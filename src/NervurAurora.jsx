@@ -444,19 +444,11 @@ export default function NervurAurora() {
   };
 
   return (
-    <div ref={pageRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{
+    <div ref={pageRef} style={{
       background: "#09090B", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
       minHeight: "100vh", position: "relative", overflowX: "hidden" }}>
 
-      {/* ═══ MOUSE GLOW ═══ */}
-      <div ref={glowRef} style={{
-        position: "fixed", left: -100, top: -100, width: "150px", height: "150px",
-        borderRadius: "50%", pointerEvents: "none", zIndex: 9999,
-        background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.03) 40%, transparent 70%)",
-        transform: "translate(-50%, -50%)",
-        transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s",
-        opacity: 0, mixBlendMode: "screen"
-      }} />
+      {/* Mouse glow removed */}
 
       <style>{`
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -568,6 +560,7 @@ export default function NervurAurora() {
             {[
               { label: "Approche", id: "approche" },
               { label: "Services", id: "services" },
+              { label: "Outils", id: "outils" },
               { label: "Projets", id: "projets" },
             ].map((item, i) => (
               <span key={i} className="nav-link" style={{ fontSize: "12px", letterSpacing: "2.5px", textTransform: "uppercase", color: "#71717A", cursor: "pointer", transition: "color 0.3s" }}
@@ -650,6 +643,7 @@ export default function NervurAurora() {
           {[
             { label: "Accueil", action: () => { window.scrollTo({ top: 0, behavior: "smooth" }); setMenuOpen(false); } },
             { label: "Services", action: () => { document.getElementById('services')?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); } },
+            // Tarifs retiré du menu mobile
             { label: "Projets", action: () => { document.getElementById('projets')?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); } },
             { label: "Approche", action: () => { document.getElementById('approche')?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); } },
           ].map((item, i) => (
@@ -1082,18 +1076,281 @@ export default function NervurAurora() {
         </div>
       </section>
 
-      {/* ═══ LOGO MARQUEE ═══ */}
-      <section aria-label="Nos clients" style={{ borderTop: `1px solid ${VG(0.1)}`, borderBottom: `1px solid ${VG(0.1)}`, padding: "28px 0", overflow: "hidden" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "64px", animation: "marquee 30s linear infinite", width: "max-content" }}>
-          {[...Array(3)].flatMap((_, setIdx) =>
-            ["STARTUP ALPHA", "MAISON BELVÉ", "TEKFLOW", "STUDIO KĀRA", "ATELIER NÜR", "KORPO GROUP", "LŪMEN.IO", "CAFÉ BRÜT"].map((name, i) => (
-              <span key={`${setIdx}-${i}`} style={{ fontSize: "13px", letterSpacing: "4px", textTransform: "uppercase", color: "#3F3F46", whiteSpace: "nowrap", fontWeight: 600 }}>
-                {name}
-              </span>
-            ))
-          )}
+
+      {/* ═══ OUTILS SaaS ═══ */}
+      <section id="outils" aria-label="Nos outils" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", borderTop: `1px solid ${VG(0.1)}` }}>
+        <RevealSection>
+          <div style={{ textAlign: "center", marginBottom: "60px" }}>
+            <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: V2, display: "block", marginBottom: "16px" }}>
+              // Nos outils
+            </span>
+            <h2 style={{ fontSize: "clamp(30px, 4vw, 50px)", fontWeight: 800, letterSpacing: "-1.5px" }}>
+              Des outils <span style={{ background: `linear-gradient(135deg, #ef4444, #8b5cf6, #06b6d4)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>puissants</span> pour votre business.
+            </h2>
+            <p style={{ fontSize: "16px", color: "#71717A", marginTop: "16px", maxWidth: "560px", margin: "16px auto 0" }}>
+              Trois outils SaaS conçus pour les PME. Simples, efficaces, sans engagement.
+            </p>
+          </div>
+        </RevealSection>
+
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "24px", maxWidth: "1100px", margin: "0 auto" }}>
+
+          {/* Sentinel */}
+          <RevealSection delay={0}>
+            <div style={{
+              border: "1px solid rgba(239,68,68,0.2)", borderRadius: "16px", padding: "36px 32px",
+              position: "relative", overflow: "hidden", height: "100%",
+              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.4)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(239,68,68,0.08)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.2)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #ef4444, #f97316)" }} />
+              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "4px" }}>Sentinel</h3>
+              <p style={{ fontSize: "13px", color: "#ef4444", fontWeight: 600, marginBottom: "12px", letterSpacing: "0.5px" }}>E-reputation & gestion des avis</p>
+              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
+                Surveillez vos avis Google en temps reel, repondez automatiquement par IA et analysez les tendances de votre e-reputation.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                {["Surveillance avis Google", "Reponses IA automatiques", "Analyse semantique", "Veille concurrentielle", "QR Code + Widget + Alertes"].map((f, i) => (
+                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ marginTop: "auto" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
+                  <span style={{ fontSize: "36px", fontWeight: 800 }}>29€</span>
+                  <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                </div>
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(239,68,68,0.3)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+                  Commencer
+                </button>
+              </div>
+            </div>
+          </RevealSection>
+
+          {/* Phantom */}
+          <RevealSection delay={120}>
+            <div style={{
+              border: "1px solid rgba(139,92,246,0.2)", borderRadius: "16px", padding: "36px 32px",
+              position: "relative", overflow: "hidden", height: "100%",
+              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(139,92,246,0.08)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.2)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #8b5cf6, #a78bfa)" }} />
+              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(139,92,246,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </div>
+              <h3 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "4px" }}>Phantom</h3>
+              <p style={{ fontSize: "13px", color: "#8b5cf6", fontWeight: 600, marginBottom: "12px", letterSpacing: "0.5px" }}>Audit de performance web</p>
+              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
+                Analysez vos scores Lighthouse, Core Web Vitals et obtenez des recommandations IA en francais pour ameliorer votre site.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals detailles", "Recommandations IA", "Historique + evolution"].map((f, i) => (
+                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ marginTop: "auto" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
+                  <span style={{ fontSize: "36px", fontWeight: 800 }}>19€</span>
+                  <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                </div>
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(139,92,246,0.3)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+                  Commencer
+                </button>
+              </div>
+            </div>
+          </RevealSection>
+
+          {/* Vault */}
+          <RevealSection delay={240}>
+            <div style={{
+              border: "1px solid rgba(6,182,212,0.2)", borderRadius: "16px", padding: "36px 32px",
+              position: "relative", overflow: "hidden", height: "100%",
+              transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.4)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(6,182,212,0.08)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.2)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #06b6d4, #22d3ee)" }} />
+              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(6,182,212,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <h3 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "4px" }}>Vault</h3>
+              <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 600, marginBottom: "12px", letterSpacing: "0.5px" }}>Surveillance des fuites de donnees</p>
+              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
+                Scannez vos emails professionnels sur les bases piratees. Alertes en temps reel et recommandations IA de cybersecurite.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps reel", "Rapport PDF + recommandations IA"].map((f, i) => (
+                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div style={{ marginTop: "auto" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
+                  <span style={{ fontSize: "36px", fontWeight: 800 }}>19€</span>
+                  <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                </div>
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(6,182,212,0.3)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+                  Commencer
+                </button>
+              </div>
+            </div>
+          </RevealSection>
+
         </div>
       </section>
+
+      {/* Section tarifs retirée */}
+      {false && <section>
+        <RevealSection>
+          <div style={{ textAlign: "center", marginBottom: "60px" }}>
+            <span style={{ fontSize: "12px", letterSpacing: "3px", color: A1 }}>● TARIFS</span>
+            <h2 style={{ fontSize: isMobile ? "32px" : "48px", fontWeight: 900, marginTop: "16px", lineHeight: 1.1 }}>
+              Des prix <span style={{ background: `linear-gradient(135deg, ${A1}, ${A3})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>imbattables</span>
+            </h2>
+            <p style={{ fontSize: "16px", color: "#71717A", marginTop: "16px", maxWidth: "500px", margin: "16px auto 0" }}>
+              Pas de surprise, pas d'engagement. Annulez quand vous voulez.
+            </p>
+          </div>
+        </RevealSection>
+
+        {/* Individual tools */}
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "20px", marginBottom: "40px" }}>
+          {/* Sentinel */}
+          <RevealSection delay={0}>
+            <div style={{ border: "1px solid rgba(239,68,68,0.2)", borderRadius: "16px", padding: "32px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #ef4444, #f97316)" }} />
+              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Sentinel</h3>
+              <p style={{ fontSize: "13px", color: "#ef4444", fontWeight: 500, marginBottom: "16px" }}>E-reputation</p>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>29€</span>
+                <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                {["Surveillance avis Google", "Reponses IA automatiques", "Analyse semantique", "Veille concurrentielle", "QR Code + Widget + Alertes", "Rapports PDF"].map((f, i) => (
+                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+                Commencer
+              </button>
+            </div>
+          </RevealSection>
+
+          {/* Phantom */}
+          <RevealSection delay={120}>
+            <div style={{ border: "1px solid rgba(139,92,246,0.2)", borderRadius: "16px", padding: "32px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #8b5cf6, #a78bfa)" }} />
+              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "rgba(139,92,246,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </div>
+              <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Phantom</h3>
+              <p style={{ fontSize: "13px", color: "#8b5cf6", fontWeight: 500, marginBottom: "16px" }}>Performance web</p>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>19€</span>
+                <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals detailles", "Recommandations IA", "Historique + evolution"].map((f, i) => (
+                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+                Commencer
+              </button>
+            </div>
+          </RevealSection>
+
+          {/* Vault */}
+          <RevealSection delay={240}>
+            <div style={{ border: "1px solid rgba(6,182,212,0.2)", borderRadius: "16px", padding: "32px", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #06b6d4, #22d3ee)" }} />
+              <div style={{ width: "40px", height: "40px", borderRadius: "10px", background: "rgba(6,182,212,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Vault</h3>
+              <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 500, marginBottom: "16px" }}>Cybersecurite</p>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>19€</span>
+                <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+              </div>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps reel", "Rapport PDF + recommandations IA"].map((f, i) => (
+                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+                Commencer
+              </button>
+            </div>
+          </RevealSection>
+        </div>
+
+        {/* Packs */}
+        <RevealSection delay={360}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "20px" }}>
+            {/* Pack Duo */}
+            <div style={{ border: `1px solid ${VG(0.15)}`, borderRadius: "16px", padding: "32px", background: VG(0.03) }}>
+              <span style={{ fontSize: "11px", letterSpacing: "2px", color: A1, fontWeight: 600 }}>PACK DUO</span>
+              <h3 style={{ fontSize: "20px", fontWeight: 700, marginTop: "8px" }}>2 outils au choix</h3>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "8px", margin: "16px 0" }}>
+                <span style={{ fontSize: "36px", fontWeight: 800 }}>39€</span>
+                <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                <span style={{ fontSize: "13px", color: "#52525B", textDecoration: "line-through", marginLeft: "8px" }}>48€</span>
+              </div>
+              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px" }}>Economisez 19% en combinant 2 outils.</p>
+              <button onClick={() => navigate("/contact")} style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${A1}, ${A3})`, border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+                Choisir mes outils
+              </button>
+            </div>
+
+            {/* Pack Total — highlighted */}
+            <div style={{ border: `2px solid ${A1}`, borderRadius: "16px", padding: "32px", background: VG(0.05), position: "relative" }}>
+              <div style={{ position: "absolute", top: "-12px", right: "20px", background: `linear-gradient(135deg, ${A1}, ${A3})`, padding: "4px 14px", borderRadius: "20px", fontSize: "11px", fontWeight: 700, color: "#fff" }}>
+                POPULAIRE
+              </div>
+              <span style={{ fontSize: "11px", letterSpacing: "2px", color: A1, fontWeight: 600 }}>PACK TOTAL</span>
+              <h3 style={{ fontSize: "20px", fontWeight: 700, marginTop: "8px" }}>Les 3 outils</h3>
+              <div style={{ display: "flex", alignItems: "baseline", gap: "8px", margin: "16px 0" }}>
+                <span style={{ fontSize: "36px", fontWeight: 800 }}>49€</span>
+                <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                <span style={{ fontSize: "13px", color: "#52525B", textDecoration: "line-through", marginLeft: "8px" }}>67€</span>
+              </div>
+              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px" }}>Sentinel + Phantom + Vault. Economisez 27%.</p>
+              <button onClick={() => navigate("/contact")} style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${A1}, ${A3})`, border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+                Tout prendre
+              </button>
+            </div>
+          </div>
+        </RevealSection>
+      </section>}
 
       {/* Technologies section moved to /technologies page */}
 
@@ -1247,41 +1504,7 @@ export default function NervurAurora() {
         </div>
       </section>
 
-      {/* ═══ TESTIMONIAL ═══ */}
-      <section aria-label="Témoignage client" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", borderTop: `1px solid ${VG(0.1)}`, position: "relative" }}>
-        <RevealSection>
-          <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative", paddingLeft: isMobile ? "24px" : "40px" }}>
-            {/* Accent border */}
-            <div style={{
-              position: "absolute", left: 0, top: 0, bottom: 0, width: "2px",
-              background: `linear-gradient(180deg, ${A1}, ${A3}, transparent)` }} />
-            {/* Quote mark */}
-            <span style={{
-              fontSize: "80px", fontWeight: 900, color: VG(0.1), lineHeight: 1,
-              position: "absolute", top: "-20px", left: "40px", fontFamily: "Georgia, serif" }}>
-              "
-            </span>
-            <blockquote style={{
-              fontSize: "clamp(20px, 2.5vw, 28px)", lineHeight: 1.7, fontWeight: 400,
-              color: "#E4E4E7", fontStyle: "italic", marginBottom: "32px", paddingTop: "20px" }}>
-              NERVÜR a transformé notre vision en un système cohérent. Chaque pixel, chaque mot, chaque interaction — tout était pensé. On ne travaille plus avec une agence, on travaille avec un éditeur de technologies.
-            </blockquote>
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <div style={{
-                width: "48px", height: "48px", borderRadius: "50%",
-                background: `linear-gradient(135deg, ${A1}, ${A3})`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "16px", fontWeight: 700, color: "#09090B" }}>
-                MK
-              </div>
-              <div>
-                <div style={{ fontSize: "15px", fontWeight: 700, marginBottom: "2px" }}>Marie Kolbe</div>
-                <div style={{ fontSize: "12px", color: "#71717A", letterSpacing: "1px" }}>CEO — Studio Kāra</div>
-              </div>
-            </div>
-          </div>
-        </RevealSection>
-      </section>
+      {/* Témoignage retiré */}
 
       {/* ═══ PROCESS ═══ */}
       <section id="approche" aria-label="Notre méthode" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", borderTop: `1px solid ${VG(0.1)}` }}>
@@ -1318,10 +1541,7 @@ export default function NervurAurora() {
                 </span>
                 <h3 style={{ fontSize: "20px", fontWeight: 700, marginBottom: "12px" }}>{step.title}</h3>
                 <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", flex: 1 }}>{step.desc}</p>
-                <div style={{ marginTop: "20px", display: "inline-flex", alignItems: "center", gap: "6px", padding: "6px 14px", border: `1px solid ${VG(0.15)}`, alignSelf: "flex-start" }}>
-                  <span style={{ width: "4px", height: "4px", background: V2, borderRadius: "50%" }} />
-                  <span style={{ fontSize: "11px", letterSpacing: "1px", color: V }}>{step.time}</span>
-                </div>
+                {/* durée retirée */}
               </div>
             </RevealSection>
           ))}
@@ -1451,9 +1671,9 @@ export default function NervurAurora() {
           <div>
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Outils</p>
             {[
-              { name: "Phantom — Audit UX", path: "/phantom" },
-              { name: "Sentinel — Reputation", path: "/sentinel" },
-              { name: "Nexus — Contenu IA", path: "/nexus" },
+              { name: "Sentinel — E-réputation", path: "/sentinel" },
+              { name: "Phantom — Audit web", path: "/phantom" },
+              { name: "Vault — Cybersécurité", path: "/vault" },
             ].map((t, i) => (
               <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
                 onMouseEnter={e => e.target.style.color = A1}

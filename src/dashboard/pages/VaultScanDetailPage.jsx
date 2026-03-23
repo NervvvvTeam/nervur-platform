@@ -14,7 +14,7 @@ const ShieldIcon = ({ size = 28, color = ACCENT }) => (
   </svg>
 );
 
-const ArrowLeftIcon = ({ size = 16, color = "#A1A1AA" }) => (
+const ArrowLeftIcon = ({ size = 16, color = "#6b7280" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
   </svg>
@@ -110,7 +110,7 @@ export default function VaultScanDetailPage() {
             style={{
               display: "inline-flex", alignItems: "center", gap: "6px",
               padding: "7px 14px", borderRadius: "6px",
-              background: downloadingPdf ? "#27272A" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+              background: downloadingPdf ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
               border: "none",
               color: "#fff", fontSize: "12px", fontWeight: 500,
               cursor: downloadingPdf ? "not-allowed" : "pointer",
@@ -145,10 +145,10 @@ export default function VaultScanDetailPage() {
           background: "linear-gradient(135deg, #06b6d4, #22d3ee)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
           {scan ? scan.domain : "Détails de l'analyse"}
         </h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           {scan ? `Analyse du ${formatDate(scan.createdAt || scan.date)}` : "Chargement..."}
         </p>
       </div>
@@ -161,7 +161,7 @@ export default function VaultScanDetailPage() {
             border: "3px solid rgba(6,182,212,0.2)", borderTop: `3px solid ${ACCENT}`,
             borderRadius: "50%", animation: "vault-spin 1s linear infinite",
           }} />
-          <div style={{ fontSize: "13px", color: "#71717A" }}>Chargement de l'analyse...</div>
+          <div style={{ fontSize: "13px", color: "#9ca3af" }}>Chargement de l'analyse...</div>
           <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}

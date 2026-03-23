@@ -1,5 +1,18 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../hooks/useApi";
+import SubNav from "../components/SubNav";
+
+const SENTINEL_NAV = [
+  { path: "/app/sentinel", label: "Dashboard", end: true },
+  { path: "/app/reviews", label: "Avis clients" },
+  { path: "/app/analytics", label: "Analyse IA" },
+  { path: "/app/competitors", label: "Concurrents" },
+  { path: "/app/reports", label: "Rapports" },
+  { path: "/app/qrcode", label: "QR Code" },
+  { path: "/app/widget", label: "Widget" },
+  { path: "/app/alerts", label: "Alertes" },
+  { path: "/app/settings", label: "Paramètres" },
+];
 
 const SECTORS = [
   { value: "restaurant", label: "Restaurant" },
@@ -74,19 +87,20 @@ export default function SettingsPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Aucune entreprise configurée. <a href="/app/onboarding" style={{ color: "#6366f1" }}>Configurer →</a></div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée. <a href="/app/onboarding" style={{ color: "#6366f1" }}>Configurer →</a></div>;
 
   return (
     <div style={{ maxWidth: "600px" }}>
+      <SubNav color="#ef4444" items={SENTINEL_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{
           width: "40px", height: "3px", borderRadius: "2px",
-          background: "linear-gradient(135deg, #6366f1, #818cf8)",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Paramètres</h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>Configurez votre entreprise et vos préférences.</p>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Paramètres</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>Configurez votre entreprise et vos préférences.</p>
       </div>
 
       <Section title="Informations entreprise">
@@ -104,7 +118,7 @@ export default function SettingsPage() {
           placeholder="https://www.google.com/maps/place/..." />
         <button onClick={handleSave} disabled={saving}
           style={{
-            padding: "10px 24px", background: "#6366f1", color: "#FAFAFA",
+            padding: "10px 24px", background: "#6366f1", color: "#ffffff",
             border: "none", borderRadius: "8px", fontWeight: 600, fontSize: "13px",
             cursor: saving ? "wait" : "pointer", fontFamily: "inherit",
             transition: "all 0.3s"
@@ -118,7 +132,7 @@ export default function SettingsPage() {
           <ModeButton active={business.mode === "manual"} label="Manuel" desc="L'IA genere, vous decidez" onClick={() => business.mode !== "manual" && toggleMode()} />
           <ModeButton active={business.mode === "auto"} label="Automatique" desc="L'IA repond 24/7" onClick={() => business.mode !== "auto" && toggleMode()} />
         </div>
-        <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.6 }}>
+        <p style={{ fontSize: "12px", color: "#d1d5db", lineHeight: 1.6 }}>
           {business.mode === "auto"
             ? "Les réponses sont générées et publiées automatiquement sur Google. Vous pouvez toujours les modifier après."
             : "Les réponses IA sont générées automatiquement. Vous les validez et publiez manuellement depuis le dashboard."
@@ -129,19 +143,19 @@ export default function SettingsPage() {
       <Section title="Scan automatique">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <div style={{ fontSize: "14px", fontWeight: 500, marginBottom: "4px", color: "#D4D4D8" }}>Scanner les avis toutes les heures</div>
-            <div style={{ fontSize: "12px", color: "#52525B" }}>
+            <div style={{ fontSize: "14px", fontWeight: 500, marginBottom: "4px", color: "#d1d5db" }}>Scanner les avis toutes les heures</div>
+            <div style={{ fontSize: "12px", color: "#d1d5db" }}>
               {business.lastScanAt ? `Dernier scan : ${new Date(business.lastScanAt).toLocaleString("fr-FR")}` : "Jamais scanné"}
             </div>
           </div>
           <button onClick={toggleScan}
             style={{
               width: "48px", height: "28px", borderRadius: "14px", border: "none", cursor: "pointer",
-              background: business.scanEnabled ? "#6366f1" : "#27272A",
+              background: business.scanEnabled ? "#6366f1" : "#3a3d4a",
               position: "relative", transition: "background 0.3s"
             }}>
             <div style={{
-              width: "22px", height: "22px", borderRadius: "11px", background: "#FAFAFA",
+              width: "22px", height: "22px", borderRadius: "11px", background: "#f0f0f3",
               position: "absolute", top: "3px",
               left: business.scanEnabled ? "23px" : "3px",
               transition: "left 0.3s"
@@ -152,19 +166,19 @@ export default function SettingsPage() {
 
       <Section title="Connexion Google Business">
         <div style={{
-          padding: "18px", borderRadius: "8px", background: "#0f0f11",
-          border: "1px solid #1e1e22"
+          padding: "18px", borderRadius: "8px", background: "#1e2029",
+          border: "1px solid #2a2d3a", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
             <div style={{
               width: "8px", height: "8px", borderRadius: "4px",
               background: business.googleAccessToken ? "#6366f1" : "#ef4444"
             }} />
-            <span style={{ fontSize: "13px", fontWeight: 600, color: "#D4D4D8" }}>
+            <span style={{ fontSize: "13px", fontWeight: 600, color: "#d1d5db" }}>
               {business.googleAccessToken ? "Connecté" : "Non connecté"}
             </span>
           </div>
-          <p style={{ fontSize: "12px", color: "#52525B", marginBottom: "16px", lineHeight: 1.6 }}>
+          <p style={{ fontSize: "12px", color: "#d1d5db", marginBottom: "16px", lineHeight: 1.6 }}>
             Connectez votre compte Google Business pour scanner automatiquement les avis et publier les réponses.
           </p>
           <button onClick={async () => {
@@ -175,8 +189,8 @@ export default function SettingsPage() {
           }}
             style={{
               padding: "10px 20px", background: business.googleAccessToken ? "transparent" : "#6366f1",
-              border: business.googleAccessToken ? "1px solid #27272A" : "none",
-              borderRadius: "8px", color: "#FAFAFA", fontSize: "13px", fontWeight: 600,
+              border: business.googleAccessToken ? "1px solid #2a2d3a" : "none",
+              borderRadius: "8px", color: "#ffffff", fontSize: "13px", fontWeight: 600,
               cursor: "pointer", fontFamily: "inherit"
             }}>
             {business.googleAccessToken ? "Reconnecter Google" : "Connecter Google"}
@@ -190,10 +204,11 @@ export default function SettingsPage() {
 function Section({ title, children }) {
   return (
     <div style={{
-      border: "1px solid #1e1e22", borderRadius: "10px", padding: "18px",
-      background: "#141416", marginBottom: "20px"
+      border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
+      background: "#1e2029", marginBottom: "20px",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
     }}>
-      <div style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "20px" }}>{title}</div>
+      <div style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "20px" }}>{title}</div>
       {children}
     </div>
   );
@@ -206,7 +221,7 @@ function Field({ label, value, onChange, placeholder }) {
       <input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={inputStyle}
         onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-        onBlur={e => { e.target.style.borderColor = "#27272A"; }} />
+        onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }} />
     </div>
   );
 }
@@ -216,18 +231,18 @@ function ModeButton({ active, label, desc, onClick }) {
     <button onClick={onClick} style={{
       flex: 1, padding: "16px", borderRadius: "8px", cursor: "pointer", fontFamily: "inherit",
       background: active ? "rgba(99,102,241,0.1)" : "transparent",
-      border: `1px solid ${active ? "rgba(99,102,241,0.25)" : "#1e1e22"}`,
+      border: `1px solid ${active ? "rgba(99,102,241,0.25)" : "#2a2d3a"}`,
       textAlign: "left", transition: "all 0.3s"
     }}>
-      <div style={{ fontSize: "13px", fontWeight: 600, color: active ? "#6366f1" : "#71717A", marginBottom: "4px" }}>{label}</div>
-      <div style={{ fontSize: "12px", color: "#52525B" }}>{desc}</div>
+      <div style={{ fontSize: "13px", fontWeight: 600, color: active ? "#6366f1" : "#9ca3af", marginBottom: "4px" }}>{label}</div>
+      <div style={{ fontSize: "12px", color: "#d1d5db" }}>{desc}</div>
     </button>
   );
 }
 
-const labelStyle = { display: "block", fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "8px" };
+const labelStyle = { display: "block", fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "8px" };
 const inputStyle = {
-  width: "100%", padding: "12px 14px", background: "#0f0f11", border: "1px solid #27272A",
-  borderRadius: "8px", color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
+  width: "100%", padding: "12px 14px", background: "#141520", border: "1px solid #2a2d3a",
+  borderRadius: "8px", color: "#e4e4e7", fontSize: "14px", fontFamily: "inherit",
   outline: "none", boxSizing: "border-box", transition: "border-color 0.2s"
 };

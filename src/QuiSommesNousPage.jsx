@@ -31,7 +31,7 @@ export default function QuiSommesNousPage() {
 
   const timeline = [
     { year: "2024", text: "Naissance de NERVÜR. Premiers projets de sites vitrines et développement des outils internes d'automatisation." },
-    { year: "2025", text: "Développement de la suite d'outils IA : Sentinel, Nexus, Signal, Phantom, Oracle, Forge." },
+    { year: "2025", text: "Développement de la suite d'outils IA : Sentinel, Phantom et Vault." },
     { year: "2026", text: "Lancement commercial. Sentinel devient le premier produit SaaS de gestion de réputation en ligne." },
   ];
 

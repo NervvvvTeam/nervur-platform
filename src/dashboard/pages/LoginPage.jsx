@@ -26,79 +26,145 @@ export default function LoginPage() {
 
   return (
     <div style={{
-      minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center",
-      background: "#101118", padding: "20px", fontFamily: "'Inter', system-ui, sans-serif"
+      minHeight: "100vh", display: "flex",
+      fontFamily: "'Inter', system-ui, sans-serif"
     }}>
-      <div style={{ width: "100%", maxWidth: "380px" }}>
-        {/* Logo */}
-        <div style={{ textAlign: "center", marginBottom: "48px" }}>
-          <div style={{ display: "inline-block", padding: "24px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)", marginBottom: "4px" }}>
-            <img src="/logo-nav.png" alt="NERVÜR" style={{
-              height: "56px", width: "auto",
-              filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain"
-            }} />
-          </div>
-          <div style={{ fontSize: "16px", color: "rgba(99,102,241,0.35)", fontWeight: 700, letterSpacing: "3px", marginBottom: "8px" }}>NERVÜR</div>
-          <div style={{ fontSize: "13px", color: "#818CF8", fontWeight: 400 }}>Espace client</div>
+      {/* Left — Branding panel */}
+      <div style={{
+        flex: 1, background: "#09090B", display: "flex", flexDirection: "column",
+        justifyContent: "center", alignItems: "center", padding: "60px",
+        position: "relative", overflow: "hidden"
+      }}>
+        {/* Subtle gradient accent */}
+        <div style={{
+          position: "absolute", top: "30%", left: "50%", transform: "translate(-50%, -50%)",
+          width: "400px", height: "400px", borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
+          pointerEvents: "none"
+        }} />
+
+        <img src="/logo-nav.png" alt="NERVÜR" style={{
+          height: "48px", width: "auto", marginBottom: "32px",
+          filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain",
+          position: "relative"
+        }} />
+
+        <h1 style={{ fontSize: "28px", fontWeight: 700, color: "#FAFAFA", textAlign: "center", marginBottom: "12px", position: "relative" }}>
+          Bienvenue sur NERVÜR
+        </h1>
+        <p style={{ fontSize: "15px", color: "#71717A", textAlign: "center", maxWidth: "320px", lineHeight: 1.6, position: "relative" }}>
+          Gérez votre e-réputation, auditez vos performances web et protégez vos données.
+        </p>
+
+        {/* Tool pills */}
+        <div style={{ display: "flex", gap: "12px", marginTop: "40px", position: "relative" }}>
+          {[
+            { name: "Sentinel", color: "#ef4444" },
+            { name: "Phantom", color: "#8b5cf6" },
+            { name: "Vault", color: "#06b6d4" },
+          ].map(t => (
+            <div key={t.name} style={{
+              padding: "6px 14px", borderRadius: "20px",
+              border: `1px solid ${t.color}30`, background: `${t.color}10`,
+              fontSize: "12px", color: t.color, fontWeight: 500
+            }}>
+              {t.name}
+            </div>
+          ))}
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit}>
-          {error && (
-            <div style={{
-              padding: "12px 16px", marginBottom: "20px", borderRadius: "8px",
-              background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.15)",
-              color: "#f87171", fontSize: "13px"
-            }}>{error}</div>
-          )}
+        {/* Bottom text */}
+        <div style={{ position: "absolute", bottom: "32px", textAlign: "center" }}>
+          <p style={{ fontSize: "12px", color: "#3f3f46" }}>
+            © 2026 NERVÜR — Éditeur de Technologies de Croissance
+          </p>
+        </div>
+      </div>
 
-          <div style={{ marginBottom: "16px" }}>
-            <label style={{ display: "block", fontSize: "13px", color: "#A1A1AA", marginBottom: "6px", fontWeight: 500 }}>
-              Email
-            </label>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
-              placeholder="nom@entreprise.com"
+      {/* Right — Login form */}
+      <div style={{
+        width: "480px", background: "#111318", display: "flex",
+        flexDirection: "column", justifyContent: "center", padding: "60px",
+        borderLeft: "1px solid #1e1e2a"
+      }}>
+        <div style={{ maxWidth: "340px", width: "100%", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>
+            Connexion
+          </h2>
+          <p style={{ fontSize: "14px", color: "#6b7280", marginBottom: "32px" }}>
+            Accédez à votre espace client
+          </p>
+
+          <form onSubmit={handleSubmit}>
+            {error && (
+              <div style={{
+                padding: "12px 16px", marginBottom: "20px", borderRadius: "8px",
+                background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)",
+                color: "#f87171", fontSize: "13px", lineHeight: 1.5
+              }}>{error}</div>
+            )}
+
+            <div style={{ marginBottom: "20px" }}>
+              <label style={{ display: "block", fontSize: "13px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>
+                Adresse email
+              </label>
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
+                placeholder="nom@entreprise.com"
+                style={{
+                  width: "100%", padding: "12px 16px", background: "#1e2029",
+                  border: "1px solid #2a2d3a", borderRadius: "10px",
+                  color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
+                  outline: "none", boxSizing: "border-box",
+                  transition: "border-color 0.2s, box-shadow 0.2s"
+                }}
+                onFocus={e => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
+                onBlur={e => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }} />
+            </div>
+
+            <div style={{ marginBottom: "28px" }}>
+              <label style={{ display: "block", fontSize: "13px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>
+                Mot de passe
+              </label>
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required
+                placeholder="••••••••"
+                style={{
+                  width: "100%", padding: "12px 16px", background: "#1e2029",
+                  border: "1px solid #2a2d3a", borderRadius: "10px",
+                  color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
+                  outline: "none", boxSizing: "border-box",
+                  transition: "border-color 0.2s, box-shadow 0.2s"
+                }}
+                onFocus={e => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
+                onBlur={e => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }} />
+            </div>
+
+            <button type="submit" disabled={loading}
               style={{
-                width: "100%", padding: "10px 14px", background: "#0c0d14",
-                border: "1px solid #27272A", borderRadius: "8px",
-                color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
-                outline: "none", boxSizing: "border-box", transition: "border-color 0.2s, box-shadow 0.2s"
+                width: "100%", padding: "12px",
+                background: "#6366f1", color: "#fff",
+                border: "none", borderRadius: "10px",
+                fontSize: "14px", fontWeight: 600, cursor: loading ? "wait" : "pointer",
+                fontFamily: "inherit", opacity: loading ? 0.6 : 1,
+                transition: "all 0.2s"
               }}
-              onFocus={e => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.15)"; }}
-              onBlur={e => { e.target.style.borderColor = "#27272A"; e.target.style.boxShadow = "none"; }} />
-          </div>
+              onMouseEnter={e => { if (!loading) e.target.style.background = "#818CF8"; }}
+              onMouseLeave={e => { e.target.style.background = "#6366f1"; }}>
+              {loading ? "Connexion..." : "Se connecter"}
+            </button>
+          </form>
 
-          <div style={{ marginBottom: "24px" }}>
-            <label style={{ display: "block", fontSize: "13px", color: "#A1A1AA", marginBottom: "6px", fontWeight: 500 }}>
-              Mot de passe
-            </label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} required
-              placeholder="••••••••"
-              style={{
-                width: "100%", padding: "10px 14px", background: "#0c0d14",
-                border: "1px solid #27272A", borderRadius: "8px",
-                color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
-                outline: "none", boxSizing: "border-box", transition: "border-color 0.2s, box-shadow 0.2s"
-              }}
-              onFocus={e => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.15)"; }}
-              onBlur={e => { e.target.style.borderColor = "#27272A"; e.target.style.boxShadow = "none"; }} />
-          </div>
-
-          <button type="submit" disabled={loading}
-            style={{
-              width: "100%", padding: "10px",
-              background: "linear-gradient(135deg, #6366f1, #818CF8)", color: "#fff", border: "none", borderRadius: "8px",
-              fontSize: "14px", fontWeight: 500, cursor: loading ? "wait" : "pointer",
-              fontFamily: "inherit", opacity: loading ? 0.6 : 1, transition: "opacity 0.2s",
-              boxShadow: "0 4px 16px rgba(99,102,241,0.25)"
+          <div style={{ marginTop: "32px", paddingTop: "20px", borderTop: "1px solid #2a2d3a" }}>
+            <p style={{ fontSize: "12px", color: "#4b5563", lineHeight: 1.6 }}>
+              Votre compte est créé par l'équipe NERVÜR lors de votre souscription.
+            </p>
+            <a href="/contact" style={{
+              fontSize: "13px", color: "#6366f1", textDecoration: "none", fontWeight: 500,
+              display: "inline-block", marginTop: "8px"
             }}>
-            {loading ? "Connexion..." : "Se connecter"}
-          </button>
-        </form>
-
-        <p style={{ textAlign: "center", fontSize: "12px", color: "#52525B", marginTop: "28px" }}>
-          {"Votre compte est créé par l'équipe NERVÜR."}
-        </p>
+              Pas encore client ? Contactez-nous →
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

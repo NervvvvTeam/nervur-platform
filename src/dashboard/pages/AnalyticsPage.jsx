@@ -1,6 +1,19 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../hooks/useApi";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
+import SubNav from "../components/SubNav";
+
+const SENTINEL_NAV = [
+  { path: "/app/sentinel", label: "Dashboard", end: true },
+  { path: "/app/reviews", label: "Avis clients" },
+  { path: "/app/analytics", label: "Analyse IA" },
+  { path: "/app/competitors", label: "Concurrents" },
+  { path: "/app/reports", label: "Rapports" },
+  { path: "/app/qrcode", label: "QR Code" },
+  { path: "/app/widget", label: "Widget" },
+  { path: "/app/alerts", label: "Alertes" },
+  { path: "/app/settings", label: "Paramètres" },
+];
 
 export default function AnalyticsPage() {
   const { get } = useApi();
@@ -31,8 +44,8 @@ export default function AnalyticsPage() {
     finally { setAnalyzing(false); }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
 
   const radarData = analysis?.themes?.map(t => ({
     theme: t.theme.charAt(0).toUpperCase() + t.theme.slice(1),
@@ -42,22 +55,24 @@ export default function AnalyticsPage() {
 
   return (
     <div style={{ maxWidth: "900px" }}>
+      <SubNav color="#ef4444" items={SENTINEL_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{
           width: "40px", height: "3px", borderRadius: "2px",
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Analyse sémantique</h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Analyse sémantique</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           {"L'IA analyse les thèmes récurrents dans vos avis clients."}
         </p>
       </div>
 
       {analyzing ? (
         <div style={{
-          padding: "80px", textAlign: "center", border: "1px solid #1e1e22",
-          borderRadius: "10px", background: "#141416"
+          padding: "80px", textAlign: "center", border: "1px solid #2a2d3a",
+          borderRadius: "10px", background: "#1e2029",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{
             width: "36px", height: "36px", border: "3px solid rgba(239,68,68,0.2)",
@@ -72,31 +87,33 @@ export default function AnalyticsPage() {
           {/* Radar Chart */}
           <div style={{
             padding: "18px", borderRadius: "10px", border: "1px solid rgba(239,68,68,0.15)",
-            background: "#141416", gridColumn: radarData.length > 0 ? "1" : "1 / -1"
+            background: "#1e2029", gridColumn: radarData.length > 0 ? "1" : "1 / -1",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
           }}>
-            <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "20px" }}>
+            <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "20px" }}>
               Radar des thèmes
             </h3>
             {radarData.length > 0 ? (
               <ResponsiveContainer width="100%" height={300}>
                 <RadarChart data={radarData}>
-                  <PolarGrid stroke="#1e1e22" />
-                  <PolarAngleAxis dataKey="theme" tick={{ fill: "#A1A1AA", fontSize: 11 }} />
-                  <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fill: "#52525B", fontSize: 10 }} />
+                  <PolarGrid stroke="#2a2d3a" />
+                  <PolarAngleAxis dataKey="theme" tick={{ fill: "#6b7280", fontSize: 11 }} />
+                  <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fill: "#d1d5db", fontSize: 10 }} />
                   <Radar name="Score" dataKey="score" stroke="#ef4444" fill="#ef4444" fillOpacity={0.2} strokeWidth={2} />
                 </RadarChart>
               </ResponsiveContainer>
             ) : (
-              <p style={{ color: "#52525B", textAlign: "center", padding: "60px 0" }}>Pas assez de données</p>
+              <p style={{ color: "#d1d5db", textAlign: "center", padding: "60px 0" }}>Pas assez de données</p>
             )}
           </div>
 
           {/* Scores list */}
           <div style={{
-            padding: "18px", borderRadius: "10px", border: "1px solid #1e1e22",
-            background: "#141416"
+            padding: "18px", borderRadius: "10px", border: "1px solid #2a2d3a",
+            background: "#1e2029",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
           }}>
-            <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "20px" }}>
+            <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "20px" }}>
               Détail par thème
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
@@ -106,13 +123,13 @@ export default function AnalyticsPage() {
                 return (
                   <div key={i}>
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-                      <span style={{ fontSize: "13px", color: "#D4D4D8", textTransform: "capitalize" }}>{t.theme}</span>
+                      <span style={{ fontSize: "13px", color: "#d1d5db", textTransform: "capitalize" }}>{t.theme}</span>
                       <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                        <span style={{ fontSize: "11px", color: "#52525B" }}>{t.mentions} mentions</span>
+                        <span style={{ fontSize: "11px", color: "#d1d5db" }}>{t.mentions} mentions</span>
                         <span style={{ fontSize: "13px", fontWeight: 600, color: barColor, opacity: barOpacity }}>{t.score}/10</span>
                       </div>
                     </div>
-                    <div style={{ height: "6px", borderRadius: "3px", background: "#1e1e22" }}>
+                    <div style={{ height: "6px", borderRadius: "3px", background: "#2a2d3a" }}>
                       <div style={{
                         height: "100%", borderRadius: "3px", background: barColor, opacity: barOpacity,
                         width: `${(t.score / 10) * 100}%`, transition: "width 0.5s"
@@ -133,7 +150,7 @@ export default function AnalyticsPage() {
               <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#ef4444", marginBottom: "12px" }}>
                 Résumé IA
               </h3>
-              <p style={{ fontSize: "15px", color: "#D4D4D8", lineHeight: 1.8 }}>{analysis.summary}</p>
+              <p style={{ fontSize: "15px", color: "#d1d5db", lineHeight: 1.8 }}>{analysis.summary}</p>
             </div>
           )}
 
@@ -150,7 +167,7 @@ export default function AnalyticsPage() {
                 {analysis.strengths.map((s, i) => (
                   <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
                     <span style={{ color: "#ef4444", fontSize: "14px", flexShrink: 0 }}>+</span>
-                    <span style={{ fontSize: "14px", color: "#D4D4D8", lineHeight: 1.6 }}>{s}</span>
+                    <span style={{ fontSize: "14px", color: "#d1d5db", lineHeight: 1.6 }}>{s}</span>
                   </div>
                 ))}
               </div>
@@ -169,7 +186,7 @@ export default function AnalyticsPage() {
                 {analysis.weaknesses.map((w, i) => (
                   <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
                     <span style={{ color: "#ef4444", fontSize: "14px", flexShrink: 0 }}>!</span>
-                    <span style={{ fontSize: "14px", color: "#D4D4D8", lineHeight: 1.6 }}>{w}</span>
+                    <span style={{ fontSize: "14px", color: "#d1d5db", lineHeight: 1.6 }}>{w}</span>
                   </div>
                 ))}
               </div>
@@ -179,10 +196,11 @@ export default function AnalyticsPage() {
           {/* Keywords */}
           {analysis.keywords && analysis.keywords.length > 0 && (
             <div style={{
-              padding: "18px", borderRadius: "10px", border: "1px solid #1e1e22",
-              background: "#141416", gridColumn: "1 / -1"
+              padding: "18px", borderRadius: "10px", border: "1px solid #2a2d3a",
+              background: "#1e2029", gridColumn: "1 / -1",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
             }}>
-              <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "16px" }}>
+              <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "16px" }}>
                 Mots-clés récurrents
               </h3>
               <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>

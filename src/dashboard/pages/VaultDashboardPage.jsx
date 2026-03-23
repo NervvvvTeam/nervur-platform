@@ -1,5 +1,13 @@
 import { useState, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
+import SubNav from "../components/SubNav";
+
+const VAULT_NAV = [
+  { path: "/app/vault", label: "Scanner", end: true },
+  { path: "/app/vault/monitoring", label: "Surveillance" },
+  { path: "/app/vault/history", label: "Historique" },
+  { path: "/app/vault/rgpd", label: "Conformit\u00e9 RGPD" },
+];
 
 const ACCENT = "#06b6d4";
 const BG_TINT = "rgba(6,182,212,0.08)";
@@ -127,7 +135,7 @@ const LockIcon = ({ size = 16, color = ACCENT }) => (
   </svg>
 );
 
-const ChevronDown = ({ size = 16, color = "#A1A1AA" }) => (
+const ChevronDown = ({ size = 16, color = "#6b7280" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="6 9 12 15 18 9"/>
   </svg>
@@ -140,16 +148,17 @@ const AlertTriangle = ({ size = 18, color = "#ef4444" }) => (
 );
 
 const cardStyle = {
-  background: "#151620",
-  border: "1px solid #1e1e2a",
+  background: "#1e2029",
+  border: "1px solid #2a2d3a",
   borderRadius: "10px",
   padding: "24px",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
 };
 
 const labelStyle = {
   fontSize: "13px",
   fontWeight: 500,
-  color: "#A1A1AA",
+  color: "#6b7280",
   marginBottom: "6px",
   display: "block",
 };
@@ -157,10 +166,10 @@ const labelStyle = {
 const inputStyle = {
   width: "100%",
   padding: "10px 14px",
-  background: "#0c0d14",
-  border: "1px solid #27272A",
+  background: "#141520",
+  border: "1px solid #2a2d3a",
   borderRadius: "8px",
-  color: "#FAFAFA",
+  color: "#e4e4e7",
   fontSize: "14px",
   fontFamily: "inherit",
   outline: "none",
@@ -199,9 +208,9 @@ function BreachCard({ breach }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px", flexWrap: "wrap", gap: "8px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <AlertTriangle size={16} color={RISK_COLORS[breach.riskLevel] || "#f97316"} />
-          <span style={{ fontSize: "14px", fontWeight: 600, color: "#FAFAFA" }}>{breach.name || breach.Name}</span>
+          <span style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>{breach.name || breach.Name}</span>
         </div>
-        <div style={{ display: "flex", gap: "12px", fontSize: "12px", color: "#71717A" }}>
+        <div style={{ display: "flex", gap: "12px", fontSize: "12px", color: "#9ca3af" }}>
           <span>{formatDate(breach.date || breach.BreachDate)}</span>
           <span>{formatNumber(breach.pwnCount || breach.PwnCount)} comptes touchés</span>
         </div>
@@ -276,7 +285,7 @@ function EmailResultCard({ result }) {
             <AlertTriangle size={18} color="#ef4444" />
           </div>
           <div>
-            <div style={{ fontSize: "14px", fontWeight: 600, color: "#FAFAFA" }}>
+            <div style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>
               {result.email}
             </div>
             <div style={{ fontSize: "12px", color: "#ef4444", marginTop: "2px" }}>
@@ -320,7 +329,7 @@ function SummaryCard({ label, value, color, icon }) {
       }}>
         {icon}
       </div>
-      <div style={{ fontSize: "12px", color: "#A1A1AA", marginBottom: "6px", fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: "12px", color: "#6b7280", marginBottom: "6px", fontWeight: 500 }}>{label}</div>
       <div style={{ fontSize: "26px", fontWeight: 700, color }}>{value}</div>
     </div>
   );
@@ -344,10 +353,10 @@ function LoadingAnimation() {
           animation: "vault-spin 1s linear infinite",
         }} />
       </div>
-      <div style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", marginBottom: "8px" }}>
+      <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>
         Analyse en cours...
       </div>
-      <div style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.6 }}>
+      <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.6 }}>
         Nous vérifions vos adresses email dans les bases de données compromises connues.
         <br />Cela peut prendre quelques secondes.
       </div>
@@ -444,7 +453,7 @@ export function VaultResults({ scan }) {
         <div style={{ marginBottom: "24px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
             <LockIcon size={18} color="#ef4444" />
-            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
               Emails compromis
             </h3>
             <span style={{
@@ -465,7 +474,7 @@ export function VaultResults({ scan }) {
         <div style={{ marginBottom: "24px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
             <ShieldCheckIcon size={18} color="#22c55e" />
-            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
               Emails sécurisés
             </h3>
           </div>
@@ -493,7 +502,7 @@ export function VaultResults({ scan }) {
         <div style={{ marginBottom: "24px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
             <ShieldIcon size={18} color={ACCENT} />
-            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
               Recommandations de sécurité
             </h3>
           </div>
@@ -516,7 +525,7 @@ export function VaultResults({ scan }) {
                 }}>
                   {i + 1}
                 </span>
-                <span style={{ fontSize: "13px", color: "#D4D4D8", lineHeight: 1.6 }}>
+                <span style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.6 }}>
                   {rec}
                 </span>
               </div>
@@ -531,8 +540,8 @@ export function VaultResults({ scan }) {
         style={{
           display: "inline-flex", alignItems: "center", gap: "8px",
           padding: "10px 20px", borderRadius: "8px",
-          background: "#27272A", border: "1px solid #3f3f46",
-          color: "#52525B", fontSize: "13px", fontWeight: 500,
+          background: "#2a2d3a", border: "1px solid #3f3f46",
+          color: "#d1d5db", fontSize: "13px", fontWeight: 500,
           cursor: "not-allowed", fontFamily: "inherit",
           opacity: 0.6,
         }}
@@ -588,6 +597,7 @@ export default function VaultDashboardPage() {
 
   return (
     <div style={{ maxWidth: "860px" }}>
+      <SubNav color="#06b6d4" items={VAULT_NAV} />
       {/* Header */}
       <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "8px" }}>
         <div style={{
@@ -598,10 +608,10 @@ export default function VaultDashboardPage() {
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
             Vault
           </h1>
-          <p style={{ fontSize: "13px", color: "#71717A", margin: 0, marginTop: "2px" }}>
+          <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0, marginTop: "2px" }}>
             Surveillance des fuites de données
           </p>
         </div>
@@ -623,13 +633,13 @@ export default function VaultDashboardPage() {
         <div style={{ flexShrink: 0, marginTop: "2px" }}>
           <LockIcon size={20} color={ACCENT} />
         </div>
-        <div style={{ fontSize: "13px", color: "#D4D4D8", lineHeight: 1.7 }}>
-          <strong style={{ color: "#FAFAFA" }}>Comment fonctionne Vault ?</strong>
+        <div style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.7 }}>
+          <strong style={{ color: "#f0f0f3" }}>Comment fonctionne Vault ?</strong>
           <br />
           Vault vérifie si les adresses email de votre entreprise apparaissent dans des bases de données piratées.
           Ces bases contiennent des informations volées lors d'attaques sur des sites comme LinkedIn, Adobe, Facebook, etc.
           <br />
-          <span style={{ color: "#A1A1AA" }}>
+          <span style={{ color: "#6b7280" }}>
             Aucune donnée sensible n'est stockée de notre côté. Seul le résultat de l'analyse est conservé.
           </span>
         </div>
@@ -644,7 +654,7 @@ export default function VaultDashboardPage() {
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "20px" }}>
             <ShieldIcon size={18} color={ACCENT} />
-            <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+            <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
               Lancer une analyse
             </h2>
           </div>
@@ -661,9 +671,9 @@ export default function VaultDashboardPage() {
               placeholder="monentreprise.fr"
               style={inputStyle}
               onFocus={e => e.target.style.borderColor = ACCENT}
-              onBlur={e => e.target.style.borderColor = "#27272A"}
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"}
             />
-            <div style={{ fontSize: "11px", color: "#52525B", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "#d1d5db", marginTop: "4px" }}>
               Le domaine principal de votre entreprise (sans www ni https://)
             </div>
           </div>
@@ -684,9 +694,9 @@ export default function VaultDashboardPage() {
                 lineHeight: 1.6,
               }}
               onFocus={e => e.target.style.borderColor = ACCENT}
-              onBlur={e => e.target.style.borderColor = "#27272A"}
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"}
             />
-            <div style={{ fontSize: "11px", color: "#52525B", marginTop: "4px" }}>
+            <div style={{ fontSize: "11px", color: "#d1d5db", marginTop: "4px" }}>
               Une adresse email par ligne. Vous pouvez ajouter toutes les adresses de votre entreprise.
             </div>
           </div>
@@ -732,7 +742,7 @@ export default function VaultDashboardPage() {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <ShieldIcon size={18} color={ACCENT} />
-              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
                 Résultats de l'analyse
               </h2>
             </div>

@@ -38,10 +38,8 @@ export default function CGVPage() {
           <div style={{ fontSize: "14px", lineHeight: 2, color: "#d4d4d8" }}>
             <p>Le Prestataire propose les services suivants :</p>
             <p style={{ marginLeft: "16px" }}>— Gestion de réputation en ligne (Sentinel)</p>
-            <p style={{ marginLeft: "16px" }}>— Audit UX et performance web (Phantom)</p>
-            <p style={{ marginLeft: "16px" }}>— Veille concurrentielle (Signal)</p>
-            <p style={{ marginLeft: "16px" }}>— Studio de contenu IA (Nexus — posts, emails, calendrier social)</p>
-            <p style={{ marginLeft: "16px" }}>— Génération de contenu avancée (Oracle, Forge)</p>
+            <p style={{ marginLeft: "16px" }}>— Audit de performance web (Phantom)</p>
+            <p style={{ marginLeft: "16px" }}>— Surveillance des fuites de données (Vault)</p>
             <p style={{ marginLeft: "16px" }}>— Création de sites vitrines</p>
             <p style={{ marginTop: "8px" }}>Le détail des prestations est défini dans le devis, la proposition commerciale ou l'offre d'abonnement acceptée par le Client.</p>
           </div>
@@ -78,7 +76,7 @@ export default function CGVPage() {
         <section style={{ marginBottom: "32px" }}>
           <h2 style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#a1a1aa", marginBottom: "16px" }}>6. Propriété intellectuelle</h2>
           <p style={{ fontSize: "14px", lineHeight: 2, color: "#d4d4d8" }}>
-            Le transfert des droits de propriété intellectuelle sur les livrables s'effectue au profit du Client dès le paiement intégral de la prestation. Le Prestataire conserve le droit de mentionner la réalisation dans son portfolio et ses références commerciales, sauf opposition écrite du Client. Les outils logiciels (Sentinel, Nexus, etc.) restent la propriété du Prestataire ; le Client bénéficie d'un droit d'accès pendant la durée de son abonnement.
+            Le transfert des droits de propriété intellectuelle sur les livrables s'effectue au profit du Client dès le paiement intégral de la prestation. Le Prestataire conserve le droit de mentionner la réalisation dans son portfolio et ses références commerciales, sauf opposition écrite du Client. Les outils logiciels (Sentinel, Phantom, Vault, etc.) restent la propriété du Prestataire ; le Client bénéficie d'un droit d'accès pendant la durée de son abonnement.
           </p>
         </section>
 

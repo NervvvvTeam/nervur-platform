@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../hooks/useApi";
 import { useNavigate } from "react-router-dom";
+import SubNav from "../components/SubNav";
+
+const PHANTOM_NAV = [
+  { path: "/app/phantom", label: "Audit", end: true },
+  { path: "/app/phantom/history", label: "Historique" },
+  { path: "/app/phantom/recommendations", label: "Recommandations" },
+];
 
 function ScoreBadge({ score }) {
   const color = score >= 90 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444";
@@ -16,14 +23,14 @@ function ScoreBadge({ score }) {
 function MiniBar({ value, max = 100, color }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "8px", width: "100%" }}>
-      <div style={{ flex: 1, height: "4px", background: "#1e1e22", borderRadius: "2px", overflow: "hidden" }}>
+      <div style={{ flex: 1, height: "4px", background: "#2a2d3a", borderRadius: "2px", overflow: "hidden" }}>
         <div style={{
           height: "100%", borderRadius: "2px",
           width: (value / max * 100) + "%",
           background: color || (value >= 90 ? "#10b981" : value >= 50 ? "#f59e0b" : "#ef4444"),
         }} />
       </div>
-      <span style={{ fontSize: "12px", color: "#71717A", minWidth: "28px", textAlign: "right" }}>{value}</span>
+      <span style={{ fontSize: "12px", color: "#9ca3af", minWidth: "28px", textAlign: "right" }}>{value}</span>
     </div>
   );
 }
@@ -86,6 +93,7 @@ export default function PhantomHistoryPage() {
 
   return (
     <div style={{ maxWidth: "900px" }}>
+      <SubNav color="#8b5cf6" items={PHANTOM_NAV} />
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{
@@ -93,10 +101,10 @@ export default function PhantomHistoryPage() {
           background: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
           Historique des audits
         </h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Suivez l'évolution de vos scores au fil du temps.
         </p>
       </div>
@@ -110,14 +118,15 @@ export default function PhantomHistoryPage() {
             const isUpdating = updatingDomain === domain;
             return (
               <div key={domain} style={{
-                padding: "18px 22px", background: "#141416", border: "1px solid #1e1e22",
+                padding: "18px 22px", background: "#1e2029", border: "1px solid #2a2d3a",
                 borderRadius: "10px", borderLeft: "3px solid #8b5cf6",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
               }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <div>
-                      <div style={{ fontSize: "15px", fontWeight: 500, color: "#E4E4E7" }}>{domain}</div>
-                      <div style={{ fontSize: "12px", color: "#52525B" }}>
+                      <div style={{ fontSize: "15px", fontWeight: 500, color: "#d1d5db" }}>{domain}</div>
+                      <div style={{ fontSize: "12px", color: "#d1d5db" }}>
                         {domainAudits.length} audit{domainAudits.length > 1 ? "s" : ""} — Dernier : {formatDate(latestAudit?.createdAt)}
                       </div>
                     </div>
@@ -129,7 +138,7 @@ export default function PhantomHistoryPage() {
                       disabled={isUpdating}
                       style={{
                         padding: "8px 16px",
-                        background: isUpdating ? "#27272A" : "linear-gradient(135deg, #8b5cf6, #a78bfa)",
+                        background: isUpdating ? "#2a2d3a" : "linear-gradient(135deg, #8b5cf6, #a78bfa)",
                         color: "#fff", border: "none", borderRadius: "6px",
                         fontSize: "13px", fontWeight: 500, cursor: isUpdating ? "wait" : "pointer",
                         fontFamily: "inherit", opacity: isUpdating ? 0.6 : 1,
@@ -158,19 +167,19 @@ export default function PhantomHistoryPage() {
                 {/* Score bars */}
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px" }}>
                   <div>
-                    <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "4px" }}>Performance</div>
+                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>Performance</div>
                     <MiniBar value={latestAudit?.scores?.performance || 0} color="#8b5cf6" />
                   </div>
                   <div>
-                    <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "4px" }}>Accessibilité</div>
+                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>Accessibilité</div>
                     <MiniBar value={latestAudit?.scores?.accessibility || 0} color="#3b82f6" />
                   </div>
                   <div>
-                    <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "4px" }}>SEO</div>
+                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>SEO</div>
                     <MiniBar value={latestAudit?.scores?.seo || 0} color="#10b981" />
                   </div>
                   <div>
-                    <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "4px" }}>Bonnes pratiques</div>
+                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>Bonnes pratiques</div>
                     <MiniBar value={latestAudit?.scores?.bestPractices || 0} color="#f59e0b" />
                   </div>
                 </div>
@@ -187,23 +196,23 @@ export default function PhantomHistoryPage() {
             style={{
               padding: "6px 14px", borderRadius: "6px", border: "none",
               fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-              background: !selectedDomain ? "#8b5cf6" : "#1e1e22",
-              color: !selectedDomain ? "#fff" : "#A1A1AA",
+              background: !selectedDomain ? "#8b5cf6" : "#2a2d3a",
+              color: !selectedDomain ? "#fff" : "#6b7280",
             }}>Tous</button>
           {domains.map(d => (
             <button key={d} onClick={() => setSelectedDomain(d)}
               style={{
                 padding: "6px 14px", borderRadius: "6px", border: "none",
                 fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                background: selectedDomain === d ? "#8b5cf6" : "#1e1e22",
-                color: selectedDomain === d ? "#fff" : "#A1A1AA",
+                background: selectedDomain === d ? "#8b5cf6" : "#2a2d3a",
+                color: selectedDomain === d ? "#fff" : "#6b7280",
               }}>{d}</button>
           ))}
         </div>
       )}
 
       {loading && (
-        <div style={{ padding: "60px 0", textAlign: "center", color: "#71717A", fontSize: "14px" }}>
+        <div style={{ padding: "60px 0", textAlign: "center", color: "#9ca3af", fontSize: "14px" }}>
           Chargement...
         </div>
       )}
@@ -211,12 +220,13 @@ export default function PhantomHistoryPage() {
       {!loading && audits.length === 0 && (
         <div style={{
           padding: "60px 24px", textAlign: "center",
-          background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px"
+          background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
-          <div style={{ fontSize: "16px", color: "#71717A", marginBottom: "12px" }}>
+          <div style={{ fontSize: "16px", color: "#9ca3af", marginBottom: "12px" }}>
             Aucun audit enregistré
           </div>
-          <p style={{ fontSize: "14px", color: "#52525B", marginBottom: "20px" }}>
+          <p style={{ fontSize: "14px", color: "#d1d5db", marginBottom: "20px" }}>
             Lancez votre premier audit depuis la page Audit.
           </p>
           <button onClick={() => navigate("/app/phantom")}
@@ -233,10 +243,11 @@ export default function PhantomHistoryPage() {
       {/* Evolution chart */}
       {!loading && evolution.length >= 2 && (
         <div style={{
-          padding: "24px", background: "#141416", border: "1px solid #1e1e22",
-          borderRadius: "10px", marginBottom: "16px"
+          padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
+          borderRadius: "10px", marginBottom: "16px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
-          <div style={{ fontSize: "13px", color: "#71717A", marginBottom: "16px" }}>
+          <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "16px" }}>
             Évolution du score global
           </div>
           <div style={{ position: "relative", height: chartHeight + 30, overflow: "hidden" }}>
@@ -244,8 +255,8 @@ export default function PhantomHistoryPage() {
               {[0, 25, 50, 75, 100].map(v => (
                 <g key={v}>
                   <line x1="0" y1={chartHeight - (v / maxScore) * chartHeight} x2={chartWidth} y2={chartHeight - (v / maxScore) * chartHeight}
-                    stroke="#1e1e22" strokeWidth="1" />
-                  <text x="0" y={chartHeight - (v / maxScore) * chartHeight - 4} fill="#71717A" fontSize="13" fontWeight="500">{v}</text>
+                    stroke="#2a2d3a" strokeWidth="1" />
+                  <text x="0" y={chartHeight - (v / maxScore) * chartHeight - 4} fill="#9ca3af" fontSize="13" fontWeight="500">{v}</text>
                 </g>
               ))}
               <polyline
@@ -277,7 +288,7 @@ export default function PhantomHistoryPage() {
               {evolution.map((a, i) => {
                 const x = (i / (evolution.length - 1)) * (chartWidth - 40) + 20;
                 const y = chartHeight - ((a.scores?.global || 0) / maxScore) * chartHeight;
-                return <circle key={i} cx={x} cy={y} r="4" fill="#8b5cf6" stroke="#0f0f11" strokeWidth="2" />;
+                return <circle key={i} cx={x} cy={y} r="4" fill="#8b5cf6" stroke="#ffffff" strokeWidth="2" />;
               })}
             </svg>
           </div>

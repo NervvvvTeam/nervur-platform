@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const PDFDocument = require("pdfkit");
 const BreachScan = require("../models/BreachScan");
 const VaultMonitoring = require("../models/VaultMonitoring");
+const RgpdScan = require("../models/RgpdScan");
 const { authMiddleware } = require("../middleware/auth");
 
 // Data class translations for non-technical users
@@ -599,6 +600,347 @@ router.get("/scan/:id/pdf", authMiddleware, async (req, res) => {
     if (!res.headersSent) {
       res.status(500).json({ error: "Erreur lors de la génération du rapport PDF." });
     }
+  }
+});
+
+// ═══════════════════════════════════════════════════
+// RGPD COMPLIANCE SCANNING — Shield
+// ═══════════════════════════════════════════════════
+
+// Helper: analyze HTML for RGPD compliance
+function analyzeRgpdCompliance(html, url) {
+  const htmlLower = html.toLowerCase();
+  const results = {};
+
+  // 1. Mentions légales
+  const mentionsPatterns = ["mentions légales", "mentions legales", "legal notice", "mentions-legales", "mentions_legales"];
+  const mentionsFound = mentionsPatterns.some(p => htmlLower.includes(p));
+  results.mentionsLegales = {
+    found: mentionsFound,
+    details: mentionsFound
+      ? "Page de mentions légales détectée ou lien vers les mentions légales trouvé."
+      : "Aucune mention légale détectée. Obligatoire pour tout site professionnel en France.",
+  };
+
+  // 2. Politique de confidentialité
+  const privacyPatterns = ["politique de confidentialité", "politique de confidentialite", "privacy policy", "politique-de-confidentialite", "données personnelles", "donnees personnelles", "personal data policy"];
+  const privacyFound = privacyPatterns.some(p => htmlLower.includes(p));
+  results.politiqueConfidentialite = {
+    found: privacyFound,
+    details: privacyFound
+      ? "Politique de confidentialité détectée sur le site."
+      : "Aucune politique de confidentialité trouvée. Obligatoire selon le RGPD (Art. 13-14).",
+  };
+
+  // 3. Cookie banner / consent
+  const cookiePatterns = ["cookie", "consent", "rgpd", "gdpr", "tarteaucitron", "axeptio", "cookiebot", "onetrust", "didomi", "quantcast", "cc-banner", "cookie-banner", "cookie-consent", "cookie-notice"];
+  const cookieFound = cookiePatterns.some(p => htmlLower.includes(p));
+  results.cookieBanner = {
+    found: cookieFound,
+    details: cookieFound
+      ? "Bannière de cookies ou système de consentement détecté."
+      : "Aucune bannière de cookies détectée. Obligatoire si le site utilise des cookies non essentiels.",
+  };
+
+  // 4. CGV / CGU
+  const cgvPatterns = ["conditions générales", "conditions generales", "cgu", "cgv", "terms of service", "terms and conditions", "conditions-generales"];
+  const cgvFound = cgvPatterns.some(p => htmlLower.includes(p));
+  results.cgv = {
+    found: cgvFound,
+    details: cgvFound
+      ? "Conditions générales (CGV/CGU) détectées sur le site."
+      : "Aucune page de conditions générales trouvée. Recommandé pour les sites e-commerce et services.",
+  };
+
+  // 5. Contact information
+  const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+  const phonePattern = /(?:\+33|0)\s*[1-9](?:[\s.-]*\d{2}){4}/g;
+  const emailsFound = html.match(emailPattern) || [];
+  const phonesFound = html.match(phonePattern) || [];
+  const hasAddress = /\d{5}\s+[A-Za-zÀ-ÿ\s-]+|cedex|rue\s|avenue\s|boulevard\s/i.test(html);
+  const contactFound = emailsFound.length > 0 || phonesFound.length > 0 || hasAddress;
+  const contactDetails = [];
+  if (emailsFound.length > 0) contactDetails.push(`${emailsFound.length} email(s) trouvé(s)`);
+  if (phonesFound.length > 0) contactDetails.push(`${phonesFound.length} numéro(s) de téléphone trouvé(s)`);
+  if (hasAddress) contactDetails.push("Adresse postale détectée");
+  results.contactInfo = {
+    found: contactFound,
+    details: contactFound
+      ? `Informations de contact détectées : ${contactDetails.join(", ")}.`
+      : "Aucune information de contact trouvée. Obligatoire dans les mentions légales.",
+  };
+
+  // 6. SSL
+  const isHttps = url.startsWith("https://") || url.startsWith("https:");
+  results.ssl = {
+    found: isHttps,
+    details: isHttps
+      ? "Le site utilise HTTPS (certificat SSL actif). Les données transitent de manière chiffrée."
+      : "Le site n'utilise pas HTTPS. Le chiffrement SSL est fortement recommandé pour protéger les données des visiteurs.",
+  };
+
+  // 7. Third-party trackers
+  const trackerPatterns = [
+    { name: "Google Analytics", patterns: ["google-analytics.com", "googletagmanager.com", "gtag(", "ga('", "analytics.js", "gtm.js"] },
+    { name: "Facebook Pixel", patterns: ["facebook.net/en_US/fbevents.js", "fbq(", "connect.facebook.net", "facebook-jssdk"] },
+    { name: "Google Ads", patterns: ["googleads.g.doubleclick.net", "googlesyndication.com", "adservice.google"] },
+    { name: "Hotjar", patterns: ["hotjar.com", "hj(", "hjSiteSettings"] },
+    { name: "LinkedIn Insight", patterns: ["snap.licdn.com", "linkedin.com/insight"] },
+    { name: "Twitter Pixel", patterns: ["static.ads-twitter.com", "twq("] },
+    { name: "TikTok Pixel", patterns: ["analytics.tiktok.com", "ttq."] },
+    { name: "Mixpanel", patterns: ["mixpanel.com", "mixpanel.init"] },
+    { name: "Segment", patterns: ["cdn.segment.com", "analytics.js"] },
+    { name: "HubSpot", patterns: ["js.hs-scripts.com", "hs-analytics.net", "hubspot.com"] },
+    { name: "Matomo/Piwik", patterns: ["matomo", "piwik"] },
+    { name: "Crisp", patterns: ["client.crisp.chat"] },
+    { name: "Intercom", patterns: ["widget.intercom.io", "intercom.com"] },
+  ];
+  const trackersFound = [];
+  for (const tracker of trackerPatterns) {
+    if (tracker.patterns.some(p => htmlLower.includes(p.toLowerCase()))) {
+      trackersFound.push(tracker.name);
+    }
+  }
+  results.thirdPartyTrackers = {
+    found: trackersFound.length > 0,
+    trackers: trackersFound,
+    details: trackersFound.length > 0
+      ? `${trackersFound.length} tracker(s) tiers détecté(s) : ${trackersFound.join(", ")}. Le consentement utilisateur est requis avant leur activation.`
+      : "Aucun tracker tiers majeur détecté.",
+  };
+
+  // 8. Form consent
+  const hasForm = /<form[\s>]/i.test(html);
+  const hasCheckbox = /<input[^>]*type\s*=\s*["']checkbox["'][^>]*>/i.test(html);
+  const consentTerms = ["j'accepte", "jaccepte", "i agree", "i consent", "consentement", "accepter les conditions", "j'ai lu", "données personnelles"];
+  const hasConsentText = consentTerms.some(t => htmlLower.includes(t));
+  const formConsentFound = hasForm && hasCheckbox && hasConsentText;
+  results.formConsent = {
+    found: formConsentFound,
+    details: hasForm
+      ? (formConsentFound
+        ? "Formulaires avec cases de consentement détectés. Bonne pratique RGPD."
+        : "Formulaires détectés mais sans mécanisme de consentement explicite. Le consentement doit être recueilli via une case à cocher non pré-cochée.")
+      : "Aucun formulaire détecté sur la page analysée.",
+  };
+
+  return results;
+}
+
+// Helper: calculate RGPD score
+function calculateRgpdScore(results) {
+  const weights = {
+    mentionsLegales: 15,
+    politiqueConfidentialite: 20,
+    cookieBanner: 15,
+    cgv: 10,
+    contactInfo: 10,
+    ssl: 15,
+    thirdPartyTrackers: 5,  // Inverted: found = trackers present = lower score
+    formConsent: 10,
+  };
+
+  let score = 0;
+  for (const [key, weight] of Object.entries(weights)) {
+    if (key === "thirdPartyTrackers") {
+      // If trackers found but no cookie banner, penalize
+      if (!results.thirdPartyTrackers.found) {
+        score += weight; // No trackers = good
+      } else if (results.cookieBanner.found) {
+        score += weight; // Trackers but consent present = ok
+      }
+      // Trackers without consent = 0 points
+    } else if (key === "formConsent") {
+      // Only penalize if forms exist without consent
+      const details = results.formConsent.details || "";
+      if (results.formConsent.found) {
+        score += weight;
+      } else if (details.includes("Aucun formulaire")) {
+        score += weight; // No forms = no penalty
+      }
+    } else {
+      if (results[key]?.found) score += weight;
+    }
+  }
+
+  return Math.min(100, Math.max(0, score));
+}
+
+// Helper: generate RGPD AI recommendations
+async function generateRgpdRecommendations(url, score, results) {
+  const issues = [];
+  if (!results.mentionsLegales.found) issues.push("Mentions légales absentes");
+  if (!results.politiqueConfidentialite.found) issues.push("Politique de confidentialité absente");
+  if (!results.cookieBanner.found) issues.push("Bannière cookies absente");
+  if (!results.cgv.found) issues.push("CGV/CGU absentes");
+  if (!results.contactInfo.found) issues.push("Informations de contact absentes");
+  if (!results.ssl.found) issues.push("Pas de HTTPS");
+  if (results.thirdPartyTrackers.found && !results.cookieBanner.found) issues.push("Trackers sans consentement");
+  if (!results.formConsent.found && !results.formConsent.details?.includes("Aucun formulaire")) issues.push("Formulaires sans consentement");
+
+  if (issues.length === 0) {
+    return "Votre site semble conforme aux principales exigences du RGPD. Continuez à surveiller régulièrement la conformité et assurez-vous que vos pratiques internes (registre des traitements, DPO, etc.) sont également à jour.";
+  }
+
+  const prompt = `Tu es un expert en conformité RGPD et droit numérique français. Analyse ce rapport de conformité RGPD pour le site ${url} et donne des recommandations claires et actionnables en français.
+
+Score de conformité : ${score}/100
+Problèmes détectés :
+${issues.map(i => `- ${i}`).join("\n")}
+
+${results.thirdPartyTrackers.found ? `Trackers détectés : ${results.thirdPartyTrackers.trackers.join(", ")}` : ""}
+
+Donne exactement 5 recommandations numérotées, courtes (2-3 phrases max chacune), avec un titre en gras. Commence par les actions les plus urgentes. Utilise un langage simple et accessible. Mentionne les articles du RGPD pertinents quand c'est utile.`;
+
+  try {
+    const OpenAI = require("openai");
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 900,
+      temperature: 0.4,
+    });
+    return completion.choices[0]?.message?.content || "Recommandations non disponibles.";
+  } catch (err) {
+    console.error("Erreur IA RGPD:", err.message);
+    // Fallback recommendations
+    const recs = [];
+    if (!results.mentionsLegales.found) recs.push("**Ajoutez des mentions légales** — Obligatoire en France (Loi pour la Confiance dans l'Économie Numérique). Incluez : identité de l'éditeur, hébergeur, directeur de publication.");
+    if (!results.politiqueConfidentialite.found) recs.push("**Créez une politique de confidentialité** — Obligatoire selon les articles 13 et 14 du RGPD. Détaillez les données collectées, leur finalité, la durée de conservation et les droits des utilisateurs.");
+    if (!results.cookieBanner.found) recs.push("**Installez une bannière de cookies** — La CNIL exige un consentement explicite avant le dépôt de cookies non essentiels. Utilisez une solution comme Tarteaucitron ou Axeptio.");
+    if (!results.ssl.found) recs.push("**Passez votre site en HTTPS** — Le chiffrement SSL protège les données en transit et est un signal de confiance pour vos visiteurs.");
+    if (!results.contactInfo.found) recs.push("**Ajoutez vos coordonnées de contact** — Email, téléphone et adresse doivent figurer dans les mentions légales pour permettre l'exercice des droits RGPD.");
+    if (recs.length === 0) recs.push("**Maintenez votre conformité** — Planifiez des audits réguliers et tenez votre registre des traitements à jour.");
+    return recs.join("\n\n");
+  }
+}
+
+// POST /api/vault/rgpd-scan — scan a website for RGPD compliance
+router.post("/rgpd-scan", authMiddleware, async (req, res) => {
+  try {
+    const { url } = req.body;
+
+    if (!url || typeof url !== "string" || url.length > 500) {
+      return res.status(400).json({ error: "URL invalide." });
+    }
+
+    // Normalize URL
+    let normalizedUrl = url.trim();
+    if (!/^https?:\/\//i.test(normalizedUrl)) {
+      normalizedUrl = "https://" + normalizedUrl;
+    }
+
+    // Validate URL format
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(normalizedUrl);
+    } catch {
+      return res.status(400).json({ error: "Format d'URL invalide. Exemple : https://monsite.fr" });
+    }
+
+    const domain = parsedUrl.hostname;
+
+    // Create scan record
+    const scan = new RgpdScan({
+      userId: req.user.userId,
+      url: normalizedUrl,
+      domain,
+      status: "scanning",
+    });
+    await scan.save();
+
+    // Fetch the page
+    let html;
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      const response = await fetch(normalizedUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (compatible; NERVUR-RGPD-Scanner/1.0)",
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.5",
+        },
+        signal: controller.signal,
+        redirect: "follow",
+      });
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        scan.status = "error";
+        await scan.save();
+        return res.status(400).json({ error: `Impossible d'accéder au site (HTTP ${response.status}). Vérifiez l'URL.` });
+      }
+
+      html = await response.text();
+    } catch (fetchErr) {
+      scan.status = "error";
+      await scan.save();
+      return res.status(400).json({
+        error: fetchErr.name === "AbortError"
+          ? "Le site met trop de temps à répondre (timeout 15s)."
+          : `Impossible d'accéder au site : ${fetchErr.message}`,
+      });
+    }
+
+    // Analyze RGPD compliance
+    const results = analyzeRgpdCompliance(html, normalizedUrl);
+    const score = calculateRgpdScore(results);
+
+    // Generate AI recommendations
+    const aiRecommendations = await generateRgpdRecommendations(normalizedUrl, score, results);
+
+    // Update scan
+    scan.results = results;
+    scan.score = score;
+    scan.aiRecommendations = aiRecommendations;
+    scan.status = "completed";
+    await scan.save();
+
+    res.json(scan);
+  } catch (err) {
+    console.error("Erreur scan RGPD:", err);
+    res.status(500).json({ error: "Erreur lors de l'analyse RGPD. Réessayez." });
+  }
+});
+
+// GET /api/vault/rgpd-history — list past RGPD scans
+router.get("/rgpd-history", authMiddleware, async (req, res) => {
+  try {
+    const scans = await RgpdScan.find({ userId: req.user.userId })
+      .sort({ createdAt: -1 })
+      .limit(50)
+      .select("url domain score status createdAt");
+    res.json(scans);
+  } catch (err) {
+    res.status(500).json({ error: "Erreur lors de la récupération de l'historique RGPD." });
+  }
+});
+
+// GET /api/vault/rgpd-scan/:id — get full RGPD scan details
+router.get("/rgpd-scan/:id", authMiddleware, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: "ID invalide." });
+    }
+    const scan = await RgpdScan.findOne({ _id: req.params.id, userId: req.user.userId });
+    if (!scan) return res.status(404).json({ error: "Scan RGPD introuvable." });
+    res.json(scan);
+  } catch (err) {
+    res.status(500).json({ error: "Erreur lors de la récupération du scan RGPD." });
+  }
+});
+
+// DELETE /api/vault/rgpd-scan/:id
+router.delete("/rgpd-scan/:id", authMiddleware, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: "ID invalide." });
+    }
+    await RgpdScan.deleteOne({ _id: req.params.id, userId: req.user.userId });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Erreur lors de la suppression." });
   }
 });
 

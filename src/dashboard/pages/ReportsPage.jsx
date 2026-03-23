@@ -1,5 +1,18 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../hooks/useApi";
+import SubNav from "../components/SubNav";
+
+const SENTINEL_NAV = [
+  { path: "/app/sentinel", label: "Dashboard", end: true },
+  { path: "/app/reviews", label: "Avis clients" },
+  { path: "/app/analytics", label: "Analyse IA" },
+  { path: "/app/competitors", label: "Concurrents" },
+  { path: "/app/reports", label: "Rapports" },
+  { path: "/app/qrcode", label: "QR Code" },
+  { path: "/app/widget", label: "Widget" },
+  { path: "/app/alerts", label: "Alertes" },
+  { path: "/app/settings", label: "Paramètres" },
+];
 
 export default function ReportsPage() {
   const { get } = useApi();
@@ -41,22 +54,23 @@ export default function ReportsPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
 
   const now = new Date();
   const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
   return (
     <div style={{ maxWidth: "700px" }}>
+      <SubNav color="#ef4444" items={SENTINEL_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{
           width: "40px", height: "3px", borderRadius: "2px",
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Rapports</h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Rapports</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Générez un rapport PDF complet de votre e-réputation.
         </p>
       </div>
@@ -69,10 +83,10 @@ export default function ReportsPage() {
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "8px", color: "#f0f0f3" }}>
               Rapport {months[now.getMonth()]} {now.getFullYear()}
             </h3>
-            <p style={{ fontSize: "14px", color: "#71717A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: "14px", color: "#9ca3af", lineHeight: 1.6 }}>
               Vue d'ensemble, analyse sémantique, sentiments, points forts et axes d'amélioration.
             </p>
           </div>
@@ -93,9 +107,10 @@ export default function ReportsPage() {
       {/* Report contents info */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #1e1e22", background: "#141416"
+        border: "1px solid #2a2d3a", background: "#1e2029",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "20px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "20px" }}>
           Contenu du rapport
         </h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -114,8 +129,8 @@ export default function ReportsPage() {
                 color: "#ef4444", flexShrink: 0
               }}>{item.icon}</span>
               <div>
-                <div style={{ fontSize: "14px", fontWeight: 600, color: "#D4D4D8", marginBottom: "2px" }}>{item.title}</div>
-                <div style={{ fontSize: "13px", color: "#71717A" }}>{item.desc}</div>
+                <div style={{ fontSize: "14px", fontWeight: 600, color: "#d1d5db", marginBottom: "2px" }}>{item.title}</div>
+                <div style={{ fontSize: "13px", color: "#9ca3af" }}>{item.desc}</div>
               </div>
             </div>
           ))}
@@ -129,7 +144,7 @@ export default function ReportsPage() {
         display: "flex", gap: "12px", alignItems: "center"
       }}>
         <span style={{ fontSize: "14px", color: "#ef4444", flexShrink: 0 }}>i</span>
-        <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6, margin: 0 }}>
+        <p style={{ fontSize: "13px", color: "#6b7280", lineHeight: 1.6, margin: 0 }}>
           {"Le rapport mensuel automatique sera bientôt disponible. Il sera envoyé par email le 1er de chaque mois."}
         </p>
       </div>

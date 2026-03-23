@@ -14,11 +14,11 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
 
   return (
     <div style={{
-      border: "1px solid #1e1e22", borderRadius: "10px", padding: "18px",
-      background: "#141416"
+      border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
+      background: "#1e2029"
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-        <div style={{ fontSize: "12px", fontWeight: 500, color: "#71717A" }}>
+        <div style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af" }}>
           Réponse IA {response?.provider === "claude" ? "(Claude)" : response?.provider === "openai" ? "(GPT)" : ""}
         </div>
         {response?.status && (
@@ -34,24 +34,24 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
       </div>
 
       {isPublished ? (
-        <p style={{ fontSize: "14px", color: "#A1A1AA", lineHeight: 1.8 }}>
+        <p style={{ fontSize: "14px", color: "#9ca3af", lineHeight: 1.8 }}>
           {response?.finalText || response?.generatedText}
         </p>
       ) : (
         <>
           <textarea value={text} onChange={e => setText(e.target.value)}
             style={{
-              width: "100%", minHeight: "160px", padding: "16px", background: "#0f0f11",
-              border: "1px solid #27272A", borderRadius: "8px", color: "#FAFAFA",
+              width: "100%", minHeight: "160px", padding: "16px", background: "#141520",
+              border: "1px solid #2a2d3a", borderRadius: "8px", color: "#e4e4e7",
               fontSize: "14px", lineHeight: 1.8, fontFamily: "inherit", resize: "vertical",
               outline: "none", boxSizing: "border-box"
             }}
             onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-            onBlur={e => { e.target.style.borderColor = "#27272A"; }} />
+            onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }} />
 
           <div style={{ display: "flex", gap: "10px", marginTop: "16px", flexWrap: "wrap" }}>
             {onRegenerate && (
-              <button onClick={onRegenerate} style={btnStyle("#71717A")}>
+              <button onClick={onRegenerate} style={btnStyle("#9ca3af")}>
                 Régénérer
               </button>
             )}
@@ -68,7 +68,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
             {onPublish && (
               <button onClick={() => onPublish(text)} style={{
                 ...btnStyle("#6366f1"),
-                background: "#6366f1", color: "#FAFAFA", borderColor: "#6366f1"
+                background: "#6366f1", color: "#ffffff", borderColor: "#6366f1"
               }}>
                 Publier →
               </button>
@@ -78,7 +78,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
       )}
 
       {response?.publishedAt && (
-        <div style={{ marginTop: "12px", fontSize: "11px", color: "#52525B" }}>
+        <div style={{ marginTop: "12px", fontSize: "11px", color: "#4b5563" }}>
           Publiée le {new Date(response.publishedAt).toLocaleString("fr-FR")}
         </div>
       )}

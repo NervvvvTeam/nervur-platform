@@ -1,6 +1,19 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../hooks/useApi";
 import ReviewCard from "../components/ReviewCard";
+import SubNav from "../components/SubNav";
+
+const SENTINEL_NAV = [
+  { path: "/app/sentinel", label: "Dashboard", end: true },
+  { path: "/app/reviews", label: "Avis clients" },
+  { path: "/app/analytics", label: "Analyse IA" },
+  { path: "/app/competitors", label: "Concurrents" },
+  { path: "/app/reports", label: "Rapports" },
+  { path: "/app/qrcode", label: "QR Code" },
+  { path: "/app/widget", label: "Widget" },
+  { path: "/app/alerts", label: "Alertes" },
+  { path: "/app/settings", label: "Paramètres" },
+];
 
 const FILTERS = [
   { key: "all", label: "Tous", color: "#6366f1" },
@@ -56,21 +69,22 @@ export default function ReviewsPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
 
   return (
     <div style={{ maxWidth: "900px" }}>
+      <SubNav color="#ef4444" items={SENTINEL_NAV} />
       <div style={{ marginBottom: "24px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
           <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444" }} />
           <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA" }}>Avis clients</h1>
-          <span style={{ fontSize: "12px", color: "#52525B" }}>{pagination?.total || 0} avis au total</span>
+          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3" }}>Avis clients</h1>
+          <span style={{ fontSize: "12px", color: "#d1d5db" }}>{pagination?.total || 0} avis au total</span>
         </div>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>Consultez et gérez les avis de vos clients.</p>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>Consultez et gérez les avis de vos clients.</p>
       </div>
 
       {/* Filters */}
@@ -81,8 +95,8 @@ export default function ReviewsPage() {
               style={{
                 padding: "6px 14px", fontSize: "12px", fontWeight: 500,
                 background: sentiment === f.key ? `${f.color}22` : "transparent",
-                border: `1px solid ${sentiment === f.key ? `${f.color}45` : "#1e1e2a"}`,
-                borderRadius: "6px", color: sentiment === f.key ? f.color : "#71717A",
+                border: `1px solid ${sentiment === f.key ? `${f.color}45` : "#2a2d3a"}`,
+                borderRadius: "6px", color: sentiment === f.key ? f.color : "#9ca3af",
                 cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
                 boxShadow: sentiment === f.key ? `0 0 8px ${f.color}15` : "none"
               }}>{f.label}</button>
@@ -94,8 +108,8 @@ export default function ReviewsPage() {
               style={{
                 padding: "6px 14px", fontSize: "12px", fontWeight: 500,
                 background: status === f.key ? "rgba(99,102,241,0.15)" : "transparent",
-                border: `1px solid ${status === f.key ? "rgba(99,102,241,0.35)" : "#1e1e2a"}`,
-                borderRadius: "6px", color: status === f.key ? "#818CF8" : "#71717A",
+                border: `1px solid ${status === f.key ? "rgba(99,102,241,0.35)" : "#2a2d3a"}`,
+                borderRadius: "6px", color: status === f.key ? "#818CF8" : "#9ca3af",
                 cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
                 boxShadow: status === f.key ? "0 0 8px rgba(99,102,241,0.1)" : "none"
               }}>{f.label}</button>
@@ -108,7 +122,7 @@ export default function ReviewsPage() {
         {reviews.length > 0 ? reviews.map(r => (
           <ReviewCard key={r._id} review={r} businessId={business._id} />
         )) : (
-          <div style={{ padding: "60px", textAlign: "center", color: "#52525B", border: "1px dashed #2a2a3a", borderRadius: "10px" }}>
+          <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db", border: "1px dashed #e5e7eb", borderRadius: "10px" }}>
             Aucun avis avec ces filtres
           </div>
         )}
@@ -120,9 +134,9 @@ export default function ReviewsPage() {
           {Array.from({ length: pagination.pages }, (_, i) => (
             <button key={i} onClick={() => setPage(i + 1)}
               style={{
-                width: "36px", height: "36px", borderRadius: "8px", border: `1px solid ${page === i + 1 ? "#6366f150" : "#1e1e2a"}`,
+                width: "36px", height: "36px", borderRadius: "8px", border: `1px solid ${page === i + 1 ? "#6366f150" : "#2a2d3a"}`,
                 background: page === i + 1 ? "linear-gradient(135deg, #6366f1, #818CF8)" : "transparent",
-                color: page === i + 1 ? "#FAFAFA" : "#71717A",
+                color: page === i + 1 ? "#ffffff" : "#9ca3af",
                 cursor: "pointer", fontFamily: "inherit", fontSize: "13px", fontWeight: 500,
                 transition: "all 0.2s"
               }}>{i + 1}</button>

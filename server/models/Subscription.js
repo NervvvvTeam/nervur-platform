@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const subscriptionSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  toolId: { type: String, enum: ["sentinel", "phantom", "nexus", "forge", "vault"], required: true },
+  toolId: { type: String, enum: ["sentinel", "phantom", "nexus", "forge", "vault", "atlas", "pulse"], required: true },
   plan: { type: String, enum: ["starter", "pro", "enterprise"], default: "starter" },
   status: { type: String, enum: ["active", "expired", "cancelled"], default: "active" },
   startDate: { type: Date, default: Date.now },

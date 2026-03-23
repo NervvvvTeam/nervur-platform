@@ -1,5 +1,12 @@
 import { useState } from "react";
 import { useApi } from "../hooks/useApi";
+import SubNav from "../components/SubNav";
+
+const PHANTOM_NAV = [
+  { path: "/app/phantom", label: "Audit", end: true },
+  { path: "/app/phantom/history", label: "Historique" },
+  { path: "/app/phantom/recommendations", label: "Recommandations" },
+];
 
 const CATEGORY_LABELS = {
   performance: "Performance",
@@ -31,7 +38,7 @@ function ScoreCircle({ score, label, color, size = 80 }) {
     <div style={{ textAlign: "center" }}>
       <div style={{ position: "relative", width: size, height: size, margin: "0 auto" }}>
         <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#1e1e2a" strokeWidth="5" />
+          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#2a2d3a" strokeWidth="5" />
           <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke={color || scoreColor}
             strokeWidth="5" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
             style={{ transition: "stroke-dashoffset 1s ease" }} />
@@ -40,10 +47,10 @@ function ScoreCircle({ score, label, color, size = 80 }) {
           position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
           display: "flex", alignItems: "center", justifyContent: "center"
         }}>
-          <span style={{ fontSize: size > 70 ? "22px" : "18px", fontWeight: 600, color: "#FAFAFA" }}>{score}</span>
+          <span style={{ fontSize: size > 70 ? "22px" : "18px", fontWeight: 600, color: "#f0f0f3" }}>{score}</span>
         </div>
       </div>
-      <div style={{ fontSize: "12px", color: "#71717A", marginTop: "8px" }}>{label}</div>
+      <div style={{ fontSize: "12px", color: "#9ca3af", marginTop: "8px" }}>{label}</div>
     </div>
   );
 }
@@ -53,18 +60,19 @@ function CWVItem({ label, data }) {
   const colors = { good: "#10b981", "needs-improvement": "#f59e0b", poor: "#ef4444" };
   return (
     <div style={{
-      padding: "14px 18px", background: "#0c0d14", border: "1px solid #1e1e2a",
-      borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center"
+      padding: "14px 18px", background: "#1e2029", border: "1px solid #2a2d3a",
+      borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
     }}>
       <div>
-        <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "4px" }}>{label}</div>
-        <div style={{ fontSize: "17px", fontWeight: 600, color: "#FAFAFA" }}>
+        <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>{label}</div>
+        <div style={{ fontSize: "17px", fontWeight: 600, color: "#f0f0f3" }}>
           {data.display || `${data.value}${data.unit}`}
         </div>
       </div>
       <div style={{
         width: "10px", height: "10px", borderRadius: "50%",
-        background: colors[data.status] || "#71717A"
+        background: colors[data.status] || "#9ca3af"
       }} />
     </div>
   );
@@ -118,16 +126,17 @@ export default function PhantomDashboardPage() {
 
   return (
     <div style={{ maxWidth: "900px" }}>
+      <SubNav color="#8b5cf6" items={PHANTOM_NAV} />
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
           <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#8b5cf6" }} />
           <span style={{ fontSize: "12px", color: "#8b5cf6", fontWeight: 500 }}>Phantom</span>
         </div>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
           Audit de performance
         </h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Analysez les performances, le SEO et l'accessibilité de n'importe quel site web.
         </p>
       </div>
@@ -135,20 +144,21 @@ export default function PhantomDashboardPage() {
       {/* URL Input */}
       <div style={{
         display: "flex", gap: "10px", marginBottom: "32px",
-        padding: "20px", background: "#151620", border: "1px solid #1e1e2a", borderRadius: "10px"
+        padding: "20px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
       }}>
         <input
           type="text" value={url} onChange={e => setUrl(e.target.value)}
           placeholder="https://exemple.com"
           onKeyDown={e => e.key === "Enter" && !loading && runAudit()}
           style={{
-            flex: 1, padding: "12px 16px", background: "#0c0d14",
-            border: "1px solid #27272A", borderRadius: "8px",
-            color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
+            flex: 1, padding: "12px 16px", background: "#1e2029",
+            border: "1px solid #2a2d3a", borderRadius: "8px",
+            color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
             outline: "none", boxSizing: "border-box", transition: "border-color 0.2s, box-shadow 0.2s",
           }}
           onFocus={e => { e.target.style.borderColor = "#8b5cf6"; e.target.style.boxShadow = "0 0 0 3px rgba(139,92,246,0.15)"; }}
-          onBlur={e => { e.target.style.borderColor = "#27272A"; e.target.style.boxShadow = "none"; }}
+          onBlur={e => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }}
         />
         <button onClick={runAudit} disabled={loading || !url.trim()}
           style={{
@@ -165,15 +175,15 @@ export default function PhantomDashboardPage() {
       {/* Progress */}
       {loading && (
         <div style={{
-          padding: "24px", background: "#151620", border: "1px solid #8b5cf630",
+          padding: "24px", background: "#1e2029", border: "1px solid #8b5cf630",
           borderLeft: "3px solid #8b5cf6",
           borderRadius: "10px", marginBottom: "24px"
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "12px" }}>
-            <span style={{ fontSize: "14px", color: "#A1A1AA" }}>{phase}</span>
+            <span style={{ fontSize: "14px", color: "#6b7280" }}>{phase}</span>
             <span style={{ fontSize: "14px", color: "#8b5cf6", fontWeight: 500 }}>{progress}%</span>
           </div>
-          <div style={{ height: "4px", background: "#1e1e2a", borderRadius: "2px", overflow: "hidden" }}>
+          <div style={{ height: "4px", background: "#2a2d3a", borderRadius: "2px", overflow: "hidden" }}>
             <div style={{
               height: "100%", background: "#8b5cf6", borderRadius: "2px",
               width: progress + "%", transition: "width 0.5s ease"
@@ -198,11 +208,12 @@ export default function PhantomDashboardPage() {
         <>
           {/* Scores */}
           <div style={{
-            padding: "28px", background: "#151620", border: "1px solid #1e1e2a",
+            padding: "28px", background: "#1e2029", border: "1px solid #2a2d3a",
             borderLeft: "3px solid #8b5cf6",
-            borderRadius: "10px", marginBottom: "16px"
+            borderRadius: "10px", marginBottom: "16px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
           }}>
-            <div style={{ fontSize: "13px", color: "#71717A", marginBottom: "24px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#8b5cf6", display: "inline-block" }} />Scores Lighthouse</div>
+            <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "24px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#8b5cf6", display: "inline-block" }} />Scores Lighthouse</div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px", justifyItems: "center" }}>
               <ScoreCircle score={result.scores.global || Math.round((result.scores.performance + result.scores.accessibility + result.scores.seo + (result.scores.bestPractices || 0)) / 4)} label="Global" size={90} color="#8b5cf6" />
               <ScoreCircle score={result.scores.performance} label="Performance" size={72} />
@@ -215,11 +226,12 @@ export default function PhantomDashboardPage() {
           {/* Core Web Vitals */}
           {result.coreWebVitals && (
             <div style={{
-              padding: "24px", background: "#151620", border: "1px solid #1e1e2a",
+              padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
               borderLeft: "3px solid #3b82f6",
-              borderRadius: "10px", marginBottom: "16px"
+              borderRadius: "10px", marginBottom: "16px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
             }}>
-              <div style={{ fontSize: "13px", color: "#71717A", marginBottom: "16px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#3b82f6", display: "inline-block" }} />Core Web Vitals</div>
+              <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "16px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#3b82f6", display: "inline-block" }} />Core Web Vitals</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
                 <CWVItem label="LCP" data={result.coreWebVitals.lcp} />
                 <CWVItem label="FCP" data={result.coreWebVitals.fcp} />
@@ -239,17 +251,18 @@ export default function PhantomDashboardPage() {
               marginBottom: "16px"
             }}>
               <div style={{ fontSize: "12px", color: "#8b5cf6", marginBottom: "8px", fontWeight: 500 }}>Analyse IA</div>
-              <p style={{ fontSize: "14px", color: "#D4D4D8", lineHeight: 1.7, margin: 0 }}>{result.summary}</p>
+              <p style={{ fontSize: "14px", color: "#d1d5db", lineHeight: 1.7, margin: 0 }}>{result.summary}</p>
             </div>
           )}
 
           {/* Issues */}
           <div style={{
-            padding: "24px", background: "#151620", border: "1px solid #1e1e2a",
-            borderRadius: "10px"
+            padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
+            borderRadius: "10px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
-              <div style={{ fontSize: "13px", color: "#71717A", display: "flex", alignItems: "center", gap: "6px" }}>
+              <div style={{ fontSize: "13px", color: "#9ca3af", display: "flex", alignItems: "center", gap: "6px" }}>
                 <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Problèmes détectés ({result.issues?.length || 0})
               </div>
               <div style={{ display: "flex", gap: "6px" }}>
@@ -258,8 +271,8 @@ export default function PhantomDashboardPage() {
                     style={{
                       padding: "4px 12px", borderRadius: "4px", border: "none",
                       fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
-                      background: filter === f ? (f === "all" ? "#27272A" : SEVERITY_COLORS[f] + "20") : "transparent",
-                      color: filter === f ? (f === "all" ? "#FAFAFA" : SEVERITY_COLORS[f]) : "#71717A",
+                      background: filter === f ? (f === "all" ? "#2a2d3a" : SEVERITY_COLORS[f] + "20") : "transparent",
+                      color: filter === f ? (f === "all" ? "#f0f0f3" : SEVERITY_COLORS[f]) : "#9ca3af",
                     }}>
                     {f === "all" ? "Tous" : f === "critical" ? "Critique" : f === "warning" ? "Attention" : "Info"}
                   </button>
@@ -270,20 +283,21 @@ export default function PhantomDashboardPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               {filteredIssues.map((issue, i) => (
                 <div key={i} style={{
-                  padding: "16px 20px", background: "#0c0d14",
-                  border: "1px solid #1e1e2a", borderRadius: "8px",
-                  borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#71717A"}`
+                  padding: "16px 20px", background: "#1e2029",
+                  border: "1px solid #2a2d3a", borderRadius: "8px",
+                  borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#9ca3af"}`,
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
                     <span style={{
                       fontSize: "11px", fontWeight: 500, padding: "2px 8px", borderRadius: "4px",
-                      background: (SEVERITY_COLORS[issue.severity] || "#71717A") + "18",
-                      color: SEVERITY_COLORS[issue.severity] || "#71717A",
+                      background: (SEVERITY_COLORS[issue.severity] || "#9ca3af") + "18",
+                      color: SEVERITY_COLORS[issue.severity] || "#9ca3af",
                     }}>
                       {issue.severity === "critical" ? "Critique" : issue.severity === "warning" ? "Attention" : "Info"}
                     </span>
                     <span style={{
-                      fontSize: "11px", color: CATEGORY_COLORS[issue.category] || "#71717A"
+                      fontSize: "11px", color: CATEGORY_COLORS[issue.category] || "#9ca3af"
                     }}>
                       {CATEGORY_LABELS[issue.category] || issue.category}
                     </span>
@@ -293,16 +307,16 @@ export default function PhantomDashboardPage() {
                       </span>
                     )}
                   </div>
-                  <div style={{ fontSize: "14px", color: "#E4E4E7", marginBottom: "4px", fontWeight: 500 }}>
+                  <div style={{ fontSize: "14px", color: "#d1d5db", marginBottom: "4px", fontWeight: 500 }}>
                     {issue.title}
                   </div>
                   {issue.description && (
-                    <div style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.5, marginBottom: issue.fix ? "6px" : 0 }}>
+                    <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.5, marginBottom: issue.fix ? "6px" : 0 }}>
                       {issue.description}
                     </div>
                   )}
                   {issue.fix && (
-                    <div style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.5 }}>
+                    <div style={{ fontSize: "13px", color: "#6b7280", lineHeight: 1.5 }}>
                       <span style={{ color: "#8b5cf6" }}>Solution : </span>{issue.fix}
                     </div>
                   )}
@@ -316,8 +330,8 @@ export default function PhantomDashboardPage() {
             <button onClick={() => { setResult(null); setUrl(""); setError(""); setProgress(0); }}
               style={{
                 padding: "10px 24px", background: "transparent",
-                border: "1px solid #27272A", borderRadius: "8px",
-                color: "#A1A1AA", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
+                border: "1px solid #2a2d3a", borderRadius: "8px",
+                color: "#6b7280", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
               }}>
               Nouvel audit
             </button>

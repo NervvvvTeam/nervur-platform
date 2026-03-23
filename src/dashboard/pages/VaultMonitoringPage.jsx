@@ -1,6 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
 import { useNavigate } from "react-router-dom";
+import SubNav from "../components/SubNav";
+
+const VAULT_NAV = [
+  { path: "/app/vault", label: "Scanner", end: true },
+  { path: "/app/vault/monitoring", label: "Surveillance" },
+  { path: "/app/vault/history", label: "Historique" },
+  { path: "/app/vault/rgpd", label: "Conformit\u00e9 RGPD" },
+];
 
 const ACCENT = "#06b6d4";
 const ACCENT_LIGHT = "#22d3ee";
@@ -13,7 +21,7 @@ const EyeIcon = ({ size = 20, color = ACCENT }) => (
   </svg>
 );
 
-const TrashIcon = ({ size = 15, color = "#71717A" }) => (
+const TrashIcon = ({ size = 15, color = "#9ca3af" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
   </svg>
@@ -134,6 +142,7 @@ export default function VaultMonitoringPage() {
 
   return (
     <div style={{ maxWidth: "860px" }}>
+      <SubNav color="#06b6d4" items={VAULT_NAV} />
       {/* Header bar */}
       <div style={{
         width: "40px", height: "3px", borderRadius: "2px",
@@ -142,11 +151,11 @@ export default function VaultMonitoringPage() {
       }} />
       <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
         <EyeIcon size={26} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
           Surveillance Vault
         </h1>
       </div>
-      <p style={{ fontSize: "14px", color: "#71717A", marginBottom: "32px" }}>
+      <p style={{ fontSize: "14px", color: "#9ca3af", marginBottom: "32px" }}>
         Surveillez automatiquement vos domaines et recevez des alertes en cas de nouvelle fuite.
       </p>
 
@@ -176,7 +185,7 @@ export default function VaultMonitoringPage() {
 
       {/* Active monitoring list */}
       <div style={{ marginBottom: "36px" }}>
-        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#D4D4D8", marginBottom: "16px" }}>
+        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#d1d5db", marginBottom: "16px" }}>
           Surveillance active
         </h2>
 
@@ -187,7 +196,7 @@ export default function VaultMonitoringPage() {
               border: `3px solid ${BORDER_TINT}`, borderTop: `3px solid ${ACCENT}`,
               borderRadius: "50%", animation: "vault-mon-spin 1s linear infinite",
             }} />
-            <div style={{ fontSize: "12px", color: "#71717A" }}>Chargement...</div>
+            <div style={{ fontSize: "12px", color: "#9ca3af" }}>Chargement...</div>
             <style>{`@keyframes vault-mon-spin { to { transform: rotate(360deg); } }`}</style>
           </div>
         )}
@@ -198,11 +207,11 @@ export default function VaultMonitoringPage() {
             background: BG_TINT, border: `1px dashed ${BORDER_TINT}`,
             borderRadius: "8px",
           }}>
-            <EyeIcon size={36} color="#3f3f46" />
-            <p style={{ fontSize: "14px", color: "#71717A", marginTop: "12px", marginBottom: "4px" }}>
+            <EyeIcon size={36} color="#d1d5db" />
+            <p style={{ fontSize: "14px", color: "#9ca3af", marginTop: "12px", marginBottom: "4px" }}>
               Aucune surveillance configuree
             </p>
-            <p style={{ fontSize: "12px", color: "#52525B" }}>
+            <p style={{ fontSize: "12px", color: "#d1d5db" }}>
               Ajoutez un domaine ci-dessous pour commencer la surveillance automatique.
             </p>
           </div>
@@ -214,7 +223,7 @@ export default function VaultMonitoringPage() {
               <div key={config._id} style={{
                 padding: "16px 18px",
                 background: config.enabled ? BG_TINT : "rgba(39,39,42,0.3)",
-                border: `1px solid ${config.enabled ? BORDER_TINT : "#27272A"}`,
+                border: `1px solid ${config.enabled ? BORDER_TINT : "#d1d5db"}`,
                 borderRadius: "8px",
                 opacity: config.enabled ? 1 : 0.65,
                 transition: "all 0.2s",
@@ -223,19 +232,19 @@ export default function VaultMonitoringPage() {
                   {/* Left info */}
                   <div style={{ flex: 1, minWidth: "200px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                      <span style={{ fontSize: "15px", fontWeight: 600, color: "#FAFAFA" }}>
+                      <span style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3" }}>
                         {config.domain}
                       </span>
                       <span style={{
                         fontSize: "10px", fontWeight: 500,
                         padding: "2px 8px", borderRadius: "10px",
                         background: config.enabled ? "rgba(6,182,212,0.15)" : "rgba(113,113,122,0.15)",
-                        color: config.enabled ? ACCENT_LIGHT : "#71717A",
+                        color: config.enabled ? ACCENT_LIGHT : "#9ca3af",
                       }}>
                         {config.enabled ? "Active" : "En pause"}
                       </span>
                     </div>
-                    <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", fontSize: "12px", color: "#A1A1AA" }}>
+                    <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", fontSize: "12px", color: "#6b7280" }}>
                       <span>{config.emails?.length || 0} email{(config.emails?.length || 0) > 1 ? "s" : ""} surveille{(config.emails?.length || 0) > 1 ? "s" : ""}</span>
                       <span>{config.frequency === "weekly" ? "Hebdomadaire" : "Mensuel"}</span>
                       <span>Dernier scan : {formatDate(config.lastScanAt)}</span>
@@ -251,7 +260,7 @@ export default function VaultMonitoringPage() {
                       title={config.enabled ? "Mettre en pause" : "Activer"}
                       style={{
                         width: "44px", height: "24px", borderRadius: "12px",
-                        background: config.enabled ? ACCENT : "#3f3f46",
+                        background: config.enabled ? ACCENT : "#3a3d4a",
                         border: "none", cursor: "pointer", position: "relative",
                         transition: "background 0.2s",
                         opacity: togglingId === config._id ? 0.5 : 1,
@@ -316,17 +325,17 @@ export default function VaultMonitoringPage() {
         border: `1px solid ${BORDER_TINT}`,
         borderRadius: "10px",
       }}>
-        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#D4D4D8", marginBottom: "4px" }}>
+        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#d1d5db", marginBottom: "4px" }}>
           Ajouter un domaine
         </h2>
-        <p style={{ fontSize: "12px", color: "#71717A", marginBottom: "20px" }}>
+        <p style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "20px" }}>
           Configurez la surveillance automatique pour un nouveau domaine.
         </p>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {/* Domain */}
           <div>
-            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#A1A1AA", marginBottom: "6px" }}>
+            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
               Domaine
             </label>
             <input
@@ -337,8 +346,8 @@ export default function VaultMonitoringPage() {
               required
               style={{
                 width: "100%", padding: "10px 14px", borderRadius: "6px",
-                background: "#18181B", border: `1px solid ${BORDER_TINT}`,
-                color: "#FAFAFA", fontSize: "13px", fontFamily: "inherit",
+                background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
+                color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
                 outline: "none", transition: "border-color 0.15s",
                 boxSizing: "border-box",
               }}
@@ -349,7 +358,7 @@ export default function VaultMonitoringPage() {
 
           {/* Emails */}
           <div>
-            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#A1A1AA", marginBottom: "6px" }}>
+            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
               Adresses email a surveiller (une par ligne)
             </label>
             <textarea
@@ -360,8 +369,8 @@ export default function VaultMonitoringPage() {
               required
               style={{
                 width: "100%", padding: "10px 14px", borderRadius: "6px",
-                background: "#18181B", border: `1px solid ${BORDER_TINT}`,
-                color: "#FAFAFA", fontSize: "13px", fontFamily: "inherit",
+                background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
+                color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
                 outline: "none", resize: "vertical", transition: "border-color 0.15s",
                 boxSizing: "border-box",
               }}
@@ -373,7 +382,7 @@ export default function VaultMonitoringPage() {
           {/* Frequency + Alert email row */}
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <div style={{ flex: 1, minWidth: "180px" }}>
-              <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#A1A1AA", marginBottom: "6px" }}>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
                 Frequence de scan
               </label>
               <select
@@ -381,8 +390,8 @@ export default function VaultMonitoringPage() {
                 onChange={e => setFrequency(e.target.value)}
                 style={{
                   width: "100%", padding: "10px 14px", borderRadius: "6px",
-                  background: "#18181B", border: `1px solid ${BORDER_TINT}`,
-                  color: "#FAFAFA", fontSize: "13px", fontFamily: "inherit",
+                  background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
+                  color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
                   outline: "none", cursor: "pointer",
                   boxSizing: "border-box",
                 }}
@@ -392,7 +401,7 @@ export default function VaultMonitoringPage() {
               </select>
             </div>
             <div style={{ flex: 1, minWidth: "180px" }}>
-              <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#A1A1AA", marginBottom: "6px" }}>
+              <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
                 Email d'alerte (optionnel)
               </label>
               <input
@@ -402,8 +411,8 @@ export default function VaultMonitoringPage() {
                 placeholder="alerte@monentreprise.fr"
                 style={{
                   width: "100%", padding: "10px 14px", borderRadius: "6px",
-                  background: "#18181B", border: `1px solid ${BORDER_TINT}`,
-                  color: "#FAFAFA", fontSize: "13px", fontFamily: "inherit",
+                  background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
+                  color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
                   outline: "none", transition: "border-color 0.15s",
                   boxSizing: "border-box",
                 }}
@@ -420,7 +429,7 @@ export default function VaultMonitoringPage() {
             style={{
               display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
               padding: "11px 24px", borderRadius: "8px",
-              background: submitting ? "#3f3f46" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
+              background: submitting ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
               border: "none", color: "#fff", fontSize: "14px", fontWeight: 600,
               cursor: submitting ? "not-allowed" : "pointer",
               fontFamily: "inherit", transition: "all 0.2s",

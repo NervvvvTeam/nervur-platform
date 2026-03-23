@@ -33,7 +33,7 @@ export default function TechnologiesPage() {
     }
   };
 
-  useSEO("Nos Outils & Technologies | NERVÜR", "Découvrez la suite d'outils IA NERVÜR : Sentinel, Signal, Phantom, Atlas, Nexus, Oracle, Forge et plus encore.", { path: "/technologies" });
+  useSEO("Nos Outils & Technologies | NERVÜR", "Découvrez la suite d'outils IA NERVÜR : Sentinel, Phantom et Vault.", { path: "/technologies" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

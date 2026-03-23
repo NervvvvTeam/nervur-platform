@@ -42,6 +42,7 @@ const sentinelAnalyticsRoutes = require("./routes/sentinel-analytics");
 const sentinelCompetitorRoutes = require("./routes/sentinel-competitors");
 const sentinelToolsRoutes = require("./routes/sentinel-tools");
 const vaultRoutes = require("./routes/vault");
+const pulseRoutes = require("./routes/pulse");
 
 const app = express();
 const PORT = configPort;
@@ -205,6 +206,7 @@ app.use("/api/sentinel-app/analytics", sentinelAnalyticsRoutes);
 app.use("/api/sentinel-app/competitors", sentinelCompetitorRoutes);
 app.use("/api/sentinel-app/tools", sentinelToolsRoutes);
 app.use("/api/vault", vaultRoutes);
+app.use("/api/pulse", pulseRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

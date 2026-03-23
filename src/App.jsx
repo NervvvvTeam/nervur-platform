@@ -44,6 +44,9 @@ const DashVaultDashboardPage = lazy(() => import('./dashboard/pages/VaultDashboa
 const DashVaultHistoryPage = lazy(() => import('./dashboard/pages/VaultHistoryPage'))
 const DashVaultScanDetailPage = lazy(() => import('./dashboard/pages/VaultScanDetailPage'))
 const DashVaultMonitoringPage = lazy(() => import('./dashboard/pages/VaultMonitoringPage'))
+const DashVaultRgpdPage = lazy(() => import('./dashboard/pages/VaultRgpdPage'))
+const DashPulseDashboardPage = lazy(() => import('./dashboard/pages/PulseDashboardPage'))
+const DashPulseHistoryPage = lazy(() => import('./dashboard/pages/PulseHistoryPage'))
 const DashPhantomHistoryPage = lazy(() => import('./dashboard/pages/PhantomHistoryPage'))
 const DashPhantomRecommendationsPage = lazy(() => import('./dashboard/pages/PhantomRecommendationsPage'))
 const DashAnalyticsPage = lazy(() => import('./dashboard/pages/AnalyticsPage'))
@@ -52,6 +55,8 @@ const DashReportsPage = lazy(() => import('./dashboard/pages/ReportsPage'))
 const DashQRCodePage = lazy(() => import('./dashboard/pages/QRCodePage'))
 const DashWidgetPage = lazy(() => import('./dashboard/pages/WidgetPage'))
 const DashAlertsPage = lazy(() => import('./dashboard/pages/AlertsPage'))
+const DashAtlasDashboardPage = lazy(() => import('./dashboard/pages/AtlasDashboardPage'))
+const DashAtlasHistoryPage = lazy(() => import('./dashboard/pages/AtlasHistoryPage'))
 
 const Loader = () => (
   <div style={{ background: "#09090B", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -112,10 +117,15 @@ function App() {
                 <Route path="nexus/campaigns" element={<DashNexusCampaignsPage />} />
                 <Route path="forge" element={<DashForgeDashboardPage />} />
                 <Route path="forge/history" element={<DashForgeHistoryPage />} />
+                <Route path="pulse" element={<DashPulseDashboardPage />} />
+                <Route path="pulse/history" element={<DashPulseHistoryPage />} />
                 <Route path="vault" element={<DashVaultDashboardPage />} />
                 <Route path="vault/history" element={<DashVaultHistoryPage />} />
                 <Route path="vault/scan/:id" element={<DashVaultScanDetailPage />} />
                 <Route path="vault/monitoring" element={<DashVaultMonitoringPage />} />
+                <Route path="vault/rgpd" element={<DashVaultRgpdPage />} />
+                <Route path="atlas" element={<DashAtlasDashboardPage />} />
+                <Route path="atlas/history" element={<DashAtlasHistoryPage />} />
                 <Route path="settings" element={<DashSettingsPage />} />
                 <Route path="onboarding" element={<DashOnboardingPage />} />
                 <Route index element={<Navigate to="/app/portal" replace />} />

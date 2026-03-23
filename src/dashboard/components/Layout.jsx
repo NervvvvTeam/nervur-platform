@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useMemo, useState, useEffect } from "react";
 
@@ -37,6 +37,11 @@ const NAV_ICONS = {
   "/app/vault": (c) => I(<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></>, c),
   "/app/vault/history": (c) => I(<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>, c),
   "/app/vault/monitoring": (c) => I(<><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></>, c),
+  "/app/vault/rgpd": (c) => I(<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></>, c),
+  "/app/pulse": (c) => I(<><path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/><path d="M12 6v4l2 2-2 2v4"/></>, c),
+  "/app/pulse/history": (c) => I(<><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></>, c),
+  "/app/atlas": (c) => I(<><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></>, c),
+  "/app/atlas/history": (c) => I(<><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></>, c),
   "/app/settings": (c) => I(<><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></>, c),
 };
 
@@ -47,6 +52,8 @@ const TOOL_COLORS = {
   nexus: "#10b981",
   forge: "#f59e0b",
   vault: "#06b6d4",
+  pulse: "#ec4899",
+  atlas: "#f59e0b",
   general: "#6366f1",
 };
 
@@ -75,58 +82,55 @@ const PATH_COLORS = {
   "/app/vault/history": TOOL_COLORS.vault,
   "/app/vault/scan": TOOL_COLORS.vault,
   "/app/vault/monitoring": TOOL_COLORS.vault,
+  "/app/vault/rgpd": TOOL_COLORS.vault,
+  "/app/pulse": TOOL_COLORS.pulse,
+  "/app/pulse/history": TOOL_COLORS.pulse,
+  "/app/atlas": TOOL_COLORS.atlas,
+  "/app/atlas/history": TOOL_COLORS.atlas,
   "/app/settings": "#71717A",
 };
 
 export default function Layout() {
   const { user, logout, hasAccess } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMobile = useIsMobile();
 
+  const activeTool = useMemo(() => {
+    if (location.pathname.startsWith("/app/sentinel") || location.pathname.startsWith("/app/reviews") || location.pathname.startsWith("/app/analytics") || location.pathname.startsWith("/app/competitors") || location.pathname.startsWith("/app/reports") || location.pathname.startsWith("/app/qrcode") || location.pathname.startsWith("/app/widget") || location.pathname.startsWith("/app/alerts") || location.pathname === "/app/settings") return "sentinel";
+    if (location.pathname.startsWith("/app/phantom")) return "phantom";
+    if (location.pathname.startsWith("/app/nexus")) return "nexus";
+    if (location.pathname.startsWith("/app/vault")) return "vault";
+    if (location.pathname.startsWith("/app/pulse")) return "pulse";
+    if (location.pathname.startsWith("/app/forge")) return "forge";
+    if (location.pathname.startsWith("/app/atlas")) return "atlas";
+    return "portal";
+  }, [location.pathname]);
+
   const navItems = useMemo(() => {
     const items = [
-      { path: "/app/portal", label: "Mes outils" },
+      { path: "/app/portal", label: "Mes outils", toolKey: "portal", color: TOOL_COLORS.general },
     ];
     if (hasAccess("sentinel")) {
-      items.push({ type: "separator", label: "Sentinel", color: TOOL_COLORS.sentinel });
-      items.push({ path: "/app/sentinel", label: "Dashboard" });
-      items.push({ path: "/app/reviews", label: "Avis clients" });
-      items.push({ path: "/app/analytics", label: "Analyse IA" });
-      items.push({ path: "/app/competitors", label: "Concurrents" });
-      items.push({ type: "separator", label: "Gestion Sentinel", color: TOOL_COLORS.sentinel });
-      items.push({ path: "/app/reports", label: "Rapports" });
-      items.push({ path: "/app/qrcode", label: "QR Code" });
-      items.push({ path: "/app/widget", label: "Widget" });
-      items.push({ path: "/app/alerts", label: "Alertes" });
+      items.push({ path: "/app/sentinel", label: "Sentinel", toolKey: "sentinel", color: TOOL_COLORS.sentinel });
     }
     if (hasAccess("phantom")) {
-      items.push({ type: "separator", label: "Phantom", color: TOOL_COLORS.phantom });
-      items.push({ path: "/app/phantom", label: "Audit" });
-      items.push({ path: "/app/phantom/history", label: "Historique" });
-      items.push({ path: "/app/phantom/recommendations", label: "Recommandations" });
+      items.push({ path: "/app/phantom", label: "Phantom", toolKey: "phantom", color: TOOL_COLORS.phantom });
     }
     if (hasAccess("nexus")) {
-      items.push({ type: "separator", label: "Nexus", color: TOOL_COLORS.nexus });
-      items.push({ path: "/app/nexus", label: "Générateur" });
-      items.push({ path: "/app/nexus/contacts", label: "Contacts" });
-      items.push({ path: "/app/nexus/campaigns", label: "Campagnes" });
-      items.push({ path: "/app/nexus/sequences", label: "Séquences" });
-      items.push({ path: "/app/nexus/calendar", label: "Calendrier" });
-    }
-    if (hasAccess("forge")) {
-      items.push({ type: "separator", label: "Forge", color: TOOL_COLORS.forge });
-      items.push({ path: "/app/forge", label: "Créer une page" });
-      items.push({ path: "/app/forge/history", label: "Historique" });
+      items.push({ path: "/app/nexus", label: "Nexus", toolKey: "nexus", color: TOOL_COLORS.nexus });
     }
     if (hasAccess("vault")) {
-      items.push({ type: "separator", label: "Vault", color: TOOL_COLORS.vault });
-      items.push({ path: "/app/vault", label: "Scanner" });
-      items.push({ path: "/app/vault/history", label: "Historique" });
-      items.push({ path: "/app/vault/monitoring", label: "Surveillance" });
+      items.push({ path: "/app/vault", label: "Vault", toolKey: "vault", color: TOOL_COLORS.vault });
     }
-    items.push({ type: "separator" });
-    items.push({ path: "/app/settings", label: "Paramètres" });
+    if (hasAccess("pulse")) {
+      items.push({ path: "/app/pulse", label: "Pulse", toolKey: "pulse", color: TOOL_COLORS.pulse });
+    }
+    if (hasAccess("atlas")) {
+      items.push({ path: "/app/atlas", label: "Atlas", toolKey: "atlas", color: TOOL_COLORS.atlas });
+    }
+    // Paramètres est dans les onglets Sentinel
     return items;
   }, [hasAccess]);
 
@@ -134,45 +138,65 @@ export default function Layout() {
     if (item.type === "separator") {
       return (
         <div key={`sep-${idx}`} style={{
-          fontSize: "11px", fontWeight: 500, color: item.color || "#52525B",
-          padding: mobile ? "16px 16px 6px" : "18px 14px 6px",
-          marginTop: idx > 0 ? "2px" : 0,
-          display: "flex", alignItems: "center", gap: "6px"
-        }}>
-          {item.color && <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: item.color, display: "inline-block" }} />}
-          {item.label || ""}
-        </div>
+          height: "1px", background: "#1e1e2a",
+          margin: mobile ? "12px 16px" : "12px 8px",
+        }} />
       );
     }
     const iconFn = NAV_ICONS[item.path];
-    const toolColor = PATH_COLORS[item.path] || TOOL_COLORS.general;
+    const toolColor = item.color || TOOL_COLORS.general;
+    const isItemActive = item.toolKey === activeTool;
+
     return (
-      <NavLink key={item.path} to={item.path} end
+      <NavLink key={item.path} to={item.path}
         onClick={mobile ? () => setMobileMenuOpen(false) : undefined}
-        style={({ isActive }) => ({
+        style={() => ({
           display: "flex", alignItems: "center", gap: "10px",
-          padding: mobile ? "10px 16px" : "8px 12px",
-          borderRadius: "6px", textDecoration: "none",
-          fontSize: mobile ? "14px" : "13px", fontWeight: isActive ? 500 : 400,
-          color: isActive ? "#FAFAFA" : "#A1A1AA",
-          background: isActive ? `${toolColor}20` : "transparent",
-          borderLeft: isActive ? `2px solid ${toolColor}` : "2px solid transparent",
-          transition: "all 0.15s"
-        })}>
-        {({ isActive }) => (
-          <>
-            <span style={{ display: "flex", alignItems: "center" }}>
-              {iconFn ? iconFn(isActive ? toolColor : "#71717A") : null}
-            </span>
-            <span>{item.label}</span>
-          </>
-        )}
+          padding: mobile ? "10px 16px" : "9px 12px",
+          borderRadius: "8px", textDecoration: "none",
+          fontSize: mobile ? "14px" : "13px", fontWeight: isItemActive ? 500 : 400,
+          color: isItemActive ? "#FAFAFA" : "#A1A1AA",
+          background: isItemActive ? `${toolColor}12` : "transparent",
+          borderLeft: isItemActive ? `3px solid ${toolColor}` : "3px solid transparent",
+          transition: "all 0.2s ease"
+        })}
+        onMouseEnter={e => {
+          if (!isItemActive) {
+            e.currentTarget.style.borderLeft = `3px solid ${toolColor}60`;
+            e.currentTarget.style.background = `${toolColor}08`;
+            e.currentTarget.style.color = "#FAFAFA";
+            const dot = e.currentTarget.querySelector("[data-dot]");
+            if (dot) dot.style.background = toolColor;
+            const icon = e.currentTarget.querySelector("[data-icon] svg");
+            if (icon) icon.style.stroke = toolColor;
+          }
+        }}
+        onMouseLeave={e => {
+          if (!isItemActive) {
+            e.currentTarget.style.borderLeft = "3px solid transparent";
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "#A1A1AA";
+            const dot = e.currentTarget.querySelector("[data-dot]");
+            if (dot) dot.style.background = "#3f3f46";
+            const icon = e.currentTarget.querySelector("[data-icon] svg");
+            if (icon) icon.style.stroke = "#71717A";
+          }
+        }}>
+        <span data-dot style={{
+          width: "6px", height: "6px", borderRadius: "50%",
+          background: isItemActive ? toolColor : "#3f3f46",
+          flexShrink: 0, transition: "background 0.2s"
+        }} />
+        <span data-icon style={{ display: "flex", alignItems: "center", transition: "all 0.2s" }}>
+          {iconFn ? iconFn(isItemActive ? toolColor : "#71717A") : null}
+        </span>
+        <span>{item.label}</span>
       </NavLink>
     );
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#101118", color: "#E4E4E7", fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#17181f", color: "#d1d5db", fontFamily: "'Inter', system-ui, sans-serif" }}>
       {/* Sidebar — desktop */}
       {!isMobile && (
         <aside style={{
@@ -190,7 +214,7 @@ export default function Layout() {
           </div>
 
           {/* Nav */}
-          <nav style={{ display: "flex", flexDirection: "column", gap: "1px", flex: 1, overflowY: "auto" }}>
+          <nav style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, overflowY: "auto" }}>
             {navItems.map((item, idx) => renderNavItem(item, idx))}
           </nav>
 
@@ -264,7 +288,7 @@ export default function Layout() {
       {/* Main content */}
       <main style={{
         flex: 1, marginLeft: isMobile ? 0 : "230px", padding: isMobile ? "66px 20px 20px" : "36px 44px",
-        minHeight: "100vh"
+        minHeight: "100vh", position: "relative", zIndex: 1
       }}>
         <Outlet />
       </main>

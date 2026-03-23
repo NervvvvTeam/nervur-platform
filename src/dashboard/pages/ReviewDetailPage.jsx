@@ -2,6 +2,19 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import ResponseEditor from "../components/ResponseEditor";
+import SubNav from "../components/SubNav";
+
+const SENTINEL_NAV = [
+  { path: "/app/sentinel", label: "Dashboard", end: true },
+  { path: "/app/reviews", label: "Avis clients" },
+  { path: "/app/analytics", label: "Analyse IA" },
+  { path: "/app/competitors", label: "Concurrents" },
+  { path: "/app/reports", label: "Rapports" },
+  { path: "/app/qrcode", label: "QR Code" },
+  { path: "/app/widget", label: "Widget" },
+  { path: "/app/alerts", label: "Alertes" },
+  { path: "/app/settings", label: "Paramètres" },
+];
 
 const SENTIMENT_CONFIG = {
   positive: { label: "Positif", color: "#22c55e", bg: "rgba(34,197,94,0.12)" },
@@ -72,14 +85,15 @@ export default function ReviewDetailPage() {
     await loadReview();
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Chargement...</div>;
-  if (!review) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Avis introuvable</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!review) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Avis introuvable</div>;
 
   const sent = SENTIMENT_CONFIG[review.sentiment] || SENTIMENT_CONFIG.mixed;
   const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
 
   return (
     <div style={{ maxWidth: "700px" }}>
+      <SubNav color="#ef4444" items={SENTINEL_NAV} />
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{
@@ -87,32 +101,33 @@ export default function ReviewDetailPage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Détail de l'avis</h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>Consultez et répondez à cet avis client.</p>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Détail de l'avis</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>Consultez et répondez à cet avis client.</p>
       </div>
 
       {/* Back */}
       <button onClick={() => navigate("/app/reviews")}
         style={{
-          background: "none", border: "none", color: "#71717A", fontSize: "13px",
+          background: "none", border: "none", color: "#9ca3af", fontSize: "13px",
           cursor: "pointer", marginBottom: "24px", fontFamily: "inherit",
           padding: 0
         }}
-        onMouseEnter={e => { e.target.style.color = "#FAFAFA"; }}
-        onMouseLeave={e => { e.target.style.color = "#71717A"; }}>
+        onMouseEnter={e => { e.target.style.color = "#f0f0f3"; }}
+        onMouseLeave={e => { e.target.style.color = "#9ca3af"; }}>
         ← Retour aux avis
       </button>
 
       {/* Review */}
       <div style={{
-        border: "1px solid #1e1e22", borderRadius: "10px", padding: "18px",
-        borderLeft: `3px solid ${sent.color}`, background: "#141416",
+        border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
+        borderLeft: `3px solid ${sent.color}`, background: "#1e2029",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "24px"
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
           <div>
             <span style={{ color: "#ef4444", fontSize: "18px" }}>{stars}</span>
-            <span style={{ fontSize: "15px", fontWeight: 600, color: "#FAFAFA", marginLeft: "12px" }}>{review.authorName}</span>
+            <span style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", marginLeft: "12px" }}>{review.authorName}</span>
           </div>
           <span style={{
             fontSize: "11px", fontWeight: 500, padding: "4px 10px",
@@ -120,11 +135,11 @@ export default function ReviewDetailPage() {
           }}>{sent.label}</span>
         </div>
 
-        <p style={{ fontSize: "15px", color: "#D4D4D8", lineHeight: 1.8, marginBottom: "12px" }}>
+        <p style={{ fontSize: "15px", color: "#d1d5db", lineHeight: 1.8, marginBottom: "12px" }}>
           {review.text || "(Avis sans texte — uniquement une note)"}
         </p>
 
-        <div style={{ fontSize: "11px", color: "#52525B" }}>
+        <div style={{ fontSize: "11px", color: "#d1d5db" }}>
           Publié le {review.publishedAt ? new Date(review.publishedAt).toLocaleDateString("fr-FR") : "—"}
         </div>
       </div>
@@ -140,10 +155,10 @@ export default function ReviewDetailPage() {
         />
       ) : (
         <div style={{
-          border: "1px dashed #27272A", borderRadius: "10px", padding: "40px",
+          border: "1px dashed #2a2d3a", borderRadius: "10px", padding: "40px",
           textAlign: "center"
         }}>
-          <p style={{ color: "#71717A", marginBottom: "20px", fontSize: "14px" }}>
+          <p style={{ color: "#9ca3af", marginBottom: "20px", fontSize: "14px" }}>
             Aucune réponse IA générée pour cet avis.
           </p>
           <button onClick={handleGenerate} disabled={generating}

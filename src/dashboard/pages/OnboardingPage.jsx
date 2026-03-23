@@ -45,7 +45,7 @@ export default function OnboardingPage() {
         {[0, 1, 2].map(i => (
           <div key={i} style={{
             flex: 1, height: "3px", borderRadius: "2px",
-            background: i <= step ? "linear-gradient(135deg, #6366f1, #818cf8)" : "#1e1e22",
+            background: i <= step ? "linear-gradient(135deg, #6366f1, #818cf8)" : "#2a2d3a",
             transition: "background 0.5s"
           }} />
         ))}
@@ -54,18 +54,18 @@ export default function OnboardingPage() {
       {/* Step 0: Business name */}
       {step === 0 && (
         <div>
-          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Comment s'appelle votre entreprise ?</h2>
-          <p style={{ color: "#71717A", marginBottom: "32px", fontSize: "14px" }}>Ce nom apparaîtra dans les réponses IA aux avis clients.</p>
+          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#f0f0f3" }}>Comment s'appelle votre entreprise ?</h2>
+          <p style={{ color: "#9ca3af", marginBottom: "32px", fontSize: "14px" }}>Ce nom apparaîtra dans les réponses IA aux avis clients.</p>
           <input value={businessName} onChange={e => setBusinessName(e.target.value)}
             placeholder="Ex: Restaurant Le Bon Gout"
             autoFocus
             style={{
-              width: "100%", padding: "16px", background: "#0f0f11", border: "1px solid #27272A",
-              borderRadius: "8px", color: "#FAFAFA", fontSize: "16px", fontFamily: "inherit",
+              width: "100%", padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
+              borderRadius: "8px", color: "#f0f0f3", fontSize: "16px", fontFamily: "inherit",
               outline: "none", boxSizing: "border-box", marginBottom: "24px"
             }}
             onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-            onBlur={e => { e.target.style.borderColor = "#27272A"; }}
+            onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }}
             onKeyDown={e => { if (e.key === "Enter" && businessName.trim()) setStep(1); }} />
           <button onClick={() => setStep(1)} disabled={!businessName.trim()}
             style={nextBtnStyle(!businessName.trim())}>
@@ -77,21 +77,21 @@ export default function OnboardingPage() {
       {/* Step 1: Sector */}
       {step === 1 && (
         <div>
-          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Quel est votre secteur d'activité ?</h2>
-          <p style={{ color: "#71717A", marginBottom: "32px", fontSize: "14px" }}>L'IA adaptera le vocabulaire des réponses à votre métier.</p>
+          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#f0f0f3" }}>Quel est votre secteur d'activité ?</h2>
+          <p style={{ color: "#9ca3af", marginBottom: "32px", fontSize: "14px" }}>L'IA adaptera le vocabulaire des réponses à votre métier.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "10px", marginBottom: "24px" }}>
             {SECTORS.map(s => (
               <button key={s.value} onClick={() => { setSector(s.value); setStep(2); }}
                 style={{
                   padding: "16px", borderRadius: "8px", cursor: "pointer", fontFamily: "inherit",
                   background: sector === s.value ? "rgba(99,102,241,0.1)" : "transparent",
-                  border: `1px solid ${sector === s.value ? "rgba(99,102,241,0.25)" : "#1e1e22"}`,
+                  border: `1px solid ${sector === s.value ? "rgba(99,102,241,0.25)" : "#2a2d3a"}`,
                   textAlign: "left", transition: "all 0.2s"
                 }}
-                onMouseEnter={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#27272A"; }}
-                onMouseLeave={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#1e1e22"; }}>
-                <div style={{ fontSize: "14px", fontWeight: 600, marginBottom: "2px", color: "#FAFAFA" }}>{s.label}</div>
-                <div style={{ fontSize: "12px", color: "#52525B" }}>{s.desc}</div>
+                onMouseEnter={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#2a2d3a"; }}
+                onMouseLeave={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#2a2d3a"; }}>
+                <div style={{ fontSize: "14px", fontWeight: 600, marginBottom: "2px", color: "#f0f0f3" }}>{s.label}</div>
+                <div style={{ fontSize: "12px", color: "#d1d5db" }}>{s.desc}</div>
               </button>
             ))}
           </div>
@@ -101,20 +101,20 @@ export default function OnboardingPage() {
       {/* Step 2: Google URL */}
       {step === 2 && (
         <div>
-          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Votre fiche Google Business</h2>
-          <p style={{ color: "#71717A", marginBottom: "32px", fontSize: "14px", lineHeight: 1.6 }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#f0f0f3" }}>Votre fiche Google Business</h2>
+          <p style={{ color: "#9ca3af", marginBottom: "32px", fontSize: "14px", lineHeight: 1.6 }}>
             Collez le lien de votre fiche Google Business. Sentinel l'utilisera pour scanner vos avis automatiquement.
           </p>
           <input value={googleUrl} onChange={e => setGoogleUrl(e.target.value)}
             placeholder="https://www.google.com/maps/place/..."
             style={{
-              width: "100%", padding: "16px", background: "#0f0f11", border: "1px solid #27272A",
-              borderRadius: "8px", color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
+              width: "100%", padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
+              borderRadius: "8px", color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
               outline: "none", boxSizing: "border-box", marginBottom: "16px"
             }}
             onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-            onBlur={e => { e.target.style.borderColor = "#27272A"; }} />
-          <p style={{ fontSize: "12px", color: "#52525B", marginBottom: "24px" }}>
+            onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }} />
+          <p style={{ fontSize: "12px", color: "#d1d5db", marginBottom: "24px" }}>
             Pas de lien ? Vous pourrez l'ajouter plus tard dans les parametres.
           </p>
           <div style={{ display: "flex", gap: "12px" }}>
@@ -124,8 +124,8 @@ export default function OnboardingPage() {
             </button>
             <button onClick={handleFinish}
               style={{
-                padding: "14px 20px", background: "transparent", border: "1px solid #27272A",
-                borderRadius: "8px", color: "#71717A", fontSize: "13px", cursor: "pointer",
+                padding: "14px 20px", background: "transparent", border: "1px solid #2a2d3a",
+                borderRadius: "8px", color: "#9ca3af", fontSize: "13px", cursor: "pointer",
                 fontFamily: "inherit"
               }}>
               Passer
@@ -138,7 +138,7 @@ export default function OnboardingPage() {
       {step > 0 && (
         <button onClick={() => setStep(s => s - 1)}
           style={{
-            marginTop: "24px", background: "none", border: "none", color: "#52525B",
+            marginTop: "24px", background: "none", border: "none", color: "#d1d5db",
             fontSize: "13px", cursor: "pointer", fontFamily: "inherit", padding: 0
           }}>
           ← Retour
@@ -149,7 +149,7 @@ export default function OnboardingPage() {
 }
 
 const nextBtnStyle = (disabled) => ({
-  padding: "14px 28px", background: disabled ? "#27272A" : "#6366f1", color: "#FAFAFA",
+  padding: "14px 28px", background: disabled ? "#2a2d3a" : "#6366f1", color: "#ffffff",
   border: "none", borderRadius: "8px", fontWeight: 600, fontSize: "13px",
   cursor: disabled ? "not-allowed" : "pointer", fontFamily: "inherit",
   transition: "all 0.2s", opacity: disabled ? 0.5 : 1

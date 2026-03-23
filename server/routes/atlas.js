@@ -1,8 +1,13 @@
 const express = require("express");
 const { generateWithAI } = require("../services/ai");
+const { authMiddleware } = require("../middleware/auth");
+const SeoProject = require("../models/SeoProject");
 const router = express.Router();
 
-// Google PageSpeed Insights API (FREE — no key needed)
+// ═══════════════════════════════════════════
+// MARKETING SITE — PageSpeed Analyzer (existing)
+// ═══════════════════════════════════════════
+
 const PSI_API = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
 
 async function fetchPageSpeed(url, strategy = "mobile", retries = 3) {
@@ -38,7 +43,6 @@ function extractAudits(psiData) {
   const issues = [];
   const details = [];
 
-  // Core Web Vitals
   const cwv = {
     lcp: audits["largest-contentful-paint"],
     fid: audits["max-potential-fid"],
@@ -55,14 +59,12 @@ function extractAudits(psiData) {
     }
   }
 
-  // Failed audits = real issues
   for (const [key, audit] of Object.entries(audits)) {
     if (audit && audit.score !== null && audit.score === 0 && audit.title) {
       issues.push(audit.title);
     }
   }
 
-  // Warnings
   const warnings = [];
   for (const [key, audit] of Object.entries(audits)) {
     if (audit && audit.score !== null && audit.score > 0 && audit.score < 0.5 && audit.title) {
@@ -82,11 +84,9 @@ router.post("/analyze", async (req, res) => {
     return res.status(400).json({ error: "L'URL est trop longue (max 2000 caracteres)." });
   }
 
-  // Normalize URL
   let targetUrl = url.trim();
   if (!targetUrl.startsWith("http")) targetUrl = "https://" + targetUrl;
 
-  // Validate URL format
   try {
     const parsed = new URL(targetUrl);
     if (!["http:", "https:"].includes(parsed.protocol)) {
@@ -97,8 +97,6 @@ router.post("/analyze", async (req, res) => {
   }
 
   try {
-
-    // Fetch REAL PageSpeed data (mobile)
     const psiData = await fetchPageSpeed(targetUrl, "mobile");
     const scores = extractScores(psiData);
     const { issues, warnings, coreWebVitals } = extractAudits(psiData);
@@ -107,7 +105,6 @@ router.post("/analyze", async (req, res) => {
       (scores.performance * 0.3 + scores.seo * 0.3 + scores.accessibility * 0.2 + scores.bestPractices * 0.2)
     );
 
-    // Now ask AI to analyze the REAL data and give recommendations
     const prompt = `Tu es un expert SEO. Voici les VRAIS resultats d'audit Lighthouse pour "${targetUrl}" :
 
 SCORES REELS :
@@ -154,7 +151,7 @@ Retourne UNIQUEMENT le JSON.`;
         seo: scores.seo,
         content: scores.accessibility,
         technical: scores.bestPractices,
-        mobile: scores.performance, // Mobile score = performance on mobile strategy
+        mobile: scores.performance,
       },
       globalScore,
       issues: issues.slice(0, 5).length > 0 ? issues.slice(0, 5) : ["Aucun probleme critique detecte"],
@@ -168,11 +165,191 @@ Retourne UNIQUEMENT le JSON.`;
 
   } catch (err) {
     console.error("[Atlas] PageSpeed Error:", err.message);
-    // If PageSpeed fails (invalid URL, timeout), return error
     res.status(503).json({
       error: "Impossible d'analyser ce site. Verifiez l'URL et reessayez.",
       fallback: true,
     });
+  }
+});
+
+// ═══════════════════════════════════════════
+// DASHBOARD — SEO Tracking Projects
+// ═══════════════════════════════════════════
+
+// Demo mode ranking simulator
+function checkKeywordRanking(domain, keyword) {
+  const hash = (domain + keyword).split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+  return {
+    keyword,
+    position: (hash % 50) + 1,
+    previousPosition: (hash % 50) + 3,
+    url: `https://${domain}/${keyword.replace(/\s/g, "-")}`,
+    change: 2,
+  };
+}
+
+// POST /api/atlas/projects — Create a tracking project
+router.post("/projects", authMiddleware, async (req, res) => {
+  try {
+    const { domain, keywords } = req.body;
+    if (!domain || typeof domain !== "string" || domain.trim().length === 0) {
+      return res.status(400).json({ error: "Le domaine est requis." });
+    }
+    if (!keywords || !Array.isArray(keywords) || keywords.length === 0) {
+      return res.status(400).json({ error: "Au moins un mot-clé est requis." });
+    }
+    if (keywords.length > 50) {
+      return res.status(400).json({ error: "Maximum 50 mots-clés par projet." });
+    }
+
+    const cleanDomain = domain.trim().replace(/^https?:\/\//, "").replace(/\/+$/, "");
+    const cleanKeywords = keywords
+      .map(k => k.trim())
+      .filter(k => k.length > 0)
+      .slice(0, 50);
+
+    // Check existing projects count for this user
+    const count = await SeoProject.countDocuments({ userId: req.user._id });
+    if (count >= 10) {
+      return res.status(400).json({ error: "Maximum 10 projets SEO autorisés." });
+    }
+
+    const project = await SeoProject.create({
+      userId: req.user._id,
+      domain: cleanDomain,
+      keywords: cleanKeywords,
+    });
+
+    res.status(201).json(project);
+  } catch (err) {
+    console.error("[Atlas] Create project error:", err.message);
+    res.status(500).json({ error: "Erreur lors de la création du projet." });
+  }
+});
+
+// GET /api/atlas/projects — List user's projects
+router.get("/projects", authMiddleware, async (req, res) => {
+  try {
+    const projects = await SeoProject.find({ userId: req.user._id })
+      .sort({ updatedAt: -1 })
+      .lean();
+
+    const enriched = projects.map(p => {
+      const avgPos = p.rankings && p.rankings.length > 0
+        ? Math.round(p.rankings.reduce((s, r) => s + r.position, 0) / p.rankings.length)
+        : null;
+      const totalChange = p.rankings && p.rankings.length > 0
+        ? p.rankings.reduce((s, r) => s + (r.change || 0), 0)
+        : 0;
+      return { ...p, averagePosition: avgPos, totalChange };
+    });
+
+    res.json(enriched);
+  } catch (err) {
+    console.error("[Atlas] List projects error:", err.message);
+    res.status(500).json({ error: "Erreur lors de la récupération des projets." });
+  }
+});
+
+// GET /api/atlas/projects/:id — Get project details with rankings
+router.get("/projects/:id", authMiddleware, async (req, res) => {
+  try {
+    const project = await SeoProject.findOne({
+      _id: req.params.id,
+      userId: req.user._id,
+    }).lean();
+
+    if (!project) {
+      return res.status(404).json({ error: "Projet non trouvé." });
+    }
+
+    const avgPos = project.rankings && project.rankings.length > 0
+      ? Math.round(project.rankings.reduce((s, r) => s + r.position, 0) / project.rankings.length)
+      : null;
+    const totalChange = project.rankings && project.rankings.length > 0
+      ? project.rankings.reduce((s, r) => s + (r.change || 0), 0)
+      : 0;
+
+    res.json({ ...project, averagePosition: avgPos, totalChange });
+  } catch (err) {
+    console.error("[Atlas] Get project error:", err.message);
+    res.status(500).json({ error: "Erreur lors de la récupération du projet." });
+  }
+});
+
+// POST /api/atlas/projects/:id/check — Trigger keyword ranking check
+router.post("/projects/:id/check", authMiddleware, async (req, res) => {
+  try {
+    const project = await SeoProject.findOne({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
+
+    if (!project) {
+      return res.status(404).json({ error: "Projet non trouvé." });
+    }
+
+    // Check rankings for each keyword
+    const rankings = project.keywords.map(keyword => {
+      const result = checkKeywordRanking(project.domain, keyword);
+      // If previous ranking exists, calculate change
+      const prev = project.rankings.find(r => r.keyword === keyword);
+      if (prev) {
+        result.previousPosition = prev.position;
+        result.change = prev.position - result.position; // positive = improved
+      }
+      result.checkedAt = new Date();
+      return result;
+    });
+
+    // Calculate average position
+    const avgPos = Math.round(rankings.reduce((s, r) => s + r.position, 0) / rankings.length);
+
+    // Update project
+    project.rankings = rankings;
+    project.lastCheckAt = new Date();
+    project.history.push({
+      date: new Date(),
+      averagePosition: avgPos,
+      keywordCount: rankings.length,
+    });
+
+    // Keep only last 90 history entries
+    if (project.history.length > 90) {
+      project.history = project.history.slice(-90);
+    }
+
+    await project.save();
+
+    const totalChange = rankings.reduce((s, r) => s + (r.change || 0), 0);
+
+    res.json({
+      ...project.toObject(),
+      averagePosition: avgPos,
+      totalChange,
+    });
+  } catch (err) {
+    console.error("[Atlas] Check rankings error:", err.message);
+    res.status(500).json({ error: "Erreur lors de la vérification des positions." });
+  }
+});
+
+// DELETE /api/atlas/projects/:id — Delete project
+router.delete("/projects/:id", authMiddleware, async (req, res) => {
+  try {
+    const project = await SeoProject.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
+
+    if (!project) {
+      return res.status(404).json({ error: "Projet non trouvé." });
+    }
+
+    res.json({ success: true, message: "Projet supprimé." });
+  } catch (err) {
+    console.error("[Atlas] Delete project error:", err.message);
+    res.status(500).json({ error: "Erreur lors de la suppression du projet." });
   }
 });
 

@@ -1,5 +1,14 @@
 import { useState } from "react";
 import { useApi } from "../hooks/useApi";
+import SubNav from "../components/SubNav";
+
+const NEXUS_NAV = [
+  { path: "/app/nexus", label: "Générateur", end: true },
+  { path: "/app/nexus/contacts", label: "Contacts" },
+  { path: "/app/nexus/campaigns", label: "Campagnes" },
+  { path: "/app/nexus/sequences", label: "Séquences" },
+  { path: "/app/nexus/calendar", label: "Calendrier" },
+];
 
 const OBJECTIVES = [
   "Prospection - Convertir des leads froids",
@@ -44,36 +53,37 @@ export default function NexusSequencePage() {
 
   return (
     <div style={{ maxWidth: "800px" }}>
+      <SubNav color="#10b981" items={NEXUS_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{
           width: "40px", height: "3px", borderRadius: "2px",
           background: "linear-gradient(135deg, #10b981, #34d399)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
           Séquences email
         </h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Générez des séquences email automatisées prêtes à l'emploi.
         </p>
       </div>
 
       {/* Form */}
       <div style={{
-        padding: "24px", background: "#141416", border: "1px solid #1e1e22",
+        padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
         borderRadius: "10px", marginBottom: "20px"
       }}>
         <div style={{ marginBottom: "18px" }}>
-          <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "8px", fontWeight: 500 }}>Objectif</div>
+          <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Objectif</div>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             {OBJECTIVES.map(o => (
               <button key={o} onClick={() => setObjective(o)}
                 style={{
                   padding: "10px 16px", borderRadius: "8px", textAlign: "left",
                   fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                  background: objective === o ? "#10b98112" : "#0f0f11",
-                  color: objective === o ? "#10b981" : "#A1A1AA",
-                  border: objective === o ? "1px solid #10b98125" : "1px solid #1e1e22",
+                  background: objective === o ? "#10b98112" : "#1e2029",
+                  color: objective === o ? "#10b981" : "#6b7280",
+                  border: objective === o ? "1px solid #10b98125" : "1px solid #2a2d3a",
                 }}>{o}</button>
             ))}
           </div>
@@ -81,35 +91,35 @@ export default function NexusSequencePage() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "14px", marginBottom: "18px" }}>
           <div>
-            <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "8px", fontWeight: 500 }}>Entreprise</div>
+            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Entreprise</div>
             <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)}
               placeholder="NERVÜR"
               style={{
-                width: "100%", padding: "10px 14px", background: "#0f0f11",
-                border: "1px solid #27272A", borderRadius: "8px",
-                color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
+                width: "100%", padding: "10px 14px", background: "#1e2029",
+                border: "1px solid #2a2d3a", borderRadius: "8px",
+                color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
               }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#27272A"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
           </div>
           <div>
-            <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "8px", fontWeight: 500 }}>Audience cible</div>
+            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Audience cible</div>
             <input type="text" value={audience} onChange={e => setAudience(e.target.value)}
               placeholder="Restaurateurs, e-commerçants..."
               style={{
-                width: "100%", padding: "10px 14px", background: "#0f0f11",
-                border: "1px solid #27272A", borderRadius: "8px",
-                color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
+                width: "100%", padding: "10px 14px", background: "#1e2029",
+                border: "1px solid #2a2d3a", borderRadius: "8px",
+                color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
               }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#27272A"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
           </div>
         </div>
 
         <div style={{ marginBottom: "20px" }}>
-          <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "8px", fontWeight: 500 }}>
+          <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>
             Nombre d'emails : {emailCount}
           </div>
           <input type="range" min={3} max={7} value={emailCount} onChange={e => setEmailCount(+e.target.value)}
@@ -148,14 +158,14 @@ export default function NexusSequencePage() {
               marginBottom: "16px"
             }}>
               <div style={{ fontSize: "12px", color: "#10b981", marginBottom: "6px", fontWeight: 500 }}>Stratégie</div>
-              <p style={{ fontSize: "14px", color: "#D4D4D8", lineHeight: 1.6, margin: 0 }}>{result.summary}</p>
+              <p style={{ fontSize: "14px", color: "#d1d5db", lineHeight: 1.6, margin: 0 }}>{result.summary}</p>
             </div>
           )}
 
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {(result.sequence || []).map((email, i) => (
               <div key={i} style={{
-                padding: "22px 24px", background: "#141416", border: "1px solid #1e1e22",
+                padding: "22px 24px", background: "#1e2029", border: "1px solid #2a2d3a",
                 borderRadius: "10px", borderLeft: "3px solid #10b981",
               }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
@@ -164,25 +174,25 @@ export default function NexusSequencePage() {
                       fontSize: "12px", fontWeight: 600, color: "#10b981",
                       padding: "3px 10px", borderRadius: "4px", background: "#10b98114",
                     }}>{email.day}</span>
-                    <span style={{ fontSize: "13px", color: "#71717A" }}>Email {i + 1}/{result.sequence.length}</span>
+                    <span style={{ fontSize: "13px", color: "#9ca3af" }}>Email {i + 1}/{result.sequence.length}</span>
                   </div>
                   <button onClick={() => copyEmail(email)}
                     style={{
-                      padding: "4px 12px", background: "#0f0f11", border: "1px solid #1e1e22",
-                      borderRadius: "4px", color: "#71717A", fontSize: "11px",
+                      padding: "4px 12px", background: "#1e2029", border: "1px solid #2a2d3a",
+                      borderRadius: "4px", color: "#9ca3af", fontSize: "11px",
                       cursor: "pointer", fontFamily: "inherit",
                     }}>Copier</button>
                 </div>
 
                 <div style={{
-                  fontSize: "15px", fontWeight: 500, color: "#E4E4E7", marginBottom: "10px",
-                  padding: "8px 12px", background: "#0f0f11", borderRadius: "6px",
+                  fontSize: "15px", fontWeight: 500, color: "#d1d5db", marginBottom: "10px",
+                  padding: "8px 12px", background: "#1e2029", borderRadius: "6px",
                 }}>
                   {email.subject}
                 </div>
 
                 <div style={{
-                  fontSize: "14px", color: "#A1A1AA", lineHeight: 1.7, whiteSpace: "pre-wrap",
+                  fontSize: "14px", color: "#6b7280", lineHeight: 1.7, whiteSpace: "pre-wrap",
                   marginBottom: "10px",
                 }}>
                   {email.body}

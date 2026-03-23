@@ -1,6 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
 import { useNavigate } from "react-router-dom";
+import SubNav from "../components/SubNav";
+
+const VAULT_NAV = [
+  { path: "/app/vault", label: "Scanner", end: true },
+  { path: "/app/vault/monitoring", label: "Surveillance" },
+  { path: "/app/vault/history", label: "Historique" },
+  { path: "/app/vault/rgpd", label: "Conformit\u00e9 RGPD" },
+];
 
 const ACCENT = "#06b6d4";
 const BG_TINT = "rgba(6,182,212,0.08)";
@@ -32,7 +40,7 @@ const ClockIcon = ({ size = 18, color = ACCENT }) => (
   </svg>
 );
 
-const TrashIcon = ({ size = 15, color = "#71717A" }) => (
+const TrashIcon = ({ size = 15, color = "#9ca3af" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
   </svg>
@@ -45,10 +53,11 @@ function formatDate(dateStr) {
 }
 
 const cardStyle = {
-  background: "#141416",
-  border: "1px solid #1e1e22",
+  background: "#1e2029",
+  border: "1px solid #2a2d3a",
   borderRadius: "10px",
   padding: "24px",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
 };
 
 export default function VaultHistoryPage() {
@@ -91,6 +100,7 @@ export default function VaultHistoryPage() {
 
   return (
     <div style={{ maxWidth: "860px" }}>
+      <SubNav color="#06b6d4" items={VAULT_NAV} />
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{
@@ -98,10 +108,10 @@ export default function VaultHistoryPage() {
           background: "linear-gradient(135deg, #06b6d4, #22d3ee)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
           Historique des analyses
         </h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Retrouvez toutes vos analyses de sécurité passées
         </p>
       </div>
@@ -114,7 +124,7 @@ export default function VaultHistoryPage() {
             border: "3px solid rgba(6,182,212,0.2)", borderTop: `3px solid ${ACCENT}`,
             borderRadius: "50%", animation: "vault-spin 1s linear infinite",
           }} />
-          <div style={{ fontSize: "13px", color: "#71717A" }}>Chargement...</div>
+          <div style={{ fontSize: "13px", color: "#9ca3af" }}>Chargement...</div>
           <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
@@ -140,10 +150,10 @@ export default function VaultHistoryPage() {
           padding: "48px 24px",
         }}>
           <ShieldIcon size={48} color="#3f3f46" />
-          <div style={{ fontSize: "16px", fontWeight: 600, color: "#71717A", marginTop: "16px", marginBottom: "8px" }}>
+          <div style={{ fontSize: "16px", fontWeight: 600, color: "#9ca3af", marginTop: "16px", marginBottom: "8px" }}>
             Aucune analyse effectuée
           </div>
-          <div style={{ fontSize: "13px", color: "#52525B", lineHeight: 1.6, marginBottom: "20px" }}>
+          <div style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.6, marginBottom: "20px" }}>
             Vous n'avez pas encore lancé d'analyse de sécurité.
             <br />Commencez par scanner les emails de votre entreprise.
           </div>
@@ -188,7 +198,7 @@ export default function VaultHistoryPage() {
                   gap: "16px",
                 }}
                 onMouseEnter={e => { e.currentTarget.style.background = BG_TINT; e.currentTarget.style.borderColor = ACCENT + "40"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "#141416"; e.currentTarget.style.borderColor = "rgba(6,182,212,0.2)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "#1e2029"; e.currentTarget.style.borderColor = "rgba(6,182,212,0.2)"; }}
               >
                 {/* Shield icon */}
                 <div style={{
@@ -204,7 +214,7 @@ export default function VaultHistoryPage() {
                 {/* Info */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px", flexWrap: "wrap" }}>
-                    <span style={{ fontSize: "14px", fontWeight: 600, color: "#FAFAFA" }}>
+                    <span style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>
                       {scan.domain}
                     </span>
                     <span style={{
@@ -217,7 +227,7 @@ export default function VaultHistoryPage() {
                       {RISK_LABELS[riskLevel] || riskLevel}
                     </span>
                   </div>
-                  <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "#71717A" }}>
+                  <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "#9ca3af" }}>
                     <span>{formatDate(scan.createdAt || scan.date)}</span>
                     <span>{compromised} email{compromised > 1 ? "s" : ""} compromis</span>
                   </div>

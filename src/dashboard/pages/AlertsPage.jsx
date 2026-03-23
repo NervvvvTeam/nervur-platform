@@ -1,5 +1,18 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../hooks/useApi";
+import SubNav from "../components/SubNav";
+
+const SENTINEL_NAV = [
+  { path: "/app/sentinel", label: "Dashboard", end: true },
+  { path: "/app/reviews", label: "Avis clients" },
+  { path: "/app/analytics", label: "Analyse IA" },
+  { path: "/app/competitors", label: "Concurrents" },
+  { path: "/app/reports", label: "Rapports" },
+  { path: "/app/qrcode", label: "QR Code" },
+  { path: "/app/widget", label: "Widget" },
+  { path: "/app/alerts", label: "Alertes" },
+  { path: "/app/settings", label: "Paramètres" },
+];
 
 export default function AlertsPage() {
   const { get, put } = useApi();
@@ -44,25 +57,25 @@ export default function AlertsPage() {
     setConfig(prev => ({ ...prev, [key]: !prev[key] }));
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Chargement...</div>;
-  if (!business || !config) return <div style={{ padding: "60px", textAlign: "center", color: "#52525B" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!business || !config) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
 
   const Toggle = ({ value, onToggle, label, desc }) => (
     <div style={{
       display: "flex", justifyContent: "space-between", alignItems: "center",
-      padding: "16px 0", borderBottom: "1px solid #1e1e22"
+      padding: "16px 0", borderBottom: "1px solid #2a2d3a"
     }}>
       <div>
-        <div style={{ fontSize: "14px", fontWeight: 500, color: "#D4D4D8", marginBottom: "4px" }}>{label}</div>
-        {desc && <div style={{ fontSize: "12px", color: "#52525B" }}>{desc}</div>}
+        <div style={{ fontSize: "14px", fontWeight: 500, color: "#d1d5db", marginBottom: "4px" }}>{label}</div>
+        {desc && <div style={{ fontSize: "12px", color: "#d1d5db" }}>{desc}</div>}
       </div>
       <div onClick={onToggle} style={{
         width: "44px", height: "24px", borderRadius: "12px", cursor: "pointer",
-        background: value ? "#ef4444" : "#27272A",
+        background: value ? "#ef4444" : "#3a3d4a",
         position: "relative", transition: "background 0.2s"
       }}>
         <div style={{
-          width: "18px", height: "18px", borderRadius: "50%", background: "#FAFAFA",
+          width: "18px", height: "18px", borderRadius: "50%", background: "#f0f0f3",
           position: "absolute", top: "3px",
           left: value ? "23px" : "3px", transition: "left 0.2s",
           boxShadow: "0 1px 3px rgba(0,0,0,0.3)"
@@ -73,14 +86,15 @@ export default function AlertsPage() {
 
   return (
     <div style={{ maxWidth: "600px" }}>
+      <SubNav color="#ef4444" items={SENTINEL_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{
           width: "40px", height: "3px", borderRadius: "2px",
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Alertes</h1>
-        <p style={{ fontSize: "14px", color: "#71717A" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Alertes</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Recevez des notifications par email quand un nouvel avis est publie.
         </p>
       </div>
@@ -88,31 +102,31 @@ export default function AlertsPage() {
       {/* Email */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #1e1e22", background: "#141416",
+        border: "1px solid #2a2d3a", background: "#1e2029", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "20px"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "16px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "16px" }}>
           Adresse email
         </h3>
         <input value={config.emailTo || ""} onChange={e => setConfig(prev => ({ ...prev, emailTo: e.target.value }))}
           placeholder="votre@email.com" type="email"
           style={{
-            width: "100%", padding: "14px 16px", background: "#0f0f11",
-            border: "1px solid #27272A", borderRadius: "8px",
-            color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit", outline: "none",
+            width: "100%", padding: "14px 16px", background: "#1e2029",
+            border: "1px solid #2a2d3a", borderRadius: "8px",
+            color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none",
             boxSizing: "border-box", transition: "border-color 0.2s"
           }}
           onFocus={e => e.target.style.borderColor = "#ef4444"}
-          onBlur={e => e.target.style.borderColor = "#27272A"} />
+          onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
       </div>
 
       {/* Toggles */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #1e1e22", background: "#141416",
+        border: "1px solid #2a2d3a", background: "#1e2029", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "20px"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "8px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "8px" }}>
           Notifications
         </h3>
 
@@ -135,10 +149,10 @@ export default function AlertsPage() {
       {/* Threshold */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #1e1e22", background: "#141416",
+        border: "1px solid #2a2d3a", background: "#1e2029", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "20px"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "16px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "16px" }}>
           Seuil d'alerte négatif
         </h3>
         <div style={{ display: "flex", gap: "8px" }}>
@@ -146,9 +160,9 @@ export default function AlertsPage() {
             <button key={n} onClick={() => setConfig(prev => ({ ...prev, thresholdRating: n }))}
               style={{
                 padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: 600,
-                background: config.thresholdRating === n ? "rgba(239,68,68,0.1)" : "#0f0f11",
-                border: `1px solid ${config.thresholdRating === n ? "rgba(239,68,68,0.3)" : "#27272A"}`,
-                color: config.thresholdRating === n ? "#ef4444" : "#71717A",
+                background: config.thresholdRating === n ? "rgba(239,68,68,0.1)" : "#1e2029",
+                border: `1px solid ${config.thresholdRating === n ? "rgba(239,68,68,0.3)" : "#d1d5db"}`,
+                color: config.thresholdRating === n ? "#ef4444" : "#9ca3af",
                 cursor: "pointer", fontFamily: "inherit"
               }}>
               {"★".repeat(n) + "☆".repeat(5 - n)} et moins
