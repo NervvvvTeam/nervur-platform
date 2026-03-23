@@ -1,0 +1,29 @@
+{
+  "name": "sentinel-api",
+  "version": "1.0.0",
+  "description": "Sentinel — Moteur IA de réponses aux avis clients",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.3.1",
+    "googleapis": "^171.4.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.0",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^8.0.3",
+    "openai": "^4.82.0",
+    "pdfkit": "^0.18.0",
+    "qrcode": "^1.5.4",
+    "resend": "^6.9.4"
+  }
+}
