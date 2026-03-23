@@ -92,22 +92,18 @@ export default function VaultHistoryPage() {
   return (
     <div style={{ maxWidth: "860px" }}>
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "28px" }}>
+      <div style={{ marginBottom: "32px" }}>
         <div style={{
-          width: "44px", height: "44px", borderRadius: "10px",
-          background: BG_TINT, border: `1px solid ${BORDER_TINT}`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          <ClockIcon size={22} color={ACCENT} />
-        </div>
-        <div>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
-            Historique des analyses
-          </h1>
-          <p style={{ fontSize: "13px", color: "#71717A", margin: 0, marginTop: "2px" }}>
-            Retrouvez toutes vos analyses de sécurité passées
-          </p>
-        </div>
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #06b6d4, #22d3ee)",
+          marginBottom: "16px"
+        }} />
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+          Historique des analyses
+        </h1>
+        <p style={{ fontSize: "14px", color: "#71717A" }}>
+          Retrouvez toutes vos analyses de sécurité passées
+        </p>
       </div>
 
       {/* Loading */}
@@ -156,9 +152,10 @@ export default function VaultHistoryPage() {
             style={{
               display: "inline-flex", alignItems: "center", gap: "8px",
               padding: "10px 20px", borderRadius: "8px",
-              background: ACCENT, border: "none",
+              background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none",
               color: "#0f0f11", fontSize: "13px", fontWeight: 600,
               cursor: "pointer", fontFamily: "inherit",
+              boxShadow: "0 4px 16px rgba(6,182,212,0.4)",
             }}
           >
             <ShieldIcon size={16} color="#0f0f11" />
@@ -183,6 +180,7 @@ export default function VaultHistoryPage() {
                 style={{
                   ...cardStyle,
                   border: `1px solid ${BORDER_TINT}`,
+                  borderLeft: `3px solid ${ACCENT}`,
                   cursor: "pointer",
                   transition: "all 0.15s",
                   display: "flex",

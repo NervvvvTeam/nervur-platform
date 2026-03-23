@@ -105,25 +105,26 @@ export default function NexusContactsPage() {
   return (
     <div style={{ maxWidth: "900px" }}>
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10b981" }} />
-          <span style={{ fontSize: "12px", color: "#10b981", fontWeight: 500 }}>Nexus</span>
-        </div>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #10b981, #34d399)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Contacts</h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>Gérez vos listes de contacts pour vos campagnes email.</p>
       </div>
 
       {/* Stats */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "24px" }}>
-        <div style={{ padding: "16px 20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px" }}>
+        <div style={{ padding: "16px 20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px", borderLeft: "3px solid #10b981" }}>
           <div style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA" }}>{total}</div>
           <div style={{ fontSize: "13px", color: "#71717A" }}>Total contacts</div>
         </div>
-        <div style={{ padding: "16px 20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px" }}>
+        <div style={{ padding: "16px 20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px", borderLeft: "3px solid #10b981" }}>
           <div style={{ fontSize: "22px", fontWeight: 600, color: "#10b981" }}>{active}</div>
           <div style={{ fontSize: "13px", color: "#71717A" }}>Actifs</div>
         </div>
-        <div style={{ padding: "16px 20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px" }}>
+        <div style={{ padding: "16px 20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px", borderLeft: "3px solid #10b981" }}>
           <div style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA" }}>{lists.length}</div>
           <div style={{ fontSize: "13px", color: "#71717A" }}>Listes</div>
         </div>
@@ -132,7 +133,7 @@ export default function NexusContactsPage() {
       {/* Actions */}
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap" }}>
         <button onClick={() => setShowAdd(!showAdd)}
-          style={{ padding: "9px 18px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit" }}>
+          style={{ padding: "9px 18px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit", boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>
           + Ajouter un contact
         </button>
         <label style={{ padding: "9px 18px", background: "#0f0f11", border: "1px solid #27272A", borderRadius: "8px", fontSize: "13px", color: "#A1A1AA", cursor: "pointer", fontFamily: "inherit" }}>
@@ -176,7 +177,7 @@ export default function NexusContactsPage() {
               onBlur={e => e.target.style.borderColor = "#27272A"} />
           </div>
           <div style={{ display: "flex", gap: "8px" }}>
-            <button onClick={addContact} style={{ padding: "8px 18px", background: "#10b981", color: "#fff", border: "none", borderRadius: "6px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Ajouter</button>
+            <button onClick={addContact} style={{ padding: "8px 18px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "6px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit", boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>Ajouter</button>
             <button onClick={() => setShowAdd(false)} style={{ padding: "8px 18px", background: "transparent", border: "1px solid #27272A", borderRadius: "6px", color: "#71717A", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Annuler</button>
           </div>
         </div>

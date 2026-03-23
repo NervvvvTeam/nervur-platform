@@ -88,10 +88,11 @@ export default function PhantomHistoryPage() {
     <div style={{ maxWidth: "900px" }}>
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#8b5cf6" }} />
-          <span style={{ fontSize: "12px", color: "#8b5cf6", fontWeight: 500 }}>Phantom</span>
-        </div>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
           Historique des audits
         </h1>
@@ -110,7 +111,7 @@ export default function PhantomHistoryPage() {
             return (
               <div key={domain} style={{
                 padding: "18px 22px", background: "#141416", border: "1px solid #1e1e22",
-                borderRadius: "10px",
+                borderRadius: "10px", borderLeft: "3px solid #8b5cf6",
               }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -127,11 +128,13 @@ export default function PhantomHistoryPage() {
                       onClick={(e) => { e.stopPropagation(); handleUpdate(latestAudit?.url || `https://${domain}`, domain); }}
                       disabled={isUpdating}
                       style={{
-                        padding: "8px 16px", background: isUpdating ? "#27272A" : "#8b5cf6",
+                        padding: "8px 16px",
+                        background: isUpdating ? "#27272A" : "linear-gradient(135deg, #8b5cf6, #a78bfa)",
                         color: "#fff", border: "none", borderRadius: "6px",
                         fontSize: "13px", fontWeight: 500, cursor: isUpdating ? "wait" : "pointer",
                         fontFamily: "inherit", opacity: isUpdating ? 0.6 : 1,
                         display: "flex", alignItems: "center", gap: "6px",
+                        boxShadow: isUpdating ? "none" : "0 4px 16px rgba(139,92,246,0.4)",
                       }}>
                       {isUpdating ? (
                         <>
@@ -237,12 +240,12 @@ export default function PhantomHistoryPage() {
             Évolution du score global
           </div>
           <div style={{ position: "relative", height: chartHeight + 30, overflow: "hidden" }}>
-            <svg width="100%" height={chartHeight + 30} viewBox={`0 0 ${chartWidth} ${chartHeight + 30}`} preserveAspectRatio="none">
+            <svg width="100%" height={chartHeight + 30} viewBox={`0 0 ${chartWidth} ${chartHeight + 30}`} preserveAspectRatio="xMidYMid meet">
               {[0, 25, 50, 75, 100].map(v => (
                 <g key={v}>
                   <line x1="0" y1={chartHeight - (v / maxScore) * chartHeight} x2={chartWidth} y2={chartHeight - (v / maxScore) * chartHeight}
                     stroke="#1e1e22" strokeWidth="1" />
-                  <text x="0" y={chartHeight - (v / maxScore) * chartHeight - 4} fill="#52525B" fontSize="10">{v}</text>
+                  <text x="0" y={chartHeight - (v / maxScore) * chartHeight - 4} fill="#71717A" fontSize="13" fontWeight="500">{v}</text>
                 </g>
               ))}
               <polyline

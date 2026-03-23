@@ -73,10 +73,11 @@ export default function ForgeHistoryPage() {
     <div style={{ maxWidth: "1100px" }}>
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: ACCENT }} />
-          <span style={{ fontSize: "12px", color: ACCENT, fontWeight: 500 }}>Forge</span>
-        </div>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #f59e0b, #fbbf24)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0, marginBottom: "6px" }}>
           Historique
         </h1>

@@ -187,10 +187,11 @@ export default function ForgeDashboardPage() {
     <div style={{ maxWidth: "1100px" }}>
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: ACCENT }} />
-          <span style={{ fontSize: "12px", color: ACCENT, fontWeight: 500 }}>Forge</span>
-        </div>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #f59e0b, #fbbf24)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0, marginBottom: "6px" }}>
           Générateur de landing pages
         </h1>
@@ -230,8 +231,9 @@ export default function ForgeDashboardPage() {
                 onClick={handleDownload}
                 style={{
                   padding: "9px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 500,
-                  background: ACCENT, color: "#000", border: "none",
+                  background: "linear-gradient(135deg, #f59e0b, #fbbf24)", color: "#000", border: "none",
                   cursor: "pointer", fontFamily: "inherit", transition: "opacity 0.15s",
+                  boxShadow: "0 4px 16px rgba(245,158,11,0.4)",
                 }}
                 onMouseEnter={(e) => (e.target.style.opacity = "0.85")}
                 onMouseLeave={(e) => (e.target.style.opacity = "1")}
@@ -420,9 +422,10 @@ export default function ForgeDashboardPage() {
                 borderRadius: "8px",
                 fontSize: "14px",
                 fontWeight: 600,
-                background: loading ? "#52525B" : ACCENT,
+                background: loading ? "#52525B" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
                 color: loading ? "#A1A1AA" : "#000",
                 border: "none",
+                boxShadow: loading ? "none" : "0 4px 16px rgba(245,158,11,0.4)",
                 cursor: loading ? "not-allowed" : "pointer",
                 fontFamily: "inherit",
                 transition: "all 0.15s",

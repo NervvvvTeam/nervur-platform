@@ -36,6 +36,7 @@ const NAV_ICONS = {
   "/app/forge/history": (c) => I(<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>, c),
   "/app/vault": (c) => I(<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></>, c),
   "/app/vault/history": (c) => I(<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>, c),
+  "/app/vault/monitoring": (c) => I(<><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></>, c),
   "/app/settings": (c) => I(<><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></>, c),
 };
 
@@ -73,6 +74,7 @@ const PATH_COLORS = {
   "/app/vault": TOOL_COLORS.vault,
   "/app/vault/history": TOOL_COLORS.vault,
   "/app/vault/scan": TOOL_COLORS.vault,
+  "/app/vault/monitoring": TOOL_COLORS.vault,
   "/app/settings": "#71717A",
 };
 
@@ -121,6 +123,7 @@ export default function Layout() {
       items.push({ type: "separator", label: "Vault", color: TOOL_COLORS.vault });
       items.push({ path: "/app/vault", label: "Scanner" });
       items.push({ path: "/app/vault/history", label: "Historique" });
+      items.push({ path: "/app/vault/monitoring", label: "Surveillance" });
     }
     items.push({ type: "separator" });
     items.push({ path: "/app/settings", label: "Paramètres" });
@@ -136,7 +139,7 @@ export default function Layout() {
           marginTop: idx > 0 ? "2px" : 0,
           display: "flex", alignItems: "center", gap: "6px"
         }}>
-          {item.color && <span style={{ width: "3px", height: "3px", borderRadius: "50%", background: item.color, display: "inline-block" }} />}
+          {item.color && <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: item.color, display: "inline-block" }} />}
           {item.label || ""}
         </div>
       );
@@ -152,7 +155,8 @@ export default function Layout() {
           borderRadius: "6px", textDecoration: "none",
           fontSize: mobile ? "14px" : "13px", fontWeight: isActive ? 500 : 400,
           color: isActive ? "#FAFAFA" : "#A1A1AA",
-          background: isActive ? `${toolColor}14` : "transparent",
+          background: isActive ? `${toolColor}20` : "transparent",
+          borderLeft: isActive ? `2px solid ${toolColor}` : "2px solid transparent",
           transition: "all 0.15s"
         })}>
         {({ isActive }) => (
@@ -168,21 +172,21 @@ export default function Layout() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#0f0f11", color: "#E4E4E7", fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#101118", color: "#E4E4E7", fontFamily: "'Inter', system-ui, sans-serif" }}>
       {/* Sidebar — desktop */}
       {!isMobile && (
         <aside style={{
-          width: "230px", borderRight: "1px solid #1e1e22", padding: "24px 12px",
+          width: "230px", borderRight: "1px solid #1e1e2a", padding: "24px 12px",
           display: "flex", flexDirection: "column", position: "fixed", top: 0, bottom: 0, left: 0,
-          background: "#111113", zIndex: 50
+          background: "#12131a", zIndex: 50
         }}>
           {/* Logo */}
-          <div style={{ padding: "0 12px", marginBottom: "28px", paddingBottom: "20px", borderBottom: "1px solid #1e1e22" }}>
+          <div style={{ padding: "0 12px", marginBottom: "28px", paddingBottom: "20px", borderBottom: "1px solid #1e1e2a", background: "rgba(99,102,241,0.04)", borderRadius: "8px", margin: "0 -4px 28px", padding: "12px 16px 16px" }}>
             <img src="/logo-nav.png" alt="NERVÜR" style={{
               height: "36px", width: "auto", marginBottom: "6px",
               filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain"
             }} />
-            <div style={{ fontSize: "11px", color: "#52525B", fontWeight: 400 }}>Espace client</div>
+            <div style={{ fontSize: "11px", color: "#818CF8", fontWeight: 400 }}>Espace client</div>
           </div>
 
           {/* Nav */}
@@ -191,12 +195,12 @@ export default function Layout() {
           </nav>
 
           {/* User */}
-          <div style={{ borderTop: "1px solid #1e1e22", paddingTop: "16px", padding: "16px 8px 0" }}>
+          <div style={{ borderTop: "1px solid #1e1e2a", paddingTop: "16px", padding: "16px 8px 0" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
               <div style={{
-                width: "32px", height: "32px", borderRadius: "6px", background: "#27272A",
+                width: "32px", height: "32px", borderRadius: "6px", background: "linear-gradient(135deg, #6366f1, #818CF8)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "13px", fontWeight: 600, color: "#A1A1AA", flexShrink: 0
+                fontSize: "13px", fontWeight: 600, color: "#fff", flexShrink: 0
               }}>
                 {user?.name?.charAt(0)?.toUpperCase() || "U"}
               </div>
@@ -225,7 +229,7 @@ export default function Layout() {
         <>
           <header style={{
             position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-            background: "#111113", borderBottom: "1px solid #1e1e22", padding: "12px 20px",
+            background: "#12131a", borderBottom: "1px solid #1e1e2a", padding: "12px 20px",
             display: "flex", justifyContent: "space-between", alignItems: "center"
           }}>
             <img src="/logo-nav.png" alt="NERVÜR" style={{
@@ -240,7 +244,7 @@ export default function Layout() {
           {mobileMenuOpen && (
             <div style={{
               position: "fixed", top: "50px", left: 0, right: 0, bottom: 0, zIndex: 49,
-              background: "#111113", padding: "12px 16px", display: "flex", flexDirection: "column", gap: "2px",
+              background: "#12131a", padding: "12px 16px", display: "flex", flexDirection: "column", gap: "2px",
               overflowY: "auto"
             }}>
               {navItems.map((item, idx) => renderNavItem(item, idx, true))}

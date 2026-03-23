@@ -4,9 +4,9 @@ import { useApi } from "../hooks/useApi";
 import ResponseEditor from "../components/ResponseEditor";
 
 const SENTIMENT_CONFIG = {
-  positive: { label: "Positif", color: "#6366f1", bg: "rgba(99,102,241,0.1)" },
-  negative: { label: "Négatif", color: "#ef4444", bg: "rgba(239,68,68,0.1)" },
-  mixed: { label: "Mixte", color: "#A1A1AA", bg: "rgba(161,161,170,0.1)" }
+  positive: { label: "Positif", color: "#22c55e", bg: "rgba(34,197,94,0.12)" },
+  negative: { label: "Négatif", color: "#ef4444", bg: "rgba(239,68,68,0.12)" },
+  mixed: { label: "Mixte", color: "#f59e0b", bg: "rgba(245,158,11,0.12)" }
 };
 
 export default function ReviewDetailPage() {
@@ -80,6 +80,17 @@ export default function ReviewDetailPage() {
 
   return (
     <div style={{ maxWidth: "700px" }}>
+      {/* Header */}
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
+          marginBottom: "16px"
+        }} />
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Détail de l'avis</h1>
+        <p style={{ fontSize: "14px", color: "#71717A" }}>Consultez et répondez à cet avis client.</p>
+      </div>
+
       {/* Back */}
       <button onClick={() => navigate("/app/reviews")}
         style={{
@@ -100,7 +111,7 @@ export default function ReviewDetailPage() {
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
           <div>
-            <span style={{ color: "#6366f1", fontSize: "18px" }}>{stars}</span>
+            <span style={{ color: "#ef4444", fontSize: "18px" }}>{stars}</span>
             <span style={{ fontSize: "15px", fontWeight: 600, color: "#FAFAFA", marginLeft: "12px" }}>{review.authorName}</span>
           </div>
           <span style={{
@@ -137,9 +148,12 @@ export default function ReviewDetailPage() {
           </p>
           <button onClick={handleGenerate} disabled={generating}
             style={{
-              padding: "12px 28px", background: "#6366f1", color: "#FAFAFA", border: "none",
+              padding: "12px 28px",
+              background: "linear-gradient(135deg, #ef4444, #f97316)",
+              color: "#fff", border: "none",
               borderRadius: "8px", fontWeight: 600, fontSize: "13px", cursor: generating ? "wait" : "pointer",
-              fontFamily: "inherit", opacity: generating ? 0.7 : 1
+              fontFamily: "inherit", opacity: generating ? 0.7 : 1,
+              boxShadow: "0 4px 16px rgba(239,68,68,0.4)"
             }}>
             {generating ? "Génération..." : "Générer une réponse IA"}
           </button>

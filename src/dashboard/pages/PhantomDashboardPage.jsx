@@ -31,7 +31,7 @@ function ScoreCircle({ score, label, color, size = 80 }) {
     <div style={{ textAlign: "center" }}>
       <div style={{ position: "relative", width: size, height: size, margin: "0 auto" }}>
         <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#1e1e22" strokeWidth="5" />
+          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#1e1e2a" strokeWidth="5" />
           <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke={color || scoreColor}
             strokeWidth="5" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
             style={{ transition: "stroke-dashoffset 1s ease" }} />
@@ -53,7 +53,7 @@ function CWVItem({ label, data }) {
   const colors = { good: "#10b981", "needs-improvement": "#f59e0b", poor: "#ef4444" };
   return (
     <div style={{
-      padding: "14px 18px", background: "#0f0f11", border: "1px solid #1e1e22",
+      padding: "14px 18px", background: "#0c0d14", border: "1px solid #1e1e2a",
       borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center"
     }}>
       <div>
@@ -135,27 +135,28 @@ export default function PhantomDashboardPage() {
       {/* URL Input */}
       <div style={{
         display: "flex", gap: "10px", marginBottom: "32px",
-        padding: "20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px"
+        padding: "20px", background: "#151620", border: "1px solid #1e1e2a", borderRadius: "10px"
       }}>
         <input
           type="text" value={url} onChange={e => setUrl(e.target.value)}
           placeholder="https://exemple.com"
           onKeyDown={e => e.key === "Enter" && !loading && runAudit()}
           style={{
-            flex: 1, padding: "12px 16px", background: "#0f0f11",
+            flex: 1, padding: "12px 16px", background: "#0c0d14",
             border: "1px solid #27272A", borderRadius: "8px",
             color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit",
-            outline: "none", boxSizing: "border-box",
+            outline: "none", boxSizing: "border-box", transition: "border-color 0.2s, box-shadow 0.2s",
           }}
-          onFocus={e => e.target.style.borderColor = "#8b5cf6"}
-          onBlur={e => e.target.style.borderColor = "#27272A"}
+          onFocus={e => { e.target.style.borderColor = "#8b5cf6"; e.target.style.boxShadow = "0 0 0 3px rgba(139,92,246,0.15)"; }}
+          onBlur={e => { e.target.style.borderColor = "#27272A"; e.target.style.boxShadow = "none"; }}
         />
         <button onClick={runAudit} disabled={loading || !url.trim()}
           style={{
-            padding: "12px 28px", background: "#8b5cf6", color: "#fff",
+            padding: "12px 28px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", color: "#fff",
             border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500,
             cursor: loading ? "wait" : "pointer", fontFamily: "inherit",
             opacity: loading || !url.trim() ? 0.5 : 1, whiteSpace: "nowrap",
+            boxShadow: "0 4px 16px rgba(139,92,246,0.25)",
           }}>
           {loading ? "Analyse..." : "Lancer l'audit"}
         </button>
@@ -164,14 +165,15 @@ export default function PhantomDashboardPage() {
       {/* Progress */}
       {loading && (
         <div style={{
-          padding: "24px", background: "#141416", border: "1px solid #1e1e22",
+          padding: "24px", background: "#151620", border: "1px solid #8b5cf630",
+          borderLeft: "3px solid #8b5cf6",
           borderRadius: "10px", marginBottom: "24px"
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "12px" }}>
             <span style={{ fontSize: "14px", color: "#A1A1AA" }}>{phase}</span>
             <span style={{ fontSize: "14px", color: "#8b5cf6", fontWeight: 500 }}>{progress}%</span>
           </div>
-          <div style={{ height: "4px", background: "#1e1e22", borderRadius: "2px", overflow: "hidden" }}>
+          <div style={{ height: "4px", background: "#1e1e2a", borderRadius: "2px", overflow: "hidden" }}>
             <div style={{
               height: "100%", background: "#8b5cf6", borderRadius: "2px",
               width: progress + "%", transition: "width 0.5s ease"
@@ -196,10 +198,11 @@ export default function PhantomDashboardPage() {
         <>
           {/* Scores */}
           <div style={{
-            padding: "28px", background: "#141416", border: "1px solid #1e1e22",
+            padding: "28px", background: "#151620", border: "1px solid #1e1e2a",
+            borderLeft: "3px solid #8b5cf6",
             borderRadius: "10px", marginBottom: "16px"
           }}>
-            <div style={{ fontSize: "13px", color: "#71717A", marginBottom: "24px" }}>Scores Lighthouse</div>
+            <div style={{ fontSize: "13px", color: "#71717A", marginBottom: "24px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#8b5cf6", display: "inline-block" }} />Scores Lighthouse</div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px", justifyItems: "center" }}>
               <ScoreCircle score={result.scores.global || Math.round((result.scores.performance + result.scores.accessibility + result.scores.seo + (result.scores.bestPractices || 0)) / 4)} label="Global" size={90} color="#8b5cf6" />
               <ScoreCircle score={result.scores.performance} label="Performance" size={72} />
@@ -212,10 +215,11 @@ export default function PhantomDashboardPage() {
           {/* Core Web Vitals */}
           {result.coreWebVitals && (
             <div style={{
-              padding: "24px", background: "#141416", border: "1px solid #1e1e22",
+              padding: "24px", background: "#151620", border: "1px solid #1e1e2a",
+              borderLeft: "3px solid #3b82f6",
               borderRadius: "10px", marginBottom: "16px"
             }}>
-              <div style={{ fontSize: "13px", color: "#71717A", marginBottom: "16px" }}>Core Web Vitals</div>
+              <div style={{ fontSize: "13px", color: "#71717A", marginBottom: "16px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#3b82f6", display: "inline-block" }} />Core Web Vitals</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
                 <CWVItem label="LCP" data={result.coreWebVitals.lcp} />
                 <CWVItem label="FCP" data={result.coreWebVitals.fcp} />
@@ -241,12 +245,12 @@ export default function PhantomDashboardPage() {
 
           {/* Issues */}
           <div style={{
-            padding: "24px", background: "#141416", border: "1px solid #1e1e22",
+            padding: "24px", background: "#151620", border: "1px solid #1e1e2a",
             borderRadius: "10px"
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
-              <div style={{ fontSize: "13px", color: "#71717A" }}>
-                Problèmes détectés ({result.issues?.length || 0})
+              <div style={{ fontSize: "13px", color: "#71717A", display: "flex", alignItems: "center", gap: "6px" }}>
+                <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Problèmes détectés ({result.issues?.length || 0})
               </div>
               <div style={{ display: "flex", gap: "6px" }}>
                 {["all", "critical", "warning", "info"].map(f => (
@@ -266,8 +270,8 @@ export default function PhantomDashboardPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               {filteredIssues.map((issue, i) => (
                 <div key={i} style={{
-                  padding: "16px 20px", background: "#0f0f11",
-                  border: "1px solid #1e1e22", borderRadius: "8px",
+                  padding: "16px 20px", background: "#0c0d14",
+                  border: "1px solid #1e1e2a", borderRadius: "8px",
                   borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#71717A"}`
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>

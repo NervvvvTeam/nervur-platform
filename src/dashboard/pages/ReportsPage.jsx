@@ -49,12 +49,13 @@ export default function ReportsPage() {
 
   return (
     <div style={{ maxWidth: "700px" }}>
-      <div style={{ marginBottom: "36px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
-        </div>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Rapports</h1>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
+          marginBottom: "16px"
+        }} />
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Rapports</h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>
           Générez un rapport PDF complet de votre e-réputation.
         </p>
@@ -63,7 +64,7 @@ export default function ReportsPage() {
       {/* Current month report */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid rgba(99,102,241,0.15)", background: "rgba(99,102,241,0.04)",
+        border: "1px solid rgba(239,68,68,0.15)", background: "rgba(239,68,68,0.06)",
         marginBottom: "20px"
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -77,10 +78,12 @@ export default function ReportsPage() {
           </div>
           <button onClick={downloadReport} disabled={generating}
             style={{
-              padding: "14px 28px", background: "#6366f1",
-              color: "#FAFAFA", border: "none", borderRadius: "8px", fontSize: "14px",
+              padding: "14px 28px",
+              background: "linear-gradient(135deg, #ef4444, #f97316)",
+              color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px",
               fontWeight: 600, cursor: generating ? "wait" : "pointer", fontFamily: "inherit",
-              opacity: generating ? 0.7 : 1, whiteSpace: "nowrap", flexShrink: 0
+              opacity: generating ? 0.7 : 1, whiteSpace: "nowrap", flexShrink: 0,
+              boxShadow: "0 4px 16px rgba(239,68,68,0.4)"
             }}>
             {generating ? "Génération..." : "Télécharger PDF"}
           </button>
@@ -106,9 +109,9 @@ export default function ReportsPage() {
             <div key={i} style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
               <span style={{
                 width: "26px", height: "26px", borderRadius: "6px",
-                background: "rgba(99,102,241,0.1)", display: "flex", alignItems: "center",
+                background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center",
                 justifyContent: "center", fontSize: "12px", fontWeight: 600,
-                color: "#6366f1", flexShrink: 0
+                color: "#ef4444", flexShrink: 0
               }}>{item.icon}</span>
               <div>
                 <div style={{ fontSize: "14px", fontWeight: 600, color: "#D4D4D8", marginBottom: "2px" }}>{item.title}</div>
@@ -122,10 +125,10 @@ export default function ReportsPage() {
       {/* Auto report info */}
       <div style={{
         marginTop: "20px", padding: "18px", borderRadius: "10px",
-        border: "1px solid rgba(99,102,241,0.15)", background: "rgba(99,102,241,0.04)",
+        border: "1px solid rgba(239,68,68,0.15)", background: "rgba(239,68,68,0.06)",
         display: "flex", gap: "12px", alignItems: "center"
       }}>
-        <span style={{ fontSize: "14px", color: "#6366f1", flexShrink: 0 }}>i</span>
+        <span style={{ fontSize: "14px", color: "#ef4444", flexShrink: 0 }}>i</span>
         <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6, margin: 0 }}>
           {"Le rapport mensuel automatique sera bientôt disponible. Il sera envoyé par email le 1er de chaque mois."}
         </p>

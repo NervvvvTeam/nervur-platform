@@ -42,12 +42,13 @@ export default function AnalyticsPage() {
 
   return (
     <div style={{ maxWidth: "900px" }}>
-      <div style={{ marginBottom: "36px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
-        </div>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Analyse sémantique</h1>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
+          marginBottom: "16px"
+        }} />
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Analyse sémantique</h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>
           {"L'IA analyse les thèmes récurrents dans vos avis clients."}
         </p>
@@ -59,18 +60,18 @@ export default function AnalyticsPage() {
           borderRadius: "10px", background: "#141416"
         }}>
           <div style={{
-            width: "36px", height: "36px", border: "3px solid rgba(99,102,241,0.2)",
-            borderTop: "3px solid #6366f1", borderRadius: "50%",
+            width: "36px", height: "36px", border: "3px solid rgba(239,68,68,0.2)",
+            borderTop: "3px solid #ef4444", borderRadius: "50%",
             animation: "spin 0.8s linear infinite", margin: "0 auto 20px"
           }} />
-          <p style={{ color: "#6366f1", fontSize: "14px" }}>Analyse en cours par GPT...</p>
+          <p style={{ color: "#ef4444", fontSize: "14px" }}>Analyse en cours par GPT...</p>
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       ) : analysis ? (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px" }}>
           {/* Radar Chart */}
           <div style={{
-            padding: "18px", borderRadius: "10px", border: "1px solid #1e1e22",
+            padding: "18px", borderRadius: "10px", border: "1px solid rgba(239,68,68,0.15)",
             background: "#141416", gridColumn: radarData.length > 0 ? "1" : "1 / -1"
           }}>
             <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "20px" }}>
@@ -82,7 +83,7 @@ export default function AnalyticsPage() {
                   <PolarGrid stroke="#1e1e22" />
                   <PolarAngleAxis dataKey="theme" tick={{ fill: "#A1A1AA", fontSize: 11 }} />
                   <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fill: "#52525B", fontSize: 10 }} />
-                  <Radar name="Score" dataKey="score" stroke="#6366f1" fill="#6366f1" fillOpacity={0.2} strokeWidth={2} />
+                  <Radar name="Score" dataKey="score" stroke="#ef4444" fill="#ef4444" fillOpacity={0.2} strokeWidth={2} />
                 </RadarChart>
               </ResponsiveContainer>
             ) : (
@@ -100,7 +101,7 @@ export default function AnalyticsPage() {
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
               {(analysis.themes || []).map((t, i) => {
-                const barColor = t.score >= 7 ? "#6366f1" : t.score >= 5 ? "#6366f1" : "#ef4444";
+                const barColor = t.score >= 7 ? "#ef4444" : t.score >= 5 ? "#f97316" : "#ef4444";
                 const barOpacity = t.score >= 7 ? 1 : t.score >= 5 ? 0.6 : 1;
                 return (
                   <div key={i}>
@@ -126,10 +127,10 @@ export default function AnalyticsPage() {
           {/* Summary */}
           {analysis.summary && (
             <div style={{
-              padding: "18px", borderRadius: "10px", border: "1px solid rgba(99,102,241,0.15)",
-              background: "rgba(99,102,241,0.04)", gridColumn: "1 / -1"
+              padding: "18px", borderRadius: "10px", border: "1px solid rgba(239,68,68,0.15)",
+              background: "rgba(239,68,68,0.06)", gridColumn: "1 / -1"
             }}>
-              <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#6366f1", marginBottom: "12px" }}>
+              <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#ef4444", marginBottom: "12px" }}>
                 Résumé IA
               </h3>
               <p style={{ fontSize: "15px", color: "#D4D4D8", lineHeight: 1.8 }}>{analysis.summary}</p>
@@ -139,16 +140,16 @@ export default function AnalyticsPage() {
           {/* Strengths & Weaknesses */}
           {analysis.strengths && (
             <div style={{
-              padding: "18px", borderRadius: "10px", border: "1px solid rgba(99,102,241,0.15)",
-              background: "rgba(99,102,241,0.04)"
+              padding: "18px", borderRadius: "10px", border: "1px solid rgba(239,68,68,0.15)",
+              background: "rgba(239,68,68,0.06)"
             }}>
-              <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#6366f1", marginBottom: "16px" }}>
+              <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#ef4444", marginBottom: "16px" }}>
                 Points forts
               </h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                 {analysis.strengths.map((s, i) => (
                   <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                    <span style={{ color: "#6366f1", fontSize: "14px", flexShrink: 0 }}>+</span>
+                    <span style={{ color: "#ef4444", fontSize: "14px", flexShrink: 0 }}>+</span>
                     <span style={{ fontSize: "14px", color: "#D4D4D8", lineHeight: 1.6 }}>{s}</span>
                   </div>
                 ))}
@@ -188,8 +189,8 @@ export default function AnalyticsPage() {
                 {analysis.keywords.map((kw, i) => (
                   <span key={i} style={{
                     padding: "6px 16px", borderRadius: "20px", fontSize: "13px",
-                    background: "rgba(99,102,241,0.1)", border: "1px solid rgba(99,102,241,0.2)",
-                    color: "#6366f1", fontWeight: 500
+                    background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.2)",
+                    color: "#ef4444", fontWeight: 500
                   }}>{kw}</span>
                 ))}
               </div>
@@ -201,9 +202,11 @@ export default function AnalyticsPage() {
       {!analyzing && (
         <button onClick={() => loadAnalysis(business._id)}
           style={{
-            marginTop: "24px", padding: "12px 28px", background: "#6366f1",
-            color: "#FAFAFA", border: "none", borderRadius: "8px", fontSize: "14px",
-            fontWeight: 600, cursor: "pointer", fontFamily: "inherit"
+            marginTop: "24px", padding: "12px 28px",
+            background: "linear-gradient(135deg, #ef4444, #f97316)",
+            color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px",
+            fontWeight: 600, cursor: "pointer", fontFamily: "inherit",
+            boxShadow: "0 4px 16px rgba(239,68,68,0.4)"
           }}>
           Relancer l'analyse
         </button>

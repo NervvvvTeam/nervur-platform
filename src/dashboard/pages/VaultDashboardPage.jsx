@@ -140,8 +140,8 @@ const AlertTriangle = ({ size = 18, color = "#ef4444" }) => (
 );
 
 const cardStyle = {
-  background: "#141416",
-  border: "1px solid #1e1e22",
+  background: "#151620",
+  border: "1px solid #1e1e2a",
   borderRadius: "10px",
   padding: "24px",
 };
@@ -157,7 +157,7 @@ const labelStyle = {
 const inputStyle = {
   width: "100%",
   padding: "10px 14px",
-  background: "#0f0f11",
+  background: "#0c0d14",
   border: "1px solid #27272A",
   borderRadius: "8px",
   color: "#FAFAFA",
@@ -192,6 +192,7 @@ function BreachCard({ breach }) {
       padding: "14px 16px",
       background: "rgba(6,182,212,0.04)",
       border: "1px solid rgba(6,182,212,0.1)",
+      borderLeft: `3px solid ${RISK_COLORS[breach.riskLevel] || "#f97316"}`,
       borderRadius: "8px",
       marginBottom: "8px",
     }}>
@@ -609,8 +610,9 @@ export default function VaultDashboardPage() {
       {/* Info banner */}
       <div style={{
         padding: "16px 20px",
-        background: BG_TINT,
+        background: "rgba(6,182,212,0.06)",
         border: `1px solid ${BORDER_TINT}`,
+        borderLeft: `3px solid ${ACCENT}`,
         borderRadius: "10px",
         marginBottom: "28px",
         marginTop: "20px",
@@ -706,13 +708,14 @@ export default function VaultDashboardPage() {
             style={{
               display: "inline-flex", alignItems: "center", gap: "8px",
               padding: "11px 24px", borderRadius: "8px",
-              background: ACCENT, border: "none",
+              background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none",
               color: "#0f0f11", fontSize: "14px", fontWeight: 600,
               cursor: "pointer", fontFamily: "inherit",
               transition: "all 0.15s",
+              boxShadow: "0 4px 16px rgba(6,182,212,0.25)",
             }}
-            onMouseEnter={e => { e.target.style.background = "#22d3ee"; }}
-            onMouseLeave={e => { e.target.style.background = ACCENT; }}
+            onMouseEnter={e => { e.target.style.boxShadow = "0 4px 20px rgba(6,182,212,0.4)"; }}
+            onMouseLeave={e => { e.target.style.boxShadow = "0 4px 16px rgba(6,182,212,0.25)"; }}
           >
             <ShieldIcon size={16} color="#0f0f11" />
             Lancer le scan

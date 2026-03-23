@@ -41,12 +41,13 @@ export default function WidgetPage() {
 
   return (
     <div style={{ maxWidth: "800px" }}>
-      <div style={{ marginBottom: "36px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
-        </div>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Widget Avis</h1>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
+          marginBottom: "16px"
+        }} />
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Widget Avis</h1>
         <p style={{ fontSize: "14px", color: "#71717A", lineHeight: 1.6 }}>
           {"Intégrez vos meilleurs avis directement sur votre site web. Le widget affiche automatiquement vos avis 4 et 5 étoiles."}
         </p>
@@ -65,19 +66,19 @@ export default function WidgetPage() {
             <button onClick={copyCode}
               style={{
                 padding: "6px 16px", fontSize: "12px", fontWeight: 600,
-                background: "rgba(99,102,241,0.1)",
-                border: "1px solid rgba(99,102,241,0.2)",
-                borderRadius: "6px", color: "#6366f1",
+                background: "rgba(239,68,68,0.1)",
+                border: "1px solid rgba(239,68,68,0.2)",
+                borderRadius: "6px", color: "#ef4444",
                 cursor: "pointer", fontFamily: "inherit"
               }}>
               {copied ? "Copié !" : "Copier"}
             </button>
           </div>
           <pre style={{
-            background: "#0f0f11", borderRadius: "8px", padding: "16px",
+            background: "rgba(239,68,68,0.06)", borderRadius: "8px", padding: "16px",
             fontSize: "11px", color: "#A1A1AA", overflow: "auto", maxHeight: "400px",
             lineHeight: 1.5, whiteSpace: "pre-wrap", wordBreak: "break-all",
-            border: "1px solid #1e1e22"
+            border: "1px solid rgba(239,68,68,0.15)"
           }}>
             {embedData?.embedCode || "Chargement..."}
           </pre>
@@ -99,7 +100,7 @@ export default function WidgetPage() {
               <span style={{ fontSize: "24px", fontWeight: 600, color: "#1a1a1a" }}>
                 {business.averageRating || "3.7"}/5
               </span>
-              <span style={{ color: "#6366f1", fontSize: "18px" }}>&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+              <span style={{ color: "#ef4444", fontSize: "18px" }}>&#9733;&#9733;&#9733;&#9733;&#9734;</span>
             </div>
             {[
               { name: "Marie D.", rating: 5, text: "Un vrai coup de coeur ! Les plats sont raffines..." },
@@ -138,9 +139,9 @@ export default function WidgetPage() {
             <div key={i} style={{ display: "flex", gap: "12px", alignItems: "center" }}>
               <span style={{
                 width: "24px", height: "24px", borderRadius: "50%",
-                background: "rgba(99,102,241,0.1)", display: "flex", alignItems: "center",
+                background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center",
                 justifyContent: "center", fontSize: "12px", fontWeight: 600,
-                color: "#6366f1", flexShrink: 0
+                color: "#ef4444", flexShrink: 0
               }}>{i + 1}</span>
               <span style={{ fontSize: "14px", color: "#D4D4D8" }}>{step}</span>
             </div>

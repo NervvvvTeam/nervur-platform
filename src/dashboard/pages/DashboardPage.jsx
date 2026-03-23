@@ -96,8 +96,8 @@ export default function DashboardPage() {
       {/* NPS + Objective + Response Time */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px", marginBottom: "20px" }}>
         {/* NPS */}
-        <div style={cardStyle}>
-          <div style={labelStyle}>Score NPS</div>
+        <div style={{ ...cardStyle, borderLeft: "3px solid #6366f140" }}>
+          <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#6366f1", display: "inline-block" }} />Score NPS</div>
           <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
             <span style={{ fontSize: "28px", fontWeight: 600, color: "#FAFAFA" }}>
               {nps?.nps ?? "—"}
@@ -118,8 +118,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Objective */}
-        <div style={cardStyle}>
-          <div style={labelStyle}>Objectif</div>
+        <div style={{ ...cardStyle, borderLeft: "3px solid #f59e0b40" }}>
+          <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#f59e0b", display: "inline-block" }} />Objectif</div>
           <div style={{ fontSize: "15px", fontWeight: 500, color: "#D4D4D8", marginBottom: "12px" }}>
             Atteindre {trends?.objective?.target || 4.5}/5
           </div>
@@ -145,8 +145,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Response time */}
-        <div style={cardStyle}>
-          <div style={labelStyle}>Temps de réponse moyen</div>
+        <div style={{ ...cardStyle, borderLeft: "3px solid #10b98140" }}>
+          <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />Temps de réponse moyen</div>
           <div style={{ fontSize: "28px", fontWeight: 600, color: "#FAFAFA" }}>
             {trends?.avgResponseTime != null ? (
               trends.avgResponseTime < 24
@@ -164,14 +164,14 @@ export default function DashboardPage() {
 
       {/* Chart + Score */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 180px", gap: "12px", marginBottom: "20px" }}>
-        <div style={cardStyle}>
-          <div style={labelStyle}>Évolution mensuelle</div>
+        <div style={{ ...cardStyle, border: "1px solid #2a2a3a", background: "#14151e" }}>
+          <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Évolution mensuelle</div>
           {stats?.monthlyTrend?.length > 0 ? (
             <ResponsiveContainer width="100%" height={180}>
               <LineChart data={stats.monthlyTrend}>
                 <XAxis dataKey="_id" tick={{ fill: "#71717A", fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: "#71717A", fontSize: 11 }} axisLine={false} tickLine={false} />
-                <Tooltip contentStyle={{ background: "#141416", border: "1px solid #27272A", borderRadius: "6px", fontSize: "12px", fontFamily: "Inter" }} />
+                <Tooltip contentStyle={{ background: "#151620", border: "1px solid #2a2a3a", borderRadius: "6px", fontSize: "12px", fontFamily: "Inter" }} />
                 <Line type="monotone" dataKey="count" stroke="#ef4444" strokeWidth={2} dot={{ fill: "#ef4444", r: 2.5 }} name="Avis" />
                 <Line type="monotone" dataKey="avgRating" stroke="#A1A1AA" strokeWidth={1.5} dot={{ fill: "#A1A1AA", r: 2 }} name="Note moy." />
               </LineChart>
@@ -183,7 +183,7 @@ export default function DashboardPage() {
           )}
         </div>
 
-        <div style={{ ...cardStyle, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ ...cardStyle, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(239,68,68,0.04)", borderLeft: "3px solid #ef444440" }}>
           <ScoreGauge score={stats?.averageRating || 0} />
         </div>
       </div>
@@ -199,12 +199,12 @@ export default function DashboardPage() {
 
       {/* Recent reviews */}
       <div>
-        <div style={{ ...labelStyle, marginBottom: "12px" }}>Derniers avis</div>
+        <div style={{ ...labelStyle, marginBottom: "12px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Derniers avis</div>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {recentReviews.length > 0 ? recentReviews.map(r => (
             <ReviewCard key={r._id} review={r} businessId={business._id} />
           )) : (
-            <div style={{ padding: "40px", textAlign: "center", color: "#52525B", fontSize: "13px", border: "1px solid #1e1e22", borderRadius: "8px" }}>
+            <div style={{ padding: "40px", textAlign: "center", color: "#52525B", fontSize: "13px", border: "1px solid #1e1e2a", borderRadius: "8px" }}>
               Aucun avis pour le moment.
             </div>
           )}
@@ -215,11 +215,12 @@ export default function DashboardPage() {
 }
 
 const cardStyle = {
-  border: "1px solid #1e1e22", borderRadius: "10px", padding: "18px", background: "#141416"
+  border: "1px solid #1e1e2a", borderRadius: "10px", padding: "18px", background: "#151620"
 };
 
 const labelStyle = {
-  fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "8px"
+  fontSize: "12px", fontWeight: 500, color: "#71717A", marginBottom: "8px",
+  display: "flex", alignItems: "center", gap: "6px"
 };
 
 function Trend({ value }) {
@@ -233,8 +234,9 @@ function Trend({ value }) {
 }
 
 function StatCard({ label, value, suffix = "", trend, alert }) {
+  const borderColor = alert ? "#ef4444" : "#6366f1";
   return (
-    <div style={cardStyle}>
+    <div style={{ ...cardStyle, borderLeft: `3px solid ${borderColor}40` }}>
       <div style={labelStyle}>{label}</div>
       <div style={{ display: "flex", alignItems: "baseline" }}>
         <span style={{ fontSize: "24px", fontWeight: 600, color: alert ? "#ef4444" : "#FAFAFA" }}>

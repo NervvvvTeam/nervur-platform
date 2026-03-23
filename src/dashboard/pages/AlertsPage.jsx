@@ -58,7 +58,7 @@ export default function AlertsPage() {
       </div>
       <div onClick={onToggle} style={{
         width: "44px", height: "24px", borderRadius: "12px", cursor: "pointer",
-        background: value ? "#6366f1" : "#27272A",
+        background: value ? "#ef4444" : "#27272A",
         position: "relative", transition: "background 0.2s"
       }}>
         <div style={{
@@ -73,12 +73,13 @@ export default function AlertsPage() {
 
   return (
     <div style={{ maxWidth: "600px" }}>
-      <div style={{ marginBottom: "36px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
-        </div>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Alertes</h1>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
+          marginBottom: "16px"
+        }} />
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Alertes</h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>
           Recevez des notifications par email quand un nouvel avis est publie.
         </p>
@@ -159,10 +160,12 @@ export default function AlertsPage() {
       {/* Save */}
       <button onClick={saveConfig} disabled={saving}
         style={{
-          padding: "14px 32px", background: saved ? "#6366f1" : "#6366f1",
-          color: "#FAFAFA", border: "none", borderRadius: "8px", fontSize: "14px",
+          padding: "14px 32px",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
+          color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px",
           fontWeight: 600, cursor: saving ? "wait" : "pointer", fontFamily: "inherit",
-          opacity: saving ? 0.7 : 1
+          opacity: saving ? 0.7 : 1,
+          boxShadow: "0 4px 16px rgba(239,68,68,0.4)"
         }}>
         {saved ? "Sauvegardé !" : saving ? "Sauvegarde..." : "Sauvegarder"}
       </button>

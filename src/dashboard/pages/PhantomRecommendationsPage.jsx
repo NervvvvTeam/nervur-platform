@@ -18,7 +18,7 @@ const CATEGORY_COLORS = {
 const SEVERITY_COLORS = {
   critical: "#ef4444",
   warning: "#f59e0b",
-  info: "#6366f1",
+  info: "#8b5cf6",
 };
 
 export default function PhantomRecommendationsPage() {
@@ -59,10 +59,11 @@ export default function PhantomRecommendationsPage() {
     <div style={{ maxWidth: "900px" }}>
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#8b5cf6" }} />
-          <span style={{ fontSize: "12px", color: "#8b5cf6", fontWeight: 500 }}>Phantom</span>
-        </div>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
           Recommandations
         </h1>
@@ -76,7 +77,7 @@ export default function PhantomRecommendationsPage() {
         {[
           { label: "Critiques", count: criticalCount, color: "#ef4444" },
           { label: "Attention", count: warningCount, color: "#f59e0b" },
-          { label: "Info", count: infoCount, color: "#6366f1" },
+          { label: "Info", count: infoCount, color: "#8b5cf6" },
         ].map(s => (
           <div key={s.label} style={{
             padding: "18px 20px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px",

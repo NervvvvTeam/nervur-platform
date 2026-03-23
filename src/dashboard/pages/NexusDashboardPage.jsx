@@ -102,11 +102,12 @@ export default function NexusDashboardPage() {
 
   return (
     <div style={{ maxWidth: "800px" }}>
-      <div style={{ marginBottom: "28px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10b981" }} />
-          <span style={{ fontSize: "12px", color: "#10b981", fontWeight: 500 }}>Nexus</span>
-        </div>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #10b981, #34d399)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
           Générateur de contenu
         </h1>
@@ -187,7 +188,7 @@ export default function NexusDashboardPage() {
             </div>
 
             <button onClick={generate} disabled={loading || !topic.trim()}
-              style={{ padding: "12px 28px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: loading ? "wait" : "pointer", fontFamily: "inherit", opacity: loading || !topic.trim() ? 0.5 : 1 }}>
+              style={{ padding: "12px 28px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: loading ? "wait" : "pointer", fontFamily: "inherit", opacity: loading || !topic.trim() ? 0.5 : 1, boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>
               {loading ? "Génération..." : "Générer le contenu"}
             </button>
           </div>

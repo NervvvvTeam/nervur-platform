@@ -80,10 +80,11 @@ export default function ReviewsPage() {
             <button key={f.key} onClick={() => { setSentiment(f.key); setPage(1); }}
               style={{
                 padding: "6px 14px", fontSize: "12px", fontWeight: 500,
-                background: sentiment === f.key ? `${f.color}15` : "transparent",
-                border: `1px solid ${sentiment === f.key ? `${f.color}35` : "#1e1e22"}`,
+                background: sentiment === f.key ? `${f.color}22` : "transparent",
+                border: `1px solid ${sentiment === f.key ? `${f.color}45` : "#1e1e2a"}`,
                 borderRadius: "6px", color: sentiment === f.key ? f.color : "#71717A",
-                cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s"
+                cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
+                boxShadow: sentiment === f.key ? `0 0 8px ${f.color}15` : "none"
               }}>{f.label}</button>
           ))}
         </div>
@@ -92,10 +93,11 @@ export default function ReviewsPage() {
             <button key={f.key} onClick={() => { setStatus(f.key); setPage(1); }}
               style={{
                 padding: "6px 14px", fontSize: "12px", fontWeight: 500,
-                background: status === f.key ? "rgba(99,102,241,0.1)" : "transparent",
-                border: `1px solid ${status === f.key ? "rgba(99,102,241,0.2)" : "#1e1e22"}`,
-                borderRadius: "6px", color: status === f.key ? "#6366f1" : "#71717A",
-                cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s"
+                background: status === f.key ? "rgba(99,102,241,0.15)" : "transparent",
+                border: `1px solid ${status === f.key ? "rgba(99,102,241,0.35)" : "#1e1e2a"}`,
+                borderRadius: "6px", color: status === f.key ? "#818CF8" : "#71717A",
+                cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
+                boxShadow: status === f.key ? "0 0 8px rgba(99,102,241,0.1)" : "none"
               }}>{f.label}</button>
           ))}
         </div>
@@ -106,7 +108,7 @@ export default function ReviewsPage() {
         {reviews.length > 0 ? reviews.map(r => (
           <ReviewCard key={r._id} review={r} businessId={business._id} />
         )) : (
-          <div style={{ padding: "60px", textAlign: "center", color: "#52525B", border: "1px dashed #27272A", borderRadius: "10px" }}>
+          <div style={{ padding: "60px", textAlign: "center", color: "#52525B", border: "1px dashed #2a2a3a", borderRadius: "10px" }}>
             Aucun avis avec ces filtres
           </div>
         )}
@@ -118,8 +120,8 @@ export default function ReviewsPage() {
           {Array.from({ length: pagination.pages }, (_, i) => (
             <button key={i} onClick={() => setPage(i + 1)}
               style={{
-                width: "36px", height: "36px", borderRadius: "8px", border: `1px solid #1e1e22`,
-                background: page === i + 1 ? "#6366f1" : "transparent",
+                width: "36px", height: "36px", borderRadius: "8px", border: `1px solid ${page === i + 1 ? "#6366f150" : "#1e1e2a"}`,
+                background: page === i + 1 ? "linear-gradient(135deg, #6366f1, #818CF8)" : "transparent",
                 color: page === i + 1 ? "#FAFAFA" : "#71717A",
                 cursor: "pointer", fontFamily: "inherit", fontSize: "13px", fontWeight: 500,
                 transition: "all 0.2s"

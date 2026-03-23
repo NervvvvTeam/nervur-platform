@@ -70,12 +70,13 @@ export default function CompetitorsPage() {
 
   return (
     <div style={{ maxWidth: "900px" }}>
-      <div style={{ marginBottom: "36px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
-        </div>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#FAFAFA" }}>Veille concurrentielle</h1>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #ef4444, #f97316)",
+          marginBottom: "16px"
+        }} />
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Veille concurrentielle</h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>
           Comparez vos scores avec vos concurrents directs.
         </p>
@@ -97,14 +98,14 @@ export default function CompetitorsPage() {
               <YAxis domain={[0, 5]} tick={{ fill: "#52525B", fontSize: 11 }} axisLine={false} />
               <Bar dataKey="rating" radius={[6, 6, 0, 0]}>
                 {chartData.map((entry, i) => (
-                  <Cell key={i} fill={entry.isOwn ? "#6366f1" : "#27272A"} />
+                  <Cell key={i} fill={entry.isOwn ? "#ef4444" : "#27272A"} />
                 ))}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
           <div style={{ display: "flex", gap: "20px", justifyContent: "center", marginTop: "12px" }}>
-            <span style={{ fontSize: "12px", color: "#6366f1", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: "#6366f1" }} />
+            <span style={{ fontSize: "12px", color: "#ef4444", display: "flex", alignItems: "center", gap: "6px" }}>
+              <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: "#ef4444" }} />
               Votre entreprise
             </span>
             <span style={{ fontSize: "12px", color: "#71717A", display: "flex", alignItems: "center", gap: "6px" }}>
@@ -121,13 +122,13 @@ export default function CompetitorsPage() {
         {data && (
           <div style={{
             padding: "18px", borderRadius: "10px",
-            border: "1px solid rgba(99,102,241,0.25)", background: "rgba(99,102,241,0.04)"
+            border: "1px solid rgba(239,68,68,0.25)", background: "rgba(239,68,68,0.04)"
           }}>
-            <div style={{ fontSize: "12px", color: "#6366f1", fontWeight: 500, marginBottom: "8px" }}>Vous</div>
+            <div style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500, marginBottom: "8px" }}>Vous</div>
             <h3 style={{ fontSize: "17px", fontWeight: 600, marginBottom: "12px", color: "#FAFAFA" }}>{data.business.name}</h3>
             <div style={{ display: "flex", gap: "20px" }}>
               <div>
-                <div style={{ fontSize: "28px", fontWeight: 600, color: "#6366f1" }}>{data.business.rating}</div>
+                <div style={{ fontSize: "28px", fontWeight: 600, color: "#ef4444" }}>{data.business.rating}</div>
                 <div style={{ fontSize: "11px", color: "#71717A" }}>Score moyen</div>
               </div>
               <div>
@@ -172,8 +173,8 @@ export default function CompetitorsPage() {
                 </div>
                 <div style={{
                   fontSize: "13px", fontWeight: 600, padding: "4px 10px", borderRadius: "6px",
-                  color: ahead ? "#6366f1" : "#ef4444",
-                  background: ahead ? "rgba(99,102,241,0.1)" : "rgba(239,68,68,0.1)",
+                  color: ahead ? "#ef4444" : "#ef4444",
+                  background: ahead ? "rgba(239,68,68,0.1)" : "rgba(239,68,68,0.1)",
                 }}>
                   {ahead ? `+${diff}` : diff}
                 </div>
@@ -220,9 +221,11 @@ export default function CompetitorsPage() {
               onBlur={e => e.target.style.borderColor = "#27272A"} />
             <button onClick={handleAdd} disabled={adding}
               style={{
-                padding: "12px 24px", background: "#6366f1",
-                color: "#FAFAFA", border: "none", borderRadius: "8px", fontSize: "14px",
-                fontWeight: 600, cursor: "pointer", fontFamily: "inherit"
+                padding: "12px 24px",
+                background: "linear-gradient(135deg, #ef4444, #f97316)",
+                color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px",
+                fontWeight: 600, cursor: "pointer", fontFamily: "inherit",
+                boxShadow: "0 4px 16px rgba(239,68,68,0.4)"
               }}>
               {adding ? "..." : "Ajouter"}
             </button>

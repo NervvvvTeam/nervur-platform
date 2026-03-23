@@ -80,10 +80,11 @@ export default function SettingsPage() {
   return (
     <div style={{ maxWidth: "600px" }}>
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
-        </div>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #6366f1, #818cf8)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Paramètres</h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>Configurez votre entreprise et vos préférences.</p>
       </div>

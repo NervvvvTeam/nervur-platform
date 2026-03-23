@@ -68,12 +68,12 @@ export default function PortalPage() {
   return (
     <div style={{ maxWidth: "720px" }}>
       {/* Header */}
-      <div style={{ marginBottom: "36px" }}>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
-          Bonjour, {user?.name?.split(" ")[0] || "Client"}
+      <div style={{ marginBottom: "36px", padding: "24px 28px", borderRadius: "12px", background: "linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(129,140,248,0.04) 100%)", border: "1px solid rgba(99,102,241,0.12)" }}>
+        <h1 style={{ fontSize: "26px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>
+          Bonjour, <span style={{ color: "#818CF8" }}>{user?.name?.split(" ")[0] || "Client"}</span>
         </h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>
-          Retrouvez vos outils ci-dessous.
+          Votre espace de gestion NERVÜR
         </p>
       </div>
 
@@ -88,25 +88,26 @@ export default function PortalPage() {
               onClick={() => active ? navigate(tool.path) : window.open("https://nervur.fr/contact", "_blank")}
               style={{
                 padding: "20px 24px",
-                border: active ? `1px solid ${color}25` : "1px solid #1e1e22",
+                border: active ? `1px solid ${color}30` : "1px solid #1e1e2a",
+                borderLeft: active ? `3px solid ${color}` : "3px solid #1e1e2a",
                 borderRadius: "10px",
-                background: active ? "#141416" : "#111113",
+                background: active ? "#151620" : "#131318",
                 cursor: "pointer",
                 opacity: active ? 1 : 0.5,
                 display: "flex", alignItems: "center", gap: "18px",
                 transition: "all 0.15s",
               }}
-              onMouseEnter={e => { if (active) { e.currentTarget.style.borderColor = `${color}50`; e.currentTarget.style.background = `${color}08`; } }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = active ? `${color}25` : "#1e1e22"; e.currentTarget.style.background = active ? "#141416" : "#111113"; }}
+              onMouseEnter={e => { if (active) { e.currentTarget.style.borderColor = `${color}50`; e.currentTarget.style.background = `${color}15`; } }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = active ? `${color}30` : "#1e1e2a"; e.currentTarget.style.borderLeft = active ? `3px solid ${color}` : "3px solid #1e1e2a"; e.currentTarget.style.background = active ? "#151620" : "#131318"; }}
             >
               {/* Icon */}
               <div style={{
-                width: "42px", height: "42px", borderRadius: "10px",
-                background: `${color}12`,
+                width: "48px", height: "48px", borderRadius: "10px",
+                background: `${color}20`,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexShrink: 0
               }}>
-                <Icon color={active ? color : "#52525B"} />
+                <Icon color={active ? color : "#52525B"} size={24} />
               </div>
 
               {/* Text */}
@@ -116,7 +117,7 @@ export default function PortalPage() {
                     {tool.name}
                   </h3>
                   {active ? (
-                    <span style={{ fontSize: "11px", fontWeight: 500, color, padding: "1px 8px", borderRadius: "4px", background: `${color}14` }}>Actif</span>
+                    <span style={{ fontSize: "11px", fontWeight: 600, color, padding: "3px 10px", borderRadius: "4px", background: `${color}22` }}>Actif</span>
                   ) : (
                     <span style={{ fontSize: "11px", fontWeight: 400, color: "#52525B" }}>Non souscrit</span>
                   )}
@@ -134,7 +135,7 @@ export default function PortalPage() {
       </div>
 
       {/* Footer */}
-      <div style={{ marginTop: "40px", paddingTop: "20px", borderTop: "1px solid #1e1e22" }}>
+      <div style={{ marginTop: "40px", paddingTop: "20px", borderTop: "1px solid #1e1e2a" }}>
         <p style={{ fontSize: "13px", color: "#52525B" }}>
           Besoin d'aide ?{" "}
           <a href="https://nervur.fr/contact" target="_blank" rel="noopener noreferrer"

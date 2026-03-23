@@ -104,16 +104,17 @@ export default function NexusCampaignsPage() {
   return (
     <div style={{ maxWidth: "900px" }}>
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10b981" }} />
-          <span style={{ fontSize: "12px", color: "#10b981", fontWeight: 500 }}>Nexus</span>
-        </div>
+        <div style={{
+          width: "40px", height: "3px", borderRadius: "2px",
+          background: "linear-gradient(135deg, #10b981, #34d399)",
+          marginBottom: "16px"
+        }} />
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Campagnes email</h1>
         <p style={{ fontSize: "14px", color: "#71717A" }}>Créez et envoyez des campagnes email avec l'IA.</p>
       </div>
 
       <button onClick={() => setShowCreate(!showCreate)}
-        style={{ padding: "10px 22px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit", marginBottom: "24px" }}>
+        style={{ padding: "10px 22px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit", marginBottom: "24px", boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>
         + Nouvelle campagne
       </button>
 
@@ -161,7 +162,7 @@ export default function NexusCampaignsPage() {
                 </div>
               </div>
               <button onClick={generateEmail} disabled={generating || !objective.trim()}
-                style={{ padding: "10px 22px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: generating ? "wait" : "pointer", fontFamily: "inherit", opacity: generating ? 0.5 : 1 }}>
+                style={{ padding: "10px 22px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: generating ? "wait" : "pointer", fontFamily: "inherit", opacity: generating ? 0.5 : 1, boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>
                 {generating ? "Génération IA..." : "Générer l'email"}
               </button>
             </>
@@ -196,7 +197,7 @@ export default function NexusCampaignsPage() {
 
               <div style={{ display: "flex", gap: "10px" }}>
                 <button onClick={saveCampaign}
-                  style={{ padding: "10px 22px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit" }}>
+                  style={{ padding: "10px 22px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit", boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>
                   Sauvegarder le brouillon
                 </button>
                 <button onClick={generateEmail} disabled={generating}
@@ -226,7 +227,7 @@ export default function NexusCampaignsPage() {
           {campaigns.map(c => (
             <div key={c._id} style={{
               padding: "20px 24px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px",
-              borderLeft: c.status === "sent" ? "3px solid #10b981" : "3px solid #f59e0b",
+              borderLeft: c.status === "sent" ? "3px solid #10b981" : "3px solid #10b981",
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                 <div>
@@ -265,7 +266,7 @@ export default function NexusCampaignsPage() {
               <div style={{ display: "flex", gap: "8px" }}>
                 {c.status === "draft" && (
                   <button onClick={() => sendCampaign(c._id)} disabled={sending === c._id}
-                    style={{ padding: "7px 16px", background: "#10b981", color: "#fff", border: "none", borderRadius: "6px", fontSize: "13px", fontWeight: 500, cursor: sending === c._id ? "wait" : "pointer", fontFamily: "inherit", opacity: sending === c._id ? 0.5 : 1 }}>
+                    style={{ padding: "7px 16px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "6px", fontSize: "13px", fontWeight: 500, cursor: sending === c._id ? "wait" : "pointer", fontFamily: "inherit", opacity: sending === c._id ? 0.5 : 1, boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>
                     {sending === c._id ? "Envoi..." : "Envoyer"}
                   </button>
                 )}

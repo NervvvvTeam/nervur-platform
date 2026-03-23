@@ -43,6 +43,7 @@ const DashForgeHistoryPage = lazy(() => import('./dashboard/pages/ForgeHistoryPa
 const DashVaultDashboardPage = lazy(() => import('./dashboard/pages/VaultDashboardPage'))
 const DashVaultHistoryPage = lazy(() => import('./dashboard/pages/VaultHistoryPage'))
 const DashVaultScanDetailPage = lazy(() => import('./dashboard/pages/VaultScanDetailPage'))
+const DashVaultMonitoringPage = lazy(() => import('./dashboard/pages/VaultMonitoringPage'))
 const DashPhantomHistoryPage = lazy(() => import('./dashboard/pages/PhantomHistoryPage'))
 const DashPhantomRecommendationsPage = lazy(() => import('./dashboard/pages/PhantomRecommendationsPage'))
 const DashAnalyticsPage = lazy(() => import('./dashboard/pages/AnalyticsPage'))
@@ -114,6 +115,7 @@ function App() {
                 <Route path="vault" element={<DashVaultDashboardPage />} />
                 <Route path="vault/history" element={<DashVaultHistoryPage />} />
                 <Route path="vault/scan/:id" element={<DashVaultScanDetailPage />} />
+                <Route path="vault/monitoring" element={<DashVaultMonitoringPage />} />
                 <Route path="settings" element={<DashSettingsPage />} />
                 <Route path="onboarding" element={<DashOnboardingPage />} />
                 <Route index element={<Navigate to="/app/portal" replace />} />

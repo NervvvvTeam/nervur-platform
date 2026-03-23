@@ -45,7 +45,7 @@ export default function OnboardingPage() {
         {[0, 1, 2].map(i => (
           <div key={i} style={{
             flex: 1, height: "3px", borderRadius: "2px",
-            background: i <= step ? "#6366f1" : "#1e1e22",
+            background: i <= step ? "linear-gradient(135deg, #6366f1, #818cf8)" : "#1e1e22",
             transition: "background 0.5s"
           }} />
         ))}
