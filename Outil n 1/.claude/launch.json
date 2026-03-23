@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cashpulse",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [".claude/serve.cjs", "3000", "."],
+      "port": 3000
+    }
+  ]
+}

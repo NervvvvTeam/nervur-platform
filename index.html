@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon-clean.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NERVÜR — Éditeur de Technologies de Croissance</title>
+
+    <!-- Security -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- SEO -->
+    <meta name="description" content="NERVÜR — Éditeur de Technologies de Croissance. Infrastructures digitales sur-mesure, applications métiers, sites vitrines et SEO. Zéro compromis." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://nervur.fr/" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="NERVÜR — Éditeur de Technologies de Croissance" />
+    <meta property="og:description" content="Agence digitale spécialisée en création de sites, applications métiers, SEO et outils IA. Infrastructures sur-mesure pour PME et startups." />
+    <meta property="og:image" content="https://nervur.fr/og-image.png" />
+    <meta property="og:url" content="https://nervur.fr/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NERVÜR" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NERVÜR — Éditeur de Technologies de Croissance" />
+    <meta name="twitter:description" content="Agence digitale spécialisée en création de sites, applications métiers, SEO et outils IA." />
+    <meta name="twitter:image" content="https://nervur.fr/og-image.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NERVÜR",
+      "url": "https://nervur.fr",
+      "logo": "https://nervur.fr/logo-nav-clean.png",
+      "description": "Éditeur de Technologies de Croissance. Infrastructures digitales sur-mesure, applications métiers, sites vitrines et SEO.",
+      "foundingDate": "2024",
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "url": "https://nervur.fr/contact",
+        "availableLanguage": "French"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "France"
+      },
+      "knowsAbout": ["Développement web", "SEO", "Applications métiers", "Sites vitrines", "Marketing digital", "UX/UI Design"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "NERVÜR",
+      "url": "https://nervur.fr",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://nervur.fr/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <!-- Netlify Forms hidden form for detection -->
+    <form name="contact" netlify netlify-honeypot="website" hidden>
+      <input name="nom" />
+      <input name="email" />
+      <input name="tel" />
+      <input name="sujet" />
+      <input name="message" />
+      <input name="services" />
+      <input name="budget" />
+      <input name="timeline" />
+      <input name="entreprise" />
+      <input name="url" />
+    </form>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

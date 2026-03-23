@@ -1,0 +1,283 @@
+import { useState, useEffect } from "react";
+import { useApi } from "../hooks/useApi";
+
+export default function NexusCampaignsPage() {
+  const api = useApi();
+  const [campaigns, setCampaigns] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showCreate, setShowCreate] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [sending, setSending] = useState(null);
+  const [lists, setLists] = useState([]);
+
+  // Create form
+  const [objective, setObjective] = useState("Présenter nos services");
+  const [companyName, setCompanyName] = useState("");
+  const [audience, setAudience] = useState("");
+  const [tone, setTone] = useState("Professionnel");
+  const [selectedList, setSelectedList] = useState("Tous les contacts");
+  const [generated, setGenerated] = useState(null);
+  const [editSubject, setEditSubject] = useState("");
+  const [editHtml, setEditHtml] = useState("");
+
+  useEffect(() => { loadData(); }, []);
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const [campData, listData] = await Promise.all([
+        api.get("/api/nexus/email/campaigns"),
+        api.get("/api/nexus/email/contacts/lists"),
+      ]);
+      setCampaigns(campData.campaigns || []);
+      setLists(listData.lists || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const generateEmail = async () => {
+    setGenerating(true);
+    try {
+      const data = await api.post("/api/nexus/email/generate-email", {
+        objective, companyName: companyName.trim(), audience: audience.trim(), tone,
+      });
+      setGenerated(data);
+      setEditSubject(data.subject || "");
+      setEditHtml(data.html || "");
+    } catch (err) {
+      alert("Erreur IA : " + err.message);
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  const saveCampaign = async () => {
+    if (!editSubject.trim() || !editHtml.trim()) return;
+    try {
+      await api.post("/api/nexus/email/campaigns", {
+        name: editSubject,
+        subject: editSubject,
+        htmlContent: editHtml,
+        textContent: generated?.textContent || "",
+        fromName: companyName || "NERVÜR",
+        listName: selectedList,
+      });
+      setShowCreate(false);
+      setGenerated(null);
+      setEditSubject("");
+      setEditHtml("");
+      loadData();
+    } catch (err) {
+      alert("Erreur : " + err.message);
+    }
+  };
+
+  const sendCampaign = async (id) => {
+    if (!confirm("Envoyer cette campagne à tous les contacts de la liste ?")) return;
+    setSending(id);
+    try {
+      const data = await api.post(`/api/nexus/email/campaigns/${id}/send`);
+      alert(`Campagne envoyée ! ${data.sent} emails envoyés, ${data.failed} échoués.`);
+      loadData();
+    } catch (err) {
+      alert("Erreur envoi : " + err.message);
+    } finally {
+      setSending(null);
+    }
+  };
+
+  const deleteCampaign = async (id) => {
+    if (!confirm("Supprimer cette campagne ?")) return;
+    try {
+      await api.del(`/api/nexus/email/campaigns/${id}`);
+      loadData();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const formatDate = (d) => new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+
+  return (
+    <div style={{ maxWidth: "900px" }}>
+      <div style={{ marginBottom: "32px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
+          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#10b981" }} />
+          <span style={{ fontSize: "12px", color: "#10b981", fontWeight: 500 }}>Nexus</span>
+        </div>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", marginBottom: "6px" }}>Campagnes email</h1>
+        <p style={{ fontSize: "14px", color: "#71717A" }}>Créez et envoyez des campagnes email avec l'IA.</p>
+      </div>
+
+      <button onClick={() => setShowCreate(!showCreate)}
+        style={{ padding: "10px 22px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit", marginBottom: "24px" }}>
+        + Nouvelle campagne
+      </button>
+
+      {/* Create campaign */}
+      {showCreate && (
+        <div style={{ padding: "24px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px", marginBottom: "24px" }}>
+          <div style={{ fontSize: "15px", fontWeight: 500, color: "#FAFAFA", marginBottom: "18px" }}>Créer une campagne</div>
+
+          {!generated ? (
+            <>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px", marginBottom: "14px" }}>
+                <div>
+                  <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "6px" }}>Objectif de l'email</div>
+                  <input type="text" value={objective} onChange={e => setObjective(e.target.value)}
+                    placeholder="Présenter nos services, promotion, invitation..."
+                    style={{ width: "100%", padding: "10px 14px", background: "#0f0f11", border: "1px solid #27272A", borderRadius: "8px", color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    onFocus={e => e.target.style.borderColor = "#10b981"}
+                    onBlur={e => e.target.style.borderColor = "#27272A"} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "6px" }}>Entreprise</div>
+                  <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)}
+                    placeholder="NERVÜR"
+                    style={{ width: "100%", padding: "10px 14px", background: "#0f0f11", border: "1px solid #27272A", borderRadius: "8px", color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    onFocus={e => e.target.style.borderColor = "#10b981"}
+                    onBlur={e => e.target.style.borderColor = "#27272A"} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "6px" }}>Audience</div>
+                  <input type="text" value={audience} onChange={e => setAudience(e.target.value)}
+                    placeholder="Restaurateurs, e-commerçants..."
+                    style={{ width: "100%", padding: "10px 14px", background: "#0f0f11", border: "1px solid #27272A", borderRadius: "8px", color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    onFocus={e => e.target.style.borderColor = "#10b981"}
+                    onBlur={e => e.target.style.borderColor = "#27272A"} />
+                </div>
+                <div>
+                  <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "6px" }}>Liste de contacts</div>
+                  <select value={selectedList} onChange={e => setSelectedList(e.target.value)}
+                    style={{ width: "100%", padding: "10px 14px", background: "#0f0f11", border: "1px solid #27272A", borderRadius: "8px", color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    onFocus={e => e.target.style.borderColor = "#10b981"}
+                    onBlur={e => e.target.style.borderColor = "#27272A"}>
+                    <option value="Tous les contacts">Tous les contacts</option>
+                    {lists.map(l => <option key={l.name} value={l.name}>{l.name} ({l.active} actifs)</option>)}
+                  </select>
+                </div>
+              </div>
+              <button onClick={generateEmail} disabled={generating || !objective.trim()}
+                style={{ padding: "10px 22px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: generating ? "wait" : "pointer", fontFamily: "inherit", opacity: generating ? 0.5 : 1 }}>
+                {generating ? "Génération IA..." : "Générer l'email"}
+              </button>
+            </>
+          ) : (
+            <>
+              {/* Edit generated email */}
+              <div style={{ marginBottom: "14px" }}>
+                <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "6px" }}>Objet</div>
+                <input type="text" value={editSubject} onChange={e => setEditSubject(e.target.value)}
+                  style={{ width: "100%", padding: "10px 14px", background: "#0f0f11", border: "1px solid #27272A", borderRadius: "8px", color: "#FAFAFA", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    onFocus={e => e.target.style.borderColor = "#10b981"}
+                    onBlur={e => e.target.style.borderColor = "#27272A"} />
+              </div>
+
+              {/* Preview */}
+              <div style={{ marginBottom: "14px" }}>
+                <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "6px" }}>Aperçu</div>
+                <div style={{
+                  background: "#fff", borderRadius: "8px", padding: "20px",
+                  maxHeight: "400px", overflowY: "auto",
+                }} dangerouslySetInnerHTML={{ __html: editHtml }} />
+              </div>
+
+              {/* HTML editor */}
+              <div style={{ marginBottom: "14px" }}>
+                <div style={{ fontSize: "12px", color: "#71717A", marginBottom: "6px" }}>Code HTML (modifiable)</div>
+                <textarea value={editHtml} onChange={e => setEditHtml(e.target.value)} rows={8}
+                  style={{ width: "100%", padding: "12px 14px", background: "#0f0f11", border: "1px solid #27272A", borderRadius: "8px", color: "#A1A1AA", fontSize: "12px", fontFamily: "monospace", outline: "none", boxSizing: "border-box", resize: "vertical", transition: "border-color 0.2s" }}
+                  onFocus={e => e.target.style.borderColor = "#10b981"}
+                  onBlur={e => e.target.style.borderColor = "#27272A"} />
+              </div>
+
+              <div style={{ display: "flex", gap: "10px" }}>
+                <button onClick={saveCampaign}
+                  style={{ padding: "10px 22px", background: "#10b981", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit" }}>
+                  Sauvegarder le brouillon
+                </button>
+                <button onClick={generateEmail} disabled={generating}
+                  style={{ padding: "10px 22px", background: "transparent", border: "1px solid #27272A", borderRadius: "8px", color: "#A1A1AA", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
+                  Régénérer
+                </button>
+                <button onClick={() => { setGenerated(null); setShowCreate(false); }}
+                  style={{ padding: "10px 22px", background: "transparent", border: "1px solid #27272A", borderRadius: "8px", color: "#71717A", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
+                  Annuler
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* Campaign list */}
+      {loading ? (
+        <div style={{ padding: "60px 0", textAlign: "center", color: "#71717A" }}>Chargement...</div>
+      ) : campaigns.length === 0 && !showCreate ? (
+        <div style={{ padding: "60px 24px", textAlign: "center", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px" }}>
+          <div style={{ fontSize: "16px", color: "#71717A", marginBottom: "8px" }}>Aucune campagne</div>
+          <p style={{ fontSize: "14px", color: "#52525B" }}>Créez votre première campagne email avec l'IA.</p>
+        </div>
+      ) : (
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          {campaigns.map(c => (
+            <div key={c._id} style={{
+              padding: "20px 24px", background: "#141416", border: "1px solid #1e1e22", borderRadius: "10px",
+              borderLeft: c.status === "sent" ? "3px solid #10b981" : "3px solid #f59e0b",
+            }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+                <div>
+                  <div style={{ fontSize: "15px", fontWeight: 500, color: "#E4E4E7", marginBottom: "2px" }}>{c.subject}</div>
+                  <div style={{ fontSize: "12px", color: "#52525B" }}>
+                    {c.listName} — {formatDate(c.createdAt)}
+                  </div>
+                </div>
+                <span style={{
+                  fontSize: "11px", fontWeight: 500, padding: "3px 10px", borderRadius: "4px",
+                  background: c.status === "sent" ? "#10b98114" : "#f59e0b14",
+                  color: c.status === "sent" ? "#10b981" : "#f59e0b",
+                }}>
+                  {c.status === "sent" ? "Envoyé" : c.status === "draft" ? "Brouillon" : c.status}
+                </span>
+              </div>
+
+              {/* Stats for sent campaigns */}
+              {c.status === "sent" && (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "12px" }}>
+                  {[
+                    { label: "Envoyés", value: c.stats?.sent || 0, color: "#FAFAFA" },
+                    { label: "Délivrés", value: c.stats?.delivered || 0, color: "#10b981" },
+                    { label: "Ouverts", value: c.stats?.opened || 0, color: "#3b82f6" },
+                    { label: "Cliqués", value: c.stats?.clicked || 0, color: "#8b5cf6" },
+                  ].map(s => (
+                    <div key={s.label} style={{ padding: "10px 14px", background: "#0f0f11", borderRadius: "6px", border: "1px solid #1e1e22" }}>
+                      <div style={{ fontSize: "18px", fontWeight: 600, color: s.color }}>{s.value}</div>
+                      <div style={{ fontSize: "11px", color: "#71717A" }}>{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Actions */}
+              <div style={{ display: "flex", gap: "8px" }}>
+                {c.status === "draft" && (
+                  <button onClick={() => sendCampaign(c._id)} disabled={sending === c._id}
+                    style={{ padding: "7px 16px", background: "#10b981", color: "#fff", border: "none", borderRadius: "6px", fontSize: "13px", fontWeight: 500, cursor: sending === c._id ? "wait" : "pointer", fontFamily: "inherit", opacity: sending === c._id ? 0.5 : 1 }}>
+                    {sending === c._id ? "Envoi..." : "Envoyer"}
+                  </button>
+                )}
+                <button onClick={() => deleteCampaign(c._id)}
+                  style={{ padding: "7px 16px", background: "transparent", border: "1px solid #27272A", borderRadius: "6px", color: "#71717A", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>
+                  Supprimer
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

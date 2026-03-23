@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CashPulse — Gestion de Trésorerie</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1117;--card:#1e2130;--border:#2a2d3e;--text:#e2e8f0;--text-muted:#8892a8;
+  --accent:#4f7df9;--green:#34d399;--orange:#f59e0b;--red:#ef4444;--violet:#a78bfa;
+  --radius:12px;--sidebar-w:260px;
+}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#3a3d4e}
+
+/* Animations */
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .3s ease-out}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Sidebar */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:100;transition:transform .3s ease}
+.sidebar-header{padding:24px 20px;border-bottom:1px solid var(--border)}
+.sidebar-logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:700;color:var(--text)}
+.sidebar-logo .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--violet));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;cursor:pointer;transition:all .2s;color:var(--text-muted);font-size:14px;font-weight:500;position:relative}
+.nav-item:hover{background:rgba(79,125,249,.08);color:var(--text)}
+.nav-item.active{background:rgba(79,125,249,.15);color:var(--accent)}
+.nav-item .nav-icon{font-size:18px;width:22px;text-align:center}
+.nav-badge{position:absolute;right:12px;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;min-width:20px;text-align:center}
+.sidebar-footer{padding:16px 20px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+
+/* Main */
+.main{margin-left:var(--sidebar-w);min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;background:rgba(15,17,23,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;z-index:50;gap:16px}
+.topbar-title{font-size:18px;font-weight:600;white-space:nowrap}
+.search-box{flex:1;max-width:420px;position:relative}
+.search-box input{width:100%;padding:10px 14px 10px 38px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;outline:none;transition:border-color .2s}
+.search-box input:focus{border-color:var(--accent)}
+.search-box .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:14px}
+.search-results{position:absolute;top:100%;left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-top:4px;max-height:320px;overflow-y:auto;display:none;z-index:200}
+.search-results.show{display:block}
+.search-result-item{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);font-size:13px;transition:background .15s}
+.search-result-item:hover{background:rgba(79,125,249,.1)}
+.search-result-item:last-child{border-bottom:none}
+.search-result-item .sr-type{font-size:10px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:2px}
+.topbar-actions{display:flex;gap:10px;align-items:center}
+.topbar-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s;position:relative}
+.topbar-btn:hover{border-color:var(--accent);color:var(--accent)}
+.notif-dot{position:absolute;top:8px;right:8px;width:8px;height:8px;background:var(--red);border-radius:50%;border:2px solid var(--card)}
+
+.content{flex:1;padding:28px}
+.page{display:none}
+.page.active{display:block;animation:fadeIn .3s ease-out}
+
+/* Cards & KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .25s;cursor:default}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.kpi-label{font-size:13px;color:var(--text-muted);margin-bottom:8px;font-weight:500}
+.kpi-value{font-size:28px;font-weight:700;margin-bottom:4px}
+.kpi-sub{font-size:12px;display:flex;align-items:center;gap:4px}
+.kpi-sub.up{color:var(--green)}.kpi-sub.down{color:var(--red)}.kpi-sub.neutral{color:var(--text-muted)}
+
+.chart-grid{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.chart-card h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.chart-card .chart-sub{font-size:12px;color:var(--text-muted);margin-bottom:16px}
+.chart-wrap{position:relative;height:250px;width:100%}
+.chart-filters{display:flex;gap:6px;margin-bottom:12px}
+.chart-filter-btn{padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-size:12px;transition:all .2s}
+.chart-filter-btn.active,.chart-filter-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.section-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.section-card h3{font-size:15px;font-weight:600;margin-bottom:16px}
+
+/* Activity & Alerts list */
+.activity-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.activity-item:last-child{border-bottom:none}
+.activity-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.activity-info{flex:1;min-width:0}
+.activity-info .ai-title{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.activity-info .ai-sub{font-size:11px;color:var(--text-muted)}
+.activity-amount{font-size:14px;font-weight:600;white-space:nowrap}
+.amount-in{color:var(--green)}.amount-out{color:var(--red)}
+
+.alert-mini{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.alert-mini:last-child{border-bottom:none}
+.alert-mini-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.alert-mini-text{flex:1;font-size:12px;line-height:1.5}
+.alert-mini-text strong{display:block;font-size:13px;margin-bottom:2px}
+
+/* Table */
+.table-container{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.table-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.table-tabs{display:flex;gap:4px}
+.table-tab{padding:7px 16px;border-radius:8px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;font-size:13px;font-weight:500;transition:all .2s}
+.table-tab.active,.table-tab:hover{background:rgba(79,125,249,.15);color:var(--accent)}
+.btn{padding:9px 18px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#3d6be7;transform:translateY(-1px)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text-muted)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{background:rgba(239,68,68,.15);color:var(--red);border:none}
+.btn-danger:hover{background:rgba(239,68,68,.25)}
+.btn-success{background:rgba(52,211,153,.15);color:var(--green);border:none}
+.btn-success:hover{background:rgba(52,211,153,.25)}
+
+table{width:100%;border-collapse:collapse}
+thead{background:rgba(255,255,255,.03)}
+th{padding:12px 16px;text-align:left;font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+td{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--border)}
+tr:hover td{background:rgba(79,125,249,.03)}
+.status-badge{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;display:inline-block}
+.status-paid{background:rgba(52,211,153,.15);color:var(--green)}
+.status-pending{background:rgba(245,158,11,.15);color:var(--orange)}
+.status-overdue{background:rgba(239,68,68,.15);color:var(--red)}
+.status-sent{background:rgba(79,125,249,.15);color:var(--accent)}
+
+/* Clients grid */
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.client-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .25s;cursor:default}
+.client-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.client-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.client-avatar{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0}
+.client-info h4{font-size:15px;font-weight:600;margin-bottom:2px}
+.client-info span{font-size:12px;color:var(--text-muted)}
+.client-score{margin-left:auto;position:relative;width:48px;height:48px}
+.client-score canvas{transform:rotate(-90deg)}
+.client-score .score-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;font-weight:700}
+.client-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding-top:14px;border-top:1px solid var(--border)}
+.client-stat{text-align:center}
+.client-stat .cs-val{font-size:14px;font-weight:600}
+.client-stat .cs-label{font-size:10px;color:var(--text-muted);margin-top:2px}
+
+/* Alerts page */
+.alerts-list{display:flex;flex-direction:column;gap:12px}
+.alert-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;align-items:flex-start;gap:14px;transition:all .25s}
+.alert-card:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(0,0,0,.2)}
+.alert-card.critique{border-left:3px solid var(--red)}
+.alert-card.warning{border-left:3px solid var(--orange)}
+.alert-card.info{border-left:3px solid var(--accent)}
+.alert-icon-wrap{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.alert-body{flex:1;min-width:0}
+.alert-body .ab-priority{font-size:10px;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:4px}
+.alert-body h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.alert-body p{font-size:12px;color:var(--text-muted);line-height:1.5;margin-bottom:10px}
+.alert-body .ab-time{font-size:11px;color:var(--text-muted)}
+.alert-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Simulation */
+.sim-layout{display:grid;grid-template-columns:340px 1fr;gap:20px}
+.sim-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.sim-panel h3{font-size:15px;font-weight:600;margin-bottom:16px}
+.sim-group{margin-bottom:18px}
+.sim-group label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px;font-weight:500}
+.sim-group select,.sim-group input[type=number]{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none}
+.sim-group select:focus,.sim-group input:focus{border-color:var(--accent)}
+.slider-wrap{display:flex;align-items:center;gap:10px}
+.slider-wrap input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:6px;background:var(--border);border-radius:3px;outline:none}
+.slider-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);cursor:pointer}
+.slider-val{min-width:50px;text-align:right;font-size:13px;font-weight:600}
+.sim-results{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.sim-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.sim-kpi{background:var(--bg);border-radius:10px;padding:14px;text-align:center}
+.sim-kpi .sk-val{font-size:20px;font-weight:700;margin-bottom:2px}
+.sim-kpi .sk-label{font-size:11px;color:var(--text-muted)}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);width:90%;max-width:520px;max-height:90vh;overflow-y:auto;animation:fadeIn .2s ease-out}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border)}
+.modal-header h3{font-size:16px;font-weight:600}
+.modal-close{width:32px;height:32px;border-radius:8px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:var(--border);color:var(--text)}
+.modal-body{padding:20px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:5px;font-weight:500}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:70px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;padding:16px 20px;border-top:1px solid var(--border)}
+
+/* Toast */
+.toast-container{position:fixed;top:80px;right:24px;z-index:600;display:flex;flex-direction:column;gap:8px}
+.toast{padding:12px 18px;border-radius:10px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;animation:fadeIn .3s ease-out;min-width:280px;box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.toast-success{background:#132d1f;border:1px solid var(--green);color:var(--green)}
+.toast-error{background:#2d1313;border:1px solid var(--red);color:var(--red)}
+.toast-warning{background:#2d2413;border:1px solid var(--orange);color:var(--orange)}
+
+/* Burger */
+.burger{display:none;width:40px;height:40px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:20px;cursor:pointer;align-items:center;justify-content:center}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90}
+
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay.show{display:block}
+  .main{margin-left:0}
+  .burger{display:flex}
+  .chart-grid,.two-col,.sim-layout{grid-template-columns:1fr}
+  .clients-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:500px){
+  .kpi-grid{grid-template-columns:1fr}
+  .content{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo"><div class="logo-icon">⚡</div>CashPulse</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-item active" data-page="dashboard"><span class="nav-icon">📊</span>Tableau de bord</div>
+    <div class="nav-item" data-page="invoices"><span class="nav-icon">📄</span>Factures</div>
+    <div class="nav-item" data-page="clients"><span class="nav-icon">👥</span>Clients</div>
+    <div class="nav-item" data-page="alerts"><span class="nav-icon">🔔</span>Alertes<span class="nav-badge" id="alertBadge">3</span></div>
+    <div class="nav-item" data-page="simulation"><span class="nav-icon">🎯</span>Simulation</div>
+  </nav>
+  <div class="sidebar-footer">CashPulse v1.0 — © 2026</div>
+</aside>
+
+<!-- Main -->
+<div class="main">
+  <header class="topbar">
+    <button class="burger" onclick="toggleSidebar()">☰</button>
+    <div class="topbar-title" id="pageTitle">Tableau de bord</div>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Rechercher factures, clients..." id="globalSearch" oninput="handleSearch(this.value)" autocomplete="off">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+    <div class="topbar-actions">
+      <button class="topbar-btn" onclick="navigateTo('alerts')" title="Notifications">🔔<span class="notif-dot"></span></button>
+    </div>
+  </header>
+
+  <div class="content">
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="kpi-grid" id="kpiGrid"></div>
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Évolution de la trésorerie</h3>
+          <div class="chart-sub">Solde cumulé au fil du temps</div>
+          <div class="chart-filters" id="cashFlowFilters">
+            <button class="chart-filter-btn active" data-range="6">6 mois</button>
+            <button class="chart-filter-btn" data-range="12">1 an</button>
+            <button class="chart-filter-btn" data-range="0">Tout</button>
+          </div>
+          <div class="chart-wrap"><canvas id="cashFlowChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Répartition des dépenses</h3>
+          <div class="chart-sub">Par catégorie</div>
+          <div class="chart-wrap"><canvas id="expenseDonut"></canvas></div>
+          <div id="donutLegend" style="margin-top:12px"></div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="section-card">
+          <h3>Activité récente</h3>
+          <div id="recentActivity"></div>
+        </div>
+        <div class="section-card">
+          <h3>Alertes actives</h3>
+          <div id="recentAlerts"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVOICES -->
+    <div class="page" id="page-invoices">
+      <div class="table-container">
+        <div class="table-header">
+          <div class="table-tabs">
+            <button class="table-tab active" data-filter="all">Toutes</button>
+            <button class="table-tab" data-filter="emise">Émises</button>
+            <button class="table-tab" data-filter="recue">Reçues</button>
+            <button class="table-tab" data-filter="retard">En retard</button>
+          </div>
+          <button class="btn btn-primary" onclick="openModal('invoiceModal')">+ Nouvelle facture</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Référence</th><th>Client / Fournisseur</th><th>Montant TTC</th><th>Émission</th><th>Échéance</th><th>Statut</th><th>Actions</th></tr></thead>
+            <tbody id="invoiceTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="page" id="page-clients">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+        <h2 style="font-size:20px;font-weight:700">Clients</h2>
+        <button class="btn btn-primary" onclick="openModal('clientModal')">+ Nouveau client</button>
+      </div>
+      <div class="clients-grid" id="clientsGrid"></div>
+    </div>
+
+    <!-- ALERTS -->
+    <div class="page" id="page-alerts">
+      <div style="margin-bottom:20px"><h2 style="font-size:20px;font-weight:700">Centre d'alertes</h2></div>
+      <div class="alerts-list" id="alertsList"></div>
+    </div>
+
+    <!-- SIMULATION -->
+    <div class="page" id="page-simulation">
+      <div style="margin-bottom:20px"><h2 style="font-size:20px;font-weight:700">Simulation de trésorerie</h2></div>
+      <div class="sim-layout">
+        <div class="sim-panel">
+          <h3>Panneau de contrôle</h3>
+          <div class="sim-group">
+            <label>Scénario prédéfini</label>
+            <select id="simScenario" onchange="applyScenario()">
+              <option value="custom">Personnalisé</option>
+              <option value="hire">Embauche (+1 salarié)</option>
+              <option value="lostclient">Perte d'un client majeur</option>
+              <option value="invest">Investissement équipement</option>
+              <option value="growth">Croissance 20%</option>
+            </select>
+          </div>
+          <div class="sim-group">
+            <label>Variation des revenus</label>
+            <div class="slider-wrap">
+              <input type="range" id="simRevenue" min="-50" max="100" value="0" oninput="updateSim()">
+              <span class="slider-val" id="simRevenueVal">0%</span>
+            </div>
+          </div>
+          <div class="sim-group">
+            <label>Variation des charges</label>
+            <div class="slider-wrap">
+              <input type="range" id="simCharges" min="-30" max="100" value="0" oninput="updateSim()">
+              <span class="slider-val" id="simChargesVal">0%</span>
+            </div>
+          </div>
+          <div class="sim-group">
+            <label>Délai moyen de paiement (jours)</label>
+            <div class="slider-wrap">
+              <input type="range" id="simDelay" min="15" max="120" value="45" oninput="updateSim()">
+              <span class="slider-val" id="simDelayVal">45j</span>
+            </div>
+          </div>
+          <div class="sim-group">
+            <label>Investissement ponctuel (€)</label>
+            <input type="number" id="simInvest" value="0" min="0" step="1000" oninput="updateSim()">
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px" onclick="updateSim()">Recalculer</button>
+        </div>
+        <div class="sim-results">
+          <h3>Projection sur 9 mois</h3>
+          <div class="chart-wrap" style="height:300px"><canvas id="simChart"></canvas></div>
+          <div class="sim-kpi-grid" id="simKpis"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Invoice Modal -->
+<div class="modal-overlay" id="invoiceModal" onclick="closeModalOverlay(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header"><h3>Nouvelle facture</h3><button class="modal-close" onclick="closeModal('invoiceModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Type</label><select id="invType"><option value="emise">Émise (client)</option><option value="recue">Reçue (fournisseur)</option></select></div>
+        <div class="form-group"><label>Client / Fournisseur</label><select id="invClient"></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Montant HT (€)</label><input type="number" id="invAmountHT" min="0" step="0.01" placeholder="0.00"></div>
+        <div class="form-group"><label>TVA (%)</label><select id="invTVA"><option value="20">20%</option><option value="10">10%</option><option value="5.5">5,5%</option><option value="0">0%</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Date d'émission</label><input type="date" id="invDateEmit"></div>
+        <div class="form-group"><label>Date d'échéance</label><input type="date" id="invDateDue"></div>
+      </div>
+      <div class="form-group"><label>Description</label><textarea id="invDesc" placeholder="Description de la facture..."></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('invoiceModal')">Annuler</button><button class="btn btn-primary" onclick="createInvoice()">Créer la facture</button></div>
+  </div>
+</div>
+
+<!-- Client Modal -->
+<div class="modal-overlay" id="clientModal" onclick="closeModalOverlay(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header"><h3>Nouveau client</h3><button class="modal-close" onclick="closeModal('clientModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Nom de l'entreprise</label><input type="text" id="clientName" placeholder="Nom..."></div>
+      <div class="form-row">
+        <div class="form-group"><label>Secteur</label><input type="text" id="clientSector" placeholder="Ex: Tech, Santé..."></div>
+        <div class="form-group"><label>Score de fiabilité (0-100)</label><input type="number" id="clientScore" min="0" max="100" value="75"></div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('clientModal')">Annuler</button><button class="btn btn-primary" onclick="createClient()">Ajouter le client</button></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ==================== DATA ====================
+const EUR = v => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
+const fmtDate = d => new Date(d).toLocaleDateString('fr-FR');
+
+const COLORS = {
+  avatars:['#4f7df9','#34d399','#f59e0b','#ef4444','#a78bfa','#ec4899','#06b6d4','#f97316'],
+  expenses:['#4f7df9','#34d399','#f59e0b','#a78bfa','#ef4444','#ec4899']
+};
+
+let clients = [
+  {id:1,name:'TechVision',sector:'Technologie',score:92,color:'#4f7df9'},
+  {id:2,name:'Boutique Centrale',sector:'Commerce',score:68,color:'#34d399'},
+  {id:3,name:'ConseilPro',sector:'Conseil',score:85,color:'#f59e0b'},
+  {id:4,name:'BâtiRénov',sector:'BTP',score:45,color:'#ef4444'},
+  {id:5,name:'MédiSanté',sector:'Santé',score:78,color:'#a78bfa'},
+  {id:6,name:'IndustriFab',sector:'Industrie',score:55,color:'#ec4899'}
+];
+
+let invoices = [
+  {id:1,ref:'FAC-2026-001',client:'TechVision',type:'emise',amountHT:12000,tva:20,dateEmit:'2026-01-10',dateDue:'2026-02-10',status:'payee',desc:'Développement site web'},
+  {id:2,ref:'FAC-2026-002',client:'Boutique Centrale',type:'emise',amountHT:4500,tva:20,dateEmit:'2026-01-15',dateDue:'2026-02-15',status:'en_attente',desc:'Campagne marketing'},
+  {id:3,ref:'FAC-2026-003',client:'ConseilPro',type:'emise',amountHT:8200,tva:20,dateEmit:'2026-02-01',dateDue:'2026-03-01',status:'payee',desc:'Audit stratégique'},
+  {id:4,ref:'FAC-2026-004',client:'BâtiRénov',type:'emise',amountHT:15000,tva:20,dateEmit:'2026-02-10',dateDue:'2026-03-10',status:'en_retard',desc:'Plans architecturaux'},
+  {id:5,ref:'FAC-2026-005',client:'MédiSanté',type:'emise',amountHT:6800,tva:20,dateEmit:'2026-02-20',dateDue:'2026-03-20',status:'en_attente',desc:'Logiciel gestion patients'},
+  {id:6,ref:'FAC-2026-006',client:'IndustriFab',type:'emise',amountHT:22000,tva:20,dateEmit:'2026-03-01',dateDue:'2026-04-01',status:'en_attente',desc:'Système IoT usine'},
+  {id:7,ref:'REC-2026-001',client:'Fournisseur Alpha',type:'recue',amountHT:3200,tva:20,dateEmit:'2026-01-05',dateDue:'2026-02-05',status:'payee',desc:'Fournitures bureau'},
+  {id:8,ref:'REC-2026-002',client:'CloudHost SAS',type:'recue',amountHT:890,tva:20,dateEmit:'2026-01-20',dateDue:'2026-02-20',status:'payee',desc:'Hébergement serveurs'},
+  {id:9,ref:'REC-2026-003',client:'Telecom Plus',type:'recue',amountHT:450,tva:20,dateEmit:'2026-02-01',dateDue:'2026-03-01',status:'en_attente',desc:'Abonnement téléphonie'},
+  {id:10,ref:'REC-2026-004',client:'Assurance Pro',type:'recue',amountHT:1800,tva:20,dateEmit:'2026-02-15',dateDue:'2026-03-15',status:'en_attente',desc:'Assurance RC Pro'},
+  {id:11,ref:'REC-2026-005',client:'Loyer Immo',type:'recue',amountHT:2500,tva:20,dateEmit:'2026-03-01',dateDue:'2026-03-31',status:'en_attente',desc:'Loyer bureaux mars'},
+  {id:12,ref:'REC-2026-006',client:'Expert Compta',type:'recue',amountHT:1200,tva:20,dateEmit:'2026-03-05',dateDue:'2026-04-05',status:'en_attente',desc:'Honoraires comptables'}
+];
+
+let alerts = [
+  {id:1,priority:'critique',icon:'🚨',title:'Facture en retard critique',desc:'BâtiRénov — FAC-2026-004 de 18 000 € TTC en retard de 1 jour. Risque de trésorerie élevé.',time:'Il y a 2 heures',active:true},
+  {id:2,priority:'warning',icon:'⚠️',title:'Seuil de trésorerie bas',desc:'Le solde prévu dans 15 jours pourrait passer sous le seuil de sécurité de 10 000 €.',time:'Il y a 5 heures',active:true},
+  {id:3,priority:'warning',icon:'⏰',title:'Échéances multiples à venir',desc:'3 factures arrivent à échéance dans les 7 prochains jours pour un total de 4 860 € TTC.',time:'Il y a 1 jour',active:true},
+  {id:4,priority:'info',icon:'📊',title:'Rapport mensuel disponible',desc:'Le rapport de trésorerie de février 2026 est prêt à être consulté.',time:'Il y a 2 jours',active:true},
+  {id:5,priority:'critique',icon:'🔴',title:'Client à risque — BâtiRénov',desc:'Score de fiabilité passé à 45/100. Délai moyen de paiement en hausse constante.',time:'Il y a 3 jours',active:true},
+  {id:6,priority:'info',icon:'✅',title:'Paiement reçu — TechVision',desc:'Facture FAC-2026-001 de 14 400 € TTC réglée avec 0 jours de retard.',time:'Il y a 5 jours',active:true}
+];
+
+const cashFlowHistory = [
+  {month:'2025-04',balance:42000},{month:'2025-05',balance:38500},{month:'2025-06',balance:45200},
+  {month:'2025-07',balance:41800},{month:'2025-08',balance:39000},{month:'2025-09',balance:47500},
+  {month:'2025-10',balance:44200},{month:'2025-11',balance:51000},{month:'2025-12',balance:48300},
+  {month:'2026-01',balance:52800},{month:'2026-02',balance:49500},{month:'2026-03',balance:47200}
+];
+
+const expenseCategories = [
+  {label:'Salaires',value:18500},{label:'Loyer & Charges',value:4200},{label:'Fournisseurs',value:6800},
+  {label:'Marketing',value:3200},{label:'Logiciels & IT',value:2100},{label:'Divers',value:1800}
+];
+
+let nextInvoiceId = 13;
+let nextClientId = 7;
+
+// ==================== NAVIGATION ====================
+const pageTitles = {dashboard:'Tableau de bord',invoices:'Factures',clients:'Clients',alerts:'Centre d\'alertes',simulation:'Simulation'};
+
+function navigateTo(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+  document.getElementById('pageTitle').textContent = pageTitles[page]||page;
+  if(page==='dashboard') renderDashboard();
+  if(page==='invoices') renderInvoices();
+  if(page==='clients') renderClients();
+  if(page==='alerts') renderAlerts();
+  if(page==='simulation') updateSim();
+  // close sidebar on mobile
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+document.querySelectorAll('.nav-item').forEach(item=>{
+  item.addEventListener('click',()=>navigateTo(item.dataset.page));
+});
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+}
+
+// ==================== MODAL & TOAST ====================
+function openModal(id){document.getElementById(id).classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+function closeModalOverlay(e){if(e.target===e.currentTarget)e.target.classList.remove('show')}
+
+function showToast(msg,type='success'){
+  const c=document.getElementById('toastContainer');
+  const icons={success:'✅',error:'❌',warning:'⚠️'};
+  const t=document.createElement('div');
+  t.className=`toast toast-${type}`;
+  t.innerHTML=`${icons[type]||''} ${msg}`;
+  c.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(()=>t.remove(),300)},3500);
+}
+
+// ==================== HELPERS ====================
+function getTTC(inv){return inv.amountHT*(1+inv.tva/100)}
+function getBalance(){
+  let base=35000;
+  invoices.forEach(inv=>{
+    if(inv.status==='payee'){
+      base += inv.type==='emise'? getTTC(inv) : -getTTC(inv);
+    }
+  });
+  return base;
+}
+function getToReceive30(){
+  const now=new Date();const d30=new Date(now.getTime()+30*86400000);
+  return invoices.filter(i=>i.type==='emise'&&i.status!=='payee'&&new Date(i.dateDue)<=d30).reduce((s,i)=>s+getTTC(i),0);
+}
+function getToPay30(){
+  const now=new Date();const d30=new Date(now.getTime()+30*86400000);
+  return invoices.filter(i=>i.type==='recue'&&i.status!=='payee'&&new Date(i.dateDue)<=d30).reduce((s,i)=>s+getTTC(i),0);
+}
+
+// ==================== DASHBOARD ====================
+let cashFlowChartInstance=null, donutChartInstance=null;
+
+function renderDashboard(){
+  const balance=getBalance();
+  const toReceive=getToReceive30();
+  const toPay=getToPay30();
+  const prediction=balance+toReceive-toPay+12000;
+
+  document.getElementById('kpiGrid').innerHTML=`
+    <div class="kpi-card fade-in"><div class="kpi-label">Solde actuel</div><div class="kpi-value" style="color:var(--green)">${EUR(balance)}</div><div class="kpi-sub up">↑ +3,2% vs mois dernier</div></div>
+    <div class="kpi-card fade-in"><div class="kpi-label">À recevoir (30j)</div><div class="kpi-value" style="color:var(--accent)">${EUR(toReceive)}</div><div class="kpi-sub neutral">${invoices.filter(i=>i.type==='emise'&&i.status!=='payee').length} factures en attente</div></div>
+    <div class="kpi-card fade-in"><div class="kpi-label">À payer (30j)</div><div class="kpi-value" style="color:var(--orange)">${EUR(toPay)}</div><div class="kpi-sub neutral">${invoices.filter(i=>i.type==='recue'&&i.status!=='payee').length} factures fournisseurs</div></div>
+    <div class="kpi-card fade-in"><div class="kpi-label">Prédiction J+90</div><div class="kpi-value" style="color:var(--violet)">${EUR(prediction)}</div><div class="kpi-sub up">↑ Tendance positive</div></div>
+  `;
+  renderCashFlowChart(6);
+  renderExpenseDonut();
+  renderRecentActivity();
+  renderRecentAlerts();
+}
+
+function renderCashFlowChart(months){
+  const data = months===0 ? cashFlowHistory : cashFlowHistory.slice(-months);
+  const labels=data.map(d=>{const[y,m]=d.month.split('-');return new Date(y,m-1).toLocaleDateString('fr-FR',{month:'short',year:'2-digit'})});
+  if(cashFlowChartInstance) cashFlowChartInstance.destroy();
+  cashFlowChartInstance=new Chart(document.getElementById('cashFlowChart'),{
+    type:'line',
+    data:{labels,datasets:[{label:'Trésorerie',data:data.map(d=>d.balance),borderColor:'#4f7df9',backgroundColor:'rgba(79,125,249,.1)',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#4f7df9'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#8892a8'},grid:{color:'rgba(42,45,62,.5)'}},y:{ticks:{color:'#8892a8',callback:v=>EUR(v)},grid:{color:'rgba(42,45,62,.5)'}}}}
+  });
+}
+
+document.getElementById('cashFlowFilters').addEventListener('click',e=>{
+  if(!e.target.classList.contains('chart-filter-btn'))return;
+  document.querySelectorAll('#cashFlowFilters .chart-filter-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderCashFlowChart(parseInt(e.target.dataset.range));
+});
+
+function renderExpenseDonut(){
+  if(donutChartInstance) donutChartInstance.destroy();
+  donutChartInstance=new Chart(document.getElementById('expenseDonut'),{
+    type:'doughnut',
+    data:{labels:expenseCategories.map(c=>c.label),datasets:[{data:expenseCategories.map(c=>c.value),backgroundColor:COLORS.expenses,borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false}}}
+  });
+  document.getElementById('donutLegend').innerHTML=expenseCategories.map((c,i)=>`<div style="display:inline-flex;align-items:center;gap:6px;margin:3px 12px 3px 0;font-size:12px"><span style="width:10px;height:10px;border-radius:3px;background:${COLORS.expenses[i]};display:inline-block"></span>${c.label}: ${EUR(c.value)}</div>`).join('');
+}
+
+function renderRecentActivity(){
+  const recent=invoices.slice().sort((a,b)=>new Date(b.dateEmit)-new Date(a.dateEmit)).slice(0,5);
+  document.getElementById('recentActivity').innerHTML=recent.map(inv=>{
+    const isIn=inv.type==='emise';
+    const color=isIn?'rgba(52,211,153,.15)':'rgba(239,68,68,.15)';
+    const icon=isIn?'📥':'📤';
+    return `<div class="activity-item"><div class="activity-icon" style="background:${color}">${icon}</div><div class="activity-info"><div class="ai-title">${inv.ref} — ${inv.client}</div><div class="ai-sub">${fmtDate(inv.dateEmit)} · ${inv.desc}</div></div><div class="activity-amount ${isIn?'amount-in':'amount-out'}">${isIn?'+':'−'}${EUR(getTTC(inv))}</div></div>`;
+  }).join('');
+}
+
+function renderRecentAlerts(){
+  const recent=alerts.filter(a=>a.active).slice(0,3);
+  const colors={critique:'rgba(239,68,68,.15)',warning:'rgba(245,158,11,.15)',info:'rgba(79,125,249,.15)'};
+  document.getElementById('recentAlerts').innerHTML=recent.map(a=>`<div class="alert-mini"><div class="alert-mini-icon" style="background:${colors[a.priority]}">${a.icon}</div><div class="alert-mini-text"><strong>${a.title}</strong>${a.desc}</div></div>`).join('');
+}
+
+// ==================== INVOICES ====================
+let invoiceFilter='all';
+
+function renderInvoices(filter){
+  if(filter) invoiceFilter=filter;
+  let filtered=invoices;
+  if(invoiceFilter==='emise') filtered=invoices.filter(i=>i.type==='emise');
+  else if(invoiceFilter==='recue') filtered=invoices.filter(i=>i.type==='recue');
+  else if(invoiceFilter==='retard') filtered=invoices.filter(i=>i.status==='en_retard');
+
+  const statusMap={payee:['Payée','status-paid'],en_attente:['En attente','status-pending'],en_retard:['En retard','status-overdue']};
+  document.getElementById('invoiceTableBody').innerHTML=filtered.map(inv=>{
+    const[label,cls]=statusMap[inv.status]||['—',''];
+    return `<tr><td style="font-weight:600">${inv.ref}</td><td>${inv.client}</td><td style="font-weight:600">${EUR(getTTC(inv))}</td><td>${fmtDate(inv.dateEmit)}</td><td>${fmtDate(inv.dateDue)}</td><td><span class="status-badge ${cls}">${label}</span></td><td style="white-space:nowrap">${inv.status!=='payee'?`<button class="btn btn-success btn-sm" onclick="markPaid(${inv.id})">✓ Payée</button> `:''}  <button class="btn btn-danger btn-sm" onclick="deleteInvoice(${inv.id})">🗑</button></td></tr>`;
+  }).join('');
+
+  // Update tabs
+  document.querySelectorAll('.table-tab').forEach(t=>{
+    t.classList.toggle('active',t.dataset.filter===invoiceFilter);
+  });
+}
+
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('table-tab'))renderInvoices(e.target.dataset.filter);
+});
+
+function markPaid(id){
+  const inv=invoices.find(i=>i.id===id);
+  if(!inv)return;
+  inv.status='payee';
+  showToast(`Facture ${inv.ref} marquée comme payée`);
+  renderInvoices();
+  updateAlertBadge();
+}
+
+function deleteInvoice(id){
+  const inv=invoices.find(i=>i.id===id);
+  if(!inv)return;
+  invoices=invoices.filter(i=>i.id!==id);
+  showToast(`Facture ${inv.ref} supprimée`,'warning');
+  renderInvoices();
+}
+
+function createInvoice(){
+  const type=document.getElementById('invType').value;
+  const clientName=document.getElementById('invClient').value;
+  const amountHT=parseFloat(document.getElementById('invAmountHT').value);
+  const tva=parseFloat(document.getElementById('invTVA').value);
+  const dateEmit=document.getElementById('invDateEmit').value;
+  const dateDue=document.getElementById('invDateDue').value;
+  const desc=document.getElementById('invDesc').value;
+  if(!clientName||!amountHT||!dateEmit||!dateDue){showToast('Veuillez remplir tous les champs obligatoires','error');return}
+  const prefix=type==='emise'?'FAC':'REC';
+  const ref=`${prefix}-2026-${String(nextInvoiceId).padStart(3,'0')}`;
+  invoices.push({id:nextInvoiceId++,ref,client:clientName,type,amountHT,tva,dateEmit,dateDue,status:'en_attente',desc});
+  closeModal('invoiceModal');
+  showToast(`Facture ${ref} créée avec succès`);
+  renderInvoices();
+  // Reset form
+  document.getElementById('invAmountHT').value='';
+  document.getElementById('invDesc').value='';
+}
+
+function populateInvoiceClientSelect(){
+  const sel=document.getElementById('invClient');
+  sel.innerHTML=clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('')+
+    '<option value="Fournisseur Alpha">Fournisseur Alpha</option><option value="CloudHost SAS">CloudHost SAS</option><option value="Telecom Plus">Telecom Plus</option><option value="Assurance Pro">Assurance Pro</option><option value="Loyer Immo">Loyer Immo</option><option value="Expert Compta">Expert Compta</option>';
+}
+
+// ==================== CLIENTS ====================
+function renderClients(){
+  document.getElementById('clientsGrid').innerHTML=clients.map(c=>{
+    const cInvoices=invoices.filter(i=>i.client===c.name);
+    const totalFacture=cInvoices.reduce((s,i)=>s+getTTC(i),0);
+    const paidInvoices=cInvoices.filter(i=>i.status==='payee');
+    const delaiMoyen=paidInvoices.length? Math.round(paidInvoices.reduce((s,i)=>{
+      const diff=(new Date(i.dateDue)-new Date(i.dateEmit))/(86400000);
+      return s+diff;
+    },0)/paidInvoices.length) : 0;
+    const enAttente=cInvoices.filter(i=>i.status!=='payee').reduce((s,i)=>s+getTTC(i),0);
+    const scoreColor=c.score>=75?'var(--green)':c.score>=50?'var(--orange)':'var(--red)';
+
+    return `<div class="client-card fade-in">
+      <div class="client-top">
+        <div class="client-avatar" style="background:${c.color}">${c.name.charAt(0)}</div>
+        <div class="client-info"><h4>${c.name}</h4><span>${c.sector}</span></div>
+        <div class="client-score"><canvas id="score-${c.id}" width="48" height="48"></canvas><div class="score-val" style="color:${scoreColor}">${c.score}</div></div>
+      </div>
+      <div class="client-stats">
+        <div class="client-stat"><div class="cs-val">${EUR(totalFacture)}</div><div class="cs-label">Total facturé</div></div>
+        <div class="client-stat"><div class="cs-val">${delaiMoyen}j</div><div class="cs-label">Délai moyen</div></div>
+        <div class="client-stat"><div class="cs-val">${EUR(enAttente)}</div><div class="cs-label">En attente</div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Draw score circles
+  clients.forEach(c=>{
+    const canvas=document.getElementById('score-'+c.id);
+    if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    const scoreColor=c.score>=75?'#34d399':c.score>=50?'#f59e0b':'#ef4444';
+    ctx.clearRect(0,0,48,48);
+    ctx.beginPath();ctx.arc(24,24,20,0,Math.PI*2);ctx.strokeStyle='#2a2d3e';ctx.lineWidth=4;ctx.stroke();
+    ctx.beginPath();ctx.arc(24,24,20,0,(c.score/100)*Math.PI*2);ctx.strokeStyle=scoreColor;ctx.lineWidth=4;ctx.lineCap='round';ctx.stroke();
+  });
+}
+
+function createClient(){
+  const name=document.getElementById('clientName').value.trim();
+  const sector=document.getElementById('clientSector').value.trim();
+  const score=parseInt(document.getElementById('clientScore').value)||75;
+  if(!name){showToast('Veuillez saisir un nom','error');return}
+  const color=COLORS.avatars[nextClientId%COLORS.avatars.length];
+  clients.push({id:nextClientId++,name,sector,score:Math.min(100,Math.max(0,score)),color});
+  closeModal('clientModal');
+  showToast(`Client "${name}" ajouté avec succès`);
+  renderClients();
+  populateInvoiceClientSelect();
+  document.getElementById('clientName').value='';
+  document.getElementById('clientSector').value='';
+  document.getElementById('clientScore').value='75';
+}
+
+// ==================== ALERTS ====================
+function renderAlerts(){
+  const colors={critique:{bg:'rgba(239,68,68,.1)',text:'var(--red)'},warning:{bg:'rgba(245,158,11,.1)',text:'var(--orange)'},info:{bg:'rgba(79,125,249,.1)',text:'var(--accent)'}};
+  document.getElementById('alertsList').innerHTML=alerts.filter(a=>a.active).map(a=>{
+    const col=colors[a.priority];
+    return `<div class="alert-card ${a.priority} fade-in">
+      <div class="alert-icon-wrap" style="background:${col.bg}">${a.icon}</div>
+      <div class="alert-body">
+        <div class="ab-priority" style="color:${col.text}">${a.priority}</div>
+        <h4>${a.title}</h4>
+        <p>${a.desc}</p>
+        <div class="ab-time">${a.time}</div>
+      </div>
+      <div class="alert-actions">
+        ${a.priority==='critique'?`<button class="btn btn-sm btn-primary" onclick="alertAction(${a.id},'relance')">📧 Relancer</button>`:''}
+        <button class="btn btn-sm btn-outline" onclick="alertAction(${a.id},'details')">Voir détails</button>
+        <button class="btn btn-sm btn-outline" onclick="dismissAlert(${a.id})">Ignorer</button>
+      </div>
+    </div>`;
+  }).join('');
+  updateAlertBadge();
+}
+
+function alertAction(id,action){
+  const a=alerts.find(x=>x.id===id);
+  if(!a)return;
+  if(action==='relance') showToast(`Relance envoyée pour : ${a.title}`);
+  else showToast(`Détails : ${a.desc}`,'warning');
+}
+
+function dismissAlert(id){
+  const a=alerts.find(x=>x.id===id);
+  if(a) a.active=false;
+  showToast('Alerte ignorée','warning');
+  renderAlerts();
+}
+
+function updateAlertBadge(){
+  const count=alerts.filter(a=>a.active).length;
+  document.getElementById('alertBadge').textContent=count;
+  document.getElementById('alertBadge').style.display=count?'':'none';
+}
+
+// ==================== SIMULATION ====================
+let simChartInstance=null;
+
+function applyScenario(){
+  const s=document.getElementById('simScenario').value;
+  const rev=document.getElementById('simRevenue');
+  const ch=document.getElementById('simCharges');
+  const del=document.getElementById('simDelay');
+  const inv=document.getElementById('simInvest');
+  switch(s){
+    case'hire':rev.value=0;ch.value=25;del.value=45;inv.value=0;break;
+    case'lostclient':rev.value=-30;ch.value=-5;del.value=60;inv.value=0;break;
+    case'invest':rev.value=10;ch.value=5;del.value=45;inv.value=50000;break;
+    case'growth':rev.value=20;ch.value=10;del.value=40;inv.value=15000;break;
+    default:rev.value=0;ch.value=0;del.value=45;inv.value=0;
+  }
+  updateSim();
+}
+
+function updateSim(){
+  document.getElementById('simRevenueVal').textContent=document.getElementById('simRevenue').value+'%';
+  document.getElementById('simChargesVal').textContent=document.getElementById('simCharges').value+'%';
+  document.getElementById('simDelayVal').textContent=document.getElementById('simDelay').value+'j';
+
+  const revMod=parseInt(document.getElementById('simRevenue').value)/100;
+  const chMod=parseInt(document.getElementById('simCharges').value)/100;
+  const delayFactor=parseInt(document.getElementById('simDelay').value)/45;
+  const investAmount=parseFloat(document.getElementById('simInvest').value)||0;
+
+  const baseRevenue=25000;const baseCharges=15000;
+  const balance=getBalance();
+  const months=['Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  const baseline=[],simulated=[];
+  let bBal=balance,sBal=balance-investAmount;
+
+  for(let i=0;i<9;i++){
+    const bRev=baseRevenue*(1+(Math.random()-.5)*.1);
+    const bCh=baseCharges*(1+(Math.random()-.5)*.1);
+    bBal+=bRev-bCh;
+    baseline.push(Math.round(bBal));
+
+    const sRev=baseRevenue*(1+revMod)*(1+(Math.random()-.5)*.1)/delayFactor;
+    const sCh=baseCharges*(1+chMod)*(1+(Math.random()-.5)*.1);
+    sBal+=sRev-sCh;
+    simulated.push(Math.round(sBal));
+  }
+
+  if(simChartInstance) simChartInstance.destroy();
+  simChartInstance=new Chart(document.getElementById('simChart'),{
+    type:'line',
+    data:{labels:months,datasets:[
+      {label:'Scénario simulé',data:simulated,borderColor:'#a78bfa',backgroundColor:'rgba(167,139,250,.1)',fill:true,tension:.4,pointRadius:4,pointBackgroundColor:'#a78bfa'},
+      {label:'Baseline',data:baseline,borderColor:'#4f7df9',borderDash:[5,5],tension:.4,pointRadius:3,pointBackgroundColor:'#4f7df9',fill:false},
+      {label:'Seuil critique',data:Array(9).fill(0),borderColor:'#ef4444',borderDash:[3,3],pointRadius:0,fill:false}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#8892a8',usePointStyle:true,pointStyle:'circle',font:{size:11}}}},scales:{x:{ticks:{color:'#8892a8'},grid:{color:'rgba(42,45,62,.5)'}},y:{ticks:{color:'#8892a8',callback:v=>EUR(v)},grid:{color:'rgba(42,45,62,.5)'}}}}
+  });
+
+  const minSolde=Math.min(...simulated);
+  const moisCritique=months[simulated.indexOf(minSolde)];
+  const risk=minSolde<0?'Critique':minSolde<10000?'Élevé':minSolde<25000?'Modéré':'Faible';
+  const riskColor=minSolde<0?'var(--red)':minSolde<10000?'var(--orange)':minSolde<25000?'var(--accent)':'var(--green)';
+  const reco=minSolde<0?'Action immédiate requise : réduisez les charges ou accélérez les encaissements.':minSolde<10000?'Vigilance : constituez une réserve de trésorerie supplémentaire.':minSolde<25000?'Situation maîtrisée, surveillez les délais de paiement.':'Trésorerie saine, bon potentiel d\'investissement.';
+
+  document.getElementById('simKpis').innerHTML=`
+    <div class="sim-kpi"><div class="sk-val" style="color:${minSolde<0?'var(--red)':'var(--green)'}">${EUR(minSolde)}</div><div class="sk-label">Solde minimum</div></div>
+    <div class="sim-kpi"><div class="sk-val" style="color:${riskColor}">${risk}</div><div class="sk-label">Niveau de risque</div></div>
+    <div class="sim-kpi"><div class="sk-val">${moisCritique} 2026</div><div class="sk-label">Mois critique</div></div>
+    <div class="sim-kpi" style="grid-column:span 2;text-align:left"><div class="sk-val" style="font-size:14px;line-height:1.5">💡 ${reco}</div><div class="sk-label">Recommandation</div></div>
+  `;
+}
+
+// ==================== SEARCH ====================
+function handleSearch(query){
+  const res=document.getElementById('searchResults');
+  if(!query.trim()){res.classList.remove('show');return}
+  const q=query.toLowerCase();
+  const results=[];
+  invoices.forEach(inv=>{
+    if(inv.ref.toLowerCase().includes(q)||inv.client.toLowerCase().includes(q)||inv.desc.toLowerCase().includes(q))
+      results.push({type:'Facture',text:`${inv.ref} — ${inv.client} — ${EUR(getTTC(inv))}`,page:'invoices'});
+  });
+  clients.forEach(c=>{
+    if(c.name.toLowerCase().includes(q)||c.sector.toLowerCase().includes(q))
+      results.push({type:'Client',text:`${c.name} — ${c.sector}`,page:'clients'});
+  });
+  if(!results.length){res.classList.remove('show');return}
+  res.innerHTML=results.slice(0,8).map(r=>`<div class="search-result-item" onclick="navigateTo('${r.page}');document.getElementById('searchResults').classList.remove('show');document.getElementById('globalSearch').value=''"><div class="sr-type">${r.type}</div>${r.text}</div>`).join('');
+  res.classList.add('show');
+}
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.search-box'))document.getElementById('searchResults').classList.remove('show');
+});
+
+// ==================== INIT ====================
+function init(){
+  // Set default dates
+  const today=new Date().toISOString().split('T')[0];
+  const due=new Date(Date.now()+30*86400000).toISOString().split('T')[0];
+  document.getElementById('invDateEmit').value=today;
+  document.getElementById('invDateDue').value=due;
+  populateInvoiceClientSelect();
+  renderDashboard();
+  updateAlertBadge();
+}
+
+init();
+</script>
+</body>
+</html>

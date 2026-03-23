@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --version)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm list:*)",
+      "Bash(npm root:*)",
+      "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\(''''bin'''',{}\\)\\); print\\(d.get\\(''''main'''',''''''''\\)\\)\")",
+      "Bash(node -e \"const p=require\\(''C:/Users/lilia/AppData/Roaming/npm/node_modules/serve/package.json''\\);console.log\\(JSON.stringify\\(p.bin\\)\\)\")",
+      "Bash(cygpath -w \"/c/Users/lilia/AppData/Roaming/npm/node_modules/serve/build/main.js\")"
+    ]
+  }
+}
