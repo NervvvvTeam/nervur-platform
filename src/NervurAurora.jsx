@@ -1467,60 +1467,8 @@ export default function NervurAurora() {
           </div>
         </RevealSection>
 
-        {/* ROW 1 — ESCRIBA + En cours */}
+        {/* ROW 1 — Projets */}
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "20px" }}>
-          {/* ESCRIBA */}
-          <RevealSection delay={0}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "2px", overflow: "hidden" }}>
-              <a href="https://www.escriba.fr/" target="_blank" rel="noopener noreferrer" className="escriba-card" style={{
-                background: "#111", display: "flex", flexDirection: "column", textDecoration: "none", color: "inherit",
-                border: `1px solid ${VG(0.1)}`, overflow: "hidden", cursor: "pointer", position: "relative"
-              }}>
-                <div style={{ flex: 1, overflow: "hidden", position: "relative" }}>
-                  <img src="/escriba-logo.jpg" alt="Logo SCOP Escriba — Client NERVÜR, fabricant d'équipements inox sur-mesure" style={{
-                    width: "100%", height: "100%", objectFit: "cover", opacity: 0.85,
-                    transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.4s"
-                  }} className="escriba-img" />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, #111 0%, transparent 60%)" }} />
-                </div>
-                <div style={{ padding: "16px 20px" }}>
-                  <span style={{ fontSize: "10px", letterSpacing: "3px", fontFamily: "monospace", color: V, display: "block", marginBottom: "4px", opacity: 0.8 }}>SITE VITRINE</span>
-                  <div style={{ fontSize: "16px", fontWeight: 700, color: V, marginBottom: "4px" }}>escriba.fr</div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#71717A" }}>Branding • Design • Dev</span>
-                    <span style={{ fontSize: "11px", color: V2 }}>↗</span>
-                  </div>
-                </div>
-              </a>
-              <a href="https://www.escriba.fr/" target="_blank" rel="noopener noreferrer" className="escriba-card" style={{
-                background: "#111", display: "flex", flexDirection: "column", textDecoration: "none", color: "inherit",
-                border: `1px solid ${VG(0.1)}`, overflow: "hidden", cursor: "pointer", position: "relative"
-              }}>
-                <div style={{ flex: 1, overflow: "hidden", position: "relative", background: "#f8f9fa", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img src="/escriba-config.png" alt="Capture d'écran du configurateur inox sur-mesure développé par NERVÜR pour SCOP Escriba" style={{
-                    width: "80%", height: "auto", objectFit: "contain", opacity: 0.9,
-                    transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)", filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))"
-                  }} className="escriba-img" />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, #111 0%, transparent 40%)" }} />
-                </div>
-                <div style={{ padding: "16px 20px" }}>
-                  <span style={{ fontSize: "10px", letterSpacing: "3px", fontFamily: "monospace", color: V, display: "block", marginBottom: "4px", opacity: 0.8 }}>CONFIGURATEUR</span>
-                  <div style={{ fontSize: "16px", fontWeight: 700, color: V, marginBottom: "4px" }}>Inox Sur-Mesure</div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#71717A" }}>Design • Développement</span>
-                    <span style={{ fontSize: "11px", color: V2 }}>↗</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", padding: "10px 0", marginTop: "2px", background: "#111", border: `1px solid ${VG(0.08)}` }}>
-              <span style={{ fontSize: "10px", letterSpacing: "3px", fontFamily: "monospace", color: V3 }}>SCOP ESCRIBA</span>
-              <span style={{ width: "1px", height: "12px", background: VG(0.15) }} />
-              <span style={{ fontSize: "18px", fontWeight: 800, color: V }}>+65%</span>
-              <span style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "#71717A" }}>Trafic</span>
-            </div>
-          </RevealSection>
-
           {/* EN COURS DE DÉVELOPPEMENT */}
           <RevealSection delay={100}>
             <div style={{
