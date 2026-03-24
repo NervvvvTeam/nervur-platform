@@ -78,6 +78,9 @@ const ALLOWED_ORIGINS = [
   "https://nervur.fr",
   "https://www.nervur.fr",
   "https://app.nervur.fr",
+  "https://nervur.netlify.app",
+  "http://nervur.fr",
+  "http://www.nervur.fr",
 ];
 
 // In development, also allow local dev servers
