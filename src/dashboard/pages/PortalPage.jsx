@@ -1110,7 +1110,7 @@ function RightPanel({ hasAccess }) {
           Résumé rapide
         </div>
         {[
-          { label: "Outils actifs", value: stats ? `${stats.tools}/4` : "—", color: "#22c55e" },
+          { label: "Outils actifs", value: stats ? `${stats.tools}/${TOOLS.length}` : "—", color: "#22c55e" },
           ...(hasAccess("sentinel") ? [
             { label: "Score réputation", value: stats?.score || "—", color: "#ef4444" },
             { label: "Total avis", value: stats?.reviews ?? "—", color: "#ef4444" },
