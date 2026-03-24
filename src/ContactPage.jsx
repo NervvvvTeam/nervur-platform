@@ -22,6 +22,7 @@ const SUJETS = [
   "Souscrire à Pulse (19€/mois)",
   "Pack Duo — 2 outils (39€/mois)",
   "Pack Total — 5 outils (69€/mois)",
+  "⭐ Accès Prioritaire Gold",
   "Projet de développement web",
   "SEO & Marketing",
   "Autre",
