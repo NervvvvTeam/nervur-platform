@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://nervur.fr/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://nervur.fr/contact</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nervur.fr/qui-sommes-nous</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nervur.fr/technologies</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nervur.fr/simulateur</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nervur.fr/diagnostic</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nervur.fr/vitrine</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://nervur.fr/sentinel</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nervur.fr/phantom</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nervur.fr/oracle</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nervur.fr/forge</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nervur.fr/nexus</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nervur.fr/pulse</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://nervur.fr/mentions-legales</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://nervur.fr/confidentialite</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://nervur.fr/cgv</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://nervur.fr/sentinel</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nervur.fr/phantom</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nervur.fr/vault</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/atlas</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/pulse</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://nervur.fr/qui-sommes-nous</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://nervur.fr/technologies</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://nervur.fr/blog/e-reputation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/blog/cybersecurite</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/blog/performance-web</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/mentions-legales</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://nervur.fr/politique-confidentialite</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://nervur.fr/cgv</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

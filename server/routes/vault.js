@@ -139,7 +139,7 @@ router.post("/scan", authMiddleware, async (req, res) => {
 
     // Create scan record
     const scan = new BreachScan({
-      userId: req.user.userId,
+      userId: req.userId,
       domain: domain.trim().toLowerCase(),
       emails: validEmails,
       status: "scanning",
@@ -213,7 +213,7 @@ router.post("/scan", authMiddleware, async (req, res) => {
 // GET /api/vault/history — list past scans
 router.get("/history", authMiddleware, async (req, res) => {
   try {
-    const scans = await BreachScan.find({ userId: req.user.userId })
+    const scans = await BreachScan.find({ userId: req.userId })
       .sort({ createdAt: -1 })
       .limit(50)
       .select("-results");
@@ -229,7 +229,7 @@ router.get("/scan/:id", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "ID invalide." });
     }
-    const scan = await BreachScan.findOne({ _id: req.params.id, userId: req.user.userId });
+    const scan = await BreachScan.findOne({ _id: req.params.id, userId: req.userId });
     if (!scan) return res.status(404).json({ error: "Scan introuvable." });
     res.json(scan);
   } catch (err) {
@@ -243,7 +243,7 @@ router.delete("/scan/:id", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "ID invalide." });
     }
-    await BreachScan.deleteOne({ _id: req.params.id, userId: req.user.userId });
+    await BreachScan.deleteOne({ _id: req.params.id, userId: req.userId });
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: "Erreur lors de la suppression." });
@@ -358,7 +358,7 @@ router.post("/monitoring", authMiddleware, async (req, res) => {
 
     // Check for existing monitoring on same domain
     const existing = await VaultMonitoring.findOne({
-      userId: req.user.userId,
+      userId: req.userId,
       domain: domain.trim().toLowerCase(),
     });
 
@@ -374,7 +374,7 @@ router.post("/monitoring", authMiddleware, async (req, res) => {
 
     // Create new monitoring config
     const monitoring = new VaultMonitoring({
-      userId: req.user.userId,
+      userId: req.userId,
       domain: domain.trim().toLowerCase(),
       emails: validEmails,
       frequency: frequency || "weekly",
@@ -392,7 +392,7 @@ router.post("/monitoring", authMiddleware, async (req, res) => {
 // GET /api/vault/monitoring — liste des surveillances actives
 router.get("/monitoring", authMiddleware, async (req, res) => {
   try {
-    const configs = await VaultMonitoring.find({ userId: req.user.userId })
+    const configs = await VaultMonitoring.find({ userId: req.userId })
       .sort({ createdAt: -1 })
       .populate("lastScanId", "summary status createdAt");
     res.json(configs);
@@ -408,7 +408,7 @@ router.patch("/monitoring/:id", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "ID invalide." });
     }
-    const config = await VaultMonitoring.findOne({ _id: req.params.id, userId: req.user.userId });
+    const config = await VaultMonitoring.findOne({ _id: req.params.id, userId: req.userId });
     if (!config) return res.status(404).json({ error: "Surveillance introuvable." });
 
     if (req.body.enabled !== undefined) config.enabled = req.body.enabled;
@@ -427,7 +427,7 @@ router.delete("/monitoring/:id", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "ID invalide." });
     }
-    const result = await VaultMonitoring.deleteOne({ _id: req.params.id, userId: req.user.userId });
+    const result = await VaultMonitoring.deleteOne({ _id: req.params.id, userId: req.userId });
     if (result.deletedCount === 0) return res.status(404).json({ error: "Surveillance introuvable." });
     res.json({ success: true });
   } catch (err) {
@@ -460,7 +460,7 @@ router.get("/scan/:id/pdf", authMiddleware, async (req, res) => {
       return res.status(400).json({ error: "ID invalide." });
     }
 
-    const scan = await BreachScan.findOne({ _id: req.params.id, userId: req.user.userId });
+    const scan = await BreachScan.findOne({ _id: req.params.id, userId: req.userId });
     if (!scan) return res.status(404).json({ error: "Scan introuvable." });
     if (scan.status !== "completed") return res.status(400).json({ error: "Le scan n'est pas terminé." });
 
@@ -843,7 +843,7 @@ router.post("/rgpd-scan", authMiddleware, async (req, res) => {
 
     // Create scan record
     const scan = new RgpdScan({
-      userId: req.user.userId,
+      userId: req.userId,
       url: normalizedUrl,
       domain,
       status: "scanning",
@@ -907,7 +907,7 @@ router.post("/rgpd-scan", authMiddleware, async (req, res) => {
 // GET /api/vault/rgpd-history — list past RGPD scans
 router.get("/rgpd-history", authMiddleware, async (req, res) => {
   try {
-    const scans = await RgpdScan.find({ userId: req.user.userId })
+    const scans = await RgpdScan.find({ userId: req.userId })
       .sort({ createdAt: -1 })
       .limit(50)
       .select("url domain score status createdAt");
@@ -923,7 +923,7 @@ router.get("/rgpd-scan/:id", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "ID invalide." });
     }
-    const scan = await RgpdScan.findOne({ _id: req.params.id, userId: req.user.userId });
+    const scan = await RgpdScan.findOne({ _id: req.params.id, userId: req.userId });
     if (!scan) return res.status(404).json({ error: "Scan RGPD introuvable." });
     res.json(scan);
   } catch (err) {
@@ -937,7 +937,7 @@ router.delete("/rgpd-scan/:id", authMiddleware, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "ID invalide." });
     }
-    await RgpdScan.deleteOne({ _id: req.params.id, userId: req.user.userId });
+    await RgpdScan.deleteOne({ _id: req.params.id, userId: req.userId });
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: "Erreur lors de la suppression." });

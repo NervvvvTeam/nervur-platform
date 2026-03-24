@@ -23,6 +23,9 @@ const MentionsLegalesPage = lazy(() => import('./MentionsLegalesPage'))
 const PolitiqueConfidentialitePage = lazy(() => import('./PolitiqueConfidentialitePage'))
 const CGVPage = lazy(() => import('./CGVPage'))
 const QuiSommesNousPage = lazy(() => import('./QuiSommesNousPage'))
+const BlogReputationPage = lazy(() => import('./BlogReputationPage'))
+const BlogSecuritePage = lazy(() => import('./BlogSecuritePage'))
+const BlogPerformancePage = lazy(() => import('./BlogPerformancePage'))
 
 // Lazy-loaded dashboard pages
 const DashLoginPage = lazy(() => import('./dashboard/pages/LoginPage'))
@@ -92,6 +95,9 @@ function App() {
             <Route path="/confidentialite" element={<PolitiqueConfidentialitePage />} />
             <Route path="/cgv" element={<CGVPage />} />
             <Route path="/qui-sommes-nous" element={<QuiSommesNousPage />} />
+            <Route path="/blog/e-reputation" element={<BlogReputationPage />} />
+            <Route path="/blog/cybersecurite" element={<BlogSecuritePage />} />
+            <Route path="/blog/performance-web" element={<BlogPerformancePage />} />
 
             {/* ═══ Espace Client (Dashboard) ═══ */}
             <Route path="/app/login" element={<DashLoginPage />} />

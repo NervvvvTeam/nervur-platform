@@ -5,7 +5,7 @@ import useSEO from "./useSEO";
 export default function QuiSommesNousPage() {
   const navigate = useNavigate();
 
-  useSEO("Qui sommes-nous | NERVÜR", "Découvrez NERVÜR, agence digitale spécialisée en technologies de croissance. Notre mission, notre équipe, notre approche.", { path: "/qui-sommes-nous" });
+  useSEO("Qui sommes-nous | NERVÜR", "Découvrez NERVÜR, agence digitale spécialisée en technologies de croissance pour PME. Notre mission, notre équipe, notre approche.", { path: "/qui-sommes-nous", keywords: "NERVÜR, agence digitale, technologies croissance, PME, équipe" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

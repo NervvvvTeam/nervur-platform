@@ -389,30 +389,114 @@ export default function NervurAurora() {
   const pageRef = useRef(null);
   useFadeOnScroll(pageRef);
 
-  useSEO("NERVÜR — Éditeur de Technologies de Croissance", "Agence digitale spécialisée en création de sites, applications métiers, SEO et outils IA. Infrastructures sur-mesure pour PME et startups.", { path: "/" });
+  useSEO(
+    "NERVÜR — Outils SaaS pour PME | E-réputation, Audit Web, Cybersécurité",
+    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation), Phantom (audit web), Vault (cybersécurité), Atlas (SEO), Pulse (monitoring). À partir de 19€/mois.",
+    {
+      path: "/",
+      keywords: "SaaS PME, e-réputation, audit web, cybersécurité, SEO, monitoring, outils PME, NERVÜR, Sentinel, Phantom, Vault, Atlas, Pulse",
+      imageAlt: "NERVÜR — 5 outils SaaS pour PME : e-réputation, audit web, cybersécurité, SEO, monitoring",
+    }
+  );
 
+  // Organization structured data
   useJsonLd({
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Organization",
     "name": "NERVÜR",
     "url": "https://nervur.fr",
     "logo": "https://nervur.fr/logo-nav-clean.png",
     "image": "https://nervur.fr/og-image.png",
-    "description": "Éditeur de Technologies de Croissance — Création de sites, applications métiers, SEO et outils IA sur-mesure.",
-    "priceRange": "€€",
-    "areaServed": "France",
-    "serviceType": ["Développement web", "SEO", "Applications métiers", "Sites vitrines", "Marketing digital", "UX/UI Design"],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Services NERVÜR",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Création de Site Vitrine" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Application Métier" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Référencement SEO" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Marketing Digital" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Webdesign UX/UI" } }
-      ]
+    "description": "Éditeur de technologies de croissance pour les PME. 5 outils SaaS : e-réputation, audit web, cybersécurité, SEO et monitoring.",
+    "foundingDate": "2024",
+    "areaServed": {
+      "@type": "Country",
+      "name": "France"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "contact@nervurpro.fr",
+      "url": "https://nervur.fr/contact",
+      "availableLanguage": "French"
+    },
+    "sameAs": [],
+    "knowsAbout": ["E-réputation", "Audit web", "Cybersécurité", "SEO", "Monitoring", "SaaS pour PME"]
+  });
+
+  // WebSite structured data with SearchAction
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NERVÜR",
+    "url": "https://nervur.fr",
+    "description": "Outils SaaS pour PME : e-réputation, audit web, cybersécurité, SEO et monitoring",
+    "inLanguage": "fr",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://nervur.fr/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
+  });
+
+  // SoftwareApplication structured data — Sentinel
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NERVÜR Sentinel",
+    "description": "Outil de surveillance et gestion de l'e-réputation pour les PME. Monitoring des avis, alertes en temps réel.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://nervur.fr/sentinel",
+    "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+  });
+
+  // SoftwareApplication structured data — Phantom
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NERVÜR Phantom",
+    "description": "Audit de performance et accessibilité de sites web. Scores Lighthouse, Core Web Vitals, recommandations SEO.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://nervur.fr/phantom",
+    "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+  });
+
+  // SoftwareApplication structured data — Vault
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NERVÜR Vault",
+    "description": "Surveillance cybersécurité pour PME. Détection de fuites de données, monitoring du dark web, alertes de sécurité.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://nervur.fr/vault",
+    "offers": { "@type": "Offer", "price": "39", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+  });
+
+  // SoftwareApplication structured data — Atlas
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NERVÜR Atlas",
+    "description": "Outil SEO pour PME. Audit de référencement, suivi de positions, analyse de mots-clés et recommandations.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://nervur.fr/atlas",
+    "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+  });
+
+  // SoftwareApplication structured data — Pulse
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NERVÜR Pulse",
+    "description": "Monitoring de disponibilité et performance pour sites web et API. Alertes temps réel, rapports de uptime.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://nervur.fr/pulse",
+    "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
   });
 
   // Oscillating hero values
@@ -549,7 +633,7 @@ export default function NervurAurora() {
         background: "#09090B", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <img src="/logo-nav.png" alt="NERVÜR" style={{
+        <img src="/logo-nav.png" alt="NERVÜR — Outils SaaS pour PME" style={{
           height: isMobile ? "40px" : "95px", width: "auto",
           filter: "invert(1) brightness(1.15)",
           mixBlendMode: "screen",
@@ -570,6 +654,13 @@ export default function NervurAurora() {
                 {item.label}
               </span>
             ))}
+            {/* Blog nav link */}
+            <span className="nav-link" style={{ fontSize: "12px", letterSpacing: "2.5px", textTransform: "uppercase", color: "#71717A", cursor: "pointer", transition: "color 0.3s" }}
+              onClick={() => navigate('/blog/e-reputation')}
+              onMouseEnter={e => { e.target.style.color = "#FAFAFA"; }}
+              onMouseLeave={e => { e.target.style.color = "#71717A"; }}>
+              Blog
+            </span>
             {/* Dropdown Apps — hover */}
             <div style={{ position: "relative" }}
               onMouseEnter={() => setAppsOpen(true)}
@@ -646,6 +737,7 @@ export default function NervurAurora() {
             // Tarifs retiré du menu mobile
             { label: "Projets", action: () => { document.getElementById('projets')?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); } },
             { label: "Approche", action: () => { document.getElementById('approche')?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); } },
+            { label: "Blog", action: () => { navigate('/blog/e-reputation'); setMenuOpen(false); } },
           ].map((item, i) => (
             <span key={i} onClick={item.action} style={{
               fontSize: "18px", letterSpacing: "4px", textTransform: "uppercase", color: V, cursor: "pointer",
@@ -1385,7 +1477,7 @@ export default function NervurAurora() {
                 border: `1px solid ${VG(0.1)}`, overflow: "hidden", cursor: "pointer", position: "relative"
               }}>
                 <div style={{ flex: 1, overflow: "hidden", position: "relative" }}>
-                  <img src="/escriba-logo.jpg" alt="SCOP Escriba" style={{
+                  <img src="/escriba-logo.jpg" alt="Logo SCOP Escriba — Client NERVÜR, fabricant d'équipements inox sur-mesure" style={{
                     width: "100%", height: "100%", objectFit: "cover", opacity: 0.85,
                     transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.4s"
                   }} className="escriba-img" />
@@ -1405,7 +1497,7 @@ export default function NervurAurora() {
                 border: `1px solid ${VG(0.1)}`, overflow: "hidden", cursor: "pointer", position: "relative"
               }}>
                 <div style={{ flex: 1, overflow: "hidden", position: "relative", background: "#f8f9fa", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img src="/escriba-config.png" alt="Configurateur Inox" style={{
+                  <img src="/escriba-config.png" alt="Capture d'écran du configurateur inox sur-mesure développé par NERVÜR pour SCOP Escriba" style={{
                     width: "80%", height: "auto", objectFit: "contain", opacity: 0.9,
                     transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)", filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.15))"
                   }} className="escriba-img" />
@@ -1658,10 +1750,10 @@ export default function NervurAurora() {
 
       {/* ═══ FOOTER ═══ */}
       <footer style={{ borderTop: `1px solid ${VG(0.1)}` }}>
-        <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
+        <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
-            <img src="/logo-nav.png" alt="NERVUR" style={{ height: "28px", width: "auto", filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain", marginBottom: "16px" }} />
+            <img src="/logo-nav.png" alt="NERVÜR — Éditeur de technologies de croissance pour PME" style={{ height: "28px", width: "auto", filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain", marginBottom: "16px" }} />
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Agence Digital NERVUR</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>
@@ -1701,7 +1793,23 @@ export default function NervurAurora() {
             ))}
           </div>
 
-          {/* Col 4 — Legal + Contact */}
+          {/* Col 4 — Blog */}
+          <div>
+            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Blog</p>
+            {[
+              { name: "E-reputation PME", path: "/blog/e-reputation" },
+              { name: "Cybersecurite PME", path: "/blog/cybersecurite" },
+              { name: "Performance web", path: "/blog/performance-web" },
+            ].map((t, i) => (
+              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = A1}
+                onMouseLeave={e => e.target.style.color = "#52525B"}>
+                {t.name}
+              </p>
+            ))}
+          </div>
+
+          {/* Col 5 — Legal + Contact */}
           <div>
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Legal</p>
             {[

@@ -208,7 +208,7 @@ Genere exactement 8 issues basees sur les VRAIS problemes ci-dessus. TOUT EN FRA
     let auditId = null;
     if (req.user) {
       try {
-        const uid = req.user._id;
+        const uid = req.userId;
         const audit = await Audit.create({
           userId: uid,
           url: targetUrl,

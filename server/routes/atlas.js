@@ -209,13 +209,13 @@ router.post("/projects", authMiddleware, async (req, res) => {
       .slice(0, 50);
 
     // Check existing projects count for this user
-    const count = await SeoProject.countDocuments({ userId: req.user._id });
+    const count = await SeoProject.countDocuments({ userId: req.userId });
     if (count >= 10) {
       return res.status(400).json({ error: "Maximum 10 projets SEO autorisés." });
     }
 
     const project = await SeoProject.create({
-      userId: req.user._id,
+      userId: req.userId,
       domain: cleanDomain,
       keywords: cleanKeywords,
     });
@@ -230,7 +230,7 @@ router.post("/projects", authMiddleware, async (req, res) => {
 // GET /api/atlas/projects — List user's projects
 router.get("/projects", authMiddleware, async (req, res) => {
   try {
-    const projects = await SeoProject.find({ userId: req.user._id })
+    const projects = await SeoProject.find({ userId: req.userId })
       .sort({ updatedAt: -1 })
       .lean();
 
@@ -256,7 +256,7 @@ router.get("/projects/:id", authMiddleware, async (req, res) => {
   try {
     const project = await SeoProject.findOne({
       _id: req.params.id,
-      userId: req.user._id,
+      userId: req.userId,
     }).lean();
 
     if (!project) {
@@ -282,7 +282,7 @@ router.post("/projects/:id/check", authMiddleware, async (req, res) => {
   try {
     const project = await SeoProject.findOne({
       _id: req.params.id,
-      userId: req.user._id,
+      userId: req.userId,
     });
 
     if (!project) {
@@ -339,7 +339,7 @@ router.delete("/projects/:id", authMiddleware, async (req, res) => {
   try {
     const project = await SeoProject.findOneAndDelete({
       _id: req.params.id,
-      userId: req.user._id,
+      userId: req.userId,
     });
 
     if (!project) {

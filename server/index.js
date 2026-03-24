@@ -43,6 +43,7 @@ const sentinelCompetitorRoutes = require("./routes/sentinel-competitors");
 const sentinelToolsRoutes = require("./routes/sentinel-tools");
 const vaultRoutes = require("./routes/vault");
 const pulseRoutes = require("./routes/pulse");
+const contactRoutes = require("./routes/contact");
 
 const app = express();
 const PORT = configPort;
@@ -174,6 +175,16 @@ const emailSendLimiter = rateLimit({
 });
 app.use("/api/nexus/email/campaigns/:id/send", emailSendLimiter);
 
+// ═══ Security: Contact form rate limit — 5 submissions/hour ═══
+const contactLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: isDev ? 50 : 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Trop de messages envoyés. Réessayez dans une heure." },
+});
+app.use("/api/contact", contactLimiter);
+
 // ═══ MongoDB Connection ═══
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI)
@@ -207,6 +218,7 @@ app.use("/api/sentinel-app/competitors", sentinelCompetitorRoutes);
 app.use("/api/sentinel-app/tools", sentinelToolsRoutes);
 app.use("/api/vault", vaultRoutes);
 app.use("/api/pulse", pulseRoutes);
+app.use("/api/contact", contactRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

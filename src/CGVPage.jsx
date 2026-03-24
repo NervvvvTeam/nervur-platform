@@ -5,7 +5,7 @@ import useSEO from "./useSEO";
 export default function CGVPage() {
   const navigate = useNavigate();
 
-  useSEO("Conditions Générales de Vente | NERVÜR", "CGV de l'agence NERVÜR. Prestations, tarifs, paiement, propriété intellectuelle et résiliation.", { path: "/cgv" });
+  useSEO("Conditions Générales de Vente | NERVÜR", "CGV de l'agence NERVÜR. Prestations, tarifs, paiement, propriété intellectuelle et résiliation.", { path: "/cgv", keywords: "CGV, conditions générales vente, NERVÜR" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

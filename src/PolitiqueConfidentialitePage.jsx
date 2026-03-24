@@ -5,7 +5,7 @@ import useSEO from "./useSEO";
 export default function PolitiqueConfidentialitePage() {
   const navigate = useNavigate();
 
-  useSEO("Politique de Confidentialité | NERVÜR", "Politique de confidentialité et protection des données personnelles de nervur.fr conforme RGPD.", { path: "/confidentialite" });
+  useSEO("Politique de Confidentialité | NERVÜR", "Politique de confidentialité et protection des données personnelles de nervur.fr conforme RGPD.", { path: "/politique-confidentialite", keywords: "politique confidentialité, RGPD, données personnelles, NERVÜR" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

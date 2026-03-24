@@ -156,7 +156,7 @@ export default function SentinelPage() {
     }
   };
 
-  useSEO("SENTINEL — Bouclier E-Réputation & Veille IA | NERVÜR", "Surveillez votre e-réputation, analysez le sentiment IA, scannez vos concurrents et détectez les opportunités marché. Le bouclier complet.", { path: "/sentinel" });
+  useSEO("SENTINEL — Bouclier E-Réputation & Veille IA | NERVÜR", "Surveillez votre e-réputation, analysez le sentiment IA, scannez vos concurrents et détectez les opportunités marché. Le bouclier complet.", { path: "/sentinel", keywords: "e-réputation PME, veille IA, surveillance avis, analyse sentiment, NERVÜR Sentinel" });
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
 

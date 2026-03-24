@@ -61,7 +61,7 @@ export default function PhantomPage() {
     }
   };
 
-  useSEO("PHANTOM — Audit UX & Performance | NERVÜR", "Audit automatisé de votre site web. Performance, SEO, accessibilité et conversion analysés en profondeur.", { path: "/phantom" });
+  useSEO("PHANTOM — Audit UX & Performance | NERVÜR", "Audit automatisé de votre site web. Performance, SEO, accessibilité et conversion analysés en profondeur.", { path: "/phantom", keywords: "audit web, performance site, audit SEO, accessibilité web, Core Web Vitals, NERVÜR Phantom" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

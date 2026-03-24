@@ -77,6 +77,12 @@ router.post("/sites", authMiddleware, async (req, res) => {
     // Clean domain
     const cleanDomain = domain.trim().replace(/^https?:\/\//, "").replace(/\/.*$/, "").replace(/^www\./, "");
 
+    // Max 10 sites per user
+    const count = await MonitoredSite.countDocuments({ userId: req.userId });
+    if (count >= 10) {
+      return res.status(400).json({ error: "Limite de 10 sites atteinte. Supprimez un site pour en ajouter un nouveau." });
+    }
+
     // Check if already monitored
     const existing = await MonitoredSite.findOne({ userId: req.userId, domain: cleanDomain });
     if (existing) {

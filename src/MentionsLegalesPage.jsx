@@ -5,7 +5,7 @@ import useSEO from "./useSEO";
 export default function MentionsLegalesPage() {
   const navigate = useNavigate();
 
-  useSEO("Mentions Légales | NERVÜR", "Mentions légales du site nervur.fr. Éditeur, hébergement, propriété intellectuelle et droit applicable.", { path: "/mentions-legales" });
+  useSEO("Mentions Légales | NERVÜR", "Mentions légales du site nervur.fr. Éditeur, hébergement, propriété intellectuelle et droit applicable.", { path: "/mentions-legales", keywords: "mentions légales, NERVÜR, nervur.fr" });
 
   useEffect(() => {
     window.scrollTo(0, 0);

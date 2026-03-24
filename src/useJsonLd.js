@@ -11,7 +11,9 @@ export default function useJsonLd(data) {
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.textContent = JSON.stringify(data);
-    script.id = "json-ld-" + (data["@type"] || "default");
+    // Use @type + name for unique IDs (allows multiple SoftwareApplication entries)
+    const suffix = (data["@type"] || "default") + (data["name"] ? "-" + data["name"].replace(/\s+/g, "-").toLowerCase() : "");
+    script.id = "json-ld-" + suffix;
     // Remove existing one with same id to avoid duplicates
     const existing = document.getElementById(script.id);
     if (existing) existing.remove();

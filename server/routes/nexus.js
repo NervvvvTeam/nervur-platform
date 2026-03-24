@@ -64,7 +64,7 @@ Retourne UNIQUEMENT le contenu, sans explication ni commentaire.`;
     if (req.user) {
       try {
         await GeneratedContent.create({
-          userId: req.user.id || req.user._id,
+          userId: req.userId,
           type: typeLabel, topic, tone: tone || "Professionnel",
           companyName: companyName || "", content: text,
         });
@@ -81,7 +81,7 @@ Retourne UNIQUEMENT le contenu, sans explication ni commentaire.`;
 // GET /history — Content generation history
 router.get("/history", requireAuth, async (req, res) => {
   try {
-    const uid = req.user.id || req.user._id;
+    const uid = req.userId;
     const { type, limit = 30 } = req.query;
     const query = { userId: uid };
     if (type) query.type = type;
@@ -98,7 +98,7 @@ router.post("/history/:id/favorite", requireAuth, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "Identifiant invalide" });
     }
-    const uid = req.user.id || req.user._id;
+    const uid = req.userId;
     const content = await GeneratedContent.findOne({ _id: req.params.id, userId: uid });
     if (!content) return res.status(404).json({ error: "Contenu non trouvé" });
     content.favorite = !content.favorite;
@@ -115,7 +115,7 @@ router.delete("/history/:id", requireAuth, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ error: "Identifiant invalide" });
     }
-    const uid = req.user.id || req.user._id;
+    const uid = req.userId;
     await GeneratedContent.deleteOne({ _id: req.params.id, userId: uid });
     res.json({ success: true });
   } catch (err) {

@@ -33,7 +33,7 @@ export default function TechnologiesPage() {
     }
   };
 
-  useSEO("Nos Outils & Technologies | NERVÜR", "Découvrez la suite d'outils IA NERVÜR : Sentinel, Phantom et Vault.", { path: "/technologies" });
+  useSEO("Nos Outils & Technologies | NERVÜR", "Découvrez la suite complète d'outils SaaS NERVÜR : Sentinel, Phantom, Vault, Atlas et Pulse. Technologies IA pour PME.", { path: "/technologies", keywords: "outils SaaS PME, technologies IA, Sentinel, Phantom, Vault, Atlas, Pulse, NERVÜR" });
 
   useEffect(() => {
     window.scrollTo(0, 0);
