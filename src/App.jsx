@@ -7,6 +7,7 @@ import './index.css'
 import { AuthProvider } from './dashboard/context/AuthContext'
 import ProtectedRoute from './dashboard/components/ProtectedRoute'
 import DashboardLayout from './dashboard/components/Layout'
+import { SkeletonGrid, SkeletonText } from './dashboard/components/Skeleton'
 
 // Lazy-loaded marketing pages
 const ContactPage = lazy(() => import('./ContactPage'))
@@ -60,6 +61,12 @@ const DashWidgetPage = lazy(() => import('./dashboard/pages/WidgetPage'))
 const DashAlertsPage = lazy(() => import('./dashboard/pages/AlertsPage'))
 const DashAtlasDashboardPage = lazy(() => import('./dashboard/pages/AtlasDashboardPage'))
 const DashAtlasHistoryPage = lazy(() => import('./dashboard/pages/AtlasHistoryPage'))
+const DashPhantomSchedulePage = lazy(() => import('./dashboard/pages/PhantomSchedulePage'))
+const DashPhantomCompetitorsPage = lazy(() => import('./dashboard/pages/PhantomCompetitorsPage'))
+const DashPulseAlertsPage = lazy(() => import('./dashboard/pages/PulseAlertsPage'))
+const DashPulseStatusPage = lazy(() => import('./dashboard/pages/PulseStatusPage'))
+const DashAtlasSuggestionsPage = lazy(() => import('./dashboard/pages/AtlasSuggestionsPage'))
+const DashAtlasReportsPage = lazy(() => import('./dashboard/pages/AtlasReportsPage'))
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -73,6 +80,14 @@ const Loader = () => (
   <div style={{ background: "#09090B", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
     <div style={{ width: "32px", height: "32px", border: "2px solid rgba(129,140,248,0.2)", borderTop: "2px solid #818CF8", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
     <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+  </div>
+)
+
+const DashboardLoader = () => (
+  <div style={{ background: "#09090B", minHeight: "100vh", padding: "32px" }}>
+    <SkeletonText width="200px" height="24px" />
+    <div style={{ marginTop: "24px" }}><SkeletonGrid count={4} height="140px" /></div>
+    <div style={{ marginTop: "24px" }}><SkeletonGrid count={2} height="240px" /></div>
   </div>
 )
 
@@ -109,40 +124,46 @@ function App() {
             <Route path="/blog/performance-web" element={<BlogPerformancePage />} />
 
             {/* ═══ Espace Client (Dashboard) ═══ */}
-            <Route path="/app/login" element={<DashLoginPage />} />
+            <Route path="/app/login" element={<Suspense fallback={<DashboardLoader />}><DashLoginPage /></Suspense>} />
             <Route path="/app" element={<ProtectedRoute />}>
               <Route element={<DashboardLayout />}>
-                <Route path="portal" element={<DashPortalPage />} />
-                <Route path="sentinel" element={<DashDashboardPage />} />
-                <Route path="reviews" element={<DashReviewsPage />} />
-                <Route path="reviews/:businessId/:reviewId" element={<DashReviewDetailPage />} />
-                <Route path="analytics" element={<DashAnalyticsPage />} />
-                <Route path="competitors" element={<DashCompetitorsPage />} />
-                <Route path="reports" element={<DashReportsPage />} />
-                <Route path="qrcode" element={<DashQRCodePage />} />
-                <Route path="widget" element={<DashWidgetPage />} />
-                <Route path="alerts" element={<DashAlertsPage />} />
-                <Route path="phantom" element={<DashPhantomPage />} />
-                <Route path="phantom/history" element={<DashPhantomHistoryPage />} />
-                <Route path="phantom/recommendations" element={<DashPhantomRecommendationsPage />} />
-                <Route path="nexus" element={<DashNexusPage />} />
-                <Route path="nexus/sequences" element={<DashNexusSequencePage />} />
-                <Route path="nexus/calendar" element={<DashNexusCalendarPage />} />
-                <Route path="nexus/contacts" element={<DashNexusContactsPage />} />
-                <Route path="nexus/campaigns" element={<DashNexusCampaignsPage />} />
-                <Route path="forge" element={<DashForgeDashboardPage />} />
-                <Route path="forge/history" element={<DashForgeHistoryPage />} />
-                <Route path="pulse" element={<DashPulseDashboardPage />} />
-                <Route path="pulse/history" element={<DashPulseHistoryPage />} />
-                <Route path="vault" element={<DashVaultDashboardPage />} />
-                <Route path="vault/history" element={<DashVaultHistoryPage />} />
-                <Route path="vault/scan/:id" element={<DashVaultScanDetailPage />} />
-                <Route path="vault/monitoring" element={<DashVaultMonitoringPage />} />
-                <Route path="vault/rgpd" element={<DashVaultRgpdPage />} />
-                <Route path="atlas" element={<DashAtlasDashboardPage />} />
-                <Route path="atlas/history" element={<DashAtlasHistoryPage />} />
-                <Route path="settings" element={<DashSettingsPage />} />
-                <Route path="onboarding" element={<DashOnboardingPage />} />
+                <Route path="portal" element={<Suspense fallback={<DashboardLoader />}><DashPortalPage /></Suspense>} />
+                <Route path="sentinel" element={<Suspense fallback={<DashboardLoader />}><DashDashboardPage /></Suspense>} />
+                <Route path="reviews" element={<Suspense fallback={<DashboardLoader />}><DashReviewsPage /></Suspense>} />
+                <Route path="reviews/:businessId/:reviewId" element={<Suspense fallback={<DashboardLoader />}><DashReviewDetailPage /></Suspense>} />
+                <Route path="analytics" element={<Suspense fallback={<DashboardLoader />}><DashAnalyticsPage /></Suspense>} />
+                <Route path="competitors" element={<Suspense fallback={<DashboardLoader />}><DashCompetitorsPage /></Suspense>} />
+                <Route path="reports" element={<Suspense fallback={<DashboardLoader />}><DashReportsPage /></Suspense>} />
+                <Route path="qrcode" element={<Suspense fallback={<DashboardLoader />}><DashQRCodePage /></Suspense>} />
+                <Route path="widget" element={<Suspense fallback={<DashboardLoader />}><DashWidgetPage /></Suspense>} />
+                <Route path="alerts" element={<Suspense fallback={<DashboardLoader />}><DashAlertsPage /></Suspense>} />
+                <Route path="phantom" element={<Suspense fallback={<DashboardLoader />}><DashPhantomPage /></Suspense>} />
+                <Route path="phantom/history" element={<Suspense fallback={<DashboardLoader />}><DashPhantomHistoryPage /></Suspense>} />
+                <Route path="phantom/recommendations" element={<Suspense fallback={<DashboardLoader />}><DashPhantomRecommendationsPage /></Suspense>} />
+                <Route path="phantom/competitors" element={<Suspense fallback={<DashboardLoader />}><DashPhantomCompetitorsPage /></Suspense>} />
+                <Route path="phantom/schedule" element={<Suspense fallback={<DashboardLoader />}><DashPhantomSchedulePage /></Suspense>} />
+                <Route path="nexus" element={<Suspense fallback={<DashboardLoader />}><DashNexusPage /></Suspense>} />
+                <Route path="nexus/sequences" element={<Suspense fallback={<DashboardLoader />}><DashNexusSequencePage /></Suspense>} />
+                <Route path="nexus/calendar" element={<Suspense fallback={<DashboardLoader />}><DashNexusCalendarPage /></Suspense>} />
+                <Route path="nexus/contacts" element={<Suspense fallback={<DashboardLoader />}><DashNexusContactsPage /></Suspense>} />
+                <Route path="nexus/campaigns" element={<Suspense fallback={<DashboardLoader />}><DashNexusCampaignsPage /></Suspense>} />
+                <Route path="forge" element={<Suspense fallback={<DashboardLoader />}><DashForgeDashboardPage /></Suspense>} />
+                <Route path="forge/history" element={<Suspense fallback={<DashboardLoader />}><DashForgeHistoryPage /></Suspense>} />
+                <Route path="pulse" element={<Suspense fallback={<DashboardLoader />}><DashPulseDashboardPage /></Suspense>} />
+                <Route path="pulse/history" element={<Suspense fallback={<DashboardLoader />}><DashPulseHistoryPage /></Suspense>} />
+                <Route path="pulse/alerts" element={<Suspense fallback={<DashboardLoader />}><DashPulseAlertsPage /></Suspense>} />
+                <Route path="pulse/status" element={<Suspense fallback={<DashboardLoader />}><DashPulseStatusPage /></Suspense>} />
+                <Route path="vault" element={<Suspense fallback={<DashboardLoader />}><DashVaultDashboardPage /></Suspense>} />
+                <Route path="vault/history" element={<Suspense fallback={<DashboardLoader />}><DashVaultHistoryPage /></Suspense>} />
+                <Route path="vault/scan/:id" element={<Suspense fallback={<DashboardLoader />}><DashVaultScanDetailPage /></Suspense>} />
+                <Route path="vault/monitoring" element={<Suspense fallback={<DashboardLoader />}><DashVaultMonitoringPage /></Suspense>} />
+                <Route path="vault/rgpd" element={<Suspense fallback={<DashboardLoader />}><DashVaultRgpdPage /></Suspense>} />
+                <Route path="atlas" element={<Suspense fallback={<DashboardLoader />}><DashAtlasDashboardPage /></Suspense>} />
+                <Route path="atlas/history" element={<Suspense fallback={<DashboardLoader />}><DashAtlasHistoryPage /></Suspense>} />
+                <Route path="atlas/suggestions" element={<Suspense fallback={<DashboardLoader />}><DashAtlasSuggestionsPage /></Suspense>} />
+                <Route path="atlas/reports" element={<Suspense fallback={<DashboardLoader />}><DashAtlasReportsPage /></Suspense>} />
+                <Route path="settings" element={<Suspense fallback={<DashboardLoader />}><DashSettingsPage /></Suspense>} />
+                <Route path="onboarding" element={<Suspense fallback={<DashboardLoader />}><DashOnboardingPage /></Suspense>} />
                 <Route index element={<Navigate to="/app/portal" replace />} />
               </Route>
             </Route>

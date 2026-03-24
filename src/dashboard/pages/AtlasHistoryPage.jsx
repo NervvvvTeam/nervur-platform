@@ -7,6 +7,8 @@ const ATLAS_COLOR = "#f59e0b";
 const ATLAS_NAV = [
   { path: "/app/atlas", label: "Projets", end: true },
   { path: "/app/atlas/history", label: "\u00c9volution" },
+  { path: "/app/atlas/suggestions", label: "Suggestions IA" },
+  { path: "/app/atlas/reports", label: "Rapports" },
 ];
 
 function MiniChart({ data, width = 400, height = 160, dataKey = "averagePosition", label = "Position moyenne", inverted = true, color = "#f59e0b" }) {

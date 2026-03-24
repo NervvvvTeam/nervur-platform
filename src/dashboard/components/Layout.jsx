@@ -27,6 +27,8 @@ const NAV_ICONS = {
   "/app/phantom": (c) => I(<><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></>, c),
   "/app/phantom/history": (c) => I(<><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></>, c),
   "/app/phantom/recommendations": (c) => I(<><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></>, c),
+  "/app/phantom/competitors": (c) => I(<><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>, c),
+  "/app/phantom/schedule": (c) => I(<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>, c),
   "/app/nexus": (c) => I(<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>, c),
   "/app/nexus/sequences": (c) => I(<><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></>, c),
   "/app/nexus/calendar": (c) => I(<><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></>, c),
@@ -40,8 +42,12 @@ const NAV_ICONS = {
   "/app/vault/rgpd": (c) => I(<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></>, c),
   "/app/pulse": (c) => I(<><path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/><path d="M12 6v4l2 2-2 2v4"/></>, c),
   "/app/pulse/history": (c) => I(<><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></>, c),
+  "/app/pulse/alerts": (c) => I(<><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></>, c),
+  "/app/pulse/status": (c) => I(<><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></>, c),
   "/app/atlas": (c) => I(<><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/></>, c),
   "/app/atlas/history": (c) => I(<><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></>, c),
+  "/app/atlas/suggestions": (c) => I(<><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></>, c),
+  "/app/atlas/reports": (c) => I(<><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></>, c),
   "/app/settings": (c) => I(<><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></>, c),
 };
 
@@ -71,6 +77,8 @@ const PATH_COLORS = {
   "/app/phantom": TOOL_COLORS.phantom,
   "/app/phantom/history": TOOL_COLORS.phantom,
   "/app/phantom/recommendations": TOOL_COLORS.phantom,
+  "/app/phantom/competitors": TOOL_COLORS.phantom,
+  "/app/phantom/schedule": TOOL_COLORS.phantom,
   "/app/nexus": TOOL_COLORS.nexus,
   "/app/nexus/sequences": TOOL_COLORS.nexus,
   "/app/nexus/calendar": TOOL_COLORS.nexus,
@@ -85,8 +93,12 @@ const PATH_COLORS = {
   "/app/vault/rgpd": TOOL_COLORS.vault,
   "/app/pulse": TOOL_COLORS.pulse,
   "/app/pulse/history": TOOL_COLORS.pulse,
+  "/app/pulse/alerts": TOOL_COLORS.pulse,
+  "/app/pulse/status": TOOL_COLORS.pulse,
   "/app/atlas": TOOL_COLORS.atlas,
   "/app/atlas/history": TOOL_COLORS.atlas,
+  "/app/atlas/suggestions": TOOL_COLORS.atlas,
+  "/app/atlas/reports": TOOL_COLORS.atlas,
   "/app/settings": "#71717A",
 };
 

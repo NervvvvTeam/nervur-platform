@@ -7,6 +7,8 @@ const PHANTOM_NAV = [
   { path: "/app/phantom", label: "Audit", end: true },
   { path: "/app/phantom/history", label: "Historique" },
   { path: "/app/phantom/recommendations", label: "Recommandations" },
+  { path: "/app/phantom/competitors", label: "Concurrents" },
+  { path: "/app/phantom/schedule", label: "Planification" },
 ];
 
 function ScoreBadge({ score }) {

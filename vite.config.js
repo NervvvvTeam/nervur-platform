@@ -33,11 +33,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Séparer le vendor React
-          'vendor-react': ['react', 'react-dom'],
-          // Séparer le routeur
-          'vendor-router': ['react-router-dom'],
-          // Séparer recharts (lourd)
+          // Vendor React + Router en un seul chunk (réduit les requêtes HTTP)
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          // Séparer recharts (lourd, chargé à la demande)
           charts: ['recharts'],
         },
         // Noms de fichiers avec hash pour cache-busting optimal
