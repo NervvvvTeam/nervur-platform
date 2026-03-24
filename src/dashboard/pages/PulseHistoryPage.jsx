@@ -213,7 +213,7 @@ export default function PulseHistoryPage() {
                   key={site._id}
                   onClick={() => setSelectedSite(site._id)}
                   style={{
-                    padding: "8px 16px", borderRadius: "6px", border: "none",
+                    padding: "8px 16px", borderRadius: "6px",
                     fontSize: "13px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit",
                     background: selectedSite === site._id ? `${ACCENT}20` : "#1e2029",
                     color: selectedSite === site._id ? ACCENT : "#9ca3af",

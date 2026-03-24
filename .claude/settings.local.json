@@ -122,7 +122,9 @@
       "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" auth status)",
       "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create NervvvvTeam/nervur-platform --private --source=. --remote=origin --push)",
       "Bash(echo \"Updated $f\")",
-      "Bash(ls -la \"C:\\\\Escriba\\\\AGencer\\\\src\\\\dashboard\\\\pages\\\\Pulse\"*)"
+      "Bash(ls -la \"C:\\\\Escriba\\\\AGencer\\\\src\\\\dashboard\\\\pages\\\\Pulse\"*)",
+      "Bash(where railway:*)",
+      "Bash(railway --version)"
     ]
   }
 }
