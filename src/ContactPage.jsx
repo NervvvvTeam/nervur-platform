@@ -19,7 +19,10 @@ const SUJETS = [
   "Souscrire à Phantom (19\u20AC/mois)",
   "Souscrire à Vault (19\u20AC/mois)",
   "Pack Duo (39\u20AC/mois)",
-  "Pack Total — 3 outils (49\u20AC/mois)",
+  "Souscrire à Atlas (19\u20AC/mois)",
+  "Souscrire à Pulse (19\u20AC/mois)",
+  "Pack Duo (39\u20AC/mois)",
+  "Pack Total — 5 outils (69\u20AC/mois)",
   "Projet de développement web",
   "SEO & Marketing",
   "Autre",
@@ -46,7 +49,7 @@ const TOOLS = [
 
 const PACKS = [
   { name: "Pack Duo", price: "39\u20AC/mois", desc: "2 outils au choix" },
-  { name: "Pack Total", price: "49\u20AC/mois", desc: "Les 3 outils" },
+  { name: "Pack Total", price: "69\u20AC/mois", desc: "Les 5 outils" },
 ];
 
 export default function ContactPage() {
