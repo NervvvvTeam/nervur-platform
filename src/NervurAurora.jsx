@@ -390,7 +390,7 @@ export default function NervurAurora() {
   useFadeOnScroll(pageRef);
 
   useSEO(
-    "NERVÜR — Outils SaaS pour PME | E-réputation, Audit Web, Cybersécurité",
+    "NERVÜR — Agence Digitale & Nouvelles Technologies",
     "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation), Phantom (audit web), Vault (cybersécurité), Atlas (SEO), Pulse (monitoring). À partir de 19€/mois.",
     {
       path: "/",
