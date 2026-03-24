@@ -76,8 +76,8 @@ export function validateMessage(message) {
 }
 
 export function validateSubject(subject) {
-  const allowed = ['', 'site-vitrine', 'application', 'seo', 'optimisation', 'branding', 'autre'];
-  return allowed.includes(subject);
+  if (!subject || typeof subject !== "string") return true;
+  return subject.length <= 200;
 }
 
 export function validateBudget(budget) {

@@ -125,7 +125,8 @@
       "Bash(ls -la \"C:\\\\Escriba\\\\AGencer\\\\src\\\\dashboard\\\\pages\\\\Pulse\"*)",
       "Bash(where railway:*)",
       "Bash(railway --version)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://nervur.netlify.app/)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://nervur.netlify.app/)",
+      "Bash(nslookup nervur.fr)"
     ]
   }
 }
