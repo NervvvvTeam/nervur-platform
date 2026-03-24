@@ -35,6 +35,207 @@ function ChangeBadge({ change }) {
   );
 }
 
+function CompetitionBadge({ level }) {
+  if (!level) return <span style={{ color: "#6b7280", fontSize: "12px" }}>--</span>;
+  const colors = {
+    low: { bg: "rgba(34,197,94,0.12)", color: "#22c55e", label: "Faible" },
+    medium: { bg: "rgba(245,158,11,0.12)", color: "#f59e0b", label: "Moyen" },
+    high: { bg: "rgba(239,68,68,0.12)", color: "#ef4444", label: "\u00c9lev\u00e9" },
+  };
+  const c = colors[level] || colors.medium;
+  return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", padding: "2px 8px",
+      borderRadius: "6px", background: c.bg, color: c.color,
+      fontSize: "11px", fontWeight: 500,
+    }}>
+      {c.label}
+    </span>
+  );
+}
+
+function SuggestionsModal({ suggestions, loading, onClose, onAdd }) {
+  return (
+    <div style={{
+      position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+      background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center",
+      justifyContent: "center", zIndex: 1000, padding: "20px",
+    }}>
+      <div style={{
+        background: "#1e2029", borderRadius: "16px", padding: "28px",
+        border: "1px solid #2a2d3a", maxWidth: "560px", width: "100%",
+        maxHeight: "80vh", overflow: "auto",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: 0 }}>
+            Suggestions IA
+          </h3>
+          <button onClick={onClose} style={{
+            background: "transparent", border: "none", color: "#6b7280",
+            fontSize: "20px", cursor: "pointer", padding: "4px",
+          }}>&times;</button>
+        </div>
+        {loading ? (
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#9ca3af", fontSize: "13px" }}>
+            <div style={{ marginBottom: "12px", fontSize: "20px" }}>&#x1f9e0;</div>
+            Analyse IA en cours...
+          </div>
+        ) : suggestions.length === 0 ? (
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#6b7280", fontSize: "13px" }}>
+            Aucune suggestion disponible.
+          </div>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            {suggestions.map((s, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                padding: "12px 16px", background: "#16171f", borderRadius: "10px",
+                border: "1px solid #2a2d3a", gap: "12px",
+              }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ color: "#f0f0f3", fontSize: "13px", fontWeight: 500 }}>{s.keyword}</div>
+                  <div style={{ color: "#6b7280", fontSize: "11px", marginTop: "2px" }}>{s.reason}</div>
+                </div>
+                <button onClick={() => onAdd(s.keyword)} style={{
+                  padding: "6px 12px", borderRadius: "6px", border: "none",
+                  background: "rgba(245,158,11,0.15)", color: "#f59e0b",
+                  fontSize: "11px", fontWeight: 600, cursor: "pointer",
+                  fontFamily: "inherit", whiteSpace: "nowrap",
+                }}>
+                  + Ajouter
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ReportModal({ report, loading, onClose }) {
+  return (
+    <div style={{
+      position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+      background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center",
+      justifyContent: "center", zIndex: 1000, padding: "20px",
+    }}>
+      <div style={{
+        background: "#1e2029", borderRadius: "16px", padding: "28px",
+        border: "1px solid #2a2d3a", maxWidth: "640px", width: "100%",
+        maxHeight: "85vh", overflow: "auto",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: 0 }}>
+            Rapport SEO
+          </h3>
+          <button onClick={onClose} style={{
+            background: "transparent", border: "none", color: "#6b7280",
+            fontSize: "20px", cursor: "pointer", padding: "4px",
+          }}>&times;</button>
+        </div>
+        {loading ? (
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#9ca3af", fontSize: "13px" }}>
+            <div style={{ marginBottom: "12px", fontSize: "20px" }}>&#x1f4ca;</div>
+            Generation du rapport IA...
+          </div>
+        ) : !report ? (
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#6b7280", fontSize: "13px" }}>
+            Erreur lors de la generation du rapport.
+          </div>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            {/* Score */}
+            <div style={{ textAlign: "center" }}>
+              <div style={{
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                width: "80px", height: "80px", borderRadius: "50%",
+                background: report.score >= 70 ? "rgba(34,197,94,0.12)" : report.score >= 40 ? "rgba(245,158,11,0.12)" : "rgba(239,68,68,0.12)",
+                border: `3px solid ${report.score >= 70 ? "#22c55e" : report.score >= 40 ? "#f59e0b" : "#ef4444"}`,
+              }}>
+                <span style={{
+                  fontSize: "24px", fontWeight: 700,
+                  color: report.score >= 70 ? "#22c55e" : report.score >= 40 ? "#f59e0b" : "#ef4444",
+                }}>{report.score}</span>
+              </div>
+              <div style={{ color: "#9ca3af", fontSize: "11px", marginTop: "8px" }}>Score SEO global</div>
+            </div>
+
+            {/* Summary */}
+            <div style={{ background: "#16171f", borderRadius: "10px", padding: "16px", border: "1px solid #2a2d3a" }}>
+              <div style={{ color: "#d1d5db", fontSize: "13px", lineHeight: "1.6" }}>{report.summary}</div>
+            </div>
+
+            {/* Stats row */}
+            {report.stats && (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))", gap: "10px" }}>
+                {[
+                  { label: "Mots-cles", value: report.stats.totalKeywords },
+                  { label: "Pos. moy.", value: report.stats.avgPos || "--" },
+                  { label: "Top 10", value: report.stats.inTop10 },
+                  { label: "Trafic est.", value: report.stats.totalTraffic },
+                ].map((s, i) => (
+                  <div key={i} style={{
+                    background: "#16171f", borderRadius: "8px", padding: "12px",
+                    border: "1px solid #2a2d3a", textAlign: "center",
+                  }}>
+                    <div style={{ fontSize: "16px", fontWeight: 700, color: "#f0f0f3" }}>{s.value}</div>
+                    <div style={{ fontSize: "10px", color: "#6b7280", marginTop: "4px" }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Strengths */}
+            <ReportSection title="Points forts" items={report.strengths} color="#22c55e" icon="\u2713" />
+
+            {/* Weaknesses */}
+            <ReportSection title="Axes d'amelioration" items={report.weaknesses} color="#ef4444" icon="!" />
+
+            {/* Actions */}
+            <ReportSection title="Actions prioritaires" items={report.actions} color="#f59e0b" icon="\u2192" />
+
+            {/* Forecast */}
+            {report.forecast && (
+              <div style={{ background: "rgba(245,158,11,0.08)", borderRadius: "10px", padding: "16px", border: "1px solid rgba(245,158,11,0.15)" }}>
+                <div style={{ fontSize: "12px", fontWeight: 600, color: "#f59e0b", marginBottom: "6px" }}>Prevision a 3 mois</div>
+                <div style={{ color: "#d1d5db", fontSize: "13px", lineHeight: "1.5" }}>{report.forecast}</div>
+              </div>
+            )}
+
+            {report.generatedAt && (
+              <div style={{ textAlign: "right", fontSize: "10px", color: "#4b5563" }}>
+                Genere le {new Date(report.generatedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ReportSection({ title, items, color, icon }) {
+  if (!items || items.length === 0) return null;
+  return (
+    <div>
+      <div style={{ fontSize: "12px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>{title}</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+        {items.map((item, i) => (
+          <div key={i} style={{
+            display: "flex", alignItems: "flex-start", gap: "8px",
+            padding: "8px 12px", background: "#16171f", borderRadius: "8px",
+            border: "1px solid #2a2d3a",
+          }}>
+            <span style={{ color, fontSize: "12px", fontWeight: 700, marginTop: "1px", flexShrink: 0 }}>{icon}</span>
+            <span style={{ color: "#d1d5db", fontSize: "12px", lineHeight: "1.4" }}>{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function AtlasDashboardPage() {
   const { get, post, del } = useApi();
   const [projects, setProjects] = useState([]);
@@ -47,6 +248,16 @@ export default function AtlasDashboardPage() {
   const [formKeywords, setFormKeywords] = useState("");
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState("");
+
+  // Suggestions state
+  const [suggestionsProjectId, setSuggestionsProjectId] = useState(null);
+  const [suggestions, setSuggestions] = useState([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
+
+  // Report state
+  const [reportProjectId, setReportProjectId] = useState(null);
+  const [report, setReport] = useState(null);
+  const [loadingReport, setLoadingReport] = useState(false);
 
   const fetchProjects = async () => {
     try {
@@ -107,12 +318,74 @@ export default function AtlasDashboardPage() {
     }
   };
 
+  const handleSuggestions = async (id) => {
+    setSuggestionsProjectId(id);
+    setLoadingSuggestions(true);
+    setSuggestions([]);
+    try {
+      const data = await post(`/api/atlas/projects/${id}/suggestions`);
+      setSuggestions(data.suggestions || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingSuggestions(false);
+    }
+  };
+
+  const handleAddSuggestion = async (keyword) => {
+    if (!suggestionsProjectId) return;
+    const project = projects.find(p => p._id === suggestionsProjectId);
+    if (!project) return;
+    if (project.keywords.includes(keyword)) return;
+
+    try {
+      // Re-create project keywords with new one added
+      const updatedKeywords = [...project.keywords, keyword];
+      // We update locally and refetch
+      setProjects(prev => prev.map(p =>
+        p._id === suggestionsProjectId
+          ? { ...p, keywords: updatedKeywords }
+          : p
+      ));
+      setSuggestions(prev => prev.filter(s => s.keyword !== keyword));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleReport = async (id) => {
+    setReportProjectId(id);
+    setLoadingReport(true);
+    setReport(null);
+    try {
+      const data = await get(`/api/atlas/projects/${id}/report`);
+      setReport(data.report || null);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingReport(false);
+    }
+  };
+
   // Overall stats
   const totalKeywords = projects.reduce((s, p) => s + (p.keywords?.length || 0), 0);
-  const avgPosition = projects.length > 0
-    ? Math.round(projects.filter(p => p.averagePosition).reduce((s, p) => s + p.averagePosition, 0) / (projects.filter(p => p.averagePosition).length || 1))
+  const projectsWithPos = projects.filter(p => p.averagePosition);
+  const avgPosition = projectsWithPos.length > 0
+    ? Math.round(projectsWithPos.reduce((s, p) => s + p.averagePosition, 0) / projectsWithPos.length)
     : null;
   const totalGained = projects.reduce((s, p) => s + (p.totalChange || 0), 0);
+
+  // Compute estimated monthly traffic across all projects
+  const totalEstimatedTraffic = projects.reduce((s, p) => {
+    if (!p.rankings) return s;
+    return s + p.rankings.reduce((rs, r) => rs + (r.estimatedTraffic || 0), 0);
+  }, 0);
+
+  // Keywords in top 10
+  const keywordsInTop10 = projects.reduce((s, p) => {
+    if (!p.rankings) return s;
+    return s + p.rankings.filter(r => r.position <= 10).length;
+  }, 0);
 
   const inputStyle = {
     width: "100%", padding: "10px 14px", background: "#1e2029",
@@ -153,13 +426,13 @@ export default function AtlasDashboardPage() {
         </div>
       </div>
 
-      {/* Stats */}
+      {/* Summary Stats */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "16px", marginBottom: "28px" }}>
         {[
           { label: "Mots-cles suivis", value: totalKeywords, suffix: "" },
           { label: "Position moyenne", value: avgPosition || "--", suffix: "" },
-          { label: "Positions gagnees", value: totalGained > 0 ? `+${totalGained}` : totalGained, suffix: "", color: totalGained > 0 ? "#22c55e" : totalGained < 0 ? "#ef4444" : "#9ca3af" },
-          { label: "Projets actifs", value: projects.length, suffix: "" },
+          { label: "Trafic mensuel est.", value: totalEstimatedTraffic > 0 ? totalEstimatedTraffic.toLocaleString("fr-FR") : "--", suffix: "", color: "#f59e0b" },
+          { label: "Mots-cles Top 10", value: keywordsInTop10, suffix: "", color: keywordsInTop10 > 0 ? "#22c55e" : "#9ca3af" },
         ].map((stat, i) => (
           <div key={i} style={{
             background: "#1e2029", borderRadius: "12px", padding: "20px",
@@ -230,6 +503,7 @@ export default function AtlasDashboardPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {projects.map(project => {
             const isExpanded = expandedId === project._id;
+            const projectTraffic = (project.rankings || []).reduce((s, r) => s + (r.estimatedTraffic || 0), 0);
             return (
               <div key={project._id} style={{
                 background: "#1e2029", borderRadius: "14px",
@@ -270,6 +544,12 @@ export default function AtlasDashboardPage() {
                         <PositionBadge position={project.averagePosition} />
                       </div>
                     )}
+                    {projectTraffic > 0 && (
+                      <div style={{ textAlign: "center" }}>
+                        <div style={{ fontSize: "11px", color: "#6b7280" }}>Trafic est.</div>
+                        <span style={{ fontSize: "13px", fontWeight: 600, color: "#f59e0b" }}>{projectTraffic.toLocaleString("fr-FR")}</span>
+                      </div>
+                    )}
                     {project.totalChange !== 0 && (
                       <ChangeBadge change={project.totalChange} />
                     )}
@@ -299,6 +579,28 @@ export default function AtlasDashboardPage() {
                         {checking === project._id ? "Verification..." : "Verifier les positions"}
                       </button>
                       <button
+                        onClick={() => handleSuggestions(project._id)}
+                        style={{
+                          padding: "8px 16px", borderRadius: "8px",
+                          border: "1px solid rgba(245,158,11,0.3)", background: "rgba(245,158,11,0.08)",
+                          color: "#f59e0b", fontSize: "12px", fontWeight: 600,
+                          cursor: "pointer", fontFamily: "inherit",
+                        }}
+                      >
+                        Suggestions IA
+                      </button>
+                      <button
+                        onClick={() => handleReport(project._id)}
+                        style={{
+                          padding: "8px 16px", borderRadius: "8px",
+                          border: "1px solid rgba(99,102,241,0.3)", background: "rgba(99,102,241,0.08)",
+                          color: "#818cf8", fontSize: "12px", fontWeight: 600,
+                          cursor: "pointer", fontFamily: "inherit",
+                        }}
+                      >
+                        Rapport SEO
+                      </button>
+                      <button
                         onClick={() => handleDelete(project._id)}
                         disabled={deleting === project._id}
                         style={{
@@ -306,7 +608,7 @@ export default function AtlasDashboardPage() {
                           border: "1px solid rgba(239,68,68,0.3)", background: "transparent",
                           color: "#ef4444", fontSize: "12px", fontWeight: 500,
                           cursor: deleting === project._id ? "default" : "pointer",
-                          fontFamily: "inherit",
+                          fontFamily: "inherit", marginLeft: "auto",
                         }}
                       >
                         {deleting === project._id ? "Suppression..." : "Supprimer"}
@@ -319,7 +621,7 @@ export default function AtlasDashboardPage() {
                         <table style={{ width: "100%", borderCollapse: "collapse" }}>
                           <thead>
                             <tr>
-                              {["Mot-cle", "Position", "Variation", "URL"].map(h => (
+                              {["Mot-cle", "Position", "Variation", "Volume", "Competition", "Trafic est.", "URL"].map(h => (
                                 <th key={h} style={{
                                   textAlign: "left", padding: "10px 12px",
                                   fontSize: "11px", color: "#6b7280", fontWeight: 500,
@@ -341,7 +643,16 @@ export default function AtlasDashboardPage() {
                                 <td style={{ padding: "10px 12px" }}>
                                   <ChangeBadge change={r.change} />
                                 </td>
-                                <td style={{ padding: "10px 12px", color: "#6b7280", fontSize: "12px", maxWidth: "300px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                <td style={{ padding: "10px 12px", color: "#d1d5db", fontSize: "12px" }}>
+                                  {r.searchVolume ? r.searchVolume.toLocaleString("fr-FR") : "--"}
+                                </td>
+                                <td style={{ padding: "10px 12px" }}>
+                                  <CompetitionBadge level={r.competition} />
+                                </td>
+                                <td style={{ padding: "10px 12px", color: "#f59e0b", fontSize: "12px", fontWeight: 500 }}>
+                                  {r.estimatedTraffic ? r.estimatedTraffic.toLocaleString("fr-FR") : "--"}
+                                </td>
+                                <td style={{ padding: "10px 12px", color: "#6b7280", fontSize: "12px", maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                   {r.url}
                                 </td>
                               </tr>
@@ -360,6 +671,25 @@ export default function AtlasDashboardPage() {
             );
           })}
         </div>
+      )}
+
+      {/* Suggestions Modal */}
+      {suggestionsProjectId && (
+        <SuggestionsModal
+          suggestions={suggestions}
+          loading={loadingSuggestions}
+          onClose={() => setSuggestionsProjectId(null)}
+          onAdd={handleAddSuggestion}
+        />
+      )}
+
+      {/* Report Modal */}
+      {reportProjectId && (
+        <ReportModal
+          report={report}
+          loading={loadingReport}
+          onClose={() => setReportProjectId(null)}
+        />
       )}
     </div>
   );

@@ -10,6 +10,9 @@ const seoProjectSchema = new mongoose.Schema({
     previousPosition: Number,
     url: String,
     change: Number,
+    searchVolume: Number,
+    competition: { type: String, enum: ["low", "medium", "high"] },
+    estimatedTraffic: Number,
     checkedAt: { type: Date, default: Date.now }
   }],
   lastCheckAt: Date,
@@ -17,6 +20,9 @@ const seoProjectSchema = new mongoose.Schema({
     date: Date,
     averagePosition: Number,
     keywordCount: Number,
+    estimatedTraffic: Number,
+    inTop10: Number,
+    inTop30: Number,
   }],
 }, { timestamps: true });
 

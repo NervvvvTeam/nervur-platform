@@ -35,6 +35,27 @@ function MiniBar({ value, max = 100, color }) {
   );
 }
 
+function TrendArrow({ current, previous }) {
+  if (previous === undefined || previous === null) return null;
+  const diff = current - previous;
+  if (diff === 0) return <span style={{ color: "#9ca3af", fontSize: "11px", marginLeft: "4px" }}>=</span>;
+  const isUp = diff > 0;
+  return (
+    <span style={{ color: isUp ? "#10b981" : "#ef4444", fontSize: "11px", fontWeight: 600, marginLeft: "4px" }}>
+      {isUp ? "\u2191" : "\u2193"}{isUp ? "+" : ""}{diff}
+    </span>
+  );
+}
+
+function ScoreWithTrend({ value, prevValue, color }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "2px" }}>
+      <MiniBar value={value} color={color} />
+      <TrendArrow current={value} previous={prevValue} />
+    </div>
+  );
+}
+
 export default function PhantomHistoryPage() {
   const api = useApi();
   const navigate = useNavigate();
@@ -44,6 +65,9 @@ export default function PhantomHistoryPage() {
   const [loading, setLoading] = useState(true);
   const [evolution, setEvolution] = useState([]);
   const [updatingDomain, setUpdatingDomain] = useState(null);
+  const [compareResult, setCompareResult] = useState(null);
+  const [comparingId, setComparingId] = useState(null);
+  const [viewMode, setViewMode] = useState("grouped"); // "grouped" or "list"
 
   useEffect(() => {
     loadHistory();
@@ -79,13 +103,32 @@ export default function PhantomHistoryPage() {
     }
   };
 
+  const handleCompare = async (currentId, previousId) => {
+    if (!currentId || !previousId) return;
+    setComparingId(currentId);
+    try {
+      const data = await api.post(`/api/phantom/compare/${currentId}`, { compareWithId: previousId });
+      setCompareResult(data);
+    } catch (err) {
+      console.error("Compare error:", err);
+    } finally {
+      setComparingId(null);
+    }
+  };
+
   const formatDate = (d) => {
     const date = new Date(d);
     return date.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
   };
 
-  // Group audits by domain for the "update" buttons
-  const uniqueDomains = [...new Set(audits.map(a => a.domain))];
+  // Group audits by domain
+  const groupedByDomain = {};
+  audits.forEach(a => {
+    if (!groupedByDomain[a.domain]) groupedByDomain[a.domain] = [];
+    groupedByDomain[a.domain].push(a);
+  });
+
+  const uniqueDomains = Object.keys(groupedByDomain);
 
   const chartHeight = 140;
   const chartWidth = 600;
@@ -105,34 +148,121 @@ export default function PhantomHistoryPage() {
           Historique des audits
         </h1>
         <p style={{ fontSize: "14px", color: "#9ca3af" }}>
-          Suivez l'évolution de vos scores au fil du temps.
+          Suivez l'\u00e9volution de vos scores au fil du temps.
         </p>
       </div>
 
-      {/* Domain cards with update buttons */}
-      {!loading && uniqueDomains.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "24px" }}>
+      {/* View mode toggle */}
+      {!loading && audits.length > 0 && (
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+          {/* Domain filter tabs */}
+          <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+            {domains.length > 1 && (
+              <>
+                <button onClick={() => setSelectedDomain("")}
+                  style={{
+                    padding: "6px 14px", borderRadius: "6px", border: "none",
+                    fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
+                    background: !selectedDomain ? "#8b5cf6" : "#2a2d3a",
+                    color: !selectedDomain ? "#fff" : "#6b7280",
+                  }}>Tous</button>
+                {domains.map(d => (
+                  <button key={d} onClick={() => setSelectedDomain(d)}
+                    style={{
+                      padding: "6px 14px", borderRadius: "6px", border: "none",
+                      fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
+                      background: selectedDomain === d ? "#8b5cf6" : "#2a2d3a",
+                      color: selectedDomain === d ? "#fff" : "#6b7280",
+                    }}>{d}</button>
+                ))}
+              </>
+            )}
+          </div>
+
+          <div style={{ display: "flex", gap: "4px" }}>
+            <button onClick={() => setViewMode("grouped")}
+              style={{
+                padding: "6px 12px", borderRadius: "6px", border: "none",
+                fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
+                background: viewMode === "grouped" ? "#8b5cf6" : "#2a2d3a",
+                color: viewMode === "grouped" ? "#fff" : "#6b7280",
+              }}>Par domaine</button>
+            <button onClick={() => setViewMode("list")}
+              style={{
+                padding: "6px 12px", borderRadius: "6px", border: "none",
+                fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
+                background: viewMode === "list" ? "#8b5cf6" : "#2a2d3a",
+                color: viewMode === "list" ? "#fff" : "#6b7280",
+              }}>Liste</button>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div style={{ padding: "60px 0", textAlign: "center", color: "#9ca3af", fontSize: "14px" }}>
+          Chargement...
+        </div>
+      )}
+
+      {!loading && audits.length === 0 && (
+        <div style={{
+          padding: "60px 24px", textAlign: "center",
+          background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+        }}>
+          <div style={{ fontSize: "16px", color: "#9ca3af", marginBottom: "12px" }}>
+            Aucun audit enregistr\u00e9
+          </div>
+          <p style={{ fontSize: "14px", color: "#d1d5db", marginBottom: "20px" }}>
+            Lancez votre premier audit depuis la page Audit.
+          </p>
+          <button onClick={() => navigate("/app/phantom")}
+            style={{
+              padding: "10px 24px", background: "#8b5cf6", color: "#fff",
+              border: "none", borderRadius: "8px", fontSize: "14px",
+              fontWeight: 500, cursor: "pointer", fontFamily: "inherit",
+            }}>
+            Lancer un audit
+          </button>
+        </div>
+      )}
+
+      {/* Grouped view */}
+      {!loading && viewMode === "grouped" && uniqueDomains.length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "24px" }}>
           {uniqueDomains.map(domain => {
-            const latestAudit = audits.find(a => a.domain === domain);
-            const domainAudits = audits.filter(a => a.domain === domain);
+            const domainAudits = groupedByDomain[domain];
+            const latestAudit = domainAudits[0];
+            const previousAudit = domainAudits.length > 1 ? domainAudits[1] : null;
             const isUpdating = updatingDomain === domain;
+
             return (
               <div key={domain} style={{
-                padding: "18px 22px", background: "#1e2029", border: "1px solid #2a2d3a",
+                background: "#1e2029", border: "1px solid #2a2d3a",
                 borderRadius: "10px", borderLeft: "3px solid #8b5cf6",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)", overflow: "hidden",
               }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
+                {/* Domain header */}
+                <div style={{
+                  padding: "18px 22px",
+                  display: "flex", alignItems: "center", justifyContent: "space-between",
+                }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <div>
                       <div style={{ fontSize: "15px", fontWeight: 500, color: "#d1d5db" }}>{domain}</div>
-                      <div style={{ fontSize: "12px", color: "#d1d5db" }}>
+                      <div style={{ fontSize: "12px", color: "#9ca3af" }}>
                         {domainAudits.length} audit{domainAudits.length > 1 ? "s" : ""} — Dernier : {formatDate(latestAudit?.createdAt)}
                       </div>
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <ScoreBadge score={latestAudit?.scores?.global || 0} />
+                    {previousAudit && (
+                      <TrendArrow
+                        current={latestAudit?.scores?.global || 0}
+                        previous={previousAudit?.scores?.global || 0}
+                      />
+                    )}
                     <button
                       onClick={(e) => { e.stopPropagation(); handleUpdate(latestAudit?.url || `https://${domain}`, domain); }}
                       disabled={isUpdating}
@@ -157,31 +287,133 @@ export default function PhantomHistoryPage() {
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M21 12a9 9 0 0 0-9-9"/><path d="M3 12a9 9 0 0 0 9 9"/><polyline points="21 3 21 12 12 12"/>
                           </svg>
-                          Mettre à jour
+                          Mettre \u00e0 jour
                         </>
                       )}
                     </button>
                   </div>
                 </div>
 
-                {/* Score bars */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px" }}>
-                  <div>
-                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>Performance</div>
-                    <MiniBar value={latestAudit?.scores?.performance || 0} color="#8b5cf6" />
+                {/* Score bars with trends */}
+                <div style={{ padding: "0 22px 16px", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px" }}>
+                  {[
+                    { key: "performance", label: "Performance", color: "#8b5cf6" },
+                    { key: "accessibility", label: "Accessibilit\u00e9", color: "#3b82f6" },
+                    { key: "seo", label: "SEO", color: "#10b981" },
+                    { key: "bestPractices", label: "Bonnes pratiques", color: "#f59e0b" },
+                  ].map(({ key, label, color }) => (
+                    <div key={key}>
+                      <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>{label}</div>
+                      <ScoreWithTrend
+                        value={latestAudit?.scores?.[key] || 0}
+                        prevValue={previousAudit?.scores?.[key]}
+                        color={color}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Audit list within domain */}
+                {domainAudits.length > 1 && (
+                  <div style={{ borderTop: "1px solid #2a2d3a" }}>
+                    {domainAudits.map((audit, idx) => {
+                      const prevAudit = idx < domainAudits.length - 1 ? domainAudits[idx + 1] : null;
+                      return (
+                        <div key={audit._id} style={{
+                          padding: "12px 22px",
+                          borderBottom: idx < domainAudits.length - 1 ? "1px solid #2a2d3a" : "none",
+                          display: "flex", alignItems: "center", justifyContent: "space-between",
+                          background: idx === 0 ? "rgba(139,92,246,0.04)" : "transparent",
+                        }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                            <span style={{ fontSize: "12px", color: "#9ca3af", minWidth: "160px" }}>
+                              {formatDate(audit.createdAt)}
+                            </span>
+                            <span style={{ fontSize: "13px", color: "#f0f0f3", fontWeight: 500 }}>
+                              {audit.scores?.global || 0}
+                            </span>
+                            {prevAudit && (
+                              <TrendArrow
+                                current={audit.scores?.global || 0}
+                                previous={prevAudit.scores?.global || 0}
+                              />
+                            )}
+                          </div>
+                          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                            <span style={{ fontSize: "11px", color: "#6b7280" }}>
+                              P:{audit.scores?.performance || 0} A:{audit.scores?.accessibility || 0} S:{audit.scores?.seo || 0} BP:{audit.scores?.bestPractices || 0}
+                            </span>
+                            {prevAudit && (
+                              <button
+                                onClick={() => handleCompare(audit._id, prevAudit._id)}
+                                disabled={comparingId === audit._id}
+                                style={{
+                                  padding: "4px 10px", background: "#2a2d3a",
+                                  border: "1px solid #3a3d4a", borderRadius: "4px",
+                                  color: "#a78bfa", fontSize: "11px", cursor: "pointer", fontFamily: "inherit",
+                                  opacity: comparingId === audit._id ? 0.5 : 1,
+                                }}>
+                                {comparingId === audit._id ? "..." : "Comparer"}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* List view (flat) */}
+      {!loading && viewMode === "list" && audits.length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "24px" }}>
+          {audits.map((audit, idx) => {
+            // Find previous audit of same domain
+            const samedomainAfter = audits.filter(a => a.domain === audit.domain);
+            const myIndex = samedomainAfter.indexOf(audit);
+            const prevAudit = myIndex < samedomainAfter.length - 1 ? samedomainAfter[myIndex + 1] : null;
+
+            return (
+              <div key={audit._id} style={{
+                padding: "16px 20px", background: "#1e2029", border: "1px solid #2a2d3a",
+                borderRadius: "10px", borderLeft: "3px solid #8b5cf6",
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                   <div>
-                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>Accessibilité</div>
-                    <MiniBar value={latestAudit?.scores?.accessibility || 0} color="#3b82f6" />
+                    <div style={{ fontSize: "14px", fontWeight: 500, color: "#d1d5db" }}>{audit.domain}</div>
+                    <div style={{ fontSize: "12px", color: "#9ca3af" }}>{formatDate(audit.createdAt)}</div>
                   </div>
-                  <div>
-                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>SEO</div>
-                    <MiniBar value={latestAudit?.scores?.seo || 0} color="#10b981" />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  <div style={{ display: "flex", gap: "8px", fontSize: "11px", color: "#6b7280" }}>
+                    <span>P:{audit.scores?.performance || 0}{prevAudit && <TrendArrow current={audit.scores?.performance || 0} previous={prevAudit.scores?.performance || 0} />}</span>
+                    <span>A:{audit.scores?.accessibility || 0}{prevAudit && <TrendArrow current={audit.scores?.accessibility || 0} previous={prevAudit.scores?.accessibility || 0} />}</span>
+                    <span>S:{audit.scores?.seo || 0}{prevAudit && <TrendArrow current={audit.scores?.seo || 0} previous={prevAudit.scores?.seo || 0} />}</span>
+                    <span>BP:{audit.scores?.bestPractices || 0}{prevAudit && <TrendArrow current={audit.scores?.bestPractices || 0} previous={prevAudit.scores?.bestPractices || 0} />}</span>
                   </div>
-                  <div>
-                    <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>Bonnes pratiques</div>
-                    <MiniBar value={latestAudit?.scores?.bestPractices || 0} color="#f59e0b" />
-                  </div>
+                  <ScoreBadge score={audit.scores?.global || 0} />
+                  {prevAudit && (
+                    <TrendArrow current={audit.scores?.global || 0} previous={prevAudit.scores?.global || 0} />
+                  )}
+                  {prevAudit && (
+                    <button
+                      onClick={() => handleCompare(audit._id, prevAudit._id)}
+                      disabled={comparingId === audit._id}
+                      style={{
+                        padding: "5px 12px", background: "#2a2d3a",
+                        border: "1px solid #3a3d4a", borderRadius: "6px",
+                        color: "#a78bfa", fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
+                        opacity: comparingId === audit._id ? 0.5 : 1,
+                      }}>
+                      {comparingId === audit._id ? "..." : "Comparer"}
+                    </button>
+                  )}
                 </div>
               </div>
             );
@@ -189,54 +421,73 @@ export default function PhantomHistoryPage() {
         </div>
       )}
 
-      {/* Domain filter tabs */}
-      {domains.length > 1 && (
-        <div style={{ marginBottom: "20px", display: "flex", gap: "6px", flexWrap: "wrap" }}>
-          <button onClick={() => setSelectedDomain("")}
-            style={{
-              padding: "6px 14px", borderRadius: "6px", border: "none",
-              fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-              background: !selectedDomain ? "#8b5cf6" : "#2a2d3a",
-              color: !selectedDomain ? "#fff" : "#6b7280",
-            }}>Tous</button>
-          {domains.map(d => (
-            <button key={d} onClick={() => setSelectedDomain(d)}
-              style={{
-                padding: "6px 14px", borderRadius: "6px", border: "none",
-                fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                background: selectedDomain === d ? "#8b5cf6" : "#2a2d3a",
-                color: selectedDomain === d ? "#fff" : "#6b7280",
-              }}>{d}</button>
-          ))}
-        </div>
-      )}
-
-      {loading && (
-        <div style={{ padding: "60px 0", textAlign: "center", color: "#9ca3af", fontSize: "14px" }}>
-          Chargement...
-        </div>
-      )}
-
-      {!loading && audits.length === 0 && (
+      {/* Comparison modal overlay */}
+      {compareResult && (
         <div style={{
-          padding: "60px 24px", textAlign: "center",
-          background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-        }}>
-          <div style={{ fontSize: "16px", color: "#9ca3af", marginBottom: "12px" }}>
-            Aucun audit enregistré
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(0,0,0,0.6)", zIndex: 1000,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          padding: "20px",
+        }} onClick={() => setCompareResult(null)}>
+          <div style={{
+            background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "14px",
+            padding: "28px", maxWidth: "600px", width: "100%",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+          }} onClick={e => e.stopPropagation()}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+              <div>
+                <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3" }}>Comparaison</div>
+                <div style={{ fontSize: "12px", color: "#9ca3af" }}>{compareResult.domain}</div>
+              </div>
+              <button onClick={() => setCompareResult(null)} style={{
+                background: "none", border: "none", color: "#9ca3af", cursor: "pointer", fontSize: "18px"
+              }}>{"\u00d7"}</button>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px", marginBottom: "20px" }}>
+              {["global", "performance", "accessibility", "seo", "bestPractices"].map(key => {
+                const comp = compareResult.comparison?.[key];
+                if (!comp) return null;
+                const labels = { global: "Global", performance: "Perf.", accessibility: "A11y", seo: "SEO", bestPractices: "BP" };
+                return (
+                  <div key={key} style={{
+                    padding: "12px 8px", background: "#161820", border: "1px solid #2a2d3a",
+                    borderRadius: "8px", textAlign: "center"
+                  }}>
+                    <div style={{ fontSize: "10px", color: "#9ca3af", marginBottom: "6px" }}>{labels[key]}</div>
+                    <div style={{ fontSize: "12px", color: "#6b7280" }}>{comp.previous}</div>
+                    <div style={{ fontSize: "11px", color: "#9ca3af", margin: "2px 0" }}>{"\u2193"}</div>
+                    <div style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3" }}>{comp.current}</div>
+                    <div style={{ marginTop: "4px" }}>
+                      {comp.diff === 0
+                        ? <span style={{ color: "#9ca3af", fontSize: "11px" }}>=</span>
+                        : <span style={{ color: comp.diff > 0 ? "#10b981" : "#ef4444", fontSize: "12px", fontWeight: 600 }}>
+                            {comp.diff > 0 ? "\u2191+" : "\u2193"}{comp.diff}
+                          </span>
+                      }
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div style={{ display: "flex", gap: "12px" }}>
+              <div style={{
+                flex: 1, padding: "12px", background: "rgba(16,185,129,0.06)",
+                border: "1px solid rgba(16,185,129,0.15)", borderRadius: "8px", textAlign: "center"
+              }}>
+                <div style={{ fontSize: "20px", fontWeight: 600, color: "#10b981" }}>{compareResult.resolvedIssues || 0}</div>
+                <div style={{ fontSize: "11px", color: "#9ca3af" }}>R\u00e9solus</div>
+              </div>
+              <div style={{
+                flex: 1, padding: "12px", background: "rgba(239,68,68,0.06)",
+                border: "1px solid rgba(239,68,68,0.15)", borderRadius: "8px", textAlign: "center"
+              }}>
+                <div style={{ fontSize: "20px", fontWeight: 600, color: "#ef4444" }}>{compareResult.newIssues || 0}</div>
+                <div style={{ fontSize: "11px", color: "#9ca3af" }}>Nouveaux</div>
+              </div>
+            </div>
           </div>
-          <p style={{ fontSize: "14px", color: "#d1d5db", marginBottom: "20px" }}>
-            Lancez votre premier audit depuis la page Audit.
-          </p>
-          <button onClick={() => navigate("/app/phantom")}
-            style={{
-              padding: "10px 24px", background: "#8b5cf6", color: "#fff",
-              border: "none", borderRadius: "8px", fontSize: "14px",
-              fontWeight: 500, cursor: "pointer", fontFamily: "inherit",
-            }}>
-            Lancer un audit
-          </button>
         </div>
       )}
 
@@ -248,7 +499,7 @@ export default function PhantomHistoryPage() {
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "16px" }}>
-            Évolution du score global
+            \u00c9volution du score global
           </div>
           <div style={{ position: "relative", height: chartHeight + 30, overflow: "hidden" }}>
             <svg width="100%" height={chartHeight + 30} viewBox={`0 0 ${chartWidth} ${chartHeight + 30}`} preserveAspectRatio="xMidYMid meet">

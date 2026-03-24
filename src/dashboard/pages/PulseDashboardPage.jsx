@@ -39,6 +39,27 @@ const RefreshIcon = ({ size = 16, color = ACCENT }) => (
   </svg>
 );
 
+const ShieldIcon = ({ size = 16, color = ACCENT }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+  </svg>
+);
+
+const BellIcon = ({ size = 16, color = ACCENT }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+  </svg>
+);
+
+const GlobeIcon = ({ size = 16, color = ACCENT }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
 function ScoreGauge({ score, size = 100 }) {
   const radius = (size - 12) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -78,11 +99,263 @@ function StatusBadge({ ok, labelOk, labelFail }) {
   );
 }
 
-function SiteCard({ site, onRecheck, onDelete, recheckingId }) {
+function Chip({ label, color = "#9ca3af" }) {
+  return (
+    <span style={{
+      display: "inline-flex", alignItems: "center",
+      padding: "2px 10px", borderRadius: "12px", fontSize: "11px", fontWeight: 500,
+      color, background: `${color}15`, border: `1px solid ${color}30`,
+    }}>
+      {label}
+    </span>
+  );
+}
+
+function MiniResponseTimeChart({ history, width = 260, height = 60 }) {
+  const points = (history || []).slice(-5);
+  if (points.length < 2) return null;
+
+  const times = points.map(p => p.responseTime || 0);
+  const maxT = Math.max(...times, 1);
+  const padding = { top: 4, bottom: 4, left: 4, right: 4 };
+  const chartW = width - padding.left - padding.right;
+  const chartH = height - padding.top - padding.bottom;
+
+  const getX = (i) => padding.left + (i / (points.length - 1)) * chartW;
+  const getY = (t) => padding.top + chartH - (t / maxT) * chartH;
+
+  const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${getX(i)} ${getY(p.responseTime || 0)}`).join(" ");
+
+  return (
+    <svg width={width} height={height} style={{ display: "block" }}>
+      <defs>
+        <linearGradient id="rtGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={ACCENT} stopOpacity="0.25" />
+          <stop offset="100%" stopColor={ACCENT} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={pathD + ` L ${getX(points.length - 1)} ${height - padding.bottom} L ${getX(0)} ${height - padding.bottom} Z`} fill="url(#rtGrad)" />
+      <path d={pathD} fill="none" stroke={ACCENT} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      {points.map((p, i) => (
+        <circle key={i} cx={getX(i)} cy={getY(p.responseTime || 0)} r="3" fill={ACCENT} stroke="#1e2029" strokeWidth="1.5" />
+      ))}
+    </svg>
+  );
+}
+
+function AlertsConfig({ site, onSave }) {
+  const [email, setEmail] = useState(site.alertEmail || "");
+  const [down, setDown] = useState(site.alerts?.down || false);
+  const [sslExp, setSslExp] = useState(site.alerts?.sslExpiring || false);
+  const [domainExp, setDomainExp] = useState(site.alerts?.domainExpiring || false);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = async () => {
+    setSaving(true);
+    setSaved(false);
+    await onSave(site._id, {
+      alertEmail: email,
+      alerts: { down, sslExpiring: sslExp, domainExpiring: domainExp },
+    });
+    setSaving(false);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
+  const toggleStyle = (active) => ({
+    width: "36px", height: "20px", borderRadius: "10px",
+    background: active ? ACCENT : "#2a2d3a",
+    border: "none", cursor: "pointer", position: "relative",
+    transition: "background 0.2s", flexShrink: 0,
+  });
+  const toggleDot = (active) => ({
+    position: "absolute", top: "2px", width: "16px", height: "16px", borderRadius: "50%",
+    background: "#fff", transition: "left 0.2s",
+    left: active ? "18px" : "2px",
+  });
+
+  return (
+    <div style={{
+      marginTop: "16px", padding: "16px", background: "#1e2029",
+      border: "1px solid #2a2d3a", borderRadius: "8px", borderLeft: `3px solid ${ACCENT}`,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+        <BellIcon size={16} color={ACCENT} />
+        <span style={{ fontSize: "13px", fontWeight: 600, color: "#f0f0f3" }}>Configurer les alertes</span>
+      </div>
+
+      <div style={{ marginBottom: "12px" }}>
+        <label style={{ fontSize: "12px", color: "#9ca3af", display: "block", marginBottom: "6px" }}>Email pour les alertes</label>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="votre@email.com"
+          style={{
+            width: "100%", padding: "8px 12px", background: "#141520",
+            border: "1px solid #2a2d3a", borderRadius: "6px",
+            color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
+            outline: "none", boxSizing: "border-box",
+          }}
+        />
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "14px" }}>
+        {[
+          { label: "Site hors ligne (down)", active: down, toggle: () => setDown(!down) },
+          { label: "Certificat SSL expire bientot", active: sslExp, toggle: () => setSslExp(!sslExp) },
+          { label: "Domaine expire bientot", active: domainExp, toggle: () => setDomainExp(!domainExp) },
+        ].map(({ label, active, toggle }) => (
+          <div key={label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <span style={{ fontSize: "12px", color: "#d1d5db" }}>{label}</span>
+            <button onClick={toggle} style={toggleStyle(active)}>
+              <div style={toggleDot(active)} />
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={handleSave}
+        disabled={saving}
+        style={{
+          padding: "8px 20px", borderRadius: "6px", fontSize: "12px", fontWeight: 600,
+          background: saved ? "rgba(16,185,129,0.15)" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
+          border: saved ? "1px solid rgba(16,185,129,0.3)" : "none",
+          color: saved ? "#10b981" : "#fff",
+          cursor: saving ? "wait" : "pointer", fontFamily: "inherit",
+          opacity: saving ? 0.5 : 1,
+        }}
+      >
+        {saving ? "Enregistrement..." : saved ? "Enregistre !" : "Enregistrer les alertes"}
+      </button>
+    </div>
+  );
+}
+
+function StatusPagePreview({ site, statusData, onClose }) {
+  if (!statusData) return null;
+
+  const statusColor = statusData.status === "operational" ? "#10b981" : "#ef4444";
+  const statusLabel = statusData.status === "operational" ? "Operationnel" : "Hors ligne";
+
+  return (
+    <div style={{
+      position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+      background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center",
+      zIndex: 9999,
+    }} onClick={onClose}>
+      <div style={{
+        width: "600px", maxHeight: "80vh", overflow: "auto",
+        background: "#141520", borderRadius: "12px", border: "1px solid #2a2d3a",
+        padding: "32px",
+      }} onClick={e => e.stopPropagation()}>
+        {/* Status page header */}
+        <div style={{ textAlign: "center", marginBottom: "28px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "8px" }}>
+            <GlobeIcon size={24} color={ACCENT} />
+            <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#f0f0f3", margin: 0 }}>
+              {statusData.domain}
+            </h2>
+          </div>
+          <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0 }}>Page de statut publique</p>
+        </div>
+
+        {/* Big status indicator */}
+        <div style={{
+          textAlign: "center", padding: "24px", marginBottom: "24px",
+          background: `${statusColor}10`, border: `1px solid ${statusColor}30`,
+          borderRadius: "10px",
+        }}>
+          <div style={{
+            width: "16px", height: "16px", borderRadius: "50%",
+            background: statusColor, margin: "0 auto 12px",
+            boxShadow: `0 0 12px ${statusColor}60`,
+          }} />
+          <div style={{ fontSize: "18px", fontWeight: 700, color: statusColor }}>{statusLabel}</div>
+          <div style={{ fontSize: "13px", color: "#9ca3af", marginTop: "6px" }}>
+            Disponibilite : {statusData.uptimePercentage}%
+          </div>
+        </div>
+
+        {/* Stats grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "12px", marginBottom: "24px" }}>
+          <div style={{ padding: "16px", background: "#1e2029", borderRadius: "8px", textAlign: "center" }}>
+            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>Temps de reponse</div>
+            <div style={{ fontSize: "20px", fontWeight: 700, color: "#f0f0f3" }}>
+              {statusData.responseTime ? `${statusData.responseTime}ms` : "N/A"}
+            </div>
+          </div>
+          <div style={{ padding: "16px", background: "#1e2029", borderRadius: "8px", textAlign: "center" }}>
+            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>Certificat SSL</div>
+            <div style={{ fontSize: "20px", fontWeight: 700, color: statusData.ssl?.valid ? "#10b981" : "#ef4444" }}>
+              {statusData.ssl?.valid ? `${statusData.ssl.daysLeft}j` : "Invalide"}
+            </div>
+          </div>
+          <div style={{ padding: "16px", background: "#1e2029", borderRadius: "8px", textAlign: "center" }}>
+            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>Uptime</div>
+            <div style={{ fontSize: "20px", fontWeight: 700, color: statusData.uptimePercentage >= 99 ? "#10b981" : "#f59e0b" }}>
+              {statusData.uptimePercentage}%
+            </div>
+          </div>
+        </div>
+
+        {/* Recent history bar */}
+        {statusData.recentHistory && statusData.recentHistory.length > 0 && (
+          <div style={{ marginBottom: "24px" }}>
+            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "10px" }}>Historique recent</div>
+            <div style={{ display: "flex", gap: "3px" }}>
+              {statusData.recentHistory.map((h, i) => (
+                <div key={i} style={{
+                  flex: 1, height: "28px", borderRadius: "3px",
+                  background: h.status === "up" ? "#10b981" : "#ef4444",
+                  opacity: 0.7 + (i / statusData.recentHistory.length) * 0.3,
+                  cursor: "default",
+                }} title={`${new Date(h.checkedAt).toLocaleString("fr-FR")} — ${h.status === "up" ? "En ligne" : "Hors ligne"} — ${h.responseTime || "?"}ms`} />
+              ))}
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px" }}>
+              <span style={{ fontSize: "10px", color: "#6b7280" }}>Ancien</span>
+              <span style={{ fontSize: "10px", color: "#6b7280" }}>Recent</span>
+            </div>
+          </div>
+        )}
+
+        <div style={{ fontSize: "11px", color: "#6b7280", textAlign: "center" }}>
+          Derniere verification : {statusData.lastChecked ? new Date(statusData.lastChecked).toLocaleString("fr-FR") : "N/A"}
+        </div>
+
+        <button
+          onClick={onClose}
+          style={{
+            display: "block", width: "100%", marginTop: "20px",
+            padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: 600,
+            background: "transparent", border: `1px solid ${BORDER_TINT}`,
+            color: ACCENT, cursor: "pointer", fontFamily: "inherit",
+          }}
+        >
+          Fermer
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, recheckingId }) {
   const [expanded, setExpanded] = useState(false);
   const check = site.lastCheck || {};
   const score = check.score ?? 0;
   const isRechecking = recheckingId === site._id;
+  const history = site.history || [];
+
+  // SSL color coding
+  const sslDays = check.ssl?.daysLeft;
+  const sslColor = !check.ssl?.valid ? "#ef4444" : sslDays > 30 ? "#10b981" : sslDays > 7 ? "#f59e0b" : "#ef4444";
+
+  // Domain color coding
+  const domainDays = check.domain?.daysUntilExpiry;
+  const domainColor = domainDays > 60 ? "#10b981" : domainDays > 30 ? "#f59e0b" : "#ef4444";
 
   return (
     <div style={{
@@ -121,7 +394,7 @@ function SiteCard({ site, onRecheck, onDelete, recheckingId }) {
             }}
           >
             <RefreshIcon size={14} />
-            {isRechecking ? "Analyse..." : "Revérifier"}
+            {isRechecking ? "Analyse..." : "Reverifier"}
           </button>
           <button
             onClick={e => { e.stopPropagation(); onDelete(site._id); }}
@@ -141,7 +414,7 @@ function SiteCard({ site, onRecheck, onDelete, recheckingId }) {
         </div>
       </div>
 
-      {/* Expanded details */}
+      {/* Expanded health card dashboard */}
       {expanded && (
         <div style={{ marginTop: "20px", paddingTop: "20px", borderTop: `1px solid ${BORDER_TINT}` }}>
           {/* Score */}
@@ -151,7 +424,7 @@ function SiteCard({ site, onRecheck, onDelete, recheckingId }) {
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-            {/* Uptime */}
+            {/* Uptime card with response time graph */}
             <div style={{
               padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
               borderRadius: "8px", borderLeft: `3px solid ${check.uptime?.status ? "#10b981" : "#ef4444"}`,
@@ -168,22 +441,46 @@ function SiteCard({ site, onRecheck, onDelete, recheckingId }) {
                   Code HTTP : <span style={{ color: "#d1d5db" }}>{check.uptime.statusCode}</span>
                 </div>
               )}
+              {/* Mini response time graph */}
+              {history.length >= 2 && (
+                <div style={{ marginTop: "10px" }}>
+                  <div style={{ fontSize: "10px", color: "#6b7280", marginBottom: "4px" }}>Temps de reponse (5 derniers)</div>
+                  <MiniResponseTimeChart history={history} width={230} height={50} />
+                </div>
+              )}
             </div>
 
-            {/* SSL */}
+            {/* SSL card with full details */}
             <div style={{
               padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", borderLeft: `3px solid ${check.ssl?.valid ? "#10b981" : "#ef4444"}`,
+              borderRadius: "8px", borderLeft: `3px solid ${sslColor}`,
             }}>
               <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Certificat SSL</div>
               <StatusBadge ok={check.ssl?.valid} labelOk="Valide" labelFail="Invalide" />
               {check.ssl?.valid && (
                 <>
                   <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "6px" }}>
-                    Expire dans : <span style={{ color: check.ssl.daysLeft > 30 ? "#10b981" : "#f59e0b", fontWeight: 500 }}>{check.ssl.daysLeft} jours</span>
+                    Expire dans : <span style={{ color: sslColor, fontWeight: 600 }}>{check.ssl.daysLeft} jours</span>
                   </div>
                   <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
                     Emetteur : <span style={{ color: "#d1d5db" }}>{check.ssl.issuer}</span>
+                  </div>
+                  {check.ssl.expiryDate && (
+                    <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
+                      Date d'expiration : <span style={{ color: "#d1d5db" }}>{new Date(check.ssl.expiryDate).toLocaleDateString("fr-FR")}</span>
+                    </div>
+                  )}
+                  {/* Expiry countdown bar */}
+                  <div style={{ marginTop: "8px" }}>
+                    <div style={{
+                      height: "4px", borderRadius: "2px", background: "#2a2d3a", overflow: "hidden",
+                    }}>
+                      <div style={{
+                        height: "100%", borderRadius: "2px", background: sslColor,
+                        width: `${Math.min(100, Math.max(0, (check.ssl.daysLeft / 365) * 100))}%`,
+                        transition: "width 0.5s ease",
+                      }} />
+                    </div>
                   </div>
                 </>
               )}
@@ -192,51 +489,77 @@ function SiteCard({ site, onRecheck, onDelete, recheckingId }) {
               )}
             </div>
 
-            {/* Domain */}
+            {/* Domain card */}
             <div style={{
               padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", borderLeft: `3px solid ${check.domain?.daysUntilExpiry > 30 ? "#10b981" : "#f59e0b"}`,
+              borderRadius: "8px", borderLeft: `3px solid ${domainColor}`,
             }}>
               <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Domaine</div>
               <div style={{ fontSize: "12px", color: "#6b7280" }}>
-                Expire dans : <span style={{ color: check.domain?.daysUntilExpiry > 60 ? "#10b981" : "#f59e0b", fontWeight: 500 }}>
-                  {check.domain?.daysUntilExpiry || "?"} jours
+                Expire dans : <span style={{ color: domainColor, fontWeight: 600 }}>
+                  {domainDays || "?"} jours
                 </span>
+              </div>
+              {check.domain?.expiryEstimate && (
+                <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
+                  Estimation : <span style={{ color: "#d1d5db" }}>{new Date(check.domain.expiryEstimate).toLocaleDateString("fr-FR")}</span>
+                </div>
+              )}
+              {/* Expiry countdown bar */}
+              <div style={{ marginTop: "8px" }}>
+                <div style={{
+                  height: "4px", borderRadius: "2px", background: "#2a2d3a", overflow: "hidden",
+                }}>
+                  <div style={{
+                    height: "100%", borderRadius: "2px", background: domainColor,
+                    width: `${Math.min(100, Math.max(0, (domainDays / 365) * 100))}%`,
+                    transition: "width 0.5s ease",
+                  }} />
+                </div>
               </div>
             </div>
 
-            {/* DNS */}
+            {/* DNS card with chips */}
             <div style={{
               padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
               borderRadius: "8px", borderLeft: `3px solid ${check.dns?.aRecords ? "#10b981" : "#ef4444"}`,
             }}>
               <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>DNS</div>
               {check.dns?.aRecords ? (
-                <>
-                  <div style={{ fontSize: "12px", color: "#6b7280", marginBottom: "4px" }}>
-                    Enregistrements A : <span style={{ color: "#d1d5db" }}>{check.dns.aRecords.length}</span>
-                  </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                  <Chip label={`A : ${check.dns.aRecords.length}`} color="#10b981" />
                   {check.dns.mxRecords?.length > 0 && (
-                    <div style={{ fontSize: "12px", color: "#6b7280", marginBottom: "4px" }}>
-                      MX : <span style={{ color: "#d1d5db" }}>{check.dns.mxRecords.join(", ")}</span>
-                    </div>
+                    <Chip label={`MX : ${check.dns.mxRecords.length}`} color="#3b82f6" />
                   )}
-                </>
+                  <Chip label={check.dns.spf ? "SPF" : "SPF absent"} color={check.dns.spf ? "#10b981" : "#ef4444"} />
+                  <Chip label={check.dns.dmarc ? "DMARC" : "DMARC absent"} color={check.dns.dmarc ? "#10b981" : "#ef4444"} />
+                  {check.dns.dkim !== undefined && (
+                    <Chip label={check.dns.dkim ? "DKIM" : "DKIM absent"} color={check.dns.dkim ? "#10b981" : "#ef4444"} />
+                  )}
+                </div>
               ) : (
                 <div style={{ fontSize: "12px", color: "#ef4444" }}>{check.dns?.error || "Erreur DNS"}</div>
+              )}
+              {check.dns?.mxRecords?.length > 0 && (
+                <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "8px" }}>
+                  MX : {check.dns.mxRecords.join(", ")}
+                </div>
               )}
             </div>
           </div>
 
-          {/* Email deliverability (SPF + DMARC) */}
+          {/* Email deliverability */}
           <div style={{
             marginTop: "12px", padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
             borderRadius: "8px", borderLeft: `3px solid ${ACCENT}`,
           }}>
             <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "10px", fontWeight: 500 }}>Delivrabilite email</div>
-            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
               <StatusBadge ok={check.dns?.spf} labelOk="SPF configure" labelFail="SPF absent" />
               <StatusBadge ok={check.dns?.dmarc} labelOk="DMARC configure" labelFail="DMARC absent" />
+              {check.dns?.dkim !== undefined && (
+                <StatusBadge ok={check.dns.dkim} labelOk="DKIM configure" labelFail="DKIM absent" />
+              )}
             </div>
             {(!check.dns?.spf || !check.dns?.dmarc) && (
               <div style={{ fontSize: "12px", color: "#f59e0b", marginTop: "8px", lineHeight: 1.5 }}>
@@ -248,6 +571,74 @@ function SiteCard({ site, onRecheck, onDelete, recheckingId }) {
               </div>
             )}
           </div>
+
+          {/* Security headers */}
+          {check.securityHeaders && Object.keys(check.securityHeaders).length > 0 && (
+            <div style={{
+              marginTop: "12px", padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
+              borderRadius: "8px", borderLeft: `3px solid ${ACCENT}`,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+                <ShieldIcon size={14} color={ACCENT} />
+                <span style={{ fontSize: "11px", color: "#9ca3af", fontWeight: 500 }}>En-tetes de securite</span>
+                {(() => {
+                  const keys = Object.keys(check.securityHeaders);
+                  const present = keys.filter(k => check.securityHeaders[k]?.present).length;
+                  return (
+                    <span style={{
+                      fontSize: "11px", fontWeight: 600, marginLeft: "auto",
+                      color: present === keys.length ? "#10b981" : present > keys.length / 2 ? "#f59e0b" : "#ef4444",
+                    }}>
+                      {present}/{keys.length}
+                    </span>
+                  );
+                })()}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                {Object.entries(check.securityHeaders).map(([key, val]) => (
+                  <div key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "12px" }}>
+                    <span style={{ color: "#d1d5db", fontFamily: "monospace", fontSize: "11px" }}>{val.label}</span>
+                    <span style={{
+                      padding: "2px 8px", borderRadius: "3px", fontSize: "11px", fontWeight: 500,
+                      color: val.present ? "#10b981" : "#ef4444",
+                      background: val.present ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)",
+                    }}>
+                      {val.present ? "Present" : "Absent"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* HTTP/2 */}
+          {check.http2 && (
+            <div style={{
+              marginTop: "12px", padding: "12px 16px", background: "#1e2029", border: "1px solid #2a2d3a",
+              borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "space-between",
+            }}>
+              <span style={{ fontSize: "12px", color: "#9ca3af" }}>Support HTTP/2</span>
+              <StatusBadge ok={check.http2.supported} labelOk="Supporte" labelFail="Non detecte" />
+            </div>
+          )}
+
+          {/* Alerts config */}
+          <AlertsConfig site={site} onSave={onSaveAlerts} />
+
+          {/* Status page button */}
+          <button
+            onClick={() => onShowStatusPage(site._id)}
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+              width: "100%", marginTop: "12px", padding: "12px",
+              borderRadius: "8px", fontSize: "13px", fontWeight: 600,
+              background: "transparent", border: `1px solid ${BORDER_TINT}`,
+              color: ACCENT, cursor: "pointer", fontFamily: "inherit",
+            }}
+          >
+            <GlobeIcon size={16} color={ACCENT} />
+            Generer une page de statut publique
+          </button>
         </div>
       )}
     </div>
@@ -262,6 +653,8 @@ export default function PulseDashboardPage() {
   const [adding, setAdding] = useState(false);
   const [recheckingId, setRecheckingId] = useState(null);
   const [error, setError] = useState("");
+  const [statusPageData, setStatusPageData] = useState(null);
+  const [statusPageSite, setStatusPageSite] = useState(null);
 
   const loadSites = useCallback(async () => {
     setLoading(true);
@@ -308,6 +701,25 @@ export default function PulseDashboardPage() {
     try {
       await del(`/api/pulse/sites/${id}`);
       setSites(prev => prev.filter(s => s._id !== id));
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const saveAlerts = async (id, config) => {
+    try {
+      const updated = await post(`/api/pulse/sites/${id}/alert`, config);
+      setSites(prev => prev.map(s => s._id === id ? updated : s));
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const showStatusPage = async (id) => {
+    try {
+      const data = await get(`/api/pulse/sites/${id}/status-page`);
+      setStatusPageData(data);
+      setStatusPageSite(id);
     } catch (err) {
       setError(err.message);
     }
@@ -444,9 +856,20 @@ export default function PulseDashboardPage() {
           site={site}
           onRecheck={recheckSite}
           onDelete={deleteSite}
+          onSaveAlerts={saveAlerts}
+          onShowStatusPage={showStatusPage}
           recheckingId={recheckingId}
         />
       ))}
+
+      {/* Status page modal */}
+      {statusPageData && (
+        <StatusPagePreview
+          site={sites.find(s => s._id === statusPageSite)}
+          statusData={statusPageData}
+          onClose={() => { setStatusPageData(null); setStatusPageSite(null); }}
+        />
+      )}
     </div>
   );
 }

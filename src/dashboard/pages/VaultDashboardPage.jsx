@@ -555,6 +555,224 @@ export function VaultResults({ scan }) {
   );
 }
 
+/* ─── Password Checker Component ─── */
+const STRENGTH_CONFIG = {
+  weak: { color: "#ef4444", label: "Faible", bg: "rgba(239,68,68,0.12)", border: "rgba(239,68,68,0.3)" },
+  medium: { color: "#eab308", label: "Moyen", bg: "rgba(234,179,8,0.12)", border: "rgba(234,179,8,0.3)" },
+  strong: { color: "#22c55e", label: "Fort", bg: "rgba(34,197,94,0.12)", border: "rgba(34,197,94,0.3)" },
+};
+
+const EyeIcon = ({ size = 16, color = "#6b7280" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+  </svg>
+);
+
+const EyeOffIcon = ({ size = 16, color = "#6b7280" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+  </svg>
+);
+
+function PasswordChecker({ post: apiPost }) {
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [checking, setChecking] = useState(false);
+  const [result, setResult] = useState(null);
+  const [pwError, setPwError] = useState(null);
+
+  const handleCheck = useCallback(async () => {
+    if (!password.trim()) return;
+    setPwError(null);
+    setChecking(true);
+    setResult(null);
+    try {
+      const data = await apiPost("/api/vault/password-check", { password });
+      setResult(data);
+    } catch (err) {
+      setPwError(err.message || "Erreur lors de la vérification.");
+    } finally {
+      setChecking(false);
+    }
+  }, [password, apiPost]);
+
+  const strengthConf = result ? STRENGTH_CONFIG[result.strength?.level] || STRENGTH_CONFIG.weak : null;
+
+  return (
+    <div style={{
+      ...cardStyle,
+      border: `1px solid ${BORDER_TINT}`,
+      marginBottom: "28px",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+        <LockIcon size={18} color={ACCENT} />
+        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          Vérificateur de mot de passe
+        </h2>
+      </div>
+      <p style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "18px", lineHeight: 1.6 }}>
+        Vérifiez la robustesse d'un mot de passe et s'il apparaît dans des fuites de données connues.
+      </p>
+
+      {/* k-anonymity explanation */}
+      <div style={{
+        padding: "10px 14px",
+        background: "rgba(6,182,212,0.05)",
+        border: `1px solid ${BORDER_TINT}`,
+        borderRadius: "6px",
+        marginBottom: "16px",
+        fontSize: "11px",
+        color: "#9ca3af",
+        lineHeight: 1.6,
+        display: "flex",
+        alignItems: "flex-start",
+        gap: "8px",
+      }}>
+        <ShieldIcon size={16} color="#06b6d4" />
+        <span>
+          <strong style={{ color: "#d1d5db" }}>Votre mot de passe reste privé.</strong> Nous utilisons la méthode
+          k-anonymity : seuls les 5 premiers caractères du hash SHA-1 sont envoyés au serveur. Le mot de passe
+          complet n'est jamais transmis ni stocké.
+        </span>
+      </div>
+
+      {/* Input */}
+      <div style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "16px" }}>
+        <div style={{ flex: 1, position: "relative" }}>
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={e => { setPassword(e.target.value); setResult(null); }}
+            placeholder="Entrez un mot de passe à vérifier"
+            style={{ ...inputStyle, paddingRight: "40px" }}
+            onFocus={e => { e.target.style.borderColor = ACCENT; }}
+            onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }}
+            onKeyDown={e => { if (e.key === "Enter") handleCheck(); }}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            style={{
+              position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)",
+              background: "none", border: "none", cursor: "pointer", padding: "4px",
+              display: "flex", alignItems: "center",
+            }}
+          >
+            {showPassword ? <EyeOffIcon size={16} color="#6b7280" /> : <EyeIcon size={16} color="#6b7280" />}
+          </button>
+        </div>
+        <button
+          onClick={handleCheck}
+          disabled={checking || !password.trim()}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "6px",
+            padding: "10px 20px", borderRadius: "8px",
+            background: checking || !password.trim() ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+            border: "none",
+            color: checking || !password.trim() ? "#6b7280" : "#0f0f11",
+            fontSize: "13px", fontWeight: 600,
+            cursor: checking || !password.trim() ? "not-allowed" : "pointer",
+            fontFamily: "inherit",
+            whiteSpace: "nowrap",
+            flexShrink: 0,
+          }}
+        >
+          {checking ? (
+            <>
+              <div style={{
+                width: "14px", height: "14px",
+                border: "2px solid rgba(107,114,128,0.3)", borderTop: "2px solid #6b7280",
+                borderRadius: "50%", animation: "vault-spin 0.8s linear infinite",
+              }} />
+              Vérification...
+            </>
+          ) : (
+            <>
+              <LockIcon size={14} color={!password.trim() ? "#6b7280" : "#0f0f11"} />
+              Vérifier
+            </>
+          )}
+        </button>
+      </div>
+
+      {/* Error */}
+      {pwError && (
+        <div style={{
+          padding: "10px 14px", marginBottom: "12px",
+          background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)",
+          borderRadius: "6px", fontSize: "13px", color: "#fca5a5",
+        }}>
+          {pwError}
+        </div>
+      )}
+
+      {/* Results */}
+      {result && (
+        <div style={{
+          padding: "18px 20px",
+          background: `${strengthConf.bg}`,
+          border: `1px solid ${strengthConf.border}`,
+          borderRadius: "8px",
+        }}>
+          {/* Strength meter */}
+          <div style={{ marginBottom: "14px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
+              <span style={{ fontSize: "13px", fontWeight: 600, color: "#f0f0f3" }}>Robustesse</span>
+              <span style={{
+                fontSize: "12px", fontWeight: 600, color: strengthConf.color,
+                padding: "2px 10px", borderRadius: "4px",
+                background: `${strengthConf.color}20`,
+              }}>
+                {strengthConf.label}
+              </span>
+            </div>
+            <div style={{
+              height: "6px", borderRadius: "3px",
+              background: "#2a2d3a", overflow: "hidden",
+            }}>
+              <div style={{
+                height: "100%", borderRadius: "3px",
+                background: strengthConf.color,
+                width: `${result.strength?.score || 0}%`,
+                transition: "width 0.5s ease-out",
+              }} />
+            </div>
+          </div>
+
+          {/* Breach status */}
+          <div style={{
+            display: "flex", alignItems: "center", gap: "10px",
+            padding: "12px 14px",
+            background: result.breached ? "rgba(239,68,68,0.08)" : "rgba(34,197,94,0.08)",
+            border: `1px solid ${result.breached ? "rgba(239,68,68,0.2)" : "rgba(34,197,94,0.2)"}`,
+            borderRadius: "6px",
+          }}>
+            {result.breached ? (
+              <AlertTriangle size={18} color="#ef4444" />
+            ) : (
+              <ShieldCheckIcon size={18} color="#22c55e" />
+            )}
+            <div>
+              <div style={{ fontSize: "13px", fontWeight: 600, color: result.breached ? "#fca5a5" : "#86efac" }}>
+                {result.breached
+                  ? `Ce mot de passe a été trouvé dans ${result.breachCount.toLocaleString("fr-FR")} fuite${result.breachCount > 1 ? "s" : ""} de données`
+                  : "Ce mot de passe n'apparaît dans aucune fuite connue"
+                }
+              </div>
+              <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "2px" }}>
+                {result.breached
+                  ? "Ne l'utilisez jamais. Choisissez un mot de passe unique et complexe."
+                  : "Bonne nouvelle ! Cela ne garantit pas qu'il est sûr — privilégiez un mot de passe long et unique."
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function VaultDashboardPage() {
   const { post } = useApi();
   const [domain, setDomain] = useState("");
@@ -731,6 +949,11 @@ export default function VaultDashboardPage() {
             Lancer le scan
           </button>
         </div>
+      )}
+
+      {/* Password Checker */}
+      {!scan && !loading && (
+        <PasswordChecker post={post} />
       )}
 
       {/* Loading */}

@@ -176,15 +176,35 @@ Retourne UNIQUEMENT le JSON.`;
 // DASHBOARD — SEO Tracking Projects
 // ═══════════════════════════════════════════
 
-// Demo mode ranking simulator
+// Demo mode ranking simulator with enhanced metrics
 function checkKeywordRanking(domain, keyword) {
   const hash = (domain + keyword).split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+  const position = (hash % 50) + 1;
+
+  // Search volume estimate: hash-based between 100-10000
+  const volHash = (keyword + domain).split("").reduce((a, c) => a + c.charCodeAt(0) * 7, 0);
+  const searchVolume = 100 + (volHash % 9901); // 100 to 10000
+
+  // Competition level: hash-based
+  const compHash = (domain + keyword + "comp").split("").reduce((a, c) => a + c.charCodeAt(0) * 3, 0);
+  const compMod = compHash % 3;
+  const competition = compMod === 0 ? "low" : compMod === 1 ? "medium" : "high";
+
+  // Estimated traffic: based on position and search volume (CTR curve)
+  const ctrByPosition = position <= 1 ? 0.32 : position <= 2 ? 0.17 : position <= 3 ? 0.11
+    : position <= 5 ? 0.06 : position <= 10 ? 0.03 : position <= 20 ? 0.015
+    : position <= 30 ? 0.008 : 0.003;
+  const estimatedTraffic = Math.round(searchVolume * ctrByPosition);
+
   return {
     keyword,
-    position: (hash % 50) + 1,
+    position,
     previousPosition: (hash % 50) + 3,
     url: `https://${domain}/${keyword.replace(/\s/g, "-")}`,
     change: 2,
+    searchVolume,
+    competition,
+    estimatedTraffic,
   };
 }
 
@@ -302,8 +322,11 @@ router.post("/projects/:id/check", authMiddleware, async (req, res) => {
       return result;
     });
 
-    // Calculate average position
+    // Calculate average position and aggregate metrics
     const avgPos = Math.round(rankings.reduce((s, r) => s + r.position, 0) / rankings.length);
+    const totalEstimatedTraffic = rankings.reduce((s, r) => s + (r.estimatedTraffic || 0), 0);
+    const inTop10 = rankings.filter(r => r.position <= 10).length;
+    const inTop30 = rankings.filter(r => r.position <= 30).length;
 
     // Update project
     project.rankings = rankings;
@@ -312,6 +335,9 @@ router.post("/projects/:id/check", authMiddleware, async (req, res) => {
       date: new Date(),
       averagePosition: avgPos,
       keywordCount: rankings.length,
+      estimatedTraffic: totalEstimatedTraffic,
+      inTop10,
+      inTop30,
     });
 
     // Keep only last 90 history entries
@@ -331,6 +357,152 @@ router.post("/projects/:id/check", authMiddleware, async (req, res) => {
   } catch (err) {
     console.error("[Atlas] Check rankings error:", err.message);
     res.status(500).json({ error: "Erreur lors de la vérification des positions." });
+  }
+});
+
+// POST /api/atlas/projects/:id/suggestions — AI keyword suggestions
+router.post("/projects/:id/suggestions", authMiddleware, async (req, res) => {
+  try {
+    const project = await SeoProject.findOne({
+      _id: req.params.id,
+      userId: req.userId,
+    }).lean();
+
+    if (!project) {
+      return res.status(404).json({ error: "Projet non trouve." });
+    }
+
+    const prompt = `Tu es un expert SEO. Pour le domaine "${project.domain}", voici les mots-cles deja suivis :
+${project.keywords.join(", ")}
+
+Suggere 8 nouveaux mots-cles pertinents et complementaires que ce site devrait aussi cibler. Prends en compte :
+- Le secteur d'activite probable du domaine
+- Les mots-cles longue traine associes
+- Les variations semantiques
+- Les mots-cles a fort potentiel de trafic
+
+Retourne UNIQUEMENT un JSON :
+{
+  "suggestions": [
+    { "keyword": "mot-cle suggere", "reason": "raison courte en francais" }
+  ]
+}`;
+
+    try {
+      const aiText = await generateWithAI(prompt);
+      const aiData = JSON.parse(aiText);
+      res.json({ suggestions: (aiData.suggestions || []).slice(0, 10) });
+    } catch (aiErr) {
+      console.error("[Atlas] AI suggestions failed:", aiErr.message);
+      // Fallback: generate basic suggestions from existing keywords
+      const fallback = project.keywords.slice(0, 5).map(k => ({
+        keyword: k + " pas cher",
+        reason: "Variation longue traine automatique",
+      }));
+      res.json({ suggestions: fallback });
+    }
+  } catch (err) {
+    console.error("[Atlas] Suggestions error:", err.message);
+    res.status(500).json({ error: "Erreur lors de la generation des suggestions." });
+  }
+});
+
+// GET /api/atlas/projects/:id/report — AI SEO report
+router.get("/projects/:id/report", authMiddleware, async (req, res) => {
+  try {
+    const project = await SeoProject.findOne({
+      _id: req.params.id,
+      userId: req.userId,
+    }).lean();
+
+    if (!project) {
+      return res.status(404).json({ error: "Projet non trouve." });
+    }
+
+    const rankings = project.rankings || [];
+    const avgPos = rankings.length > 0
+      ? Math.round(rankings.reduce((s, r) => s + r.position, 0) / rankings.length)
+      : null;
+    const inTop10 = rankings.filter(r => r.position <= 10).length;
+    const inTop30 = rankings.filter(r => r.position <= 30).length;
+    const totalTraffic = rankings.reduce((s, r) => s + (r.estimatedTraffic || 0), 0);
+    const totalVolume = rankings.reduce((s, r) => s + (r.searchVolume || 0), 0);
+    const improved = rankings.filter(r => (r.change || 0) > 0).length;
+    const declined = rankings.filter(r => (r.change || 0) < 0).length;
+
+    const rankingsDetail = rankings.map(r =>
+      `- "${r.keyword}": position ${r.position} (change: ${r.change > 0 ? "+" : ""}${r.change || 0}), volume: ${r.searchVolume || "N/A"}, trafic estime: ${r.estimatedTraffic || 0}`
+    ).join("\n");
+
+    const prompt = `Tu es un consultant SEO senior. Genere un rapport SEO complet pour le domaine "${project.domain}".
+
+DONNEES ACTUELLES :
+- Mots-cles suivis : ${rankings.length}
+- Position moyenne : ${avgPos || "N/A"}
+- Mots-cles dans le Top 10 : ${inTop10}
+- Mots-cles dans le Top 30 : ${inTop30}
+- Trafic mensuel estime : ${totalTraffic}
+- Volume de recherche total : ${totalVolume}
+- Progressions : ${improved} mots-cles
+- Regressions : ${declined} mots-cles
+
+DETAIL DES POSITIONS :
+${rankingsDetail || "Aucune donnee de position disponible."}
+
+Retourne UNIQUEMENT un JSON :
+{
+  "score": <note globale SEO de 0 a 100>,
+  "summary": "Resume executif en 2-3 phrases",
+  "strengths": ["3 points forts"],
+  "weaknesses": ["3 points faibles ou axes d'amelioration"],
+  "actions": ["5 actions prioritaires concretes"],
+  "forecast": "Prevision a 3 mois en 1-2 phrases"
+}`;
+
+    try {
+      const aiText = await generateWithAI(prompt);
+      const aiData = JSON.parse(aiText);
+      res.json({
+        report: {
+          ...aiData,
+          stats: { avgPos, inTop10, inTop30, totalTraffic, totalVolume, improved, declined, totalKeywords: rankings.length },
+          generatedAt: new Date(),
+        },
+      });
+    } catch (aiErr) {
+      console.error("[Atlas] AI report failed:", aiErr.message);
+      // Fallback report
+      const score = avgPos ? Math.max(0, Math.min(100, 100 - avgPos * 1.5)) : 50;
+      res.json({
+        report: {
+          score: Math.round(score),
+          summary: `Le domaine ${project.domain} suit ${rankings.length} mots-cles avec une position moyenne de ${avgPos || "N/A"}. ${inTop10} mots-cles sont dans le Top 10.`,
+          strengths: [
+            inTop10 > 0 ? `${inTop10} mots-cles en premiere page` : "Projet de suivi mis en place",
+            improved > 0 ? `${improved} mots-cles en progression` : "Suivi actif des positions",
+            "Couverture semantique en cours",
+          ],
+          weaknesses: [
+            avgPos > 20 ? "Position moyenne a ameliorer" : "Consolider les positions actuelles",
+            declined > 0 ? `${declined} mots-cles en regression` : "Diversifier les mots-cles",
+            "Potentiel de trafic a exploiter",
+          ],
+          actions: [
+            "Optimiser les contenus des pages ciblant les mots-cles hors Top 10",
+            "Renforcer le maillage interne",
+            "Creer du contenu autour des mots-cles longue traine",
+            "Ameliorer la vitesse de chargement",
+            "Developper les backlinks de qualite",
+          ],
+          forecast: `En maintenant les efforts, une amelioration de la position moyenne de 5 a 10 places est possible sous 3 mois.`,
+          stats: { avgPos, inTop10, inTop30, totalTraffic, totalVolume, improved, declined, totalKeywords: rankings.length },
+          generatedAt: new Date(),
+        },
+      });
+    }
+  } catch (err) {
+    console.error("[Atlas] Report error:", err.message);
+    res.status(500).json({ error: "Erreur lors de la generation du rapport." });
   }
 });
 

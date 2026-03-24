@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useApi } from "../hooks/useApi";
+import { useAuth } from "../hooks/useAuth";
 import SubNav from "../components/SubNav";
+
+const API = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const PHANTOM_NAV = [
   { path: "/app/phantom", label: "Audit", end: true },
@@ -10,7 +13,7 @@ const PHANTOM_NAV = [
 
 const CATEGORY_LABELS = {
   performance: "Performance",
-  accessibility: "Accessibilité",
+  accessibility: "Accessibilit\u00e9",
   seo: "SEO",
   bestPractices: "Bonnes pratiques",
 };
@@ -78,8 +81,19 @@ function CWVItem({ label, data }) {
   );
 }
 
+function ComparisonArrow({ diff }) {
+  if (diff === 0) return <span style={{ color: "#9ca3af", fontSize: "13px" }}>=</span>;
+  const isUp = diff > 0;
+  return (
+    <span style={{ color: isUp ? "#10b981" : "#ef4444", fontSize: "13px", fontWeight: 600 }}>
+      {isUp ? "\u2191" : "\u2193"} {isUp ? "+" : ""}{diff}
+    </span>
+  );
+}
+
 export default function PhantomDashboardPage() {
   const api = useApi();
+  const { token } = useAuth();
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -88,14 +102,39 @@ export default function PhantomDashboardPage() {
   const [error, setError] = useState("");
   const [filter, setFilter] = useState("all");
 
+  // Comparison state
+  const [previousAudits, setPreviousAudits] = useState([]);
+  const [selectedCompareId, setSelectedCompareId] = useState("");
+  const [comparison, setComparison] = useState(null);
+  const [comparingLoading, setComparingLoading] = useState(false);
+  const [pdfLoading, setPdfLoading] = useState(false);
+
   const phases = [
     "Connexion au site...",
     "Lancement de Lighthouse...",
     "Analyse des performances...",
-    "Vérification de l'accessibilité...",
+    "V\u00e9rification de l'accessibilit\u00e9...",
     "Audit SEO...",
-    "Analyse IA des résultats...",
+    "Analyse IA des r\u00e9sultats...",
   ];
+
+  // Load previous audits for comparison when result comes in
+  useEffect(() => {
+    if (result?.auditId) {
+      loadPreviousAudits();
+    }
+  }, [result?.auditId]);
+
+  const loadPreviousAudits = async () => {
+    try {
+      const domain = new URL(url.trim().startsWith("http") ? url.trim() : "https://" + url.trim()).hostname.replace("www.", "");
+      const data = await api.get(`/api/phantom/history?domain=${encodeURIComponent(domain)}&limit=10`);
+      const others = (data.audits || []).filter(a => a._id !== result?.auditId);
+      setPreviousAudits(others);
+    } catch {
+      setPreviousAudits([]);
+    }
+  };
 
   const runAudit = async () => {
     if (!url.trim()) return;
@@ -103,6 +142,9 @@ export default function PhantomDashboardPage() {
     setError("");
     setResult(null);
     setProgress(0);
+    setComparison(null);
+    setSelectedCompareId("");
+    setPreviousAudits([]);
 
     for (let i = 0; i < phases.length; i++) {
       setPhase(phases[i]);
@@ -113,7 +155,7 @@ export default function PhantomDashboardPage() {
     try {
       const data = await api.post("/api/phantom/audit", { url: url.trim() });
       setProgress(100);
-      setPhase("Terminé");
+      setPhase("Termin\u00e9");
       setTimeout(() => setResult(data), 300);
     } catch (err) {
       setError(err.message || "Erreur lors de l'audit");
@@ -122,7 +164,47 @@ export default function PhantomDashboardPage() {
     }
   };
 
+  const handleCompare = async (compareWithId) => {
+    if (!compareWithId || !result?.auditId) return;
+    setComparingLoading(true);
+    setSelectedCompareId(compareWithId);
+    try {
+      const data = await api.post(`/api/phantom/compare/${result.auditId}`, { compareWithId });
+      setComparison(data);
+    } catch (err) {
+      console.error("Compare error:", err);
+      setComparison(null);
+    } finally {
+      setComparingLoading(false);
+    }
+  };
+
+  const handleDownloadPdf = async () => {
+    if (!result?.auditId) return;
+    setPdfLoading(true);
+    try {
+      const res = await fetch(`${API}/api/phantom/audit/${result.auditId}/pdf`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Erreur PDF");
+      const blob = await res.blob();
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `phantom-audit-${Date.now()}.pdf`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    } catch (err) {
+      console.error("PDF download error:", err);
+    } finally {
+      setPdfLoading(false);
+    }
+  };
+
   const filteredIssues = result?.issues?.filter(i => filter === "all" || i.severity === filter) || [];
+
+  const formatDate = (d) => {
+    return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  };
 
   return (
     <div style={{ maxWidth: "900px" }}>
@@ -137,7 +219,7 @@ export default function PhantomDashboardPage() {
           Audit de performance
         </h1>
         <p style={{ fontSize: "14px", color: "#9ca3af" }}>
-          Analysez les performances, le SEO et l'accessibilité de n'importe quel site web.
+          Analysez les performances, le SEO et l'accessibilit\u00e9 de n'importe quel site web.
         </p>
       </div>
 
@@ -206,6 +288,115 @@ export default function PhantomDashboardPage() {
       {/* Results */}
       {result && (
         <>
+          {/* Action bar: PDF + Compare */}
+          <div style={{
+            display: "flex", gap: "12px", marginBottom: "16px", flexWrap: "wrap", alignItems: "center",
+          }}>
+            {result.auditId && (
+              <button onClick={handleDownloadPdf} disabled={pdfLoading}
+                style={{
+                  padding: "10px 20px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", color: "#fff",
+                  border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 500,
+                  cursor: pdfLoading ? "wait" : "pointer", fontFamily: "inherit",
+                  opacity: pdfLoading ? 0.6 : 1, display: "flex", alignItems: "center", gap: "8px",
+                  boxShadow: "0 4px 16px rgba(139,92,246,0.25)",
+                }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                {pdfLoading ? "G\u00e9n\u00e9ration..." : "T\u00e9l\u00e9charger le rapport PDF"}
+              </button>
+            )}
+
+            {result.auditId && previousAudits.length > 0 && (
+              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ fontSize: "13px", color: "#9ca3af" }}>Comparer avec :</span>
+                <select
+                  value={selectedCompareId}
+                  onChange={e => handleCompare(e.target.value)}
+                  style={{
+                    padding: "8px 12px", background: "#1e2029", border: "1px solid #2a2d3a",
+                    borderRadius: "8px", color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
+                    cursor: "pointer", outline: "none", minWidth: "220px",
+                  }}
+                >
+                  <option value="">Comparer avec un audit pr\u00e9c\u00e9dent</option>
+                  {previousAudits.map(a => (
+                    <option key={a._id} value={a._id}>
+                      {formatDate(a.createdAt)} — Score {a.scores?.global || 0}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+
+          {/* Comparison results */}
+          {comparingLoading && (
+            <div style={{
+              padding: "20px", background: "#1e2029", border: "1px solid #2a2d3a",
+              borderRadius: "10px", marginBottom: "16px", textAlign: "center", color: "#9ca3af", fontSize: "14px"
+            }}>
+              Comparaison en cours...
+            </div>
+          )}
+
+          {comparison && !comparingLoading && (
+            <div style={{
+              padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
+              borderLeft: "3px solid #a78bfa", borderRadius: "10px", marginBottom: "16px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+            }}>
+              <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "18px", display: "flex", alignItems: "center", gap: "6px" }}>
+                <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#a78bfa", display: "inline-block" }} />
+                Comparaison avec l'audit du {formatDate(comparison.previous?.date)}
+              </div>
+
+              {/* Side-by-side scores */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "12px", marginBottom: "20px" }}>
+                {["global", "performance", "accessibility", "seo", "bestPractices"].map(key => {
+                  const comp = comparison.comparison?.[key];
+                  if (!comp) return null;
+                  const labels = { global: "Global", performance: "Perf.", accessibility: "A11y", seo: "SEO", bestPractices: "BP" };
+                  return (
+                    <div key={key} style={{
+                      padding: "14px 10px", background: "#161820", border: "1px solid #2a2d3a",
+                      borderRadius: "8px", textAlign: "center"
+                    }}>
+                      <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px" }}>{labels[key]}</div>
+                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "8px" }}>
+                        <span style={{ fontSize: "12px", color: "#6b7280" }}>{comp.previous}</span>
+                        <span style={{ fontSize: "14px", color: "#9ca3af" }}>{"\u2192"}</span>
+                        <span style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3" }}>{comp.current}</span>
+                      </div>
+                      <div style={{ marginTop: "6px" }}>
+                        <ComparisonArrow diff={comp.diff} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Resolved / New issues */}
+              <div style={{ display: "flex", gap: "16px" }}>
+                <div style={{
+                  flex: 1, padding: "12px 16px", background: "rgba(16,185,129,0.06)",
+                  border: "1px solid rgba(16,185,129,0.15)", borderRadius: "8px"
+                }}>
+                  <div style={{ fontSize: "18px", fontWeight: 600, color: "#10b981" }}>{comparison.resolvedIssues || 0}</div>
+                  <div style={{ fontSize: "12px", color: "#9ca3af" }}>Probl\u00e8mes r\u00e9solus</div>
+                </div>
+                <div style={{
+                  flex: 1, padding: "12px 16px", background: "rgba(239,68,68,0.06)",
+                  border: "1px solid rgba(239,68,68,0.15)", borderRadius: "8px"
+                }}>
+                  <div style={{ fontSize: "18px", fontWeight: 600, color: "#ef4444" }}>{comparison.newIssues || 0}</div>
+                  <div style={{ fontSize: "12px", color: "#9ca3af" }}>Nouveaux probl\u00e8mes</div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Scores */}
           <div style={{
             padding: "28px", background: "#1e2029", border: "1px solid #2a2d3a",
@@ -217,7 +408,7 @@ export default function PhantomDashboardPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px", justifyItems: "center" }}>
               <ScoreCircle score={result.scores.global || Math.round((result.scores.performance + result.scores.accessibility + result.scores.seo + (result.scores.bestPractices || 0)) / 4)} label="Global" size={90} color="#8b5cf6" />
               <ScoreCircle score={result.scores.performance} label="Performance" size={72} />
-              <ScoreCircle score={result.scores.accessibility} label="Accessibilité" size={72} />
+              <ScoreCircle score={result.scores.accessibility} label="Accessibilit\u00e9" size={72} />
               <ScoreCircle score={result.scores.seo} label="SEO" size={72} />
               <ScoreCircle score={result.scores.bestPractices || result.scores.conversion || 0} label="Bonnes pratiques" size={72} />
             </div>
@@ -263,7 +454,7 @@ export default function PhantomDashboardPage() {
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
               <div style={{ fontSize: "13px", color: "#9ca3af", display: "flex", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Problèmes détectés ({result.issues?.length || 0})
+                <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Probl\u00e8mes d\u00e9tect\u00e9s ({result.issues?.length || 0})
               </div>
               <div style={{ display: "flex", gap: "6px" }}>
                 {["all", "critical", "warning", "info"].map(f => (
@@ -327,7 +518,7 @@ export default function PhantomDashboardPage() {
 
           {/* New audit */}
           <div style={{ marginTop: "24px", textAlign: "center" }}>
-            <button onClick={() => { setResult(null); setUrl(""); setError(""); setProgress(0); }}
+            <button onClick={() => { setResult(null); setUrl(""); setError(""); setProgress(0); setComparison(null); setSelectedCompareId(""); setPreviousAudits([]); }}
               style={{
                 padding: "10px 24px", background: "transparent",
                 border: "1px solid #2a2d3a", borderRadius: "8px",

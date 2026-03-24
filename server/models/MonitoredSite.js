@@ -9,13 +9,22 @@ const schema = new mongoose.Schema({
     ssl: mongoose.Schema.Types.Mixed,
     dns: mongoose.Schema.Types.Mixed,
     domain: mongoose.Schema.Types.Mixed,
+    securityHeaders: mongoose.Schema.Types.Mixed,
+    http2: mongoose.Schema.Types.Mixed,
     checkedAt: Date,
   },
   history: [{
     score: Number,
+    responseTime: Number,
+    uptimeStatus: Boolean,
     checkedAt: Date,
   }],
   alertEmail: String,
+  alerts: {
+    down: { type: Boolean, default: false },
+    sslExpiring: { type: Boolean, default: false },
+    domainExpiring: { type: Boolean, default: false },
+  },
   enabled: { type: Boolean, default: true },
 }, { timestamps: true });
 

@@ -3,6 +3,7 @@ const { generateWithAI } = require("../services/ai");
 const Audit = require("../models/Audit");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const PDFDocument = require("pdfkit");
 const { authMiddleware } = require("../middleware/auth");
 const router = express.Router();
 
@@ -327,6 +328,203 @@ router.get("/recommendations", requireAuth, async (req, res) => {
 
     res.json({ recommendations });
   } catch (err) {
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// POST /api/phantom/compare/:id — Compare two audits of the same domain
+router.post("/compare/:id", requireAuth, async (req, res) => {
+  try {
+    const { compareWithId } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(req.params.id) || !mongoose.Types.ObjectId.isValid(compareWithId)) {
+      return res.status(400).json({ error: "Identifiants invalides" });
+    }
+
+    const [current, previous] = await Promise.all([
+      Audit.findOne({ _id: req.params.id, userId: req.userId }),
+      Audit.findOne({ _id: compareWithId, userId: req.userId }),
+    ]);
+
+    if (!current || !previous) {
+      return res.status(404).json({ error: "Un ou plusieurs audits introuvables" });
+    }
+
+    if (current.domain !== previous.domain) {
+      return res.status(400).json({ error: "Les deux audits doivent concerner le meme domaine" });
+    }
+
+    const scoreDiff = (key) => ({
+      current: current.scores?.[key] || 0,
+      previous: previous.scores?.[key] || 0,
+      diff: (current.scores?.[key] || 0) - (previous.scores?.[key] || 0),
+    });
+
+    const cwvDiff = (key) => {
+      const cur = current.coreWebVitals?.[key];
+      const prev = previous.coreWebVitals?.[key];
+      if (!cur && !prev) return null;
+      return {
+        current: cur || null,
+        previous: prev || null,
+        improved: cur && prev ? (key === "cls" ? cur.value <= prev.value : cur.value <= prev.value) : null,
+      };
+    };
+
+    // Count resolved / new issues
+    const currentTitles = new Set((current.issues || []).map(i => i.title));
+    const previousTitles = new Set((previous.issues || []).map(i => i.title));
+    const resolvedIssues = (previous.issues || []).filter(i => !currentTitles.has(i.title));
+    const newIssues = (current.issues || []).filter(i => !previousTitles.has(i.title));
+
+    res.json({
+      domain: current.domain,
+      current: { id: current._id, url: current.url, date: current.createdAt, scores: current.scores },
+      previous: { id: previous._id, url: previous.url, date: previous.createdAt, scores: previous.scores },
+      comparison: {
+        global: scoreDiff("global"),
+        performance: scoreDiff("performance"),
+        accessibility: scoreDiff("accessibility"),
+        seo: scoreDiff("seo"),
+        bestPractices: scoreDiff("bestPractices"),
+      },
+      coreWebVitals: {
+        lcp: cwvDiff("lcp"),
+        fcp: cwvDiff("fcp"),
+        cls: cwvDiff("cls"),
+        tbt: cwvDiff("tbt"),
+      },
+      resolvedIssues: resolvedIssues.length,
+      newIssues: newIssues.length,
+      resolvedDetails: resolvedIssues.slice(0, 5),
+      newDetails: newIssues.slice(0, 5),
+    });
+  } catch (err) {
+    console.error("[Phantom] Compare error:", err.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// GET /api/phantom/audit/:id/pdf — Generate PDF report for an audit
+router.get("/audit/:id/pdf", requireAuth, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: "Identifiant invalide" });
+    }
+    const audit = await Audit.findOne({ _id: req.params.id, userId: req.userId });
+    if (!audit) return res.status(404).json({ error: "Audit non trouve" });
+
+    const doc = new PDFDocument({ size: "A4", margin: 50 });
+    const chunks = [];
+    doc.on("data", (chunk) => chunks.push(chunk));
+    doc.on("end", () => {
+      const pdfBuffer = Buffer.concat(chunks);
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", `attachment; filename="phantom-audit-${audit.domain}-${new Date(audit.createdAt).toISOString().slice(0,10)}.pdf"`);
+      res.send(pdfBuffer);
+    });
+    doc.on("error", (err) => {
+      console.error("[Phantom] PDF error:", err.message);
+      res.status(500).json({ error: "Erreur generation PDF" });
+    });
+
+    const dateStr = new Date(audit.createdAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+
+    // --- Header ---
+    doc.fontSize(8).fillColor("#8b5cf6").text("PHANTOM — RAPPORT D'AUDIT", 50, 50);
+    doc.fontSize(22).fillColor("#1a1a1a").text("Rapport d'audit web", 50, 72);
+    doc.fontSize(12).fillColor("#666").text(`${audit.url} — ${dateStr}`, 50, 100);
+    doc.moveTo(50, 125).lineTo(545, 125).strokeColor("#e5e5e5").stroke();
+
+    // --- Scores ---
+    doc.fontSize(16).fillColor("#1a1a1a").text("Scores", 50, 140);
+    const scoreBoxes = [
+      { label: "Global", value: audit.scores?.global || 0, color: "#8b5cf6" },
+      { label: "Performance", value: audit.scores?.performance || 0, color: "#8b5cf6" },
+      { label: "Accessibilite", value: audit.scores?.accessibility || 0, color: "#3b82f6" },
+      { label: "SEO", value: audit.scores?.seo || 0, color: "#10b981" },
+      { label: "Bonnes pratiques", value: audit.scores?.bestPractices || 0, color: "#f59e0b" },
+    ];
+    scoreBoxes.forEach((box, i) => {
+      const x = 50 + i * 100;
+      const scoreColor = box.value >= 90 ? "#4ADE80" : box.value >= 50 ? "#f59e0b" : "#ef4444";
+      doc.roundedRect(x, 165, 90, 55, 6).fillColor("#f8f8f8").fill();
+      doc.fontSize(8).fillColor("#888").text(box.label, x + 8, 173, { width: 74 });
+      doc.fontSize(22).fillColor(scoreColor).text(`${box.value}`, x + 8, 190, { width: 74 });
+    });
+
+    // --- Core Web Vitals ---
+    const cwv = audit.coreWebVitals;
+    if (cwv) {
+      doc.fontSize(16).fillColor("#1a1a1a").text("Core Web Vitals", 50, 240);
+      const cwvItems = [
+        { label: "LCP", data: cwv.lcp },
+        { label: "FCP", data: cwv.fcp },
+        { label: "CLS", data: cwv.cls },
+        { label: "TBT", data: cwv.tbt },
+        { label: "Speed Index", data: cwv.speedIndex },
+        { label: "TTI", data: cwv.tti },
+      ].filter(c => c.data);
+
+      cwvItems.forEach((item, i) => {
+        const x = 50 + (i % 3) * 170;
+        const y = 265 + Math.floor(i / 3) * 35;
+        const statusColor = item.data.status === "good" ? "#4ADE80" : item.data.status === "needs-improvement" ? "#f59e0b" : "#ef4444";
+        doc.fontSize(9).fillColor("#888").text(item.label, x, y);
+        doc.fontSize(11).fillColor(statusColor).text(item.data.display || `${item.data.value}${item.data.unit}`, x + 80, y);
+      });
+    }
+
+    // --- AI Summary ---
+    const summaryY = cwv ? 345 : 240;
+    if (audit.aiSummary) {
+      doc.fontSize(16).fillColor("#1a1a1a").text("Analyse IA", 50, summaryY);
+      doc.fontSize(10).fillColor("#555").text(audit.aiSummary, 50, summaryY + 22, { width: 495, lineGap: 4 });
+    }
+
+    // --- Issues ---
+    const issuesY = audit.aiSummary ? summaryY + 70 : summaryY;
+    const issues = audit.issues || [];
+    if (issues.length > 0) {
+      doc.fontSize(16).fillColor("#1a1a1a").text(`Problemes detectes (${issues.length})`, 50, issuesY);
+
+      const categoryLabels = { performance: "Performance", accessibility: "Accessibilite", seo: "SEO", bestPractices: "Bonnes pratiques" };
+      const severityLabels = { critical: "CRITIQUE", warning: "ATTENTION", info: "INFO" };
+      const severityColors = { critical: "#ef4444", warning: "#f59e0b", info: "#6366f1" };
+
+      let y = issuesY + 25;
+      issues.forEach((issue, i) => {
+        if (y > 720) {
+          doc.addPage();
+          y = 50;
+        }
+        const sevColor = severityColors[issue.severity] || "#888";
+        doc.fontSize(8).fillColor(sevColor).text(`[${severityLabels[issue.severity] || issue.severity}]`, 50, y, { continued: true });
+        doc.fillColor("#888").text(` ${categoryLabels[issue.category] || issue.category}`, { continued: false });
+        y += 14;
+        doc.fontSize(11).fillColor("#1a1a1a").text(issue.title || "", 50, y, { width: 495 });
+        y += 16;
+        if (issue.description) {
+          doc.fontSize(9).fillColor("#666").text(issue.description, 50, y, { width: 495, lineGap: 2 });
+          y += doc.heightOfString(issue.description, { width: 495, lineGap: 2 }) + 4;
+        }
+        if (issue.fix) {
+          doc.fontSize(9).fillColor("#8b5cf6").text("Solution : ", 50, y, { continued: true });
+          doc.fillColor("#555").text(issue.fix, { width: 440 });
+          y += doc.heightOfString("Solution : " + issue.fix, { width: 495 }) + 4;
+        }
+        y += 10;
+      });
+    }
+
+    // --- Footer ---
+    doc.fontSize(8).fillColor("#aaa").text(
+      `Rapport genere par Phantom — ${new Date().toLocaleDateString("fr-FR")}`,
+      50, 750, { align: "center", width: 495 }
+    );
+
+    doc.end();
+  } catch (err) {
+    console.error("[Phantom] PDF error:", err.message);
     res.status(500).json({ error: "Erreur serveur" });
   }
 });

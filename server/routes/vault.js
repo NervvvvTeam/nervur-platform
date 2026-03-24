@@ -944,4 +944,325 @@ router.delete("/rgpd-scan/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════════
+// PASSWORD CHECK — k-anonymity via HIBP Passwords API
+// ═══════════════════════════════════════════════════
+
+// POST /api/vault/password-check — check password strength + breach status
+router.post("/password-check", authMiddleware, async (req, res) => {
+  try {
+    const { password } = req.body;
+
+    if (!password || typeof password !== "string" || password.length === 0) {
+      return res.status(400).json({ error: "Mot de passe requis." });
+    }
+
+    if (password.length > 256) {
+      return res.status(400).json({ error: "Mot de passe trop long." });
+    }
+
+    // Calculate strength
+    const strength = calculatePasswordStrength(password);
+
+    // Check HIBP using k-anonymity model
+    let breachCount = 0;
+    let breached = false;
+    try {
+      const crypto = require("crypto");
+      const sha1Hash = crypto.createHash("sha1").update(password).digest("hex").toUpperCase();
+      const prefix = sha1Hash.substring(0, 5);
+      const suffix = sha1Hash.substring(5);
+
+      const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`, {
+        headers: { "User-Agent": "NERVUR-Vault-PasswordCheck" },
+      });
+
+      if (response.ok) {
+        const text = await response.text();
+        const lines = text.split("\n");
+        for (const line of lines) {
+          const [hashSuffix, count] = line.trim().split(":");
+          if (hashSuffix === suffix) {
+            breachCount = parseInt(count, 10) || 0;
+            breached = true;
+            break;
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Erreur HIBP password check:", err.message);
+      // Continue without breach data — strength still useful
+    }
+
+    res.json({
+      strength,
+      breached,
+      breachCount,
+    });
+  } catch (err) {
+    console.error("Erreur password check:", err);
+    res.status(500).json({ error: "Erreur lors de la vérification." });
+  }
+});
+
+function calculatePasswordStrength(password) {
+  let score = 0;
+  const len = password.length;
+
+  // Length scoring
+  if (len >= 8) score += 1;
+  if (len >= 12) score += 1;
+  if (len >= 16) score += 1;
+
+  // Character variety
+  if (/[a-z]/.test(password)) score += 1;
+  if (/[A-Z]/.test(password)) score += 1;
+  if (/[0-9]/.test(password)) score += 1;
+  if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+
+  // Common patterns penalty
+  const lower = password.toLowerCase();
+  const commonPatterns = ["password", "123456", "qwerty", "azerty", "motdepasse", "admin", "letmein", "welcome", "monkey", "dragon", "master"];
+  if (commonPatterns.some(p => lower.includes(p))) score = Math.max(0, score - 3);
+
+  // Sequential/repeated chars penalty
+  if (/(.)\1{2,}/.test(password)) score = Math.max(0, score - 1);
+  if (/(?:012|123|234|345|456|567|678|789|abc|bcd|cde|def)/.test(lower)) score = Math.max(0, score - 1);
+
+  if (score <= 2) return { level: "weak", label: "Faible", score: Math.round((score / 7) * 100) };
+  if (score <= 4) return { level: "medium", label: "Moyen", score: Math.round((score / 7) * 100) };
+  return { level: "strong", label: "Fort", score: Math.round((score / 7) * 100) };
+}
+
+// ═══════════════════════════════════════════════════
+// SECURITY SCORE — score global basé sur fuites + RGPD
+// ═══════════════════════════════════════════════════
+
+// GET /api/vault/security-score/:domain — overall security score
+router.get("/security-score/:domain", authMiddleware, async (req, res) => {
+  try {
+    const domain = req.params.domain.trim().toLowerCase();
+
+    if (!domain || domain.length > 200) {
+      return res.status(400).json({ error: "Domaine invalide." });
+    }
+
+    // Find latest breach scan for this domain
+    const latestBreachScan = await BreachScan.findOne({
+      userId: req.userId,
+      domain,
+      status: "completed",
+    }).sort({ createdAt: -1 });
+
+    // Find latest RGPD scan for this domain
+    const latestRgpdScan = await RgpdScan.findOne({
+      userId: req.userId,
+      domain,
+      status: "completed",
+    }).sort({ createdAt: -1 });
+
+    // Calculate breach score (100 = no breaches, 0 = critical)
+    let breachScore = 100;
+    let breachDetails = { totalEmails: 0, compromised: 0, totalBreaches: 0, riskLevel: "low" };
+    if (latestBreachScan && latestBreachScan.summary) {
+      const s = latestBreachScan.summary;
+      breachDetails = {
+        totalEmails: s.totalEmails || 0,
+        compromised: s.compromisedEmails || 0,
+        totalBreaches: s.totalBreaches || 0,
+        riskLevel: s.riskLevel || "low",
+      };
+      if (s.riskLevel === "critical") breachScore = 15;
+      else if (s.riskLevel === "high") breachScore = 35;
+      else if (s.riskLevel === "medium") breachScore = 60;
+      else if (s.compromisedEmails > 0) breachScore = 75;
+      else breachScore = 100;
+    }
+
+    // RGPD score
+    let rgpdScore = null;
+    let rgpdDetails = {};
+    if (latestRgpdScan) {
+      rgpdScore = latestRgpdScan.score || 0;
+      rgpdDetails = latestRgpdScan.results || {};
+    }
+
+    // Email security score (based on breach data classes)
+    let emailScore = 100;
+    if (latestBreachScan && latestBreachScan.summary) {
+      const dataTypes = latestBreachScan.summary.dataTypesExposed || [];
+      if (dataTypes.includes("Passwords")) emailScore -= 40;
+      if (dataTypes.includes("Auth tokens")) emailScore -= 30;
+      if (dataTypes.includes("Security questions and answers")) emailScore -= 20;
+      if (dataTypes.includes("Phone numbers")) emailScore -= 10;
+      emailScore = Math.max(0, emailScore);
+    }
+
+    // Password exposure score
+    let passwordScore = 100;
+    if (latestBreachScan && latestBreachScan.summary) {
+      const dataTypes = latestBreachScan.summary.dataTypesExposed || [];
+      if (dataTypes.includes("Passwords")) passwordScore = 20;
+      else if (dataTypes.includes("Password hints") || dataTypes.includes("PINs")) passwordScore = 50;
+    }
+
+    // Overall weighted score
+    const weights = { breaches: 0.35, rgpd: 0.25, emails: 0.20, passwords: 0.20 };
+    const effectiveRgpd = rgpdScore !== null ? rgpdScore : 50; // default 50 if no scan
+    const overallScore = Math.round(
+      breachScore * weights.breaches +
+      effectiveRgpd * weights.rgpd +
+      emailScore * weights.emails +
+      passwordScore * weights.passwords
+    );
+
+    // Generate recommended actions
+    const actions = [];
+    if (breachScore < 50) {
+      actions.push({ priority: "critical", label: "Changer tous les mots de passe compromis", description: "Des données sensibles ont été exposées dans des fuites. Changez immédiatement les mots de passe des comptes affectés.", category: "breaches" });
+    }
+    if (breachScore < 80 && breachScore >= 50) {
+      actions.push({ priority: "high", label: "Vérifier les comptes exposés", description: "Certaines informations ont fuité. Vérifiez les comptes associés et activez la double authentification.", category: "breaches" });
+    }
+    if (rgpdScore !== null && rgpdScore < 60) {
+      actions.push({ priority: "high", label: "Améliorer la conformité RGPD", description: "Votre site ne respecte pas plusieurs critères RGPD obligatoires. Consultez le détail de l'analyse RGPD.", category: "rgpd" });
+    }
+    if (emailScore < 60) {
+      actions.push({ priority: "critical", label: "Sécuriser les comptes email", description: "Des identifiants email ont été exposés avec des données sensibles. Activez la 2FA et changez les mots de passe.", category: "emails" });
+    }
+    if (passwordScore < 50) {
+      actions.push({ priority: "critical", label: "Renouveler les mots de passe exposés", description: "Des mots de passe ont été trouvés dans des fuites de données. Utilisez un gestionnaire de mots de passe.", category: "passwords" });
+    }
+    if (breachScore === 100 && emailScore === 100) {
+      actions.push({ priority: "low", label: "Continuer la surveillance", description: "Aucune fuite détectée. Planifiez des scans réguliers pour rester protégé.", category: "general" });
+    }
+    if (rgpdScore !== null && rgpdScore >= 80) {
+      actions.push({ priority: "low", label: "Maintenir la conformité RGPD", description: "Bonne conformité RGPD. Effectuez un audit régulier pour rester à jour.", category: "rgpd" });
+    }
+
+    res.json({
+      domain,
+      overallScore,
+      scores: {
+        breaches: breachScore,
+        rgpd: effectiveRgpd,
+        emails: emailScore,
+        passwords: passwordScore,
+      },
+      breachDetails,
+      rgpdAvailable: rgpdScore !== null,
+      actions,
+      lastBreachScan: latestBreachScan?.createdAt || null,
+      lastRgpdScan: latestRgpdScan?.createdAt || null,
+    });
+  } catch (err) {
+    console.error("Erreur security score:", err);
+    res.status(500).json({ error: "Erreur lors du calcul du score de sécurité." });
+  }
+});
+
+// ═══════════════════════════════════════════════════
+// RGPD PDF REPORT
+// ═══════════════════════════════════════════════════
+
+// GET /api/vault/rgpd-scan/:id/pdf — generate RGPD PDF report
+router.get("/rgpd-scan/:id/pdf", authMiddleware, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: "ID invalide." });
+    }
+
+    const scan = await RgpdScan.findOne({ _id: req.params.id, userId: req.userId });
+    if (!scan) return res.status(404).json({ error: "Scan RGPD introuvable." });
+    if (scan.status !== "completed") return res.status(400).json({ error: "Le scan n'est pas terminé." });
+
+    const doc = new PDFDocument({ size: "A4", margin: 50 });
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="rapport-rgpd-${scan.domain}-${Date.now()}.pdf"`);
+    doc.pipe(res);
+
+    const scoreColor = scan.score >= 80 ? [22, 163, 74] : scan.score >= 60 ? [202, 138, 4] : scan.score >= 40 ? [234, 88, 12] : [220, 38, 38];
+    const scoreLabel = scan.score >= 80 ? "EXCELLENT" : scan.score >= 60 ? "CORRECT" : scan.score >= 40 ? "INSUFFISANT" : "CRITIQUE";
+    const scanDate = scan.createdAt
+      ? new Date(scan.createdAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })
+      : "Date inconnue";
+
+    // ─── Header bar ───
+    doc.rect(0, 0, 595.28, 80).fill("#0e7490");
+    doc.fontSize(26).fill("#ffffff").text("NERVUR VAULT", 50, 22);
+    doc.fontSize(11).fill("rgba(255,255,255,0.85)").text("Rapport de conformite RGPD", 50, 52);
+
+    doc.y = 100;
+
+    // ─── Domain + date ───
+    doc.fontSize(18).fill("#1a1a2e").text(scan.domain, 50);
+    doc.fontSize(10).fill("#6b7280").text(`Analyse du ${scanDate}`, 50);
+    doc.moveDown(1.2);
+
+    // ─── Score badge ───
+    const badgeY = doc.y;
+    doc.roundedRect(50, badgeY, 200, 36, 6).fill(`rgb(${scoreColor.join(",")})`);
+    doc.fontSize(13).fill("#ffffff").text(`Score RGPD : ${scan.score}/100 — ${scoreLabel}`, 58, badgeY + 10, { width: 184, align: "center" });
+    doc.moveDown(2.5);
+
+    // ─── Compliance items ───
+    doc.fontSize(14).fill("#1a1a2e").text("Detail de la conformite", 50);
+    doc.moveDown(0.6);
+
+    const complianceLabels = {
+      mentionsLegales: "Mentions legales",
+      politiqueConfidentialite: "Politique de confidentialite",
+      cookieBanner: "Banniere cookies",
+      cgv: "CGV / CGU",
+      contactInfo: "Informations de contact",
+      ssl: "Certificat SSL (HTTPS)",
+      thirdPartyTrackers: "Trackers tiers",
+      formConsent: "Consentement formulaires",
+    };
+
+    const results = scan.results || {};
+    for (const [key, label] of Object.entries(complianceLabels)) {
+      if (doc.y > 700) { doc.addPage(); doc.y = 50; }
+      const r = results[key];
+      if (!r) continue;
+      const isPass = key === "thirdPartyTrackers" ? !r.found : r.found;
+      const statusText = isPass ? "CONFORME" : "NON CONFORME";
+      const statusColor = isPass ? [22, 163, 74] : [220, 38, 38];
+
+      doc.fontSize(11).fill("#1a1a2e").text(`${label}`, 50, doc.y, { continued: true });
+      doc.fill(`rgb(${statusColor.join(",")})`).text(`  — ${statusText}`, { continued: false });
+      doc.fontSize(9).fill("#6b7280").text(r.details || "", 60, doc.y, { width: 480 });
+      doc.moveDown(0.6);
+    }
+
+    // ─── AI Recommendations ───
+    if (scan.aiRecommendations) {
+      if (doc.y > 580) { doc.addPage(); doc.y = 50; }
+      doc.moveDown(0.5);
+      doc.fontSize(14).fill("#1a1a2e").text("Recommandations", 50);
+      doc.moveDown(0.5);
+      const cleanRecs = scan.aiRecommendations.replace(/\*\*/g, "");
+      doc.fontSize(9).fill("#374151").text(cleanRecs, 50, doc.y, { width: 495 });
+    }
+
+    // ─── Footer ───
+    const pageCount = doc.bufferedPageRange().count;
+    for (let i = 0; i < pageCount; i++) {
+      doc.switchToPage(i);
+      doc.fontSize(8).fill("#9ca3af").text(
+        "Rapport genere par NERVUR Vault — Confidentiel",
+        50, 780, { width: 495, align: "center" }
+      );
+    }
+
+    doc.end();
+  } catch (err) {
+    console.error("Erreur generation PDF RGPD:", err);
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Erreur lors de la generation du rapport PDF." });
+    }
+  }
+});
+
 module.exports = router;

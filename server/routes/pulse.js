@@ -3,17 +3,45 @@ const router = express.Router();
 const { authMiddleware } = require("../middleware/auth");
 const MonitoredSite = require("../models/MonitoredSite");
 
+// ═══ Security headers to check ═══
+const SECURITY_HEADERS = [
+  { key: "x-frame-options", label: "X-Frame-Options" },
+  { key: "content-security-policy", label: "Content-Security-Policy" },
+  { key: "x-content-type-options", label: "X-Content-Type-Options" },
+  { key: "strict-transport-security", label: "Strict-Transport-Security" },
+  { key: "referrer-policy", label: "Referrer-Policy" },
+  { key: "permissions-policy", label: "Permissions-Policy" },
+];
+
 // ═══ Health check function ═══
 async function checkSiteHealth(domain) {
   const results = {};
 
-  // 1. Uptime check (HTTP request)
+  // 1. Uptime check (HTTP request) + Security headers + HTTP/2
   try {
     const start = Date.now();
     const resp = await fetch(`https://${domain}`, { signal: AbortSignal.timeout(10000) });
     results.uptime = { status: resp.ok, responseTime: Date.now() - start, statusCode: resp.status };
+
+    // Security headers check
+    const headerResults = {};
+    for (const { key, label } of SECURITY_HEADERS) {
+      headerResults[key] = {
+        label,
+        present: resp.headers.has(key),
+        value: resp.headers.get(key) || null,
+      };
+    }
+    results.securityHeaders = headerResults;
+
+    // HTTP/2 check (from response headers — alt-svc or upgrade)
+    const altSvc = resp.headers.get("alt-svc") || "";
+    const hasH2 = altSvc.includes("h2") || altSvc.includes("h3");
+    results.http2 = { supported: hasH2, altSvc: altSvc || null };
   } catch (e) {
     results.uptime = { status: false, error: e.message };
+    results.securityHeaders = {};
+    results.http2 = { supported: false, error: e.message };
   }
 
   // 2. SSL certificate check
@@ -30,7 +58,7 @@ async function checkSiteHealth(domain) {
     });
     const expiryDate = new Date(cert.valid_to);
     const daysLeft = Math.floor((expiryDate - Date.now()) / 86400000);
-    results.ssl = { valid: true, expiryDate: cert.valid_to, daysLeft, issuer: cert.issuer?.O || "Unknown" };
+    results.ssl = { valid: true, expiryDate: cert.valid_to, daysLeft, issuer: cert.issuer?.O || "Unknown", subject: cert.subject?.CN || domain };
   } catch (e) {
     results.ssl = { valid: false, error: e.message };
   }
@@ -43,7 +71,8 @@ async function checkSiteHealth(domain) {
     const txt = await dns.resolve(domain, "TXT").catch(() => []);
     const hasSPF = txt.some(t => t.join("").includes("v=spf1"));
     const hasDMARC = await dns.resolve(`_dmarc.${domain}`, "TXT").then(r => r.length > 0).catch(() => false);
-    results.dns = { aRecords: records, mxRecords: mx.map(m => m.exchange), spf: hasSPF, dmarc: hasDMARC };
+    const hasDKIM = await dns.resolve(`default._domainkey.${domain}`, "TXT").then(r => r.length > 0).catch(() => false);
+    results.dns = { aRecords: records, mxRecords: mx.map(m => m.exchange), spf: hasSPF, dmarc: hasDMARC, dkim: hasDKIM };
   } catch (e) {
     results.dns = { error: e.message };
   }
@@ -55,12 +84,21 @@ async function checkSiteHealth(domain) {
 
   // 5. Calculate overall score
   let score = 0;
-  if (results.uptime?.status) score += 25;
-  if (results.ssl?.valid && results.ssl.daysLeft > 14) score += 25;
-  if (results.dns?.aRecords?.length > 0) score += 15;
+  if (results.uptime?.status) score += 20;
+  if (results.ssl?.valid && results.ssl.daysLeft > 14) score += 20;
+  if (results.dns?.aRecords?.length > 0) score += 10;
   if (results.dns?.spf) score += 10;
   if (results.dns?.dmarc) score += 10;
-  if (results.domain?.daysUntilExpiry > 30) score += 15;
+  if (results.domain?.daysUntilExpiry > 30) score += 10;
+
+  // Security headers score (up to 20 points)
+  if (results.securityHeaders && typeof results.securityHeaders === "object") {
+    const headerKeys = Object.keys(results.securityHeaders);
+    const presentCount = headerKeys.filter(k => results.securityHeaders[k]?.present).length;
+    const headerScore = headerKeys.length > 0 ? Math.round((presentCount / headerKeys.length) * 20) : 0;
+    score += headerScore;
+  }
+
   results.score = score;
 
   return results;
@@ -90,8 +128,7 @@ router.post("/sites", authMiddleware, async (req, res) => {
     }
 
     // Run initial health check
-    const healthResults = checkSiteHealth(cleanDomain);
-    const health = await healthResults;
+    const health = await checkSiteHealth(cleanDomain);
 
     const site = await MonitoredSite.create({
       userId: req.userId,
@@ -103,9 +140,16 @@ router.post("/sites", authMiddleware, async (req, res) => {
         ssl: health.ssl,
         dns: health.dns,
         domain: health.domain,
+        securityHeaders: health.securityHeaders,
+        http2: health.http2,
         checkedAt: new Date(),
       },
-      history: [{ score: health.score, checkedAt: new Date() }],
+      history: [{
+        score: health.score,
+        responseTime: health.uptime?.responseTime || null,
+        uptimeStatus: health.uptime?.status || false,
+        checkedAt: new Date(),
+      }],
     });
 
     res.status(201).json(site);
@@ -138,6 +182,76 @@ router.get("/sites/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// ═══ GET /api/pulse/sites/:id/status-page — Public-friendly health data ═══
+router.get("/sites/:id/status-page", authMiddleware, async (req, res) => {
+  try {
+    const site = await MonitoredSite.findOne({ _id: req.params.id, userId: req.userId });
+    if (!site) return res.status(404).json({ error: "Site non trouvé." });
+
+    const check = site.lastCheck || {};
+    const recentHistory = (site.history || []).slice(-30);
+
+    // Calculate uptime percentage from history
+    const totalChecks = recentHistory.length;
+    const upChecks = recentHistory.filter(h => h.uptimeStatus).length;
+    const uptimePercentage = totalChecks > 0 ? Math.round((upChecks / totalChecks) * 10000) / 100 : 100;
+
+    // Build public-friendly response
+    const statusPage = {
+      domain: site.domain,
+      status: check.uptime?.status ? "operational" : "down",
+      uptimePercentage,
+      lastChecked: check.checkedAt,
+      responseTime: check.uptime?.responseTime || null,
+      ssl: check.ssl ? {
+        valid: check.ssl.valid,
+        daysLeft: check.ssl.daysLeft,
+        issuer: check.ssl.issuer,
+      } : null,
+      recentHistory: recentHistory.map(h => ({
+        score: h.score,
+        responseTime: h.responseTime,
+        status: h.uptimeStatus ? "up" : "down",
+        checkedAt: h.checkedAt,
+      })),
+    };
+
+    res.json(statusPage);
+  } catch (err) {
+    console.error("[Pulse] Erreur status-page:", err.message);
+    res.status(500).json({ error: "Erreur lors de la génération de la page de statut." });
+  }
+});
+
+// ═══ POST /api/pulse/sites/:id/alert — Configure email alerts ═══
+router.post("/sites/:id/alert", authMiddleware, async (req, res) => {
+  try {
+    const site = await MonitoredSite.findOne({ _id: req.params.id, userId: req.userId });
+    if (!site) return res.status(404).json({ error: "Site non trouvé." });
+
+    const { alertEmail, alerts } = req.body;
+
+    if (alertEmail !== undefined) {
+      if (alertEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(alertEmail)) {
+        return res.status(400).json({ error: "Adresse email invalide." });
+      }
+      site.alertEmail = alertEmail || undefined;
+    }
+
+    if (alerts && typeof alerts === "object") {
+      if (typeof alerts.down === "boolean") site.alerts.down = alerts.down;
+      if (typeof alerts.sslExpiring === "boolean") site.alerts.sslExpiring = alerts.sslExpiring;
+      if (typeof alerts.domainExpiring === "boolean") site.alerts.domainExpiring = alerts.domainExpiring;
+    }
+
+    await site.save();
+    res.json(site);
+  } catch (err) {
+    console.error("[Pulse] Erreur config alertes:", err.message);
+    res.status(500).json({ error: "Erreur lors de la configuration des alertes." });
+  }
+});
+
 // ═══ POST /api/pulse/sites/:id/check — Trigger health check ═══
 router.post("/sites/:id/check", authMiddleware, async (req, res) => {
   try {
@@ -152,9 +266,16 @@ router.post("/sites/:id/check", authMiddleware, async (req, res) => {
       ssl: health.ssl,
       dns: health.dns,
       domain: health.domain,
+      securityHeaders: health.securityHeaders,
+      http2: health.http2,
       checkedAt: new Date(),
     };
-    site.history.push({ score: health.score, checkedAt: new Date() });
+    site.history.push({
+      score: health.score,
+      responseTime: health.uptime?.responseTime || null,
+      uptimeStatus: health.uptime?.status || false,
+      checkedAt: new Date(),
+    });
 
     // Keep only last 100 history entries
     if (site.history.length > 100) {
