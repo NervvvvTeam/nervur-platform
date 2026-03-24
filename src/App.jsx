@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import NervurAurora from './NervurAurora'
 import './index.css'
 
@@ -61,6 +61,14 @@ const DashAlertsPage = lazy(() => import('./dashboard/pages/AlertsPage'))
 const DashAtlasDashboardPage = lazy(() => import('./dashboard/pages/AtlasDashboardPage'))
 const DashAtlasHistoryPage = lazy(() => import('./dashboard/pages/AtlasHistoryPage'))
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 const Loader = () => (
   <div style={{ background: "#09090B", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
     <div style={{ width: "32px", height: "32px", border: "2px solid rgba(129,140,248,0.2)", borderTop: "2px solid #818CF8", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
@@ -72,6 +80,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <ScrollToTop />
         <Suspense fallback={<Loader />}>
           <Routes>
             {/* ═══ Marketing site ═══ */}

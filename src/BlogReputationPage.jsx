@@ -264,14 +264,16 @@ export default function BlogReputationPage() {
       {/* Floating TOC */}
       <TableOfContents sections={TOC_SECTIONS} activeId={activeId} isMobile={isMobile} />
 
-      <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
-        {/* Nav back */}
-        <div style={{ marginBottom: "48px", animation: "fadeUp 0.6s ease" }}>
-          <span onClick={() => navigate("/")} style={{ fontSize: "13px", color: V3, cursor: "pointer", letterSpacing: "1px", transition: "color 0.3s" }}
-            onMouseEnter={e => e.target.style.color = ACCENT} onMouseLeave={e => e.target.style.color = V3}>
-            &larr; NERVUR
-          </span>
-        </div>
+      <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", boxSizing: "border-box" }}>
+        {/* Back button */}
+        <button onClick={() => navigate(-1)} style={{
+          background: "none", border: "none", color: "#71717A", fontSize: "13px",
+          cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: "6px",
+          marginBottom: "24px", padding: 0
+        }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          Retour
+        </button>
 
         {/* Hero */}
         <Section>
@@ -280,7 +282,7 @@ export default function BlogReputationPage() {
             <span style={{ fontSize: "13px", color: V3, marginLeft: "16px" }}>12 min de lecture</span>
           </div>
           <h1 style={{
-            fontSize: isMobile ? "36px" : "48px", fontWeight: 900, lineHeight: 1.1, margin: "0 0 24px", letterSpacing: "-1px",
+            fontSize: isMobile ? "28px" : "42px", fontWeight: 900, lineHeight: 1.1, margin: "0 0 24px", letterSpacing: "-1px",
             background: `linear-gradient(135deg, ${V}, ${ACCENT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
           }}>
             E-reputation : pourquoi 90% des PME perdent des clients sans le savoir
