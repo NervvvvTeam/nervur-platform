@@ -1178,15 +1178,15 @@ export default function NervurAurora() {
                 <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Sentinel</h3>
-              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#ef4444", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>E-reputation & gestion des avis</p>
+              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#ef4444", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>E-réputation & gestion des avis</p>
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
-                Surveillez vos avis Google en temps reel, repondez automatiquement par IA et analysez les tendances de votre e-reputation.
+                Surveillez vos avis Google en temps réel, répondez automatiquement par IA et analysez les tendances de votre e-réputation.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "sentinel" ? null : "sentinel"); }} style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.4)", color: "#ef4444", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "sentinel" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "sentinel" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
-                {["Surveillance avis Google", "Reponses IA automatiques", "Analyse semantique", "Veille concurrentielle", "QR Code + Widget + Alertes"].map((f, i) => (
+                {["Surveillance avis Google", "Réponses IA automatiques", "Analyse sémantique", "Veille concurrentielle", "QR Code + Widget + Alertes"].map((f, i) => (
                   <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1224,13 +1224,13 @@ export default function NervurAurora() {
               <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Phantom</h3>
               <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#8b5cf6", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Audit de performance web</p>
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
-                Analysez vos scores Lighthouse, Core Web Vitals et obtenez des recommandations IA en francais pour ameliorer votre site.
+                Analysez vos scores Lighthouse, Core Web Vitals et obtenez des recommandations IA en français pour améliorer votre site.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "phantom" ? null : "phantom"); }} style={{ background: "rgba(139,92,246,0.15)", border: "1px solid rgba(139,92,246,0.4)", color: "#8b5cf6", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "phantom" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "phantom" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
-                {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals detailles", "Recommandations IA", "Historique + evolution"].map((f, i) => (
+                {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals détaillés", "Recommandations IA", "Historique + évolution"].map((f, i) => (
                   <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1268,13 +1268,13 @@ export default function NervurAurora() {
               <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Vault</h3>
               <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#06b6d4", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Surveillance des fuites de donnees</p>
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
-                Scannez vos emails professionnels sur les bases piratees. Alertes en temps reel et recommandations IA de cybersecurite.
+                Scannez vos emails professionnels sur les bases piratées. Alertes en temps réel et recommandations IA de cybersécurité.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "vault" ? null : "vault"); }} style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.4)", color: "#06b6d4", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "vault" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "vault" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
-                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps reel", "Rapport PDF + recommandations IA"].map((f, i) => (
+                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps réel", "Rapport PDF + recommandations IA"].map((f, i) => (
                   <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1310,15 +1310,15 @@ export default function NervurAurora() {
                 <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
               <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Pulse</h3>
-              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#ec4899", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Monitoring sante web</p>
+              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#ec4899", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Monitoring santé web</p>
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
-                Surveillez la sante de vos sites en temps reel. Uptime, SSL, DNS, securite et delivrabilite email.
+                Surveillez la santé de vos sites en temps réel. Uptime, SSL, DNS, sécurité et délivrabilité email.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "pulse" ? null : "pulse"); }} style={{ background: "rgba(236,72,153,0.15)", border: "1px solid rgba(236,72,153,0.4)", color: "#ec4899", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "pulse" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "pulse" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
-                {["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de securite", "Page de statut publique"].map((f, i) => (
+                {["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de sécurité", "Page de statut publique"].map((f, i) => (
                   <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1366,13 +1366,13 @@ export default function NervurAurora() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Sentinel</h3>
-              <p style={{ fontSize: "13px", color: "#ef4444", fontWeight: 500, marginBottom: "16px" }}>E-reputation</p>
+              <p style={{ fontSize: "13px", color: "#ef4444", fontWeight: 500, marginBottom: "16px" }}>E-réputation</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>29€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Surveillance avis Google", "Reponses IA automatiques", "Analyse semantique", "Veille concurrentielle", "QR Code + Widget + Alertes", "Rapports PDF"].map((f, i) => (
+                {["Surveillance avis Google", "Réponses IA automatiques", "Analyse sémantique", "Veille concurrentielle", "QR Code + Widget + Alertes", "Rapports PDF"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1399,7 +1399,7 @@ export default function NervurAurora() {
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals detailles", "Recommandations IA", "Historique + evolution"].map((f, i) => (
+                {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals détaillés", "Recommandations IA", "Historique + évolution"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1420,13 +1420,13 @@ export default function NervurAurora() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               </div>
               <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Vault</h3>
-              <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 500, marginBottom: "16px" }}>Cybersecurite</p>
+              <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 500, marginBottom: "16px" }}>Cybersécurité</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>19€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps reel", "Rapport PDF + recommandations IA"].map((f, i) => (
+                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps réel", "Rapport PDF + recommandations IA"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1447,13 +1447,13 @@ export default function NervurAurora() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
               <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Pulse</h3>
-              <p style={{ fontSize: "13px", color: "#ec4899", fontWeight: 500, marginBottom: "16px" }}>Monitoring sante web</p>
+              <p style={{ fontSize: "13px", color: "#ec4899", fontWeight: 500, marginBottom: "16px" }}>Monitoring santé web</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>19€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de securite", "Page de statut publique"].map((f, i) => (
+                {["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de sécurité", "Page de statut publique"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1584,8 +1584,8 @@ export default function NervurAurora() {
 
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: isMobile ? "16px" : "24px", maxWidth: "800px", margin: "0 auto", position: "relative" }}>
           {[
-            { title: "Donnees reelles", desc: "Chaque analyse est basee sur de vraies API — Google PageSpeed, Lighthouse, scraping reel. Zero simulation, zero estimation.", accent: "#4ADE80" },
-            { title: "Resultats mesurables", desc: "Scores de performance, audits detailles, signaux concurrentiels — tout est chiffre, source et verifiable.", accent: "#c084fc" },
+            { title: "Données réelles", desc: "Chaque analyse est basée sur de vraies API — Google PageSpeed, Lighthouse, scraping réel. Zéro simulation, zéro estimation.", accent: "#4ADE80" },
+            { title: "Résultats mesurables", desc: "Scores de performance, audits détaillés, signaux concurrentiels — tout est chiffré, sourcé et vérifiable.", accent: "#c084fc" },
           ].map((item, i) => (
             <RevealSection key={i} delay={i * 150}>
               <div style={{
@@ -1808,8 +1808,8 @@ export default function NervurAurora() {
           <div>
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Blog</p>
             {[
-              { name: "E-reputation PME", path: "/blog/e-reputation" },
-              { name: "Cybersecurite PME", path: "/blog/cybersecurite" },
+              { name: "E-réputation PME", path: "/blog/e-reputation" },
+              { name: "Cybersécurité PME", path: "/blog/cybersecurite" },
               { name: "Performance web", path: "/blog/performance-web" },
             ].map((t, i) => (
               <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
