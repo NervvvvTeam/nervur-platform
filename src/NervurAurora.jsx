@@ -1166,9 +1166,10 @@ export default function NervurAurora() {
           {/* Sentinel */}
           <RevealSection delay={0}>
             <div style={{
-              border: "1px solid rgba(239,68,68,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
+              border: isMobile ? "1px solid rgba(239,68,68,0.45)" : "1px solid rgba(239,68,68,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
-              background: "rgba(239,68,68,0.04)", backdropFilter: "blur(8px)",
+              background: isMobile ? "rgba(239,68,68,0.08)" : "rgba(239,68,68,0.04)", backdropFilter: "blur(8px)",
+              boxShadow: isMobile ? "0 4px 20px rgba(239,68,68,0.15)" : "none",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(239,68,68,0.12)"; e.currentTarget.style.background = "rgba(239,68,68,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(239,68,68,0.04)"; }}>
@@ -1209,9 +1210,10 @@ export default function NervurAurora() {
           {/* Phantom */}
           <RevealSection delay={120}>
             <div style={{
-              border: "1px solid rgba(139,92,246,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
+              border: isMobile ? "1px solid rgba(139,92,246,0.45)" : "1px solid rgba(139,92,246,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
-              background: "rgba(139,92,246,0.04)", backdropFilter: "blur(8px)",
+              background: isMobile ? "rgba(139,92,246,0.08)" : "rgba(139,92,246,0.04)", backdropFilter: "blur(8px)",
+              boxShadow: isMobile ? "0 4px 20px rgba(139,92,246,0.15)" : "none",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(139,92,246,0.12)"; e.currentTarget.style.background = "rgba(139,92,246,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(139,92,246,0.04)"; }}>
@@ -1252,9 +1254,10 @@ export default function NervurAurora() {
           {/* Vault */}
           <RevealSection delay={240}>
             <div style={{
-              border: "1px solid rgba(6,182,212,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
+              border: isMobile ? "1px solid rgba(6,182,212,0.45)" : "1px solid rgba(6,182,212,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
-              background: "rgba(6,182,212,0.04)", backdropFilter: "blur(8px)",
+              background: isMobile ? "rgba(6,182,212,0.08)" : "rgba(6,182,212,0.04)", backdropFilter: "blur(8px)",
+              boxShadow: isMobile ? "0 4px 20px rgba(6,182,212,0.15)" : "none",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(6,182,212,0.12)"; e.currentTarget.style.background = "rgba(6,182,212,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(6,182,212,0.04)"; }}>
@@ -1295,9 +1298,10 @@ export default function NervurAurora() {
           {/* Pulse */}
           <RevealSection delay={360}>
             <div style={{
-              border: "1px solid rgba(236,72,153,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
+              border: isMobile ? "1px solid rgba(236,72,153,0.45)" : "1px solid rgba(236,72,153,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
-              background: "rgba(236,72,153,0.04)", backdropFilter: "blur(8px)",
+              background: isMobile ? "rgba(236,72,153,0.08)" : "rgba(236,72,153,0.04)", backdropFilter: "blur(8px)",
+              boxShadow: isMobile ? "0 4px 20px rgba(236,72,153,0.15)" : "none",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(236,72,153,0.12)"; e.currentTarget.style.background = "rgba(236,72,153,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(236,72,153,0.04)"; }}>
