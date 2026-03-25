@@ -205,7 +205,7 @@ export default function Layout() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#17181f", color: "#d1d5db", fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#191b24", color: "#d1d5db", fontFamily: "'Inter', system-ui, sans-serif" }}>
       {/* Sidebar — desktop */}
       {!isMobile && (
         <aside style={{
@@ -214,9 +214,9 @@ export default function Layout() {
           background: "#12131a", zIndex: 50
         }}>
           {/* Logo */}
-          <div style={{ marginBottom: "28px", borderBottom: "1px solid #1e1e2a", background: "rgba(99,102,241,0.04)", borderRadius: "8px", margin: "0 -4px 28px", padding: "12px 16px 16px" }}>
+          <div style={{ marginBottom: "28px", borderBottom: "1px solid #1e1e2a", background: "rgba(99,102,241,0.04)", borderRadius: "8px", margin: "0 -4px 28px", padding: "8px 16px 10px" }}>
             <img src="/logo-nav.png" alt="NERVÜR" style={{
-              height: "48px", width: "auto", marginBottom: "6px",
+              height: "28px", width: "auto", marginBottom: "4px",
               filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain"
             }} />
             <div style={{ fontSize: "11px", color: "#818CF8", fontWeight: 400 }}>Espace client</div>
@@ -297,7 +297,8 @@ export default function Layout() {
       {/* Main content */}
       <main style={{
         flex: 1, marginLeft: isMobile ? 0 : "230px", padding: isMobile ? "66px 20px 20px" : "36px 44px",
-        minHeight: "100vh", position: "relative", zIndex: 1
+        minHeight: "100vh", position: "relative", zIndex: 1,
+        background: `radial-gradient(ellipse 80% 50% at 70% 0%, ${(PATH_COLORS[location.pathname] || TOOL_COLORS.general)}10 0%, transparent 70%)`,
       }}>
         <Outlet />
       </main>

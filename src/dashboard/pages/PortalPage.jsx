@@ -494,7 +494,7 @@ function ParticleNetwork({ width = 300, height = 600 }) {
 const ACTIVITY_ITEMS = [
   { icon: "🛡", text: "Nouvel avis 5 étoiles détecté", tool: "Sentinel", color: "#ef4444", time: "Il y a 2 min" },
   { icon: "⚡", text: "Score performance amélioré +12%", tool: "Phantom", color: "#8b5cf6", time: "Il y a 15 min" },
-  { icon: "📧", text: "Campagne email envoyée avec succès", tool: "Nexus", color: "#10b981", time: "Il y a 1h" },
+  { icon: "💗", text: "Uptime 99.9% — tous les sites en ligne", tool: "Pulse", color: "#ec4899", time: "Il y a 1h" },
   { icon: "🔒", text: "Scan sécurité terminé — 0 fuite", tool: "Vault", color: "#06b6d4", time: "Il y a 3h" },
   { icon: "🛡", text: "Réponse IA publiée automatiquement", tool: "Sentinel", color: "#ef4444", time: "Il y a 5h" },
   { icon: "⚡", text: "Nouveau rapport Lighthouse disponible", tool: "Phantom", color: "#8b5cf6", time: "Hier" },
@@ -611,10 +611,10 @@ const TOOLS = [
 ];
 
 const TIPS = [
-  "Répondez aux avis dans les 24h pour améliorer votre score.",
-  "Utilisez Phantom pour optimiser le SEO de vos pages clés.",
-  "Programmez vos contenus avec Nexus pour une présence régulière.",
-  "Lancez un scan Vault chaque mois pour vérifier vos emails.",
+  "Repondez aux avis dans les 24h pour ameliorer votre score.",
+  "Utilisez Phantom pour optimiser le SEO de vos pages cles.",
+  "Lancez un scan Vault chaque mois pour verifier vos emails.",
+  "Surveillez votre uptime avec Pulse pour ne rater aucune panne.",
 ];
 
 // ═══════════════════════════════════════════
@@ -1008,13 +1008,7 @@ function RightPanel({ hasAccess }) {
             data.scans = scans?.length || 0;
           } catch(e) {}
         }
-        if (hasAccess("nexus")) {
-          try {
-            const contacts = await get("/api/nexus/email/contacts");
-            data.contacts = contacts?.length || 0;
-          } catch(e) {}
-        }
-        data.tools = [hasAccess("sentinel"), hasAccess("phantom"), hasAccess("nexus"), hasAccess("vault")].filter(Boolean).length;
+        data.tools = [hasAccess("sentinel"), hasAccess("phantom"), hasAccess("vault"), hasAccess("pulse")].filter(Boolean).length;
         setStats(data);
       } catch(e) { setStats({ tools: 0 }); }
     }
@@ -1030,8 +1024,8 @@ function RightPanel({ hasAccess }) {
   if (hasAccess("phantom")) {
     activities.push({ icon: "⚡", text: "Audits de performance disponibles", tool: "Phantom", color: "#8b5cf6" });
   }
-  if (hasAccess("nexus")) {
-    activities.push({ icon: "📧", text: "Module emailing prêt à l'emploi", tool: "Nexus", color: "#10b981" });
+  if (hasAccess("pulse")) {
+    activities.push({ icon: "💗", text: "Monitoring sante web actif", tool: "Pulse", color: "#ec4899" });
   }
   if (hasAccess("vault")) {
     activities.push({ icon: "🔒", text: "Protection données activée", tool: "Vault", color: "#06b6d4" });
@@ -1064,8 +1058,36 @@ function RightPanel({ hasAccess }) {
       animation: "slideInRight 0.6s ease-out forwards", opacity: 0,
       animationDelay: "0.3s"
     }}>
-      {/* Hologram */}
-      <NervurHologram />
+      {/* Quick overview card */}
+      <div style={{
+        padding: "20px", borderRadius: "14px",
+        background: "linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(129,140,248,0.04) 100%)",
+        border: "1px solid rgba(99,102,241,0.15)",
+        position: "relative", overflow: "hidden",
+      }}>
+        <div style={{ fontSize: "10px", fontWeight: 600, color: "#818CF8", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "12px" }}>NERVUR</div>
+        <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.7 }}>
+          Votre espace de gestion centralise. Accedez a vos outils, suivez vos statistiques et gerez votre presence en ligne.
+        </div>
+        <div style={{
+          marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap",
+        }}>
+          {[
+            { label: "SEN", color: "#ef4444" },
+            { label: "PHA", color: "#8b5cf6" },
+            { label: "VAU", color: "#06b6d4" },
+            { label: "PUL", color: "#ec4899" },
+          ].map((t, i) => (
+            <div key={i} style={{
+              padding: "4px 10px", borderRadius: "4px",
+              background: `${t.color}15`, border: `1px solid ${t.color}30`,
+              fontSize: "9px", fontWeight: 600, color: t.color, letterSpacing: "1px",
+            }}>
+              {t.label}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Live Activity — dynamic */}
       <div style={{
@@ -1112,8 +1134,8 @@ function RightPanel({ hasAccess }) {
           ...(hasAccess("vault") ? [
             { label: "Scans sécurité", value: stats?.scans ?? "—", color: "#06b6d4" },
           ] : []),
-          ...(hasAccess("nexus") ? [
-            { label: "Contacts", value: stats?.contacts ?? "—", color: "#10b981" },
+          ...(hasAccess("pulse") ? [
+            { label: "Sites surveilles", value: "—", color: "#ec4899" },
           ] : []),
         ].map((stat, i) => (
           <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: i < 3 ? "1px solid #2a2d3a" : "none" }}>

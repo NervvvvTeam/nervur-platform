@@ -800,7 +800,7 @@ export default function NervurAurora() {
               fontSize: "17px", lineHeight: 1.8, color: "#71717A", maxWidth: "520px",
               marginBottom: "44px",
               animation: loaded ? "fadeInUp 0.8s ease 0.6s both" : "none" }}>
-              NERVÜR conçoit les stratégies digitales qui rendent votre entreprise pérenne grâce à internet. Deux fondateurs. Zéro compromis.
+              NERVÜR conçoit les stratégies digitales qui rendent votre entreprise pérenne grâce à internet. Une vision. Zéro compromis.
             </p>
             <div style={{
               display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row",
