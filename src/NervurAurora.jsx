@@ -1147,7 +1147,7 @@ export default function NervurAurora() {
       {/* ═══ OUTILS SaaS ═══ */}
       <section id="outils" aria-label="Nos outils" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", borderTop: `1px solid ${VG(0.1)}` }}>
         <RevealSection>
-          <div style={{ textAlign: "center", marginBottom: "60px" }}>
+          <div style={{ textAlign: "center", marginBottom: isMobile ? "30px" : "60px" }}>
             <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: V2, display: "block", marginBottom: "16px" }}>
               // Nos outils
             </span>
@@ -1160,40 +1160,40 @@ export default function NervurAurora() {
           </div>
         </RevealSection>
 
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)", gap: "24px", maxWidth: "1100px", margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(2, 1fr)", gap: isMobile ? "12px" : "24px", maxWidth: "1100px", margin: "0 auto" }}>
 
           {/* Sentinel */}
           <RevealSection delay={0}>
             <div style={{
-              border: "1px solid rgba(239,68,68,0.25)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(239,68,68,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
               background: "rgba(239,68,68,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(239,68,68,0.12)"; e.currentTarget.style.background = "rgba(239,68,68,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(239,68,68,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #ef4444, #f97316)" }} />
-              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div style={{ width: isMobile ? "36px" : "44px", height: isMobile ? "36px" : "44px", borderRadius: "12px", background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: isMobile ? "12px" : "20px" }}>
+                <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <h3 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "4px" }}>Sentinel</h3>
-              <p style={{ fontSize: "13px", color: "#ef4444", fontWeight: 600, marginBottom: "12px", letterSpacing: "0.5px" }}>E-reputation & gestion des avis</p>
-              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
+              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Sentinel</h3>
+              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#ef4444", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>E-reputation & gestion des avis</p>
+              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Surveillez vos avis Google en temps reel, repondez automatiquement par IA et analysez les tendances de votre e-reputation.
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              </p>}
+              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
                 {["Surveillance avis Google", "Reponses IA automatiques", "Analyse semantique", "Veille concurrentielle", "QR Code + Widget + Alertes"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
-              </ul>
+              </ul>}
               <div style={{ marginTop: "auto" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
-                  <span style={{ fontSize: "36px", fontWeight: 800 }}>29€</span>
-                  <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>29€</span>
+                  <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
-                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(239,68,68,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer
@@ -1205,35 +1205,35 @@ export default function NervurAurora() {
           {/* Phantom */}
           <RevealSection delay={120}>
             <div style={{
-              border: "1px solid rgba(139,92,246,0.25)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(139,92,246,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
               background: "rgba(139,92,246,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(139,92,246,0.12)"; e.currentTarget.style.background = "rgba(139,92,246,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(139,92,246,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #8b5cf6, #a78bfa)" }} />
-              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(139,92,246,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <div style={{ width: isMobile ? "36px" : "44px", height: isMobile ? "36px" : "44px", borderRadius: "12px", background: "rgba(139,92,246,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: isMobile ? "12px" : "20px" }}>
+                <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
               </div>
-              <h3 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "4px" }}>Phantom</h3>
-              <p style={{ fontSize: "13px", color: "#8b5cf6", fontWeight: 600, marginBottom: "12px", letterSpacing: "0.5px" }}>Audit de performance web</p>
-              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
+              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Phantom</h3>
+              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#8b5cf6", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Audit de performance web</p>
+              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Analysez vos scores Lighthouse, Core Web Vitals et obtenez des recommandations IA en francais pour ameliorer votre site.
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              </p>}
+              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
                 {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals detailles", "Recommandations IA", "Historique + evolution"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
-              </ul>
+              </ul>}
               <div style={{ marginTop: "auto" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
-                  <span style={{ fontSize: "36px", fontWeight: 800 }}>19€</span>
-                  <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>19€</span>
+                  <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
-                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(139,92,246,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer
@@ -1245,35 +1245,35 @@ export default function NervurAurora() {
           {/* Vault */}
           <RevealSection delay={240}>
             <div style={{
-              border: "1px solid rgba(6,182,212,0.25)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(6,182,212,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
               background: "rgba(6,182,212,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(6,182,212,0.12)"; e.currentTarget.style.background = "rgba(6,182,212,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(6,182,212,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #06b6d4, #22d3ee)" }} />
-              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(6,182,212,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <div style={{ width: isMobile ? "36px" : "44px", height: isMobile ? "36px" : "44px", borderRadius: "12px", background: "rgba(6,182,212,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: isMobile ? "12px" : "20px" }}>
+                <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               </div>
-              <h3 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "4px" }}>Vault</h3>
-              <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 600, marginBottom: "12px", letterSpacing: "0.5px" }}>Surveillance des fuites de donnees</p>
-              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
+              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Vault</h3>
+              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#06b6d4", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Surveillance des fuites de donnees</p>
+              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Scannez vos emails professionnels sur les bases piratees. Alertes en temps reel et recommandations IA de cybersecurite.
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              </p>}
+              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
                 {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps reel", "Rapport PDF + recommandations IA"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
-              </ul>
+              </ul>}
               <div style={{ marginTop: "auto" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
-                  <span style={{ fontSize: "36px", fontWeight: 800 }}>19€</span>
-                  <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>19€</span>
+                  <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
-                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(6,182,212,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer
@@ -1285,35 +1285,35 @@ export default function NervurAurora() {
           {/* Pulse */}
           <RevealSection delay={360}>
             <div style={{
-              border: "1px solid rgba(236,72,153,0.25)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(236,72,153,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
               background: "rgba(236,72,153,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(236,72,153,0.12)"; e.currentTarget.style.background = "rgba(236,72,153,0.07)"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(236,72,153,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #ec4899, #f472b6)" }} />
-              <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(236,72,153,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <div style={{ width: isMobile ? "36px" : "44px", height: isMobile ? "36px" : "44px", borderRadius: "12px", background: "rgba(236,72,153,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: isMobile ? "12px" : "20px" }}>
+                <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               </div>
-              <h3 style={{ fontSize: "24px", fontWeight: 800, marginBottom: "4px" }}>Pulse</h3>
-              <p style={{ fontSize: "13px", color: "#ec4899", fontWeight: 600, marginBottom: "12px", letterSpacing: "0.5px" }}>Monitoring sante web</p>
-              <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
+              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Pulse</h3>
+              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#ec4899", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Monitoring sante web</p>
+              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Surveillez la sante de vos sites en temps reel. Uptime, SSL, DNS, securite et delivrabilite email.
-              </p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              </p>}
+              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
                 {["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de securite", "Page de statut publique"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
-              </ul>
+              </ul>}
               <div style={{ marginTop: "auto" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
-                  <span style={{ fontSize: "36px", fontWeight: 800 }}>19€</span>
-                  <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>19€</span>
+                  <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
-                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: "12px", background: "linear-gradient(135deg, #ec4899, #f472b6)", border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #ec4899, #f472b6)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(236,72,153,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer

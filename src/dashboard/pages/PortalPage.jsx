@@ -1093,7 +1093,7 @@ export default function PortalPage() {
         {/* LEFT: Tools */}
         <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className={`mb-6 sm:mb-8 px-4 sm:px-8 py-5 sm:py-7 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.12)] relative overflow-hidden ${fadeInUpClass}`}>
+          <div className={`mb-5 sm:mb-8 px-4 sm:px-8 py-5 sm:py-7 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.12)] relative overflow-hidden ${fadeInUpClass}`}>
             <div className="absolute -top-5 right-10 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.15)_0%,transparent_70%)] [animation:orbFloat_6s_ease-in-out_infinite] pointer-events-none" />
             <h1 className="text-xl sm:text-[28px] font-semibold text-[#f0f0f3] mb-1.5 relative">
               <TypingText text={`Bonjour, ${user?.name?.split(" ")[0] || "Client"}`} speed={50} delay={300} />
@@ -1106,7 +1106,7 @@ export default function PortalPage() {
           </div>
 
           {/* Tool Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4">
             {TOOLS.map((tool, index) => {
               const active = hasAccess(tool.id);
               const { Icon, color, gradient } = tool;
@@ -1116,13 +1116,13 @@ export default function PortalPage() {
                   onClick={() => active ? navigate(tool.path) : window.open("https://nervur.fr/contact", "_blank")}
                   onMouseEnter={() => setHoveredCard(tool.id)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-4 sm:p-6 rounded-[14px] bg-[#1e2029] cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden min-w-0"
+                  className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-5 sm:p-6 rounded-[14px] bg-[#1f2130] cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden min-w-0"
                   style={{
                     animationDelay: `${index * 0.1}s`,
-                    border: `1px solid ${isHovered && active ? `${color}50` : "#2a2d3a"}`,
+                    border: `1px solid ${isHovered && active ? `${color}50` : "#33364a"}`,
                     opacity: active ? undefined : 0.45,
                     transform: isHovered && active ? "translateY(-4px)" : "translateY(0)",
-                    boxShadow: isHovered && active ? `0 12px 40px ${color}20, 0 4px 16px rgba(0,0,0,0.3)` : "0 2px 8px rgba(0,0,0,0.25)",
+                    boxShadow: isHovered && active ? `0 12px 40px ${color}20, 0 4px 16px rgba(0,0,0,0.3)` : "0 2px 12px rgba(0,0,0,0.3)",
                   }}>
                   {/* Top accent */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[14px]" style={{ background: active ? gradient : "#2a2d3a" }} />
@@ -1153,11 +1153,12 @@ export default function PortalPage() {
                   <div className="mt-auto">
                     {active ? (
                       <span onMouseEnter={() => setHoveredBtn(tool.id)} onMouseLeave={() => setHoveredBtn(null)}
-                        className="inline-flex items-center gap-1.5 px-4 py-[7px] rounded-lg text-xs font-medium transition-all duration-300"
+                        className="inline-flex items-center gap-1.5 px-5 py-2 rounded-lg text-[13px] font-semibold transition-all duration-300"
                         style={{
-                          background: hoveredBtn === tool.id ? `${color}25` : `${color}15`,
+                          background: hoveredBtn === tool.id ? `${color}30` : `${color}20`,
                           color,
-                          border: `1px solid ${hoveredBtn === tool.id ? `${color}50` : `${color}30`}`,
+                          border: `1px solid ${hoveredBtn === tool.id ? `${color}60` : `${color}40`}`,
+                          boxShadow: hoveredBtn === tool.id ? `0 4px 12px ${color}25` : "none",
                         }}>
                         Ouvrir <span className="inline-block transition-transform duration-300" style={{ transform: hoveredBtn === tool.id ? "translateX(4px)" : "translateX(0)" }}>&rarr;</span>
                       </span>
@@ -1177,8 +1178,10 @@ export default function PortalPage() {
           </div>
         </div>
 
-        {/* RIGHT: Interactive Panel */}
-        <RightPanel hasAccess={hasAccess} />
+        {/* RIGHT: Interactive Panel — hidden on mobile/tablet */}
+        <div className="hidden lg:block">
+          <RightPanel hasAccess={hasAccess} />
+        </div>
       </div>
     </div>
   );

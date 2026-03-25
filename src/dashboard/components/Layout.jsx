@@ -245,27 +245,30 @@ export default function Layout() {
       {/* Mobile header */}
       {isMobile && (
         <>
-          <header className="fixed top-0 left-0 right-0 z-50 bg-[#12131a] border-b border-[#1e1e2a] px-5 py-3 flex justify-between items-center">
-            <img src="/logo-nervur.svg" alt="NERVÜR" className="h-[34px] w-auto object-contain" />
+          <header className="fixed top-0 left-0 right-0 z-50 bg-[#12131a]/95 backdrop-blur-md border-b border-[#1e1e2a] px-4 py-2.5 flex justify-between items-center">
+            <img src="/logo-nervur.svg" alt="NERVÜR" className="h-[28px] w-auto object-contain" />
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="bg-transparent border-none text-[#A1A1AA] text-lg cursor-pointer p-1">
+              className="bg-transparent border-none text-[#A1A1AA] text-xl cursor-pointer p-1.5 rounded-lg hover:bg-[#1e1e2a] transition-colors duration-150">
               {mobileMenuOpen ? "✕" : "☰"}
             </button>
           </header>
           {mobileMenuOpen && (
-            <div className="fixed top-[50px] left-0 right-0 bottom-0 z-[49] bg-[#12131a] px-4 py-3 flex flex-col gap-0.5 overflow-y-auto">
+            <>
+            <div className="fixed inset-0 z-[48] bg-black/50 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+            <div className="fixed top-[48px] left-0 right-0 bottom-0 z-[49] bg-[#12131a]/98 backdrop-blur-md px-4 py-3 flex flex-col gap-0.5 overflow-y-auto">
               {navItems.map((item, idx) => renderNavItem(item, idx, true))}
               <button onClick={() => { logout(); navigate("/app/login"); }}
                 className="mt-auto p-3 bg-transparent border border-[#27272A] rounded-md text-[#71717A] text-[13px] cursor-pointer font-[inherit]">
                 Se déconnecter
               </button>
             </div>
+            </>
           )}
         </>
       )}
 
       {/* Main content */}
-      <main className={`flex-1 min-h-screen relative z-[1] ${isMobile ? "ml-0 pt-[66px] px-4 pb-5" : isTablet ? "ml-[64px] px-5 py-6" : "ml-[230px] px-11 py-9"}`}
+      <main className={`flex-1 min-h-screen relative z-[1] ${isMobile ? "ml-0 pt-[60px] px-4 pb-5" : isTablet ? "ml-[64px] px-5 py-6" : "ml-[230px] px-11 py-9"}`}
         style={{
           background: `radial-gradient(ellipse 80% 50% at 70% 0%, ${(PATH_COLORS[location.pathname] || TOOL_COLORS.general)}10 0%, transparent 70%)`,
         }}>
