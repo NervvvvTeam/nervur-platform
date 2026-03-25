@@ -1182,7 +1182,7 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Surveillez vos avis Google en temps reel, repondez automatiquement par IA et analysez les tendances de votre e-reputation.
               </p>}
-              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "sentinel" ? null : "sentinel"); }} style={{ background: "none", border: "none", color: "#ef4444", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "sentinel" ? null : "sentinel"); }} style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.4)", color: "#ef4444", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "sentinel" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "sentinel" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
@@ -1226,7 +1226,7 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Analysez vos scores Lighthouse, Core Web Vitals et obtenez des recommandations IA en francais pour ameliorer votre site.
               </p>}
-              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "phantom" ? null : "phantom"); }} style={{ background: "none", border: "none", color: "#8b5cf6", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "phantom" ? null : "phantom"); }} style={{ background: "rgba(139,92,246,0.15)", border: "1px solid rgba(139,92,246,0.4)", color: "#8b5cf6", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "phantom" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "phantom" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
@@ -1270,7 +1270,7 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Scannez vos emails professionnels sur les bases piratees. Alertes en temps reel et recommandations IA de cybersecurite.
               </p>}
-              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "vault" ? null : "vault"); }} style={{ background: "none", border: "none", color: "#06b6d4", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "vault" ? null : "vault"); }} style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.4)", color: "#06b6d4", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "vault" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "vault" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
@@ -1314,7 +1314,7 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Surveillez la sante de vos sites en temps reel. Uptime, SSL, DNS, securite et delivrabilite email.
               </p>}
-              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "pulse" ? null : "pulse"); }} style={{ background: "none", border: "none", color: "#ec4899", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "pulse" ? null : "pulse"); }} style={{ background: "rgba(236,72,153,0.15)", border: "1px solid rgba(236,72,153,0.4)", color: "#ec4899", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "pulse" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "pulse" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
