@@ -213,13 +213,10 @@ export default function Layout() {
           display: "flex", flexDirection: "column", position: "fixed", top: 0, bottom: 0, left: 0,
           background: "#12131a", zIndex: 50
         }}>
-          {/* Logo */}
-          <div style={{ marginBottom: "28px", borderBottom: "1px solid #1e1e2a", background: "rgba(99,102,241,0.04)", borderRadius: "8px", margin: "0 -4px 28px", padding: "8px 16px 10px" }}>
-            <img src="/logo-nav.png" alt="NERVÜR" style={{
-              height: "40px", width: "auto", marginBottom: "4px",
-              filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain"
-            }} />
-            <div style={{ fontSize: "11px", color: "#818CF8", fontWeight: 400 }}>Espace client</div>
+          {/* Branding */}
+          <div style={{ marginBottom: "28px", borderBottom: "1px solid #1e1e2a", margin: "0 -4px 28px", padding: "12px 16px 14px" }}>
+            <div style={{ fontSize: "16px", fontWeight: 700, color: "#FAFAFA", letterSpacing: "1px" }}>NERVÜR</div>
+            <div style={{ fontSize: "11px", color: "#818CF8", fontWeight: 400, marginTop: "2px" }}>Espace client</div>
           </div>
 
           {/* Nav */}

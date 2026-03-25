@@ -612,7 +612,7 @@ export default function NervurAurora() {
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <img src="/logo-nav.png" alt="NERVÜR" style={{
-          height: isMobile ? "36px" : "44px", width: "auto",
+          height: isMobile ? "38px" : "50px", width: "auto",
           filter: "invert(1) brightness(1.15)",
           mixBlendMode: "screen",
           objectFit: "contain" }} />
