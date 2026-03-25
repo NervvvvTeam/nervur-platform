@@ -22,7 +22,6 @@ const SUJETS = [
   "Souscrire à Pulse (19€/mois)",
   "Pack Duo — 2 outils (39€/mois)",
   "Pack Total — 5 outils (69€/mois)",
-  "⭐ Accès Prioritaire Gold",
   "Projet de développement web",
   "SEO & Marketing",
   "Autre",
@@ -70,8 +69,7 @@ export default function ContactPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const sanitized = (name === "nom" || name === "message") ? sanitizeInput(value) : value;
-    setForm((prev) => ({ ...prev, [name]: sanitized }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
