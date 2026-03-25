@@ -59,14 +59,10 @@ const DashReportsPage = lazy(() => import('./dashboard/pages/ReportsPage'))
 const DashQRCodePage = lazy(() => import('./dashboard/pages/QRCodePage'))
 const DashWidgetPage = lazy(() => import('./dashboard/pages/WidgetPage'))
 const DashAlertsPage = lazy(() => import('./dashboard/pages/AlertsPage'))
-const DashAtlasDashboardPage = lazy(() => import('./dashboard/pages/AtlasDashboardPage'))
-const DashAtlasHistoryPage = lazy(() => import('./dashboard/pages/AtlasHistoryPage'))
 const DashPhantomSchedulePage = lazy(() => import('./dashboard/pages/PhantomSchedulePage'))
 const DashPhantomCompetitorsPage = lazy(() => import('./dashboard/pages/PhantomCompetitorsPage'))
 const DashPulseAlertsPage = lazy(() => import('./dashboard/pages/PulseAlertsPage'))
 const DashPulseStatusPage = lazy(() => import('./dashboard/pages/PulseStatusPage'))
-const DashAtlasSuggestionsPage = lazy(() => import('./dashboard/pages/AtlasSuggestionsPage'))
-const DashAtlasReportsPage = lazy(() => import('./dashboard/pages/AtlasReportsPage'))
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -158,10 +154,6 @@ function App() {
                 <Route path="vault/scan/:id" element={<Suspense fallback={<DashboardLoader />}><DashVaultScanDetailPage /></Suspense>} />
                 <Route path="vault/monitoring" element={<Suspense fallback={<DashboardLoader />}><DashVaultMonitoringPage /></Suspense>} />
                 <Route path="vault/rgpd" element={<Suspense fallback={<DashboardLoader />}><DashVaultRgpdPage /></Suspense>} />
-                <Route path="atlas" element={<Suspense fallback={<DashboardLoader />}><DashAtlasDashboardPage /></Suspense>} />
-                <Route path="atlas/history" element={<Suspense fallback={<DashboardLoader />}><DashAtlasHistoryPage /></Suspense>} />
-                <Route path="atlas/suggestions" element={<Suspense fallback={<DashboardLoader />}><DashAtlasSuggestionsPage /></Suspense>} />
-                <Route path="atlas/reports" element={<Suspense fallback={<DashboardLoader />}><DashAtlasReportsPage /></Suspense>} />
                 <Route path="settings" element={<Suspense fallback={<DashboardLoader />}><DashSettingsPage /></Suspense>} />
                 <Route path="onboarding" element={<Suspense fallback={<DashboardLoader />}><DashOnboardingPage /></Suspense>} />
                 <Route index element={<Navigate to="/app/portal" replace />} />

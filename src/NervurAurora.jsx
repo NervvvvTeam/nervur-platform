@@ -391,11 +391,11 @@ export default function NervurAurora() {
 
   useSEO(
     "NERVÜR — Agence Digitale & Nouvelles Technologies",
-    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation), Phantom (audit web), Vault (cybersécurité), Atlas (SEO), Pulse (monitoring). À partir de 19€/mois.",
+    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation), Phantom (audit web), Vault (cybersécurité). À partir de 19€/mois.",
     {
       path: "/",
-      keywords: "SaaS PME, e-réputation, audit web, cybersécurité, SEO, monitoring, outils PME, NERVÜR, Sentinel, Phantom, Vault, Atlas, Pulse",
-      imageAlt: "NERVÜR — 5 outils SaaS pour PME : e-réputation, audit web, cybersécurité, SEO, monitoring",
+      keywords: "SaaS PME, e-réputation, audit web, cybersécurité, outils PME, NERVÜR, Sentinel, Phantom, Vault",
+      imageAlt: "NERVÜR — Outils SaaS pour PME : e-réputation, audit web, cybersécurité",
     }
   );
 
@@ -407,7 +407,7 @@ export default function NervurAurora() {
     "url": "https://nervur.fr",
     "logo": "https://nervur.fr/logo-nav-clean.png",
     "image": "https://nervur.fr/og-image.png",
-    "description": "Éditeur de technologies de croissance pour les PME. 5 outils SaaS : e-réputation, audit web, cybersécurité, SEO et monitoring.",
+    "description": "Éditeur de technologies de croissance pour les PME. 3 outils SaaS : e-réputation, audit web et cybersécurité.",
     "foundingDate": "2024",
     "areaServed": {
       "@type": "Country",
@@ -475,29 +475,7 @@ export default function NervurAurora() {
     "offers": { "@type": "Offer", "price": "39", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
   });
 
-  // SoftwareApplication structured data — Atlas
-  useJsonLd({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "NERVÜR Atlas",
-    "description": "Outil SEO pour PME. Audit de référencement, suivi de positions, analyse de mots-clés et recommandations.",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "url": "https://nervur.fr/atlas",
-    "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
-  });
-
-  // SoftwareApplication structured data — Pulse
-  useJsonLd({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "NERVÜR Pulse",
-    "description": "Monitoring de disponibilité et performance pour sites web et API. Alertes temps réel, rapports de uptime.",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web",
-    "url": "https://nervur.fr/pulse",
-    "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
-  });
+  // Atlas and Pulse removed
 
   // Oscillating hero values
   const perfScore = useOscillate(98, 2, 3000);
@@ -1614,7 +1592,7 @@ export default function NervurAurora() {
               </h2>
             </TextReveal>
             <p style={{ fontSize: "16px", lineHeight: 1.8, color: "#71717A", maxWidth: "460px", margin: "0 auto 40px" }}>
-              Réservez un appel de 30 minutes. On écoute, on diagnostique, on vous dit la vérité. Gratuit. Sans engagement.
+              Parlons de votre projet. On écoute, on diagnostique, on vous dit la vérité. Gratuit. Sans engagement.
             </p>
             <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexDirection: isMobile ? "column" : "row", alignItems: "center" }}>
               <MagneticButton className="cta-btn" onClick={() => navigate('/contact')}
@@ -1623,7 +1601,7 @@ export default function NervurAurora() {
                 background: `linear-gradient(135deg, ${A1}, ${A3})`,
                 color: "#09090B", fontSize: isMobile ? "12px" : "14px", fontWeight: 700, letterSpacing: "1.5px",
                 textTransform: "uppercase", cursor: "pointer", display: "inline-block", textAlign: "center" }}>
-                Réserver un appel →
+                Nous contacter →
               </MagneticButton>
               <MagneticButton className="cta-btn" onClick={() => navigate('/contact')}
                                style={{

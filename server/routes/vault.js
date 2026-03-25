@@ -961,9 +961,6 @@ router.post("/password-check", authMiddleware, async (req, res) => {
       return res.status(400).json({ error: "Mot de passe trop long." });
     }
 
-    // Calculate strength
-    const strength = calculatePasswordStrength(password);
-
     // Check HIBP using k-anonymity model
     let breachCount = 0;
     let breached = false;
@@ -994,6 +991,9 @@ router.post("/password-check", authMiddleware, async (req, res) => {
       // Continue without breach data — strength still useful
     }
 
+    // Calculate strength with breach status factored in
+    const strength = calculatePasswordStrength(password, breached);
+
     res.json({
       strength,
       breached,
@@ -1005,33 +1005,50 @@ router.post("/password-check", authMiddleware, async (req, res) => {
   }
 });
 
-function calculatePasswordStrength(password) {
+function calculatePasswordStrength(password, breached = false) {
   let score = 0;
   const len = password.length;
 
   // Length scoring
   if (len >= 8) score += 1;
-  if (len >= 12) score += 1;
+  if (len >= 12) score += 2;
   if (len >= 16) score += 1;
+  if (len >= 20) score += 1;
 
   // Character variety
-  if (/[a-z]/.test(password)) score += 1;
-  if (/[A-Z]/.test(password)) score += 1;
-  if (/[0-9]/.test(password)) score += 1;
-  if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+  const hasLower = /[a-z]/.test(password);
+  const hasUpper = /[A-Z]/.test(password);
+  const hasDigit = /[0-9]/.test(password);
+  const hasSpecial = /[^a-zA-Z0-9]/.test(password);
+  if (hasLower) score += 1;
+  if (hasUpper) score += 1;
+  if (hasDigit) score += 1;
+  if (hasSpecial) score += 1;
+
+  // Bonus for having all 4 character types
+  if (hasLower && hasUpper && hasDigit && hasSpecial) score += 1;
 
   // Common patterns penalty
   const lower = password.toLowerCase();
   const commonPatterns = ["password", "123456", "qwerty", "azerty", "motdepasse", "admin", "letmein", "welcome", "monkey", "dragon", "master"];
-  if (commonPatterns.some(p => lower.includes(p))) score = Math.max(0, score - 3);
+  if (commonPatterns.some(p => lower.includes(p))) score = Math.max(0, score - 4);
 
   // Sequential/repeated chars penalty
   if (/(.)\1{2,}/.test(password)) score = Math.max(0, score - 1);
   if (/(?:012|123|234|345|456|567|678|789|abc|bcd|cde|def)/.test(lower)) score = Math.max(0, score - 1);
 
-  if (score <= 2) return { level: "weak", label: "Faible", score: Math.round((score / 7) * 100) };
-  if (score <= 4) return { level: "medium", label: "Moyen", score: Math.round((score / 7) * 100) };
-  return { level: "strong", label: "Fort", score: Math.round((score / 7) * 100) };
+  // Breach penalty — if password found in breaches, cap at medium
+  if (breached) {
+    score = Math.min(score, 3);
+  } else if (len >= 12 && score >= 4) {
+    // Bonus for NOT being breached with decent complexity
+    score += 1;
+  }
+
+  const maxScore = 10;
+  if (score <= 3) return { level: "weak", label: "Faible", score: Math.round((score / maxScore) * 100) };
+  if (score <= 5) return { level: "medium", label: "Moyen", score: Math.round((score / maxScore) * 100) };
+  return { level: "strong", label: "Fort", score: Math.round((score / maxScore) * 100) };
 }
 
 // ═══════════════════════════════════════════════════

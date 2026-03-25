@@ -62,8 +62,6 @@ export default function LoginPage() {
             { name: "Sentinel", color: "#ef4444" },
             { name: "Phantom", color: "#8b5cf6" },
             { name: "Vault", color: "#06b6d4" },
-            { name: "Atlas", color: "#f59e0b" },
-            { name: "Pulse", color: "#ec4899" },
           ].map(t => (
             <div key={t.name} style={{
               padding: "6px 14px", borderRadius: "20px",

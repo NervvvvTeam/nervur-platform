@@ -138,8 +138,25 @@ export default function PhantomDashboardPage() {
     }
   };
 
+  const isValidUrl = (input) => {
+    try {
+      const urlStr = input.trim().startsWith("http") ? input.trim() : "https://" + input.trim();
+      const parsed = new URL(urlStr);
+      return parsed.hostname && parsed.hostname.includes(".");
+    } catch {
+      return false;
+    }
+  };
+
   const runAudit = async () => {
-    if (!url.trim()) return;
+    const trimmed = url.trim();
+    if (!trimmed) return;
+
+    if (!isValidUrl(trimmed)) {
+      setError("URL invalide. Exemple : https://exemple.com");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setResult(null);
@@ -155,12 +172,17 @@ export default function PhantomDashboardPage() {
     }
 
     try {
-      const data = await api.post("/api/phantom/audit", { url: url.trim() });
+      const data = await api.post("/api/phantom/audit", { url: trimmed });
+      if (!data || !data.scores) {
+        throw new Error("R\u00e9ponse invalide du serveur. R\u00e9essayez.");
+      }
       setProgress(100);
       setPhase("Termin\u00e9");
       setTimeout(() => setResult(data), 300);
     } catch (err) {
-      setError(err.message || "Erreur lors de l'audit");
+      setError(err.message || "Erreur lors de l'audit. V\u00e9rifiez l'URL et r\u00e9essayez.");
+      setProgress(0);
+      setPhase("");
     } finally {
       setLoading(false);
     }
@@ -202,7 +224,7 @@ export default function PhantomDashboardPage() {
     }
   };
 
-  const filteredIssues = result?.issues?.filter(i => filter === "all" || i.severity === filter) || [];
+  const filteredIssues = (result?.issues || []).filter(i => filter === "all" || i.severity === filter);
 
   const formatDate = (d) => {
     return new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });

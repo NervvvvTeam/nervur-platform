@@ -168,7 +168,7 @@ export default function QuiSommesNousPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "24px", textAlign: "center" }}>
           {[
             { number: "50+", label: "Projets livrés" },
-            { number: "6", label: "Outils IA" },
+            { number: "3", label: "Outils IA" },
             { number: "100%", label: "Code sur mesure" },
             { number: "24h", label: "Délai de réponse" },
           ].map((s, i) => (

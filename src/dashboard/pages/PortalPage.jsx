@@ -608,12 +608,6 @@ const TOOLS = [
     color: "#06b6d4", gradient: "linear-gradient(135deg, #06b6d4, #22d3ee)",
     Icon: ShieldCheckIcon, path: "/app/vault", stats: "Scans • Alertes • Surveillance"
   },
-  {
-    id: "atlas", name: "Atlas", subtitle: "Suivi SEO",
-    desc: "Suivez vos positions Google, surveillez vos mots-cles et optimisez votre visibilite.",
-    color: "#f59e0b", gradient: "linear-gradient(135deg, #f59e0b, #fbbf24)",
-    Icon: MapIcon, path: "/app/atlas", stats: "Mots-cles • Positions • Evolution"
-  },
 ];
 
 const TIPS = [

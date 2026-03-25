@@ -76,7 +76,33 @@ export default function DashboardPage() {
   }
 
   if (loading) {
-    return <div style={{ padding: "60px", textAlign: "center", color: "#9ca3af", fontSize: "14px" }}>Chargement...</div>;
+    return (
+      <div>
+        <style>{dashStyles}</style>
+        <SubNav color="#ef4444" items={SENTINEL_NAV} />
+        <div style={{ marginBottom: "28px", ...fadeInUp(0) }}>
+          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444", marginBottom: "10px" }} />
+          <div style={{ width: "200px", height: "22px", background: "#2a2d3a", borderRadius: "6px", marginBottom: "8px" }} />
+          <div style={{ width: "120px", height: "14px", background: "#1e2029", borderRadius: "4px" }} />
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "12px", marginBottom: "20px" }}>
+          {[1,2,3,4,5].map(i => (
+            <div key={i} style={{ ...cardStyle, borderLeft: "3px solid #2a2d3a" }}>
+              <div style={{ width: "80px", height: "12px", background: "#2a2d3a", borderRadius: "4px", marginBottom: "12px" }} />
+              <div style={{ width: "60px", height: "24px", background: "#2a2d3a", borderRadius: "6px" }} />
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px" }}>
+          {[1,2,3].map(i => (
+            <div key={i} style={{ ...cardStyle, borderLeft: "3px solid #2a2d3a", minHeight: "120px" }}>
+              <div style={{ width: "100px", height: "12px", background: "#2a2d3a", borderRadius: "4px", marginBottom: "16px" }} />
+              <div style={{ width: "50px", height: "28px", background: "#2a2d3a", borderRadius: "6px" }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
   if (!business) {

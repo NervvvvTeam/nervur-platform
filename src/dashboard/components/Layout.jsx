@@ -139,9 +139,6 @@ export default function Layout() {
     if (hasAccess("pulse")) {
       items.push({ path: "/app/pulse", label: "Pulse", toolKey: "pulse", color: TOOL_COLORS.pulse });
     }
-    if (hasAccess("atlas")) {
-      items.push({ path: "/app/atlas", label: "Atlas", toolKey: "atlas", color: TOOL_COLORS.atlas });
-    }
     // Paramètres est dans les onglets Sentinel
     return items;
   }, [hasAccess]);

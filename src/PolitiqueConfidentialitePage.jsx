@@ -40,7 +40,7 @@ export default function PolitiqueConfidentialitePage() {
           <div style={{ fontSize: "14px", lineHeight: 2, color: "#d4d4d8" }}>
             <p>Dans le cadre de l'utilisation de nos services, nous pouvons collecter :</p>
             <p style={{ marginLeft: "16px" }}>— Données de contact : nom, email, téléphone (formulaire de contact)</p>
-            <p style={{ marginLeft: "16px" }}>— Données d'utilisation : URLs analysées via nos outils (Atlas, Phantom, Signal, etc.)</p>
+            <p style={{ marginLeft: "16px" }}>— Données d'utilisation : URLs analysées via nos outils (Sentinel, Phantom, Vault, etc.)</p>
             <p style={{ marginLeft: "16px" }}>— Données techniques : adresse IP, type de navigateur, pages visitées</p>
           </div>
         </section>

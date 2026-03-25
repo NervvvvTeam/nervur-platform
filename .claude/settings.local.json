@@ -130,7 +130,8 @@
       "Bash(curl -s --max-time 10 https://nervurapi-production.up.railway.app/api/health)",
       "Bash(curl -s --max-time 10 -X POST https://nervurapi-production.up.railway.app/api/contact -H \"Content-Type: application/json\" -H \"Origin: https://nervur.netlify.app\" -d '{\"\"name\"\":\"\"Test\"\",\"\"email\"\":\"\"test@test.com\"\",\"\"message\"\":\"\"Test message\"\"}')",
       "Bash(curl -s --max-time 10 -X POST https://nervurapi-production.up.railway.app/api/contact -H \"Content-Type: application/json\" -d '{\"\"name\"\":\"\"Test\"\",\"\"email\"\":\"\"test@test.com\"\",\"\"subject\"\":\"\"Test\"\",\"\"message\"\":\"\"Hello\"\"}')",
-      "Bash(curl -s --max-time 10 -X POST https://nervurapi-production.up.railway.app/api/contact -H \"Content-Type: application/json\" -d '{\"\"name\"\":\"\"Test Chef\"\",\"\"email\"\":\"\"test@test.com\"\",\"\"subject\"\":\"\"Test\"\",\"\"message\"\":\"\"Hello from test\"\"}')"
+      "Bash(curl -s --max-time 10 -X POST https://nervurapi-production.up.railway.app/api/contact -H \"Content-Type: application/json\" -d '{\"\"name\"\":\"\"Test Chef\"\",\"\"email\"\":\"\"test@test.com\"\",\"\"subject\"\":\"\"Test\"\",\"\"message\"\":\"\"Hello from test\"\"}')",
+      "WebFetch(domain:fastscribe.io)"
     ]
   }
 }
