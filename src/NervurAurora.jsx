@@ -507,7 +507,7 @@ export default function NervurAurora() {
 
   return (
     <div ref={pageRef} style={{
-      background: "linear-gradient(180deg, #0f1117 0%, #141824 50%, #0f1117 100%)", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      background: "linear-gradient(180deg, #0f1117 0%, #161b2e 30%, #1a1f33 50%, #161b2e 70%, #0f1117 100%)", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
       minHeight: "100vh", position: "relative", overflowX: "hidden" }}>
 
       {/* Mouse glow removed */}
@@ -612,7 +612,7 @@ export default function NervurAurora() {
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <img src="/logo-nav.png" alt="NERVÜR" style={{
-          height: isMobile ? "28px" : "32px", width: "auto",
+          height: isMobile ? "36px" : "44px", width: "auto",
           filter: "invert(1) brightness(1.15)",
           mixBlendMode: "screen",
           objectFit: "contain" }} />
@@ -1157,7 +1157,7 @@ export default function NervurAurora() {
               // Nos outils
             </span>
             <h2 style={{ fontSize: "clamp(30px, 4vw, 50px)", fontWeight: 800, letterSpacing: "-1.5px" }}>
-              Des outils <span style={{ background: `linear-gradient(135deg, #ef4444, #8b5cf6, #06b6d4)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>puissants</span> pour votre business.
+              Des outils <span style={{ background: `linear-gradient(135deg, #ef4444, #ec4899, #8b5cf6, #06b6d4)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>puissants</span> pour votre business.
             </h2>
             <p style={{ fontSize: "16px", color: "#71717A", marginTop: "16px", maxWidth: "560px", margin: "16px auto 0" }}>
               Quatre outils SaaS conçus pour les PME. Simples, efficaces, sans engagement.

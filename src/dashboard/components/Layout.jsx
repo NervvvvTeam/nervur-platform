@@ -216,7 +216,7 @@ export default function Layout() {
           {/* Logo */}
           <div style={{ marginBottom: "28px", borderBottom: "1px solid #1e1e2a", background: "rgba(99,102,241,0.04)", borderRadius: "8px", margin: "0 -4px 28px", padding: "8px 16px 10px" }}>
             <img src="/logo-nav.png" alt="NERVÜR" style={{
-              height: "28px", width: "auto", marginBottom: "4px",
+              height: "40px", width: "auto", marginBottom: "4px",
               filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain"
             }} />
             <div style={{ fontSize: "11px", color: "#818CF8", fontWeight: 400 }}>Espace client</div>
@@ -266,7 +266,7 @@ export default function Layout() {
             display: "flex", justifyContent: "space-between", alignItems: "center"
           }}>
             <img src="/logo-nav.png" alt="NERVÜR" style={{
-              height: "26px", width: "auto",
+              height: "34px", width: "auto",
               filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain"
             }} />
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

@@ -44,7 +44,7 @@ export default function LoginPage() {
         }} />
 
         <img src="/logo-nav.png" alt="NERVÜR" style={{
-          height: "72px", width: "auto", marginBottom: "36px",
+          height: "90px", width: "auto", marginBottom: "36px",
           filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain",
           position: "relative"
         }} />
@@ -62,6 +62,7 @@ export default function LoginPage() {
             { name: "Sentinel", color: "#ef4444" },
             { name: "Phantom", color: "#8b5cf6" },
             { name: "Vault", color: "#06b6d4" },
+            { name: "Pulse", color: "#ec4899" },
           ].map(t => (
             <div key={t.name} style={{
               padding: "6px 14px", borderRadius: "20px",
