@@ -381,6 +381,7 @@ export default function NervurAurora() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
   const [hoveredProduct, setHoveredProduct] = useState(null);
+  const [expandedTool, setExpandedTool] = useState(null);
 
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [appsOpen, setAppsOpen] = useState(false);
@@ -1180,10 +1181,13 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Surveillez vos avis Google en temps reel, repondez automatiquement par IA et analysez les tendances de votre e-reputation.
               </p>}
-              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "sentinel" ? null : "sentinel"); }} style={{ background: "none", border: "none", color: "#ef4444", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+                {expandedTool === "sentinel" ? "Réduire ▲" : "En savoir + ▼"}
+              </button>}
+              {(expandedTool === "sentinel" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
                 {["Surveillance avis Google", "Reponses IA automatiques", "Analyse semantique", "Veille concurrentielle", "QR Code + Widget + Alertes"].map((f, i) => (
-                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
@@ -1220,10 +1224,13 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Analysez vos scores Lighthouse, Core Web Vitals et obtenez des recommandations IA en francais pour ameliorer votre site.
               </p>}
-              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "phantom" ? null : "phantom"); }} style={{ background: "none", border: "none", color: "#8b5cf6", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+                {expandedTool === "phantom" ? "Réduire ▲" : "En savoir + ▼"}
+              </button>}
+              {(expandedTool === "phantom" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
                 {["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals detailles", "Recommandations IA", "Historique + evolution"].map((f, i) => (
-                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
@@ -1260,10 +1267,13 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Scannez vos emails professionnels sur les bases piratees. Alertes en temps reel et recommandations IA de cybersecurite.
               </p>}
-              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "vault" ? null : "vault"); }} style={{ background: "none", border: "none", color: "#06b6d4", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+                {expandedTool === "vault" ? "Réduire ▲" : "En savoir + ▼"}
+              </button>}
+              {(expandedTool === "vault" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
                 {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps reel", "Rapport PDF + recommandations IA"].map((f, i) => (
-                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
@@ -1300,10 +1310,13 @@ export default function NervurAurora() {
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
                 Surveillez la sante de vos sites en temps reel. Uptime, SSL, DNS, securite et delivrabilite email.
               </p>}
-              {!isMobile && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
+              {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "pulse" ? null : "pulse"); }} style={{ background: "none", border: "none", color: "#ec4899", fontSize: "11px", fontWeight: 600, cursor: "pointer", padding: "4px 0", marginBottom: "6px", display: "flex", alignItems: "center", gap: "4px" }}>
+                {expandedTool === "pulse" ? "Réduire ▲" : "En savoir + ▼"}
+              </button>}
+              {(expandedTool === "pulse" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
                 {["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de securite", "Page de statut publique"].map((f, i) => (
-                  <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
+                    <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
