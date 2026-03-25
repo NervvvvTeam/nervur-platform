@@ -1168,11 +1168,12 @@ export default function NervurAurora() {
           {/* Sentinel */}
           <RevealSection delay={0}>
             <div style={{
-              border: "1px solid rgba(239,68,68,0.2)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(239,68,68,0.25)", borderRadius: "16px", padding: "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
+              background: "rgba(239,68,68,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.4)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(239,68,68,0.08)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.2)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(239,68,68,0.12)"; e.currentTarget.style.background = "rgba(239,68,68,0.07)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(239,68,68,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #ef4444, #f97316)" }} />
               <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1207,11 +1208,12 @@ export default function NervurAurora() {
           {/* Phantom */}
           <RevealSection delay={120}>
             <div style={{
-              border: "1px solid rgba(139,92,246,0.2)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(139,92,246,0.25)", borderRadius: "16px", padding: "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
+              background: "rgba(139,92,246,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.4)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(139,92,246,0.08)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.2)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(139,92,246,0.12)"; e.currentTarget.style.background = "rgba(139,92,246,0.07)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(139,92,246,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(139,92,246,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #8b5cf6, #a78bfa)" }} />
               <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(139,92,246,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -1246,11 +1248,12 @@ export default function NervurAurora() {
           {/* Vault */}
           <RevealSection delay={240}>
             <div style={{
-              border: "1px solid rgba(6,182,212,0.2)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(6,182,212,0.25)", borderRadius: "16px", padding: "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
+              background: "rgba(6,182,212,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.4)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(6,182,212,0.08)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.2)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(6,182,212,0.12)"; e.currentTarget.style.background = "rgba(6,182,212,0.07)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(6,182,212,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #06b6d4, #22d3ee)" }} />
               <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(6,182,212,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -1285,11 +1288,12 @@ export default function NervurAurora() {
           {/* Pulse */}
           <RevealSection delay={360}>
             <div style={{
-              border: "1px solid rgba(236,72,153,0.2)", borderRadius: "16px", padding: "36px 32px",
+              border: "1px solid rgba(236,72,153,0.25)", borderRadius: "16px", padding: "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
+              background: "rgba(236,72,153,0.04)", backdropFilter: "blur(8px)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.4)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(236,72,153,0.08)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.2)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(236,72,153,0.12)"; e.currentTarget.style.background = "rgba(236,72,153,0.07)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(236,72,153,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(236,72,153,0.04)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #ec4899, #f472b6)" }} />
               <div style={{ width: "44px", height: "44px", borderRadius: "12px", background: "rgba(236,72,153,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>

@@ -68,6 +68,15 @@ export default function BlogPage() {
 
       {/* Hero */}
       <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", textAlign: "center" }}>
+        <button onClick={() => navigate("/")} style={{
+          background: "none", border: `1px solid ${VG(0.15)}`, borderRadius: "8px",
+          color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+          marginBottom: "32px", transition: "all 0.3s", fontFamily: "inherit",
+        }}
+          onMouseEnter={e => { e.target.style.color = V; e.target.style.borderColor = VG(0.3); }}
+          onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = VG(0.15); }}>
+          ← Retour à l'accueil
+        </button>
         <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#71717A", display: "block", marginBottom: "16px" }}>
           // Le blog NERVÜR
         </span>
