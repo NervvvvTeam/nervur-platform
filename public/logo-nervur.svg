@@ -1,9 +1,58 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
-  <!-- N Icon in rounded box -->
-  <rect x="4" y="8" width="64" height="64" rx="14" fill="none" stroke="#FAFAFA" stroke-width="2.5" opacity="0.25"/>
-  <path d="M22 56V24l28 32V24" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <!-- Diagonal slash accent -->
-  <line x1="38" y1="18" x2="44" y2="10" stroke="#818CF8" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-  <!-- NERVÜR text -->
-  <text x="82" y="54" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="800" fill="#FAFAFA" letter-spacing="3">NERVÜR</text>
+  <style>
+    @keyframes drawN {
+      0% { stroke-dashoffset: 120; opacity: 0.3; }
+      60% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+    @keyframes boxReveal {
+      0% { opacity: 0; stroke-dashoffset: 240; }
+      50% { opacity: 0.25; stroke-dashoffset: 0; }
+      100% { opacity: 0.25; stroke-dashoffset: 0; }
+    }
+    @keyframes textSlide {
+      0% { opacity: 0; transform: translateX(-6px); }
+      35% { opacity: 0; transform: translateX(-6px); }
+      75% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes accentPulse {
+      0%, 45% { opacity: 0; }
+      75% { opacity: 0.7; }
+      100% { opacity: 0.5; }
+    }
+    @keyframes nGlow {
+      0%, 100% { filter: drop-shadow(0 0 0px rgba(129,140,248,0)); }
+      50% { filter: drop-shadow(0 0 6px rgba(129,140,248,0.35)); }
+    }
+    .n-box {
+      stroke-dasharray: 240;
+      animation: boxReveal 1.8s ease-out forwards;
+    }
+    .n-letter {
+      stroke-dasharray: 120;
+      animation: drawN 1.6s ease-out forwards, nGlow 4s ease-in-out 2s infinite;
+    }
+    .accent-line { animation: accentPulse 1.8s ease-out forwards; }
+    .logo-text { animation: textSlide 1.8s ease-out forwards; }
+    svg:hover .n-letter {
+      filter: drop-shadow(0 0 10px rgba(129,140,248,0.5));
+      transition: filter 0.3s;
+    }
+    svg:hover .n-box { opacity: 0.4; stroke: #818CF8; transition: all 0.3s; }
+    svg:hover .accent-line { opacity: 1; transition: opacity 0.3s; }
+    svg:hover .logo-text tspan { fill: #818CF8; transition: fill 0.3s; }
+  </style>
+
+  <!-- Box -->
+  <rect class="n-box" x="4" y="8" width="64" height="64" rx="14" fill="none" stroke="#FAFAFA" stroke-width="2"/>
+
+  <!-- N draw -->
+  <path class="n-letter" d="M22 56V24l28 32V24" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Accent -->
+  <line class="accent-line" x1="38" y1="16" x2="46" y2="5" stroke="#818CF8" stroke-width="2.5" stroke-linecap="round" opacity="0"/>
+
+  <!-- Text -->
+  <text class="logo-text" x="82" y="54" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="38" font-weight="800" letter-spacing="2" fill="#FAFAFA" opacity="0">NERV<tspan fill="#818CF8">&#220;</tspan>R</text>
 </svg>
