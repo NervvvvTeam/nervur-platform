@@ -2,14 +2,21 @@ import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useMemo, useState, useEffect } from "react";
 
-function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" && window.innerWidth < breakpoint);
+function useBreakpoint() {
+  const getBreakpoint = () => {
+    if (typeof window === "undefined") return "desktop";
+    const w = window.innerWidth;
+    if (w < 768) return "mobile";
+    if (w < 1024) return "tablet";
+    return "desktop";
+  };
+  const [bp, setBp] = useState(getBreakpoint);
   useEffect(() => {
-    const handler = () => setIsMobile(window.innerWidth < breakpoint);
+    const handler = () => setBp(getBreakpoint());
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
-  }, [breakpoint]);
-  return isMobile;
+  }, []);
+  return bp;
 }
 
 const I = (d, c) => <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{d}</svg>;
@@ -107,7 +114,9 @@ export default function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isMobile = useIsMobile();
+  const bp = useBreakpoint();
+  const isMobile = bp === "mobile";
+  const isTablet = bp === "tablet";
 
   const activeTool = useMemo(() => {
     if (location.pathname.startsWith("/app/sentinel") || location.pathname.startsWith("/app/reviews") || location.pathname.startsWith("/app/analytics") || location.pathname.startsWith("/app/competitors") || location.pathname.startsWith("/app/reports") || location.pathname.startsWith("/app/qrcode") || location.pathname.startsWith("/app/widget") || location.pathname.startsWith("/app/alerts") || location.pathname === "/app/settings") return "sentinel";
@@ -153,11 +162,13 @@ export default function Layout() {
     const toolColor = item.color || TOOL_COLORS.general;
     const isItemActive = item.toolKey === activeTool;
 
+    const tablet = !mobile && isTablet;
     return (
       <NavLink key={item.path} to={item.path}
         onClick={mobile ? () => setMobileMenuOpen(false) : undefined}
-        className={`flex items-center gap-2.5 rounded-lg no-underline transition-all duration-200 ${
-          mobile ? "px-4 py-2.5 text-sm" : "px-3 py-2 text-[13px]"
+        title={tablet ? item.label : undefined}
+        className={`flex items-center ${tablet ? "justify-center" : ""} gap-2.5 rounded-lg no-underline transition-all duration-200 ${
+          mobile ? "px-4 py-2.5 text-sm" : tablet ? "px-1 py-2.5 text-[13px]" : "px-3 py-2 text-[13px]"
         } ${isItemActive ? "font-medium text-[#FAFAFA]" : "font-normal text-[#A1A1AA]"}`}
         style={{
           background: isItemActive ? `${toolColor}12` : "transparent",
@@ -185,25 +196,25 @@ export default function Layout() {
             if (icon) icon.style.stroke = "#71717A";
           }
         }}>
-        <span data-dot className="w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-200"
-          style={{ background: isItemActive ? toolColor : "#3f3f46" }} />
+        {!tablet && <span data-dot className="w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-200"
+          style={{ background: isItemActive ? toolColor : "#3f3f46" }} />}
         <span data-icon className="flex items-center transition-all duration-200">
           {iconFn ? iconFn(isItemActive ? toolColor : "#71717A") : null}
         </span>
-        <span>{item.label}</span>
+        {!tablet && <span>{item.label}</span>}
       </NavLink>
     );
   };
 
   return (
     <div className="flex min-h-screen bg-[#191b24] text-gray-300 font-['Inter',system-ui,sans-serif]">
-      {/* Sidebar — desktop */}
+      {/* Sidebar — desktop & tablet */}
       {!isMobile && (
-        <aside className="w-[230px] border-r border-[#1e1e2a] px-3 py-6 flex flex-col fixed top-0 bottom-0 left-0 bg-[#12131a] z-50">
+        <aside className={`${isTablet ? "w-[64px]" : "w-[230px]"} border-r border-[#1e1e2a] ${isTablet ? "px-1.5" : "px-3"} py-6 flex flex-col fixed top-0 bottom-0 left-0 bg-[#12131a] z-50 transition-[width] duration-200`}>
           {/* Branding */}
-          <div className="-mx-1 mb-7 border-b border-[#1e1e2a] px-4 pt-3 pb-3.5">
-            <div className="text-base font-bold text-[#FAFAFA] tracking-wider">NERVÜR</div>
-            <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>
+          <div className={`-mx-1 mb-7 border-b border-[#1e1e2a] ${isTablet ? "px-1 text-center" : "px-4"} pt-3 pb-3.5`}>
+            <div className={`font-bold text-[#FAFAFA] tracking-wider ${isTablet ? "text-xs" : "text-base"}`}>{isTablet ? "N" : "NERVÜR"}</div>
+            {!isTablet && <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>}
           </div>
 
           {/* Nav */}
@@ -212,19 +223,20 @@ export default function Layout() {
           </nav>
 
           {/* User */}
-          <div className="border-t border-[#1e1e2a] pt-4 px-2">
-            <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-8 h-8 rounded-md bg-gradient-to-br from-[#6366f1] to-[#818CF8] flex items-center justify-center text-[13px] font-semibold text-white shrink-0">
+          <div className={`border-t border-[#1e1e2a] pt-4 ${isTablet ? "px-0.5" : "px-2"}`}>
+            <div className={`flex items-center ${isTablet ? "justify-center" : "gap-2.5"} mb-3`}>
+              <div className={`${isTablet ? "w-7 h-7 text-[11px]" : "w-8 h-8 text-[13px]"} rounded-md bg-gradient-to-br from-[#6366f1] to-[#818CF8] flex items-center justify-center font-semibold text-white shrink-0`}>
                 {user?.name?.charAt(0)?.toUpperCase() || "U"}
               </div>
-              <div>
+              {!isTablet && <div>
                 <div className="text-[13px] text-[#D4D4D8] font-medium">{user?.name}</div>
                 <div className="text-[11px] text-[#52525B]">{user?.email}</div>
-              </div>
+              </div>}
             </div>
             <button onClick={() => { logout(); navigate("/app/login"); }}
-              className="w-full py-[7px] bg-transparent border border-[#27272A] rounded-md text-[#71717A] text-xs cursor-pointer font-[inherit] transition-all duration-150 hover:border-[#3f3f46] hover:text-[#A1A1AA]">
-              Se déconnecter
+              title={isTablet ? "Se déconnecter" : undefined}
+              className={`w-full py-[7px] bg-transparent border border-[#27272A] rounded-md text-[#71717A] text-xs cursor-pointer font-[inherit] transition-all duration-150 hover:border-[#3f3f46] hover:text-[#A1A1AA] ${isTablet ? "px-1" : ""}`}>
+              {isTablet ? "\u2190" : "Se déconnecter"}
             </button>
           </div>
         </aside>
@@ -253,7 +265,7 @@ export default function Layout() {
       )}
 
       {/* Main content */}
-      <main className={`flex-1 min-h-screen relative z-[1] ${isMobile ? "ml-0 pt-[66px] px-5 pb-5" : "ml-[230px] px-11 py-9"}`}
+      <main className={`flex-1 min-h-screen relative z-[1] ${isMobile ? "ml-0 pt-[66px] px-4 pb-5" : isTablet ? "ml-[64px] px-5 py-6" : "ml-[230px] px-11 py-9"}`}
         style={{
           background: `radial-gradient(ellipse 80% 50% at 70% 0%, ${(PATH_COLORS[location.pathname] || TOOL_COLORS.general)}10 0%, transparent 70%)`,
         }}>

@@ -25,22 +25,22 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex font-['Inter',system-ui,sans-serif]">
+    <div className="min-h-screen flex flex-col md:flex-row font-['Inter',system-ui,sans-serif]">
       {/* Left — Branding panel */}
-      <div className="flex-1 bg-[#09090B] flex flex-col justify-center items-center p-[60px] relative overflow-hidden">
+      <div className="bg-[#09090B] flex flex-col justify-center items-center px-6 py-10 md:flex-1 md:p-[60px] relative overflow-hidden">
         {/* Subtle gradient accent */}
         <div className="absolute top-[30%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.08)_0%,transparent_70%)] pointer-events-none" />
 
         <img
           src="/logo-nervur.svg"
           alt="NERVÜR"
-          className="h-[70px] w-auto mb-9 relative"
+          className="h-[50px] md:h-[70px] w-auto mb-6 md:mb-9 relative"
         />
 
-        <h1 className="text-[32px] font-bold text-[#FAFAFA] text-center mb-3 relative">
+        <h1 className="text-2xl md:text-[32px] font-bold text-[#FAFAFA] text-center mb-3 relative">
           Bienvenue sur NERVÜR
         </h1>
-        <p className="text-[15px] text-[#71717A] text-center max-w-[360px] leading-relaxed relative">
+        <p className="text-sm md:text-[15px] text-[#71717A] text-center max-w-[360px] leading-relaxed relative">
           Gérez votre réputation, auditez vos performances, surveillez votre
           sécurité et boostez votre SEO.
         </p>
@@ -68,7 +68,7 @@ export default function LoginPage() {
         </div>
 
         {/* Bottom text */}
-        <div className="absolute bottom-8 text-center">
+        <div className="hidden md:block absolute bottom-8 text-center">
           <p className="text-xs text-[#3f3f46]">
             © 2026 NERVÜR — Éditeur de Technologies de Croissance
           </p>
@@ -76,7 +76,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right — Login form */}
-      <div className="w-[480px] bg-[#111318] flex flex-col justify-center p-[60px] border-l border-[#1e1e2a]">
+      <div className="w-full md:w-[480px] bg-[#111318] flex flex-col justify-center px-6 py-10 md:p-[60px] border-t md:border-t-0 md:border-l border-[#1e1e2a]">
         <div className="max-w-[340px] w-full mx-auto">
           <h2 className="text-[22px] font-semibold text-[#f0f0f3] mb-2">
             Connexion

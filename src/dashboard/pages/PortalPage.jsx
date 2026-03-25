@@ -964,7 +964,7 @@ function RightPanel({ hasAccess }) {
   };
 
   return (
-    <div className="w-[300px] shrink-0 flex flex-col gap-4 opacity-0 [animation:slideInRight_0.6s_ease-out_0.3s_forwards]">
+    <div className="w-full lg:w-[300px] shrink-0 flex flex-col gap-4 opacity-0 [animation:slideInRight_0.6s_ease-out_0.3s_forwards]">
       {/* Quick overview card */}
       <div className="p-5 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.15)] relative overflow-hidden">
         <div className="text-[10px] font-semibold text-[#818CF8] tracking-[1.5px] uppercase mb-3">NERVUR</div>
@@ -1088,14 +1088,14 @@ export default function PortalPage() {
       <style>{styleTag}</style>
 
       {/* Two-column layout: Tools + Interactive Panel */}
-      <div className="flex gap-8 items-start">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
 
         {/* LEFT: Tools */}
         <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className={`mb-8 px-8 py-7 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.12)] relative overflow-hidden ${fadeInUpClass}`}>
+          <div className={`mb-6 sm:mb-8 px-4 sm:px-8 py-5 sm:py-7 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.12)] relative overflow-hidden ${fadeInUpClass}`}>
             <div className="absolute -top-5 right-10 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.15)_0%,transparent_70%)] [animation:orbFloat_6s_ease-in-out_infinite] pointer-events-none" />
-            <h1 className="text-[28px] font-semibold text-[#f0f0f3] mb-1.5 relative">
+            <h1 className="text-xl sm:text-[28px] font-semibold text-[#f0f0f3] mb-1.5 relative">
               <TypingText text={`Bonjour, ${user?.name?.split(" ")[0] || "Client"}`} speed={50} delay={300} />
             </h1>
             <p className="text-sm text-[#9ca3af] relative opacity-0 [animation:fadeInUp_0.6s_ease-out_1.2s_forwards]">
@@ -1106,7 +1106,7 @@ export default function PortalPage() {
           </div>
 
           {/* Tool Cards */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {TOOLS.map((tool, index) => {
               const active = hasAccess(tool.id);
               const { Icon, color, gradient } = tool;
@@ -1116,7 +1116,7 @@ export default function PortalPage() {
                   onClick={() => active ? navigate(tool.path) : window.open("https://nervur.fr/contact", "_blank")}
                   onMouseEnter={() => setHoveredCard(tool.id)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-6 rounded-[14px] bg-[#1e2029] cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden"
+                  className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-4 sm:p-6 rounded-[14px] bg-[#1e2029] cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden min-w-0"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     border: `1px solid ${isHovered && active ? `${color}50` : "#2a2d3a"}`,
