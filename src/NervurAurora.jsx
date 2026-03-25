@@ -660,8 +660,10 @@ export default function NervurAurora() {
                 boxShadow: "0 20px 40px rgba(0,0,0,0.5)"
               }}>
                 {[
-                  { label: "Simulateur ROI", desc: "Calculez votre ROI digital", path: "/simulateur" },
-                  { label: "Diagnostic Digital", desc: "Évaluez votre maturité digitale", path: "/diagnostic" },
+                  { label: "Sentinel", desc: "E-réputation & avis clients", path: "/sentinel" },
+                  { label: "Phantom", desc: "Audit de performance web", path: "/phantom" },
+                  { label: "Vault", desc: "Cybersécurité & conformité RGPD", path: "/contact" },
+                  { label: "Pulse", desc: "Monitoring santé web", path: "/contact" },
                 ].map((app, i) => (
                   <div key={i} onClick={() => { navigate(app.path); setAppsOpen(false); }}
                     style={{
@@ -738,20 +740,20 @@ export default function NervurAurora() {
               maxHeight: mobileAppsOpen ? "200px" : "0", opacity: mobileAppsOpen ? 1 : 0,
               display: "flex", flexDirection: "column", gap: "12px", marginTop: mobileAppsOpen ? "8px" : "0"
             }}>
-              <span onClick={() => { navigate('/simulateur'); setMenuOpen(false); setMobileAppsOpen(false); }} style={{
-                fontSize: "14px", letterSpacing: "2px", color: V3, cursor: "pointer", padding: "6px 0",
-                transition: "color 0.3s", textAlign: "center" }}
-                onTouchStart={e => { e.currentTarget.style.color = V; }}
-                onTouchEnd={e => { e.currentTarget.style.color = V3; }}>
-                Simulateur ROI
-              </span>
-              <span onClick={() => { navigate('/diagnostic'); setMenuOpen(false); setMobileAppsOpen(false); }} style={{
-                fontSize: "14px", letterSpacing: "2px", color: V3, cursor: "pointer", padding: "6px 0",
-                transition: "color 0.3s", textAlign: "center" }}
-                onTouchStart={e => { e.currentTarget.style.color = V; }}
-                onTouchEnd={e => { e.currentTarget.style.color = V3; }}>
-                Diagnostic Digital
-              </span>
+              {[
+                { label: "Sentinel", path: "/sentinel" },
+                { label: "Phantom", path: "/phantom" },
+                { label: "Vault", path: "/contact" },
+                { label: "Pulse", path: "/contact" },
+              ].map((app, i) => (
+                <span key={i} onClick={() => { navigate(app.path); setMenuOpen(false); setMobileAppsOpen(false); }} style={{
+                  fontSize: "14px", letterSpacing: "2px", color: V3, cursor: "pointer", padding: "6px 0",
+                  transition: "color 0.3s", textAlign: "center" }}
+                  onTouchStart={e => { e.currentTarget.style.color = V; }}
+                  onTouchEnd={e => { e.currentTarget.style.color = V3; }}>
+                  {app.label}
+                </span>
+              ))}
             </div>
           </div>
           {/* Bouton Espace Client mobile */}
@@ -1758,6 +1760,7 @@ export default function NervurAurora() {
               { name: "Sentinel — E-réputation", path: "/sentinel" },
               { name: "Phantom — Audit web", path: "/phantom" },
               { name: "Vault — Cybersécurité", path: "/vault" },
+              { name: "Pulse — Monitoring", path: "/contact" },
             ].map((t, i) => (
               <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
                 onMouseEnter={e => e.target.style.color = A1}
