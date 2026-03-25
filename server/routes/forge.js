@@ -5,8 +5,13 @@ const router = express.Router();
 
 function optionalAuth(req, res, next) {
   const token = req.headers.authorization?.replace("Bearer ", "");
-  if (token) {
-    try { req.user = jwt.verify(token, process.env.JWT_SECRET); } catch {}
+  if (token && token.split(".").length === 3) {
+    try {
+      req.user = jwt.verify(token, process.env.JWT_SECRET, {
+        algorithms: ["HS256"],
+        maxAge: "24h",
+      });
+    } catch {}
   }
   next();
 }

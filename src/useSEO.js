@@ -97,7 +97,7 @@ export default function useSEO(title, description, opts) {
     // Cleanup: restore defaults on unmount
     return () => {
       document.title = "NERVÜR — Outils SaaS pour PME";
-      setMeta("name", "description", "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel, Phantom, Vault.");
+      setMeta("name", "description", "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel, Phantom, Pulse, Vault.");
       setLink("canonical", SITE + "/");
       setMeta("property", "og:title", "NERVÜR — Outils SaaS pour PME");
       setMeta("property", "og:description", "Outils SaaS innovants pour les PME.");

@@ -17,9 +17,10 @@ const SUJETS = [
   "Demande d'information",
   "Souscrire à Sentinel (29€/mois)",
   "Souscrire à Phantom (19€/mois)",
+  "Souscrire à Pulse (19€/mois)",
   "Souscrire à Vault (19€/mois)",
   "Pack Duo — 2 outils (39€/mois)",
-  "Pack Total — 3 outils (49€/mois)",
+  "Pack Total — 4 outils (49€/mois)",
   "Projet de développement web",
   "SEO & Marketing",
   "Autre",
@@ -38,12 +39,13 @@ const ToolIcon = ({ type, color, size = 18 }) => {
 const TOOLS = [
   { name: "Sentinel", icon: "sentinel", price: "29€/mois", desc: "E-réputation", color: "#ef4444" },
   { name: "Phantom", icon: "phantom", price: "19€/mois", desc: "Audit web", color: "#8b5cf6" },
+  { name: "Pulse", icon: "pulse", price: "19€/mois", desc: "Monitoring santé web", color: "#ec4899" },
   { name: "Vault", icon: "vault", price: "19€/mois", desc: "Cybersécurité", color: "#06b6d4" },
 ];
 
 const PACKS = [
   { name: "Pack Duo", price: "39\u20AC/mois", desc: "2 outils au choix" },
-  { name: "Pack Total", price: "49\u20AC/mois", desc: "Les 3 outils" },
+  { name: "Pack Total", price: "49\u20AC/mois", desc: "Les 4 outils" },
 ];
 
 export default function ContactPage() {
@@ -58,7 +60,7 @@ export default function ContactPage() {
 
   useSEO(
     "Contact — NERVÜR | Demande d'information & Devis",
-    "Contactez NERVÜR pour vos outils SaaS ou projets web. Réponse sous 24h. Devis gratuit pour Sentinel, Phantom et Vault.",
+    "Contactez NERVÜR pour vos outils SaaS ou projets web. Réponse sous 24h. Devis gratuit pour Sentinel, Phantom, Pulse et Vault.",
     { path: "/contact", keywords: "contact NERVÜR, devis SaaS PME, demande information, outils PME" }
   );
 

@@ -3,27 +3,29 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const { generateWithAI } = require("../services/ai");
 const GeneratedContent = require("../models/GeneratedContent");
+const { authMiddleware } = require("../middleware/auth");
 const router = express.Router();
 
 // Optional auth — saves history if authenticated
 function optionalAuth(req, res, next) {
   const token = req.headers.authorization?.replace("Bearer ", "");
-  if (token) {
-    try { req.user = jwt.verify(token, process.env.JWT_SECRET); } catch {}
+  if (token && token.split(".").length === 3) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET, {
+        algorithms: ["HS256"],
+        maxAge: "24h",
+      });
+      if (decoded.userId && mongoose.Types.ObjectId.isValid(decoded.userId)) {
+        req.user = { id: decoded.userId, _id: decoded.userId, role: decoded.role };
+        req.userId = decoded.userId;
+      }
+    } catch (e) { /* ignore — optional auth */ }
   }
   next();
 }
 
-function requireAuth(req, res, next) {
-  const token = req.headers.authorization?.replace("Bearer ", "");
-  if (!token) return res.status(401).json({ error: "Non autorisé" });
-  try {
-    req.user = jwt.verify(token, process.env.JWT_SECRET);
-    next();
-  } catch {
-    return res.status(401).json({ error: "Token invalide" });
-  }
-}
+// Use shared hardened auth middleware for required-auth routes
+const requireAuth = authMiddleware;
 
 // ═══════════════════════════════════
 // CONTENT GENERATION
