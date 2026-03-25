@@ -227,7 +227,7 @@ app.use("/api/contact", contactRoutes);
 app.get("/api/health", (req, res) => {
   res.json({
     status: "ok",
-    tools: ["sentinel", "vertex", "signal", "phantom", "nexus", "forge", "oracle", "atlas", "flux", "echo"],
+    tools: ["sentinel", "phantom", "vault", "pulse"],
     dashboard: { mongodb: mongoose.connection.readyState === 1 },
   });
 });
