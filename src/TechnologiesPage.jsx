@@ -251,7 +251,7 @@ export default function TechnologiesPage() {
                   <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
                 </div>
                 <button className="cta-link" onClick={() => navigate(tool.link)} style={{ color: tool.color }}>
-                  En savoir plus &rarr;
+                  Essayer la démo &rarr;
                 </button>
               </div>
             </div>
