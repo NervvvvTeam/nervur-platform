@@ -611,11 +611,7 @@ export default function NervurAurora() {
         background: "rgba(15,17,23,0.85)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <img src="/logo-nav.png" alt="NERVÜR — Outils SaaS pour PME" style={{
-          height: isMobile ? "40px" : "95px", width: "auto",
-          filter: "invert(1) brightness(1.15)",
-          mixBlendMode: "screen",
-          objectFit: "contain" }} />
+        <span style={{ fontSize: isMobile ? "18px" : "22px", fontWeight: 800, letterSpacing: "2px", color: "#FAFAFA" }}>NERVÜR</span>
         {/* Desktop nav */}
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
