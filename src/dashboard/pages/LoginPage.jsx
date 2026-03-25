@@ -43,9 +43,8 @@ export default function LoginPage() {
           pointerEvents: "none"
         }} />
 
-        <img src="/logo-nav.png" alt="NERVÜR" style={{
-          height: "90px", width: "auto", marginBottom: "36px",
-          filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain",
+        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
+          height: "70px", width: "auto", marginBottom: "36px",
           position: "relative"
         }} />
 

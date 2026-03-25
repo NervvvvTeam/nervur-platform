@@ -262,9 +262,9 @@ export default function Layout() {
             background: "#12131a", borderBottom: "1px solid #1e1e2a", padding: "12px 20px",
             display: "flex", justifyContent: "space-between", alignItems: "center"
           }}>
-            <img src="/logo-nav.png" alt="NERVÜR" style={{
+            <img src="/logo-nervur.svg" alt="NERVÜR" style={{
               height: "34px", width: "auto",
-              filter: "invert(1) brightness(1.15)", mixBlendMode: "screen", objectFit: "contain"
+              objectFit: "contain"
             }} />
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               style={{ background: "none", border: "none", color: "#A1A1AA", fontSize: "18px", cursor: "pointer", padding: "4px" }}>

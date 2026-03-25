@@ -198,7 +198,7 @@ export default function OraclePage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#09090B", borderBottom: `1px solid ${VG(0.1)}` }}>
-        <img src="/logo-nav.png" alt="NERVÜR" style={{ height: isMobile ? "50px" : "95px", width: "auto", filter: "invert(1) brightness(1.15)", objectFit: "contain", mixBlendMode: "screen" }} />
+        <img src="/logo-nervur.svg" alt="NERVÜR" style={{ height: isMobile ? "50px" : "95px", width: "auto", objectFit: "contain" }} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button className="nav-btn" onClick={() => navigate('/technologies')} aria-label="Retour aux outils">← Outils</button>
           <button className="nav-btn" onClick={() => navigate('/contact')}>Contact</button>

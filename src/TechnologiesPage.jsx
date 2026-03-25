@@ -151,8 +151,8 @@ export default function TechnologiesPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)"
       }}>
-        <img src="/logo-nav.png" alt="NERVUR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "40px" : "70px", width: "auto", filter: "invert(1) brightness(1.15)", objectFit: "contain", mixBlendMode: "screen", cursor: "pointer" }} />
+        <img src="/logo-nervur.svg" alt="NERVUR" onClick={() => navigate("/")}
+          style={{ height: isMobile ? "40px" : "70px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour a l'accueil" onClick={() => navigate("/")}>Accueil</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>

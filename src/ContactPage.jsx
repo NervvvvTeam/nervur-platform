@@ -242,12 +242,11 @@ export default function ContactPage() {
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>
         <img
-          src="/logo-nav.png" alt="NERVÜR"
+          src="/logo-nervur.svg" alt="NERVÜR"
           onClick={() => navigate("/")}
           style={{
             height: isMobile ? "40px" : "70px", width: "auto",
-            filter: "invert(1) brightness(1.15)", objectFit: "contain",
-            mixBlendMode: "screen", cursor: "pointer",
+            objectFit: "contain", cursor: "pointer",
           }}
         />
         <button className="contact-nav-btn" onClick={() => navigate("/")}>
@@ -605,9 +604,9 @@ export default function ContactPage() {
         alignItems: "center",
         gap: isMobile ? "12px" : "0",
       }}>
-        <img src="/logo-nav.png" alt="NERVÜR" style={{
-          height: "28px", width: "auto", filter: "invert(1)",
-          objectFit: "contain", mixBlendMode: "screen",
+        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
+          height: "28px", width: "auto",
+          objectFit: "contain",
         }} />
         <span style={{ fontSize: "11px", color: "#3F3F46" }}>
           © 2026 NERVÜR — Tous droits réservés

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- N Icon in rounded box -->
+  <rect x="4" y="8" width="64" height="64" rx="14" fill="none" stroke="#FAFAFA" stroke-width="2.5" opacity="0.25"/>
+  <path d="M22 56V24l28 32V24" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Diagonal slash accent -->
+  <line x1="38" y1="18" x2="44" y2="10" stroke="#818CF8" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <!-- NERVÜR text -->
+  <text x="82" y="54" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="800" fill="#FAFAFA" letter-spacing="3">NERVÜR</text>
+</svg>
