@@ -92,7 +92,7 @@ export default function VaultMonitoringPage() {
         .map(e => e.trim())
         .filter(e => e.length > 0);
       await post("/api/vault/monitoring", { domain, emails, frequency, alertEmail });
-      setSuccess("Surveillance activée avec succès !");
+      setSuccess("Surveillance activ\u00e9e avec succ\u00e8s !");
       setDomain("");
       setEmailsText("");
       setAlertEmail("");
@@ -127,7 +127,7 @@ export default function VaultMonitoringPage() {
     setDeletingId(id);
     try {
       await del(`/api/vault/monitoring/${id}`);
-      setSuccess("Surveillance supprimée.");
+      setSuccess("Surveillance supprim\u00e9e.");
       fetchConfigs();
     } catch (err) {
       setError(err.message);
@@ -141,110 +141,82 @@ export default function VaultMonitoringPage() {
   };
 
   return (
-    <div style={{ maxWidth: "860px" }}>
+    <div className="max-w-[860px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
       {/* Header bar */}
-      <div style={{
-        width: "40px", height: "3px", borderRadius: "2px",
-        background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
-        marginBottom: "16px"
-      }} />
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
+      <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
+      <div className="flex items-center gap-3 mb-1.5">
         <EyeIcon size={26} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+        <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
           Surveillance Vault
         </h1>
       </div>
-      <p style={{ fontSize: "14px", color: "#9ca3af", marginBottom: "32px" }}>
+      <p className="text-sm text-[#9ca3af] mb-8">
         Surveillez automatiquement vos domaines et recevez des alertes en cas de nouvelle fuite.
       </p>
 
       {/* Messages */}
       {error && (
-        <div style={{
-          padding: "10px 14px", marginBottom: "16px",
-          background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)",
-          borderRadius: "6px", fontSize: "13px", color: "#fca5a5",
-        }}>
+        <div className="px-3.5 py-2.5 mb-4 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.25)] rounded-md text-[13px] text-[#fca5a5]">
           {error}
-          <button onClick={() => setError(null)} style={{
-            float: "right", background: "none", border: "none", color: "#fca5a5",
-            cursor: "pointer", fontSize: "14px", padding: 0, lineHeight: 1,
-          }}>x</button>
+          <button onClick={() => setError(null)} className="float-right bg-transparent border-none text-[#fca5a5] cursor-pointer text-sm p-0 leading-none">x</button>
         </div>
       )}
       {success && (
-        <div style={{
-          padding: "10px 14px", marginBottom: "16px",
-          background: "rgba(6,182,212,0.1)", border: `1px solid ${BORDER_TINT}`,
-          borderRadius: "6px", fontSize: "13px", color: ACCENT_LIGHT,
-        }}>
+        <div className="px-3.5 py-2.5 mb-4 bg-[rgba(6,182,212,0.1)] border border-[rgba(6,182,212,0.2)] rounded-md text-[13px] text-[#22d3ee]">
           {success}
         </div>
       )}
 
       {/* Active monitoring list */}
-      <div style={{ marginBottom: "36px" }}>
-        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#d1d5db", marginBottom: "16px" }}>
+      <div className="mb-9">
+        <h2 className="text-[15px] font-semibold text-[#d1d5db] mb-4">
           Surveillance active
         </h2>
 
         {loading && (
-          <div style={{ textAlign: "center", padding: "32px 0" }}>
-            <div style={{
-              width: "28px", height: "28px", margin: "0 auto 10px",
-              border: `3px solid ${BORDER_TINT}`, borderTop: `3px solid ${ACCENT}`,
-              borderRadius: "50%", animation: "vault-mon-spin 1s linear infinite",
-            }} />
-            <div style={{ fontSize: "12px", color: "#9ca3af" }}>Chargement...</div>
+          <div className="text-center py-8">
+            <div className="w-7 h-7 mx-auto mb-2.5 border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-mon-spin_1s_linear_infinite]" />
+            <div className="text-xs text-[#9ca3af]">Chargement...</div>
             <style>{`@keyframes vault-mon-spin { to { transform: rotate(360deg); } }`}</style>
           </div>
         )}
 
         {!loading && configs.length === 0 && (
-          <div style={{
-            padding: "40px 24px", textAlign: "center",
-            background: BG_TINT, border: `1px dashed ${BORDER_TINT}`,
-            borderRadius: "8px",
-          }}>
+          <div className="px-6 py-10 text-center bg-[rgba(6,182,212,0.06)] border border-dashed border-[rgba(6,182,212,0.2)] rounded-lg">
             <EyeIcon size={36} color="#d1d5db" />
-            <p style={{ fontSize: "14px", color: "#9ca3af", marginTop: "12px", marginBottom: "4px" }}>
+            <p className="text-sm text-[#9ca3af] mt-3 mb-1">
               Aucune surveillance configuree
             </p>
-            <p style={{ fontSize: "12px", color: "#d1d5db" }}>
+            <p className="text-xs text-[#d1d5db]">
               Ajoutez un domaine ci-dessous pour commencer la surveillance automatique.
             </p>
           </div>
         )}
 
         {!loading && configs.length > 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <div className="flex flex-col gap-2.5">
             {configs.map(config => (
-              <div key={config._id} style={{
-                padding: "16px 18px",
+              <div key={config._id} className="px-[18px] py-4 rounded-lg transition-all duration-200" style={{
                 background: config.enabled ? BG_TINT : "rgba(39,39,42,0.3)",
                 border: `1px solid ${config.enabled ? BORDER_TINT : "#d1d5db"}`,
-                borderRadius: "8px",
                 opacity: config.enabled ? 1 : 0.65,
-                transition: "all 0.2s",
               }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "10px" }}>
+                <div className="flex items-center justify-between flex-wrap gap-2.5">
                   {/* Left info */}
-                  <div style={{ flex: 1, minWidth: "200px" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                      <span style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3" }}>
+                  <div className="flex-1 min-w-[200px]">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[15px] font-semibold text-[#f0f0f3]">
                         {config.domain}
                       </span>
-                      <span style={{
-                        fontSize: "10px", fontWeight: 500,
-                        padding: "2px 8px", borderRadius: "10px",
+                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-[10px]" style={{
                         background: config.enabled ? "rgba(6,182,212,0.15)" : "rgba(113,113,122,0.15)",
                         color: config.enabled ? ACCENT_LIGHT : "#9ca3af",
                       }}>
                         {config.enabled ? "Active" : "En pause"}
                       </span>
                     </div>
-                    <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", fontSize: "12px", color: "#6b7280" }}>
+                    <div className="flex gap-4 flex-wrap text-xs text-[#6b7280]">
                       <span>{config.emails?.length || 0} email{(config.emails?.length || 0) > 1 ? "s" : ""} surveille{(config.emails?.length || 0) > 1 ? "s" : ""}</span>
                       <span>{config.frequency === "weekly" ? "Hebdomadaire" : "Mensuel"}</span>
                       <span>Dernier scan : {formatDate(config.lastScanAt)}</span>
@@ -252,25 +224,20 @@ export default function VaultMonitoringPage() {
                   </div>
 
                   {/* Right actions */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <div className="flex items-center gap-2">
                     {/* Toggle */}
                     <button
                       onClick={() => handleToggle(config)}
                       disabled={togglingId === config._id}
                       title={config.enabled ? "Mettre en pause" : "Activer"}
+                      className="w-11 h-6 rounded-xl border-none cursor-pointer relative transition-colors duration-200"
                       style={{
-                        width: "44px", height: "24px", borderRadius: "12px",
                         background: config.enabled ? ACCENT : "#3a3d4a",
-                        border: "none", cursor: "pointer", position: "relative",
-                        transition: "background 0.2s",
                         opacity: togglingId === config._id ? 0.5 : 1,
                       }}
                     >
-                      <div style={{
-                        width: "18px", height: "18px", borderRadius: "50%",
-                        background: "#fff", position: "absolute", top: "3px",
+                      <div className="w-[18px] h-[18px] rounded-full bg-white absolute top-[3px] transition-[left] duration-200" style={{
                         left: config.enabled ? "23px" : "3px",
-                        transition: "left 0.2s",
                       }} />
                     </button>
 
@@ -278,16 +245,7 @@ export default function VaultMonitoringPage() {
                     <button
                       onClick={() => handleScanNow(config)}
                       title="Scanner maintenant"
-                      style={{
-                        display: "flex", alignItems: "center", gap: "5px",
-                        padding: "6px 12px", borderRadius: "6px",
-                        background: "transparent", border: `1px solid ${BORDER_TINT}`,
-                        color: ACCENT, fontSize: "12px", fontWeight: 500,
-                        cursor: "pointer", fontFamily: "inherit",
-                        transition: "all 0.15s",
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.background = BG_TINT; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+                      className="flex items-center gap-[5px] px-3 py-1.5 rounded-md bg-transparent border border-[rgba(6,182,212,0.2)] text-[#06b6d4] text-xs font-medium cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.06)]"
                     >
                       <RefreshIcon size={13} />
                       Scanner
@@ -298,15 +256,8 @@ export default function VaultMonitoringPage() {
                       onClick={() => handleDelete(config._id)}
                       disabled={deletingId === config._id}
                       title="Supprimer"
-                      style={{
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        width: "32px", height: "32px", borderRadius: "6px",
-                        background: "transparent", border: "1px solid rgba(239,68,68,0.2)",
-                        cursor: "pointer", transition: "all 0.15s",
-                        opacity: deletingId === config._id ? 0.5 : 1,
-                      }}
-                      onMouseEnter={e => { e.currentTarget.style.background = "rgba(239,68,68,0.1)"; }}
-                      onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+                      className="flex items-center justify-center w-8 h-8 rounded-md bg-transparent border border-[rgba(239,68,68,0.2)] cursor-pointer transition-all duration-150 hover:bg-[rgba(239,68,68,0.1)]"
+                      style={{ opacity: deletingId === config._id ? 0.5 : 1 }}
                     >
                       <TrashIcon size={14} color="#ef4444" />
                     </button>
@@ -319,23 +270,18 @@ export default function VaultMonitoringPage() {
       </div>
 
       {/* Add domain form */}
-      <div style={{
-        padding: "24px",
-        background: BG_TINT,
-        border: `1px solid ${BORDER_TINT}`,
-        borderRadius: "10px",
-      }}>
-        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#d1d5db", marginBottom: "4px" }}>
+      <div className="p-6 bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.2)] rounded-[10px]">
+        <h2 className="text-[15px] font-semibold text-[#d1d5db] mb-1">
           Ajouter un domaine
         </h2>
-        <p style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "20px" }}>
+        <p className="text-xs text-[#9ca3af] mb-5">
           Configurez la surveillance automatique pour un nouveau domaine.
         </p>
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {/* Domain */}
           <div>
-            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
+            <label className="block text-xs font-medium text-[#6b7280] mb-1.5">
               Domaine
             </label>
             <input
@@ -344,21 +290,13 @@ export default function VaultMonitoringPage() {
               onChange={e => setDomain(e.target.value)}
               placeholder="monentreprise.fr"
               required
-              style={{
-                width: "100%", padding: "10px 14px", borderRadius: "6px",
-                background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
-                color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
-                outline: "none", transition: "border-color 0.15s",
-                boxSizing: "border-box",
-              }}
-              onFocus={e => { e.target.style.borderColor = ACCENT; }}
-              onBlur={e => { e.target.style.borderColor = BORDER_TINT; }}
+              className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
             />
           </div>
 
           {/* Emails */}
           <div>
-            <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
+            <label className="block text-xs font-medium text-[#6b7280] mb-1.5">
               Adresses email a surveiller (une par ligne)
             </label>
             <textarea
@@ -367,41 +305,27 @@ export default function VaultMonitoringPage() {
               placeholder={"contact@monentreprise.fr\ndirection@monentreprise.fr\ncompta@monentreprise.fr"}
               rows={4}
               required
-              style={{
-                width: "100%", padding: "10px 14px", borderRadius: "6px",
-                background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
-                color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
-                outline: "none", resize: "vertical", transition: "border-color 0.15s",
-                boxSizing: "border-box",
-              }}
-              onFocus={e => { e.target.style.borderColor = ACCENT; }}
-              onBlur={e => { e.target.style.borderColor = BORDER_TINT; }}
+              className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none resize-y transition-colors duration-150 box-border focus:border-[#06b6d4]"
             />
           </div>
 
           {/* Frequency + Alert email row */}
-          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-            <div style={{ flex: 1, minWidth: "180px" }}>
-              <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
+          <div className="flex gap-4 flex-wrap">
+            <div className="flex-1 min-w-[180px]">
+              <label className="block text-xs font-medium text-[#6b7280] mb-1.5">
                 Frequence de scan
               </label>
               <select
                 value={frequency}
                 onChange={e => setFrequency(e.target.value)}
-                style={{
-                  width: "100%", padding: "10px 14px", borderRadius: "6px",
-                  background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
-                  color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
-                  outline: "none", cursor: "pointer",
-                  boxSizing: "border-box",
-                }}
+                className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none cursor-pointer box-border"
               >
                 <option value="weekly">Hebdomadaire</option>
                 <option value="monthly">Mensuel</option>
               </select>
             </div>
-            <div style={{ flex: 1, minWidth: "180px" }}>
-              <label style={{ display: "block", fontSize: "12px", fontWeight: 500, color: "#6b7280", marginBottom: "6px" }}>
+            <div className="flex-1 min-w-[180px]">
+              <label className="block text-xs font-medium text-[#6b7280] mb-1.5">
                 Email d'alerte (optionnel)
               </label>
               <input
@@ -409,15 +333,7 @@ export default function VaultMonitoringPage() {
                 value={alertEmail}
                 onChange={e => setAlertEmail(e.target.value)}
                 placeholder="alerte@monentreprise.fr"
-                style={{
-                  width: "100%", padding: "10px 14px", borderRadius: "6px",
-                  background: "#1e2029", border: `1px solid ${BORDER_TINT}`,
-                  color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
-                  outline: "none", transition: "border-color 0.15s",
-                  boxSizing: "border-box",
-                }}
-                onFocus={e => { e.target.style.borderColor = ACCENT; }}
-                onBlur={e => { e.target.style.borderColor = BORDER_TINT; }}
+                className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
               />
             </div>
           </div>
@@ -426,23 +342,15 @@ export default function VaultMonitoringPage() {
           <button
             type="submit"
             disabled={submitting}
+            className="flex items-center justify-center gap-2 px-6 py-[11px] rounded-lg border-none text-white text-sm font-semibold font-[inherit] transition-all duration-200 self-start"
             style={{
-              display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-              padding: "11px 24px", borderRadius: "8px",
               background: submitting ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
-              border: "none", color: "#fff", fontSize: "14px", fontWeight: 600,
               cursor: submitting ? "not-allowed" : "pointer",
-              fontFamily: "inherit", transition: "all 0.2s",
-              alignSelf: "flex-start",
             }}
           >
             {submitting ? (
               <>
-                <div style={{
-                  width: "14px", height: "14px",
-                  border: "2px solid rgba(255,255,255,0.3)", borderTop: "2px solid #fff",
-                  borderRadius: "50%", animation: "vault-mon-spin 0.8s linear infinite",
-                }} />
+                <div className="w-3.5 h-3.5 border-2 border-[rgba(255,255,255,0.3)] border-t-white rounded-full animate-[vault-mon-spin_0.8s_linear_infinite]" />
                 Activation...
               </>
             ) : (

@@ -22,16 +22,16 @@ const RISK_COLORS = {
 
 const RISK_LABELS = {
   critical: "Critique",
-  high: "Élevé",
+  high: "\u00c9lev\u00e9",
   medium: "Moyen",
   low: "Faible",
 };
 
 const RISK_EXPLANATIONS = {
-  critical: "Risque critique : Des mots de passe et données sensibles ont été exposés. Action immédiate requise.",
-  high: "Risque élevé : Des informations personnelles importantes ont été compromises. Changez vos mots de passe rapidement.",
-  medium: "Risque moyen : Certaines informations ont fuité mais le danger reste limité. Restez vigilant.",
-  low: "Risque faible : Peu de données exposées. Continuez les bonnes pratiques de sécurité.",
+  critical: "Risque critique : Des mots de passe et donn\u00e9es sensibles ont \u00e9t\u00e9 expos\u00e9s. Action imm\u00e9diate requise.",
+  high: "Risque \u00e9lev\u00e9 : Des informations personnelles importantes ont \u00e9t\u00e9 compromises. Changez vos mots de passe rapidement.",
+  medium: "Risque moyen : Certaines informations ont fuit\u00e9 mais le danger reste limit\u00e9. Restez vigilant.",
+  low: "Risque faible : Peu de donn\u00e9es expos\u00e9es. Continuez les bonnes pratiques de s\u00e9curit\u00e9.",
 };
 
 const DATA_CLASS_LABELS = {
@@ -39,34 +39,34 @@ const DATA_CLASS_LABELS = {
   "Passwords": "Mots de passe",
   "Usernames": "Noms d'utilisateur",
   "IP addresses": "Adresses IP",
-  "Phone numbers": "Numéros de téléphone",
+  "Phone numbers": "Num\u00e9ros de t\u00e9l\u00e9phone",
   "Physical addresses": "Adresses postales",
   "Dates of birth": "Dates de naissance",
   "Credit cards": "Cartes bancaires",
-  "Social security numbers": "Numéros de sécurité sociale",
+  "Social security numbers": "Num\u00e9ros de s\u00e9curit\u00e9 sociale",
   "Bank account numbers": "Comptes bancaires",
-  "Employment": "Données d'emploi",
+  "Employment": "Donn\u00e9es d'emploi",
   "Genders": "Genres",
   "Names": "Noms complets",
   "Geographic locations": "Localisations",
   "Employers": "Employeurs",
-  "Job titles": "Postes occupés",
+  "Job titles": "Postes occup\u00e9s",
   "Income levels": "Niveaux de revenus",
-  "Education levels": "Niveaux d'éducation",
-  "Biometric data": "Données biométriques",
-  "Browser user agent details": "Données navigateur",
+  "Education levels": "Niveaux d'\u00e9ducation",
+  "Biometric data": "Donn\u00e9es biom\u00e9triques",
+  "Browser user agent details": "Donn\u00e9es navigateur",
   "Device information": "Infos appareil",
-  "Security questions and answers": "Questions de sécurité",
+  "Security questions and answers": "Questions de s\u00e9curit\u00e9",
   "Auth tokens": "Jetons d'authentification",
   "Password hints": "Indices de mot de passe",
   "PINs": "Codes PIN",
   "Purchases": "Achats",
   "Avatars": "Photos de profil",
   "Social connections": "Connexions sociales",
-  "Private messages": "Messages privés",
+  "Private messages": "Messages priv\u00e9s",
   "Chat logs": "Historique de chat",
-  "Age groups": "Tranches d'âge",
-  "Nationalities": "Nationalités",
+  "Age groups": "Tranches d'\u00e2ge",
+  "Nationalities": "Nationalit\u00e9s",
   "Political views": "Opinions politiques",
   "Religions": "Religions",
   "Smoking habits": "Habitudes tabagiques",
@@ -75,26 +75,26 @@ const DATA_CLASS_LABELS = {
   "Sexual orientations": "Orientations sexuelles",
   "Relationship statuses": "Statuts relationnels",
   "Fitness levels": "Niveaux de forme",
-  "Health insurance information": "Infos assurance santé",
-  "Medical conditions": "Conditions médicales",
+  "Health insurance information": "Infos assurance sant\u00e9",
+  "Medical conditions": "Conditions m\u00e9dicales",
 };
 
 const DATA_CLASS_EXPLANATIONS = {
-  "Email addresses": "Votre adresse email peut être utilisée pour du spam ou des tentatives de phishing.",
-  "Passwords": "Vos mots de passe sont exposés. Changez-les immédiatement partout où vous les utilisez.",
+  "Email addresses": "Votre adresse email peut \u00eatre utilis\u00e9e pour du spam ou des tentatives de phishing.",
+  "Passwords": "Vos mots de passe sont expos\u00e9s. Changez-les imm\u00e9diatement partout o\u00f9 vous les utilisez.",
   "Usernames": "Vos noms d'utilisateur sont connus, ce qui facilite les tentatives de connexion frauduleuses.",
   "IP addresses": "Votre localisation approximative et fournisseur internet sont connus.",
-  "Phone numbers": "Votre numéro peut être utilisé pour des appels ou SMS frauduleux.",
-  "Physical addresses": "Votre adresse postale est exposée, risque d'usurpation d'identité.",
-  "Dates of birth": "Votre date de naissance peut servir à deviner vos mots de passe ou usurper votre identité.",
-  "Credit cards": "Vos données bancaires sont compromises. Contactez votre banque immédiatement.",
-  "Social security numbers": "Risque majeur d'usurpation d'identité. Contactez les autorités.",
-  "Bank account numbers": "Vos coordonnées bancaires sont exposées. Prévenez votre banque.",
-  "Names": "Votre nom complet est associé à d'autres données personnelles.",
-  "Geographic locations": "Vos lieux fréquentés sont connus.",
-  "Security questions and answers": "Vos questions de sécurité sont compromises. Changez-les sur tous vos comptes.",
-  "Auth tokens": "Des jetons d'accès à vos comptes ont fuité. Déconnectez toutes les sessions.",
-  "Private messages": "Des messages privés ont été exposés publiquement.",
+  "Phone numbers": "Votre num\u00e9ro peut \u00eatre utilis\u00e9 pour des appels ou SMS frauduleux.",
+  "Physical addresses": "Votre adresse postale est expos\u00e9e, risque d'usurpation d'identit\u00e9.",
+  "Dates of birth": "Votre date de naissance peut servir \u00e0 deviner vos mots de passe ou usurper votre identit\u00e9.",
+  "Credit cards": "Vos donn\u00e9es bancaires sont compromises. Contactez votre banque imm\u00e9diatement.",
+  "Social security numbers": "Risque majeur d'usurpation d'identit\u00e9. Contactez les autorit\u00e9s.",
+  "Bank account numbers": "Vos coordonn\u00e9es bancaires sont expos\u00e9es. Pr\u00e9venez votre banque.",
+  "Names": "Votre nom complet est associ\u00e9 \u00e0 d'autres donn\u00e9es personnelles.",
+  "Geographic locations": "Vos lieux fr\u00e9quent\u00e9s sont connus.",
+  "Security questions and answers": "Vos questions de s\u00e9curit\u00e9 sont compromises. Changez-les sur tous vos comptes.",
+  "Auth tokens": "Des jetons d'acc\u00e8s \u00e0 vos comptes ont fuit\u00e9. D\u00e9connectez toutes les sessions.",
+  "Private messages": "Des messages priv\u00e9s ont \u00e9t\u00e9 expos\u00e9s publiquement.",
 };
 
 const DATA_CLASS_SEVERITY = {
@@ -147,38 +147,8 @@ const AlertTriangle = ({ size = 18, color = "#ef4444" }) => (
   </svg>
 );
 
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
-
-const labelStyle = {
-  fontSize: "13px",
-  fontWeight: 500,
-  color: "#6b7280",
-  marginBottom: "6px",
-  display: "block",
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "10px 14px",
-  background: "#141520",
-  border: "1px solid #2a2d3a",
-  borderRadius: "8px",
-  color: "#e4e4e7",
-  fontSize: "14px",
-  fontFamily: "inherit",
-  outline: "none",
-  transition: "border-color 0.15s",
-  boxSizing: "border-box",
-};
-
 function formatDate(dateStr) {
-  if (!dateStr) return "—";
+  if (!dateStr) return "\u2014";
   const d = new Date(dateStr);
   return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 }
@@ -197,35 +167,27 @@ function getDataClassColor(dataClass) {
 
 function BreachCard({ breach }) {
   return (
-    <div style={{
-      padding: "14px 16px",
-      background: "rgba(6,182,212,0.04)",
-      border: "1px solid rgba(6,182,212,0.1)",
+    <div className="px-4 py-3.5 bg-[rgba(6,182,212,0.04)] border border-[rgba(6,182,212,0.1)] rounded-lg mb-2" style={{
       borderLeft: `3px solid ${RISK_COLORS[breach.riskLevel] || "#f97316"}`,
-      borderRadius: "8px",
-      marginBottom: "8px",
     }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px", flexWrap: "wrap", gap: "8px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <div className="flex justify-between items-center mb-2.5 flex-wrap gap-2">
+        <div className="flex items-center gap-2">
           <AlertTriangle size={16} color={RISK_COLORS[breach.riskLevel] || "#f97316"} />
-          <span style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>{breach.name || breach.Name}</span>
+          <span className="text-sm font-semibold text-[#f0f0f3]">{breach.name || breach.Name}</span>
         </div>
-        <div style={{ display: "flex", gap: "12px", fontSize: "12px", color: "#9ca3af" }}>
+        <div className="flex gap-3 text-xs text-[#9ca3af]">
           <span>{formatDate(breach.date || breach.BreachDate)}</span>
-          <span>{formatNumber(breach.pwnCount || breach.PwnCount)} comptes touchés</span>
+          <span>{formatNumber(breach.pwnCount || breach.PwnCount)} comptes touch\u00e9s</span>
         </div>
       </div>
       {/* Data classes */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+      <div className="flex flex-wrap gap-1.5">
         {(breach.dataClasses || breach.DataClasses || []).map((dc, i) => {
           const color = getDataClassColor(dc);
           const label = DATA_CLASS_LABELS[dc] || dc;
           const explanation = DATA_CLASS_EXPLANATIONS[dc];
           return (
-            <span key={i} title={explanation || label} style={{
-              display: "inline-flex", alignItems: "center", gap: "4px",
-              padding: "3px 10px", borderRadius: "4px",
-              fontSize: "11px", fontWeight: 500,
+            <span key={i} title={explanation || label} className="inline-flex items-center gap-1 px-2.5 py-[3px] rounded text-[11px] font-medium" style={{
               color: color,
               background: `${color}15`,
               border: `1px solid ${color}30`,
@@ -242,11 +204,7 @@ function BreachCard({ breach }) {
         const critical = classes.find(dc => DATA_CLASS_EXPLANATIONS[dc]);
         if (!critical) return null;
         return (
-          <div style={{
-            marginTop: "10px", padding: "8px 12px",
-            background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.15)",
-            borderRadius: "6px", fontSize: "12px", color: "#fca5a5", lineHeight: 1.5,
-          }}>
+          <div className="mt-2.5 px-3 py-2 bg-[rgba(239,68,68,0.06)] border border-[rgba(239,68,68,0.15)] rounded-md text-xs text-[#fca5a5] leading-normal">
             {DATA_CLASS_EXPLANATIONS[critical]}
           </div>
         );
@@ -263,46 +221,33 @@ function EmailResultCard({ result }) {
   if (breachCount === 0) return null;
 
   return (
-    <div style={{
-      ...cardStyle,
-      border: `1px solid ${BORDER_TINT}`,
-      background: BG_TINT,
-      marginBottom: "12px",
-    }}>
+    <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-3">
       <div
         onClick={() => setExpanded(!expanded)}
-        style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          cursor: "pointer", userSelect: "none",
-        }}
+        className="flex items-center justify-between cursor-pointer select-none"
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{
-            width: "36px", height: "36px", borderRadius: "8px",
-            background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.2)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-[rgba(239,68,68,0.12)] border border-[rgba(239,68,68,0.2)] flex items-center justify-center">
             <AlertTriangle size={18} color="#ef4444" />
           </div>
           <div>
-            <div style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>
+            <div className="text-sm font-semibold text-[#f0f0f3]">
               {result.email}
             </div>
-            <div style={{ fontSize: "12px", color: "#ef4444", marginTop: "2px" }}>
-              {breachCount} fuite{breachCount > 1 ? "s" : ""} détectée{breachCount > 1 ? "s" : ""}
+            <div className="text-xs text-[#ef4444] mt-0.5">
+              {breachCount} fuite{breachCount > 1 ? "s" : ""} d\u00e9tect\u00e9e{breachCount > 1 ? "s" : ""}
             </div>
           </div>
         </div>
-        <div style={{
+        <div className="transition-transform duration-200" style={{
           transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-          transition: "transform 0.2s",
         }}>
           <ChevronDown />
         </div>
       </div>
 
       {expanded && (
-        <div style={{ marginTop: "16px", paddingTop: "16px", borderTop: "1px solid rgba(6,182,212,0.1)" }}>
+        <div className="mt-4 pt-4 border-t border-[rgba(6,182,212,0.1)]">
           {breaches.map((breach, i) => (
             <BreachCard key={i} breach={breach} />
           ))}
@@ -314,50 +259,30 @@ function EmailResultCard({ result }) {
 
 function SummaryCard({ label, value, color, icon }) {
   return (
-    <div style={{
-      ...cardStyle,
-      flex: "1 1 0",
-      minWidth: "140px",
+    <div className="bg-[#1e2029] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] flex-[1_1_0] min-w-[140px] relative overflow-hidden" style={{
       border: `1px solid ${color}30`,
       background: `${color}08`,
-      position: "relative",
-      overflow: "hidden",
     }}>
-      <div style={{
-        position: "absolute", top: "-10px", right: "-10px", opacity: 0.08,
-        width: "60px", height: "60px",
-      }}>
+      <div className="absolute -top-2.5 -right-2.5 opacity-[0.08] w-[60px] h-[60px]">
         {icon}
       </div>
-      <div style={{ fontSize: "12px", color: "#6b7280", marginBottom: "6px", fontWeight: 500 }}>{label}</div>
-      <div style={{ fontSize: "26px", fontWeight: 700, color }}>{value}</div>
+      <div className="text-xs text-[#6b7280] mb-1.5 font-medium">{label}</div>
+      <div className="text-[26px] font-bold" style={{ color }}>{value}</div>
     </div>
   );
 }
 
 function LoadingAnimation() {
   return (
-    <div style={{
-      ...cardStyle,
-      border: `1px solid ${BORDER_TINT}`,
-      background: BG_TINT,
-      textAlign: "center",
-      padding: "48px 24px",
-    }}>
-      <div style={{ marginBottom: "20px" }}>
-        <div style={{
-          width: "64px", height: "64px", margin: "0 auto",
-          border: `3px solid rgba(6,182,212,0.2)`,
-          borderTop: `3px solid ${ACCENT}`,
-          borderRadius: "50%",
-          animation: "vault-spin 1s linear infinite",
-        }} />
+    <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+      <div className="mb-5">
+        <div className="w-16 h-16 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite]" />
       </div>
-      <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>
+      <div className="text-base font-semibold text-[#f0f0f3] mb-2">
         Analyse en cours...
       </div>
-      <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.6 }}>
-        Nous vérifions vos adresses email dans les bases de données compromises connues.
+      <div className="text-[13px] text-[#9ca3af] leading-relaxed">
+        Nous v\u00e9rifions vos adresses email dans les bases de donn\u00e9es compromises connues.
         <br />Cela peut prendre quelques secondes.
       </div>
       <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
@@ -380,9 +305,9 @@ export function VaultResults({ scan }) {
   return (
     <div>
       {/* Summary Cards */}
-      <div style={{ display: "flex", gap: "12px", marginBottom: "24px", flexWrap: "wrap" }}>
+      <div className="flex gap-3 mb-6 flex-wrap">
         <SummaryCard
-          label="Emails scannés"
+          label="Emails scann\u00e9s"
           value={totalEmails}
           color={ACCENT}
           icon={<LockIcon size={60} color={ACCENT} />}
@@ -394,7 +319,7 @@ export function VaultResults({ scan }) {
           icon={<AlertTriangle size={60} color={compromisedCount > 0 ? "#ef4444" : "#22c55e"} />}
         />
         <SummaryCard
-          label="Fuites détectées"
+          label="Fuites d\u00e9tect\u00e9es"
           value={totalBreaches}
           color={totalBreaches > 0 ? "#f97316" : "#22c55e"}
           icon={<ShieldIcon size={60} color={totalBreaches > 0 ? "#f97316" : "#22c55e"} />}
@@ -408,58 +333,40 @@ export function VaultResults({ scan }) {
       </div>
 
       {/* Risk explanation */}
-      <div style={{
-        padding: "14px 18px",
+      <div className="px-[18px] py-3.5 rounded-lg mb-6 text-[13px] leading-relaxed flex items-start gap-2.5" style={{
         background: `${riskColor}10`,
         border: `1px solid ${riskColor}30`,
-        borderRadius: "8px",
-        marginBottom: "24px",
-        fontSize: "13px",
-        color: `${riskColor}`,
-        lineHeight: 1.6,
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "10px",
+        color: riskColor,
       }}>
-        <span style={{ flexShrink: 0, marginTop: "1px" }}>
+        <span className="shrink-0 mt-px">
           <ShieldIcon size={18} color={riskColor} />
         </span>
-        {RISK_EXPLANATIONS[riskLevel] || "Résultat de l'analyse de sécurité."}
+        {RISK_EXPLANATIONS[riskLevel] || "R\u00e9sultat de l'analyse de s\u00e9curit\u00e9."}
       </div>
 
-      {/* No breaches — celebration */}
+      {/* No breaches -- celebration */}
       {compromisedCount === 0 && (
-        <div style={{
-          ...cardStyle,
-          border: "1px solid rgba(34,197,94,0.3)",
-          background: "rgba(34,197,94,0.08)",
-          textAlign: "center",
-          padding: "40px 24px",
-          marginBottom: "24px",
-        }}>
+        <div className="bg-[rgba(34,197,94,0.08)] border border-[rgba(34,197,94,0.3)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
           <ShieldCheckIcon size={56} color="#22c55e" />
-          <div style={{ fontSize: "20px", fontWeight: 700, color: "#22c55e", marginTop: "16px", marginBottom: "8px" }}>
-            Aucune fuite détectée
+          <div className="text-xl font-bold text-[#22c55e] mt-4 mb-2">
+            Aucune fuite d\u00e9tect\u00e9e
           </div>
-          <div style={{ fontSize: "14px", color: "#86efac", lineHeight: 1.6, maxWidth: "440px", margin: "0 auto" }}>
-            Bonne nouvelle ! Aucune des adresses email analysées n'apparaît dans les bases de données compromises connues.
-            Continuez à appliquer les bonnes pratiques de sécurité.
+          <div className="text-sm text-[#86efac] leading-relaxed max-w-[440px] mx-auto">
+            Bonne nouvelle ! Aucune des adresses email analys\u00e9es n'appara\u00eet dans les bases de donn\u00e9es compromises connues.
+            Continuez \u00e0 appliquer les bonnes pratiques de s\u00e9curit\u00e9.
           </div>
         </div>
       )}
 
       {/* Compromised emails */}
       {compromisedCount > 0 && (
-        <div style={{ marginBottom: "24px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3.5">
             <LockIcon size={18} color="#ef4444" />
-            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+            <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
               Emails compromis
             </h3>
-            <span style={{
-              fontSize: "11px", fontWeight: 600, color: "#ef4444",
-              background: "rgba(239,68,68,0.15)", padding: "2px 8px", borderRadius: "4px",
-            }}>
+            <span className="text-[11px] font-semibold text-[#ef4444] bg-[rgba(239,68,68,0.15)] px-2 py-0.5 rounded">
               {compromisedCount}
             </span>
           </div>
@@ -471,25 +378,17 @@ export function VaultResults({ scan }) {
 
       {/* Safe emails */}
       {results.filter(r => !r.breaches || r.breaches.length === 0).length > 0 && compromisedCount > 0 && (
-        <div style={{ marginBottom: "24px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3.5">
             <ShieldCheckIcon size={18} color="#22c55e" />
-            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
-              Emails sécurisés
+            <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
+              Emails s\u00e9curis\u00e9s
             </h3>
           </div>
-          <div style={{
-            ...cardStyle,
-            border: "1px solid rgba(34,197,94,0.15)",
-            background: "rgba(34,197,94,0.04)",
-          }}>
+          <div className="bg-[rgba(34,197,94,0.04)] border border-[rgba(34,197,94,0.15)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
             {results.filter(r => !r.breaches || r.breaches.length === 0).map((r, i) => (
-              <div key={i} style={{
-                display: "flex", alignItems: "center", gap: "8px",
-                padding: "6px 0",
-                fontSize: "13px", color: "#86efac",
-              }}>
-                <span style={{ color: "#22c55e" }}>&#10003;</span>
+              <div key={i} className="flex items-center gap-2 py-1.5 text-[13px] text-[#86efac]">
+                <span className="text-[#22c55e]">&#10003;</span>
                 {r.email}
               </div>
             ))}
@@ -499,33 +398,22 @@ export function VaultResults({ scan }) {
 
       {/* AI Recommendations */}
       {recommendations.length > 0 && (
-        <div style={{ marginBottom: "24px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-3.5">
             <ShieldIcon size={18} color={ACCENT} />
-            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
-              Recommandations de sécurité
+            <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
+              Recommandations de s\u00e9curit\u00e9
             </h3>
           </div>
-          <div style={{
-            ...cardStyle,
-            border: `1px solid ${BORDER_TINT}`,
-            background: BG_TINT,
-          }}>
+          <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
             {recommendations.map((rec, i) => (
-              <div key={i} style={{
-                display: "flex", gap: "12px",
-                padding: "12px 0",
+              <div key={i} className="flex gap-3 py-3" style={{
                 borderBottom: i < recommendations.length - 1 ? "1px solid rgba(6,182,212,0.1)" : "none",
               }}>
-                <span style={{
-                  width: "24px", height: "24px", borderRadius: "6px",
-                  background: `${ACCENT}20`, color: ACCENT,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "12px", fontWeight: 700, flexShrink: 0,
-                }}>
+                <span className="w-6 h-6 rounded-md bg-[rgba(6,182,212,0.12)] text-[#06b6d4] flex items-center justify-center text-xs font-bold shrink-0">
                   {i + 1}
                 </span>
-                <span style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.6 }}>
+                <span className="text-[13px] text-[#d1d5db] leading-relaxed">
                   {rec}
                 </span>
               </div>
@@ -537,25 +425,18 @@ export function VaultResults({ scan }) {
       {/* Download button (disabled) */}
       <button
         disabled
-        style={{
-          display: "inline-flex", alignItems: "center", gap: "8px",
-          padding: "10px 20px", borderRadius: "8px",
-          background: "#2a2d3a", border: "1px solid #3f3f46",
-          color: "#d1d5db", fontSize: "13px", fontWeight: 500,
-          cursor: "not-allowed", fontFamily: "inherit",
-          opacity: 0.6,
-        }}
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#2a2d3a] border border-[#3f3f46] text-[#d1d5db] text-[13px] font-medium cursor-not-allowed font-[inherit] opacity-60"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
-        Télécharger le rapport (bientôt disponible)
+        T\u00e9l\u00e9charger le rapport (bient\u00f4t disponible)
       </button>
     </div>
   );
 }
 
-/* ─── Password Checker Component ─── */
+/* --- Password Checker Component --- */
 const STRENGTH_CONFIG = {
   weak: { color: "#ef4444", label: "Faible", bg: "rgba(239,68,68,0.12)", border: "rgba(239,68,68,0.3)" },
   medium: { color: "#eab308", label: "Moyen", bg: "rgba(234,179,8,0.12)", border: "rgba(234,179,8,0.3)" },
@@ -590,7 +471,7 @@ function PasswordChecker({ post: apiPost }) {
       const data = await apiPost("/api/vault/password-check", { password });
       setResult(data);
     } catch (err) {
-      setPwError(err.message || "Erreur lors de la vérification.");
+      setPwError(err.message || "Erreur lors de la v\u00e9rification.");
     } finally {
       setChecking(false);
     }
@@ -599,64 +480,42 @@ function PasswordChecker({ post: apiPost }) {
   const strengthConf = result ? STRENGTH_CONFIG[result.strength?.level] || STRENGTH_CONFIG.weak : null;
 
   return (
-    <div style={{
-      ...cardStyle,
-      border: `1px solid ${BORDER_TINT}`,
-      marginBottom: "28px",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+    <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+      <div className="flex items-center gap-2 mb-1.5">
         <LockIcon size={18} color={ACCENT} />
-        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
-          Vérificateur de mot de passe
+        <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          V\u00e9rificateur de mot de passe
         </h2>
       </div>
-      <p style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "18px", lineHeight: 1.6 }}>
-        Vérifiez la robustesse d'un mot de passe et s'il apparaît dans des fuites de données connues.
+      <p className="text-xs text-[#9ca3af] mb-[18px] leading-relaxed">
+        V\u00e9rifiez la robustesse d'un mot de passe et s'il appara\u00eet dans des fuites de donn\u00e9es connues.
       </p>
 
       {/* k-anonymity explanation */}
-      <div style={{
-        padding: "10px 14px",
-        background: "rgba(6,182,212,0.05)",
-        border: `1px solid ${BORDER_TINT}`,
-        borderRadius: "6px",
-        marginBottom: "16px",
-        fontSize: "11px",
-        color: "#9ca3af",
-        lineHeight: 1.6,
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "8px",
-      }}>
+      <div className="px-3.5 py-2.5 bg-[rgba(6,182,212,0.05)] border border-[rgba(6,182,212,0.2)] rounded-md mb-4 text-[11px] text-[#9ca3af] leading-relaxed flex items-start gap-2">
         <ShieldIcon size={16} color="#06b6d4" />
         <span>
-          <strong style={{ color: "#d1d5db" }}>Votre mot de passe reste privé.</strong> Nous utilisons la méthode
-          k-anonymity : seuls les 5 premiers caractères du hash SHA-1 sont envoyés au serveur. Le mot de passe
-          complet n'est jamais transmis ni stocké.
+          <strong className="text-[#d1d5db]">Votre mot de passe reste priv\u00e9.</strong> Nous utilisons la m\u00e9thode
+          k-anonymity : seuls les 5 premiers caract\u00e8res du hash SHA-1 sont envoy\u00e9s au serveur. Le mot de passe
+          complet n'est jamais transmis ni stock\u00e9.
         </span>
       </div>
 
       {/* Input */}
-      <div style={{ display: "flex", gap: "10px", alignItems: "flex-start", marginBottom: "16px" }}>
-        <div style={{ flex: 1, position: "relative" }}>
+      <div className="flex gap-2.5 items-start mb-4">
+        <div className="flex-1 relative">
           <input
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={e => { setPassword(e.target.value); setResult(null); }}
-            placeholder="Entrez un mot de passe à vérifier"
-            style={{ ...inputStyle, paddingRight: "40px" }}
-            onFocus={e => { e.target.style.borderColor = ACCENT; }}
-            onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }}
+            placeholder="Entrez un mot de passe \u00e0 v\u00e9rifier"
+            className="w-full px-3.5 py-2.5 pr-10 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
             onKeyDown={e => { if (e.key === "Enter") handleCheck(); }}
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)",
-              background: "none", border: "none", cursor: "pointer", padding: "4px",
-              display: "flex", alignItems: "center",
-            }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer p-1 flex items-center"
           >
             {showPassword ? <EyeOffIcon size={16} color="#6b7280" /> : <EyeIcon size={16} color="#6b7280" />}
           </button>
@@ -664,32 +523,22 @@ function PasswordChecker({ post: apiPost }) {
         <button
           onClick={handleCheck}
           disabled={checking || !password.trim()}
+          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-lg border-none text-[13px] font-semibold font-[inherit] whitespace-nowrap shrink-0"
           style={{
-            display: "inline-flex", alignItems: "center", gap: "6px",
-            padding: "10px 20px", borderRadius: "8px",
             background: checking || !password.trim() ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
-            border: "none",
             color: checking || !password.trim() ? "#6b7280" : "#0f0f11",
-            fontSize: "13px", fontWeight: 600,
             cursor: checking || !password.trim() ? "not-allowed" : "pointer",
-            fontFamily: "inherit",
-            whiteSpace: "nowrap",
-            flexShrink: 0,
           }}
         >
           {checking ? (
             <>
-              <div style={{
-                width: "14px", height: "14px",
-                border: "2px solid rgba(107,114,128,0.3)", borderTop: "2px solid #6b7280",
-                borderRadius: "50%", animation: "vault-spin 0.8s linear infinite",
-              }} />
-              Vérification...
+              <div className="w-3.5 h-3.5 border-2 border-[rgba(107,114,128,0.3)] border-t-[#6b7280] rounded-full animate-[vault-spin_0.8s_linear_infinite]" />
+              V\u00e9rification...
             </>
           ) : (
             <>
               <LockIcon size={14} color={!password.trim() ? "#6b7280" : "#0f0f11"} />
-              Vérifier
+              V\u00e9rifier
             </>
           )}
         </button>
@@ -697,55 +546,40 @@ function PasswordChecker({ post: apiPost }) {
 
       {/* Error */}
       {pwError && (
-        <div style={{
-          padding: "10px 14px", marginBottom: "12px",
-          background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)",
-          borderRadius: "6px", fontSize: "13px", color: "#fca5a5",
-        }}>
+        <div className="px-3.5 py-2.5 mb-3 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.25)] rounded-md text-[13px] text-[#fca5a5]">
           {pwError}
         </div>
       )}
 
       {/* Results */}
       {result && (
-        <div style={{
-          padding: "18px 20px",
-          background: `${strengthConf.bg}`,
+        <div className="px-5 py-[18px] rounded-lg" style={{
+          background: strengthConf.bg,
           border: `1px solid ${strengthConf.border}`,
-          borderRadius: "8px",
         }}>
           {/* Strength meter */}
-          <div style={{ marginBottom: "14px" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
-              <span style={{ fontSize: "13px", fontWeight: 600, color: "#f0f0f3" }}>Robustesse</span>
-              <span style={{
-                fontSize: "12px", fontWeight: 600, color: strengthConf.color,
-                padding: "2px 10px", borderRadius: "4px",
+          <div className="mb-3.5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[13px] font-semibold text-[#f0f0f3]">Robustesse</span>
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded" style={{
+                color: strengthConf.color,
                 background: `${strengthConf.color}20`,
               }}>
                 {strengthConf.label}
               </span>
             </div>
-            <div style={{
-              height: "6px", borderRadius: "3px",
-              background: "#2a2d3a", overflow: "hidden",
-            }}>
-              <div style={{
-                height: "100%", borderRadius: "3px",
+            <div className="h-1.5 rounded-sm bg-[#2a2d3a] overflow-hidden">
+              <div className="h-full rounded-sm transition-[width] duration-500 ease-out" style={{
                 background: strengthConf.color,
                 width: `${result.strength?.score || 0}%`,
-                transition: "width 0.5s ease-out",
               }} />
             </div>
           </div>
 
           {/* Breach status */}
-          <div style={{
-            display: "flex", alignItems: "center", gap: "10px",
-            padding: "12px 14px",
+          <div className="flex items-center gap-2.5 px-3.5 py-3 rounded-md" style={{
             background: result.breached ? "rgba(239,68,68,0.08)" : "rgba(34,197,94,0.08)",
             border: `1px solid ${result.breached ? "rgba(239,68,68,0.2)" : "rgba(34,197,94,0.2)"}`,
-            borderRadius: "6px",
           }}>
             {result.breached ? (
               <AlertTriangle size={18} color="#ef4444" />
@@ -753,16 +587,16 @@ function PasswordChecker({ post: apiPost }) {
               <ShieldCheckIcon size={18} color="#22c55e" />
             )}
             <div>
-              <div style={{ fontSize: "13px", fontWeight: 600, color: result.breached ? "#fca5a5" : "#86efac" }}>
+              <div className="text-[13px] font-semibold" style={{ color: result.breached ? "#fca5a5" : "#86efac" }}>
                 {result.breached
-                  ? `Ce mot de passe a été trouvé dans ${result.breachCount.toLocaleString("fr-FR")} fuite${result.breachCount > 1 ? "s" : ""} de données`
-                  : "Ce mot de passe n'apparaît dans aucune fuite connue"
+                  ? `Ce mot de passe a \u00e9t\u00e9 trouv\u00e9 dans ${result.breachCount.toLocaleString("fr-FR")} fuite${result.breachCount > 1 ? "s" : ""} de donn\u00e9es`
+                  : "Ce mot de passe n'appara\u00eet dans aucune fuite connue"
                 }
               </div>
-              <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "2px" }}>
+              <div className="text-[11px] text-[#9ca3af] mt-0.5">
                 {result.breached
                   ? "Ne l'utilisez jamais. Choisissez un mot de passe unique et complexe."
-                  : "Bonne nouvelle ! Cela ne garantit pas qu'il est sûr — privilégiez un mot de passe long et unique."
+                  : "Bonne nouvelle ! Cela ne garantit pas qu'il est s\u00fbr \u2014 privil\u00e9giez un mot de passe long et unique."
                 }
               </div>
             </div>
@@ -814,72 +648,53 @@ export default function VaultDashboardPage() {
   }, [domain, emailsText, post]);
 
   return (
-    <div style={{ maxWidth: "860px" }}>
+    <div className="max-w-[860px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "8px" }}>
-        <div style={{
-          width: "44px", height: "44px", borderRadius: "10px",
-          background: BG_TINT, border: `1px solid ${BORDER_TINT}`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
+      <div className="flex items-center gap-3.5 mb-2">
+        <div className="w-11 h-11 rounded-[10px] bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] flex items-center justify-center">
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
             Vault
           </h1>
-          <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0, marginTop: "2px" }}>
-            Surveillance des fuites de données
+          <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
+            Surveillance des fuites de donn\u00e9es
           </p>
         </div>
       </div>
 
       {/* Info banner */}
-      <div style={{
-        padding: "16px 20px",
-        background: "rgba(6,182,212,0.06)",
-        border: `1px solid ${BORDER_TINT}`,
-        borderLeft: `3px solid ${ACCENT}`,
-        borderRadius: "10px",
-        marginBottom: "28px",
-        marginTop: "20px",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "14px",
-      }}>
-        <div style={{ flexShrink: 0, marginTop: "2px" }}>
+      <div className="px-5 py-4 bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.2)] border-l-[3px] border-l-[#06b6d4] rounded-[10px] mb-7 mt-5 flex items-start gap-3.5">
+        <div className="shrink-0 mt-0.5">
           <LockIcon size={20} color={ACCENT} />
         </div>
-        <div style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.7 }}>
-          <strong style={{ color: "#f0f0f3" }}>Comment fonctionne Vault ?</strong>
+        <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
+          <strong className="text-[#f0f0f3]">Comment fonctionne Vault ?</strong>
           <br />
-          Vault vérifie si les adresses email de votre entreprise apparaissent dans des bases de données piratées.
-          Ces bases contiennent des informations volées lors d'attaques sur des sites comme LinkedIn, Adobe, Facebook, etc.
+          Vault v\u00e9rifie si les adresses email de votre entreprise apparaissent dans des bases de donn\u00e9es pirat\u00e9es.
+          Ces bases contiennent des informations vol\u00e9es lors d'attaques sur des sites comme LinkedIn, Adobe, Facebook, etc.
           <br />
-          <span style={{ color: "#6b7280" }}>
-            Aucune donnée sensible n'est stockée de notre côté. Seul le résultat de l'analyse est conservé.
+          <span className="text-[#6b7280]">
+            Aucune donn\u00e9e sensible n'est stock\u00e9e de notre c\u00f4t\u00e9. Seul le r\u00e9sultat de l'analyse est conserv\u00e9.
           </span>
         </div>
       </div>
 
       {/* Scan form */}
       {!scan && !loading && (
-        <div style={{
-          ...cardStyle,
-          border: `1px solid ${BORDER_TINT}`,
-          marginBottom: "28px",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "20px" }}>
+        <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+          <div className="flex items-center gap-2 mb-5">
             <ShieldIcon size={18} color={ACCENT} />
-            <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+            <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
               Lancer une analyse
             </h2>
           </div>
 
           {/* Domain input */}
-          <div style={{ marginBottom: "16px" }}>
-            <label style={labelStyle}>
+          <div className="mb-4">
+            <label className="block text-[13px] font-medium text-[#6b7280] mb-1.5">
               Domaine de votre entreprise
             </label>
             <input
@@ -887,45 +702,33 @@ export default function VaultDashboardPage() {
               value={domain}
               onChange={e => setDomain(e.target.value)}
               placeholder="monentreprise.fr"
-              style={inputStyle}
-              onFocus={e => e.target.style.borderColor = ACCENT}
-              onBlur={e => e.target.style.borderColor = "#2a2d3a"}
+              className="w-full px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
             />
-            <div style={{ fontSize: "11px", color: "#d1d5db", marginTop: "4px" }}>
+            <div className="text-[11px] text-[#d1d5db] mt-1">
               Le domaine principal de votre entreprise (sans www ni https://)
             </div>
           </div>
 
           {/* Emails textarea */}
-          <div style={{ marginBottom: "20px" }}>
-            <label style={labelStyle}>
-              Adresses email à vérifier
+          <div className="mb-5">
+            <label className="block text-[13px] font-medium text-[#6b7280] mb-1.5">
+              Adresses email \u00e0 v\u00e9rifier
             </label>
             <textarea
               value={emailsText}
               onChange={e => setEmailsText(e.target.value)}
               placeholder={"contact@monentreprise.fr\ndirection@monentreprise.fr\ncompta@monentreprise.fr"}
               rows={5}
-              style={{
-                ...inputStyle,
-                resize: "vertical",
-                lineHeight: 1.6,
-              }}
-              onFocus={e => e.target.style.borderColor = ACCENT}
-              onBlur={e => e.target.style.borderColor = "#2a2d3a"}
+              className="w-full px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none resize-y leading-relaxed transition-colors duration-150 box-border focus:border-[#06b6d4]"
             />
-            <div style={{ fontSize: "11px", color: "#d1d5db", marginTop: "4px" }}>
+            <div className="text-[11px] text-[#d1d5db] mt-1">
               Une adresse email par ligne. Vous pouvez ajouter toutes les adresses de votre entreprise.
             </div>
           </div>
 
           {/* Error */}
           {error && (
-            <div style={{
-              padding: "10px 14px", marginBottom: "16px",
-              background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)",
-              borderRadius: "6px", fontSize: "13px", color: "#fca5a5",
-            }}>
+            <div className="px-3.5 py-2.5 mb-4 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.25)] rounded-md text-[13px] text-[#fca5a5]">
               {error}
             </div>
           )}
@@ -933,17 +736,7 @@ export default function VaultDashboardPage() {
           {/* Submit button */}
           <button
             onClick={handleScan}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              padding: "11px 24px", borderRadius: "8px",
-              background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none",
-              color: "#0f0f11", fontSize: "14px", fontWeight: 600,
-              cursor: "pointer", fontFamily: "inherit",
-              transition: "all 0.15s",
-              boxShadow: "0 4px 16px rgba(6,182,212,0.25)",
-            }}
-            onMouseEnter={e => { e.target.style.boxShadow = "0 4px 20px rgba(6,182,212,0.4)"; }}
-            onMouseLeave={e => { e.target.style.boxShadow = "0 4px 16px rgba(6,182,212,0.25)"; }}
+            className="inline-flex items-center gap-2 px-6 py-[11px] rounded-lg bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] border-none text-[#0f0f11] text-sm font-semibold cursor-pointer font-[inherit] transition-all duration-150 shadow-[0_4px_16px_rgba(6,182,212,0.25)] hover:shadow-[0_4px_20px_rgba(6,182,212,0.4)]"
           >
             <ShieldIcon size={16} color="#0f0f11" />
             Lancer le scan
@@ -962,24 +755,16 @@ export default function VaultDashboardPage() {
       {/* Results */}
       {scan && !loading && (
         <div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2">
               <ShieldIcon size={18} color={ACCENT} />
-              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
-                Résultats de l'analyse
+              <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
+                R\u00e9sultats de l'analyse
               </h2>
             </div>
             <button
               onClick={() => { setScan(null); setError(null); }}
-              style={{
-                padding: "7px 14px", borderRadius: "6px",
-                background: "transparent", border: `1px solid ${BORDER_TINT}`,
-                color: ACCENT, fontSize: "12px", fontWeight: 500,
-                cursor: "pointer", fontFamily: "inherit",
-                transition: "all 0.15s",
-              }}
-              onMouseEnter={e => { e.target.style.background = BG_TINT; }}
-              onMouseLeave={e => { e.target.style.background = "transparent"; }}
+              className="px-3.5 py-[7px] rounded-md bg-transparent border border-[rgba(6,182,212,0.2)] text-[#06b6d4] text-xs font-medium cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.08)]"
             >
               Nouveau scan
             </button>

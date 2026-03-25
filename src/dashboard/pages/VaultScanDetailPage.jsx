@@ -8,14 +8,6 @@ const ACCENT = "#06b6d4";
 const BG_TINT = "rgba(6,182,212,0.08)";
 const BORDER_TINT = "rgba(6,182,212,0.2)";
 
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
-
 const PRIORITY_CONFIG = {
   critical: { color: "#ef4444", label: "Critique", bg: "rgba(239,68,68,0.1)", border: "rgba(239,68,68,0.25)" },
   high: { color: "#f97316", label: "Urgent", bg: "rgba(249,115,22,0.1)", border: "rgba(249,115,22,0.25)" },
@@ -53,9 +45,8 @@ const DownloadIcon = ({ size = 15, color = "#fff" }) => (
   </svg>
 );
 
-/* ─── Radar Chart (SVG) ─── */
+/* --- Radar Chart (SVG) --- */
 function RadarChart({ scores }) {
-  // scores: { breaches, rgpd, emails, passwords } — each 0-100
   const labels = [
     { key: "breaches", label: "Fuites" },
     { key: "rgpd", label: "RGPD" },
@@ -72,33 +63,25 @@ function RadarChart({ scores }) {
     return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
   }
 
-  // Grid circles
   const gridLevels = [25, 50, 75, 100];
-
-  // Data polygon
   const dataPoints = labels.map((l, i) => getPoint(i, scores[l.key] || 0));
   const dataPath = dataPoints.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ") + " Z";
 
   return (
     <svg width="260" height="260" viewBox="0 0 260 260">
-      {/* Grid */}
       {gridLevels.map(level => {
         const points = labels.map((_, i) => getPoint(i, level));
         const path = points.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ") + " Z";
         return <path key={level} d={path} fill="none" stroke="#2a2d3a" strokeWidth="1" />;
       })}
-      {/* Axes */}
       {labels.map((_, i) => {
         const p = getPoint(i, 100);
         return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#2a2d3a" strokeWidth="1" />;
       })}
-      {/* Data area */}
       <path d={dataPath} fill="rgba(6,182,212,0.15)" stroke={ACCENT} strokeWidth="2" />
-      {/* Data dots */}
       {dataPoints.map((p, i) => (
         <circle key={i} cx={p.x} cy={p.y} r="4" fill={ACCENT} stroke="#1e2029" strokeWidth="2" />
       ))}
-      {/* Labels */}
       {labels.map((l, i) => {
         const p = getPoint(i, 120);
         const anchor = p.x < cx - 10 ? "end" : p.x > cx + 10 ? "start" : "middle";
@@ -113,7 +96,7 @@ function RadarChart({ scores }) {
   );
 }
 
-/* ─── Score Badge ─── */
+/* --- Score Badge --- */
 function ScoreBadge({ score }) {
   let color = "#ef4444", label = "Critique";
   if (score >= 80) { color = "#22c55e"; label = "Excellent"; }
@@ -121,20 +104,17 @@ function ScoreBadge({ score }) {
   else if (score >= 40) { color = "#f97316"; label = "Insuffisant"; }
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <div style={{
-        width: "80px", height: "80px", borderRadius: "50%",
+    <div className="text-center">
+      <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-2" style={{
         border: `4px solid ${color}`,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        margin: "0 auto 8px",
         background: `${color}10`,
       }}>
-        <span style={{ fontSize: "26px", fontWeight: 700, color }}>{score}</span>
+        <span className="text-[26px] font-bold" style={{ color }}>{score}</span>
       </div>
-      <div style={{
-        display: "inline-flex", padding: "3px 12px", borderRadius: "6px",
-        fontSize: "12px", fontWeight: 600, color,
-        background: `${color}15`, border: `1px solid ${color}30`,
+      <div className="inline-flex px-3 py-[3px] rounded-md text-xs font-semibold" style={{
+        color,
+        background: `${color}15`,
+        border: `1px solid ${color}30`,
       }}>
         {label}
       </div>
@@ -142,7 +122,7 @@ function ScoreBadge({ score }) {
   );
 }
 
-/* ─── Metric Bar ─── */
+/* --- Metric Bar --- */
 function MetricBar({ label, score, icon }) {
   let color = "#ef4444";
   if (score >= 80) color = "#22c55e";
@@ -150,18 +130,18 @@ function MetricBar({ label, score, icon }) {
   else if (score >= 40) color = "#f97316";
 
   return (
-    <div style={{ marginBottom: "12px" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
-        <span style={{ fontSize: "12px", color: "#d1d5db", display: "flex", alignItems: "center", gap: "6px" }}>
+    <div className="mb-3">
+      <div className="flex justify-between items-center mb-1">
+        <span className="text-xs text-[#d1d5db] flex items-center gap-1.5">
           {icon}
           {label}
         </span>
-        <span style={{ fontSize: "12px", fontWeight: 600, color }}>{score}/100</span>
+        <span className="text-xs font-semibold" style={{ color }}>{score}/100</span>
       </div>
-      <div style={{ height: "5px", borderRadius: "3px", background: "#2a2d3a", overflow: "hidden" }}>
-        <div style={{
-          height: "100%", borderRadius: "3px", background: color,
-          width: `${score}%`, transition: "width 0.6s ease-out",
+      <div className="h-[5px] rounded-sm bg-[#2a2d3a] overflow-hidden">
+        <div className="h-full rounded-sm transition-[width] duration-[0.6s] ease-out" style={{
+          background: color,
+          width: `${score}%`,
         }} />
       </div>
     </div>
@@ -196,13 +176,12 @@ export default function VaultScanDetailPage() {
     fetchScan();
   }, [fetchScan]);
 
-  // Fetch security score when scan is loaded
   useEffect(() => {
     if (scan && scan.domain && scan.status === "completed") {
       setLoadingScore(true);
       get(`/api/vault/security-score/${encodeURIComponent(scan.domain)}`)
         .then(data => setSecurityScore(data))
-        .catch(() => { /* silently fail — score is supplementary */ })
+        .catch(() => {})
         .finally(() => setLoadingScore(false));
     }
   }, [scan, get]);
@@ -232,21 +211,12 @@ export default function VaultScanDetailPage() {
   };
 
   return (
-    <div style={{ maxWidth: "860px" }}>
+    <div className="max-w-[860px]">
       {/* Top actions */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px", flexWrap: "wrap" }}>
+      <div className="flex items-center gap-2.5 mb-6 flex-wrap">
         <button
           onClick={() => navigate("/app/vault/history")}
-          style={{
-            display: "inline-flex", alignItems: "center", gap: "6px",
-            padding: "7px 14px", borderRadius: "6px",
-            background: "transparent", border: `1px solid ${BORDER_TINT}`,
-            color: ACCENT, fontSize: "12px", fontWeight: 500,
-            cursor: "pointer", fontFamily: "inherit",
-            transition: "all 0.15s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = BG_TINT; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+          className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md bg-transparent border border-[rgba(6,182,212,0.2)] text-[#06b6d4] text-xs font-medium cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.08)]"
         >
           <ArrowLeftIcon size={14} color={ACCENT} />
           Retour
@@ -256,25 +226,16 @@ export default function VaultScanDetailPage() {
           <button
             onClick={handleDownloadPdf}
             disabled={downloadingPdf}
+            className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md border-none text-white text-xs font-medium font-[inherit] transition-all duration-150"
             style={{
-              display: "inline-flex", alignItems: "center", gap: "6px",
-              padding: "7px 14px", borderRadius: "6px",
               background: downloadingPdf ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
-              border: "none",
-              color: "#fff", fontSize: "12px", fontWeight: 500,
               cursor: downloadingPdf ? "not-allowed" : "pointer",
-              fontFamily: "inherit",
-              transition: "all 0.15s",
               opacity: downloadingPdf ? 0.7 : 1,
             }}
           >
             {downloadingPdf ? (
               <>
-                <div style={{
-                  width: "13px", height: "13px",
-                  border: "2px solid rgba(255,255,255,0.3)", borderTop: "2px solid #fff",
-                  borderRadius: "50%", animation: "vault-spin 0.8s linear infinite",
-                }} />
+                <div className="w-[13px] h-[13px] border-2 border-[rgba(255,255,255,0.3)] border-t-white rounded-full animate-[vault-spin_0.8s_linear_infinite]" />
                 Generation...
               </>
             ) : (
@@ -288,71 +249,51 @@ export default function VaultScanDetailPage() {
       </div>
 
       {/* Header */}
-      <div style={{ marginBottom: "32px" }}>
-        <div style={{
-          width: "40px", height: "3px", borderRadius: "2px",
-          background: "linear-gradient(135deg, #06b6d4, #22d3ee)",
-          marginBottom: "16px"
-        }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
+      <div className="mb-8">
+        <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
+        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
           {scan ? scan.domain : "D\u00e9tails de l'analyse"}
         </h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
+        <p className="text-sm text-[#9ca3af]">
           {scan ? `Analyse du ${formatDate(scan.createdAt || scan.date)}` : "Chargement..."}
         </p>
       </div>
 
       {/* Loading */}
       {loading && (
-        <div style={{ textAlign: "center", padding: "48px 0" }}>
-          <div style={{
-            width: "36px", height: "36px", margin: "0 auto 12px",
-            border: "3px solid rgba(6,182,212,0.2)", borderTop: `3px solid ${ACCENT}`,
-            borderRadius: "50%", animation: "vault-spin 1s linear infinite",
-          }} />
-          <div style={{ fontSize: "13px", color: "#9ca3af" }}>Chargement de l'analyse...</div>
+        <div className="text-center py-12">
+          <div className="w-9 h-9 mx-auto mb-3 border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite]" />
+          <div className="text-[13px] text-[#9ca3af]">Chargement de l'analyse...</div>
           <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 
       {/* Error */}
       {error && (
-        <div style={{
-          padding: "10px 14px", marginBottom: "16px",
-          background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)",
-          borderRadius: "6px", fontSize: "13px", color: "#fca5a5",
-        }}>
+        <div className="px-3.5 py-2.5 mb-4 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.25)] rounded-md text-[13px] text-[#fca5a5]">
           {error}
         </div>
       )}
 
       {/* Security Score Section */}
       {scan && !loading && securityScore && (
-        <div style={{
-          ...cardStyle,
-          border: `1px solid ${BORDER_TINT}`,
-          background: BG_TINT,
-          marginBottom: "28px",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "20px" }}>
+        <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+          <div className="flex items-center gap-2 mb-5">
             <ShieldIcon size={20} color={ACCENT} />
-            <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+            <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
               Score de s\u00e9curit\u00e9 global
             </h2>
           </div>
 
-          <div style={{
-            display: "flex", gap: "24px", alignItems: "center",
-            flexWrap: "wrap", justifyContent: "center",
-          }}>
+          <div className="flex gap-6 items-center flex-wrap justify-center">
             {/* Radar Chart */}
-            <div style={{ flexShrink: 0 }}>
+            <div className="shrink-0">
               <RadarChart scores={securityScore.scores} />
             </div>
 
             {/* Score + Metric Bars */}
-            <div style={{ flex: 1, minWidth: "240px" }}>
-              <div style={{ marginBottom: "20px" }}>
+            <div className="flex-1 min-w-[240px]">
+              <div className="mb-5">
                 <ScoreBadge score={securityScore.overallScore} />
               </div>
               <MetricBar
@@ -376,12 +317,8 @@ export default function VaultScanDetailPage() {
                 icon={<ShieldIcon size={13} color={securityScore.scores.passwords >= 60 ? "#22c55e" : "#ef4444"} />}
               />
               {!securityScore.rgpdAvailable && (
-                <div style={{
-                  marginTop: "8px", padding: "8px 12px",
-                  background: "rgba(234,179,8,0.08)", border: "1px solid rgba(234,179,8,0.2)",
-                  borderRadius: "6px", fontSize: "11px", color: "#eab308",
-                }}>
-                  Score RGPD estim\u00e9 — lancez une analyse RGPD pour un r\u00e9sultat pr\u00e9cis.
+                <div className="mt-2 px-3 py-2 bg-[rgba(234,179,8,0.08)] border border-[rgba(234,179,8,0.2)] rounded-md text-[11px] text-[#eab308]">
+                  Score RGPD estim\u00e9 \u2014 lancez une analyse RGPD pour un r\u00e9sultat pr\u00e9cis.
                 </div>
               )}
             </div>
@@ -389,37 +326,33 @@ export default function VaultScanDetailPage() {
 
           {/* Recommended Actions */}
           {securityScore.actions && securityScore.actions.length > 0 && (
-            <div style={{ marginTop: "24px", borderTop: `1px solid ${BORDER_TINT}`, paddingTop: "20px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+            <div className="mt-6 border-t border-[rgba(6,182,212,0.2)] pt-5">
+              <div className="flex items-center gap-2 mb-3.5">
                 <AlertTriangleIcon size={16} color={ACCENT} />
-                <h3 style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+                <h3 className="text-sm font-semibold text-[#f0f0f3] m-0">
                   Actions recommand\u00e9es
                 </h3>
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div className="flex flex-col gap-2">
                 {securityScore.actions.map((action, i) => {
                   const conf = PRIORITY_CONFIG[action.priority] || PRIORITY_CONFIG.low;
                   return (
-                    <div key={i} style={{
-                      display: "flex", alignItems: "flex-start", gap: "12px",
-                      padding: "12px 16px",
+                    <div key={i} className="flex items-start gap-3 px-4 py-3 rounded-lg" style={{
                       background: conf.bg,
                       border: `1px solid ${conf.border}`,
                       borderLeft: `3px solid ${conf.color}`,
-                      borderRadius: "8px",
                     }}>
-                      <span style={{
-                        fontSize: "10px", fontWeight: 700, color: conf.color,
-                        background: `${conf.color}20`, padding: "2px 8px", borderRadius: "4px",
-                        flexShrink: 0, marginTop: "2px",
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded shrink-0 mt-0.5" style={{
+                        color: conf.color,
+                        background: `${conf.color}20`,
                       }}>
                         {conf.label}
                       </span>
                       <div>
-                        <div style={{ fontSize: "13px", fontWeight: 600, color: "#f0f0f3", marginBottom: "2px" }}>
+                        <div className="text-[13px] font-semibold text-[#f0f0f3] mb-0.5">
                           {action.label}
                         </div>
-                        <div style={{ fontSize: "12px", color: "#9ca3af", lineHeight: 1.5 }}>
+                        <div className="text-xs text-[#9ca3af] leading-normal">
                           {action.description}
                         </div>
                       </div>
@@ -434,16 +367,9 @@ export default function VaultScanDetailPage() {
 
       {/* Loading score indicator */}
       {scan && !loading && loadingScore && (
-        <div style={{
-          ...cardStyle, border: `1px solid ${BORDER_TINT}`,
-          textAlign: "center", padding: "24px", marginBottom: "28px",
-        }}>
-          <div style={{
-            width: "24px", height: "24px", margin: "0 auto 8px",
-            border: "2px solid rgba(6,182,212,0.2)", borderTop: `2px solid ${ACCENT}`,
-            borderRadius: "50%", animation: "vault-spin 1s linear infinite",
-          }} />
-          <div style={{ fontSize: "12px", color: "#9ca3af" }}>Calcul du score de s\u00e9curit\u00e9...</div>
+        <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] text-center p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+          <div className="w-6 h-6 mx-auto mb-2 border-2 border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite]" />
+          <div className="text-xs text-[#9ca3af]">Calcul du score de s\u00e9curit\u00e9...</div>
         </div>
       )}
 

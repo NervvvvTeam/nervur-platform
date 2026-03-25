@@ -275,9 +275,9 @@ export default function SentinelPage() {
   ];
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#0f1117", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }} role="document">
+    <div onMouseMove={handleMouseMove} className="bg-[#0f1117] text-[#FAFAFA] font-[Helvetica_Neue,Helvetica,Arial,sans-serif] min-h-screen relative" role="document">
 
-      <div ref={glowRef} aria-hidden="true" style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
+      <div ref={glowRef} aria-hidden="true" className="fixed w-[150px] h-[150px] rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-screen" style={{ left: -100, top: -100, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0 }} />
 
       <style>{`
         .nav-btn { cursor: pointer; background: transparent; border: 1.5px solid rgba(129,140,248,0.25); color: #a1a1aa; font-weight: 600; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; padding: 8px 22px; font-family: inherit; transition: all 0.3s; }
@@ -292,22 +292,18 @@ export default function SentinelPage() {
       `}</style>
 
       {/* NAV */}
-      <nav aria-label="Navigation principale" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+      <nav aria-label="Navigation principale" className="flex justify-between items-center fixed top-0 left-0 right-0 z-[100] bg-[rgba(9,9,11,0.92)] backdrop-blur-[24px]" style={{ padding: isMobile ? "12px 20px" : "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
+        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} className="w-auto object-contain cursor-pointer" style={{ height: isMobile ? "34px" : "42px" }} />
+        <div className="flex items-center gap-4">
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
         </div>
       </nav>
 
-      <main style={{ padding: isMobile ? "100px 20px 60px" : "160px 48px 80px", maxWidth: "1100px", margin: "0 auto" }}>
+      <main className="mx-auto max-w-[1100px]" style={{ padding: isMobile ? "100px 20px 60px" : "160px 48px 80px" }}>
         {/* RETOUR */}
-        <div style={{ marginBottom: "20px" }}>
-          <button onClick={() => navigate("/")} style={{
-            background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
-            color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
-            fontFamily: "inherit", transition: "all 0.3s",
-          }}
+        <div className="mb-5">
+          <button onClick={() => navigate("/")} className="bg-transparent border border-white/15 rounded-lg text-[#71717A] text-[13px] px-5 py-2 cursor-pointer font-[inherit] transition-all duration-300"
             onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
             onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
             ← Retour
@@ -315,27 +311,27 @@ export default function SentinelPage() {
         </div>
 
         {/* ═══════════════ HERO ═══════════════ */}
-        <div style={{ animation: "fadeInUp 0.8s ease both", marginBottom: "40px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px", flexWrap: "wrap" }}>
+        <div className="mb-10" style={{ animation: "fadeInUp 0.8s ease both" }}>
+          <div className="flex items-center gap-3 mb-5 flex-wrap">
             <svg aria-hidden="true" width="32" height="32" viewBox="0 0 26 26" fill="none">
               <defs><linearGradient id="hero-sentinel" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#fca5a5" /><stop offset="100%" stopColor="#ef4444" /></linearGradient></defs>
               <path d="M13 2L4 6v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z" fill="none" stroke="url(#hero-sentinel)" strokeWidth="1.5" />
               <path d="M9 13l2.5 2.5L17 10" fill="none" stroke="url(#hero-sentinel)" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-            <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "#ef4444", fontWeight: 700, padding: "4px 12px", border: "1px solid rgba(239,68,68,0.3)", borderRadius: "2px" }}>E-RÉPUTATION</span>
-            <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "#10b981", fontWeight: 700, padding: "4px 12px", border: "1px solid rgba(16,185,129,0.3)", borderRadius: "2px", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", animation: "livePulse 2s ease infinite" }} />
+            <span className="text-[10px] tracking-[3px] uppercase text-[#ef4444] font-bold py-1 px-3 border border-[rgba(239,68,68,0.3)]">E-RÉPUTATION</span>
+            <span className="text-[10px] tracking-[3px] uppercase text-[#10b981] font-bold py-1 px-3 border border-[rgba(16,185,129,0.3)] flex items-center gap-1.5">
+              <span className="w-[5px] h-[5px] rounded-full bg-[#10b981]" style={{ animation: "livePulse 2s ease infinite" }} />
               VEILLE MARCHÉ
             </span>
           </div>
-          <h1 style={{ fontSize: isMobile ? "36px" : "clamp(42px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-2px", lineHeight: 1.1, marginBottom: "20px" }}>SENTINEL</h1>
-          <p style={{ fontSize: "18px", color: "#71717A", lineHeight: 1.8, maxWidth: "680px" }}>
+          <h1 className="font-extrabold tracking-[-2px] leading-[1.1] mb-5" style={{ fontSize: isMobile ? "36px" : "clamp(42px, 5vw, 64px)" }}>SENTINEL</h1>
+          <p className="text-lg text-[#71717A] leading-[1.8] max-w-[680px]">
             Votre bouclier complet. Sentinel surveille votre e-réputation, scanne vos concurrents et détecte les opportunités de votre marché — le tout propulsé par l'IA.
           </p>
         </div>
 
         {/* ═══════════════ STATS BAR ═══════════════ */}
-        <section aria-label="Statistiques clés" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(6, 1fr)", gap: "12px", marginBottom: "32px", animation: "fadeInUp 0.8s ease 0.2s both" }}>
+        <section aria-label="Statistiques clés" className="grid gap-3 mb-8" style={{ gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(6, 1fr)", animation: "fadeInUp 0.8s ease 0.2s both" }}>
           {[
             { label: "Avis analysés / mois", value: "847", color: V },
             { label: "Temps de réponse IA", value: "< 2s", color: V },
@@ -344,112 +340,110 @@ export default function SentinelPage() {
             { label: "Sources actives", value: "156", color: "#60a5fa" },
             { label: "Avis interceptés", value: "94%", color: "#fbbf24" },
           ].map((s, i) => (
-            <div key={i} style={{ padding: "16px 12px", border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.4)", textAlign: "center" }}>
-              <div style={{ fontSize: "20px", fontWeight: 800, color: s.color, marginBottom: "4px" }}>{s.value}</div>
-              <div style={{ fontSize: "8px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#52525B" }}>{s.label}</div>
+            <div key={i} className="py-4 px-3 bg-[rgba(24,24,27,0.4)] text-center" style={{ border: `1px solid ${VG(0.1)}` }}>
+              <div className="text-xl font-extrabold mb-1" style={{ color: s.color }}>{s.value}</div>
+              <div className="text-[8px] tracking-[1.5px] uppercase text-[#52525B]">{s.label}</div>
             </div>
           ))}
         </section>
 
         {/* ═══════════════ TABS ═══════════════ */}
-        <div style={{ display: "flex", gap: "8px", marginBottom: "32px", animation: "fadeInUp 0.8s ease 0.3s both", flexWrap: "wrap" }}>
+        <div className="flex gap-2 mb-8 flex-wrap" style={{ animation: "fadeInUp 0.8s ease 0.3s both" }}>
           {TABS.map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{
-              padding: "10px 24px", fontSize: "11px", letterSpacing: "1.5px",
-              textTransform: "uppercase", fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
+            <button key={tab.key} onClick={() => setActiveTab(tab.key)} className="text-[11px] tracking-[1.5px] uppercase font-bold cursor-pointer font-[inherit] transition-all duration-300" style={{
+              padding: "10px 24px",
               background: activeTab === tab.key ? `${tab.color}20` : "transparent",
               border: `1px solid ${activeTab === tab.key ? `${tab.color}60` : VG(0.1)}`,
               color: activeTab === tab.key ? tab.color : "#52525B",
-              transition: "all 0.3s",
             }}>{tab.label}</button>
           ))}
         </div>
 
         {/* ═══════════════ TAB: RÉPUTATION ═══════════════ */}
         {activeTab === "reputation" && (
-          <section aria-label="Démonstration e-réputation" style={{ animation: "fadeInUp 0.6s ease both", marginBottom: "80px" }}>
-            <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.5)", borderRadius: "12px", overflow: "hidden", backdropFilter: "blur(12px)" }}>
+          <section aria-label="Démonstration e-réputation" className="mb-20" style={{ animation: "fadeInUp 0.6s ease both" }}>
+            <div className="rounded-xl overflow-hidden backdrop-blur-[12px]" style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.5)" }}>
 
               {/* Dashboard header */}
-              <div style={{ padding: "14px 20px", borderBottom: `1px solid ${VG(0.08)}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
-                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FEBC2E" }} />
-                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
-                  <span style={{ fontSize: "11px", color: "#52525B", marginLeft: "12px", letterSpacing: "1px" }}>sentinel-dashboard.nervur.com</span>
+              <div className="flex items-center justify-between" style={{ padding: "14px 20px", borderBottom: `1px solid ${VG(0.08)}` }}>
+                <div className="flex gap-1.5 items-center">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                  <span className="text-[11px] text-[#52525B] ml-3 tracking-[1px]">sentinel-dashboard.nervur.com</span>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#4ADE80", animation: "pulseGlow 2s ease infinite" }} />
-                  <span style={{ fontSize: "9px", color: "#4ADE80", letterSpacing: "1px" }}>LIVE</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" style={{ animation: "pulseGlow 2s ease infinite" }} />
+                  <span className="text-[9px] text-[#4ADE80] tracking-[1px]">LIVE</span>
                 </div>
               </div>
 
               <div style={{ padding: isMobile ? "20px" : "32px" }}>
 
                 {/* Score de réputation */}
-                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: "16px", marginBottom: "28px" }}>
-                  <div style={{ padding: "16px", border: `1px solid ${VG(0.08)}`, background: VG(0.02), borderRadius: "8px", textAlign: "center" }}>
-                    <div style={{ fontSize: "32px", fontWeight: 800, color: "#4ADE80" }}>4.7</div>
-                    <div style={{ fontSize: "9px", color: "#52525B", letterSpacing: "1.5px", textTransform: "uppercase" }}>Score global</div>
-                    <div style={{ marginTop: "6px", display: "flex", justifyContent: "center", gap: "2px" }}>
-                      {[1,2,3,4,5].map(s => <span key={s} style={{ color: s <= 4 ? "#fbbf24" : VG(0.2), fontSize: "14px" }}>★</span>)}
+                <div className="grid gap-4 mb-7" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr" }}>
+                  <div className="p-4 rounded-lg text-center" style={{ border: `1px solid ${VG(0.08)}`, background: VG(0.02) }}>
+                    <div className="text-[32px] font-extrabold text-[#4ADE80]">4.7</div>
+                    <div className="text-[9px] text-[#52525B] tracking-[1.5px] uppercase">Score global</div>
+                    <div className="mt-1.5 flex justify-center gap-0.5">
+                      {[1,2,3,4,5].map(s => <span key={s} className="text-sm" style={{ color: s <= 4 ? "#fbbf24" : VG(0.2) }}>★</span>)}
                     </div>
                   </div>
-                  <div style={{ padding: "16px", border: `1px solid ${VG(0.08)}`, background: VG(0.02), borderRadius: "8px", textAlign: "center" }}>
-                    <div style={{ fontSize: "32px", fontWeight: 800, color: "#ef4444" }}>3</div>
-                    <div style={{ fontSize: "9px", color: "#52525B", letterSpacing: "1.5px", textTransform: "uppercase" }}>Alertes cette semaine</div>
-                    <div style={{ marginTop: "8px", display: "flex", justifyContent: "center", gap: "4px" }}>
-                      {["negative","negative","mixed"].map((s,i) => <span key={i} style={{ width: 8, height: 8, borderRadius: "50%", background: sentimentColor(s), animation: "pulseDot 2s ease infinite", animationDelay: `${i*0.3}s` }} />)}
+                  <div className="p-4 rounded-lg text-center" style={{ border: `1px solid ${VG(0.08)}`, background: VG(0.02) }}>
+                    <div className="text-[32px] font-extrabold text-[#ef4444]">3</div>
+                    <div className="text-[9px] text-[#52525B] tracking-[1.5px] uppercase">Alertes cette semaine</div>
+                    <div className="mt-2 flex justify-center gap-1">
+                      {["negative","negative","mixed"].map((s,i) => <span key={i} className="w-2 h-2 rounded-full" style={{ background: sentimentColor(s), animation: "pulseDot 2s ease infinite", animationDelay: `${i*0.3}s` }} />)}
                     </div>
                   </div>
-                  <div style={{ padding: "16px", border: `1px solid ${VG(0.08)}`, background: VG(0.02), borderRadius: "8px", textAlign: "center" }}>
-                    <div style={{ fontSize: "32px", fontWeight: 800, color: V }}>+12%</div>
-                    <div style={{ fontSize: "9px", color: "#52525B", letterSpacing: "1.5px", textTransform: "uppercase" }}>Évolution ce mois</div>
-                    <div style={{ marginTop: "8px", height: "16px", display: "flex", alignItems: "end", justifyContent: "center", gap: "3px" }}>
-                      {[30,45,35,55,60,50,70,65,80,75,85,90].map((h,i) => <div key={i} style={{ width: "4px", height: `${h*0.16}px`, background: `rgba(74,222,128,${0.3+i*0.05})`, borderRadius: "1px" }} />)}
+                  <div className="p-4 rounded-lg text-center" style={{ border: `1px solid ${VG(0.08)}`, background: VG(0.02) }}>
+                    <div className="text-[32px] font-extrabold text-white">+12%</div>
+                    <div className="text-[9px] text-[#52525B] tracking-[1.5px] uppercase">Évolution ce mois</div>
+                    <div className="mt-2 h-4 flex items-end justify-center gap-[3px]">
+                      {[30,45,35,55,60,50,70,65,80,75,85,90].map((h,i) => <div key={i} className="w-1 rounded-[1px]" style={{ height: `${h*0.16}px`, background: `rgba(74,222,128,${0.3+i*0.05})` }} />)}
                     </div>
                   </div>
                 </div>
 
                 {/* Reviews feed */}
-                <div style={{ marginBottom: "28px" }}>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px" }}>
-                    <h3 style={{ fontSize: "12px", fontWeight: 700, color: V3, letterSpacing: "1.5px", textTransform: "uppercase" }}>Flux d'avis en temps réel</h3>
-                    <span style={{ fontSize: "9px", color: "#52525B", letterSpacing: "1px" }}>{FAKE_REVIEWS.length} NOUVEAUX</span>
+                <div className="mb-7">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <h3 className="text-xs font-bold text-[#A1A1AA] tracking-[1.5px] uppercase">Flux d'avis en temps réel</h3>
+                    <span className="text-[9px] text-[#52525B] tracking-[1px]">{FAKE_REVIEWS.length} NOUVEAUX</span>
                   </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                  <div className="flex flex-col gap-2.5">
                     {FAKE_REVIEWS.map((review, i) => (
                       <div key={i} onClick={() => { setSelectedReview(i); setUserReview(review.text); }}
-                        style={{
-                          padding: "14px 18px", border: `1px solid ${selectedReview === i ? VG(0.3) : VG(0.08)}`,
+                        className="rounded-lg cursor-pointer transition-all duration-300" style={{
+                          padding: "14px 18px",
+                          border: `1px solid ${selectedReview === i ? VG(0.3) : VG(0.08)}`,
                           background: selectedReview === i ? VG(0.04) : "transparent",
-                          borderRadius: "8px", cursor: "pointer", transition: "all 0.3s ease",
                           borderLeft: `3px solid ${sentimentColor(review.sentiment)}`,
                         }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px", flexWrap: "wrap", gap: "6px" }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <div style={{ display: "flex", gap: "1px" }}>
+                        <div className="flex justify-between items-center mb-1.5 flex-wrap gap-1.5">
+                          <div className="flex items-center gap-2">
+                            <div className="flex gap-[1px]">
                               {[1,2,3,4,5].map(s => (
-                                <span key={s} style={{ color: s <= review.stars ? "#fbbf24" : VG(0.15), fontSize: "11px" }}>★</span>
+                                <span key={s} className="text-[11px]" style={{ color: s <= review.stars ? "#fbbf24" : VG(0.15) }}>★</span>
                               ))}
                             </div>
-                            <span style={{ fontSize: "12px", fontWeight: 600, color: V }}>{review.name}</span>
-                            <span style={{ fontSize: "8px", letterSpacing: "1px", fontWeight: 700, color: sentimentColor(review.sentiment), padding: "2px 6px", border: `1px solid ${sentimentColor(review.sentiment)}40`, borderRadius: "2px" }}>{sentimentLabel(review.sentiment)}</span>
+                            <span className="text-xs font-semibold text-white">{review.name}</span>
+                            <span className="text-[8px] tracking-[1px] font-bold rounded-[2px]" style={{ color: sentimentColor(review.sentiment), padding: "2px 6px", border: `1px solid ${sentimentColor(review.sentiment)}40` }}>{sentimentLabel(review.sentiment)}</span>
                           </div>
-                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <span style={{ fontSize: "9px", color: "#52525B", letterSpacing: "0.5px" }}>{review.source}</span>
-                            <span style={{ fontSize: "9px", color: "#3f3f46" }}>{review.date}</span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[9px] text-[#52525B] tracking-[0.5px]">{review.source}</span>
+                            <span className="text-[9px] text-[#3f3f46]">{review.date}</span>
                           </div>
                         </div>
-                        <p style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.6, margin: 0 }}>{review.text}</p>
+                        <p className="text-[13px] text-[#71717A] leading-[1.6] m-0">{review.text}</p>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Interactive zone */}
-                <div style={{ padding: isMobile ? "20px" : "24px", border: `1px solid ${VG(0.12)}`, background: "rgba(239,68,68,0.02)", borderRadius: "10px" }}>
-                  <h3 style={{ fontSize: "12px", fontWeight: 700, marginBottom: "14px", color: V, display: "flex", alignItems: "center", gap: "8px", letterSpacing: "1px", textTransform: "uppercase" }}>
+                <div className="rounded-[10px]" style={{ padding: isMobile ? "20px" : "24px", border: `1px solid ${VG(0.12)}`, background: "rgba(239,68,68,0.02)" }}>
+                  <h3 className="text-xs font-bold mb-3.5 text-white flex items-center gap-2 tracking-[1px] uppercase">
                     <svg aria-hidden="true" width="14" height="14" viewBox="0 0 26 26" fill="none">
                       <path d="M13 2L4 6v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4z" fill="none" stroke="#ef4444" strokeWidth="1.5" />
                     </svg>
@@ -459,26 +453,21 @@ export default function SentinelPage() {
                     value={userReview}
                     onChange={e => setUserReview(e.target.value)}
                     placeholder="Collez un avis client ici (ou cliquez sur un avis ci-dessus)..."
-                    style={{
-                      width: "100%", minHeight: "70px", padding: "14px 16px",
+                    className="w-full min-h-[70px] rounded-[6px] text-white text-sm leading-[1.6] resize-y outline-none font-[inherit] transition-[border-color] duration-300 box-border" style={{
+                      padding: "14px 16px",
                       background: VG(0.03), border: `1px solid ${VG(0.1)}`,
-                      borderRadius: "6px", color: V, fontSize: "14px", lineHeight: 1.6,
-                      resize: "vertical", outline: "none", fontFamily: "inherit",
-                      transition: "border-color 0.3s", boxSizing: "border-box",
                     }}
                     onFocus={e => e.target.style.borderColor = VG(0.25)}
                     onBlur={e => e.target.style.borderColor = VG(0.1)}
                   />
                   <button onClick={() => generateResponse(userReview)}
                     disabled={isGenerating || !userReview.trim()}
-                    style={{
-                      marginTop: "12px", padding: "12px 28px",
+                    className="mt-3 font-bold text-xs tracking-[1.5px] uppercase font-[inherit] transition-all duration-300" style={{
+                      padding: "12px 28px",
                       background: userReview.trim() ? "linear-gradient(135deg, #ef4444, #dc2626)" : VG(0.06),
-                      border: "none", color: userReview.trim() ? V : "#52525B", fontWeight: 700, fontSize: "12px",
-                      letterSpacing: "1.5px", textTransform: "uppercase",
+                      border: "none", color: userReview.trim() ? V : "#52525B",
                       cursor: isGenerating || !userReview.trim() ? "not-allowed" : "pointer",
-                      transition: "all 0.3s ease", opacity: !userReview.trim() ? 0.4 : 1,
-                      fontFamily: "inherit",
+                      opacity: !userReview.trim() ? 0.4 : 1,
                     }}>
                     {isGenerating ? "Analyse IA en cours..." : "Analyser & répondre →"}
                   </button>
@@ -486,14 +475,14 @@ export default function SentinelPage() {
 
                 {/* Generated response */}
                 {displayedText && (
-                  <div style={{ marginTop: "20px", padding: isMobile ? "20px" : "24px", border: "1px solid rgba(239,68,68,0.2)", background: "rgba(239,68,68,0.03)", borderRadius: "10px", animation: "fadeInUp 0.4s ease both" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
-                      <span style={{ fontSize: "9px", letterSpacing: "1.5px", fontWeight: 700, color: "#ef4444", padding: "3px 8px", border: "1px solid rgba(239,68,68,0.3)" }}>IA SENTINEL</span>
-                      <span style={{ fontSize: "10px", color: "#52525B" }}>Réponse suggérée — prête à publier</span>
+                  <div className="mt-5 border border-[rgba(239,68,68,0.2)] bg-[rgba(239,68,68,0.03)] rounded-[10px]" style={{ padding: isMobile ? "20px" : "24px", animation: "fadeInUp 0.4s ease both" }}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-[9px] tracking-[1.5px] font-bold text-[#ef4444] border border-[rgba(239,68,68,0.3)]" style={{ padding: "3px 8px" }}>IA SENTINEL</span>
+                      <span className="text-[10px] text-[#52525B]">Réponse suggérée — prête à publier</span>
                     </div>
-                    <p style={{ fontSize: "14px", color: "#E4E4E7", lineHeight: 1.8, whiteSpace: "pre-wrap", margin: 0 }}>
+                    <p className="text-sm text-[#E4E4E7] leading-[1.8] whitespace-pre-wrap m-0">
                       {displayedText}
-                      {isGenerating && <span style={{ display: "inline-block", width: "2px", height: "14px", background: "#ef4444", marginLeft: "2px", animation: "pulseDot 0.8s ease infinite" }} />}
+                      {isGenerating && <span className="inline-block w-0.5 h-3.5 bg-[#ef4444] ml-0.5" style={{ animation: "pulseDot 0.8s ease infinite" }} />}
                     </p>
                   </div>
                 )}
@@ -504,40 +493,40 @@ export default function SentinelPage() {
 
         {/* ═══════════════ TAB: VEILLE CONCURRENCE ═══════════════ */}
         {activeTab === "veille" && (
-          <section aria-label="Veille concurrentielle" style={{ animation: "fadeInUp 0.6s ease both", marginBottom: "80px" }}>
+          <section aria-label="Veille concurrentielle" className="mb-20" style={{ animation: "fadeInUp 0.6s ease both" }}>
 
             {/* Signal filters */}
-            <div style={{ display: "flex", gap: "8px", marginBottom: "20px", flexWrap: "wrap" }}>
+            <div className="flex gap-2 mb-5 flex-wrap">
               {SIGNAL_FILTERS.map(f => (
-                <button key={f} onClick={() => setSignalFilter(f)} style={{
-                  padding: "6px 16px", fontSize: "11px", letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
+                <button key={f} onClick={() => setSignalFilter(f)} className="text-[11px] tracking-[1px] cursor-pointer font-[inherit] transition-all duration-300" style={{
+                  padding: "6px 16px",
                   background: signalFilter === f ? "rgba(16,185,129,0.15)" : "transparent",
                   border: `1px solid ${signalFilter === f ? "rgba(16,185,129,0.4)" : VG(0.1)}`,
-                  color: signalFilter === f ? "#6ee7b7" : "#52525B", transition: "all 0.3s"
+                  color: signalFilter === f ? "#6ee7b7" : "#52525B",
                 }}>{f}</button>
               ))}
             </div>
 
             {/* Signal feed */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "40px" }}>
+            <div className="flex flex-col gap-2 mb-10">
               {filteredSignals.map((s, i) => {
                 const cfg = TYPE_CONFIG[s.type];
                 const isVisible = i < visibleSignals;
                 return (
                   <div key={s.id} onClick={() => setExpandedSignal(expandedSignal === s.id ? null : s.id)}
-                    style={{
-                      border: `1px solid ${expandedSignal === s.id ? `${cfg.color}40` : VG(0.08)}`, background: "rgba(24,24,27,0.4)",
-                      padding: "16px 20px", cursor: "pointer", transition: "all 0.4s",
+                    className="bg-[rgba(24,24,27,0.4)] cursor-pointer transition-all duration-[400ms]" style={{
+                      border: `1px solid ${expandedSignal === s.id ? `${cfg.color}40` : VG(0.08)}`,
+                      padding: "16px 20px",
                       opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(12px)",
                       borderLeft: `3px solid ${cfg.color}`
                     }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px", flex: 1, minWidth: 0 }}>
-                        <span style={{ fontSize: "16px", color: cfg.color }}>{cfg.icon}</span>
-                        <div style={{ minWidth: 0 }}>
-                          <div style={{ fontSize: "14px", fontWeight: 700, marginBottom: "2px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{s.title}</div>
-                          <div style={{ fontSize: "10px", color: "#52525B", display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
-                            <span style={{ color: cfg.color, fontWeight: 600 }}>{cfg.label}</span>
+                    <div className="flex justify-between items-center gap-3 flex-wrap">
+                      <div className="flex items-center gap-2.5 flex-1 min-w-0">
+                        <span className="text-base" style={{ color: cfg.color }}>{cfg.icon}</span>
+                        <div className="min-w-0">
+                          <div className="text-sm font-bold mb-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{s.title}</div>
+                          <div className="text-[10px] text-[#52525B] flex gap-2 items-center flex-wrap">
+                            <span style={{ color: cfg.color }} className="font-semibold">{cfg.label}</span>
                             <span>·</span>
                             <span>{s.source}</span>
                             <span>·</span>
@@ -545,16 +534,16 @@ export default function SentinelPage() {
                           </div>
                         </div>
                       </div>
-                      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <div className="flex items-center gap-2">
                         {!isMobile && s.tags.map(t => (
-                          <span key={t} style={{ fontSize: "8px", padding: "2px 8px", border: `1px solid ${VG(0.1)}`, color: "#52525B", letterSpacing: "0.5px" }}>{t}</span>
+                          <span key={t} className="text-[8px] text-[#52525B] tracking-[0.5px]" style={{ padding: "2px 8px", border: `1px solid ${VG(0.1)}` }}>{t}</span>
                         ))}
-                        <span style={{ fontSize: "13px", fontWeight: 800, color: s.score >= 80 ? "#4ADE80" : s.score >= 60 ? "#fbbf24" : "#71717A", minWidth: "36px", textAlign: "right" }}>{s.score}</span>
+                        <span className="text-[13px] font-extrabold min-w-[36px] text-right" style={{ color: s.score >= 80 ? "#4ADE80" : s.score >= 60 ? "#fbbf24" : "#71717A" }}>{s.score}</span>
                       </div>
                     </div>
                     {expandedSignal === s.id && (
-                      <div style={{ marginTop: "12px", paddingTop: "12px", borderTop: `1px solid ${VG(0.06)}` }}>
-                        <p style={{ fontSize: "13px", color: V3, lineHeight: 1.8 }}>{s.detail}</p>
+                      <div className="mt-3 pt-3" style={{ borderTop: `1px solid ${VG(0.06)}` }}>
+                        <p className="text-[13px] text-[#A1A1AA] leading-[1.8]">{s.detail}</p>
                       </div>
                     )}
                   </div>
@@ -563,97 +552,102 @@ export default function SentinelPage() {
             </div>
 
             {/* Monitor tool */}
-            <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.4)", padding: isMobile ? "24px" : "32px" }}>
-              <div style={{ fontSize: "9px", letterSpacing: "2px", color: "#10b981", marginBottom: "16px" }}>SCANNER UN CONCURRENT</div>
-              <div style={{ display: "flex", gap: "10px", flexDirection: isMobile ? "column" : "row" }}>
+            <div className="bg-[rgba(24,24,27,0.4)]" style={{ border: `1px solid ${VG(0.1)}`, padding: isMobile ? "24px" : "32px" }}>
+              <div className="text-[9px] tracking-[2px] text-[#10b981] mb-4">SCANNER UN CONCURRENT</div>
+              <div className="flex gap-2.5" style={{ flexDirection: isMobile ? "column" : "row" }}>
                 <input value={monitorUrl} onChange={e => setMonitorUrl(e.target.value)} placeholder="Entrez un nom de domaine (ex: concurrent.com)" aria-label="URL du concurrent"
-                  style={{ flex: 1, padding: "12px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "14px", fontFamily: "inherit", outline: "none" }} />
+                  className="flex-1 text-white text-sm font-[inherit] outline-none" style={{ padding: "12px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}` }} />
                 <button onClick={startMonitor} disabled={monitoring || !monitorUrl}
-                  style={{ padding: "12px 24px", background: !monitorUrl ? VG(0.06) : "linear-gradient(135deg, #10b981, #059669)", border: "none", color: !monitorUrl ? "#52525B" : V, fontWeight: 700, fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: !monitorUrl ? "not-allowed" : "pointer", fontFamily: "inherit", whiteSpace: "nowrap" }}>
+                  className="font-bold text-[11px] tracking-[1.5px] uppercase font-[inherit] whitespace-nowrap" style={{
+                    padding: "12px 24px",
+                    background: !monitorUrl ? VG(0.06) : "linear-gradient(135deg, #10b981, #059669)",
+                    border: "none", color: !monitorUrl ? "#52525B" : V,
+                    cursor: !monitorUrl ? "not-allowed" : "pointer",
+                  }}>
                   {monitoring ? "Scan..." : "Analyser"}
                 </button>
               </div>
               {monitoring && (
-                <div style={{ marginTop: "16px", height: "3px", background: VG(0.06), overflow: "hidden", position: "relative" }}>
-                  <div style={{ position: "absolute", width: "30%", height: "100%", background: "linear-gradient(90deg, transparent, #10b981, transparent)", animation: "scanSweep 1.5s ease infinite" }} />
+                <div className="mt-4 h-[3px] overflow-hidden relative" style={{ background: VG(0.06) }}>
+                  <div className="absolute w-[30%] h-full" style={{ background: "linear-gradient(90deg, transparent, #10b981, transparent)", animation: "scanSweep 1.5s ease infinite" }} />
                 </div>
               )}
               {monitorError && !monitoring && (
-                <div style={{ marginTop: "20px", animation: "fadeInUp 0.4s ease both", textAlign: "center", padding: "20px" }}>
-                  <div style={{ display: "inline-block", padding: "20px 32px", border: "1px solid rgba(239,68,68,0.3)", background: "rgba(239,68,68,0.05)", borderRadius: "8px" }}>
-                    <p style={{ fontSize: "14px", color: "#fca5a5", marginBottom: "8px", fontWeight: 600 }}>Analyse impossible</p>
-                    <p style={{ fontSize: "12px", color: "#71717A", lineHeight: 1.6, maxWidth: "400px" }}>{monitorError}</p>
-                    <button onClick={() => { setMonitorError(null); setMonitorUrl(""); }} style={{ marginTop: "16px", padding: "8px 20px", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#a1a1aa", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>Réessayer</button>
+                <div className="mt-5 text-center p-5" style={{ animation: "fadeInUp 0.4s ease both" }}>
+                  <div className="inline-block border border-[rgba(239,68,68,0.3)] bg-[rgba(239,68,68,0.05)] rounded-lg" style={{ padding: "20px 32px" }}>
+                    <p className="text-sm text-[#fca5a5] mb-2 font-semibold">Analyse impossible</p>
+                    <p className="text-xs text-[#71717A] leading-[1.6] max-w-[400px]">{monitorError}</p>
+                    <button onClick={() => { setMonitorError(null); setMonitorUrl(""); }} className="mt-4 bg-transparent border border-white/15 text-[#a1a1aa] text-[11px] tracking-[1.5px] uppercase cursor-pointer font-[inherit]" style={{ padding: "8px 20px" }}>Réessayer</button>
                   </div>
                 </div>
               )}
 
               {monitorResults && (
-                <div style={{ marginTop: "20px" }}>
-                  <div style={{ fontSize: "12px", fontWeight: 700, marginBottom: "16px" }}>Résultats pour <span style={{ color: "#10b981" }}>{monitorResults.domain}</span>
-                    {monitorResults.realData && <span style={{ marginLeft: "8px", fontSize: "8px", padding: "2px 6px", background: "rgba(74,222,128,0.15)", border: "1px solid rgba(74,222,128,0.3)", color: "#4ADE80", letterSpacing: "1px" }}>DONNÉES RÉELLES</span>}
+                <div className="mt-5">
+                  <div className="text-xs font-bold mb-4">Résultats pour <span className="text-[#10b981]">{monitorResults.domain}</span>
+                    {monitorResults.realData && <span className="ml-2 text-[8px] tracking-[1px] text-[#4ADE80] bg-[rgba(74,222,128,0.15)] border border-[rgba(74,222,128,0.3)]" style={{ padding: "2px 6px" }}>DONNÉES RÉELLES</span>}
                   </div>
 
                   {monitorResults.rawData && (
-                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr", gap: "8px", marginBottom: "16px" }}>
-                      <div style={{ padding: "10px", background: VG(0.03), border: `1px solid ${VG(0.06)}`, textAlign: "center" }}>
-                        <div style={{ fontSize: "16px", fontWeight: 800, color: monitorResults.rawData.loadTime < 2000 ? "#4ADE80" : monitorResults.rawData.loadTime < 4000 ? "#fbbf24" : "#ef4444" }}>{monitorResults.rawData.loadTime}ms</div>
-                        <div style={{ fontSize: "8px", color: "#52525B", letterSpacing: "1px", marginTop: "2px" }}>CHARGEMENT</div>
+                    <div className="grid gap-2 mb-4" style={{ gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr" }}>
+                      <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
+                        <div className="text-base font-extrabold" style={{ color: monitorResults.rawData.loadTime < 2000 ? "#4ADE80" : monitorResults.rawData.loadTime < 4000 ? "#fbbf24" : "#ef4444" }}>{monitorResults.rawData.loadTime}ms</div>
+                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">CHARGEMENT</div>
                       </div>
-                      <div style={{ padding: "10px", background: VG(0.03), border: `1px solid ${VG(0.06)}`, textAlign: "center" }}>
-                        <div style={{ fontSize: "16px", fontWeight: 800, color: monitorResults.rawData.hasSSL ? "#4ADE80" : "#ef4444" }}>{monitorResults.rawData.hasSSL ? "HTTPS" : "HTTP"}</div>
-                        <div style={{ fontSize: "8px", color: "#52525B", letterSpacing: "1px", marginTop: "2px" }}>SÉCURITÉ</div>
+                      <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
+                        <div className="text-base font-extrabold" style={{ color: monitorResults.rawData.hasSSL ? "#4ADE80" : "#ef4444" }}>{monitorResults.rawData.hasSSL ? "HTTPS" : "HTTP"}</div>
+                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">SÉCURITÉ</div>
                       </div>
-                      <div style={{ padding: "10px", background: VG(0.03), border: `1px solid ${VG(0.06)}`, textAlign: "center" }}>
-                        <div style={{ fontSize: "16px", fontWeight: 800, color: V }}>{monitorResults.rawData.links?.internal || 0}</div>
-                        <div style={{ fontSize: "8px", color: "#52525B", letterSpacing: "1px", marginTop: "2px" }}>LIENS INT.</div>
+                      <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
+                        <div className="text-base font-extrabold text-white">{monitorResults.rawData.links?.internal || 0}</div>
+                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">LIENS INT.</div>
                       </div>
-                      <div style={{ padding: "10px", background: VG(0.03), border: `1px solid ${VG(0.06)}`, textAlign: "center" }}>
-                        <div style={{ fontSize: "16px", fontWeight: 800, color: V }}>{(monitorResults.rawData.socialLinks || []).length}</div>
-                        <div style={{ fontSize: "8px", color: "#52525B", letterSpacing: "1px", marginTop: "2px" }}>RÉSEAUX</div>
+                      <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
+                        <div className="text-base font-extrabold text-white">{(monitorResults.rawData.socialLinks || []).length}</div>
+                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">RÉSEAUX</div>
                       </div>
                     </div>
                   )}
 
                   {monitorResults.techStack && (
-                    <div style={{ marginBottom: "16px", padding: "10px 14px", background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
-                      <div style={{ fontSize: "9px", color: "#52525B", letterSpacing: "1px", marginBottom: "6px" }}>STACK TECHNIQUE DÉTECTÉE</div>
-                      <div style={{ fontSize: "12px", color: V2, lineHeight: 1.6 }}>{monitorResults.techStack}</div>
+                    <div className="mb-4" style={{ padding: "10px 14px", background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
+                      <div className="text-[9px] text-[#52525B] tracking-[1px] mb-1.5">STACK TECHNIQUE DÉTECTÉE</div>
+                      <div className="text-xs text-[#D4D4D8] leading-[1.6]">{monitorResults.techStack}</div>
                     </div>
                   )}
 
                   {(monitorResults.strengths?.length > 0 || monitorResults.weaknesses?.length > 0) && (
-                    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "8px", marginBottom: "16px" }}>
+                    <div className="grid gap-2 mb-4" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr" }}>
                       {monitorResults.strengths?.length > 0 && (
-                        <div style={{ padding: "12px", background: "rgba(74,222,128,0.05)", border: "1px solid rgba(74,222,128,0.15)" }}>
-                          <div style={{ fontSize: "9px", color: "#4ADE80", letterSpacing: "1px", marginBottom: "8px" }}>POINTS FORTS</div>
-                          {monitorResults.strengths.map((s, i) => <div key={i} style={{ fontSize: "11px", color: V3, marginBottom: "4px", lineHeight: 1.5 }}>+ {s}</div>)}
+                        <div className="p-3 bg-[rgba(74,222,128,0.05)] border border-[rgba(74,222,128,0.15)]">
+                          <div className="text-[9px] text-[#4ADE80] tracking-[1px] mb-2">POINTS FORTS</div>
+                          {monitorResults.strengths.map((s, i) => <div key={i} className="text-[11px] text-[#A1A1AA] mb-1 leading-[1.5]">+ {s}</div>)}
                         </div>
                       )}
                       {monitorResults.weaknesses?.length > 0 && (
-                        <div style={{ padding: "12px", background: "rgba(239,68,68,0.05)", border: "1px solid rgba(239,68,68,0.15)" }}>
-                          <div style={{ fontSize: "9px", color: "#ef4444", letterSpacing: "1px", marginBottom: "8px" }}>FAIBLESSES</div>
-                          {monitorResults.weaknesses.map((w, i) => <div key={i} style={{ fontSize: "11px", color: V3, marginBottom: "4px", lineHeight: 1.5 }}>- {w}</div>)}
+                        <div className="p-3 bg-[rgba(239,68,68,0.05)] border border-[rgba(239,68,68,0.15)]">
+                          <div className="text-[9px] text-[#ef4444] tracking-[1px] mb-2">FAIBLESSES</div>
+                          {monitorResults.weaknesses.map((w, i) => <div key={i} className="text-[11px] text-[#A1A1AA] mb-1 leading-[1.5]">- {w}</div>)}
                         </div>
                       )}
                     </div>
                   )}
 
-                  <div style={{ fontSize: "9px", color: "#52525B", letterSpacing: "1px", marginBottom: "8px" }}>SIGNAUX DÉTECTÉS</div>
+                  <div className="text-[9px] text-[#52525B] tracking-[1px] mb-2">SIGNAUX DÉTECTÉS</div>
                   {monitorResults.signals.map((s, i) => (
-                    <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", padding: "10px 0", borderBottom: `1px solid ${VG(0.05)}`, gap: "12px" }}>
-                      <div style={{ flex: 1 }}>
-                        <span style={{ fontSize: "12px", color: V2, lineHeight: 1.5 }}>{s.text}</span>
-                        {s.recommendation && <div style={{ fontSize: "10px", color: "#10b981", marginTop: "4px" }}>{s.recommendation}</div>}
+                    <div key={i} className="flex justify-between items-start gap-3" style={{ padding: "10px 0", borderBottom: `1px solid ${VG(0.05)}` }}>
+                      <div className="flex-1">
+                        <span className="text-xs text-[#D4D4D8] leading-[1.5]">{s.text}</span>
+                        {s.recommendation && <div className="text-[10px] text-[#10b981] mt-1">{s.recommendation}</div>}
                       </div>
-                      <span style={{ fontSize: "9px", padding: "2px 8px", border: `1px solid ${s.importance === "haute" ? "rgba(239,68,68,0.3)" : s.importance === "moyenne" ? "rgba(251,191,36,0.3)" : VG(0.1)}`, color: s.importance === "haute" ? "#ef4444" : s.importance === "moyenne" ? "#fbbf24" : "#52525B", whiteSpace: "nowrap", flexShrink: 0 }}>{(s.importance || "").toUpperCase()}</span>
+                      <span className="text-[9px] whitespace-nowrap shrink-0" style={{ padding: "2px 8px", border: `1px solid ${s.importance === "haute" ? "rgba(239,68,68,0.3)" : s.importance === "moyenne" ? "rgba(251,191,36,0.3)" : VG(0.1)}`, color: s.importance === "haute" ? "#ef4444" : s.importance === "moyenne" ? "#fbbf24" : "#52525B" }}>{(s.importance || "").toUpperCase()}</span>
                     </div>
                   ))}
 
                   {monitorResults.summary && (
-                    <div style={{ marginTop: "16px", padding: "12px", background: "rgba(16,185,129,0.05)", border: "1px solid rgba(16,185,129,0.15)" }}>
-                      <div style={{ fontSize: "9px", color: "#10b981", letterSpacing: "1px", marginBottom: "6px" }}>SYNTHÈSE</div>
-                      <div style={{ fontSize: "12px", color: V2, lineHeight: 1.6 }}>{monitorResults.summary}</div>
+                    <div className="mt-4 p-3 bg-[rgba(16,185,129,0.05)] border border-[rgba(16,185,129,0.15)]">
+                      <div className="text-[9px] text-[#10b981] tracking-[1px] mb-1.5">SYNTHÈSE</div>
+                      <div className="text-xs text-[#D4D4D8] leading-[1.6]">{monitorResults.summary}</div>
                     </div>
                   )}
                 </div>
@@ -664,33 +658,32 @@ export default function SentinelPage() {
 
         {/* ═══════════════ TAB: PRIX & MARCHÉ ═══════════════ */}
         {activeTab === "prix" && (
-          <section aria-label="Tableau de bord prix et marché" style={{ animation: "fadeInUp 0.6s ease both", marginBottom: "80px" }}>
-            <div style={{
-              border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.5)",
-              overflow: "hidden", backdropFilter: "blur(12px)" }}>
+          <section aria-label="Tableau de bord prix et marché" className="mb-20" style={{ animation: "fadeInUp 0.6s ease both" }}>
+            <div className="overflow-hidden backdrop-blur-[12px]" style={{
+              border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.5)" }}>
 
-              <div style={{ padding: "14px 20px", borderBottom: `1px solid ${VG(0.08)}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
-                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FEBC2E" }} />
-                  <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
-                  <span style={{ fontSize: "11px", color: "#52525B", marginLeft: "12px" }}>sentinel-prix.nervur.com</span>
+              <div className="flex justify-between items-center" style={{ padding: "14px 20px", borderBottom: `1px solid ${VG(0.08)}` }}>
+                <div className="flex gap-1.5 items-center">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
+                  <span className="text-[11px] text-[#52525B] ml-3">sentinel-prix.nervur.com</span>
                 </div>
-                <span style={{ fontSize: "9px", color: "#8b5cf6", letterSpacing: "1px" }}>30 JOURS</span>
+                <span className="text-[9px] text-[#8b5cf6] tracking-[1px]">30 JOURS</span>
               </div>
 
               <div style={{ padding: isMobile ? "20px" : "32px" }}>
-                <div style={{ display: "flex", gap: "20px", marginBottom: "20px", flexWrap: "wrap" }}>
+                <div className="flex gap-5 mb-5 flex-wrap">
                   {COMPETITORS.map((c, i) => (
-                    <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span style={{ width: 12, height: 3, borderRadius: "2px", background: c.color }} />
-                      <span style={{ fontSize: "10px", color: V3, letterSpacing: "0.5px" }}>{c.name}</span>
+                    <div key={i} className="flex items-center gap-1.5">
+                      <span className="w-3 h-[3px] rounded-[2px]" style={{ background: c.color }} />
+                      <span className="text-[10px] text-[#A1A1AA] tracking-[0.5px]">{c.name}</span>
                     </div>
                   ))}
                 </div>
 
-                <div style={{ width: "100%", overflow: "hidden" }}>
-                  <svg role="img" aria-label="Graphique d'évolution des prix sur 30 jours" viewBox={`0 0 ${chartW} ${chartH + 20}`} style={{ width: "100%", height: "auto" }}>
+                <div className="w-full overflow-hidden">
+                  <svg role="img" aria-label="Graphique d'évolution des prix sur 30 jours" viewBox={`0 0 ${chartW} ${chartH + 20}`} className="w-full h-auto">
                     {[90, 110, 130, 150].map(p => (
                       <g key={p}>
                         <line x1="0" y1={getY(p)} x2={chartW} y2={getY(p)} stroke={VG(0.05)} strokeWidth="1" />
@@ -717,21 +710,20 @@ export default function SentinelPage() {
                   </svg>
                 </div>
 
-                <div style={{ marginTop: "24px" }}>
-                  <h3 style={{ fontSize: "12px", fontWeight: 700, color: V3, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "12px" }}>Alertes récentes</h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                <div className="mt-6">
+                  <h3 className="text-xs font-bold text-[#A1A1AA] tracking-[2px] uppercase mb-3">Alertes récentes</h3>
+                  <div className="flex flex-col gap-2">
                     {PRICE_ALERTS.map((a, i) => (
-                      <div key={i} style={{
-                        display: "flex", alignItems: "center", gap: "12px", padding: "12px 16px",
+                      <div key={i} className="flex items-center gap-3" style={{
+                        padding: "12px 16px",
                         border: `1px solid ${a.type === "danger" ? "rgba(239,68,68,0.2)" : VG(0.08)}`,
                         background: a.type === "danger" ? "rgba(239,68,68,0.03)" : "transparent",
                       }}>
-                        <span style={{
-                          width: 8, height: 8, borderRadius: "50%",
+                        <span className="w-2 h-2 rounded-full" style={{
                           background: a.type === "danger" ? "#ef4444" : a.type === "warning" ? "#fbbf24" : "#3b82f6",
                         }} />
-                        <span style={{ fontSize: "12px", color: a.type === "danger" ? "#fca5a5" : V3, flex: 1 }}>{a.text}</span>
-                        <span style={{ fontSize: "10px", color: "#52525B" }}>Jour {a.day}</span>
+                        <span className="text-xs flex-1" style={{ color: a.type === "danger" ? "#fca5a5" : "#A1A1AA" }}>{a.text}</span>
+                        <span className="text-[10px] text-[#52525B]">Jour {a.day}</span>
                       </div>
                     ))}
                   </div>
@@ -742,27 +734,25 @@ export default function SentinelPage() {
         )}
 
         {/* ═══════════════ FEATURES ═══════════════ */}
-        <section aria-label="Fonctionnalités incluses" style={{ marginBottom: "80px" }}>
-          <div style={{ textAlign: "center", marginBottom: "48px" }}>
-            <h2 style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800, letterSpacing: "-1px", marginBottom: "12px" }}>Tout ce qui est inclus</h2>
-            <p style={{ fontSize: "15px", color: "#71717A", maxWidth: "560px", margin: "0 auto", lineHeight: 1.7 }}>Un seul abonnement, zéro surprise. Réputation + veille concurrentielle + alertes marché.</p>
+        <section aria-label="Fonctionnalités incluses" className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="font-extrabold tracking-[-1px] mb-3" style={{ fontSize: isMobile ? "28px" : "36px" }}>Tout ce qui est inclus</h2>
+            <p className="text-[15px] text-[#71717A] max-w-[560px] mx-auto leading-[1.7]">Un seul abonnement, zéro surprise. Réputation + veille concurrentielle + alertes marché.</p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px" }}>
+          <div className="grid gap-4" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr" }}>
             {FEATURES.map((f, i) => (
-              <div key={i} className="sentinel-feature" style={{
-                padding: "24px", border: `1px solid ${VG(0.08)}`, background: VG(0.02),
-                borderRadius: "10px", transition: "all 0.3s ease", cursor: "default",
+              <div key={i} className="sentinel-feature p-6 rounded-[10px] cursor-default" style={{
+                border: `1px solid ${VG(0.08)}`, background: VG(0.02),
+                transition: "opacity 0.4s, transform 0.4s, border-color 0.4s, background 0.4s",
                 opacity: i < visibleFeatures ? 1 : 0, transform: i < visibleFeatures ? "translateY(0)" : "translateY(12px)",
-                transitionProperty: "opacity, transform, border-color, background",
-                transitionDuration: "0.4s",
               }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}>
-                  <div style={{ minWidth: "40px", height: "40px", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(239,68,68,0.2)", borderRadius: "8px", background: "rgba(239,68,68,0.05)" }}>
+                <div className="flex items-start gap-4">
+                  <div className="min-w-[40px] h-10 flex items-center justify-center border border-[rgba(239,68,68,0.2)] rounded-lg bg-[rgba(239,68,68,0.05)]">
                     <FeatureIcon type={f.icon} />
                   </div>
                   <div>
-                    <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "6px", color: V }}>{f.title}</h3>
-                    <p style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
+                    <h3 className="text-[15px] font-bold mb-1.5 text-white">{f.title}</h3>
+                    <p className="text-[13px] text-[#71717A] leading-[1.7] m-0">{f.desc}</p>
                   </div>
                 </div>
               </div>
@@ -771,23 +761,19 @@ export default function SentinelPage() {
         </section>
 
         {/* ═══════════════ PRICING ═══════════════ */}
-        <section aria-label="Tarification" style={{ marginBottom: "80px", animation: "fadeInUp 0.8s ease 0.6s both" }}>
-          <div style={{
-            maxWidth: "520px", margin: "0 auto", padding: isMobile ? "32px 24px" : "48px 40px",
-            border: "1px solid rgba(239,68,68,0.3)", background: "rgba(239,68,68,0.03)",
-            borderRadius: "16px", textAlign: "center", position: "relative", overflow: "hidden",
-          }}>
-            <div style={{ position: "absolute", top: "-1px", left: "40px", right: "40px", height: "2px", background: "linear-gradient(90deg, transparent, #ef4444, transparent)" }} />
+        <section aria-label="Tarification" className="mb-20" style={{ animation: "fadeInUp 0.8s ease 0.6s both" }}>
+          <div className="max-w-[520px] mx-auto border border-[rgba(239,68,68,0.3)] bg-[rgba(239,68,68,0.03)] rounded-2xl text-center relative overflow-hidden" style={{ padding: isMobile ? "32px 24px" : "48px 40px" }}>
+            <div className="absolute -top-px left-10 right-10 h-0.5 bg-gradient-to-r from-transparent via-[#ef4444] to-transparent" />
 
-            <div style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "#ef4444", fontWeight: 700, marginBottom: "24px" }}>ABONNEMENT UNIQUE</div>
+            <div className="text-[10px] tracking-[3px] uppercase text-[#ef4444] font-bold mb-6">ABONNEMENT UNIQUE</div>
 
-            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
-              <span style={{ fontSize: isMobile ? "48px" : "64px", fontWeight: 800, color: V, lineHeight: 1 }}>99€</span>
-              <span style={{ fontSize: "16px", color: "#52525B", fontWeight: 600 }}>/mois</span>
+            <div className="flex items-baseline justify-center gap-1 mb-2">
+              <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>99€</span>
+              <span className="text-base text-[#52525B] font-semibold">/mois</span>
             </div>
-            <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "28px" }}>Sans engagement · Setup offert · Résultats dès le 1er jour</p>
+            <p className="text-[13px] text-[#71717A] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
 
-            <div style={{ textAlign: "left", marginBottom: "32px" }}>
+            <div className="text-left mb-8">
               {[
                 "Monitoring Google Avis en continu",
                 "Analyse de sentiment IA automatique",
@@ -800,42 +786,34 @@ export default function SentinelPage() {
                 "Rapports PDF hebdomadaires",
                 "Support prioritaire",
               ].map((item, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "8px 0", borderBottom: i < 9 ? `1px solid ${VG(0.06)}` : "none" }}>
-                  <span style={{ color: "#4ADE80", fontSize: "14px", minWidth: "18px" }}>✓</span>
-                  <span style={{ fontSize: "13px", color: V2 }}>{item}</span>
+                <div key={i} className="flex items-center gap-2.5 py-2" style={{ borderBottom: i < 9 ? `1px solid ${VG(0.06)}` : "none" }}>
+                  <span className="text-[#4ADE80] text-sm min-w-[18px]">✓</span>
+                  <span className="text-[13px] text-[#D4D4D8]">{item}</span>
                 </div>
               ))}
             </div>
 
-            <button onClick={() => navigate('/contact?outil=sentinel')} style={{
-              width: "100%", padding: "16px", background: "linear-gradient(135deg, #ef4444, #dc2626)",
-              border: "none", color: V, fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px",
-              textTransform: "uppercase", cursor: "pointer", borderRadius: "8px",
-              transition: "all 0.3s ease", fontFamily: "inherit",
-            }}
+            <button onClick={() => navigate('/contact?outil=sentinel')} className="w-full py-4 bg-gradient-to-br from-[#ef4444] to-[#dc2626] border-none text-white font-extrabold text-[13px] tracking-[1.5px] uppercase cursor-pointer rounded-lg transition-all duration-300 font-[inherit]"
               onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(239,68,68,0.3)"; }}
               onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
               Activer Sentinel →
             </button>
 
-            <p style={{ fontSize: "11px", color: "#52525B", marginTop: "16px" }}>Paiement sécurisé · Annulation à tout moment</p>
+            <p className="text-[11px] text-[#52525B] mt-4">Paiement sécurisé · Annulation à tout moment</p>
           </div>
         </section>
 
         {/* ═══════════════ CTA FINAL ═══════════════ */}
-        <section aria-label="Appel à l'action" style={{
-          textAlign: "center", padding: isMobile ? "40px 20px" : "60px 48px",
-          border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.3)", borderRadius: "12px" }}>
-          <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, marginBottom: "16px", letterSpacing: "-1px" }}>
+        <section aria-label="Appel à l'action" className="text-center rounded-xl" style={{
+          padding: isMobile ? "40px 20px" : "60px 48px",
+          border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.3)" }}>
+          <h2 className="font-extrabold mb-4 tracking-[-1px]" style={{ fontSize: isMobile ? "24px" : "32px" }}>
             Protégez votre réputation. Devancez vos concurrents.
           </h2>
-          <p style={{ fontSize: "15px", color: "#71717A", marginBottom: "32px", maxWidth: "560px", margin: "0 auto 32px", lineHeight: 1.7 }}>
+          <p className="text-[15px] text-[#71717A] max-w-[560px] mx-auto mb-8 leading-[1.7]">
             Sentinel combine e-réputation et veille marché dans un seul outil propulsé par l'IA. Chaque avis, chaque mouvement concurrent — détecté et traité automatiquement.
           </p>
-          <button onClick={() => navigate('/contact?outil=sentinel')} style={{
-            padding: "16px 40px", background: V, color: "#0f1117", border: "none",
-            fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
-            cursor: "pointer", transition: "all 0.3s ease", fontFamily: "inherit" }}
+          <button onClick={() => navigate('/contact?outil=sentinel')} className="bg-white text-[#0f1117] border-none font-extrabold text-[13px] tracking-[1.5px] uppercase cursor-pointer transition-all duration-300 font-[inherit]" style={{ padding: "16px 40px" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(255,255,255,0.2)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             Réserver une démo gratuite →
@@ -844,9 +822,9 @@ export default function SentinelPage() {
       </main>
 
       {/* Footer */}
-      <footer style={{ padding: isMobile ? "30px 20px" : "40px 48px", borderTop: `1px solid ${VG(0.08)}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: isMobile ? "column" : "row", gap: "12px" }}>
-        <span style={{ fontSize: "11px", color: "#52525B", letterSpacing: "1px" }}>NERVÜR © 2026</span>
-        <span style={{ fontSize: "11px", color: "#52525B" }}>SENTINEL — Bouclier E-Réputation & Veille IA</span>
+      <footer className="flex justify-between items-center" style={{ padding: isMobile ? "30px 20px" : "40px 48px", borderTop: `1px solid ${VG(0.08)}`, flexDirection: isMobile ? "column" : "row", gap: "12px" }}>
+        <span className="text-[11px] text-[#52525B] tracking-[1px]">NERVÜR © 2026</span>
+        <span className="text-[11px] text-[#52525B]">SENTINEL — Bouclier E-Réputation & Veille IA</span>
       </footer>
     </div>
   );

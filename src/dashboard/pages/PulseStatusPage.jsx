@@ -13,14 +13,6 @@ const ACCENT = "#ec4899";
 const BG_TINT = "rgba(236,72,153,0.06)";
 const BORDER_TINT = "rgba(236,72,153,0.18)";
 
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
-
 export default function PulseStatusPage() {
   const { get } = useApi();
   const [sites, setSites] = useState([]);
@@ -58,41 +50,36 @@ export default function PulseStatusPage() {
   };
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div className="max-w-[900px]">
       <SubNav color={ACCENT} items={PULSE_NAV} />
 
       {/* Header */}
-      <div style={{ marginBottom: "32px" }}>
-        <div style={{
-          height: "3px", width: "40px", borderRadius: "2px", marginBottom: "16px",
-          background: `linear-gradient(135deg, ${ACCENT}, #f472b6)`,
-        }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
+      <div className="mb-8">
+        <div className="h-[3px] w-10 rounded-sm mb-4 bg-gradient-to-br from-[#ec4899] to-[#f472b6]" />
+        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
           Page de statut publique
         </h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
+        <p className="text-sm text-[#9ca3af]">
           Générez une page de statut publique pour vos clients.
         </p>
       </div>
 
       {loading && (
-        <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, textAlign: "center", padding: "48px 24px" }}>
-          <div style={{
-            width: "48px", height: "48px", margin: "0 auto 16px",
-            border: `3px solid ${BORDER_TINT}`, borderTop: `3px solid ${ACCENT}`,
-            borderRadius: "50%", animation: "pulse-status-spin 1s linear infinite",
-          }} />
-          <div style={{ fontSize: "14px", color: "#9ca3af" }}>Chargement...</div>
+        <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+          <div
+            className="w-12 h-12 mx-auto mb-4 border-[3px] border-[rgba(236,72,153,0.18)] border-t-[#ec4899] rounded-full animate-[pulse-status-spin_1s_linear_infinite]"
+          />
+          <div className="text-sm text-[#9ca3af]">Chargement...</div>
           <style>{`@keyframes pulse-status-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 
       {!loading && sites.length === 0 && (
-        <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, background: BG_TINT, textAlign: "center", padding: "48px 24px" }}>
-          <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>
+        <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
             Aucun site surveillé
           </div>
-          <div style={{ fontSize: "13px", color: "#9ca3af" }}>
+          <div className="text-[13px] text-[#9ca3af]">
             Ajoutez un site depuis l'onglet Moniteur pour créer une page de statut.
           </div>
         </div>
@@ -101,75 +88,61 @@ export default function PulseStatusPage() {
       {!loading && sites.length > 0 && (
         <>
           {/* Toggle activation */}
-          <div style={{
-            ...cardStyle, border: `1px solid ${BORDER_TINT}`, marginBottom: "20px",
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-          }}>
+          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5 flex items-center justify-between">
             <div>
-              <div style={{ fontSize: "14px", fontWeight: 500, color: "#f0f0f3" }}>
+              <div className="text-sm font-medium text-[#f0f0f3]">
                 Activer la page de statut publique
               </div>
-              <div style={{ fontSize: "12px", color: "#9ca3af", marginTop: "2px" }}>
+              <div className="text-xs text-[#9ca3af] mt-0.5">
                 Permet à vos clients de consulter le statut de vos services en temps réel.
               </div>
             </div>
             <button
               onClick={() => setStatusEnabled(!statusEnabled)}
-              style={{
-                width: "44px", height: "24px", borderRadius: "12px", border: "none",
-                background: statusEnabled ? ACCENT : "#2a2d3a",
-                cursor: "pointer", position: "relative", transition: "background 0.2s",
-              }}
+              className="w-11 h-6 rounded-xl border-none cursor-pointer relative transition-colors duration-200"
+              style={{ background: statusEnabled ? ACCENT : "#2a2d3a" }}
             >
-              <div style={{
-                width: "18px", height: "18px", borderRadius: "50%", background: "#fff",
-                position: "absolute", top: "3px",
-                left: statusEnabled ? "23px" : "3px",
-                transition: "left 0.2s",
-              }} />
+              <div
+                className="w-[18px] h-[18px] rounded-full bg-white absolute top-[3px] transition-[left] duration-200"
+                style={{ left: statusEnabled ? "23px" : "3px" }}
+              />
             </button>
           </div>
 
           {/* Preview */}
-          <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, marginBottom: "20px" }}>
-            <div style={{
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-              marginBottom: "20px",
-            }}>
-              <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
                 Aperçu de la page de statut
               </h2>
-              <span style={{
-                fontSize: "11px", fontWeight: 500, padding: "3px 10px", borderRadius: "4px",
-                background: statusEnabled ? "rgba(16,185,129,0.12)" : "rgba(107,114,128,0.12)",
-                color: statusEnabled ? "#10b981" : "#6b7280",
-              }}>
+              <span
+                className="text-[11px] font-medium px-2.5 py-[3px] rounded"
+                style={{
+                  background: statusEnabled ? "rgba(16,185,129,0.12)" : "rgba(107,114,128,0.12)",
+                  color: statusEnabled ? "#10b981" : "#6b7280",
+                }}
+              >
                 {statusEnabled ? "Activée" : "Désactivée"}
               </span>
             </div>
 
             {/* Mock status page */}
-            <div style={{
-              background: "#161820", borderRadius: "12px", border: "1px solid #2a2d3a",
-              padding: "28px", opacity: statusEnabled ? 1 : 0.5,
-              transition: "opacity 0.3s",
-            }}>
+            <div
+              className="bg-[#161820] rounded-xl border border-[#2a2d3a] p-7 transition-opacity duration-300"
+              style={{ opacity: statusEnabled ? 1 : 0.5 }}
+            >
               {/* Status page header */}
-              <div style={{ textAlign: "center", marginBottom: "24px" }}>
-                <div style={{
-                  width: "40px", height: "40px", borderRadius: "10px", margin: "0 auto 12px",
-                  background: BG_TINT, border: `1px solid ${BORDER_TINT}`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
+              <div className="text-center mb-6">
+                <div className="w-10 h-10 rounded-[10px] mx-auto mb-3 bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] flex items-center justify-center">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/>
                     <path d="M12 6v4l2 2-2 2v4"/>
                   </svg>
                 </div>
-                <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: "0 0 4px" }}>
+                <h3 className="text-base font-semibold text-[#f0f0f3] m-0 mb-1">
                   Statut des services
                 </h3>
-                <div style={{ fontSize: "12px", color: "#9ca3af" }}>
+                <div className="text-xs text-[#9ca3af]">
                   Dernière mise à jour : {new Date().toLocaleDateString("fr-FR", {
                     day: "numeric", month: "long", year: "numeric",
                     hour: "2-digit", minute: "2-digit",
@@ -181,16 +154,17 @@ export default function PulseStatusPage() {
               {(() => {
                 const allUp = sites.every(s => s.lastCheck?.uptimeStatus !== false);
                 return (
-                  <div style={{
-                    padding: "14px 20px", borderRadius: "8px", marginBottom: "20px",
-                    background: allUp ? "rgba(16,185,129,0.08)" : "rgba(239,68,68,0.08)",
-                    border: `1px solid ${allUp ? "rgba(16,185,129,0.2)" : "rgba(239,68,68,0.2)"}`,
-                    textAlign: "center",
-                  }}>
-                    <span style={{
-                      fontSize: "14px", fontWeight: 600,
-                      color: allUp ? "#10b981" : "#ef4444",
-                    }}>
+                  <div
+                    className="py-3.5 px-5 rounded-lg mb-5 text-center border"
+                    style={{
+                      background: allUp ? "rgba(16,185,129,0.08)" : "rgba(239,68,68,0.08)",
+                      borderColor: allUp ? "rgba(16,185,129,0.2)" : "rgba(239,68,68,0.2)",
+                    }}
+                  >
+                    <span
+                      className="text-sm font-semibold"
+                      style={{ color: allUp ? "#10b981" : "#ef4444" }}
+                    >
                       {allUp ? "Tous les systèmes sont opérationnels" : "Certains systèmes rencontrent des problèmes"}
                     </span>
                   </div>
@@ -198,38 +172,35 @@ export default function PulseStatusPage() {
               })()}
 
               {/* Service list */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div className="flex flex-col gap-2">
                 {sites.map(site => {
                   const isUp = site.lastCheck?.uptimeStatus !== false;
                   const score = site.lastCheck?.score || 0;
                   return (
-                    <div key={site._id} style={{
-                      display: "flex", alignItems: "center", justifyContent: "space-between",
-                      padding: "14px 18px", background: "#1e2029", borderRadius: "8px",
-                      border: "1px solid #2a2d3a",
-                    }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <div style={{
-                          width: "8px", height: "8px", borderRadius: "50%",
-                          background: isUp ? "#10b981" : "#ef4444",
-                        }} />
-                        <span style={{ fontSize: "13px", color: "#d1d5db", fontWeight: 500 }}>
+                    <div key={site._id} className="flex items-center justify-between py-3.5 px-[18px] bg-[#1e2029] rounded-lg border border-[#2a2d3a]">
+                      <div className="flex items-center gap-2.5">
+                        <div
+                          className="w-2 h-2 rounded-full"
+                          style={{ background: isUp ? "#10b981" : "#ef4444" }}
+                        />
+                        <span className="text-[13px] text-[#d1d5db] font-medium">
                           {site.domain}
                         </span>
                       </div>
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <span style={{
-                          fontSize: "12px", color: isUp ? "#10b981" : "#ef4444",
-                          fontWeight: 500,
-                        }}>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="text-xs font-medium"
+                          style={{ color: isUp ? "#10b981" : "#ef4444" }}
+                        >
                           {isUp ? "Opérationnel" : "Hors ligne"}
                         </span>
-                        <span style={{
-                          fontSize: "11px", padding: "2px 8px", borderRadius: "4px",
-                          background: (score >= 80 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444") + "15",
-                          color: score >= 80 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444",
-                          fontWeight: 600,
-                        }}>
+                        <span
+                          className="text-[11px] px-2 py-0.5 rounded font-semibold"
+                          style={{
+                            background: (score >= 80 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444") + "15",
+                            color: score >= 80 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444",
+                          }}
+                        >
                           {score}/100
                         </span>
                       </div>
@@ -239,25 +210,21 @@ export default function PulseStatusPage() {
               </div>
 
               {/* Uptime bar (last 30 days mock) */}
-              <div style={{ marginTop: "20px" }}>
-                <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px" }}>
+              <div className="mt-5">
+                <div className="text-xs text-[#9ca3af] mb-2">
                   Disponibilité (30 derniers jours)
                 </div>
-                <div style={{ display: "flex", gap: "2px", height: "24px" }}>
+                <div className="flex gap-0.5 h-6">
                   {Array.from({ length: 30 }).map((_, i) => {
                     const isGreen = Math.random() > 0.05;
                     return (
-                      <div key={i} style={{
-                        flex: 1, borderRadius: "2px",
+                      <div key={i} className="flex-1 rounded-sm" style={{
                         background: isGreen ? "rgba(16,185,129,0.4)" : "rgba(239,68,68,0.5)",
                       }} />
                     );
                   })}
                 </div>
-                <div style={{
-                  display: "flex", justifyContent: "space-between",
-                  fontSize: "10px", color: "#6b7280", marginTop: "4px",
-                }}>
+                <div className="flex justify-between text-[10px] text-[#6b7280] mt-1">
                   <span>30 jours</span>
                   <span>Aujourd'hui</span>
                 </div>
@@ -266,31 +233,22 @@ export default function PulseStatusPage() {
           </div>
 
           {/* Embed code */}
-          <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}` }}>
-            <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>
+          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+            <h2 className="text-[15px] font-semibold text-[#f0f0f3] mb-2">
               Code d'intégration
             </h2>
-            <p style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "16px" }}>
+            <p className="text-xs text-[#9ca3af] mb-4">
               Copiez ce code et intégrez-le dans le site de votre client pour afficher le statut en temps réel.
             </p>
 
-            <div style={{ position: "relative" }}>
-              <pre style={{
-                padding: "16px", background: "#161820", borderRadius: "8px",
-                border: "1px solid #2a2d3a", color: "#a78bfa", fontSize: "12px",
-                overflow: "auto", lineHeight: 1.6, margin: 0,
-              }}>
+            <div className="relative">
+              <pre className="p-4 bg-[#161820] rounded-lg border border-[#2a2d3a] text-[#a78bfa] text-xs overflow-auto leading-relaxed m-0">
                 {embedCode}
               </pre>
               <button
                 onClick={handleCopy}
-                style={{
-                  position: "absolute", top: "8px", right: "8px",
-                  padding: "6px 12px", background: copied ? "#10b981" : ACCENT,
-                  color: "#fff", border: "none", borderRadius: "6px",
-                  fontSize: "11px", fontWeight: 500, cursor: "pointer",
-                  fontFamily: "inherit", transition: "background 0.2s",
-                }}
+                className="absolute top-2 right-2 px-3 py-1.5 text-white border-none rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-colors duration-200"
+                style={{ background: copied ? "#10b981" : ACCENT }}
               >
                 {copied ? "Copié !" : "Copier"}
               </button>

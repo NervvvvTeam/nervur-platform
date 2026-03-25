@@ -14,28 +14,6 @@ const ACCENT = "#06b6d4";
 const BG_TINT = "rgba(6,182,212,0.08)";
 const BORDER_TINT = "rgba(6,182,212,0.2)";
 
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
-
-const inputStyle = {
-  width: "100%",
-  padding: "10px 14px",
-  background: "#141520",
-  border: "1px solid #2a2d3a",
-  borderRadius: "8px",
-  color: "#e4e4e7",
-  fontSize: "14px",
-  fontFamily: "inherit",
-  outline: "none",
-  transition: "border-color 0.15s",
-  boxSizing: "border-box",
-};
-
 const ShieldIcon = ({ size = 28, color = ACCENT }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -91,8 +69,8 @@ function ScoreGauge({ score }) {
   else if (score >= 40) { color = "#f97316"; label = "Insuffisant"; }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-      <svg height={radius * 2} width={radius * 2} style={{ transform: "rotate(-90deg)" }}>
+    <div className="flex flex-col items-center gap-2">
+      <svg height={radius * 2} width={radius * 2} className="-rotate-90">
         <circle
           stroke="#2a2d3a"
           fill="transparent"
@@ -111,24 +89,14 @@ function ScoreGauge({ score }) {
           r={normalizedRadius}
           cx={radius}
           cy={radius}
-          style={{ transition: "stroke-dashoffset 0.8s ease-out" }}
+          className="transition-[stroke-dashoffset] duration-[0.8s] ease-out"
         />
       </svg>
-      <div style={{
-        position: "relative",
-        marginTop: "-110px",
-        textAlign: "center",
-        marginBottom: "40px",
-      }}>
-        <div style={{ fontSize: "36px", fontWeight: 700, color }}>{score}</div>
-        <div style={{ fontSize: "12px", color: "#9ca3af" }}>/100</div>
+      <div className="relative -mt-[110px] text-center mb-10">
+        <div className="text-4xl font-bold" style={{ color }}>{score}</div>
+        <div className="text-xs text-[#9ca3af]">/100</div>
       </div>
-      <div style={{
-        display: "inline-flex",
-        padding: "4px 14px",
-        borderRadius: "6px",
-        fontSize: "13px",
-        fontWeight: 600,
+      <div className="inline-flex px-3.5 py-1 rounded-md text-[13px] font-semibold" style={{
         color,
         background: `${color}15`,
         border: `1px solid ${color}30`,
@@ -148,50 +116,36 @@ function ComplianceCard({ keyName, result }) {
   const bgColor = isPass ? "rgba(34,197,94,0.04)" : "rgba(239,68,68,0.04)";
 
   return (
-    <div style={{
-      ...cardStyle,
+    <div className="rounded-[10px] px-5 py-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.2)]" style={{
       border: `1px solid ${borderColor}`,
       background: bgColor,
-      padding: "18px 20px",
     }}>
-      <div style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
-        <div style={{ flexShrink: 0, marginTop: "2px" }}>
+      <div className="flex items-start gap-3">
+        <div className="shrink-0 mt-0.5">
           {isPass ? <CheckCircle size={20} /> : <XCircle size={20} />}
         </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "4px" }}>
-            <span style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>
+        <div className="flex-1">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-sm font-semibold text-[#f0f0f3]">
               {info.label}
             </span>
-            <span style={{
-              fontSize: "11px",
-              fontWeight: 600,
-              padding: "2px 8px",
-              borderRadius: "4px",
+            <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{
               color: isPass ? "#22c55e" : "#ef4444",
               background: isPass ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)",
             }}>
               {isPass ? "Conforme" : "Non conforme"}
             </span>
           </div>
-          <div style={{ fontSize: "11px", color: "#6b7280", marginBottom: "8px" }}>
+          <div className="text-[11px] text-[#6b7280] mb-2">
             {info.description}
           </div>
-          <div style={{ fontSize: "12px", color: "#d1d5db", lineHeight: 1.6 }}>
+          <div className="text-xs text-[#d1d5db] leading-relaxed">
             {result.details}
           </div>
           {keyName === "thirdPartyTrackers" && result.trackers && result.trackers.length > 0 && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "10px" }}>
+            <div className="flex flex-wrap gap-1.5 mt-2.5">
               {result.trackers.map((t, i) => (
-                <span key={i} style={{
-                  padding: "2px 8px",
-                  borderRadius: "4px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  color: "#f97316",
-                  background: "rgba(249,115,22,0.12)",
-                  border: "1px solid rgba(249,115,22,0.25)",
-                }}>
+                <span key={i} className="px-2 py-0.5 rounded text-[11px] font-medium text-[#f97316] bg-[rgba(249,115,22,0.12)] border border-[rgba(249,115,22,0.25)]">
                   {t}
                 </span>
               ))}
@@ -326,7 +280,7 @@ export default function VaultRgpdPage() {
     try {
       const result = await post("/api/vault/rgpd-scan", { url: url.trim() });
       setScan(result);
-      fetchHistory(); // refresh history
+      fetchHistory();
     } catch (err) {
       setError(err.message || "Une erreur est survenue lors de l'analyse.");
     } finally {
@@ -388,116 +342,81 @@ export default function VaultRgpdPage() {
   ];
 
   return (
-    <div style={{ maxWidth: "860px" }}>
+    <div className="max-w-[860px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
 
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "8px" }}>
-        <div style={{
-          width: "44px", height: "44px", borderRadius: "10px",
-          background: BG_TINT, border: `1px solid ${BORDER_TINT}`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
+      <div className="flex items-center gap-3.5 mb-2">
+        <div className="w-11 h-11 rounded-[10px] bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] flex items-center justify-center">
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
             Conformit\u00e9 RGPD
           </h1>
-          <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0, marginTop: "2px" }}>
+          <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
             Analysez la conformit\u00e9 RGPD de n'importe quel site web
           </p>
         </div>
       </div>
 
       {/* Gradient bar */}
-      <div style={{
-        height: "3px",
-        background: `linear-gradient(90deg, ${ACCENT}, #22d3ee, transparent)`,
-        borderRadius: "2px",
-        marginBottom: "24px",
-        marginTop: "16px",
-      }} />
+      <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-6 mt-4" />
 
       {/* Info banner */}
-      <div style={{
-        padding: "16px 20px",
-        background: "rgba(6,182,212,0.06)",
-        border: `1px solid ${BORDER_TINT}`,
-        borderLeft: `3px solid ${ACCENT}`,
-        borderRadius: "10px",
-        marginBottom: "28px",
-        display: "flex",
-        alignItems: "flex-start",
-        gap: "14px",
-      }}>
-        <div style={{ flexShrink: 0, marginTop: "2px" }}>
+      <div className="px-5 py-4 bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.2)] border-l-[3px] border-l-[#06b6d4] rounded-[10px] mb-7 flex items-start gap-3.5">
+        <div className="shrink-0 mt-0.5">
           <GlobeIcon size={20} color={ACCENT} />
         </div>
-        <div style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.7 }}>
-          <strong style={{ color: "#f0f0f3" }}>Shield \u2014 Analyse RGPD</strong>
+        <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
+          <strong className="text-[#f0f0f3]">Shield \u2014 Analyse RGPD</strong>
           <br />
           Entrez l'URL d'un site web pour v\u00e9rifier sa conformit\u00e9 RGPD. L'outil analyse 8 crit\u00e8res
           cl\u00e9s : mentions l\u00e9gales, politique de confidentialit\u00e9, cookies, CGV, contacts, SSL, trackers et consentement.
           <br />
-          <span style={{ color: "#6b7280" }}>
+          <span className="text-[#6b7280]">
             L'analyse porte sur la page d'accueil du site. Pour une conformit\u00e9 compl\u00e8te, un audit approfondi est recommand\u00e9.
           </span>
         </div>
       </div>
 
       {/* Scan form */}
-      <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, marginBottom: "28px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "20px" }}>
+      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+        <div className="flex items-center gap-2 mb-5">
           <GlobeIcon size={18} color={ACCENT} />
-          <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
             Analyser un site
           </h2>
         </div>
 
-        <div style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
-          <div style={{ flex: 1 }}>
+        <div className="flex gap-3 items-start">
+          <div className="flex-1">
             <input
               type="text"
               value={url}
               onChange={e => setUrl(e.target.value)}
               placeholder="https://monsite.fr"
-              style={inputStyle}
-              onFocus={e => { e.target.style.borderColor = ACCENT; }}
-              onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }}
+              className="w-full px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
               onKeyDown={e => { if (e.key === "Enter") handleScan(); }}
             />
-            <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "4px" }}>
+            <div className="text-[11px] text-[#6b7280] mt-1">
               URL compl\u00e8te du site \u00e0 analyser (la page d'accueil sera scann\u00e9e)
             </div>
           </div>
           <button
             onClick={handleScan}
             disabled={loading}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border-none text-sm font-semibold font-[inherit] transition-all duration-150 whitespace-nowrap shrink-0"
             style={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              padding: "10px 24px", borderRadius: "8px",
               background: loading ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
-              border: "none",
               color: loading ? "#6b7280" : "#0f0f11",
-              fontSize: "14px", fontWeight: 600,
               cursor: loading ? "not-allowed" : "pointer",
-              fontFamily: "inherit",
-              transition: "all 0.15s",
-              boxShadow: loading ? "none" : `0 4px 16px rgba(6,182,212,0.25)`,
-              whiteSpace: "nowrap",
-              flexShrink: 0,
+              boxShadow: loading ? "none" : "0 4px 16px rgba(6,182,212,0.25)",
             }}
           >
             {loading ? (
               <>
-                <div style={{
-                  width: "16px", height: "16px",
-                  border: "2px solid rgba(107,114,128,0.3)",
-                  borderTop: "2px solid #6b7280",
-                  borderRadius: "50%",
-                  animation: "rgpd-spin 0.8s linear infinite",
-                }} />
+                <div className="w-4 h-4 border-2 border-[rgba(107,114,128,0.3)] border-t-[#6b7280] rounded-full animate-[rgpd-spin_0.8s_linear_infinite]" />
                 Analyse...
               </>
             ) : (
@@ -510,11 +429,7 @@ export default function VaultRgpdPage() {
         </div>
 
         {error && (
-          <div style={{
-            padding: "10px 14px", marginTop: "16px",
-            background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)",
-            borderRadius: "6px", fontSize: "13px", color: "#fca5a5",
-          }}>
+          <div className="px-3.5 py-2.5 mt-4 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.25)] rounded-md text-[13px] text-[#fca5a5]">
             {error}
           </div>
         )}
@@ -522,23 +437,14 @@ export default function VaultRgpdPage() {
 
       {/* Loading */}
       {loading && !scan && (
-        <div style={{
-          ...cardStyle, border: `1px solid ${BORDER_TINT}`,
-          background: BG_TINT, textAlign: "center", padding: "48px 24px",
-        }}>
-          <div style={{ marginBottom: "20px" }}>
-            <div style={{
-              width: "64px", height: "64px", margin: "0 auto",
-              border: "3px solid rgba(6,182,212,0.2)",
-              borderTop: `3px solid ${ACCENT}`,
-              borderRadius: "50%",
-              animation: "rgpd-spin 1s linear infinite",
-            }} />
+        <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+          <div className="mb-5">
+            <div className="w-16 h-16 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[rgpd-spin_1s_linear_infinite]" />
           </div>
-          <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>
+          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
             Analyse RGPD en cours...
           </div>
-          <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.6 }}>
+          <div className="text-[13px] text-[#9ca3af] leading-relaxed">
             Nous analysons le site pour v\u00e9rifier sa conformit\u00e9 RGPD.
             <br />Cela peut prendre quelques secondes.
           </div>
@@ -549,36 +455,27 @@ export default function VaultRgpdPage() {
       {/* Results */}
       {scan && scan.status === "completed" && !loading && (
         <div>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2">
               <ShieldIcon size={18} color={ACCENT} />
-              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+              <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
                 R\u00e9sultats \u2014 {scan.domain}
               </h2>
             </div>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+            <div className="flex gap-2 items-center">
               <button
                 onClick={handleDownloadRgpdPdf}
                 disabled={downloadingPdf}
+                className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md border-none text-white text-xs font-medium font-[inherit] transition-all duration-150"
                 style={{
-                  display: "inline-flex", alignItems: "center", gap: "6px",
-                  padding: "7px 14px", borderRadius: "6px",
                   background: downloadingPdf ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
-                  border: "none",
-                  color: "#fff", fontSize: "12px", fontWeight: 500,
                   cursor: downloadingPdf ? "not-allowed" : "pointer",
-                  fontFamily: "inherit",
-                  transition: "all 0.15s",
                   opacity: downloadingPdf ? 0.7 : 1,
                 }}
               >
                 {downloadingPdf ? (
                   <>
-                    <div style={{
-                      width: "13px", height: "13px",
-                      border: "2px solid rgba(255,255,255,0.3)", borderTop: "2px solid #fff",
-                      borderRadius: "50%", animation: "rgpd-spin 0.8s linear infinite",
-                    }} />
+                    <div className="w-[13px] h-[13px] border-2 border-[rgba(255,255,255,0.3)] border-t-white rounded-full animate-[rgpd-spin_0.8s_linear_infinite]" />
                     G\u00e9n\u00e9ration...
                   </>
                 ) : (
@@ -590,13 +487,7 @@ export default function VaultRgpdPage() {
               </button>
               <button
                 onClick={() => { setScan(null); setError(null); setSelectedHistoryId(null); }}
-                style={{
-                  padding: "7px 14px", borderRadius: "6px",
-                  background: "transparent", border: `1px solid ${BORDER_TINT}`,
-                  color: ACCENT, fontSize: "12px", fontWeight: 500,
-                  cursor: "pointer", fontFamily: "inherit",
-                  transition: "all 0.15s",
-                }}
+                className="px-3.5 py-[7px] rounded-md bg-transparent border border-[rgba(6,182,212,0.2)] text-[#06b6d4] text-xs font-medium cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.08)]"
               >
                 Nouvelle analyse
               </button>
@@ -604,19 +495,15 @@ export default function VaultRgpdPage() {
           </div>
 
           {/* Score gauge */}
-          <div style={{
-            ...cardStyle, border: `1px solid ${BORDER_TINT}`,
-            background: BG_TINT, textAlign: "center", padding: "32px 24px",
-            marginBottom: "24px",
-          }}>
+          <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
             <ScoreGauge score={scan.score || 0} />
-            <div style={{ fontSize: "13px", color: "#9ca3af", marginTop: "12px" }}>
+            <div className="text-[13px] text-[#9ca3af] mt-3">
               Score de conformit\u00e9 RGPD
             </div>
           </div>
 
           {/* Compliance cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(380px, 1fr))", gap: "12px", marginBottom: "24px" }}>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(380px,1fr))] gap-3 mb-6">
             {complianceKeys.map(key => (
               <ComplianceCard key={key} keyName={key} result={scan.results?.[key]} />
             ))}
@@ -624,22 +511,15 @@ export default function VaultRgpdPage() {
 
           {/* AI Recommendations */}
           {scan.aiRecommendations && (
-            <div style={{ marginBottom: "24px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3.5">
                 <ShieldIcon size={18} color={ACCENT} />
-                <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+                <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
                   Recommandations IA
                 </h3>
               </div>
-              <div style={{
-                ...cardStyle,
-                border: `1px solid ${BORDER_TINT}`,
-                background: BG_TINT,
-              }}>
-                <div style={{
-                  fontSize: "13px", color: "#d1d5db", lineHeight: 1.8,
-                  whiteSpace: "pre-wrap",
-                }}>
+              <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                <div className="text-[13px] text-[#d1d5db] leading-[1.8] whitespace-pre-wrap">
                   {scan.aiRecommendations}
                 </div>
               </div>
@@ -648,72 +528,45 @@ export default function VaultRgpdPage() {
 
           {/* Action Plan */}
           {actionPlanItems.length > 0 && (
-            <div style={{ marginBottom: "24px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3.5">
                 <WrenchIcon size={18} color={ACCENT} />
-                <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+                <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
                   Plan d'action
                 </h3>
-                <span style={{
-                  fontSize: "11px", fontWeight: 600, color: ACCENT,
-                  background: "rgba(6,182,212,0.15)", padding: "2px 8px", borderRadius: "4px",
-                }}>
+                <span className="text-[11px] font-semibold text-[#06b6d4] bg-[rgba(6,182,212,0.15)] px-2 py-0.5 rounded">
                   {actionPlanItems.length} {actionPlanItems.length > 1 ? "\u00e9tapes" : "\u00e9tape"}
                 </span>
               </div>
 
-              <div style={{
-                ...cardStyle,
-                border: `1px solid ${BORDER_TINT}`,
-                background: BG_TINT,
-                padding: "0",
-              }}>
+              <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)] p-0">
                 {actionPlanItems.map((item, i) => (
-                  <div key={item.key} style={{
-                    padding: "20px 24px",
+                  <div key={item.key} className="px-6 py-5" style={{
                     borderBottom: i < actionPlanItems.length - 1 ? `1px solid ${BORDER_TINT}` : "none",
                   }}>
                     {/* Step number + issue */}
-                    <div style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}>
-                      <div style={{
-                        width: "30px", height: "30px", borderRadius: "50%",
-                        background: "linear-gradient(135deg, #06b6d4, #22d3ee)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        flexShrink: 0,
-                        fontSize: "13px", fontWeight: 700, color: "#0f0f11",
-                      }}>
+                    <div className="flex items-start gap-3.5">
+                      <div className="w-[30px] h-[30px] rounded-full bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] flex items-center justify-center shrink-0 text-[13px] font-bold text-[#0f0f11]">
                         {i + 1}
                       </div>
-                      <div style={{ flex: 1 }}>
+                      <div className="flex-1">
                         {/* Issue title */}
-                        <div style={{
-                          fontSize: "14px", fontWeight: 600, color: "#f0f0f3",
-                          marginBottom: "8px",
-                        }}>
+                        <div className="text-sm font-semibold text-[#f0f0f3] mb-2">
                           {item.issue}
                         </div>
 
                         {/* How to fix */}
-                        <div style={{
-                          padding: "12px 16px",
-                          background: "rgba(6,182,212,0.04)",
-                          border: `1px solid rgba(6,182,212,0.12)`,
-                          borderRadius: "8px",
-                          marginBottom: "8px",
-                        }}>
-                          <div style={{ fontSize: "11px", fontWeight: 600, color: ACCENT, marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                        <div className="px-4 py-3 bg-[rgba(6,182,212,0.04)] border border-[rgba(6,182,212,0.12)] rounded-lg mb-2">
+                          <div className="text-[11px] font-semibold text-[#06b6d4] mb-1 uppercase tracking-[0.5px]">
                             Comment corriger
                           </div>
-                          <div style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.7 }}>
+                          <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
                             {item.fix}
                           </div>
                         </div>
 
                         {/* Estimated time */}
-                        <div style={{
-                          display: "inline-flex", alignItems: "center", gap: "6px",
-                          fontSize: "11px", color: "#9ca3af",
-                        }}>
+                        <div className="inline-flex items-center gap-1.5 text-[11px] text-[#9ca3af]">
                           <ClockIcon size={12} color="#9ca3af" />
                           Temps estim\u00e9 : {item.time}
                         </div>
@@ -727,19 +580,12 @@ export default function VaultRgpdPage() {
 
           {/* All compliant message */}
           {actionPlanItems.length === 0 && scan.score >= 80 && (
-            <div style={{
-              ...cardStyle,
-              border: "1px solid rgba(34,197,94,0.25)",
-              background: "rgba(34,197,94,0.06)",
-              textAlign: "center",
-              padding: "32px 24px",
-              marginBottom: "24px",
-            }}>
+            <div className="bg-[rgba(34,197,94,0.06)] border border-[rgba(34,197,94,0.25)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
               <CheckCircle size={40} color="#22c55e" />
-              <div style={{ fontSize: "16px", fontWeight: 600, color: "#22c55e", marginTop: "12px", marginBottom: "6px" }}>
+              <div className="text-base font-semibold text-[#22c55e] mt-3 mb-1.5">
                 F\u00e9licitations !
               </div>
-              <div style={{ fontSize: "13px", color: "#86efac", lineHeight: 1.6, maxWidth: "440px", margin: "0 auto" }}>
+              <div className="text-[13px] text-[#86efac] leading-relaxed max-w-[440px] mx-auto">
                 Votre site respecte les principaux crit\u00e8res de conformit\u00e9 RGPD.
                 Continuez \u00e0 surveiller r\u00e9guli\u00e8rement pour maintenir cette conformit\u00e9.
               </div>
@@ -749,77 +595,60 @@ export default function VaultRgpdPage() {
       )}
 
       {/* History section */}
-      <div style={{ marginTop: "16px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+      <div className="mt-4">
+        <div className="flex items-center gap-2 mb-3.5">
           <ClockIcon size={16} color="#9ca3af" />
-          <h3 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <h3 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
             Historique des analyses
           </h3>
         </div>
 
         {loadingHistory && (
-          <div style={{ fontSize: "13px", color: "#6b7280", padding: "16px" }}>
+          <div className="text-[13px] text-[#6b7280] p-4">
             Chargement...
           </div>
         )}
 
         {!loadingHistory && history.length === 0 && (
-          <div style={{
-            ...cardStyle,
-            border: `1px solid #2a2d3a`,
-            textAlign: "center",
-            padding: "32px 24px",
-            color: "#6b7280",
-            fontSize: "13px",
-          }}>
+          <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center text-[#6b7280] text-[13px]">
             Aucune analyse RGPD effectu\u00e9e. Lancez votre premi\u00e8re analyse ci-dessus.
           </div>
         )}
 
         {!loadingHistory && history.length > 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          <div className="flex flex-col gap-2">
             {history.map(h => (
               <div
                 key={h._id}
                 onClick={() => loadScanDetail(h._id)}
+                className="bg-[#1e2029] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between"
                 style={{
-                  ...cardStyle,
-                  padding: "14px 18px",
                   border: selectedHistoryId === h._id ? `1px solid ${ACCENT}` : "1px solid #2a2d3a",
                   background: selectedHistoryId === h._id ? BG_TINT : "#1e2029",
-                  cursor: "pointer",
-                  transition: "all 0.15s",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div className="flex items-center gap-3">
                   <GlobeIcon size={16} color="#6b7280" />
                   <div>
-                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#f0f0f3" }}>
+                    <div className="text-[13px] font-semibold text-[#f0f0f3]">
                       {h.domain || h.url}
                     </div>
-                    <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "2px" }}>
+                    <div className="text-[11px] text-[#6b7280] mt-0.5">
                       {formatDate(h.createdAt)}
                     </div>
                   </div>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div className="flex items-center gap-2.5">
                   {h.status === "completed" && h.score != null && (
-                    <span style={{
-                      fontSize: "14px",
-                      fontWeight: 700,
-                      color: getScoreColor(h.score),
-                    }}>
+                    <span className="text-sm font-bold" style={{ color: getScoreColor(h.score) }}>
                       {h.score}/100
                     </span>
                   )}
                   {h.status === "error" && (
-                    <span style={{ fontSize: "11px", color: "#ef4444" }}>Erreur</span>
+                    <span className="text-[11px] text-[#ef4444]">Erreur</span>
                   )}
                   {h.status === "scanning" && (
-                    <span style={{ fontSize: "11px", color: "#eab308" }}>En cours</span>
+                    <span className="text-[11px] text-[#eab308]">En cours</span>
                   )}
                 </div>
               </div>

@@ -15,7 +15,7 @@ const PHANTOM_NAV = [
 
 const CATEGORY_LABELS = {
   performance: "Performance",
-  accessibility: "Accessibilit\u00e9",
+  accessibility: "Accessibilité",
   seo: "SEO",
   bestPractices: "Bonnes pratiques",
 };
@@ -40,22 +40,19 @@ function ScoreCircle({ score, label, color, size = 80 }) {
   const scoreColor = score >= 90 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444";
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <div style={{ position: "relative", width: size, height: size, margin: "0 auto" }}>
-        <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
+    <div className="text-center">
+      <div className="relative mx-auto" style={{ width: size, height: size }}>
+        <svg width={size} height={size} className="-rotate-90">
           <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#2a2d3a" strokeWidth="5" />
           <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke={color || scoreColor}
             strokeWidth="5" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
-            style={{ transition: "stroke-dashoffset 1s ease" }} />
+            className="transition-[stroke-dashoffset] duration-1000 ease-out" />
         </svg>
-        <div style={{
-          position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
-          display: "flex", alignItems: "center", justifyContent: "center"
-        }}>
-          <span style={{ fontSize: size > 70 ? "22px" : "18px", fontWeight: 600, color: "#f0f0f3" }}>{score}</span>
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+          <span className="font-semibold text-[#f0f0f3]" style={{ fontSize: size > 70 ? "22px" : "18px" }}>{score}</span>
         </div>
       </div>
-      <div style={{ fontSize: "12px", color: "#9ca3af", marginTop: "8px" }}>{label}</div>
+      <div className="text-xs text-[#9ca3af] mt-2">{label}</div>
     </div>
   );
 }
@@ -64,31 +61,24 @@ function CWVItem({ label, data }) {
   if (!data) return null;
   const colors = { good: "#10b981", "needs-improvement": "#f59e0b", poor: "#ef4444" };
   return (
-    <div style={{
-      padding: "14px 18px", background: "#1e2029", border: "1px solid #2a2d3a",
-      borderRadius: "8px", display: "flex", justifyContent: "space-between", alignItems: "center",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-    }}>
+    <div className="px-[18px] py-[14px] bg-[#1e2029] border border-[#2a2d3a] rounded-lg flex justify-between items-center shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
       <div>
-        <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "4px" }}>{label}</div>
-        <div style={{ fontSize: "17px", fontWeight: 600, color: "#f0f0f3" }}>
+        <div className="text-[11px] text-[#9ca3af] mb-1">{label}</div>
+        <div className="text-[17px] font-semibold text-[#f0f0f3]">
           {data.display || `${data.value}${data.unit}`}
         </div>
       </div>
-      <div style={{
-        width: "10px", height: "10px", borderRadius: "50%",
-        background: colors[data.status] || "#9ca3af"
-      }} />
+      <div className="w-2.5 h-2.5 rounded-full" style={{ background: colors[data.status] || "#9ca3af" }} />
     </div>
   );
 }
 
 function ComparisonArrow({ diff }) {
-  if (diff === 0) return <span style={{ color: "#9ca3af", fontSize: "13px" }}>=</span>;
+  if (diff === 0) return <span className="text-[#9ca3af] text-[13px]">=</span>;
   const isUp = diff > 0;
   return (
-    <span style={{ color: isUp ? "#10b981" : "#ef4444", fontSize: "13px", fontWeight: 600 }}>
-      {isUp ? "\u2191" : "\u2193"} {isUp ? "+" : ""}{diff}
+    <span className="text-[13px] font-semibold" style={{ color: isUp ? "#10b981" : "#ef4444" }}>
+      {isUp ? "↑" : "↓"} {isUp ? "+" : ""}{diff}
     </span>
   );
 }
@@ -115,9 +105,9 @@ export default function PhantomDashboardPage() {
     "Connexion au site...",
     "Lancement de Lighthouse...",
     "Analyse des performances...",
-    "V\u00e9rification de l'accessibilit\u00e9...",
+    "Vérification de l'accessibilité...",
     "Audit SEO...",
-    "Analyse IA des r\u00e9sultats...",
+    "Analyse IA des résultats...",
   ];
 
   // Load previous audits for comparison when result comes in
@@ -174,13 +164,13 @@ export default function PhantomDashboardPage() {
     try {
       const data = await api.post("/api/phantom/audit", { url: trimmed });
       if (!data || !data.scores) {
-        throw new Error("R\u00e9ponse invalide du serveur. R\u00e9essayez.");
+        throw new Error("Réponse invalide du serveur. Réessayez.");
       }
       setProgress(100);
-      setPhase("Termin\u00e9");
+      setPhase("Terminé");
       setTimeout(() => setResult(data), 300);
     } catch (err) {
-      setError(err.message || "Erreur lors de l'audit. V\u00e9rifiez l'URL et r\u00e9essayez.");
+      setError(err.message || "Erreur lors de l'audit. Vérifiez l'URL et réessayez.");
       setProgress(0);
       setPhase("");
     } finally {
@@ -231,80 +221,53 @@ export default function PhantomDashboardPage() {
   };
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div className="max-w-[900px]">
       <SubNav color="#8b5cf6" items={PHANTOM_NAV} />
       {/* Header */}
-      <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#8b5cf6" }} />
-          <span style={{ fontSize: "12px", color: "#8b5cf6", fontWeight: 500 }}>Phantom</span>
+      <div className="mb-8">
+        <div className="flex items-center gap-2.5 mb-1.5">
+          <div className="w-2 h-2 rounded-full bg-[#8b5cf6]" />
+          <span className="text-xs text-[#8b5cf6] font-medium">Phantom</span>
         </div>
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
+        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
           Audit de performance
         </h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
-          Analysez les performances, le SEO et l'accessibilit\u00e9 de n'importe quel site web.
+        <p className="text-sm text-[#9ca3af]">
+          Analysez les performances, le SEO et l'accessibilité de n'importe quel site web.
         </p>
       </div>
 
       {/* URL Input */}
-      <div style={{
-        display: "flex", gap: "10px", marginBottom: "32px",
-        padding: "20px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-      }}>
+      <div className="flex gap-2.5 mb-8 p-5 bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
         <input
           type="text" value={url} onChange={e => setUrl(e.target.value)}
           placeholder="https://exemple.com"
           onKeyDown={e => e.key === "Enter" && !loading && runAudit()}
-          style={{
-            flex: 1, padding: "12px 16px", background: "#1e2029",
-            border: "1px solid #2a2d3a", borderRadius: "8px",
-            color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
-            outline: "none", boxSizing: "border-box", transition: "border-color 0.2s, box-shadow 0.2s",
-          }}
-          onFocus={e => { e.target.style.borderColor = "#8b5cf6"; e.target.style.boxShadow = "0 0 0 3px rgba(139,92,246,0.15)"; }}
-          onBlur={e => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }}
+          className="flex-1 px-4 py-3 bg-[#1e2029] border border-[#2a2d3a] rounded-lg text-[#f0f0f3] text-sm font-[inherit] outline-none box-border transition-[border-color,box-shadow] duration-200 focus:border-[#8b5cf6] focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
         />
         <button onClick={runAudit} disabled={loading || !url.trim()}
-          style={{
-            padding: "12px 28px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", color: "#fff",
-            border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 500,
-            cursor: loading ? "wait" : "pointer", fontFamily: "inherit",
-            opacity: loading || !url.trim() ? 0.5 : 1, whiteSpace: "nowrap",
-            boxShadow: "0 4px 16px rgba(139,92,246,0.25)",
-          }}>
+          className="px-7 py-3 bg-gradient-to-br from-[#8b5cf6] to-[#a78bfa] text-white border-none rounded-lg text-sm font-medium font-[inherit] whitespace-nowrap shadow-[0_4px_16px_rgba(139,92,246,0.25)] disabled:opacity-50"
+          style={{ cursor: loading ? "wait" : "pointer" }}>
           {loading ? "Analyse..." : "Lancer l'audit"}
         </button>
       </div>
 
       {/* Progress */}
       {loading && (
-        <div style={{
-          padding: "24px", background: "#1e2029", border: "1px solid #8b5cf630",
-          borderLeft: "3px solid #8b5cf6",
-          borderRadius: "10px", marginBottom: "24px"
-        }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "12px" }}>
-            <span style={{ fontSize: "14px", color: "#6b7280" }}>{phase}</span>
-            <span style={{ fontSize: "14px", color: "#8b5cf6", fontWeight: 500 }}>{progress}%</span>
+        <div className="p-6 bg-[#1e2029] border border-[#8b5cf630] border-l-[3px] border-l-[#8b5cf6] rounded-[10px] mb-6">
+          <div className="flex justify-between mb-3">
+            <span className="text-sm text-[#6b7280]">{phase}</span>
+            <span className="text-sm text-[#8b5cf6] font-medium">{progress}%</span>
           </div>
-          <div style={{ height: "4px", background: "#2a2d3a", borderRadius: "2px", overflow: "hidden" }}>
-            <div style={{
-              height: "100%", background: "#8b5cf6", borderRadius: "2px",
-              width: progress + "%", transition: "width 0.5s ease"
-            }} />
+          <div className="h-1 bg-[#2a2d3a] rounded-sm overflow-hidden">
+            <div className="h-full bg-[#8b5cf6] rounded-sm transition-[width] duration-500 ease-out" style={{ width: progress + "%" }} />
           </div>
         </div>
       )}
 
       {/* Error */}
       {error && (
-        <div style={{
-          padding: "16px 20px", background: "rgba(239,68,68,0.08)",
-          border: "1px solid rgba(239,68,68,0.15)", borderRadius: "10px",
-          color: "#f87171", fontSize: "14px", marginBottom: "24px"
-        }}>
+        <div className="px-5 py-4 bg-[rgba(239,68,68,0.08)] border border-[rgba(239,68,68,0.15)] rounded-[10px] text-[#f87171] text-sm mb-6">
           {error}
         </div>
       )}
@@ -313,38 +276,27 @@ export default function PhantomDashboardPage() {
       {result && (
         <>
           {/* Action bar: PDF + Compare */}
-          <div style={{
-            display: "flex", gap: "12px", marginBottom: "16px", flexWrap: "wrap", alignItems: "center",
-          }}>
+          <div className="flex gap-3 mb-4 flex-wrap items-center">
             {result.auditId && (
               <button onClick={handleDownloadPdf} disabled={pdfLoading}
-                style={{
-                  padding: "10px 20px", background: "linear-gradient(135deg, #8b5cf6, #a78bfa)", color: "#fff",
-                  border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 500,
-                  cursor: pdfLoading ? "wait" : "pointer", fontFamily: "inherit",
-                  opacity: pdfLoading ? 0.6 : 1, display: "flex", alignItems: "center", gap: "8px",
-                  boxShadow: "0 4px 16px rgba(139,92,246,0.25)",
-                }}>
+                className="px-5 py-2.5 bg-gradient-to-br from-[#8b5cf6] to-[#a78bfa] text-white border-none rounded-lg text-[13px] font-medium font-[inherit] flex items-center gap-2 shadow-[0_4px_16px_rgba(139,92,246,0.25)] disabled:opacity-60"
+                style={{ cursor: pdfLoading ? "wait" : "pointer" }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
                 </svg>
-                {pdfLoading ? "G\u00e9n\u00e9ration..." : "T\u00e9l\u00e9charger le rapport PDF"}
+                {pdfLoading ? "Génération..." : "Télécharger le rapport PDF"}
               </button>
             )}
 
             {result.auditId && previousAudits.length > 0 && (
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ fontSize: "13px", color: "#9ca3af" }}>Comparer avec :</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[13px] text-[#9ca3af]">Comparer avec :</span>
                 <select
                   value={selectedCompareId}
                   onChange={e => handleCompare(e.target.value)}
-                  style={{
-                    padding: "8px 12px", background: "#1e2029", border: "1px solid #2a2d3a",
-                    borderRadius: "8px", color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
-                    cursor: "pointer", outline: "none", minWidth: "220px",
-                  }}
+                  className="px-3 py-2 bg-[#1e2029] border border-[#2a2d3a] rounded-lg text-[#f0f0f3] text-[13px] font-[inherit] cursor-pointer outline-none min-w-[220px]"
                 >
-                  <option value="">Comparer avec un audit pr\u00e9c\u00e9dent</option>
+                  <option value="">Comparer avec un audit précédent</option>
                   {previousAudits.map(a => (
                     <option key={a._id} value={a._id}>
                       {formatDate(a.createdAt)} — Score {a.scores?.global || 0}
@@ -357,43 +309,33 @@ export default function PhantomDashboardPage() {
 
           {/* Comparison results */}
           {comparingLoading && (
-            <div style={{
-              padding: "20px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "10px", marginBottom: "16px", textAlign: "center", color: "#9ca3af", fontSize: "14px"
-            }}>
+            <div className="p-5 bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] mb-4 text-center text-[#9ca3af] text-sm">
               Comparaison en cours...
             </div>
           )}
 
           {comparison && !comparingLoading && (
-            <div style={{
-              padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderLeft: "3px solid #a78bfa", borderRadius: "10px", marginBottom: "16px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-            }}>
-              <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "18px", display: "flex", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#a78bfa", display: "inline-block" }} />
+            <div className="p-6 bg-[#1e2029] border border-[#2a2d3a] border-l-[3px] border-l-[#a78bfa] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+              <div className="text-[13px] text-[#9ca3af] mb-[18px] flex items-center gap-1.5">
+                <span className="w-[5px] h-[5px] rounded-full bg-[#a78bfa] inline-block" />
                 Comparaison avec l'audit du {formatDate(comparison.previous?.date)}
               </div>
 
               {/* Side-by-side scores */}
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "12px", marginBottom: "20px" }}>
+              <div className="grid grid-cols-5 gap-3 mb-5">
                 {["global", "performance", "accessibility", "seo", "bestPractices"].map(key => {
                   const comp = comparison.comparison?.[key];
                   if (!comp) return null;
                   const labels = { global: "Global", performance: "Perf.", accessibility: "A11y", seo: "SEO", bestPractices: "BP" };
                   return (
-                    <div key={key} style={{
-                      padding: "14px 10px", background: "#161820", border: "1px solid #2a2d3a",
-                      borderRadius: "8px", textAlign: "center"
-                    }}>
-                      <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px" }}>{labels[key]}</div>
-                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "8px" }}>
-                        <span style={{ fontSize: "12px", color: "#6b7280" }}>{comp.previous}</span>
-                        <span style={{ fontSize: "14px", color: "#9ca3af" }}>{"\u2192"}</span>
-                        <span style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3" }}>{comp.current}</span>
+                    <div key={key} className="px-2.5 py-[14px] bg-[#161820] border border-[#2a2d3a] rounded-lg text-center">
+                      <div className="text-[11px] text-[#9ca3af] mb-2">{labels[key]}</div>
+                      <div className="flex justify-center items-center gap-2">
+                        <span className="text-xs text-[#6b7280]">{comp.previous}</span>
+                        <span className="text-sm text-[#9ca3af]">{"→"}</span>
+                        <span className="text-[15px] font-semibold text-[#f0f0f3]">{comp.current}</span>
                       </div>
-                      <div style={{ marginTop: "6px" }}>
+                      <div className="mt-1.5">
                         <ComparisonArrow diff={comp.diff} />
                       </div>
                     </div>
@@ -402,37 +344,26 @@ export default function PhantomDashboardPage() {
               </div>
 
               {/* Resolved / New issues */}
-              <div style={{ display: "flex", gap: "16px" }}>
-                <div style={{
-                  flex: 1, padding: "12px 16px", background: "rgba(16,185,129,0.06)",
-                  border: "1px solid rgba(16,185,129,0.15)", borderRadius: "8px"
-                }}>
-                  <div style={{ fontSize: "18px", fontWeight: 600, color: "#10b981" }}>{comparison.resolvedIssues || 0}</div>
-                  <div style={{ fontSize: "12px", color: "#9ca3af" }}>Probl\u00e8mes r\u00e9solus</div>
+              <div className="flex gap-4">
+                <div className="flex-1 px-4 py-3 bg-[rgba(16,185,129,0.06)] border border-[rgba(16,185,129,0.15)] rounded-lg">
+                  <div className="text-lg font-semibold text-[#10b981]">{comparison.resolvedIssues || 0}</div>
+                  <div className="text-xs text-[#9ca3af]">Problèmes résolus</div>
                 </div>
-                <div style={{
-                  flex: 1, padding: "12px 16px", background: "rgba(239,68,68,0.06)",
-                  border: "1px solid rgba(239,68,68,0.15)", borderRadius: "8px"
-                }}>
-                  <div style={{ fontSize: "18px", fontWeight: 600, color: "#ef4444" }}>{comparison.newIssues || 0}</div>
-                  <div style={{ fontSize: "12px", color: "#9ca3af" }}>Nouveaux probl\u00e8mes</div>
+                <div className="flex-1 px-4 py-3 bg-[rgba(239,68,68,0.06)] border border-[rgba(239,68,68,0.15)] rounded-lg">
+                  <div className="text-lg font-semibold text-[#ef4444]">{comparison.newIssues || 0}</div>
+                  <div className="text-xs text-[#9ca3af]">Nouveaux problèmes</div>
                 </div>
               </div>
             </div>
           )}
 
           {/* Scores */}
-          <div style={{
-            padding: "28px", background: "#1e2029", border: "1px solid #2a2d3a",
-            borderLeft: "3px solid #8b5cf6",
-            borderRadius: "10px", marginBottom: "16px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-          }}>
-            <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "24px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#8b5cf6", display: "inline-block" }} />Scores Lighthouse</div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px", justifyItems: "center" }}>
+          <div className="p-7 bg-[#1e2029] border border-[#2a2d3a] border-l-[3px] border-l-[#8b5cf6] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+            <div className="text-[13px] text-[#9ca3af] mb-6 flex items-center gap-1.5"><span className="w-[5px] h-[5px] rounded-full bg-[#8b5cf6] inline-block" />Scores Lighthouse</div>
+            <div className="grid grid-cols-5 gap-4 justify-items-center">
               <ScoreCircle score={result.scores.global || Math.round((result.scores.performance + result.scores.accessibility + result.scores.seo + (result.scores.bestPractices || 0)) / 4)} label="Global" size={90} color="#8b5cf6" />
               <ScoreCircle score={result.scores.performance} label="Performance" size={72} />
-              <ScoreCircle score={result.scores.accessibility} label="Accessibilit\u00e9" size={72} />
+              <ScoreCircle score={result.scores.accessibility} label="Accessibilité" size={72} />
               <ScoreCircle score={result.scores.seo} label="SEO" size={72} />
               <ScoreCircle score={result.scores.bestPractices || result.scores.conversion || 0} label="Bonnes pratiques" size={72} />
             </div>
@@ -440,14 +371,9 @@ export default function PhantomDashboardPage() {
 
           {/* Core Web Vitals */}
           {result.coreWebVitals && (
-            <div style={{
-              padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderLeft: "3px solid #3b82f6",
-              borderRadius: "10px", marginBottom: "16px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-            }}>
-              <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "16px", display: "flex", alignItems: "center", gap: "6px" }}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#3b82f6", display: "inline-block" }} />Core Web Vitals</div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
+            <div className="p-6 bg-[#1e2029] border border-[#2a2d3a] border-l-[3px] border-l-[#3b82f6] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+              <div className="text-[13px] text-[#9ca3af] mb-4 flex items-center gap-1.5"><span className="w-[5px] h-[5px] rounded-full bg-[#3b82f6] inline-block" />Core Web Vitals</div>
+              <div className="grid grid-cols-3 gap-2.5">
                 <CWVItem label="LCP" data={result.coreWebVitals.lcp} />
                 <CWVItem label="FCP" data={result.coreWebVitals.fcp} />
                 <CWVItem label="CLS" data={result.coreWebVitals.cls} />
@@ -460,32 +386,23 @@ export default function PhantomDashboardPage() {
 
           {/* AI Summary */}
           {result.summary && (
-            <div style={{
-              padding: "20px 24px", background: "rgba(139,92,246,0.06)",
-              border: "1px solid rgba(139,92,246,0.15)", borderRadius: "10px",
-              marginBottom: "16px"
-            }}>
-              <div style={{ fontSize: "12px", color: "#8b5cf6", marginBottom: "8px", fontWeight: 500 }}>Analyse IA</div>
-              <p style={{ fontSize: "14px", color: "#d1d5db", lineHeight: 1.7, margin: 0 }}>{result.summary}</p>
+            <div className="px-6 py-5 bg-[rgba(139,92,246,0.06)] border border-[rgba(139,92,246,0.15)] rounded-[10px] mb-4">
+              <div className="text-xs text-[#8b5cf6] mb-2 font-medium">Analyse IA</div>
+              <p className="text-sm text-[#d1d5db] leading-[1.7] m-0">{result.summary}</p>
             </div>
           )}
 
           {/* Issues */}
-          <div style={{
-            padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
-            borderRadius: "10px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-          }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
-              <div style={{ fontSize: "13px", color: "#9ca3af", display: "flex", alignItems: "center", gap: "6px" }}>
-                <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Probl\u00e8mes d\u00e9tect\u00e9s ({result.issues?.length || 0})
+          <div className="p-6 bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+            <div className="flex justify-between items-center mb-[18px]">
+              <div className="text-[13px] text-[#9ca3af] flex items-center gap-1.5">
+                <span className="w-[5px] h-[5px] rounded-full bg-[#ef4444] inline-block" />Problèmes détectés ({result.issues?.length || 0})
               </div>
-              <div style={{ display: "flex", gap: "6px" }}>
+              <div className="flex gap-1.5">
                 {["all", "critical", "warning", "info"].map(f => (
                   <button key={f} onClick={() => setFilter(f)}
+                    className="px-3 py-1 rounded border-none text-xs cursor-pointer font-[inherit]"
                     style={{
-                      padding: "4px 12px", borderRadius: "4px", border: "none",
-                      fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
                       background: filter === f ? (f === "all" ? "#2a2d3a" : SEVERITY_COLORS[f] + "20") : "transparent",
                       color: filter === f ? (f === "all" ? "#f0f0f3" : SEVERITY_COLORS[f]) : "#9ca3af",
                     }}>
@@ -495,44 +412,38 @@ export default function PhantomDashboardPage() {
               </div>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            <div className="flex flex-col gap-2">
               {filteredIssues.map((issue, i) => (
-                <div key={i} style={{
-                  padding: "16px 20px", background: "#1e2029",
-                  border: "1px solid #2a2d3a", borderRadius: "8px",
-                  borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#9ca3af"}`,
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-                }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
-                    <span style={{
-                      fontSize: "11px", fontWeight: 500, padding: "2px 8px", borderRadius: "4px",
-                      background: (SEVERITY_COLORS[issue.severity] || "#9ca3af") + "18",
-                      color: SEVERITY_COLORS[issue.severity] || "#9ca3af",
-                    }}>
+                <div key={i} className="px-5 py-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.2)]"
+                  style={{ borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#9ca3af"}` }}>
+                  <div className="flex items-center gap-2.5 mb-1.5">
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded"
+                      style={{
+                        background: (SEVERITY_COLORS[issue.severity] || "#9ca3af") + "18",
+                        color: SEVERITY_COLORS[issue.severity] || "#9ca3af",
+                      }}>
                       {issue.severity === "critical" ? "Critique" : issue.severity === "warning" ? "Attention" : "Info"}
                     </span>
-                    <span style={{
-                      fontSize: "11px", color: CATEGORY_COLORS[issue.category] || "#9ca3af"
-                    }}>
+                    <span className="text-[11px]" style={{ color: CATEGORY_COLORS[issue.category] || "#9ca3af" }}>
                       {CATEGORY_LABELS[issue.category] || issue.category}
                     </span>
                     {issue.impact && (
-                      <span style={{ fontSize: "11px", color: "#10b981", marginLeft: "auto" }}>
+                      <span className="text-[11px] text-[#10b981] ml-auto">
                         {issue.impact}
                       </span>
                     )}
                   </div>
-                  <div style={{ fontSize: "14px", color: "#d1d5db", marginBottom: "4px", fontWeight: 500 }}>
+                  <div className="text-sm text-[#d1d5db] mb-1 font-medium">
                     {issue.title}
                   </div>
                   {issue.description && (
-                    <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.5, marginBottom: issue.fix ? "6px" : 0 }}>
+                    <div className={`text-[13px] text-[#9ca3af] leading-normal ${issue.fix ? "mb-1.5" : ""}`}>
                       {issue.description}
                     </div>
                   )}
                   {issue.fix && (
-                    <div style={{ fontSize: "13px", color: "#6b7280", lineHeight: 1.5 }}>
-                      <span style={{ color: "#8b5cf6" }}>Solution : </span>{issue.fix}
+                    <div className="text-[13px] text-[#6b7280] leading-normal">
+                      <span className="text-[#8b5cf6]">Solution : </span>{issue.fix}
                     </div>
                   )}
                 </div>
@@ -541,13 +452,9 @@ export default function PhantomDashboardPage() {
           </div>
 
           {/* New audit */}
-          <div style={{ marginTop: "24px", textAlign: "center" }}>
+          <div className="mt-6 text-center">
             <button onClick={() => { setResult(null); setUrl(""); setError(""); setProgress(0); setComparison(null); setSelectedCompareId(""); setPreviousAudits([]); }}
-              style={{
-                padding: "10px 24px", background: "transparent",
-                border: "1px solid #2a2d3a", borderRadius: "8px",
-                color: "#6b7280", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-              }}>
+              className="px-6 py-2.5 bg-transparent border border-[#2a2d3a] rounded-lg text-[#6b7280] text-[13px] cursor-pointer font-[inherit]">
               Nouvel audit
             </button>
           </div>

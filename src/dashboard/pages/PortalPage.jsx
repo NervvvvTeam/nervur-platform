@@ -63,10 +63,7 @@ const styleTag = `
 }
 `;
 
-const fadeInUp = {
-  animation: "fadeInUp 0.5s ease-out forwards",
-  opacity: 0,
-};
+const fadeInUpClass = "opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards]";
 
 // ═══════════════════════════════════════════
 // TYPING TEXT EFFECT
@@ -85,7 +82,7 @@ function TypingText({ text, speed = 60, delay = 500 }) {
     }, delay);
     return () => clearTimeout(timeout);
   }, [text, speed, delay]);
-  return <span>{displayed}{showCursor && <span style={{ animation: "blink 1s infinite", color: "#818CF8" }}>|</span>}</span>;
+  return <span>{displayed}{showCursor && <span className="[animation:blink_1s_infinite] text-[#818CF8]">|</span>}</span>;
 }
 
 // ═══════════════════════════════════════════
@@ -106,7 +103,7 @@ function AnimatedCounter({ value, duration = 1500, suffix = "", color = "#f0f0f3
     }, 16);
     return () => clearInterval(timer);
   }, [numVal, duration]);
-  return <span style={{ color, fontWeight: 600 }}>{Number.isInteger(numVal) ? Math.round(count) : count.toFixed(1)}{suffix}</span>;
+  return <span className="font-semibold" style={{ color }}>{Number.isInteger(numVal) ? Math.round(count) : count.toFixed(1)}{suffix}</span>;
 }
 
 // ═══════════════════════════════════════════
@@ -158,17 +155,12 @@ function TiltCard({ children, style, onClick, onMouseEnter, onMouseLeave, active
 function GradientBorder({ color, active, children }) {
   if (!active) return children;
   return (
-    <div style={{ position: "relative", borderRadius: "14px", padding: "1px" }}>
-      <div style={{
-        position: "absolute", inset: "-1px", borderRadius: "15px", overflow: "hidden", zIndex: 0
-      }}>
-        <div style={{
-          position: "absolute", inset: "-50%",
-          background: `conic-gradient(from 0deg, ${color}, transparent 30%, transparent 70%, ${color})`,
-          animation: "rotateGradient 4s linear infinite", opacity: 0.4
-        }} />
+    <div className="relative rounded-[14px] p-px">
+      <div className="absolute -inset-px rounded-[15px] overflow-hidden z-0">
+        <div className="absolute -inset-1/2 [animation:rotateGradient_4s_linear_infinite] opacity-40"
+          style={{ background: `conic-gradient(from 0deg, ${color}, transparent 30%, transparent 70%, ${color})` }} />
       </div>
-      <div style={{ position: "relative", zIndex: 1 }}>{children}</div>
+      <div className="relative z-[1]">{children}</div>
     </div>
   );
 }
@@ -185,9 +177,9 @@ function LiveClock() {
   const fmt = time.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const clock = time.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
   return (
-    <div style={{ position: "absolute", top: "28px", right: "32px", textAlign: "right", animation: "fadeInUp 0.6s ease-out 1.5s forwards", opacity: 0 }}>
-      <div style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", fontVariantNumeric: "tabular-nums", letterSpacing: "1px" }}>{clock}</div>
-      <div style={{ fontSize: "12px", color: "#6b7280", textTransform: "capitalize", marginTop: "2px" }}>{fmt}</div>
+    <div className="absolute top-7 right-8 text-right opacity-0 [animation:fadeInUp_0.6s_ease-out_1.5s_forwards]">
+      <div className="text-[22px] font-semibold text-[#f0f0f3] tabular-nums tracking-wide">{clock}</div>
+      <div className="text-xs text-gray-500 capitalize mt-0.5">{fmt}</div>
     </div>
   );
 }
@@ -316,12 +308,9 @@ function AuroraCanvas({ width = 300, height = 340 }) {
   }, [width, height]);
 
   return (
-    <div style={{
-      height: height + "px", borderRadius: "14px", position: "relative",
-      background: "#1e2029", border: "1px solid #2a2d3a",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.2)", overflow: "hidden"
-    }}>
-      <div style={{ position: "absolute", top: "14px", left: "16px", zIndex: 2, fontSize: "10px", fontWeight: 600, color: "#6b7280", letterSpacing: "1px", textTransform: "uppercase" }}>
+    <div className="rounded-[14px] relative bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] overflow-hidden"
+      style={{ height: height + "px" }}>
+      <div className="absolute top-3.5 left-4 z-[2] text-[10px] font-semibold text-gray-500 tracking-wide uppercase">
         Aurora NERVÜR
       </div>
       <canvas ref={canvasRef} width={width} height={height}
@@ -330,7 +319,7 @@ function AuroraCanvas({ width = 300, height = 340 }) {
           mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
         }}
         onMouseLeave={() => { mouseRef.current = { x: width / 2, y: height / 2 }; }}
-        style={{ width: "100%", height: "100%", cursor: "crosshair" }}
+        className="w-full h-full cursor-crosshair"
       />
     </div>
   );
@@ -483,7 +472,8 @@ function ParticleNetwork({ width = 300, height = 600 }) {
         mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
       }}
       onMouseLeave={() => { mouseRef.current = { x: -1000, y: -1000 }; }}
-      style={{ position: "absolute", top: 0, right: 0, width, height, borderRadius: "14px", cursor: "crosshair" }}
+      className="absolute top-0 right-0 rounded-[14px] cursor-crosshair"
+      style={{ width, height }}
     />
   );
 }
@@ -511,27 +501,18 @@ function LiveTicker() {
   }, []);
 
   return (
-    <div style={{
-      padding: "16px 20px", borderRadius: "12px",
-      background: "#1e2029", border: "1px solid #2a2d3a",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.2)", overflow: "hidden",
-      position: "relative", minHeight: "70px"
-    }}>
-      <div style={{ fontSize: "10px", fontWeight: 600, color: "#6b7280", letterSpacing: "1px", marginBottom: "12px", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "6px" }}>
-        <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22c55e", animation: "statusPulse 2s infinite", display: "inline-block" }} />
+    <div className="px-5 py-4 rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] overflow-hidden relative min-h-[70px]">
+      <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3 uppercase flex items-center gap-1.5">
+        <span className="w-1.5 h-1.5 rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />
         Activité en direct
       </div>
       {ACTIVITY_ITEMS.map((item, i) => (
-        <div key={i} style={{
-          display: i === visibleIdx ? "flex" : "none",
-          alignItems: "center", gap: "12px",
-          animation: "fadeInUp 0.4s ease-out",
-        }}>
-          <span style={{ fontSize: "20px" }}>{item.icon}</span>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: "13px", color: "#d1d5db", fontWeight: 500 }}>{item.text}</div>
-            <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "2px", display: "flex", gap: "8px" }}>
-              <span style={{ color: item.color, fontWeight: 500 }}>{item.tool}</span>
+        <div key={i} className={`${i === visibleIdx ? "flex" : "hidden"} items-center gap-3 [animation:fadeInUp_0.4s_ease-out]`}>
+          <span className="text-xl">{item.icon}</span>
+          <div className="flex-1">
+            <div className="text-[13px] text-gray-300 font-medium">{item.text}</div>
+            <div className="text-[11px] text-gray-500 mt-0.5 flex gap-2">
+              <span className="font-medium" style={{ color: item.color }}>{item.tool}</span>
               <span>{item.time}</span>
             </div>
           </div>
@@ -635,153 +616,87 @@ const holoStyles = `
 
 function NervurHologram() {
   return (
-    <div className="holo-container" style={{
-      height: "280px", borderRadius: "14px", position: "relative",
-      background: "linear-gradient(180deg, #1a1b25 0%, #1e2029 50%, #1a1b25 100%)",
-      border: "1px solid #2a2d3a", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-      overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center",
-      cursor: "pointer", perspective: "600px"
-    }}>
+    <div className="holo-container h-[280px] rounded-[14px] relative bg-[linear-gradient(180deg,#1a1b25_0%,#1e2029_50%,#1a1b25_100%)] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] overflow-hidden flex items-center justify-center cursor-pointer [perspective:600px]">
       <style>{holoStyles}</style>
 
       {/* Scan line effect */}
-      <div style={{
-        position: "absolute", left: 0, right: 0, height: "1px",
-        background: "linear-gradient(90deg, transparent, rgba(129,140,248,0.3), transparent)",
-        animation: "scanLine 3s linear infinite", pointerEvents: "none", zIndex: 3
-      }} />
+      <div className="absolute left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,rgba(129,140,248,0.3),transparent)] [animation:scanLine_3s_linear_infinite] pointer-events-none z-[3]" />
 
       {/* Grid background */}
-      <div style={{
-        position: "absolute", inset: 0, opacity: 0.04,
-        backgroundImage: "linear-gradient(rgba(129,140,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(129,140,248,0.5) 1px, transparent 1px)",
-        backgroundSize: "30px 30px", pointerEvents: "none"
-      }} />
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: "linear-gradient(rgba(129,140,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(129,140,248,0.5) 1px, transparent 1px)",
+          backgroundSize: "30px 30px"
+        }} />
 
       {/* Label */}
-      <div style={{ position: "absolute", top: "12px", left: "14px", zIndex: 4 }}>
-        <div style={{ fontSize: "10px", fontWeight: 600, color: "rgba(129,140,248,0.5)", letterSpacing: "2px", textTransform: "uppercase" }}>NERVÜR</div>
+      <div className="absolute top-3 left-3.5 z-[4]">
+        <div className="text-[10px] font-semibold text-[rgba(129,140,248,0.5)] tracking-[2px] uppercase">NERVÜR</div>
       </div>
 
       {/* Central floating element */}
-      <div style={{ animation: "holoFloat 4s ease-in-out infinite", position: "relative", perspective: "400px", transformStyle: "preserve-3d" }}>
+      <div className="[animation:holoFloat_4s_ease-in-out_infinite] relative [perspective:400px] [transform-style:preserve-3d]">
         {/* Glow behind */}
-        <div className="holo-glow" style={{
-          position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-          width: "120px", height: "120px", borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(99,102,241,0.25) 0%, rgba(129,140,248,0.1) 40%, transparent 70%)",
-          animation: "holoPulse 3s ease-in-out infinite", transition: "opacity 0.5s"
-        }} />
+        <div className="holo-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.25)_0%,rgba(129,140,248,0.1)_40%,transparent_70%)] [animation:holoPulse_3s_ease-in-out_infinite] transition-opacity duration-500" />
 
         {/* Ring 1 — Red (Sentinel) */}
-        <div className="holo-ring" style={{
-          position: "absolute", top: "50%", left: "50%",
-          width: "140px", height: "140px", marginTop: "-70px", marginLeft: "-70px",
-          border: "1.5px solid rgba(239,68,68,0.3)", borderRadius: "50%",
-          animation: "holoRing1 8s linear infinite",
-        }}>
-          <div style={{ position: "absolute", top: "-3px", left: "50%", width: "6px", height: "6px", borderRadius: "50%", background: "#ef4444", boxShadow: "0 0 8px #ef4444" }} />
+        <div className="holo-ring absolute top-1/2 left-1/2 w-[140px] h-[140px] -mt-[70px] -ml-[70px] border-[1.5px] border-[rgba(239,68,68,0.3)] rounded-full [animation:holoRing1_8s_linear_infinite]">
+          <div className="absolute -top-[3px] left-1/2 w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]" />
         </div>
 
         {/* Ring 2 — Purple (Phantom) */}
-        <div className="holo-ring" style={{
-          position: "absolute", top: "50%", left: "50%",
-          width: "110px", height: "110px", marginTop: "-55px", marginLeft: "-55px",
-          border: "1.5px solid rgba(139,92,246,0.3)", borderRadius: "50%",
-          animation: "holoRing2 6s linear infinite",
-        }}>
-          <div style={{ position: "absolute", bottom: "-3px", left: "50%", width: "6px", height: "6px", borderRadius: "50%", background: "#8b5cf6", boxShadow: "0 0 8px #8b5cf6" }} />
+        <div className="holo-ring absolute top-1/2 left-1/2 w-[110px] h-[110px] -mt-[55px] -ml-[55px] border-[1.5px] border-[rgba(139,92,246,0.3)] rounded-full [animation:holoRing2_6s_linear_infinite]">
+          <div className="absolute -bottom-[3px] left-1/2 w-1.5 h-1.5 rounded-full bg-violet-500 shadow-[0_0_8px_#8b5cf6]" />
         </div>
 
         {/* Ring 3 — Green (Nexus) */}
-        <div className="holo-ring" style={{
-          position: "absolute", top: "50%", left: "50%",
-          width: "170px", height: "170px", marginTop: "-85px", marginLeft: "-85px",
-          border: "1px solid rgba(16,185,129,0.2)", borderRadius: "50%",
-          animation: "holoRing3 10s linear infinite",
-        }}>
-          <div style={{ position: "absolute", top: "50%", right: "-3px", width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", boxShadow: "0 0 8px #10b981" }} />
+        <div className="holo-ring absolute top-1/2 left-1/2 w-[170px] h-[170px] -mt-[85px] -ml-[85px] border border-[rgba(16,185,129,0.2)] rounded-full [animation:holoRing3_10s_linear_infinite]">
+          <div className="absolute top-1/2 -right-[3px] w-[5px] h-[5px] rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
         </div>
 
         {/* Core — 3D Cube with N */}
-        <div className="holo-core" style={{
-          width: "60px", height: "60px",
-          position: "relative", zIndex: 2,
-          transformStyle: "preserve-3d",
-          animation: "holoSpin 12s linear infinite",
-        }}>
+        <div className="holo-core w-[60px] h-[60px] relative z-[2] [transform-style:preserve-3d] [animation:holoSpin_12s_linear_infinite]">
           {/* Front face */}
-          <div style={{
-            position: "absolute", width: "60px", height: "60px",
-            background: "linear-gradient(135deg, #6366f1, #818CF8)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transform: "translateZ(30px)", backfaceVisibility: "hidden",
-          }}>
-            <span style={{ fontSize: "28px", fontWeight: 800, color: "#fff", fontFamily: "'Helvetica Neue', sans-serif" }}>N</span>
+          <div className="absolute w-[60px] h-[60px] bg-[linear-gradient(135deg,#6366f1,#818CF8)] flex items-center justify-center [transform:translateZ(30px)] [backface-visibility:hidden]">
+            <span className="text-[28px] font-extrabold text-white font-['Helvetica_Neue',sans-serif]">N</span>
           </div>
           {/* Back face */}
-          <div style={{
-            position: "absolute", width: "60px", height: "60px",
-            background: "linear-gradient(135deg, #4f46e5, #6366f1)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transform: "rotateY(180deg) translateZ(30px)", backfaceVisibility: "hidden",
-          }}>
-            <span style={{ fontSize: "28px", fontWeight: 800, color: "#fff", fontFamily: "'Helvetica Neue', sans-serif" }}>N</span>
+          <div className="absolute w-[60px] h-[60px] bg-[linear-gradient(135deg,#4f46e5,#6366f1)] flex items-center justify-center [transform:rotateY(180deg)_translateZ(30px)] [backface-visibility:hidden]">
+            <span className="text-[28px] font-extrabold text-white font-['Helvetica_Neue',sans-serif]">N</span>
           </div>
           {/* Right face */}
-          <div style={{
-            position: "absolute", width: "60px", height: "60px",
-            background: "linear-gradient(180deg, #7c3aed, #6366f1)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transform: "rotateY(90deg) translateZ(30px)", backfaceVisibility: "hidden",
-          }}>
-            <span style={{ fontSize: "28px", fontWeight: 800, color: "#fff", fontFamily: "'Helvetica Neue', sans-serif" }}>N</span>
+          <div className="absolute w-[60px] h-[60px] bg-[linear-gradient(180deg,#7c3aed,#6366f1)] flex items-center justify-center [transform:rotateY(90deg)_translateZ(30px)] [backface-visibility:hidden]">
+            <span className="text-[28px] font-extrabold text-white font-['Helvetica_Neue',sans-serif]">N</span>
           </div>
           {/* Left face */}
-          <div style={{
-            position: "absolute", width: "60px", height: "60px",
-            background: "linear-gradient(180deg, #818CF8, #4f46e5)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transform: "rotateY(-90deg) translateZ(30px)", backfaceVisibility: "hidden",
-          }}>
-            <span style={{ fontSize: "28px", fontWeight: 800, color: "#fff", fontFamily: "'Helvetica Neue', sans-serif" }}>N</span>
+          <div className="absolute w-[60px] h-[60px] bg-[linear-gradient(180deg,#818CF8,#4f46e5)] flex items-center justify-center [transform:rotateY(-90deg)_translateZ(30px)] [backface-visibility:hidden]">
+            <span className="text-[28px] font-extrabold text-white font-['Helvetica_Neue',sans-serif]">N</span>
           </div>
           {/* Top face */}
-          <div style={{
-            position: "absolute", width: "60px", height: "60px",
-            background: "linear-gradient(135deg, #a78bfa, #818CF8)",
-            transform: "rotateX(90deg) translateZ(30px)",
-          }} />
+          <div className="absolute w-[60px] h-[60px] bg-[linear-gradient(135deg,#a78bfa,#818CF8)] [transform:rotateX(90deg)_translateZ(30px)]" />
           {/* Bottom face */}
-          <div style={{
-            position: "absolute", width: "60px", height: "60px",
-            background: "linear-gradient(135deg, #4338ca, #4f46e5)",
-            transform: "rotateX(-90deg) translateZ(30px)",
-          }} />
+          <div className="absolute w-[60px] h-[60px] bg-[linear-gradient(135deg,#4338ca,#4f46e5)] [transform:rotateX(-90deg)_translateZ(30px)]" />
         </div>
       </div>
 
       {/* Bottom stats bar */}
-      <div style={{
-        position: "absolute", bottom: "12px", left: "14px", right: "14px",
-        display: "flex", justifyContent: "space-between", zIndex: 4
-      }}>
+      <div className="absolute bottom-3 left-3.5 right-3.5 flex justify-between z-[4]">
         {[
           { label: "SEN", color: "#ef4444" },
           { label: "PHA", color: "#8b5cf6" },
           { label: "NEX", color: "#10b981" },
           { label: "VAU", color: "#06b6d4" },
         ].map((t, i) => (
-          <div key={i} style={{ textAlign: "center" }}>
-            <div style={{ width: "24px", height: "2px", background: t.color, borderRadius: "1px", marginBottom: "4px", opacity: 0.6 }} />
-            <div style={{ fontSize: "8px", color: t.color, letterSpacing: "1px", opacity: 0.5 }}>{t.label}</div>
+          <div key={i} className="text-center">
+            <div className="w-6 h-0.5 rounded-sm mb-1 opacity-60" style={{ background: t.color }} />
+            <div className="text-[8px] tracking-wide opacity-50" style={{ color: t.color }}>{t.label}</div>
           </div>
         ))}
       </div>
 
       {/* Corner decorations */}
-      <div style={{ position: "absolute", top: "8px", right: "8px", width: "12px", height: "12px", borderTop: "1px solid rgba(129,140,248,0.2)", borderRight: "1px solid rgba(129,140,248,0.2)" }} />
-      <div style={{ position: "absolute", bottom: "8px", left: "8px", width: "12px", height: "12px", borderBottom: "1px solid rgba(129,140,248,0.2)", borderLeft: "1px solid rgba(129,140,248,0.2)" }} />
+      <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-[rgba(129,140,248,0.2)]" />
+      <div className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-[rgba(129,140,248,0.2)]" />
     </div>
   );
 }
@@ -952,14 +867,11 @@ function GravityPlayground({ width = 300, height = 300 }) {
   }, [width, height]);
 
   return (
-    <div style={{
-      height: height + "px", borderRadius: "14px", position: "relative",
-      overflow: "hidden", border: "1px solid #2a2d3a",
-      boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-    }}>
-      <div style={{ position: "absolute", top: "12px", left: "14px", zIndex: 2 }}>
-        <div style={{ fontSize: "10px", fontWeight: 600, color: "rgba(255,255,255,0.4)", letterSpacing: "1px", textTransform: "uppercase" }}>NERVÜR Universe</div>
-        <div style={{ fontSize: "9px", color: "rgba(255,255,255,0.2)", marginTop: "2px" }}>Survolez pour attirer • Cliquez pour repousser</div>
+    <div className="rounded-[14px] relative overflow-hidden border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)]"
+      style={{ height: height + "px" }}>
+      <div className="absolute top-3 left-3.5 z-[2]">
+        <div className="text-[10px] font-semibold text-white/40 tracking-wide uppercase">NERVÜR Universe</div>
+        <div className="text-[9px] text-white/20 mt-0.5">Survolez pour attirer • Cliquez pour repousser</div>
       </div>
       <canvas ref={canvasRef} width={width} height={height}
         onMouseMove={(e) => {
@@ -969,7 +881,7 @@ function GravityPlayground({ width = 300, height = 300 }) {
         onMouseDown={() => { mouseRef.current.down = true; }}
         onMouseUp={() => { mouseRef.current.down = false; }}
         onMouseLeave={() => { mouseRef.current = { x: -1000, y: -1000, down: false }; }}
-        style={{ width: "100%", height: "100%", cursor: "grab" }}
+        className="w-full h-full cursor-grab"
       />
     </div>
   );
@@ -1052,37 +964,22 @@ function RightPanel({ hasAccess }) {
   };
 
   return (
-    <div style={{
-      width: "300px", flexShrink: 0,
-      display: "flex", flexDirection: "column", gap: "16px",
-      animation: "slideInRight 0.6s ease-out forwards", opacity: 0,
-      animationDelay: "0.3s"
-    }}>
+    <div className="w-[300px] shrink-0 flex flex-col gap-4 opacity-0 [animation:slideInRight_0.6s_ease-out_0.3s_forwards]">
       {/* Quick overview card */}
-      <div style={{
-        padding: "20px", borderRadius: "14px",
-        background: "linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(129,140,248,0.04) 100%)",
-        border: "1px solid rgba(99,102,241,0.15)",
-        position: "relative", overflow: "hidden",
-      }}>
-        <div style={{ fontSize: "10px", fontWeight: 600, color: "#818CF8", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "12px" }}>NERVUR</div>
-        <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.7 }}>
+      <div className="p-5 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.15)] relative overflow-hidden">
+        <div className="text-[10px] font-semibold text-[#818CF8] tracking-[1.5px] uppercase mb-3">NERVUR</div>
+        <div className="text-[13px] text-[#9ca3af] leading-[1.7]">
           Votre espace de gestion centralise. Accedez a vos outils, suivez vos statistiques et gerez votre presence en ligne.
         </div>
-        <div style={{
-          marginTop: "16px", display: "flex", gap: "8px", flexWrap: "wrap",
-        }}>
+        <div className="mt-4 flex gap-2 flex-wrap">
           {[
             { label: "SEN", color: "#ef4444" },
             { label: "PHA", color: "#8b5cf6" },
             { label: "VAU", color: "#06b6d4" },
             { label: "PUL", color: "#ec4899" },
           ].map((t, i) => (
-            <div key={i} style={{
-              padding: "4px 10px", borderRadius: "4px",
-              background: `${t.color}15`, border: `1px solid ${t.color}30`,
-              fontSize: "9px", fontWeight: 600, color: t.color, letterSpacing: "1px",
-            }}>
+            <div key={i} className="px-2.5 py-1 rounded text-[9px] font-semibold tracking-wide"
+              style={{ background: `${t.color}15`, border: `1px solid ${t.color}30`, color: t.color }}>
               {t.label}
             </div>
           ))}
@@ -1090,39 +987,25 @@ function RightPanel({ hasAccess }) {
       </div>
 
       {/* Live Activity — dynamic */}
-      <div style={{
-        padding: "16px 20px", borderRadius: "12px",
-        background: "#1e2029", border: "1px solid #2a2d3a",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.2)", minHeight: "70px",
-        animation: "fadeInUp 0.5s ease-out 0.5s forwards", opacity: 0
-      }}>
-        <div style={{ fontSize: "10px", fontWeight: 600, color: "#6b7280", letterSpacing: "1px", marginBottom: "12px", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "6px" }}>
-          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22c55e", animation: "statusPulse 2s infinite", display: "inline-block" }} />
+      <div className="px-5 py-4 rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] min-h-[70px] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.5s_forwards]">
+        <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3 uppercase flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />
           Vos outils
         </div>
         {activities.map((item, i) => (
-          <div key={i} style={{
-            display: i === visibleIdx % activities.length ? "flex" : "none",
-            alignItems: "center", gap: "12px",
-            animation: "fadeInUp 0.4s ease-out",
-          }}>
-            <span style={{ fontSize: "20px" }}>{item.icon}</span>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: "13px", color: "#d1d5db", fontWeight: 500 }}>{item.text}</div>
-              <span style={{ fontSize: "11px", color: item.color, fontWeight: 500 }}>{item.tool}</span>
+          <div key={i} className={`${i === visibleIdx % activities.length ? "flex" : "hidden"} items-center gap-3 [animation:fadeInUp_0.4s_ease-out]`}>
+            <span className="text-xl">{item.icon}</span>
+            <div className="flex-1">
+              <div className="text-[13px] text-gray-300 font-medium">{item.text}</div>
+              <span className="text-[11px] font-medium" style={{ color: item.color }}>{item.tool}</span>
             </div>
           </div>
         ))}
       </div>
 
       {/* Quick Stats — real data */}
-      <div style={{
-        padding: "16px 20px", borderRadius: "12px",
-        background: "#1e2029", border: "1px solid #2a2d3a",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-        animation: "fadeInUp 0.5s ease-out 0.6s forwards", opacity: 0
-      }}>
-        <div style={{ fontSize: "10px", fontWeight: 600, color: "#6b7280", letterSpacing: "1px", marginBottom: "14px", textTransform: "uppercase" }}>
+      <div className="px-5 py-4 rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.6s_forwards]">
+        <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3.5 uppercase">
           Résumé rapide
         </div>
         {[
@@ -1138,9 +1021,9 @@ function RightPanel({ hasAccess }) {
             { label: "Sites surveilles", value: "—", color: "#ec4899" },
           ] : []),
         ].map((stat, i) => (
-          <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: i < 3 ? "1px solid #2a2d3a" : "none" }}>
-            <span style={{ fontSize: "12px", color: "#9ca3af" }}>{stat.label}</span>
-            <span style={{ fontSize: "13px", fontWeight: 600, color: stat.color }}>{stat.value}</span>
+          <div key={i} className={`flex justify-between items-center py-2 ${i < 3 ? "border-b border-[#2a2d3a]" : ""}`}>
+            <span className="text-xs text-[#9ca3af]">{stat.label}</span>
+            <span className="text-[13px] font-semibold" style={{ color: stat.color }}>{stat.value}</span>
           </div>
         ))}
       </div>
@@ -1148,65 +1031,38 @@ function RightPanel({ hasAccess }) {
       {/* Contact / Support */}
       {!contactOpen ? (
         <button onClick={() => setContactOpen(true)}
-          style={{
-            display: "flex", alignItems: "center", gap: "10px",
-            padding: "14px 20px", borderRadius: "12px", width: "100%",
-            background: "linear-gradient(135deg, rgba(99,102,241,0.1), rgba(129,140,248,0.05))",
-            border: "1px solid rgba(99,102,241,0.15)",
-            cursor: "pointer", fontFamily: "inherit", textAlign: "left",
-            transition: "all 0.3s",
-            animation: "fadeInUp 0.5s ease-out 0.7s forwards", opacity: 0
-          }}>
-          <span style={{ fontSize: "20px" }}>💬</span>
+          className="flex items-center gap-2.5 px-5 py-3.5 rounded-xl w-full bg-[linear-gradient(135deg,rgba(99,102,241,0.1),rgba(129,140,248,0.05))] border border-[rgba(99,102,241,0.15)] cursor-pointer font-[inherit] text-left transition-all duration-300 opacity-0 [animation:fadeInUp_0.5s_ease-out_0.7s_forwards]">
+          <span className="text-xl">💬</span>
           <div>
-            <div style={{ fontSize: "13px", color: "#818CF8", fontWeight: 500 }}>Besoin d'aide ?</div>
-            <div style={{ fontSize: "11px", color: "#6b7280" }}>Envoyez-nous un message</div>
+            <div className="text-[13px] text-[#818CF8] font-medium">Besoin d'aide ?</div>
+            <div className="text-[11px] text-gray-500">Envoyez-nous un message</div>
           </div>
         </button>
       ) : (
-        <div style={{
-          padding: "18px 20px", borderRadius: "12px",
-          background: "#1e2029", border: "1px solid #2a2d3a",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-          animation: "fadeInScale 0.3s ease-out"
-        }}>
+        <div className="px-5 py-[18px] rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] [animation:fadeInScale_0.3s_ease-out]">
           {contactSent ? (
-            <div style={{ textAlign: "center", padding: "20px 0" }}>
-              <div style={{ fontSize: "28px", marginBottom: "8px" }}>✅</div>
-              <div style={{ fontSize: "14px", color: "#22c55e", fontWeight: 500 }}>Message envoyé !</div>
-              <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>Nous vous répondrons sous 24h</div>
+            <div className="text-center py-5">
+              <div className="text-[28px] mb-2">✅</div>
+              <div className="text-sm text-green-500 font-medium">Message envoyé !</div>
+              <div className="text-xs text-gray-500 mt-1">Nous vous répondrons sous 24h</div>
             </div>
           ) : (
             <>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-                <span style={{ fontSize: "13px", fontWeight: 600, color: "#f0f0f3" }}>Contactez-nous</span>
-                <button onClick={() => setContactOpen(false)} style={{ background: "none", border: "none", color: "#6b7280", cursor: "pointer", fontSize: "16px", fontFamily: "inherit" }}>✕</button>
+              <div className="flex justify-between items-center mb-3.5">
+                <span className="text-[13px] font-semibold text-[#f0f0f3]">Contactez-nous</span>
+                <button onClick={() => setContactOpen(false)} className="bg-transparent border-none text-gray-500 cursor-pointer text-base font-[inherit]">✕</button>
               </div>
               <input value={contactForm.subject} onChange={e => setContactForm(f => ({ ...f, subject: e.target.value }))}
                 placeholder="Sujet"
-                style={{
-                  width: "100%", padding: "10px 12px", background: "#141520", border: "1px solid #2a2d3a",
-                  borderRadius: "8px", color: "#e4e4e7", fontSize: "13px", fontFamily: "inherit",
-                  outline: "none", boxSizing: "border-box", marginBottom: "10px"
-                }}
-                onFocus={e => e.target.style.borderColor = "#6366f1"}
-                onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
+                className="w-full px-3 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-[13px] font-[inherit] outline-none box-border mb-2.5 focus:border-indigo-500"
+              />
               <textarea value={contactForm.message} onChange={e => setContactForm(f => ({ ...f, message: e.target.value }))}
                 placeholder="Votre message..."
                 rows={4}
-                style={{
-                  width: "100%", padding: "10px 12px", background: "#141520", border: "1px solid #2a2d3a",
-                  borderRadius: "8px", color: "#e4e4e7", fontSize: "13px", fontFamily: "inherit",
-                  outline: "none", boxSizing: "border-box", marginBottom: "12px", resize: "vertical"
-                }}
-                onFocus={e => e.target.style.borderColor = "#6366f1"}
-                onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
+                className="w-full px-3 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-[13px] font-[inherit] outline-none box-border mb-3 resize-y focus:border-indigo-500"
+              />
               <button onClick={handleContact}
-                style={{
-                  width: "100%", padding: "10px", background: "linear-gradient(135deg, #6366f1, #818CF8)",
-                  color: "#fff", border: "none", borderRadius: "8px",
-                  fontSize: "13px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit"
-                }}>
+                className="w-full py-2.5 bg-[linear-gradient(135deg,#6366f1,#818CF8)] text-white border-none rounded-lg text-[13px] font-medium cursor-pointer font-[inherit]">
                 Envoyer
               </button>
             </>
@@ -1228,27 +1084,21 @@ export default function PortalPage() {
   const tipIndex = Math.floor(Date.now() / 86400000) % TIPS.length;
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="relative">
       <style>{styleTag}</style>
 
       {/* Two-column layout: Tools + Interactive Panel */}
-      <div style={{ display: "flex", gap: "32px", alignItems: "flex-start" }}>
+      <div className="flex gap-8 items-start">
 
         {/* LEFT: Tools */}
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="flex-1 min-w-0">
           {/* Header */}
-          <div style={{
-            marginBottom: "32px", padding: "28px 32px", borderRadius: "14px",
-            background: "linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(129,140,248,0.04) 100%)",
-            border: "1px solid rgba(99,102,241,0.12)",
-            position: "relative", overflow: "hidden",
-            ...fadeInUp
-          }}>
-            <div style={{ position: "absolute", top: "-20px", right: "40px", width: "120px", height: "120px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)", animation: "orbFloat 6s ease-in-out infinite", pointerEvents: "none" }} />
-            <h1 style={{ fontSize: "28px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px", position: "relative" }}>
+          <div className={`mb-8 px-8 py-7 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.12)] relative overflow-hidden ${fadeInUpClass}`}>
+            <div className="absolute -top-5 right-10 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.15)_0%,transparent_70%)] [animation:orbFloat_6s_ease-in-out_infinite] pointer-events-none" />
+            <h1 className="text-[28px] font-semibold text-[#f0f0f3] mb-1.5 relative">
               <TypingText text={`Bonjour, ${user?.name?.split(" ")[0] || "Client"}`} speed={50} delay={300} />
             </h1>
-            <p style={{ fontSize: "14px", color: "#9ca3af", position: "relative", animation: "fadeInUp 0.6s ease-out 1.2s forwards", opacity: 0 }}>
+            <p className="text-sm text-[#9ca3af] relative opacity-0 [animation:fadeInUp_0.6s_ease-out_1.2s_forwards]">
               Votre espace de gestion NERVÜR
             </p>
             {/* Live clock */}
@@ -1256,7 +1106,7 @@ export default function PortalPage() {
           </div>
 
           {/* Tool Cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div className="grid grid-cols-2 gap-4">
             {TOOLS.map((tool, index) => {
               const active = hasAccess(tool.id);
               const { Icon, color, gradient } = tool;
@@ -1266,58 +1116,53 @@ export default function PortalPage() {
                   onClick={() => active ? navigate(tool.path) : window.open("https://nervur.fr/contact", "_blank")}
                   onMouseEnter={() => setHoveredCard(tool.id)}
                   onMouseLeave={() => setHoveredCard(null)}
+                  className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-6 rounded-[14px] bg-[#1e2029] cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden"
                   style={{
-                    ...fadeInUp, animationDelay: `${index * 0.1}s`,
-                    padding: "24px", paddingTop: "27px",
+                    animationDelay: `${index * 0.1}s`,
                     border: `1px solid ${isHovered && active ? `${color}50` : "#2a2d3a"}`,
-                    borderRadius: "14px", background: "#1e2029",
-                    cursor: "pointer", opacity: active ? 1 : 0.45,
-                    display: "flex", flexDirection: "column",
-                    transition: "all 0.3s ease",
-                    position: "relative", overflow: "hidden",
+                    opacity: active ? undefined : 0.45,
                     transform: isHovered && active ? "translateY(-4px)" : "translateY(0)",
                     boxShadow: isHovered && active ? `0 12px 40px ${color}20, 0 4px 16px rgba(0,0,0,0.3)` : "0 2px 8px rgba(0,0,0,0.25)",
                   }}>
                   {/* Top accent */}
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: active ? gradient : "#2a2d3a", borderRadius: "14px 14px 0 0" }} />
-                  {isHovered && active && <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, borderRadius: "14px", pointerEvents: "none", background: `linear-gradient(90deg, transparent, ${color}10, transparent)`, backgroundSize: "200% 100%", animation: "shimmer 2s linear infinite" }} />}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[14px]" style={{ background: active ? gradient : "#2a2d3a" }} />
+                  {isHovered && active && <div className="absolute inset-0 rounded-[14px] pointer-events-none [background-size:200%_100%] [animation:shimmer_2s_linear_infinite]" style={{ background: `linear-gradient(90deg, transparent, ${color}10, transparent)` }} />}
 
-                  <div style={{
-                    width: "48px", height: "48px", borderRadius: "12px", background: gradient,
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: "16px", boxShadow: active ? `0 4px 12px ${color}30` : "none",
-                    transition: "transform 0.3s", transform: isHovered && active ? "scale(1.08)" : "scale(1)",
-                  }}>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300"
+                    style={{
+                      background: gradient,
+                      boxShadow: active ? `0 4px 12px ${color}30` : "none",
+                      transform: isHovered && active ? "scale(1.08)" : "scale(1)",
+                    }}>
                     <Icon color="#fff" size={24} />
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px", flexWrap: "wrap" }}>
-                    <h3 style={{ fontSize: "16px", fontWeight: 600, color: active ? "#f0f0f3" : "#4b5563", margin: 0 }}>{tool.name}</h3>
-                    <span style={{ fontSize: "10px", fontWeight: 500, color: active ? color : "#6b7280", padding: "2px 7px", borderRadius: "4px", background: active ? `${color}15` : "#2a2d3a" }}>{tool.subtitle}</span>
-                    {active && <span style={{ display: "inline-flex", alignItems: "center", gap: "3px", fontSize: "10px", color: "#22c55e", fontWeight: 500 }}>
-                      <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#22c55e", animation: "statusPulse 2s infinite", display: "inline-block" }} />Actif
+                  <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                    <h3 className="text-base font-semibold m-0" style={{ color: active ? "#f0f0f3" : "#4b5563" }}>{tool.name}</h3>
+                    <span className="text-[10px] font-medium px-[7px] py-0.5 rounded"
+                      style={{ color: active ? color : "#6b7280", background: active ? `${color}15` : "#2a2d3a" }}>{tool.subtitle}</span>
+                    {active && <span className="inline-flex items-center gap-[3px] text-[10px] text-green-500 font-medium">
+                      <span className="w-[5px] h-[5px] rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />Actif
                     </span>}
                   </div>
 
-                  <p style={{ fontSize: "13px", color: "#9ca3af", margin: "0 0 14px", lineHeight: 1.6 }}>{tool.desc}</p>
+                  <p className="text-[13px] text-[#9ca3af] m-0 mb-3.5 leading-relaxed">{tool.desc}</p>
 
-                  {active && <div style={{ fontSize: "11px", color: "#6b7280", marginBottom: "16px", padding: "6px 10px", borderRadius: "6px", background: "#17181f", border: "1px solid #2a2d3a" }}>{tool.stats}</div>}
+                  {active && <div className="text-[11px] text-gray-500 mb-4 px-2.5 py-1.5 rounded-md bg-[#17181f] border border-[#2a2d3a]">{tool.stats}</div>}
 
-                  <div style={{ marginTop: "auto" }}>
+                  <div className="mt-auto">
                     {active ? (
                       <span onMouseEnter={() => setHoveredBtn(tool.id)} onMouseLeave={() => setHoveredBtn(null)}
+                        className="inline-flex items-center gap-1.5 px-4 py-[7px] rounded-lg text-xs font-medium transition-all duration-300"
                         style={{
-                          display: "inline-flex", alignItems: "center", gap: "6px",
-                          padding: "7px 16px", borderRadius: "8px",
                           background: hoveredBtn === tool.id ? `${color}25` : `${color}15`,
-                          color, fontSize: "12px", fontWeight: 500,
+                          color,
                           border: `1px solid ${hoveredBtn === tool.id ? `${color}50` : `${color}30`}`,
-                          transition: "all 0.3s",
                         }}>
-                        Ouvrir <span style={{ transition: "transform 0.3s", transform: hoveredBtn === tool.id ? "translateX(4px)" : "translateX(0)", display: "inline-block" }}>&rarr;</span>
+                        Ouvrir <span className="inline-block transition-transform duration-300" style={{ transform: hoveredBtn === tool.id ? "translateX(4px)" : "translateX(0)" }}>&rarr;</span>
                       </span>
                     ) : (
-                      <span style={{ fontSize: "12px", color: "#6b7280" }}>Non souscrit</span>
+                      <span className="text-xs text-gray-500">Non souscrit</span>
                     )}
                   </div>
                 </div>
@@ -1326,9 +1171,9 @@ export default function PortalPage() {
           </div>
 
           {/* Tips */}
-          <div style={{ marginTop: "24px", padding: "16px 20px", borderRadius: "12px", background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.12)", ...fadeInUp, animationDelay: "0.5s" }}>
-            <div style={{ fontSize: "10px", fontWeight: 600, color: "#818CF8", letterSpacing: "0.5px", textTransform: "uppercase", marginBottom: "6px" }}>Conseil du jour</div>
-            <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0, lineHeight: 1.6 }}>{TIPS[tipIndex]}</p>
+          <div className={`mt-6 px-5 py-4 rounded-xl bg-[rgba(99,102,241,0.06)] border border-[rgba(99,102,241,0.12)] ${fadeInUpClass}`} style={{ animationDelay: "0.5s" }}>
+            <div className="text-[10px] font-semibold text-[#818CF8] tracking-[0.5px] uppercase mb-1.5">Conseil du jour</div>
+            <p className="text-[13px] text-[#9ca3af] m-0 leading-relaxed">{TIPS[tipIndex]}</p>
           </div>
         </div>
 

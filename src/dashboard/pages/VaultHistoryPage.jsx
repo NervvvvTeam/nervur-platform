@@ -23,7 +23,7 @@ const RISK_COLORS = {
 
 const RISK_LABELS = {
   critical: "Critique",
-  high: "Élevé",
+  high: "\u00c9lev\u00e9",
   medium: "Moyen",
   low: "Faible",
 };
@@ -47,18 +47,10 @@ const TrashIcon = ({ size = 15, color = "#9ca3af" }) => (
 );
 
 function formatDate(dateStr) {
-  if (!dateStr) return "—";
+  if (!dateStr) return "\u2014";
   const d = new Date(dateStr);
   return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
 }
-
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
 
 export default function VaultHistoryPage() {
   const { get, del } = useApi();
@@ -86,7 +78,7 @@ export default function VaultHistoryPage() {
 
   const handleDelete = useCallback(async (e, scanId) => {
     e.stopPropagation();
-    if (!confirm("Supprimer cette analyse ? Cette action est irréversible.")) return;
+    if (!confirm("Supprimer cette analyse ? Cette action est irr\u00e9versible.")) return;
     try {
       setDeletingId(scanId);
       await del(`/api/vault/scan/${scanId}`);
@@ -99,74 +91,49 @@ export default function VaultHistoryPage() {
   }, [del]);
 
   return (
-    <div style={{ maxWidth: "860px" }}>
+    <div className="max-w-[860px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
       {/* Header */}
-      <div style={{ marginBottom: "32px" }}>
-        <div style={{
-          width: "40px", height: "3px", borderRadius: "2px",
-          background: "linear-gradient(135deg, #06b6d4, #22d3ee)",
-          marginBottom: "16px"
-        }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
+      <div className="mb-8">
+        <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
+        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
           Historique des analyses
         </h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
-          Retrouvez toutes vos analyses de sécurité passées
+        <p className="text-sm text-[#9ca3af]">
+          Retrouvez toutes vos analyses de s\u00e9curit\u00e9 pass\u00e9es
         </p>
       </div>
 
       {/* Loading */}
       {loading && (
-        <div style={{ textAlign: "center", padding: "48px 0" }}>
-          <div style={{
-            width: "36px", height: "36px", margin: "0 auto 12px",
-            border: "3px solid rgba(6,182,212,0.2)", borderTop: `3px solid ${ACCENT}`,
-            borderRadius: "50%", animation: "vault-spin 1s linear infinite",
-          }} />
-          <div style={{ fontSize: "13px", color: "#9ca3af" }}>Chargement...</div>
+        <div className="text-center py-12">
+          <div className="w-9 h-9 mx-auto mb-3 border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite]" />
+          <div className="text-[13px] text-[#9ca3af]">Chargement...</div>
           <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 
       {/* Error */}
       {error && (
-        <div style={{
-          padding: "10px 14px", marginBottom: "16px",
-          background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)",
-          borderRadius: "6px", fontSize: "13px", color: "#fca5a5",
-        }}>
+        <div className="px-3.5 py-2.5 mb-4 bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.25)] rounded-md text-[13px] text-[#fca5a5]">
           {error}
         </div>
       )}
 
       {/* Empty state */}
       {!loading && !error && scans.length === 0 && (
-        <div style={{
-          ...cardStyle,
-          border: `1px solid ${BORDER_TINT}`,
-          background: BG_TINT,
-          textAlign: "center",
-          padding: "48px 24px",
-        }}>
+        <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] text-center px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
           <ShieldIcon size={48} color="#3f3f46" />
-          <div style={{ fontSize: "16px", fontWeight: 600, color: "#9ca3af", marginTop: "16px", marginBottom: "8px" }}>
-            Aucune analyse effectuée
+          <div className="text-base font-semibold text-[#9ca3af] mt-4 mb-2">
+            Aucune analyse effectu\u00e9e
           </div>
-          <div style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.6, marginBottom: "20px" }}>
-            Vous n'avez pas encore lancé d'analyse de sécurité.
+          <div className="text-[13px] text-[#d1d5db] leading-relaxed mb-5">
+            Vous n'avez pas encore lanc\u00e9 d'analyse de s\u00e9curit\u00e9.
             <br />Commencez par scanner les emails de votre entreprise.
           </div>
           <button
             onClick={() => navigate("/app/vault")}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              padding: "10px 20px", borderRadius: "8px",
-              background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none",
-              color: "#0f0f11", fontSize: "13px", fontWeight: 600,
-              cursor: "pointer", fontFamily: "inherit",
-              boxShadow: "0 4px 16px rgba(6,182,212,0.4)",
-            }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] border-none text-[#0f0f11] text-[13px] font-semibold cursor-pointer font-[inherit] shadow-[0_4px_16px_rgba(6,182,212,0.4)]"
           >
             <ShieldIcon size={16} color="#0f0f11" />
             Lancer une analyse
@@ -176,7 +143,7 @@ export default function VaultHistoryPage() {
 
       {/* Scan list */}
       {!loading && scans.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div className="flex flex-col gap-2.5">
           {scans.map(scan => {
             const scanId = scan._id || scan.id;
             const riskLevel = scan.riskLevel || "low";
@@ -187,47 +154,35 @@ export default function VaultHistoryPage() {
               <div
                 key={scanId}
                 onClick={() => navigate(`/app/vault/scan/${scanId}`)}
+                className="bg-[#1e2029] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center gap-4 hover:bg-[rgba(6,182,212,0.08)]"
                 style={{
-                  ...cardStyle,
                   border: `1px solid ${BORDER_TINT}`,
                   borderLeft: `3px solid ${ACCENT}`,
-                  cursor: "pointer",
-                  transition: "all 0.15s",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "16px",
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = BG_TINT; e.currentTarget.style.borderColor = ACCENT + "40"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "#1e2029"; e.currentTarget.style.borderColor = "rgba(6,182,212,0.2)"; }}
               >
                 {/* Shield icon */}
-                <div style={{
-                  width: "40px", height: "40px", borderRadius: "8px",
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{
                   background: `${riskColor}12`,
                   border: `1px solid ${riskColor}25`,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0,
                 }}>
                   <ShieldIcon size={20} color={riskColor} />
                 </div>
 
                 {/* Info */}
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px", flexWrap: "wrap" }}>
-                    <span style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2.5 mb-1 flex-wrap">
+                    <span className="text-sm font-semibold text-[#f0f0f3]">
                       {scan.domain}
                     </span>
-                    <span style={{
-                      fontSize: "11px", fontWeight: 600,
+                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{
                       color: riskColor,
                       background: `${riskColor}15`,
-                      padding: "2px 8px", borderRadius: "4px",
                       border: `1px solid ${riskColor}30`,
                     }}>
                       {RISK_LABELS[riskLevel] || riskLevel}
                     </span>
                   </div>
-                  <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "#9ca3af" }}>
+                  <div className="flex gap-4 text-xs text-[#9ca3af]">
                     <span>{formatDate(scan.createdAt || scan.date)}</span>
                     <span>{compromised} email{compromised > 1 ? "s" : ""} compromis</span>
                   </div>
@@ -237,24 +192,18 @@ export default function VaultHistoryPage() {
                 <button
                   onClick={(e) => handleDelete(e, scanId)}
                   disabled={deletingId === scanId}
+                  className="bg-transparent border border-transparent rounded-md p-1.5 flex items-center justify-center shrink-0 transition-all duration-150 hover:opacity-100 hover:border-[rgba(239,68,68,0.3)] hover:bg-[rgba(239,68,68,0.1)]"
                   style={{
-                    background: "transparent", border: "1px solid transparent",
-                    borderRadius: "6px", padding: "6px",
                     cursor: deletingId === scanId ? "wait" : "pointer",
                     opacity: deletingId === scanId ? 0.4 : 0.6,
-                    transition: "all 0.15s",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    flexShrink: 0,
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.borderColor = "rgba(239,68,68,0.3)"; e.currentTarget.style.background = "rgba(239,68,68,0.1)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.opacity = "0.6"; e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.background = "transparent"; }}
                   title="Supprimer cette analyse"
                 >
                   <TrashIcon color="#ef4444" />
                 </button>
 
                 {/* Arrow */}
-                <span style={{ color: ACCENT, fontSize: "16px", flexShrink: 0 }}>&#8594;</span>
+                <span className="text-[#06b6d4] text-base shrink-0">&#8594;</span>
               </div>
             );
           })}

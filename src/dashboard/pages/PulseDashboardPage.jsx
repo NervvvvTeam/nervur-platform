@@ -14,14 +14,6 @@ const ACCENT_LIGHT = "#f472b6";
 const BG_TINT = "rgba(236,72,153,0.06)";
 const BORDER_TINT = "rgba(236,72,153,0.18)";
 
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
-
 const HeartPulseIcon = ({ size = 22, color = ACCENT }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572" />
@@ -69,19 +61,16 @@ function ScoreGauge({ score, size = 100 }) {
   const scoreColor = score >= 80 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444";
 
   return (
-    <div style={{ position: "relative", width: size, height: size }}>
+    <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
         <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#2a2d3a" strokeWidth="6" />
         <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={scoreColor}
           strokeWidth="6" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
           style={{ transition: "stroke-dashoffset 1s ease" }} />
       </svg>
-      <div style={{
-        position: "absolute", top: 0, left: 0, width: "100%", height: "100%",
-        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"
-      }}>
-        <span style={{ fontSize: size > 80 ? "24px" : "18px", fontWeight: 700, color: scoreColor }}>{score}</span>
-        <span style={{ fontSize: "10px", color: "#6b7280" }}>/100</span>
+      <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+        <span className="font-bold" style={{ fontSize: size > 80 ? "24px" : "18px", color: scoreColor }}>{score}</span>
+        <span className="text-[10px] text-[#6b7280]">/100</span>
       </div>
     </div>
   );
@@ -89,13 +78,14 @@ function ScoreGauge({ score, size = 100 }) {
 
 function StatusBadge({ ok, labelOk, labelFail }) {
   return (
-    <span style={{
-      display: "inline-flex", alignItems: "center", gap: "5px",
-      padding: "3px 10px", borderRadius: "4px", fontSize: "12px", fontWeight: 500,
-      color: ok ? "#10b981" : "#ef4444",
-      background: ok ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)",
-      border: `1px solid ${ok ? "rgba(16,185,129,0.2)" : "rgba(239,68,68,0.2)"}`,
-    }}>
+    <span
+      className="inline-flex items-center gap-[5px] px-2.5 py-[3px] rounded text-xs font-medium"
+      style={{
+        color: ok ? "#10b981" : "#ef4444",
+        background: ok ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)",
+        border: `1px solid ${ok ? "rgba(16,185,129,0.2)" : "rgba(239,68,68,0.2)"}`,
+      }}
+    >
       {ok ? "\u2705" : "\u274C"} {ok ? labelOk : labelFail}
     </span>
   );
@@ -103,11 +93,10 @@ function StatusBadge({ ok, labelOk, labelFail }) {
 
 function Chip({ label, color = "#9ca3af" }) {
   return (
-    <span style={{
-      display: "inline-flex", alignItems: "center",
-      padding: "2px 10px", borderRadius: "12px", fontSize: "11px", fontWeight: 500,
-      color, background: `${color}15`, border: `1px solid ${color}30`,
-    }}>
+    <span
+      className="inline-flex items-center px-2.5 py-0.5 rounded-xl text-[11px] font-medium"
+      style={{ color, background: `${color}15`, border: `1px solid ${color}30` }}
+    >
       {label}
     </span>
   );
@@ -129,7 +118,7 @@ function MiniResponseTimeChart({ history, width = 260, height = 60 }) {
   const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${getX(i)} ${getY(p.responseTime || 0)}`).join(" ");
 
   return (
-    <svg width={width} height={height} style={{ display: "block" }}>
+    <svg width={width} height={height} className="block">
       <defs>
         <linearGradient id="rtGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={ACCENT} stopOpacity="0.25" />
@@ -165,54 +154,41 @@ function AlertsConfig({ site, onSave }) {
     setTimeout(() => setSaved(false), 2000);
   };
 
-  const toggleStyle = (active) => ({
-    width: "36px", height: "20px", borderRadius: "10px",
-    background: active ? ACCENT : "#2a2d3a",
-    border: "none", cursor: "pointer", position: "relative",
-    transition: "background 0.2s", flexShrink: 0,
-  });
-  const toggleDot = (active) => ({
-    position: "absolute", top: "2px", width: "16px", height: "16px", borderRadius: "50%",
-    background: "#fff", transition: "left 0.2s",
-    left: active ? "18px" : "2px",
-  });
-
   return (
-    <div style={{
-      marginTop: "16px", padding: "16px", background: "#1e2029",
-      border: "1px solid #2a2d3a", borderRadius: "8px", borderLeft: `3px solid ${ACCENT}`,
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "14px" }}>
+    <div className="mt-4 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
+      <div className="flex items-center gap-2 mb-3.5">
         <BellIcon size={16} color={ACCENT} />
-        <span style={{ fontSize: "13px", fontWeight: 600, color: "#f0f0f3" }}>Configurer les alertes</span>
+        <span className="text-[13px] font-semibold text-[#f0f0f3]">Configurer les alertes</span>
       </div>
 
-      <div style={{ marginBottom: "12px" }}>
-        <label style={{ fontSize: "12px", color: "#9ca3af", display: "block", marginBottom: "6px" }}>Email pour les alertes</label>
+      <div className="mb-3">
+        <label className="text-xs text-[#9ca3af] block mb-1.5">Email pour les alertes</label>
         <input
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="votre@email.com"
-          style={{
-            width: "100%", padding: "8px 12px", background: "#141520",
-            border: "1px solid #2a2d3a", borderRadius: "6px",
-            color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit",
-            outline: "none", boxSizing: "border-box",
-          }}
+          className="w-full px-3 py-2 bg-[#141520] border border-[#2a2d3a] rounded-md text-[#f0f0f3] text-[13px] font-[inherit] outline-none box-border"
         />
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "14px" }}>
+      <div className="flex flex-col gap-2.5 mb-3.5">
         {[
           { label: "Site hors ligne (down)", active: down, toggle: () => setDown(!down) },
           { label: "Certificat SSL expire bientot", active: sslExp, toggle: () => setSslExp(!sslExp) },
           { label: "Domaine expire bientot", active: domainExp, toggle: () => setDomainExp(!domainExp) },
         ].map(({ label, active, toggle }) => (
-          <div key={label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <span style={{ fontSize: "12px", color: "#d1d5db" }}>{label}</span>
-            <button onClick={toggle} style={toggleStyle(active)}>
-              <div style={toggleDot(active)} />
+          <div key={label} className="flex items-center justify-between">
+            <span className="text-xs text-[#d1d5db]">{label}</span>
+            <button
+              onClick={toggle}
+              className="w-9 h-5 rounded-[10px] border-none cursor-pointer relative transition-colors duration-200 shrink-0"
+              style={{ background: active ? ACCENT : "#2a2d3a" }}
+            >
+              <div
+                className="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-[left] duration-200"
+                style={{ left: active ? "18px" : "2px" }}
+              />
             </button>
           </div>
         ))}
@@ -221,12 +197,12 @@ function AlertsConfig({ site, onSave }) {
       <button
         onClick={handleSave}
         disabled={saving}
+        className="px-5 py-2 rounded-md text-xs font-semibold font-[inherit]"
         style={{
-          padding: "8px 20px", borderRadius: "6px", fontSize: "12px", fontWeight: 600,
           background: saved ? "rgba(16,185,129,0.15)" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
           border: saved ? "1px solid rgba(16,185,129,0.3)" : "none",
           color: saved ? "#10b981" : "#fff",
-          cursor: saving ? "wait" : "pointer", fontFamily: "inherit",
+          cursor: saving ? "wait" : "pointer",
           opacity: saving ? 0.5 : 1,
         }}
       >
@@ -243,61 +219,60 @@ function StatusPagePreview({ site, statusData, onClose }) {
   const statusLabel = statusData.status === "operational" ? "Operationnel" : "Hors ligne";
 
   return (
-    <div style={{
-      position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-      background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center",
-      zIndex: 9999,
-    }} onClick={onClose}>
-      <div style={{
-        width: "600px", maxHeight: "80vh", overflow: "auto",
-        background: "#141520", borderRadius: "12px", border: "1px solid #2a2d3a",
-        padding: "32px",
-      }} onClick={e => e.stopPropagation()}>
+    <div
+      className="fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]"
+      onClick={onClose}
+    >
+      <div
+        className="w-[600px] max-h-[80vh] overflow-auto bg-[#141520] rounded-xl border border-[#2a2d3a] p-8"
+        onClick={e => e.stopPropagation()}
+      >
         {/* Status page header */}
-        <div style={{ textAlign: "center", marginBottom: "28px" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "8px" }}>
+        <div className="text-center mb-7">
+          <div className="flex items-center justify-center gap-2.5 mb-2">
             <GlobeIcon size={24} color={ACCENT} />
-            <h2 style={{ fontSize: "20px", fontWeight: 700, color: "#f0f0f3", margin: 0 }}>
+            <h2 className="text-xl font-bold text-[#f0f0f3] m-0">
               {statusData.domain}
             </h2>
           </div>
-          <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0 }}>Page de statut publique</p>
+          <p className="text-[13px] text-[#9ca3af] m-0">Page de statut publique</p>
         </div>
 
         {/* Big status indicator */}
-        <div style={{
-          textAlign: "center", padding: "24px", marginBottom: "24px",
-          background: `${statusColor}10`, border: `1px solid ${statusColor}30`,
-          borderRadius: "10px",
-        }}>
-          <div style={{
-            width: "16px", height: "16px", borderRadius: "50%",
-            background: statusColor, margin: "0 auto 12px",
-            boxShadow: `0 0 12px ${statusColor}60`,
-          }} />
-          <div style={{ fontSize: "18px", fontWeight: 700, color: statusColor }}>{statusLabel}</div>
-          <div style={{ fontSize: "13px", color: "#9ca3af", marginTop: "6px" }}>
+        <div
+          className="text-center p-6 mb-6 rounded-[10px] border"
+          style={{
+            background: `${statusColor}10`,
+            borderColor: `${statusColor}30`,
+          }}
+        >
+          <div
+            className="w-4 h-4 rounded-full mx-auto mb-3"
+            style={{ background: statusColor, boxShadow: `0 0 12px ${statusColor}60` }}
+          />
+          <div className="text-lg font-bold" style={{ color: statusColor }}>{statusLabel}</div>
+          <div className="text-[13px] text-[#9ca3af] mt-1.5">
             Disponibilite : {statusData.uptimePercentage}%
           </div>
         </div>
 
         {/* Stats grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "12px", marginBottom: "24px" }}>
-          <div style={{ padding: "16px", background: "#1e2029", borderRadius: "8px", textAlign: "center" }}>
-            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>Temps de reponse</div>
-            <div style={{ fontSize: "20px", fontWeight: 700, color: "#f0f0f3" }}>
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="p-4 bg-[#1e2029] rounded-lg text-center">
+            <div className="text-[11px] text-[#9ca3af] mb-1.5">Temps de reponse</div>
+            <div className="text-xl font-bold text-[#f0f0f3]">
               {statusData.responseTime ? `${statusData.responseTime}ms` : "N/A"}
             </div>
           </div>
-          <div style={{ padding: "16px", background: "#1e2029", borderRadius: "8px", textAlign: "center" }}>
-            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>Certificat SSL</div>
-            <div style={{ fontSize: "20px", fontWeight: 700, color: statusData.ssl?.valid ? "#10b981" : "#ef4444" }}>
+          <div className="p-4 bg-[#1e2029] rounded-lg text-center">
+            <div className="text-[11px] text-[#9ca3af] mb-1.5">Certificat SSL</div>
+            <div className="text-xl font-bold" style={{ color: statusData.ssl?.valid ? "#10b981" : "#ef4444" }}>
               {statusData.ssl?.valid ? `${statusData.ssl.daysLeft}j` : "Invalide"}
             </div>
           </div>
-          <div style={{ padding: "16px", background: "#1e2029", borderRadius: "8px", textAlign: "center" }}>
-            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "6px" }}>Uptime</div>
-            <div style={{ fontSize: "20px", fontWeight: 700, color: statusData.uptimePercentage >= 99 ? "#10b981" : "#f59e0b" }}>
+          <div className="p-4 bg-[#1e2029] rounded-lg text-center">
+            <div className="text-[11px] text-[#9ca3af] mb-1.5">Uptime</div>
+            <div className="text-xl font-bold" style={{ color: statusData.uptimePercentage >= 99 ? "#10b981" : "#f59e0b" }}>
               {statusData.uptimePercentage}%
             </div>
           </div>
@@ -305,37 +280,33 @@ function StatusPagePreview({ site, statusData, onClose }) {
 
         {/* Recent history bar */}
         {statusData.recentHistory && statusData.recentHistory.length > 0 && (
-          <div style={{ marginBottom: "24px" }}>
-            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "10px" }}>Historique recent</div>
-            <div style={{ display: "flex", gap: "3px" }}>
+          <div className="mb-6">
+            <div className="text-xs text-[#9ca3af] mb-2.5">Historique recent</div>
+            <div className="flex gap-[3px]">
               {statusData.recentHistory.map((h, i) => (
-                <div key={i} style={{
-                  flex: 1, height: "28px", borderRadius: "3px",
-                  background: h.status === "up" ? "#10b981" : "#ef4444",
-                  opacity: 0.7 + (i / statusData.recentHistory.length) * 0.3,
-                  cursor: "default",
-                }} title={`${new Date(h.checkedAt).toLocaleString("fr-FR")} — ${h.status === "up" ? "En ligne" : "Hors ligne"} — ${h.responseTime || "?"}ms`} />
+                <div key={i} className="flex-1 h-7 rounded-[3px] cursor-default"
+                  style={{
+                    background: h.status === "up" ? "#10b981" : "#ef4444",
+                    opacity: 0.7 + (i / statusData.recentHistory.length) * 0.3,
+                  }}
+                  title={`${new Date(h.checkedAt).toLocaleString("fr-FR")} — ${h.status === "up" ? "En ligne" : "Hors ligne"} — ${h.responseTime || "?"}ms`}
+                />
               ))}
             </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px" }}>
-              <span style={{ fontSize: "10px", color: "#6b7280" }}>Ancien</span>
-              <span style={{ fontSize: "10px", color: "#6b7280" }}>Recent</span>
+            <div className="flex justify-between mt-1.5">
+              <span className="text-[10px] text-[#6b7280]">Ancien</span>
+              <span className="text-[10px] text-[#6b7280]">Recent</span>
             </div>
           </div>
         )}
 
-        <div style={{ fontSize: "11px", color: "#6b7280", textAlign: "center" }}>
+        <div className="text-[11px] text-[#6b7280] text-center">
           Derniere verification : {statusData.lastChecked ? new Date(statusData.lastChecked).toLocaleString("fr-FR") : "N/A"}
         </div>
 
         <button
           onClick={onClose}
-          style={{
-            display: "block", width: "100%", marginTop: "20px",
-            padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: 600,
-            background: "transparent", border: `1px solid ${BORDER_TINT}`,
-            color: ACCENT, cursor: "pointer", fontFamily: "inherit",
-          }}
+          className="block w-full mt-5 py-2.5 rounded-lg text-[13px] font-semibold bg-transparent border border-[rgba(236,72,153,0.18)] text-[#ec4899] cursor-pointer font-[inherit]"
         >
           Fermer
         </button>
@@ -360,38 +331,30 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
   const domainColor = domainDays > 60 ? "#10b981" : domainDays > 30 ? "#f59e0b" : "#ef4444";
 
   return (
-    <div style={{
-      ...cardStyle,
-      border: `1px solid ${BORDER_TINT}`,
-      background: BG_TINT,
-      marginBottom: "12px",
-    }}>
+    <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-3">
       {/* Header row */}
       <div
         onClick={() => setExpanded(!expanded)}
-        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer", userSelect: "none" }}
+        className="flex items-center justify-between cursor-pointer select-none"
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        <div className="flex items-center gap-4">
           <ScoreGauge score={score} size={64} />
           <div>
-            <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3" }}>{site.domain}</div>
-            <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
+            <div className="text-base font-semibold text-[#f0f0f3]">{site.domain}</div>
+            <div className="text-xs text-[#6b7280] mt-1">
               {check.checkedAt
                 ? `Dernier check : ${new Date(check.checkedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}`
                 : "Aucune analyse"}
             </div>
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div className="flex items-center gap-2">
           <button
             onClick={e => { e.stopPropagation(); onRecheck(site._id); }}
             disabled={isRechecking}
+            className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md bg-transparent border border-[rgba(236,72,153,0.18)] text-[#ec4899] text-xs font-medium font-[inherit]"
             style={{
-              display: "inline-flex", alignItems: "center", gap: "6px",
-              padding: "7px 14px", borderRadius: "6px",
-              background: "transparent", border: `1px solid ${BORDER_TINT}`,
-              color: ACCENT, fontSize: "12px", fontWeight: 500,
-              cursor: isRechecking ? "wait" : "pointer", fontFamily: "inherit",
+              cursor: isRechecking ? "wait" : "pointer",
               opacity: isRechecking ? 0.5 : 1,
             }}
           >
@@ -400,17 +363,13 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
           </button>
           <button
             onClick={e => { e.stopPropagation(); onDelete(site._id); }}
-            style={{
-              display: "inline-flex", alignItems: "center",
-              padding: "7px 10px", borderRadius: "6px",
-              background: "transparent", border: "1px solid rgba(239,68,68,0.2)",
-              cursor: "pointer",
-            }}
+            className="inline-flex items-center px-2.5 py-[7px] rounded-md bg-transparent border border-[rgba(239,68,68,0.2)] cursor-pointer"
           >
             <TrashIcon size={14} />
           </button>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-            style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}>
+            className="transition-transform duration-200"
+            style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}>
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </div>
@@ -418,117 +377,105 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
 
       {/* Expanded health card dashboard */}
       {expanded && (
-        <div style={{ marginTop: "20px", paddingTop: "20px", borderTop: `1px solid ${BORDER_TINT}` }}>
+        <div className="mt-5 pt-5 border-t border-[rgba(236,72,153,0.18)]">
           {/* Score */}
-          <div style={{ textAlign: "center", marginBottom: "24px" }}>
-            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "10px", fontWeight: 500 }}>Score de sante</div>
+          <div className="text-center mb-6">
+            <div className="text-xs text-[#9ca3af] mb-2.5 font-medium">Score de sante</div>
             <ScoreGauge score={score} size={110} />
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+          <div className="grid grid-cols-2 gap-3">
             {/* Uptime card with response time graph */}
-            <div style={{
-              padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", borderLeft: `3px solid ${check.uptime?.status ? "#10b981" : "#ef4444"}`,
-            }}>
-              <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Uptime</div>
+            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${check.uptime?.status ? "#10b981" : "#ef4444"}` }}>
+              <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">Uptime</div>
               <StatusBadge ok={check.uptime?.status} labelOk="En ligne" labelFail="Hors ligne" />
               {check.uptime?.responseTime && (
-                <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "6px" }}>
-                  Temps de reponse : <span style={{ color: "#d1d5db", fontWeight: 500 }}>{check.uptime.responseTime}ms</span>
+                <div className="text-xs text-[#6b7280] mt-1.5">
+                  Temps de reponse : <span className="text-[#d1d5db] font-medium">{check.uptime.responseTime}ms</span>
                 </div>
               )}
               {check.uptime?.statusCode && (
-                <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
-                  Code HTTP : <span style={{ color: "#d1d5db" }}>{check.uptime.statusCode}</span>
+                <div className="text-xs text-[#6b7280] mt-0.5">
+                  Code HTTP : <span className="text-[#d1d5db]">{check.uptime.statusCode}</span>
                 </div>
               )}
               {/* Mini response time graph */}
               {history.length >= 2 && (
-                <div style={{ marginTop: "10px" }}>
-                  <div style={{ fontSize: "10px", color: "#6b7280", marginBottom: "4px" }}>Temps de reponse (5 derniers)</div>
+                <div className="mt-2.5">
+                  <div className="text-[10px] text-[#6b7280] mb-1">Temps de reponse (5 derniers)</div>
                   <MiniResponseTimeChart history={history} width={230} height={50} />
                 </div>
               )}
             </div>
 
             {/* SSL card with full details */}
-            <div style={{
-              padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", borderLeft: `3px solid ${sslColor}`,
-            }}>
-              <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Certificat SSL</div>
+            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${sslColor}` }}>
+              <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">Certificat SSL</div>
               <StatusBadge ok={check.ssl?.valid} labelOk="Valide" labelFail="Invalide" />
               {check.ssl?.valid && (
                 <>
-                  <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "6px" }}>
-                    Expire dans : <span style={{ color: sslColor, fontWeight: 600 }}>{check.ssl.daysLeft} jours</span>
+                  <div className="text-xs text-[#6b7280] mt-1.5">
+                    Expire dans : <span className="font-semibold" style={{ color: sslColor }}>{check.ssl.daysLeft} jours</span>
                   </div>
-                  <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
-                    Emetteur : <span style={{ color: "#d1d5db" }}>{check.ssl.issuer}</span>
+                  <div className="text-xs text-[#6b7280] mt-0.5">
+                    Emetteur : <span className="text-[#d1d5db]">{check.ssl.issuer}</span>
                   </div>
                   {check.ssl.expiryDate && (
-                    <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
-                      Date d'expiration : <span style={{ color: "#d1d5db" }}>{new Date(check.ssl.expiryDate).toLocaleDateString("fr-FR")}</span>
+                    <div className="text-xs text-[#6b7280] mt-0.5">
+                      Date d'expiration : <span className="text-[#d1d5db]">{new Date(check.ssl.expiryDate).toLocaleDateString("fr-FR")}</span>
                     </div>
                   )}
                   {/* Expiry countdown bar */}
-                  <div style={{ marginTop: "8px" }}>
-                    <div style={{
-                      height: "4px", borderRadius: "2px", background: "#2a2d3a", overflow: "hidden",
-                    }}>
-                      <div style={{
-                        height: "100%", borderRadius: "2px", background: sslColor,
-                        width: `${Math.min(100, Math.max(0, (check.ssl.daysLeft / 365) * 100))}%`,
-                        transition: "width 0.5s ease",
-                      }} />
+                  <div className="mt-2">
+                    <div className="h-1 rounded-sm bg-[#2a2d3a] overflow-hidden">
+                      <div
+                        className="h-full rounded-sm transition-[width] duration-500 ease-in-out"
+                        style={{
+                          background: sslColor,
+                          width: `${Math.min(100, Math.max(0, (check.ssl.daysLeft / 365) * 100))}%`,
+                        }}
+                      />
                     </div>
                   </div>
                 </>
               )}
               {check.ssl?.error && (
-                <div style={{ fontSize: "11px", color: "#ef4444", marginTop: "6px" }}>{check.ssl.error}</div>
+                <div className="text-[11px] text-[#ef4444] mt-1.5">{check.ssl.error}</div>
               )}
             </div>
 
             {/* Domain card */}
-            <div style={{
-              padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", borderLeft: `3px solid ${domainColor}`,
-            }}>
-              <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Domaine</div>
-              <div style={{ fontSize: "12px", color: "#6b7280" }}>
-                Expire dans : <span style={{ color: domainColor, fontWeight: 600 }}>
+            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${domainColor}` }}>
+              <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">Domaine</div>
+              <div className="text-xs text-[#6b7280]">
+                Expire dans : <span className="font-semibold" style={{ color: domainColor }}>
                   {domainDays || "?"} jours
                 </span>
               </div>
               {check.domain?.expiryEstimate && (
-                <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
-                  Estimation : <span style={{ color: "#d1d5db" }}>{new Date(check.domain.expiryEstimate).toLocaleDateString("fr-FR")}</span>
+                <div className="text-xs text-[#6b7280] mt-1">
+                  Estimation : <span className="text-[#d1d5db]">{new Date(check.domain.expiryEstimate).toLocaleDateString("fr-FR")}</span>
                 </div>
               )}
               {/* Expiry countdown bar */}
-              <div style={{ marginTop: "8px" }}>
-                <div style={{
-                  height: "4px", borderRadius: "2px", background: "#2a2d3a", overflow: "hidden",
-                }}>
-                  <div style={{
-                    height: "100%", borderRadius: "2px", background: domainColor,
-                    width: `${Math.min(100, Math.max(0, (domainDays / 365) * 100))}%`,
-                    transition: "width 0.5s ease",
-                  }} />
+              <div className="mt-2">
+                <div className="h-1 rounded-sm bg-[#2a2d3a] overflow-hidden">
+                  <div
+                    className="h-full rounded-sm transition-[width] duration-500 ease-in-out"
+                    style={{
+                      background: domainColor,
+                      width: `${Math.min(100, Math.max(0, (domainDays / 365) * 100))}%`,
+                    }}
+                  />
                 </div>
               </div>
             </div>
 
             {/* DNS card with chips */}
-            <div style={{
-              padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", borderLeft: `3px solid ${check.dns?.aRecords ? "#10b981" : "#ef4444"}`,
-            }}>
-              <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>DNS</div>
+            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${check.dns?.aRecords ? "#10b981" : "#ef4444"}` }}>
+              <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">DNS</div>
               {check.dns?.aRecords ? (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                <div className="flex flex-wrap gap-1.5">
                   <Chip label={`A : ${check.dns.aRecords.length}`} color="#10b981" />
                   {check.dns.mxRecords?.length > 0 && (
                     <Chip label={`MX : ${check.dns.mxRecords.length}`} color="#3b82f6" />
@@ -540,10 +487,10 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
                   )}
                 </div>
               ) : (
-                <div style={{ fontSize: "12px", color: "#ef4444" }}>{check.dns?.error || "Erreur DNS"}</div>
+                <div className="text-xs text-[#ef4444]">{check.dns?.error || "Erreur DNS"}</div>
               )}
               {check.dns?.mxRecords?.length > 0 && (
-                <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "8px" }}>
+                <div className="text-[11px] text-[#6b7280] mt-2">
                   MX : {check.dns.mxRecords.join(", ")}
                 </div>
               )}
@@ -551,12 +498,9 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
           </div>
 
           {/* Email deliverability */}
-          <div style={{
-            marginTop: "12px", padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-            borderRadius: "8px", borderLeft: `3px solid ${ACCENT}`,
-          }}>
-            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "10px", fontWeight: 500 }}>Delivrabilite email</div>
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <div className="mt-3 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
+            <div className="text-[11px] text-[#9ca3af] mb-2.5 font-medium">Delivrabilite email</div>
+            <div className="flex gap-3 flex-wrap">
               <StatusBadge ok={check.dns?.spf} labelOk="SPF configure" labelFail="SPF absent" />
               <StatusBadge ok={check.dns?.dmarc} labelOk="DMARC configure" labelFail="DMARC absent" />
               {check.dns?.dkim !== undefined && (
@@ -564,7 +508,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
               )}
             </div>
             {(!check.dns?.spf || !check.dns?.dmarc) && (
-              <div style={{ fontSize: "12px", color: "#f59e0b", marginTop: "8px", lineHeight: 1.5 }}>
+              <div className="text-xs text-[#f59e0b] mt-2 leading-relaxed">
                 {!check.dns?.spf && !check.dns?.dmarc
                   ? "Ni SPF ni DMARC ne sont configures. Vos emails risquent d'atterrir en spam."
                   : !check.dns?.spf
@@ -576,19 +520,15 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
 
           {/* Security headers */}
           {check.securityHeaders && Object.keys(check.securityHeaders).length > 0 && (
-            <div style={{
-              marginTop: "12px", padding: "16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", borderLeft: `3px solid ${ACCENT}`,
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+            <div className="mt-3 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
+              <div className="flex items-center gap-2 mb-3">
                 <ShieldIcon size={14} color={ACCENT} />
-                <span style={{ fontSize: "11px", color: "#9ca3af", fontWeight: 500 }}>En-tetes de securite</span>
+                <span className="text-[11px] text-[#9ca3af] font-medium">En-tetes de securite</span>
                 {(() => {
                   const keys = Object.keys(check.securityHeaders);
                   const present = keys.filter(k => check.securityHeaders[k]?.present).length;
                   return (
-                    <span style={{
-                      fontSize: "11px", fontWeight: 600, marginLeft: "auto",
+                    <span className="text-[11px] font-semibold ml-auto" style={{
                       color: present === keys.length ? "#10b981" : present > keys.length / 2 ? "#f59e0b" : "#ef4444",
                     }}>
                       {present}/{keys.length}
@@ -596,15 +536,17 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
                   );
                 })()}
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <div className="flex flex-col gap-1.5">
                 {Object.entries(check.securityHeaders).map(([key, val]) => (
-                  <div key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "12px" }}>
-                    <span style={{ color: "#d1d5db", fontFamily: "monospace", fontSize: "11px" }}>{val.label}</span>
-                    <span style={{
-                      padding: "2px 8px", borderRadius: "3px", fontSize: "11px", fontWeight: 500,
-                      color: val.present ? "#10b981" : "#ef4444",
-                      background: val.present ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)",
-                    }}>
+                  <div key={key} className="flex items-center justify-between text-xs">
+                    <span className="text-[#d1d5db] font-mono text-[11px]">{val.label}</span>
+                    <span
+                      className="px-2 py-0.5 rounded-[3px] text-[11px] font-medium"
+                      style={{
+                        color: val.present ? "#10b981" : "#ef4444",
+                        background: val.present ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)",
+                      }}
+                    >
                       {val.present ? "Present" : "Absent"}
                     </span>
                   </div>
@@ -615,11 +557,8 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
 
           {/* HTTP/2 */}
           {check.http2 && (
-            <div style={{
-              marginTop: "12px", padding: "12px 16px", background: "#1e2029", border: "1px solid #2a2d3a",
-              borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "space-between",
-            }}>
-              <span style={{ fontSize: "12px", color: "#9ca3af" }}>Support HTTP/2</span>
+            <div className="mt-3 px-4 py-3 bg-[#1e2029] border border-[#2a2d3a] rounded-lg flex items-center justify-between">
+              <span className="text-xs text-[#9ca3af]">Support HTTP/2</span>
               <StatusBadge ok={check.http2.supported} labelOk="Supporte" labelFail="Non detecte" />
             </div>
           )}
@@ -630,13 +569,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
           {/* Status page button */}
           <button
             onClick={() => onShowStatusPage(site._id)}
-            style={{
-              display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-              width: "100%", marginTop: "12px", padding: "12px",
-              borderRadius: "8px", fontSize: "13px", fontWeight: 600,
-              background: "transparent", border: `1px solid ${BORDER_TINT}`,
-              color: ACCENT, cursor: "pointer", fontFamily: "inherit",
-            }}
+            className="flex items-center justify-center gap-2 w-full mt-3 py-3 rounded-lg text-[13px] font-semibold bg-transparent border border-[rgba(236,72,153,0.18)] text-[#ec4899] cursor-pointer font-[inherit]"
           >
             <GlobeIcon size={16} color={ACCENT} />
             Generer une page de statut publique
@@ -728,125 +661,87 @@ export default function PulseDashboardPage() {
   };
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div className="max-w-[900px]">
       <SubNav color={ACCENT} items={PULSE_NAV} />
 
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "8px" }}>
-        <div style={{
-          width: "44px", height: "44px", borderRadius: "10px",
-          background: BG_TINT, border: `1px solid ${BORDER_TINT}`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
+      <div className="flex items-center gap-3.5 mb-2">
+        <div className="w-11 h-11 rounded-[10px] bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] flex items-center justify-center">
           <HeartPulseIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>Pulse</h1>
-          <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0, marginTop: "2px" }}>
+          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">Pulse</h1>
+          <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
             Surveillance de la sante numerique de vos sites
           </p>
         </div>
       </div>
 
       {/* Gradient bar */}
-      <div style={{
-        height: "3px", borderRadius: "2px", marginBottom: "28px", marginTop: "16px",
-        background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
-      }} />
+      <div className="h-[3px] rounded-sm mb-7 mt-4 bg-gradient-to-br from-[#ec4899] to-[#f472b6]" />
 
       {/* Add site form */}
-      <div style={{
-        ...cardStyle,
-        border: `1px solid ${BORDER_TINT}`,
-        marginBottom: "28px",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+      <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+        <div className="flex items-center gap-2 mb-4">
           <HeartPulseIcon size={18} color={ACCENT} />
-          <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
             Ajouter un site
           </h2>
         </div>
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div className="flex gap-2.5">
           <input
             type="text"
             value={domain}
             onChange={e => setDomain(e.target.value)}
             placeholder="exemple.com"
             onKeyDown={e => e.key === "Enter" && !adding && addSite()}
-            style={{
-              flex: 1, padding: "12px 16px", background: "#141520",
-              border: "1px solid #2a2d3a", borderRadius: "8px",
-              color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
-              outline: "none", boxSizing: "border-box", transition: "border-color 0.2s, box-shadow 0.2s",
-            }}
-            onFocus={e => { e.target.style.borderColor = ACCENT; e.target.style.boxShadow = `0 0 0 3px ${BORDER_TINT}`; }}
-            onBlur={e => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }}
+            className="flex-1 px-4 py-3 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#f0f0f3] text-sm font-[inherit] outline-none box-border transition-[border-color,box-shadow] duration-200 focus:border-[#ec4899] focus:shadow-[0_0_0_3px_rgba(236,72,153,0.18)]"
           />
           <button
             onClick={addSite}
             disabled={adding || !domain.trim()}
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-lg bg-gradient-to-br from-[#ec4899] to-[#f472b6] border-none text-white text-sm font-semibold font-[inherit] shadow-[0_4px_16px_rgba(236,72,153,0.25)] whitespace-nowrap"
             style={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              padding: "12px 28px", borderRadius: "8px",
-              background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`, border: "none",
-              color: "#fff", fontSize: "14px", fontWeight: 600,
-              cursor: adding ? "wait" : "pointer", fontFamily: "inherit",
+              cursor: adding ? "wait" : "pointer",
               opacity: adding || !domain.trim() ? 0.5 : 1,
-              boxShadow: `0 4px 16px rgba(236,72,153,0.25)`,
-              whiteSpace: "nowrap",
             }}
           >
             <HeartPulseIcon size={16} color="#fff" />
             {adding ? "Analyse..." : "Analyser"}
           </button>
         </div>
-        <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "8px" }}>
+        <div className="text-[11px] text-[#6b7280] mt-2">
           Entrez un nom de domaine sans https:// ni www. Le premier scan sera lance automatiquement.
         </div>
       </div>
 
       {/* Error */}
       {error && (
-        <div style={{
-          padding: "12px 16px", marginBottom: "16px",
-          background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.15)",
-          borderRadius: "8px", fontSize: "13px", color: "#f87171",
-        }}>
+        <div className="px-4 py-3 mb-4 bg-[rgba(239,68,68,0.08)] border border-[rgba(239,68,68,0.15)] rounded-lg text-[13px] text-[#f87171]">
           {error}
-          <button onClick={() => setError("")} style={{
-            float: "right", background: "none", border: "none", color: "#f87171",
-            cursor: "pointer", fontSize: "16px", lineHeight: 1,
-          }}>&times;</button>
+          <button onClick={() => setError("")} className="float-right bg-transparent border-none text-[#f87171] cursor-pointer text-base leading-none">
+            &times;
+          </button>
         </div>
       )}
 
       {/* Loading */}
       {loading && sites.length === 0 && (
-        <div style={{
-          ...cardStyle, border: `1px solid ${BORDER_TINT}`, background: BG_TINT,
-          textAlign: "center", padding: "48px 24px",
-        }}>
-          <div style={{
-            width: "48px", height: "48px", margin: "0 auto 16px",
-            border: `3px solid ${BORDER_TINT}`, borderTop: `3px solid ${ACCENT}`,
-            borderRadius: "50%", animation: "pulse-spin 1s linear infinite",
-          }} />
-          <div style={{ fontSize: "14px", color: "#9ca3af" }}>Chargement de vos sites...</div>
+        <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+          <div className="w-12 h-12 mx-auto mb-4 border-[3px] border-[rgba(236,72,153,0.18)] border-t-[#ec4899] rounded-full animate-[pulse-spin_1s_linear_infinite]" />
+          <div className="text-sm text-[#9ca3af]">Chargement de vos sites...</div>
           <style>{`@keyframes pulse-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 
       {/* Sites list */}
       {!loading && sites.length === 0 && (
-        <div style={{
-          ...cardStyle, border: `1px solid ${BORDER_TINT}`, background: BG_TINT,
-          textAlign: "center", padding: "48px 24px",
-        }}>
+        <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
           <HeartPulseIcon size={48} color={ACCENT} />
-          <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", marginTop: "16px", marginBottom: "8px" }}>
+          <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
             Aucun site surveille
           </div>
-          <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.6, maxWidth: "400px", margin: "0 auto" }}>
+          <div className="text-[13px] text-[#9ca3af] leading-relaxed max-w-[400px] mx-auto">
             Ajoutez votre premier domaine ci-dessus pour lancer une analyse de sante complete : uptime, SSL, DNS, et plus.
           </div>
         </div>

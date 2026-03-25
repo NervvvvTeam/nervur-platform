@@ -146,10 +146,7 @@ export default function Layout() {
   const renderNavItem = (item, idx, mobile = false) => {
     if (item.type === "separator") {
       return (
-        <div key={`sep-${idx}`} style={{
-          height: "1px", background: "#1e1e2a",
-          margin: mobile ? "12px 16px" : "12px 8px",
-        }} />
+        <div key={`sep-${idx}`} className={`h-px bg-[#1e1e2a] ${mobile ? "mx-4 my-3" : "mx-2 my-3"}`} />
       );
     }
     const iconFn = NAV_ICONS[item.path];
@@ -159,16 +156,13 @@ export default function Layout() {
     return (
       <NavLink key={item.path} to={item.path}
         onClick={mobile ? () => setMobileMenuOpen(false) : undefined}
-        style={() => ({
-          display: "flex", alignItems: "center", gap: "10px",
-          padding: mobile ? "10px 16px" : "9px 12px",
-          borderRadius: "8px", textDecoration: "none",
-          fontSize: mobile ? "14px" : "13px", fontWeight: isItemActive ? 500 : 400,
-          color: isItemActive ? "#FAFAFA" : "#A1A1AA",
+        className={`flex items-center gap-2.5 rounded-lg no-underline transition-all duration-200 ${
+          mobile ? "px-4 py-2.5 text-sm" : "px-3 py-2 text-[13px]"
+        } ${isItemActive ? "font-medium text-[#FAFAFA]" : "font-normal text-[#A1A1AA]"}`}
+        style={{
           background: isItemActive ? `${toolColor}12` : "transparent",
           borderLeft: isItemActive ? `3px solid ${toolColor}` : "3px solid transparent",
-          transition: "all 0.2s ease"
-        })}
+        }}
         onMouseEnter={e => {
           if (!isItemActive) {
             e.currentTarget.style.borderLeft = `3px solid ${toolColor}60`;
@@ -191,12 +185,9 @@ export default function Layout() {
             if (icon) icon.style.stroke = "#71717A";
           }
         }}>
-        <span data-dot style={{
-          width: "6px", height: "6px", borderRadius: "50%",
-          background: isItemActive ? toolColor : "#3f3f46",
-          flexShrink: 0, transition: "background 0.2s"
-        }} />
-        <span data-icon style={{ display: "flex", alignItems: "center", transition: "all 0.2s" }}>
+        <span data-dot className="w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-200"
+          style={{ background: isItemActive ? toolColor : "#3f3f46" }} />
+        <span data-icon className="flex items-center transition-all duration-200">
           {iconFn ? iconFn(isItemActive ? toolColor : "#71717A") : null}
         </span>
         <span>{item.label}</span>
@@ -205,49 +196,34 @@ export default function Layout() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#191b24", color: "#d1d5db", fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="flex min-h-screen bg-[#191b24] text-gray-300 font-['Inter',system-ui,sans-serif]">
       {/* Sidebar — desktop */}
       {!isMobile && (
-        <aside style={{
-          width: "230px", borderRight: "1px solid #1e1e2a", padding: "24px 12px",
-          display: "flex", flexDirection: "column", position: "fixed", top: 0, bottom: 0, left: 0,
-          background: "#12131a", zIndex: 50
-        }}>
+        <aside className="w-[230px] border-r border-[#1e1e2a] px-3 py-6 flex flex-col fixed top-0 bottom-0 left-0 bg-[#12131a] z-50">
           {/* Branding */}
-          <div style={{ marginBottom: "28px", borderBottom: "1px solid #1e1e2a", margin: "0 -4px 28px", padding: "12px 16px 14px" }}>
-            <div style={{ fontSize: "16px", fontWeight: 700, color: "#FAFAFA", letterSpacing: "1px" }}>NERVÜR</div>
-            <div style={{ fontSize: "11px", color: "#818CF8", fontWeight: 400, marginTop: "2px" }}>Espace client</div>
+          <div className="-mx-1 mb-7 border-b border-[#1e1e2a] px-4 pt-3 pb-3.5">
+            <div className="text-base font-bold text-[#FAFAFA] tracking-wider">NERVÜR</div>
+            <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>
           </div>
 
           {/* Nav */}
-          <nav style={{ display: "flex", flexDirection: "column", gap: "2px", flex: 1, overflowY: "auto" }}>
+          <nav className="flex flex-col gap-0.5 flex-1 overflow-y-auto">
             {navItems.map((item, idx) => renderNavItem(item, idx))}
           </nav>
 
           {/* User */}
-          <div style={{ borderTop: "1px solid #1e1e2a", paddingTop: "16px", padding: "16px 8px 0" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-              <div style={{
-                width: "32px", height: "32px", borderRadius: "6px", background: "linear-gradient(135deg, #6366f1, #818CF8)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "13px", fontWeight: 600, color: "#fff", flexShrink: 0
-              }}>
+          <div className="border-t border-[#1e1e2a] pt-4 px-2">
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className="w-8 h-8 rounded-md bg-gradient-to-br from-[#6366f1] to-[#818CF8] flex items-center justify-center text-[13px] font-semibold text-white shrink-0">
                 {user?.name?.charAt(0)?.toUpperCase() || "U"}
               </div>
               <div>
-                <div style={{ fontSize: "13px", color: "#D4D4D8", fontWeight: 500 }}>{user?.name}</div>
-                <div style={{ fontSize: "11px", color: "#52525B" }}>{user?.email}</div>
+                <div className="text-[13px] text-[#D4D4D8] font-medium">{user?.name}</div>
+                <div className="text-[11px] text-[#52525B]">{user?.email}</div>
               </div>
             </div>
             <button onClick={() => { logout(); navigate("/app/login"); }}
-              style={{
-                width: "100%", padding: "7px", background: "transparent",
-                border: "1px solid #27272A", borderRadius: "6px",
-                color: "#71717A", fontSize: "12px", cursor: "pointer",
-                fontFamily: "inherit", transition: "all 0.15s"
-              }}
-              onMouseEnter={e => { e.target.style.borderColor = "#3f3f46"; e.target.style.color = "#A1A1AA"; }}
-              onMouseLeave={e => { e.target.style.borderColor = "#27272A"; e.target.style.color = "#71717A"; }}>
+              className="w-full py-[7px] bg-transparent border border-[#27272A] rounded-md text-[#71717A] text-xs cursor-pointer font-[inherit] transition-all duration-150 hover:border-[#3f3f46] hover:text-[#A1A1AA]">
               Se déconnecter
             </button>
           </div>
@@ -257,33 +233,18 @@ export default function Layout() {
       {/* Mobile header */}
       {isMobile && (
         <>
-          <header style={{
-            position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-            background: "#12131a", borderBottom: "1px solid #1e1e2a", padding: "12px 20px",
-            display: "flex", justifyContent: "space-between", alignItems: "center"
-          }}>
-            <img src="/logo-nervur.svg" alt="NERVÜR" style={{
-              height: "34px", width: "auto",
-              objectFit: "contain"
-            }} />
+          <header className="fixed top-0 left-0 right-0 z-50 bg-[#12131a] border-b border-[#1e1e2a] px-5 py-3 flex justify-between items-center">
+            <img src="/logo-nervur.svg" alt="NERVÜR" className="h-[34px] w-auto object-contain" />
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              style={{ background: "none", border: "none", color: "#A1A1AA", fontSize: "18px", cursor: "pointer", padding: "4px" }}>
+              className="bg-transparent border-none text-[#A1A1AA] text-lg cursor-pointer p-1">
               {mobileMenuOpen ? "✕" : "☰"}
             </button>
           </header>
           {mobileMenuOpen && (
-            <div style={{
-              position: "fixed", top: "50px", left: 0, right: 0, bottom: 0, zIndex: 49,
-              background: "#12131a", padding: "12px 16px", display: "flex", flexDirection: "column", gap: "2px",
-              overflowY: "auto"
-            }}>
+            <div className="fixed top-[50px] left-0 right-0 bottom-0 z-[49] bg-[#12131a] px-4 py-3 flex flex-col gap-0.5 overflow-y-auto">
               {navItems.map((item, idx) => renderNavItem(item, idx, true))}
               <button onClick={() => { logout(); navigate("/app/login"); }}
-                style={{
-                  marginTop: "auto", padding: "12px", background: "transparent",
-                  border: "1px solid #27272A", borderRadius: "6px", color: "#71717A",
-                  fontSize: "13px", cursor: "pointer", fontFamily: "inherit"
-                }}>
+                className="mt-auto p-3 bg-transparent border border-[#27272A] rounded-md text-[#71717A] text-[13px] cursor-pointer font-[inherit]">
                 Se déconnecter
               </button>
             </div>
@@ -292,11 +253,10 @@ export default function Layout() {
       )}
 
       {/* Main content */}
-      <main style={{
-        flex: 1, marginLeft: isMobile ? 0 : "230px", padding: isMobile ? "66px 20px 20px" : "36px 44px",
-        minHeight: "100vh", position: "relative", zIndex: 1,
-        background: `radial-gradient(ellipse 80% 50% at 70% 0%, ${(PATH_COLORS[location.pathname] || TOOL_COLORS.general)}10 0%, transparent 70%)`,
-      }}>
+      <main className={`flex-1 min-h-screen relative z-[1] ${isMobile ? "ml-0 pt-[66px] px-5 pb-5" : "ml-[230px] px-11 py-9"}`}
+        style={{
+          background: `radial-gradient(ellipse 80% 50% at 70% 0%, ${(PATH_COLORS[location.pathname] || TOOL_COLORS.general)}10 0%, transparent 70%)`,
+        }}>
         <Outlet />
       </main>
     </div>

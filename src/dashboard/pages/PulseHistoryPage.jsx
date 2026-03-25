@@ -14,14 +14,6 @@ const ACCENT_LIGHT = "#f472b6";
 const BG_TINT = "rgba(236,72,153,0.06)";
 const BORDER_TINT = "rgba(236,72,153,0.18)";
 
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
-
 const HeartPulseIcon = ({ size = 22, color = ACCENT }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572" />
@@ -36,11 +28,11 @@ const AlertTriangleIcon = ({ size = 16, color = "#ef4444" }) => (
   </svg>
 );
 
-// ═══ Score evolution chart (existing, kept) ═══
+// Score evolution chart (SVG - kept with minimal inline styles for computed coords)
 function ScoreChart({ history, width = 820, height = 180 }) {
   if (!history || history.length < 2) {
     return (
-      <div style={{ width, height, display: "flex", alignItems: "center", justifyContent: "center", color: "#6b7280", fontSize: "12px" }}>
+      <div className="flex items-center justify-center text-[#6b7280] text-xs" style={{ width, height }}>
         Pas assez de donnees pour afficher le graphique
       </div>
     );
@@ -59,7 +51,7 @@ function ScoreChart({ history, width = 820, height = 180 }) {
   const areaD = pathD + ` L ${getX(points.length - 1)} ${height - padding.bottom} L ${getX(0)} ${height - padding.bottom} Z`;
 
   return (
-    <svg width={width} height={height} style={{ display: "block" }}>
+    <svg width={width} height={height} className="block">
       <defs>
         <linearGradient id="pulseGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={ACCENT} stopOpacity="0.3" />
@@ -81,12 +73,12 @@ function ScoreChart({ history, width = 820, height = 180 }) {
   );
 }
 
-// ═══ Response time chart ═══
+// Response time chart (SVG)
 function ResponseTimeChart({ history, width = 820, height = 160 }) {
   const points = (history || []).slice(-30).filter(p => p.responseTime != null);
   if (points.length < 2) {
     return (
-      <div style={{ width, height, display: "flex", alignItems: "center", justifyContent: "center", color: "#6b7280", fontSize: "12px" }}>
+      <div className="flex items-center justify-center text-[#6b7280] text-xs" style={{ width, height }}>
         Pas assez de donnees de temps de reponse
       </div>
     );
@@ -104,11 +96,10 @@ function ResponseTimeChart({ history, width = 820, height = 160 }) {
   const pathD = points.map((p, i) => `${i === 0 ? "M" : "L"} ${getX(i)} ${getY(p.responseTime)}`).join(" ");
   const areaD = pathD + ` L ${getX(points.length - 1)} ${height - padding.bottom} L ${getX(0)} ${height - padding.bottom} Z`;
 
-  // Grid lines for response time
   const gridValues = [0, Math.round(maxT * 0.25), Math.round(maxT * 0.5), Math.round(maxT * 0.75), maxT];
 
   return (
-    <svg width={width} height={height} style={{ display: "block" }}>
+    <svg width={width} height={height} className="block">
       <defs>
         <linearGradient id="rtGradHist" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.25" />
@@ -133,16 +124,16 @@ function ResponseTimeChart({ history, width = 820, height = 160 }) {
   );
 }
 
-// ═══ Downtime incidents list ═══
+// Downtime incidents list
 function DowntimeIncidents({ history }) {
   const incidents = (history || []).filter(h => h.uptimeStatus === false);
 
   if (incidents.length === 0) {
     return (
-      <div style={{ padding: "20px", textAlign: "center" }}>
-        <div style={{ fontSize: "24px", marginBottom: "8px" }}>&#9989;</div>
-        <div style={{ fontSize: "13px", color: "#10b981", fontWeight: 500 }}>Aucun incident detecte</div>
-        <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
+      <div className="p-5 text-center">
+        <div className="text-2xl mb-2">&#9989;</div>
+        <div className="text-[13px] text-[#10b981] font-medium">Aucun incident detecte</div>
+        <div className="text-xs text-[#6b7280] mt-1">
           Tous les checks ont montre le site en ligne.
         </div>
       </div>
@@ -150,30 +141,23 @@ function DowntimeIncidents({ history }) {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+    <div className="flex flex-col gap-2">
       {incidents.slice(-10).reverse().map((inc, i) => (
-        <div key={i} style={{
-          display: "flex", alignItems: "center", gap: "12px",
-          padding: "12px 16px", background: "rgba(239,68,68,0.06)",
-          border: "1px solid rgba(239,68,68,0.12)", borderRadius: "8px",
-        }}>
+        <div key={i} className="flex items-center gap-3 px-4 py-3 bg-[rgba(239,68,68,0.06)] border border-[rgba(239,68,68,0.12)] rounded-lg">
           <AlertTriangleIcon size={16} color="#ef4444" />
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: "12px", fontWeight: 500, color: "#f87171" }}>Site hors ligne</div>
-            <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "2px" }}>
+          <div className="flex-1">
+            <div className="text-xs font-medium text-[#f87171]">Site hors ligne</div>
+            <div className="text-[11px] text-[#6b7280] mt-0.5">
               {new Date(inc.checkedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
             </div>
           </div>
-          <span style={{
-            fontSize: "11px", fontWeight: 600, color: "#ef4444",
-            padding: "2px 8px", borderRadius: "4px", background: "rgba(239,68,68,0.1)",
-          }}>
+          <span className="text-[11px] font-semibold text-[#ef4444] px-2 py-0.5 rounded bg-[rgba(239,68,68,0.1)]">
             Score : {inc.score}/100
           </span>
         </div>
       ))}
       {incidents.length > 10 && (
-        <div style={{ fontSize: "11px", color: "#6b7280", textAlign: "center", paddingTop: "4px" }}>
+        <div className="text-[11px] text-[#6b7280] text-center pt-1">
           ... et {incidents.length - 10} incidents supplementaires
         </div>
       )}
@@ -181,7 +165,7 @@ function DowntimeIncidents({ history }) {
   );
 }
 
-// ═══ SSL / Domain expiry timeline ═══
+// SSL / Domain expiry timeline
 function ExpiryTimeline({ site }) {
   const check = site.lastCheck || {};
   const items = [];
@@ -210,7 +194,7 @@ function ExpiryTimeline({ site }) {
 
   if (items.length === 0) {
     return (
-      <div style={{ padding: "20px", textAlign: "center", color: "#6b7280", fontSize: "12px" }}>
+      <div className="p-5 text-center text-[#6b7280] text-xs">
         Aucune donnee d'expiration disponible.
       </div>
     );
@@ -219,29 +203,31 @@ function ExpiryTimeline({ site }) {
   const maxDays = 365;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div className="flex flex-col gap-4">
       {items.map((item, i) => (
         <div key={i}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
-            <span style={{ fontSize: "12px", color: "#d1d5db", fontWeight: 500 }}>{item.label}</span>
-            <span style={{ fontSize: "12px", fontWeight: 600, color: item.color }}>
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-xs text-[#d1d5db] font-medium">{item.label}</span>
+            <span className="text-xs font-semibold" style={{ color: item.color }}>
               {item.days} jours
             </span>
           </div>
           {/* Progress bar */}
-          <div style={{ height: "8px", borderRadius: "4px", background: "#2a2d3a", overflow: "hidden" }}>
-            <div style={{
-              height: "100%", borderRadius: "4px", background: item.color,
-              width: `${Math.min(100, Math.max(2, (item.days / maxDays) * 100))}%`,
-              transition: "width 0.5s ease",
-            }} />
+          <div className="h-2 rounded bg-[#2a2d3a] overflow-hidden">
+            <div
+              className="h-full rounded transition-[width] duration-500 ease-in-out"
+              style={{
+                background: item.color,
+                width: `${Math.min(100, Math.max(2, (item.days / maxDays) * 100))}%`,
+              }}
+            />
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
+          <div className="flex justify-between mt-1">
             {item.date && (
-              <span style={{ fontSize: "10px", color: "#6b7280" }}>Expiration : {item.date}</span>
+              <span className="text-[10px] text-[#6b7280]">Expiration : {item.date}</span>
             )}
             {item.detail && (
-              <span style={{ fontSize: "10px", color: "#6b7280" }}>{item.detail}</span>
+              <span className="text-[10px] text-[#6b7280]">{item.detail}</span>
             )}
           </div>
         </div>
@@ -250,26 +236,26 @@ function ExpiryTimeline({ site }) {
   );
 }
 
-// ═══ History table (enhanced with response time column) ═══
+// History table
 function HistoryTable({ history }) {
   if (!history || history.length === 0) {
     return (
-      <div style={{ padding: "24px", textAlign: "center", color: "#6b7280", fontSize: "13px" }}>
+      <div className="p-6 text-center text-[#6b7280] text-[13px]">
         Aucun historique disponible pour ce site.
       </div>
     );
   }
 
   return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse text-[13px]">
         <thead>
           <tr>
-            <th style={{ textAlign: "left", padding: "10px 14px", color: "#9ca3af", fontWeight: 500, borderBottom: "1px solid #2a2d3a", fontSize: "12px" }}>Date</th>
-            <th style={{ textAlign: "center", padding: "10px 14px", color: "#9ca3af", fontWeight: 500, borderBottom: "1px solid #2a2d3a", fontSize: "12px" }}>Statut</th>
-            <th style={{ textAlign: "center", padding: "10px 14px", color: "#9ca3af", fontWeight: 500, borderBottom: "1px solid #2a2d3a", fontSize: "12px" }}>Score</th>
-            <th style={{ textAlign: "center", padding: "10px 14px", color: "#9ca3af", fontWeight: 500, borderBottom: "1px solid #2a2d3a", fontSize: "12px" }}>Temps de reponse</th>
-            <th style={{ textAlign: "right", padding: "10px 14px", color: "#9ca3af", fontWeight: 500, borderBottom: "1px solid #2a2d3a", fontSize: "12px" }}>Tendance</th>
+            <th className="text-left px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Date</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Statut</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Score</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Temps de reponse</th>
+            <th className="text-right px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Tendance</th>
           </tr>
         </thead>
         <tbody>
@@ -280,36 +266,33 @@ function HistoryTable({ history }) {
             const isDown = entry.uptimeStatus === false;
             const rtColor = entry.responseTime == null ? "#6b7280" : entry.responseTime < 500 ? "#10b981" : entry.responseTime < 1500 ? "#f59e0b" : "#ef4444";
             return (
-              <tr key={i} style={{
-                borderBottom: "1px solid #2a2d3a20",
-                background: isDown ? "rgba(239,68,68,0.04)" : "transparent",
-              }}>
-                <td style={{ padding: "10px 14px", color: "#d1d5db" }}>
+              <tr key={i} className="border-b border-[#2a2d3a]/[0.12]" style={{ background: isDown ? "rgba(239,68,68,0.04)" : "transparent" }}>
+                <td className="px-3.5 py-2.5 text-[#d1d5db]">
                   {new Date(entry.checkedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                 </td>
-                <td style={{ padding: "10px 14px", textAlign: "center" }}>
-                  <span style={{
-                    display: "inline-block", padding: "2px 8px", borderRadius: "4px",
-                    fontSize: "11px", fontWeight: 500,
-                    color: isDown ? "#ef4444" : "#10b981",
-                    background: isDown ? "rgba(239,68,68,0.1)" : "rgba(16,185,129,0.1)",
-                  }}>
+                <td className="px-3.5 py-2.5 text-center">
+                  <span
+                    className="inline-block px-2 py-0.5 rounded text-[11px] font-medium"
+                    style={{
+                      color: isDown ? "#ef4444" : "#10b981",
+                      background: isDown ? "rgba(239,68,68,0.1)" : "rgba(16,185,129,0.1)",
+                    }}
+                  >
                     {isDown ? "Hors ligne" : "En ligne"}
                   </span>
                 </td>
-                <td style={{ padding: "10px 14px", textAlign: "center" }}>
-                  <span style={{
-                    display: "inline-block", padding: "2px 10px", borderRadius: "4px",
-                    fontSize: "13px", fontWeight: 600, color: scoreColor,
-                    background: `${scoreColor}15`,
-                  }}>
+                <td className="px-3.5 py-2.5 text-center">
+                  <span
+                    className="inline-block px-2.5 py-0.5 rounded text-[13px] font-semibold"
+                    style={{ color: scoreColor, background: `${scoreColor}15` }}
+                  >
                     {entry.score}/100
                   </span>
                 </td>
-                <td style={{ padding: "10px 14px", textAlign: "center", fontSize: "12px", fontWeight: 500, color: rtColor }}>
-                  {entry.responseTime != null ? `${entry.responseTime}ms` : "—"}
+                <td className="px-3.5 py-2.5 text-center text-xs font-medium" style={{ color: rtColor }}>
+                  {entry.responseTime != null ? `${entry.responseTime}ms` : "\u2014"}
                 </td>
-                <td style={{ padding: "10px 14px", textAlign: "right", fontSize: "12px", fontWeight: 500, color: diff > 0 ? "#10b981" : diff < 0 ? "#ef4444" : "#6b7280" }}>
+                <td className="px-3.5 py-2.5 text-right text-xs font-medium" style={{ color: diff > 0 ? "#10b981" : diff < 0 ? "#ef4444" : "#6b7280" }}>
                   {diff > 0 ? `+${diff}` : diff < 0 ? `${diff}` : "="}
                 </td>
               </tr>
@@ -347,53 +330,42 @@ export default function PulseHistoryPage() {
   const currentSite = sites.find(s => s._id === selectedSite);
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div className="max-w-[900px]">
       <SubNav color={ACCENT} items={PULSE_NAV} />
 
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "8px" }}>
-        <div style={{
-          width: "44px", height: "44px", borderRadius: "10px",
-          background: BG_TINT, border: `1px solid ${BORDER_TINT}`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
+      <div className="flex items-center gap-3.5 mb-2">
+        <div className="w-11 h-11 rounded-[10px] bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] flex items-center justify-center">
           <HeartPulseIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>Evolution</h1>
-          <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0, marginTop: "2px" }}>
+          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">Evolution</h1>
+          <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
             Suivez l'evolution du score de sante de vos sites
           </p>
         </div>
       </div>
 
       {/* Gradient bar */}
-      <div style={{
-        height: "3px", borderRadius: "2px", marginBottom: "28px", marginTop: "16px",
-        background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
-      }} />
+      <div className="h-[3px] rounded-sm mb-7 mt-4 bg-gradient-to-br from-[#ec4899] to-[#f472b6]" />
 
       {/* Loading */}
       {loading && (
-        <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, textAlign: "center", padding: "48px 24px" }}>
-          <div style={{
-            width: "48px", height: "48px", margin: "0 auto 16px",
-            border: `3px solid ${BORDER_TINT}`, borderTop: `3px solid ${ACCENT}`,
-            borderRadius: "50%", animation: "pulse-hist-spin 1s linear infinite",
-          }} />
-          <div style={{ fontSize: "14px", color: "#9ca3af" }}>Chargement...</div>
+        <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+          <div className="w-12 h-12 mx-auto mb-4 border-[3px] border-[rgba(236,72,153,0.18)] border-t-[#ec4899] rounded-full animate-[pulse-hist-spin_1s_linear_infinite]" />
+          <div className="text-sm text-[#9ca3af]">Chargement...</div>
           <style>{`@keyframes pulse-hist-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 
       {/* No sites */}
       {!loading && sites.length === 0 && (
-        <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, background: BG_TINT, textAlign: "center", padding: "48px 24px" }}>
+        <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
           <HeartPulseIcon size={48} color={ACCENT} />
-          <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", marginTop: "16px", marginBottom: "8px" }}>
+          <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
             Aucun site surveille
           </div>
-          <div style={{ fontSize: "13px", color: "#9ca3af" }}>
+          <div className="text-[13px] text-[#9ca3af]">
             Ajoutez un site depuis l'onglet Moniteur pour voir son evolution ici.
           </div>
         </div>
@@ -402,15 +374,14 @@ export default function PulseHistoryPage() {
       {/* Site selector */}
       {!loading && sites.length > 0 && (
         <>
-          <div style={{ marginBottom: "20px" }}>
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+          <div className="mb-5">
+            <div className="flex gap-2 flex-wrap">
               {sites.map(site => (
                 <button
                   key={site._id}
                   onClick={() => setSelectedSite(site._id)}
+                  className="px-4 py-2 rounded-md text-[13px] font-medium cursor-pointer font-[inherit]"
                   style={{
-                    padding: "8px 16px", borderRadius: "6px",
-                    fontSize: "13px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit",
                     background: selectedSite === site._id ? `${ACCENT}20` : "#1e2029",
                     color: selectedSite === site._id ? ACCENT : "#9ca3af",
                     border: `1px solid ${selectedSite === site._id ? BORDER_TINT : "#2a2d3a"}`,
@@ -425,30 +396,31 @@ export default function PulseHistoryPage() {
           {currentSite && (
             <>
               {/* Score chart */}
-              <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, marginBottom: "16px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
-                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: ACCENT, display: "inline-block" }} />
-                  <span style={{ fontSize: "13px", color: "#9ca3af" }}>Evolution du score — {currentSite.domain}</span>
+              <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-[5px] h-[5px] rounded-full bg-[#ec4899] inline-block" />
+                  <span className="text-[13px] text-[#9ca3af]">Evolution du score — {currentSite.domain}</span>
                 </div>
                 <ScoreChart history={currentSite.history || []} width={820} height={180} />
               </div>
 
               {/* Response time chart */}
-              <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, marginBottom: "16px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
-                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#3b82f6", display: "inline-block" }} />
-                  <span style={{ fontSize: "13px", color: "#9ca3af" }}>Temps de reponse — {currentSite.domain}</span>
+              <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-[5px] h-[5px] rounded-full bg-[#3b82f6] inline-block" />
+                  <span className="text-[13px] text-[#9ca3af]">Temps de reponse — {currentSite.domain}</span>
                   {(() => {
                     const pts = (currentSite.history || []).filter(h => h.responseTime != null);
                     if (pts.length === 0) return null;
                     const avg = Math.round(pts.reduce((s, p) => s + p.responseTime, 0) / pts.length);
                     return (
-                      <span style={{
-                        fontSize: "11px", fontWeight: 600,
-                        color: avg < 500 ? "#10b981" : avg < 1500 ? "#f59e0b" : "#ef4444",
-                        background: `${avg < 500 ? "#10b981" : avg < 1500 ? "#f59e0b" : "#ef4444"}15`,
-                        padding: "2px 8px", borderRadius: "4px", marginLeft: "auto",
-                      }}>
+                      <span
+                        className="text-[11px] font-semibold px-2 py-0.5 rounded ml-auto"
+                        style={{
+                          color: avg < 500 ? "#10b981" : avg < 1500 ? "#f59e0b" : "#ef4444",
+                          background: `${avg < 500 ? "#10b981" : avg < 1500 ? "#f59e0b" : "#ef4444"}15`,
+                        }}
+                      >
                         Moyenne : {avg}ms
                       </span>
                     );
@@ -458,19 +430,16 @@ export default function PulseHistoryPage() {
               </div>
 
               {/* Two-column: Downtime incidents + SSL/Domain expiry */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
+              <div className="grid grid-cols-2 gap-4 mb-4">
                 {/* Downtime incidents */}
-                <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}` }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
+                <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                  <div className="flex items-center gap-2 mb-4">
                     <AlertTriangleIcon size={14} color="#ef4444" />
-                    <span style={{ fontSize: "13px", color: "#9ca3af" }}>Incidents de downtime</span>
+                    <span className="text-[13px] text-[#9ca3af]">Incidents de downtime</span>
                     {(() => {
                       const count = (currentSite.history || []).filter(h => h.uptimeStatus === false).length;
                       return count > 0 ? (
-                        <span style={{
-                          fontSize: "11px", fontWeight: 600, color: "#ef4444",
-                          background: "rgba(239,68,68,0.1)", padding: "2px 8px", borderRadius: "4px", marginLeft: "auto",
-                        }}>
+                        <span className="text-[11px] font-semibold text-[#ef4444] bg-[rgba(239,68,68,0.1)] px-2 py-0.5 rounded ml-auto">
                           {count}
                         </span>
                       ) : null;
@@ -480,24 +449,21 @@ export default function PulseHistoryPage() {
                 </div>
 
                 {/* SSL / Domain expiry timeline */}
-                <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}` }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
-                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />
-                    <span style={{ fontSize: "13px", color: "#9ca3af" }}>Expiration SSL / Domaine</span>
+                <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="w-[5px] h-[5px] rounded-full bg-[#10b981] inline-block" />
+                    <span className="text-[13px] text-[#9ca3af]">Expiration SSL / Domaine</span>
                   </div>
                   <ExpiryTimeline site={currentSite} />
                 </div>
               </div>
 
               {/* History table */}
-              <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}` }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "16px" }}>
-                  <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: ACCENT, display: "inline-block" }} />
-                  <span style={{ fontSize: "13px", color: "#9ca3af" }}>Historique des analyses</span>
-                  <span style={{
-                    fontSize: "11px", fontWeight: 600, color: ACCENT,
-                    background: `${ACCENT}15`, padding: "2px 8px", borderRadius: "4px", marginLeft: "auto",
-                  }}>
+              <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="w-[5px] h-[5px] rounded-full bg-[#ec4899] inline-block" />
+                  <span className="text-[13px] text-[#9ca3af]">Historique des analyses</span>
+                  <span className="text-[11px] font-semibold text-[#ec4899] bg-[rgba(236,72,153,0.08)] px-2 py-0.5 rounded ml-auto">
                     {currentSite.history?.length || 0} analyses
                   </span>
                 </div>

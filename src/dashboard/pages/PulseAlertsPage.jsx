@@ -10,16 +10,7 @@ const PULSE_NAV = [
 ];
 
 const ACCENT = "#ec4899";
-const BG_TINT = "rgba(236,72,153,0.06)";
 const BORDER_TINT = "rgba(236,72,153,0.18)";
-
-const cardStyle = {
-  background: "#1e2029",
-  border: "1px solid #2a2d3a",
-  borderRadius: "10px",
-  padding: "24px",
-  boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-};
 
 const ALERT_TYPES = [
   { key: "siteDown", label: "Site hors ligne", desc: "Alerte quand le site ne répond plus" },
@@ -116,44 +107,39 @@ export default function PulseAlertsPage() {
   };
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div className="max-w-[900px]">
       <SubNav color={ACCENT} items={PULSE_NAV} />
 
       {/* Header */}
-      <div style={{ marginBottom: "32px" }}>
-        <div style={{
-          height: "3px", width: "40px", borderRadius: "2px", marginBottom: "16px",
-          background: `linear-gradient(135deg, ${ACCENT}, #f472b6)`,
-        }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
+      <div className="mb-8">
+        <div className="h-[3px] w-10 rounded-sm mb-4 bg-gradient-to-br from-[#ec4899] to-[#f472b6]" />
+        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
           Configuration des alertes
         </h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
+        <p className="text-sm text-[#9ca3af]">
           Configurez les alertes pour vos sites surveillés.
         </p>
       </div>
 
       {loading && (
-        <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, textAlign: "center", padding: "48px 24px" }}>
-          <div style={{
-            width: "48px", height: "48px", margin: "0 auto 16px",
-            border: `3px solid ${BORDER_TINT}`, borderTop: `3px solid ${ACCENT}`,
-            borderRadius: "50%", animation: "pulse-alert-spin 1s linear infinite",
-          }} />
-          <div style={{ fontSize: "14px", color: "#9ca3af" }}>Chargement...</div>
+        <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+          <div
+            className="w-12 h-12 mx-auto mb-4 border-[3px] border-[rgba(236,72,153,0.18)] border-t-[#ec4899] rounded-full animate-[pulse-alert-spin_1s_linear_infinite]"
+          />
+          <div className="text-sm text-[#9ca3af]">Chargement...</div>
           <style>{`@keyframes pulse-alert-spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       )}
 
       {!loading && sites.length === 0 && (
-        <div style={{ ...cardStyle, border: `1px solid ${BORDER_TINT}`, background: BG_TINT, textAlign: "center", padding: "48px 24px" }}>
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "16px" }}>
+        <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4 mx-auto">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
           </svg>
-          <div style={{ fontSize: "16px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>
+          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
             Aucun site surveillé
           </div>
-          <div style={{ fontSize: "13px", color: "#9ca3af" }}>
+          <div className="text-[13px] text-[#9ca3af]">
             Ajoutez un site depuis l'onglet Moniteur pour configurer des alertes.
           </div>
         </div>
@@ -162,84 +148,61 @@ export default function PulseAlertsPage() {
       {!loading && sites.length > 0 && (
         <>
           {/* Email notification toggle */}
-          <div style={{
-            ...cardStyle, border: `1px solid ${BORDER_TINT}`, marginBottom: "20px",
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-          }}>
+          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5 flex items-center justify-between">
             <div>
-              <div style={{ fontSize: "14px", fontWeight: 500, color: "#f0f0f3" }}>
+              <div className="text-sm font-medium text-[#f0f0f3]">
                 Notifications par email
               </div>
-              <div style={{ fontSize: "12px", color: "#9ca3af", marginTop: "2px" }}>
+              <div className="text-xs text-[#9ca3af] mt-0.5">
                 Recevez les alertes directement dans votre boîte mail.
               </div>
             </div>
             <button
               onClick={() => setEmailNotif(!emailNotif)}
-              style={{
-                width: "44px", height: "24px", borderRadius: "12px", border: "none",
-                background: emailNotif ? ACCENT : "#2a2d3a",
-                cursor: "pointer", position: "relative", transition: "background 0.2s",
-              }}
+              className="w-11 h-6 rounded-xl border-none cursor-pointer relative transition-colors duration-200"
+              style={{ background: emailNotif ? ACCENT : "#2a2d3a" }}
             >
-              <div style={{
-                width: "18px", height: "18px", borderRadius: "50%", background: "#fff",
-                position: "absolute", top: "3px",
-                left: emailNotif ? "23px" : "3px",
-                transition: "left 0.2s",
-              }} />
+              <div
+                className="w-[18px] h-[18px] rounded-full bg-white absolute top-[3px] transition-[left] duration-200"
+                style={{ left: emailNotif ? "23px" : "3px" }}
+              />
             </button>
           </div>
 
           {/* Per-site alert config */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
+          <div className="flex flex-col gap-3 mb-6">
             {sites.map(site => (
-              <div key={site._id} style={{
-                ...cardStyle, border: `1px solid ${BORDER_TINT}`, padding: "20px",
-              }}>
-                <div style={{
-                  display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px",
-                  paddingBottom: "12px", borderBottom: "1px solid #2a2d3a",
-                }}>
-                  <div style={{
-                    width: "8px", height: "8px", borderRadius: "50%",
-                    background: site.lastCheck?.uptimeStatus !== false ? "#10b981" : "#ef4444",
-                  }} />
-                  <div style={{ fontSize: "15px", fontWeight: 500, color: "#d1d5db" }}>
+              <div key={site._id} className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#2a2d3a]">
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ background: site.lastCheck?.uptimeStatus !== false ? "#10b981" : "#ef4444" }}
+                  />
+                  <div className="text-[15px] font-medium text-[#d1d5db]">
                     {site.domain}
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px" }}>
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3">
                   {ALERT_TYPES.map(alert => (
-                    <div key={alert.key} style={{
-                      padding: "14px", background: "#161820", borderRadius: "8px",
-                      border: "1px solid #2a2d3a",
-                      display: "flex", alignItems: "center", justifyContent: "space-between",
-                    }}>
+                    <div key={alert.key} className="p-3.5 bg-[#161820] rounded-lg border border-[#2a2d3a] flex items-center justify-between">
                       <div>
-                        <div style={{ fontSize: "13px", fontWeight: 500, color: "#d1d5db" }}>
+                        <div className="text-[13px] font-medium text-[#d1d5db]">
                           {alert.label}
                         </div>
-                        <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "2px" }}>
+                        <div className="text-[11px] text-[#6b7280] mt-0.5">
                           {alert.desc}
                         </div>
                       </div>
                       <button
                         onClick={() => toggleAlert(site._id, alert.key)}
-                        style={{
-                          width: "36px", height: "20px", borderRadius: "10px", border: "none",
-                          background: alertConfigs[site._id]?.[alert.key] ? ACCENT : "#2a2d3a",
-                          cursor: "pointer", position: "relative", transition: "background 0.2s",
-                          flexShrink: 0, marginLeft: "12px",
-                        }}
+                        className="w-9 h-5 rounded-[10px] border-none cursor-pointer relative transition-colors duration-200 shrink-0 ml-3"
+                        style={{ background: alertConfigs[site._id]?.[alert.key] ? ACCENT : "#2a2d3a" }}
                       >
-                        <div style={{
-                          width: "14px", height: "14px", borderRadius: "50%", background: "#fff",
-                          position: "absolute", top: "3px",
-                          left: alertConfigs[site._id]?.[alert.key] ? "19px" : "3px",
-                          transition: "left 0.2s",
-                        }} />
+                        <div
+                          className="w-3.5 h-3.5 rounded-full bg-white absolute top-[3px] transition-[left] duration-200"
+                          style={{ left: alertConfigs[site._id]?.[alert.key] ? "19px" : "3px" }}
+                        />
                       </button>
                     </div>
                   ))}
@@ -249,62 +212,51 @@ export default function PulseAlertsPage() {
           </div>
 
           {/* Alert history log */}
-          <div style={{
-            ...cardStyle, border: `1px solid ${BORDER_TINT}`, padding: 0, overflow: "hidden",
-          }}>
-            <div style={{
-              padding: "18px 22px", borderBottom: "1px solid #2a2d3a",
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-            }}>
-              <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)] p-0 overflow-hidden">
+            <div className="px-[22px] py-[18px] border-b border-[#2a2d3a] flex items-center justify-between">
+              <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
                 Historique des alertes
               </h2>
-              <span style={{
-                fontSize: "12px", color: ACCENT, fontWeight: 500,
-                padding: "3px 10px", background: `${ACCENT}15`, borderRadius: "6px",
-              }}>
+              <span className="text-xs text-[#ec4899] font-medium px-2.5 py-[3px] bg-[rgba(236,72,153,0.08)] rounded-md">
                 {alertLog.length} alerte{alertLog.length > 1 ? "s" : ""}
               </span>
             </div>
 
             {alertLog.length === 0 ? (
-              <div style={{ padding: "48px 24px", textAlign: "center" }}>
-                <div style={{ fontSize: "14px", color: "#9ca3af" }}>
+              <div className="py-12 px-6 text-center">
+                <div className="text-sm text-[#9ca3af]">
                   Aucune alerte enregistrée
                 </div>
-                <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
+                <div className="text-xs text-[#6b7280] mt-1">
                   Les alertes apparaîtront ici lorsqu'un événement sera détecté.
                 </div>
               </div>
             ) : (
               <div>
                 {alertLog.map((log, idx) => (
-                  <div key={idx} style={{
-                    padding: "14px 22px",
-                    borderBottom: idx < alertLog.length - 1 ? "1px solid #2a2d3a" : "none",
-                    display: "flex", alignItems: "center", gap: "12px",
-                  }}>
-                    <div style={{
-                      width: "8px", height: "8px", borderRadius: "50%",
-                      background: alertTypeColors[log.type] || "#9ca3af",
-                      flexShrink: 0,
-                    }} />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: "13px", color: "#d1d5db" }}>
+                  <div key={idx} className={`px-[22px] py-3.5 flex items-center gap-3 ${idx < alertLog.length - 1 ? "border-b border-[#2a2d3a]" : ""}`}>
+                    <div
+                      className="w-2 h-2 rounded-full shrink-0"
+                      style={{ background: alertTypeColors[log.type] || "#9ca3af" }}
+                    />
+                    <div className="flex-1">
+                      <div className="text-[13px] text-[#d1d5db]">
                         {log.message}
                       </div>
-                      <div style={{ fontSize: "11px", color: "#6b7280", marginTop: "2px" }}>
+                      <div className="text-[11px] text-[#6b7280] mt-0.5">
                         {new Date(log.date).toLocaleDateString("fr-FR", {
                           day: "numeric", month: "long", year: "numeric",
                           hour: "2-digit", minute: "2-digit",
                         })}
                       </div>
                     </div>
-                    <span style={{
-                      fontSize: "11px", fontWeight: 500, padding: "3px 8px", borderRadius: "4px",
-                      background: `${alertTypeColors[log.type] || "#9ca3af"}15`,
-                      color: alertTypeColors[log.type] || "#9ca3af",
-                    }}>
+                    <span
+                      className="text-[11px] font-medium px-2 py-[3px] rounded"
+                      style={{
+                        background: `${alertTypeColors[log.type] || "#9ca3af"}15`,
+                        color: alertTypeColors[log.type] || "#9ca3af",
+                      }}
+                    >
                       {alertTypeLabels[log.type] || log.type}
                     </span>
                   </div>
