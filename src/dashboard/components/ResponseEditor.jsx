@@ -19,7 +19,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
         <div style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af" }}>
-          Réponse IA {response?.provider === "claude" ? "(Claude)" : response?.provider === "openai" ? "(GPT)" : ""}
+          Réponse IA
         </div>
         {response?.status && (
           <span style={{

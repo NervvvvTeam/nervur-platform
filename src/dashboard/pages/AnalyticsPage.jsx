@@ -79,7 +79,7 @@ export default function AnalyticsPage() {
             borderTop: "3px solid #ef4444", borderRadius: "50%",
             animation: "spin 0.8s linear infinite", margin: "0 auto 20px"
           }} />
-          <p style={{ color: "#ef4444", fontSize: "14px" }}>Analyse en cours par GPT...</p>
+          <p style={{ color: "#ef4444", fontSize: "14px" }}>Analyse en cours par IA...</p>
           <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
         </div>
       ) : analysis ? (
