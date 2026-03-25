@@ -337,7 +337,7 @@ export default function DiagnosticPage() {
         background: "#09090B", backdropFilter: "blur(24px)",
         borderBottom: `1px solid ${VG(0.08)}` }}>
         <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "40px" : "70px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
+          style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" onClick={() => navigate("/")}>
             ← Accueil
@@ -348,7 +348,20 @@ export default function DiagnosticPage() {
         </div>
       </nav>
 
-      <div style={{ paddingTop: isMobile ? "90px" : "140px", paddingBottom: "80px", maxWidth: "800px", margin: "0 auto", padding: isMobile ? "90px 20px 60px" : "140px 48px 80px" }}>
+      {/* RETOUR */}
+      <div style={{ padding: isMobile ? "90px 20px 0 20px" : "140px 48px 0 48px", maxWidth: "800px", margin: "0 auto" }}>
+        <button onClick={() => navigate("/")} style={{
+          background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
+          color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+          fontFamily: "inherit", transition: "all 0.3s",
+        }}
+          onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
+          onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          ← Retour
+        </button>
+      </div>
+
+      <div style={{ paddingTop: "20px", paddingBottom: "80px", maxWidth: "800px", margin: "0 auto", padding: isMobile ? "20px 20px 60px" : "20px 48px 80px" }}>
 
         {/* ════════════ QUIZ MODE ════════════ */}
         {!showResults && (

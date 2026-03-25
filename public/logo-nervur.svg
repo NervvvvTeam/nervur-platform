@@ -1,58 +1,99 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <defs>
+    <!-- Scan line gradient -->
+    <linearGradient id="scanGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#818CF8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+    </linearGradient>
+    <!-- N glow filter -->
+    <filter id="nGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
   <style>
     @keyframes drawN {
-      0% { stroke-dashoffset: 120; opacity: 0.3; }
-      60% { stroke-dashoffset: 0; opacity: 1; }
+      0% { stroke-dashoffset: 120; opacity: 0; }
+      20% { opacity: 1; }
+      70% { stroke-dashoffset: 0; }
       100% { stroke-dashoffset: 0; opacity: 1; }
     }
-    @keyframes boxReveal {
-      0% { opacity: 0; stroke-dashoffset: 240; }
-      50% { opacity: 0.25; stroke-dashoffset: 0; }
-      100% { opacity: 0.25; stroke-dashoffset: 0; }
+    @keyframes boxDraw {
+      0% { stroke-dashoffset: 240; opacity: 0; }
+      15% { opacity: 0.3; }
+      60% { stroke-dashoffset: 0; opacity: 0.3; }
+      100% { stroke-dashoffset: 0; opacity: 0.3; }
     }
-    @keyframes textSlide {
-      0% { opacity: 0; transform: translateX(-6px); }
-      35% { opacity: 0; transform: translateX(-6px); }
-      75% { opacity: 1; transform: translateX(0); }
+    @keyframes textReveal {
+      0%, 30% { opacity: 0; transform: translateX(-10px); }
+      70% { opacity: 1; transform: translateX(0); }
       100% { opacity: 1; transform: translateX(0); }
     }
-    @keyframes accentPulse {
-      0%, 45% { opacity: 0; }
-      75% { opacity: 0.7; }
-      100% { opacity: 0.5; }
+    @keyframes letterReveal {
+      0%, 30% { opacity: 0; transform: translateY(8px); }
+      70% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 1; transform: translateY(0); }
     }
-    @keyframes nGlow {
-      0%, 100% { filter: drop-shadow(0 0 0px rgba(129,140,248,0)); }
-      50% { filter: drop-shadow(0 0 6px rgba(129,140,248,0.35)); }
+    @keyframes accentFlash {
+      0%, 40% { opacity: 0; }
+      60% { opacity: 1; }
+      100% { opacity: 0.6; }
     }
-    .n-box {
-      stroke-dasharray: 240;
-      animation: boxReveal 1.8s ease-out forwards;
+    @keyframes breathe {
+      0%, 100% { filter: drop-shadow(0 0 2px rgba(129,140,248,0.1)); }
+      50% { filter: drop-shadow(0 0 8px rgba(129,140,248,0.4)); }
     }
-    .n-letter {
-      stroke-dasharray: 120;
-      animation: drawN 1.6s ease-out forwards, nGlow 4s ease-in-out 2s infinite;
+    @keyframes scanLine {
+      0% { transform: translateX(-80px); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(320px); opacity: 0; }
     }
-    .accent-line { animation: accentPulse 1.8s ease-out forwards; }
-    .logo-text { animation: textSlide 1.8s ease-out forwards; }
-    svg:hover .n-letter {
-      filter: drop-shadow(0 0 10px rgba(129,140,248,0.5));
-      transition: filter 0.3s;
+    @keyframes particleFloat {
+      0% { transform: translateY(0) scale(1); opacity: 0.6; }
+      50% { transform: translateY(-6px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.6; }
     }
-    svg:hover .n-box { opacity: 0.4; stroke: #818CF8; transition: all 0.3s; }
+    @keyframes uPulse {
+      0%, 100% { fill: #818CF8; }
+      50% { fill: #a78bfa; }
+    }
+
+    .n-box { stroke-dasharray: 240; animation: boxDraw 2s ease-out forwards; }
+    .n-letter { stroke-dasharray: 120; animation: drawN 1.8s ease-out forwards; }
+    .n-group { animation: breathe 4s ease-in-out 2.5s infinite; }
+    .accent-line { animation: accentFlash 2s ease-out forwards; }
+    .logo-text { animation: textReveal 2.2s ease-out forwards; }
+    .u-accent { animation: uPulse 3s ease-in-out 2.5s infinite; }
+    .scan { animation: scanLine 3s ease-in-out 1.5s forwards; }
+    .particle { animation: particleFloat 3s ease-in-out infinite; }
+
+    /* Hover effects */
+    svg:hover .n-letter { stroke: #818CF8; filter: url(#nGlow); transition: all 0.4s; }
+    svg:hover .n-box { opacity: 0.5; stroke: #818CF8; transition: all 0.4s; }
     svg:hover .accent-line { opacity: 1; transition: opacity 0.3s; }
-    svg:hover .logo-text tspan { fill: #818CF8; transition: fill 0.3s; }
+    svg:hover .u-accent { fill: #c4b5fd; transition: fill 0.3s; }
   </style>
 
-  <!-- Box -->
-  <rect class="n-box" x="4" y="8" width="64" height="64" rx="14" fill="none" stroke="#FAFAFA" stroke-width="2"/>
+  <!-- Scan line effect (one-time on load) -->
+  <rect class="scan" x="0" y="30" width="60" height="20" fill="url(#scanGrad)" opacity="0" rx="10"/>
 
-  <!-- N draw -->
-  <path class="n-letter" d="M22 56V24l28 32V24" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-
-  <!-- Accent -->
-  <line class="accent-line" x1="38" y1="16" x2="46" y2="5" stroke="#818CF8" stroke-width="2.5" stroke-linecap="round" opacity="0"/>
+  <!-- N icon group -->
+  <g class="n-group">
+    <!-- Box -->
+    <rect class="n-box" x="4" y="8" width="64" height="64" rx="14" fill="none" stroke="#FAFAFA" stroke-width="2"/>
+    <!-- N letter -->
+    <path class="n-letter" d="M22 56V24l28 32V24" stroke="#FAFAFA" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- Accent slash -->
+    <line class="accent-line" x1="38" y1="16" x2="46" y2="5" stroke="#818CF8" stroke-width="2.5" stroke-linecap="round" opacity="0"/>
+    <!-- Floating particles -->
+    <circle class="particle" cx="60" cy="14" r="1.5" fill="#818CF8" opacity="0.5" style="animation-delay: 0s"/>
+    <circle class="particle" cx="10" cy="65" r="1" fill="#818CF8" opacity="0.4" style="animation-delay: 1s"/>
+    <circle class="particle" cx="55" cy="60" r="1.2" fill="#a78bfa" opacity="0.3" style="animation-delay: 2s"/>
+  </g>
 
   <!-- Text -->
-  <text class="logo-text" x="82" y="54" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="38" font-weight="800" letter-spacing="2" fill="#FAFAFA" opacity="0">NERV<tspan fill="#818CF8">&#220;</tspan>R</text>
+  <text class="logo-text" x="82" y="54" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="38" font-weight="800" letter-spacing="2" fill="#FAFAFA" opacity="0">NERV<tspan class="u-accent" fill="#818CF8">&#220;</tspan>R</text>
 </svg>

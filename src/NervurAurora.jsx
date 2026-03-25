@@ -1027,7 +1027,7 @@ export default function NervurAurora() {
                         ))}
                       </div>
                       <div style={{ marginTop: "28px" }}>
-                        <ChromeButton onClick={() => navigate('/technologies')}>Découvrir →</ChromeButton>
+                        <ChromeButton onClick={() => navigate('/app/login')}>Essayer la démo →</ChromeButton>
                       </div>
                     </div>
                   </div>

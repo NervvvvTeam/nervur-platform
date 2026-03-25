@@ -106,7 +106,7 @@ export default function VitrinePage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} style={{ height: isMobile ? "40px" : "70px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
+        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" onClick={() => navigate("/technologies")} aria-label="Retour aux outils">← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -114,6 +114,18 @@ export default function VitrinePage() {
       </nav>
 
       <main style={{ padding: isMobile ? "100px 16px 60px" : "160px 48px 80px", maxWidth: "1200px", margin: "0 auto" }}>
+        {/* RETOUR */}
+        <div style={{ marginBottom: "20px" }}>
+          <button onClick={() => navigate("/")} style={{
+            background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
+            color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+            fontFamily: "inherit", transition: "all 0.3s",
+          }}
+            onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+            ← Retour
+          </button>
+        </div>
         {/* HERO */}
         <section aria-label="Présentation Sites Vitrines" style={{ animation: "fadeInUp 0.6s ease both", marginBottom: isMobile ? "40px" : "64px" }}>
           <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#52525B", fontFamily: "monospace", display: "block", marginBottom: "16px" }}>

@@ -114,7 +114,7 @@ export default function PulsePage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} style={{ height: isMobile ? "40px" : "70px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
+        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Technologies</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -122,6 +122,18 @@ export default function PulsePage() {
       </nav>
 
       <main style={{ padding: isMobile ? "100px 16px 60px" : "140px 48px 80px", maxWidth: "1100px", margin: "0 auto" }}>
+        {/* RETOUR */}
+        <div style={{ marginBottom: "20px" }}>
+          <button onClick={() => navigate("/")} style={{
+            background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
+            color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+            fontFamily: "inherit", transition: "all 0.3s",
+          }}
+            onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+            ← Retour
+          </button>
+        </div>
         <div style={{ animation: "fadeInUp 0.6s ease both", marginBottom: "40px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
             <svg width="32" height="32" viewBox="0 0 26 26" fill="none" aria-hidden="true">

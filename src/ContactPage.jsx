@@ -254,9 +254,22 @@ export default function ContactPage() {
         </button>
       </nav>
 
+      {/* RETOUR */}
+      <div style={{ padding: isMobile ? "100px 20px 0 20px" : "140px 48px 0 48px", maxWidth: "1100px", margin: "0 auto" }}>
+        <button onClick={() => navigate("/")} style={{
+          background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
+          color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+          fontFamily: "inherit", transition: "all 0.3s",
+        }}
+          onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
+          onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          ← Retour
+        </button>
+      </div>
+
       {/* MAIN */}
       <main style={{
-        paddingTop: isMobile ? "100px" : "140px",
+        paddingTop: "20px",
         paddingBottom: "80px",
         maxWidth: "1100px",
         margin: "0 auto",
