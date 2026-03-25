@@ -145,7 +145,7 @@ export default function PhantomPage() {
   };
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#09090B", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#0f1117", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} aria-hidden="true" style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -361,7 +361,7 @@ export default function PhantomPage() {
         <section aria-label="Appel à l'action" style={{ marginTop: results ? "20px" : "60px", textAlign: "center", padding: isMobile ? "32px 20px" : "48px", border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.3)", animation: "fadeInUp 0.6s ease 0.4s both" }}>
           <h2 style={{ fontSize: isMobile ? "20px" : "28px", fontWeight: 800, marginBottom: "12px", letterSpacing: "-1px" }}>Votre site perd des clients chaque jour.</h2>
           <p style={{ fontSize: "14px", color: "#71717A", marginBottom: "28px", maxWidth: "450px", margin: "0 auto 28px", lineHeight: 1.7 }}>Phantom identifie les fuites. On les colmate. Résultats en 30 jours.</p>
-          <button onClick={() => navigate('/contact?outil=phantom')} style={{ padding: "14px 36px", background: V, color: "#09090B", border: "none", fontWeight: 800, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", transition: "all 0.3s", fontFamily: "inherit" }}
+          <button onClick={() => navigate('/contact?outil=phantom')} style={{ padding: "14px 36px", background: V, color: "#0f1117", border: "none", fontWeight: 800, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", transition: "all 0.3s", fontFamily: "inherit" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(255,255,255,0.2)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             Auditer mon site →

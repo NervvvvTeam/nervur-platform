@@ -99,7 +99,7 @@ export default function TechnologiesPage() {
 
   return (
     <div style={{
-      background: "#09090B", color: "#FAFAFA",
+      background: "#0f1117", color: "#FAFAFA",
       fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
       minHeight: "100vh", position: "relative"
     }}>
@@ -289,7 +289,7 @@ export default function TechnologiesPage() {
               <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>Les 4 outils inclus</p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "12px 32px", background: "#818CF8", border: "none",
-                color: "#09090B", fontWeight: 700, fontSize: "13px", cursor: "pointer",
+                color: "#0f1117", fontWeight: 700, fontSize: "13px", cursor: "pointer",
                 fontFamily: "inherit", transition: "all 0.3s", borderRadius: "8px",
               }}
                 onMouseEnter={e => { e.target.style.background = "#a5b4fc"; e.target.style.transform = "translateY(-2px)"; }}
@@ -313,7 +313,7 @@ export default function TechnologiesPage() {
             On concoit des outils sur-mesure pour votre entreprise. Parlons de votre projet.
           </p>
           <button onClick={() => navigate('/contact')} style={{
-            padding: "16px 40px", background: "#FAFAFA", color: "#09090B", border: "none",
+            padding: "16px 40px", background: "#FAFAFA", color: "#0f1117", border: "none",
             fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
             cursor: "pointer", transition: "all 0.3s ease",
           }}

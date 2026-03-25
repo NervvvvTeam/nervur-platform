@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 
-const BG = "#09090B";
+const BG = "#0f1117";
 const V = "#FFFFFF";
 const V2 = "#D4D4D8";
 const V3 = "#A1A1AA";

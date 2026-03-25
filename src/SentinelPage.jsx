@@ -276,7 +276,7 @@ export default function SentinelPage() {
   ];
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#09090B", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }} role="document">
+    <div onMouseMove={handleMouseMove} style={{ background: "#0f1117", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }} role="document">
 
       <div ref={glowRef} aria-hidden="true" style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
@@ -822,7 +822,7 @@ export default function SentinelPage() {
             Sentinel combine e-réputation et veille marché dans un seul outil propulsé par l'IA. Chaque avis, chaque mouvement concurrent — détecté et traité automatiquement.
           </p>
           <button onClick={() => navigate('/contact?outil=sentinel')} style={{
-            padding: "16px 40px", background: V, color: "#09090B", border: "none",
+            padding: "16px 40px", background: V, color: "#0f1117", border: "none",
             fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
             cursor: "pointer", transition: "all 0.3s ease", fontFamily: "inherit" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(255,255,255,0.2)"; }}

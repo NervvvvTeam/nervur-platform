@@ -507,7 +507,7 @@ export default function NervurAurora() {
 
   return (
     <div ref={pageRef} style={{
-      background: "#09090B", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      background: "linear-gradient(180deg, #0f1117 0%, #141824 50%, #0f1117 100%)", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
       minHeight: "100vh", position: "relative", overflowX: "hidden" }}>
 
       {/* Mouse glow removed */}
@@ -608,7 +608,7 @@ export default function NervurAurora() {
       <nav aria-label="Navigation principale" style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "#09090B", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
+        background: "rgba(15,17,23,0.85)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <img src="/logo-nav.png" alt="NERVÜR — Outils SaaS pour PME" style={{
@@ -707,7 +707,7 @@ export default function NervurAurora() {
       {isMobile && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 99,
-          background: "#09090B", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "32px",
+          background: "#0f1117", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "32px",
           transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
           opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "auto" : "none",
           transform: menuOpen ? "translateY(0)" : "translateY(-20px)" }}>

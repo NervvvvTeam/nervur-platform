@@ -161,7 +161,7 @@ export default function ContactPage() {
   if (sent) {
     return (
       <div style={{
-        background: "#09090B", color: "#FAFAFA",
+        background: "#0f1117", color: "#FAFAFA",
         fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
         minHeight: "100vh", display: "flex", flexDirection: "column",
         justifyContent: "center", alignItems: "center",
@@ -212,7 +212,7 @@ export default function ContactPage() {
 
   return (
     <div style={{
-      background: "#09090B", color: "#FAFAFA",
+      background: "#0f1117", color: "#FAFAFA",
       fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
       minHeight: "100vh", position: "relative",
     }}>

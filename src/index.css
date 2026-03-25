@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background: #09090B;
+  background: #0f1117;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -42,7 +42,7 @@ body {
   z-index: 10000;
   padding: 8px 16px;
   background: #818CF8;
-  color: #09090B;
+  color: #0f1117;
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
