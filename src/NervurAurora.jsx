@@ -620,10 +620,10 @@ export default function NervurAurora() {
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
             {[
-              { label: "Approche", id: "approche" },
               { label: "Services", id: "services" },
               { label: "Outils", id: "outils" },
               { label: "Projets", id: "projets" },
+              { label: "Approche", id: "approche" },
             ].map((item, i) => (
               <span key={i} className="nav-link" style={{ fontSize: "12px", letterSpacing: "2.5px", textTransform: "uppercase", color: "#71717A", cursor: "pointer", transition: "color 0.3s" }}
                 onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
@@ -634,7 +634,7 @@ export default function NervurAurora() {
             ))}
             {/* Blog nav link */}
             <span className="nav-link" style={{ fontSize: "12px", letterSpacing: "2.5px", textTransform: "uppercase", color: "#71717A", cursor: "pointer", transition: "color 0.3s" }}
-              onClick={() => navigate('/blog/e-reputation')}
+              onClick={() => navigate('/blog')}
               onMouseEnter={e => { e.target.style.color = "#FAFAFA"; }}
               onMouseLeave={e => { e.target.style.color = "#71717A"; }}>
               Blog
@@ -660,10 +660,8 @@ export default function NervurAurora() {
                 boxShadow: "0 20px 40px rgba(0,0,0,0.5)"
               }}>
                 {[
-                  { label: "Sentinel", desc: "E-réputation & avis clients", path: "/sentinel" },
-                  { label: "Phantom", desc: "Audit de performance web", path: "/phantom" },
-                  { label: "Vault", desc: "Cybersécurité & conformité RGPD", path: "/contact" },
-                  { label: "Pulse", desc: "Monitoring santé web", path: "/contact" },
+                  { label: "Calculer votre ROI digital", desc: "Estimez le retour sur investissement de votre stratégie digitale", path: "/simulateur" },
+                  { label: "Évaluer votre maturité digitale", desc: "Diagnostic complet de votre présence en ligne", path: "/diagnostic" },
                 ].map((app, i) => (
                   <div key={i} onClick={() => { navigate(app.path); setAppsOpen(false); }}
                     style={{
@@ -1704,15 +1702,15 @@ export default function NervurAurora() {
       </section>
 
       {/* ═══ TECH MARQUEE — GRILLE TECHNIQUE ═══ */}
-      <section aria-label="Technologies utilisées" style={{ borderTop: `1px solid ${VG(0.1)}`, padding: "0", overflow: "hidden" }}>
-        <div style={{ borderBottom: `1px solid ${VG(0.05)}`, padding: "16px 0", overflow: "hidden" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "40px", animation: "marquee 35s linear infinite", width: "max-content" }}>
+      <section aria-label="Technologies utilisées" style={{ borderTop: `1px solid ${VG(0.15)}`, padding: "0", overflow: "hidden", background: "rgba(129,140,248,0.03)" }}>
+        <div style={{ borderBottom: `1px solid ${VG(0.1)}`, padding: "24px 0", overflow: "hidden" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "48px", animation: "marquee 30s linear infinite", width: "max-content" }}>
             {[...Array(4)].flatMap((_, setIdx) =>
               ["REACT", "NEXT.JS", "FIGMA", "NODE.JS", "TAILWIND", "TYPESCRIPT", "VERCEL", "WORDPRESS"].map((tech, i) => (
                 <span key={`t1-${setIdx}-${i}`} style={{
-                  fontSize: "11px", letterSpacing: "3px", fontFamily: "monospace",
-                  color: "#27272A", whiteSpace: "nowrap", padding: "4px 16px" }}>
-                  <span style={{ color: V2, marginRight: "8px", animation: "terminalBlink 2s infinite", fontSize: "8px" }}>▸</span>
+                  fontSize: "13px", letterSpacing: "4px", fontFamily: "monospace",
+                  color: "#52525B", whiteSpace: "nowrap", padding: "4px 16px", fontWeight: 600 }}>
+                  <span style={{ color: "#818CF8", marginRight: "10px", fontSize: "10px" }}>◆</span>
                   {tech}
                 </span>
               ))
