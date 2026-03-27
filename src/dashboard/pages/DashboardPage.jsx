@@ -38,7 +38,7 @@ const SENTINEL_NAV = [
   { path: "/app/qrcode", label: "QR Code" },
   { path: "/app/widget", label: "Widget" },
   { path: "/app/alerts", label: "Alertes" },
-  { path: "/app/settings", label: "Parametres" },
+  { path: "/app/settings", label: "Paramètres" },
 ];
 
 export default function DashboardPage() {
@@ -210,7 +210,7 @@ export default function DashboardPage() {
           { label: "Score global", value: stats?.averageRating?.toFixed(1) || "\u2014", suffix: "/5", trend: trends?.scoreTrend },
           { label: "Total avis", value: stats?.totalReviews || 0, trend: trends?.countTrend },
           { label: "Ce mois", value: stats?.thisMonthCount || 0 },
-          { label: "Taux de reponse", value: `${stats?.responseRate || 0}%` },
+          { label: "Taux de réponse", value: `${stats?.responseRate || 0}%` },
           { label: "En attente", value: stats?.pendingResponses || 0, alert: stats?.pendingResponses > 0 },
         ].map((s, i) => (
           <div key={s.label} style={fadeInUp(0.1 + i * 0.08)}>
@@ -272,7 +272,7 @@ export default function DashboardPage() {
 
         {/* Response time */}
         <div style={{ ...cardStyle, borderLeft: "3px solid #10b981", ...fadeInUp(0.5) }}>
-          <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />Temps de reponse moyen</div>
+          <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block" }} />Temps de réponse moyen</div>
           <div style={{ fontSize: "28px", fontWeight: 600, color: "#f0f0f3" }}>
             {trends?.avgResponseTime != null ? (
               trends.avgResponseTime < 24
@@ -283,7 +283,7 @@ export default function DashboardPage() {
           <div style={{
             marginTop: "8px", fontSize: "12px", fontWeight: 500, color: "#9ca3af"
           }}>
-            {(trends?.avgResponseTime || 999) <= 2 ? "Excellent" : (trends?.avgResponseTime || 999) <= 24 ? "Bon" : "Peut etre ameliore"}
+            {(trends?.avgResponseTime || 999) <= 2 ? "Excellent" : (trends?.avgResponseTime || 999) <= 24 ? "Bon" : "Peut être amélioré"}
           </div>
         </div>
       </div>
@@ -304,7 +304,7 @@ export default function DashboardPage() {
             </ResponsiveContainer>
           ) : (
             <div style={{ height: "180px", display: "flex", alignItems: "center", justifyContent: "center", color: "#d1d5db", fontSize: "13px" }}>
-              Pas encore de donnees
+              Pas encore de données
             </div>
           )}
         </div>
@@ -323,7 +323,7 @@ export default function DashboardPage() {
         <div style={{ ...cardStyle, display: "flex", gap: "16px", marginBottom: "20px", ...fadeInUp(0.6) }}>
           <SentimentBar label="Positifs" count={stats.sentiments.positive} total={stats.totalReviews} color="#22c55e" />
           <SentimentBar label="Mixtes" count={stats.sentiments.mixed} total={stats.totalReviews} color="#f59e0b" />
-          <SentimentBar label="Negatifs" count={stats.sentiments.negative} total={stats.totalReviews} color="#ef4444" />
+          <SentimentBar label="Négatifs" count={stats.sentiments.negative} total={stats.totalReviews} color="#ef4444" />
         </div>
       )}
 

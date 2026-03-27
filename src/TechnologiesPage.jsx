@@ -18,8 +18,8 @@ const TOOLS = [
     name: "SENTINEL",
     subtitle: "E-reputation",
     color: "#ef4444",
-    description: "Surveillez vos avis Google, repondez automatiquement avec l'IA et analysez votre reputation en ligne.",
-    features: ["Avis Google en temps reel", "Reponses IA automatiques", "Analyse semantique", "Veille concurrentielle", "QR Code & Widget", "Rapports PDF"],
+    description: "Surveillez vos avis Google, répondez automatiquement avec l'IA et analysez votre réputation en ligne.",
+    features: ["Avis Google en temps réel", "Réponses IA automatiques", "Analyse sémantique", "Veille concurrentielle", "QR Code & Widget", "Rapports PDF"],
     price: "29",
     link: "/sentinel",
     icon: (
@@ -36,7 +36,7 @@ const TOOLS = [
     subtitle: "Performance web",
     color: "#8b5cf6",
     description: "Auditez vos pages web, obtenez vos scores Lighthouse et des recommandations d'optimisation par IA.",
-    features: ["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals", "Recommandations IA", "Historique + evolution", "Comparaison concurrents"],
+    features: ["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals", "Recommandations IA", "Historique + évolution", "Comparaison concurrents"],
     price: "19",
     link: "/phantom",
     icon: (
@@ -50,10 +50,10 @@ const TOOLS = [
   {
     id: "vault",
     name: "VAULT",
-    subtitle: "Cybersecurite",
+    subtitle: "Cybersécurité",
     color: "#06b6d4",
-    description: "Surveillez les fuites de donnees, verifiez vos emails et assurez votre conformite RGPD.",
-    features: ["Detection fuites de donnees", "Scan emails professionnels", "Conformite RGPD", "Monitoring continu", "Alertes en temps reel", "Rapport PDF"],
+    description: "Surveillez les fuites de données, vérifiez vos emails et assurez votre conformité RGPD.",
+    features: ["Détection fuites de données", "Scan emails professionnels", "Conformité RGPD", "Monitoring continu", "Alertes en temps réel", "Rapport PDF"],
     price: "19",
     link: "/contact",
     icon: (
@@ -67,10 +67,10 @@ const TOOLS = [
   {
     id: "pulse",
     name: "PULSE",
-    subtitle: "Monitoring sante web",
+    subtitle: "Monitoring santé web",
     color: "#ec4899",
-    description: "Surveillez la sante de vos sites en temps reel. Uptime, SSL, DNS et delivrabilite email.",
-    features: ["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de securite", "Page de statut publique", "Alertes email"],
+    description: "Surveillez la santé de vos sites en temps réel. Uptime, SSL, DNS et délivrabilité email.",
+    features: ["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de sécurité", "Page de statut publique", "Alertes email"],
     price: "19",
     link: "/contact",
     icon: (
@@ -89,7 +89,7 @@ export default function TechnologiesPage() {
 
   useSEO(
     "Nos Outils & Technologies | NERVUR",
-    "Decouvrez la suite complete d'outils SaaS NERVUR : Sentinel, Phantom, Pulse et Vault. Technologies IA pour PME.",
+    "Découvrez la suite complète d'outils SaaS NERVUR : Sentinel, Phantom, Pulse et Vault. Technologies IA pour PME.",
     { path: "/technologies", keywords: "outils SaaS PME, technologies IA, Sentinel, Phantom, Pulse, Vault, NERVUR" }
   );
 
@@ -154,7 +154,7 @@ export default function TechnologiesPage() {
         <img src="/logo-nervur.svg" alt="NERVUR" onClick={() => navigate("/")}
           style={{ height: isMobile ? "40px" : "70px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <button className="nav-btn" aria-label="Retour a l'accueil" onClick={() => navigate("/")}>Accueil</button>
+          <button className="nav-btn" aria-label="Retour à l'accueil" onClick={() => navigate("/")}>Accueil</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
         </div>
       </nav>
@@ -182,7 +182,7 @@ export default function TechnologiesPage() {
             Des outils puissants pour votre business
           </h1>
           <p style={{ fontSize: "16px", color: "#71717A", maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}>
-            Quatre solutions professionnelles pour surveiller, analyser et proteger votre presence en ligne.
+            Quatre solutions professionnelles pour surveiller, analyser et protéger votre présence en ligne.
           </p>
         </section>
 
@@ -267,7 +267,7 @@ export default function TechnologiesPage() {
               Packs multi-outils
             </h2>
             <p style={{ fontSize: "15px", color: "#71717A", maxWidth: "500px", margin: "0 auto", lineHeight: 1.7 }}>
-              Combinez vos outils et economisez. Sans engagement, annulez quand vous voulez.
+              Combinez vos outils et économisez. Sans engagement, annulez quand vous voulez.
             </p>
           </div>
 
@@ -319,10 +319,10 @@ export default function TechnologiesPage() {
           animation: "fadeInUp 0.8s ease 0.7s both",
         }}>
           <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, marginBottom: "16px", letterSpacing: "-1px" }}>
-            Un besoin specifique ?
+            Un besoin spécifique ?
           </h2>
           <p style={{ fontSize: "15px", color: "#71717A", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
-            On concoit des outils sur-mesure pour votre entreprise. Parlons de votre projet.
+            On conçoit des outils sur-mesure pour votre entreprise. Parlons de votre projet.
           </p>
           <button onClick={() => navigate('/contact')} style={{
             padding: "16px 40px", background: "#FAFAFA", color: "#0f1117", border: "none",
@@ -343,7 +343,7 @@ export default function TechnologiesPage() {
         flexDirection: isMobile ? "column" : "row", gap: "12px",
       }}>
         <span style={{ fontSize: "11px", color: "#52525B", letterSpacing: "1px" }}>NERVUR &copy; 2026</span>
-        <span style={{ fontSize: "11px", color: "#52525B" }}>Editeur de Technologies de Croissance</span>
+        <span style={{ fontSize: "11px", color: "#52525B" }}>Éditeur de Technologies de Croissance</span>
       </footer>
     </div>
   );

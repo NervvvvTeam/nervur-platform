@@ -473,10 +473,20 @@ export default function NervurAurora() {
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "url": "https://nervur.fr/vault",
-    "offers": { "@type": "Offer", "price": "39", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+    "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
   });
 
-  // Atlas and Pulse removed
+  // SoftwareApplication structured data — Pulse
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "NERVÜR Pulse",
+    "description": "Monitoring de la santé web pour PME. Surveillance uptime, certificats SSL, DNS et délivrabilité email.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://nervur.fr/contact",
+    "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+  });
 
   // Oscillating hero values
   const perfScore = useOscillate(98, 2, 3000);
@@ -1775,7 +1785,7 @@ export default function NervurAurora() {
             {[
               { name: "Sentinel — E-réputation", path: "/sentinel" },
               { name: "Phantom — Audit web", path: "/phantom" },
-              { name: "Vault — Cybersécurité", path: "/vault" },
+              { name: "Vault — Cybersécurité", path: "/contact" },
               { name: "Pulse — Monitoring", path: "/contact" },
             ].map((t, i) => (
               <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}

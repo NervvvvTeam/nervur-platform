@@ -179,7 +179,13 @@
       "Bash(/dev/null __NEW_LINE_27dd25842087312b__ echo echo '=== 5. PHANTOM — Get history ===' curl -s https://nervurapi-production.up.railway.app/api/phantom/history -H 'Authorization: Bearer $TOKEN')",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''Count:'''', len\\(d\\) if isinstance\\(d, list\\) else ''''N/A''''\\); print\\(json.dumps\\(d, indent=2\\)[:400]\\)\" 2)",
       "Bash(/dev/null __NEW_LINE_27dd25842087312b__ echo echo '=== 6. VAULT — Get history ===' curl -s https://nervurapi-production.up.railway.app/api/vault/history -H 'Authorization: Bearer $TOKEN')",
-      "Bash(/dev/null __NEW_LINE_27dd25842087312b__ echo echo '=== 7. PULSE — Get history ===' curl -s https://nervurapi-production.up.railway.app/api/pulse/history -H 'Authorization: Bearer $TOKEN')"
+      "Bash(/dev/null __NEW_LINE_27dd25842087312b__ echo echo '=== 7. PULSE — Get history ===' curl -s https://nervurapi-production.up.railway.app/api/pulse/history -H 'Authorization: Bearer $TOKEN')",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWI2MGUwMTljN2EwY2U5YTc2YmIwOTciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzQ2MDkwOTQsImV4cCI6MTc3NDY5NTQ5NH0.-o2JMyIUln6X6EQ1TWmzcXoWTMEWHUndR9s-aUkCyLo\")",
+      "Bash(curl -s -X POST https://nervurapi-production.up.railway.app/api/phantom/audit -H \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\" -d '{\"\"url\"\":\"\"https://nervur.fr\"\"}')",
+      "Bash(curl -s -X POST https://nervurapi-production.up.railway.app/api/vault/scan -H \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"test@example.com\"\"}')",
+      "Bash(curl -s -X POST https://nervurapi-production.up.railway.app/api/sentinel/scan-reviews -H \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\" -d '{\"\"businessId\"\":\"\"69bde526e13f5bca0a71c118\"\"}')",
+      "Bash(curl -s -X POST https://nervurapi-production.up.railway.app/api/sentinel/generate -H \"Content-Type: application/json\" -d '{\"\"\"\"review\"\"\"\":\"\"\"\"test\"\"\"\",\"\"\"\"businessName\"\"\"\":\"\"\"\"test\"\"\"\",\"\"\"\"tone\"\"\"\":\"\"\"\"professional\"\"\"\"}')",
+      "Bash(npx railway:*)"
     ]
   }
 }
