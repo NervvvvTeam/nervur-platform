@@ -559,4 +559,87 @@ router.get("/audit/:id/pdf", requireAuth, async (req, res) => {
   }
 });
 
+// ── Schedule CRUD ──────────────────────────────────────────────
+
+const Schedule = require("../models/Schedule");
+
+// GET /api/phantom/schedules — list all schedules for the authenticated user
+router.get("/schedules", requireAuth, async (req, res) => {
+  try {
+    const schedules = await Schedule.find({ userId: req.userId }).sort({ createdAt: -1 });
+    res.json({ schedules });
+  } catch (err) {
+    console.error("[Phantom] Schedules list error:", err.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// POST /api/phantom/schedules — create a new schedule
+router.post("/schedules", requireAuth, async (req, res) => {
+  try {
+    const { domain, frequency } = req.body;
+    if (!domain || typeof domain !== "string" || domain.trim().length === 0) {
+      return res.status(400).json({ error: "Le champ 'domain' est requis." });
+    }
+    if (frequency && !["weekly", "monthly"].includes(frequency)) {
+      return res.status(400).json({ error: "Frequence invalide (weekly ou monthly)." });
+    }
+    const schedule = await Schedule.create({
+      userId: req.userId,
+      domain: domain.trim().substring(0, 253),
+      frequency: frequency || "weekly",
+      enabled: true,
+    });
+    res.status(201).json({ schedule });
+  } catch (err) {
+    if (err.code === 11000) {
+      return res.status(409).json({ error: "Un planning existe deja pour ce domaine." });
+    }
+    console.error("[Phantom] Schedule create error:", err.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// PUT /api/phantom/schedules/:id — update a schedule (toggle enabled, change frequency)
+router.put("/schedules/:id", requireAuth, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: "Identifiant invalide" });
+    }
+    const update = {};
+    if (typeof req.body.enabled === "boolean") update.enabled = req.body.enabled;
+    if (req.body.frequency && ["weekly", "monthly"].includes(req.body.frequency)) {
+      update.frequency = req.body.frequency;
+    }
+    if (Object.keys(update).length === 0) {
+      return res.status(400).json({ error: "Aucun champ a mettre a jour." });
+    }
+    const schedule = await Schedule.findOneAndUpdate(
+      { _id: req.params.id, userId: req.userId },
+      update,
+      { new: true }
+    );
+    if (!schedule) return res.status(404).json({ error: "Planning non trouve" });
+    res.json({ schedule });
+  } catch (err) {
+    console.error("[Phantom] Schedule update error:", err.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// DELETE /api/phantom/schedules/:id — delete a schedule
+router.delete("/schedules/:id", requireAuth, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: "Identifiant invalide" });
+    }
+    const result = await Schedule.findOneAndDelete({ _id: req.params.id, userId: req.userId });
+    if (!result) return res.status(404).json({ error: "Planning non trouve" });
+    res.json({ deleted: 1 });
+  } catch (err) {
+    console.error("[Phantom] Schedule delete error:", err.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
 module.exports = router;

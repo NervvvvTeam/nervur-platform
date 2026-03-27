@@ -6,7 +6,7 @@ const ATLAS_COLOR = "#f59e0b";
 
 const ATLAS_NAV = [
   { path: "/app/atlas", label: "Projets", end: true },
-  { path: "/app/atlas/history", label: "\u00c9volution" },
+  { path: "/app/atlas/history", label: "\Évolution" },
   { path: "/app/atlas/suggestions", label: "Suggestions IA" },
   { path: "/app/atlas/reports", label: "Rapports" },
 ];
@@ -32,7 +32,7 @@ function ChangeBadge({ change }) {
       display: "inline-flex", alignItems: "center", gap: "2px",
       color: up ? "#22c55e" : "#ef4444", fontSize: "12px", fontWeight: 500,
     }}>
-      {up ? "\u2191" : "\u2193"} {Math.abs(change)}
+      {up ? "\↑" : "\↓"} {Math.abs(change)}
     </span>
   );
 }
@@ -42,7 +42,7 @@ function CompetitionBadge({ level }) {
   const colors = {
     low: { bg: "rgba(34,197,94,0.12)", color: "#22c55e", label: "Faible" },
     medium: { bg: "rgba(245,158,11,0.12)", color: "#f59e0b", label: "Moyen" },
-    high: { bg: "rgba(239,68,68,0.12)", color: "#ef4444", label: "\u00c9lev\u00e9" },
+    high: { bg: "rgba(239,68,68,0.12)", color: "#ef4444", label: "\Élev\é" },
   };
   const c = colors[level] || colors.medium;
   return (

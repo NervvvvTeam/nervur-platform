@@ -7,7 +7,7 @@ const VAULT_NAV = [
   { path: "/app/vault", label: "Scanner", end: true },
   { path: "/app/vault/monitoring", label: "Surveillance" },
   { path: "/app/vault/history", label: "Historique" },
-  { path: "/app/vault/rgpd", label: "Conformit\u00e9 RGPD" },
+  { path: "/app/vault/rgpd", label: "Conformit\é RGPD" },
 ];
 
 const ACCENT = "#06b6d4";
@@ -92,7 +92,7 @@ export default function VaultMonitoringPage() {
         .map(e => e.trim())
         .filter(e => e.length > 0);
       await post("/api/vault/monitoring", { domain, emails, frequency, alertEmail });
-      setSuccess("Surveillance activ\u00e9e avec succ\u00e8s !");
+      setSuccess("Surveillance activ\ée avec succ\ès !");
       setDomain("");
       setEmailsText("");
       setAlertEmail("");
@@ -127,7 +127,7 @@ export default function VaultMonitoringPage() {
     setDeletingId(id);
     try {
       await del(`/api/vault/monitoring/${id}`);
-      setSuccess("Surveillance supprim\u00e9e.");
+      setSuccess("Surveillance supprim\ée.");
       fetchConfigs();
     } catch (err) {
       setError(err.message);

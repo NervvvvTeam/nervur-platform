@@ -25,6 +25,7 @@ export default function PhantomSchedulePage() {
 
   useEffect(() => {
     loadDomains();
+    loadSchedules();
   }, []);
 
   const loadDomains = async () => {
@@ -38,26 +39,47 @@ export default function PhantomSchedulePage() {
     }
   };
 
-  const handleAdd = () => {
+  const loadSchedules = async () => {
+    try {
+      const data = await api.get("/api/phantom/schedules");
+      setSchedules(data.schedules || []);
+    } catch (err) {
+      console.error("Load schedules error:", err);
+    }
+  };
+
+  const handleAdd = async () => {
     if (!selectedDomain) return;
     if (schedules.find(s => s.domain === selectedDomain)) return;
-    setSchedules(prev => [...prev, {
-      domain: selectedDomain,
-      frequency,
-      enabled: true,
-      id: Date.now(),
-    }]);
-    setSelectedDomain("");
+    try {
+      const data = await api.post("/api/phantom/schedules", { domain: selectedDomain, frequency });
+      setSchedules(prev => [...prev, data.schedule]);
+      setSelectedDomain("");
+    } catch (err) {
+      console.error("Add schedule error:", err);
+    }
   };
 
-  const toggleSchedule = (id) => {
-    setSchedules(prev => prev.map(s =>
-      s.id === id ? { ...s, enabled: !s.enabled } : s
-    ));
+  const toggleSchedule = async (id) => {
+    const current = schedules.find(s => (s._id || s.id) === id);
+    if (!current) return;
+    try {
+      const data = await api.put("/api/phantom/schedules/" + id, { enabled: !current.enabled });
+      setSchedules(prev => prev.map(s =>
+        (s._id || s.id) === id ? data.schedule : s
+      ));
+    } catch (err) {
+      console.error("Toggle schedule error:", err);
+    }
   };
 
-  const removeSchedule = (id) => {
-    setSchedules(prev => prev.filter(s => s.id !== id));
+  const removeSchedule = async (id) => {
+    try {
+      await api.del("/api/phantom/schedules/" + id);
+      setSchedules(prev => prev.filter(s => (s._id || s.id) !== id));
+    } catch (err) {
+      console.error("Remove schedule error:", err);
+    }
   };
 
   return (
@@ -211,7 +233,7 @@ export default function PhantomSchedulePage() {
         ) : (
           <div>
             {schedules.map((schedule, idx) => (
-              <div key={schedule.id} style={{
+              <div key={schedule._id || schedule.id} style={{
                 padding: "16px 22px",
                 borderBottom: idx < schedules.length - 1 ? "1px solid #2a2d3a" : "none",
                 display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -246,7 +268,7 @@ export default function PhantomSchedulePage() {
                   </span>
                   {/* Toggle */}
                   <button
-                    onClick={() => toggleSchedule(schedule.id)}
+                    onClick={() => toggleSchedule(schedule._id || schedule.id)}
                     style={{
                       width: "40px", height: "22px", borderRadius: "11px", border: "none",
                       background: schedule.enabled ? "#8b5cf6" : "#2a2d3a",
@@ -262,7 +284,7 @@ export default function PhantomSchedulePage() {
                   </button>
                   {/* Remove */}
                   <button
-                    onClick={() => removeSchedule(schedule.id)}
+                    onClick={() => removeSchedule(schedule._id || schedule.id)}
                     style={{
                       background: "none", border: "none", color: "#6b7280",
                       cursor: "pointer", padding: "4px", fontSize: "16px",

@@ -44,7 +44,7 @@ function TrendArrow({ current, previous }) {
   const isUp = diff > 0;
   return (
     <span style={{ color: isUp ? "#10b981" : "#ef4444", fontSize: "11px", fontWeight: 600, marginLeft: "4px" }}>
-      {isUp ? "\u2191" : "\u2193"}{isUp ? "+" : ""}{diff}
+      {isUp ? "\↑" : "\↓"}{isUp ? "+" : ""}{diff}
     </span>
   );
 }
@@ -160,7 +160,7 @@ export default function PhantomHistoryPage() {
           Historique des audits
         </h1>
         <p style={{ fontSize: "14px", color: "#9ca3af" }}>
-          Suivez l'\u00e9volution de vos scores au fil du temps.
+          Suivez l'\évolution de vos scores au fil du temps.
         </p>
       </div>
 
@@ -223,7 +223,7 @@ export default function PhantomHistoryPage() {
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ fontSize: "16px", color: "#9ca3af", marginBottom: "12px" }}>
-            Aucun audit enregistr\u00e9
+            Aucun audit enregistr\é
           </div>
           <p style={{ fontSize: "14px", color: "#d1d5db", marginBottom: "20px" }}>
             Lancez votre premier audit depuis la page Audit.
@@ -299,7 +299,7 @@ export default function PhantomHistoryPage() {
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M21 12a9 9 0 0 0-9-9"/><path d="M3 12a9 9 0 0 0 9 9"/><polyline points="21 3 21 12 12 12"/>
                           </svg>
-                          Mettre \u00e0 jour
+                          Mettre \à jour
                         </>
                       )}
                     </button>
@@ -323,7 +323,7 @@ export default function PhantomHistoryPage() {
                 <div style={{ padding: "0 22px 16px", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px" }}>
                   {[
                     { key: "performance", label: "Performance", color: "#8b5cf6" },
-                    { key: "accessibility", label: "Accessibilit\u00e9", color: "#3b82f6" },
+                    { key: "accessibility", label: "Accessibilit\é", color: "#3b82f6" },
                     { key: "seo", label: "SEO", color: "#10b981" },
                     { key: "bestPractices", label: "Bonnes pratiques", color: "#f59e0b" },
                   ].map(({ key, label, color }) => (
@@ -475,7 +475,7 @@ export default function PhantomHistoryPage() {
               </div>
               <button onClick={() => setCompareResult(null)} style={{
                 background: "none", border: "none", color: "#9ca3af", cursor: "pointer", fontSize: "18px"
-              }}>{"\u00d7"}</button>
+              }}>{"\×"}</button>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px", marginBottom: "20px" }}>
@@ -490,13 +490,13 @@ export default function PhantomHistoryPage() {
                   }}>
                     <div style={{ fontSize: "10px", color: "#9ca3af", marginBottom: "6px" }}>{labels[key]}</div>
                     <div style={{ fontSize: "12px", color: "#6b7280" }}>{comp.previous}</div>
-                    <div style={{ fontSize: "11px", color: "#9ca3af", margin: "2px 0" }}>{"\u2193"}</div>
+                    <div style={{ fontSize: "11px", color: "#9ca3af", margin: "2px 0" }}>{"\↓"}</div>
                     <div style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3" }}>{comp.current}</div>
                     <div style={{ marginTop: "4px" }}>
                       {comp.diff === 0
                         ? <span style={{ color: "#9ca3af", fontSize: "11px" }}>=</span>
                         : <span style={{ color: comp.diff > 0 ? "#10b981" : "#ef4444", fontSize: "12px", fontWeight: 600 }}>
-                            {comp.diff > 0 ? "\u2191+" : "\u2193"}{comp.diff}
+                            {comp.diff > 0 ? "\↑+" : "\↓"}{comp.diff}
                           </span>
                       }
                     </div>
@@ -511,7 +511,7 @@ export default function PhantomHistoryPage() {
                 border: "1px solid rgba(16,185,129,0.15)", borderRadius: "8px", textAlign: "center"
               }}>
                 <div style={{ fontSize: "20px", fontWeight: 600, color: "#10b981" }}>{compareResult.resolvedIssues || 0}</div>
-                <div style={{ fontSize: "11px", color: "#9ca3af" }}>R\u00e9solus</div>
+                <div style={{ fontSize: "11px", color: "#9ca3af" }}>R\ésolus</div>
               </div>
               <div style={{
                 flex: 1, padding: "12px", background: "rgba(239,68,68,0.06)",
@@ -533,7 +533,7 @@ export default function PhantomHistoryPage() {
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "16px" }}>
-            \u00c9volution du score global
+            \Évolution du score global
           </div>
           <div style={{ position: "relative", height: chartHeight + 30, overflow: "hidden" }}>
             <svg width="100%" height={chartHeight + 30} viewBox={`0 0 ${chartWidth} ${chartHeight + 30}`} preserveAspectRatio="xMidYMid meet">

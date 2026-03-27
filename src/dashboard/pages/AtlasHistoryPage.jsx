@@ -6,7 +6,7 @@ const ATLAS_COLOR = "#f59e0b";
 
 const ATLAS_NAV = [
   { path: "/app/atlas", label: "Projets", end: true },
-  { path: "/app/atlas/history", label: "\u00c9volution" },
+  { path: "/app/atlas/history", label: "\Évolution" },
   { path: "/app/atlas/suggestions", label: "Suggestions IA" },
   { path: "/app/atlas/reports", label: "Rapports" },
 ];
@@ -216,7 +216,7 @@ function KeywordMovers({ rankings, type = "best" }) {
               display: "inline-flex", alignItems: "center", gap: "2px",
               color: isBest ? "#22c55e" : "#ef4444", fontSize: "12px", fontWeight: 600,
             }}>
-              {isBest ? "\u2191" : "\u2193"} {Math.abs(r.change)}
+              {isBest ? "\↑" : "\↓"} {Math.abs(r.change)}
             </span>
           </div>
         </div>
@@ -367,7 +367,7 @@ export default function AtlasHistoryPage() {
                 border: "1px solid #2a2d3a",
               }}>
                 <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ color: "#22c55e" }}>{"\u2191"}</span>
+                  <span style={{ color: "#22c55e" }}>{"\↑"}</span>
                   Meilleures progressions
                 </h3>
                 <KeywordMovers rankings={rankings} type="best" />
@@ -379,7 +379,7 @@ export default function AtlasHistoryPage() {
                 border: "1px solid #2a2d3a",
               }}>
                 <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <span style={{ color: "#ef4444" }}>{"\u2193"}</span>
+                  <span style={{ color: "#ef4444" }}>{"\↓"}</span>
                   Plus fortes baisses
                 </h3>
                 <KeywordMovers rankings={rankings} type="worst" />
