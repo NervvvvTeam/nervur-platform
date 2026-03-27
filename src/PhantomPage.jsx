@@ -369,6 +369,30 @@ export default function PhantomPage() {
           </section>
         )}
 
+        {/* Tarification */}
+        <section aria-label="Tarification" className="mb-20" style={{ animation: "fadeInUp 0.8s ease 0.6s both" }}>
+          <div className="max-w-[520px] mx-auto border border-[rgba(139,92,246,0.3)] bg-[rgba(139,92,246,0.03)] rounded-2xl text-center relative overflow-hidden" style={{ padding: isMobile ? "32px 24px" : "48px 40px" }}>
+            <div className="absolute -top-px left-10 right-10 h-0.5 bg-gradient-to-r from-transparent via-[#8b5cf6] to-transparent" />
+            <div className="text-[10px] tracking-[3px] uppercase text-[#8b5cf6] font-bold mb-6">ABONNEMENT UNIQUE</div>
+            <div className="flex items-baseline justify-center gap-1 mb-2">
+              <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>19€</span>
+              <span className="text-base text-[#52525B] font-semibold">/mois</span>
+            </div>
+            <p className="text-[13px] text-[#71717A] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
+            <div className="text-left mb-8">
+              {["Audit Lighthouse complet", "Scores Performance + SEO + Accessibilité", "Core Web Vitals détaillés", "Recommandations IA en français", "Historique des audits + évolution", "Comparaison avant/après", "Export PDF des rapports", "Scan illimité de pages"].map((f, i) => (
+                <div key={i} className="flex items-center gap-2.5 py-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                  <span className="text-[#4ADE80] text-sm min-w-[18px]">✓</span>
+                  <span className="text-[13px] text-[#D4D4D8]">{f}</span>
+                </div>
+              ))}
+            </div>
+            <button onClick={() => navigate('/contact')} className="w-full py-3 rounded-xl font-bold text-sm border-0 cursor-pointer transition-all" style={{ background: "#8b5cf6", color: "#fff" }}>
+              Commencer maintenant →
+            </button>
+          </div>
+        </section>
+
         {/* CTA */}
         <section aria-label="Appel à l'action" style={{ marginTop: results ? "20px" : "60px", textAlign: "center", padding: isMobile ? "32px 20px" : "48px", border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.3)", animation: "fadeInUp 0.6s ease 0.4s both" }}>
           <h2 style={{ fontSize: isMobile ? "20px" : "28px", fontWeight: 800, marginBottom: "12px", letterSpacing: "-1px" }}>Votre site perd des clients chaque jour.</h2>

@@ -6,7 +6,7 @@ const VAULT_NAV = [
   { path: "/app/vault", label: "Scanner", end: true },
   { path: "/app/vault/monitoring", label: "Surveillance" },
   { path: "/app/vault/history", label: "Historique" },
-  { path: "/app/vault/rgpd", label: "Conformit\u00e9 RGPD" },
+  { path: "/app/vault/rgpd", label: "Conformit\é RGPD" },
 ];
 
 const ACCENT = "#06b6d4";
@@ -22,16 +22,16 @@ const RISK_COLORS = {
 
 const RISK_LABELS = {
   critical: "Critique",
-  high: "\u00c9lev\u00e9",
+  high: "\Élev\é",
   medium: "Moyen",
   low: "Faible",
 };
 
 const RISK_EXPLANATIONS = {
-  critical: "Risque critique : Des mots de passe et donn\u00e9es sensibles ont \u00e9t\u00e9 expos\u00e9s. Action imm\u00e9diate requise.",
-  high: "Risque \u00e9lev\u00e9 : Des informations personnelles importantes ont \u00e9t\u00e9 compromises. Changez vos mots de passe rapidement.",
-  medium: "Risque moyen : Certaines informations ont fuit\u00e9 mais le danger reste limit\u00e9. Restez vigilant.",
-  low: "Risque faible : Peu de donn\u00e9es expos\u00e9es. Continuez les bonnes pratiques de s\u00e9curit\u00e9.",
+  critical: "Risque critique : Des mots de passe et donn\ées sensibles ont \ét\é expos\és. Action imm\édiate requise.",
+  high: "Risque \élev\é : Des informations personnelles importantes ont \ét\é compromises. Changez vos mots de passe rapidement.",
+  medium: "Risque moyen : Certaines informations ont fuit\é mais le danger reste limit\é. Restez vigilant.",
+  low: "Risque faible : Peu de donn\ées expos\ées. Continuez les bonnes pratiques de s\écurit\é.",
 };
 
 const DATA_CLASS_LABELS = {
@@ -39,34 +39,34 @@ const DATA_CLASS_LABELS = {
   "Passwords": "Mots de passe",
   "Usernames": "Noms d'utilisateur",
   "IP addresses": "Adresses IP",
-  "Phone numbers": "Num\u00e9ros de t\u00e9l\u00e9phone",
+  "Phone numbers": "Num\éros de t\él\éphone",
   "Physical addresses": "Adresses postales",
   "Dates of birth": "Dates de naissance",
   "Credit cards": "Cartes bancaires",
-  "Social security numbers": "Num\u00e9ros de s\u00e9curit\u00e9 sociale",
+  "Social security numbers": "Num\éros de s\écurit\é sociale",
   "Bank account numbers": "Comptes bancaires",
-  "Employment": "Donn\u00e9es d'emploi",
+  "Employment": "Donn\ées d'emploi",
   "Genders": "Genres",
   "Names": "Noms complets",
   "Geographic locations": "Localisations",
   "Employers": "Employeurs",
-  "Job titles": "Postes occup\u00e9s",
+  "Job titles": "Postes occup\és",
   "Income levels": "Niveaux de revenus",
-  "Education levels": "Niveaux d'\u00e9ducation",
-  "Biometric data": "Donn\u00e9es biom\u00e9triques",
-  "Browser user agent details": "Donn\u00e9es navigateur",
+  "Education levels": "Niveaux d'\éducation",
+  "Biometric data": "Donn\ées biom\étriques",
+  "Browser user agent details": "Donn\ées navigateur",
   "Device information": "Infos appareil",
-  "Security questions and answers": "Questions de s\u00e9curit\u00e9",
+  "Security questions and answers": "Questions de s\écurit\é",
   "Auth tokens": "Jetons d'authentification",
   "Password hints": "Indices de mot de passe",
   "PINs": "Codes PIN",
   "Purchases": "Achats",
   "Avatars": "Photos de profil",
   "Social connections": "Connexions sociales",
-  "Private messages": "Messages priv\u00e9s",
+  "Private messages": "Messages priv\és",
   "Chat logs": "Historique de chat",
-  "Age groups": "Tranches d'\u00e2ge",
-  "Nationalities": "Nationalit\u00e9s",
+  "Age groups": "Tranches d'\âge",
+  "Nationalities": "Nationalit\és",
   "Political views": "Opinions politiques",
   "Religions": "Religions",
   "Smoking habits": "Habitudes tabagiques",
@@ -75,26 +75,26 @@ const DATA_CLASS_LABELS = {
   "Sexual orientations": "Orientations sexuelles",
   "Relationship statuses": "Statuts relationnels",
   "Fitness levels": "Niveaux de forme",
-  "Health insurance information": "Infos assurance sant\u00e9",
-  "Medical conditions": "Conditions m\u00e9dicales",
+  "Health insurance information": "Infos assurance sant\é",
+  "Medical conditions": "Conditions m\édicales",
 };
 
 const DATA_CLASS_EXPLANATIONS = {
-  "Email addresses": "Votre adresse email peut \u00eatre utilis\u00e9e pour du spam ou des tentatives de phishing.",
-  "Passwords": "Vos mots de passe sont expos\u00e9s. Changez-les imm\u00e9diatement partout o\u00f9 vous les utilisez.",
+  "Email addresses": "Votre adresse email peut \être utilis\ée pour du spam ou des tentatives de phishing.",
+  "Passwords": "Vos mots de passe sont expos\és. Changez-les imm\édiatement partout o\ù vous les utilisez.",
   "Usernames": "Vos noms d'utilisateur sont connus, ce qui facilite les tentatives de connexion frauduleuses.",
   "IP addresses": "Votre localisation approximative et fournisseur internet sont connus.",
-  "Phone numbers": "Votre num\u00e9ro peut \u00eatre utilis\u00e9 pour des appels ou SMS frauduleux.",
-  "Physical addresses": "Votre adresse postale est expos\u00e9e, risque d'usurpation d'identit\u00e9.",
-  "Dates of birth": "Votre date de naissance peut servir \u00e0 deviner vos mots de passe ou usurper votre identit\u00e9.",
-  "Credit cards": "Vos donn\u00e9es bancaires sont compromises. Contactez votre banque imm\u00e9diatement.",
-  "Social security numbers": "Risque majeur d'usurpation d'identit\u00e9. Contactez les autorit\u00e9s.",
-  "Bank account numbers": "Vos coordonn\u00e9es bancaires sont expos\u00e9es. Pr\u00e9venez votre banque.",
-  "Names": "Votre nom complet est associ\u00e9 \u00e0 d'autres donn\u00e9es personnelles.",
-  "Geographic locations": "Vos lieux fr\u00e9quent\u00e9s sont connus.",
-  "Security questions and answers": "Vos questions de s\u00e9curit\u00e9 sont compromises. Changez-les sur tous vos comptes.",
-  "Auth tokens": "Des jetons d'acc\u00e8s \u00e0 vos comptes ont fuit\u00e9. D\u00e9connectez toutes les sessions.",
-  "Private messages": "Des messages priv\u00e9s ont \u00e9t\u00e9 expos\u00e9s publiquement.",
+  "Phone numbers": "Votre num\éro peut \être utilis\é pour des appels ou SMS frauduleux.",
+  "Physical addresses": "Votre adresse postale est expos\ée, risque d'usurpation d'identit\é.",
+  "Dates of birth": "Votre date de naissance peut servir \à deviner vos mots de passe ou usurper votre identit\é.",
+  "Credit cards": "Vos donn\ées bancaires sont compromises. Contactez votre banque imm\édiatement.",
+  "Social security numbers": "Risque majeur d'usurpation d'identit\é. Contactez les autorit\és.",
+  "Bank account numbers": "Vos coordonn\ées bancaires sont expos\ées. Pr\évenez votre banque.",
+  "Names": "Votre nom complet est associ\é \à d'autres donn\ées personnelles.",
+  "Geographic locations": "Vos lieux fr\équent\és sont connus.",
+  "Security questions and answers": "Vos questions de s\écurit\é sont compromises. Changez-les sur tous vos comptes.",
+  "Auth tokens": "Des jetons d'acc\ès \à vos comptes ont fuit\é. D\éconnectez toutes les sessions.",
+  "Private messages": "Des messages priv\és ont \ét\é expos\és publiquement.",
 };
 
 const DATA_CLASS_SEVERITY = {
@@ -177,7 +177,7 @@ function BreachCard({ breach }) {
         </div>
         <div className="flex gap-3 text-xs text-[#9ca3af]">
           <span>{formatDate(breach.date || breach.BreachDate)}</span>
-          <span>{formatNumber(breach.pwnCount || breach.PwnCount)} comptes touch\u00e9s</span>
+          <span>{formatNumber(breach.pwnCount || breach.PwnCount)} comptes touch\és</span>
         </div>
       </div>
       {/* Data classes */}
@@ -235,7 +235,7 @@ function EmailResultCard({ result }) {
               {result.email}
             </div>
             <div className="text-xs text-[#ef4444] mt-0.5">
-              {breachCount} fuite{breachCount > 1 ? "s" : ""} d\u00e9tect\u00e9e{breachCount > 1 ? "s" : ""}
+              {breachCount} fuite{breachCount > 1 ? "s" : ""} d\étect\ée{breachCount > 1 ? "s" : ""}
             </div>
           </div>
         </div>
@@ -282,7 +282,7 @@ function LoadingAnimation() {
         Analyse en cours...
       </div>
       <div className="text-[13px] text-[#9ca3af] leading-relaxed">
-        Nous v\u00e9rifions vos adresses email dans les bases de donn\u00e9es compromises connues.
+        Nous v\érifions vos adresses email dans les bases de donn\ées compromises connues.
         <br />Cela peut prendre quelques secondes.
       </div>
       <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
@@ -307,7 +307,7 @@ export function VaultResults({ scan }) {
       {/* Summary Cards */}
       <div className="flex gap-3 mb-6 flex-wrap">
         <SummaryCard
-          label="Emails scann\u00e9s"
+          label="Emails scann\és"
           value={totalEmails}
           color={ACCENT}
           icon={<LockIcon size={60} color={ACCENT} />}
@@ -319,7 +319,7 @@ export function VaultResults({ scan }) {
           icon={<AlertTriangle size={60} color={compromisedCount > 0 ? "#ef4444" : "#22c55e"} />}
         />
         <SummaryCard
-          label="Fuites d\u00e9tect\u00e9es"
+          label="Fuites d\étect\ées"
           value={totalBreaches}
           color={totalBreaches > 0 ? "#f97316" : "#22c55e"}
           icon={<ShieldIcon size={60} color={totalBreaches > 0 ? "#f97316" : "#22c55e"} />}
@@ -341,7 +341,7 @@ export function VaultResults({ scan }) {
         <span className="shrink-0 mt-px">
           <ShieldIcon size={18} color={riskColor} />
         </span>
-        {RISK_EXPLANATIONS[riskLevel] || "R\u00e9sultat de l'analyse de s\u00e9curit\u00e9."}
+        {RISK_EXPLANATIONS[riskLevel] || "R\ésultat de l'analyse de s\écurit\é."}
       </div>
 
       {/* No breaches -- celebration */}
@@ -349,11 +349,11 @@ export function VaultResults({ scan }) {
         <div className="bg-[rgba(34,197,94,0.08)] border border-[rgba(34,197,94,0.3)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
           <ShieldCheckIcon size={56} color="#22c55e" />
           <div className="text-xl font-bold text-[#22c55e] mt-4 mb-2">
-            Aucune fuite d\u00e9tect\u00e9e
+            Aucune fuite d\étect\ée
           </div>
           <div className="text-sm text-[#86efac] leading-relaxed max-w-[440px] mx-auto">
-            Bonne nouvelle ! Aucune des adresses email analys\u00e9es n'appara\u00eet dans les bases de donn\u00e9es compromises connues.
-            Continuez \u00e0 appliquer les bonnes pratiques de s\u00e9curit\u00e9.
+            Bonne nouvelle ! Aucune des adresses email analys\ées n'appara\ît dans les bases de donn\ées compromises connues.
+            Continuez \à appliquer les bonnes pratiques de s\écurit\é.
           </div>
         </div>
       )}
@@ -382,7 +382,7 @@ export function VaultResults({ scan }) {
           <div className="flex items-center gap-2 mb-3.5">
             <ShieldCheckIcon size={18} color="#22c55e" />
             <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
-              Emails s\u00e9curis\u00e9s
+              Emails s\écuris\és
             </h3>
           </div>
           <div className="bg-[rgba(34,197,94,0.04)] border border-[rgba(34,197,94,0.15)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
@@ -402,7 +402,7 @@ export function VaultResults({ scan }) {
           <div className="flex items-center gap-2 mb-3.5">
             <ShieldIcon size={18} color={ACCENT} />
             <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
-              Recommandations de s\u00e9curit\u00e9
+              Recommandations de s\écurit\é
             </h3>
           </div>
           <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
@@ -430,7 +430,7 @@ export function VaultResults({ scan }) {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
-        T\u00e9l\u00e9charger le rapport (bient\u00f4t disponible)
+        T\él\écharger le rapport (bient\ôt disponible)
       </button>
     </div>
   );
@@ -471,7 +471,7 @@ function PasswordChecker({ post: apiPost }) {
       const data = await apiPost("/api/vault/password-check", { password });
       setResult(data);
     } catch (err) {
-      setPwError(err.message || "Erreur lors de la v\u00e9rification.");
+      setPwError(err.message || "Erreur lors de la v\érification.");
     } finally {
       setChecking(false);
     }
@@ -484,20 +484,20 @@ function PasswordChecker({ post: apiPost }) {
       <div className="flex items-center gap-2 mb-1.5">
         <LockIcon size={18} color={ACCENT} />
         <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
-          V\u00e9rificateur de mot de passe
+          V\érificateur de mot de passe
         </h2>
       </div>
       <p className="text-xs text-[#9ca3af] mb-[18px] leading-relaxed">
-        V\u00e9rifiez la robustesse d'un mot de passe et s'il appara\u00eet dans des fuites de donn\u00e9es connues.
+        V\érifiez la robustesse d'un mot de passe et s'il appara\ît dans des fuites de donn\ées connues.
       </p>
 
       {/* k-anonymity explanation */}
       <div className="px-3.5 py-2.5 bg-[rgba(6,182,212,0.05)] border border-[rgba(6,182,212,0.2)] rounded-md mb-4 text-[11px] text-[#9ca3af] leading-relaxed flex items-start gap-2">
         <ShieldIcon size={16} color="#06b6d4" />
         <span>
-          <strong className="text-[#d1d5db]">Votre mot de passe reste priv\u00e9.</strong> Nous utilisons la m\u00e9thode
-          k-anonymity : seuls les 5 premiers caract\u00e8res du hash SHA-1 sont envoy\u00e9s au serveur. Le mot de passe
-          complet n'est jamais transmis ni stock\u00e9.
+          <strong className="text-[#d1d5db]">Votre mot de passe reste priv\é.</strong> Nous utilisons la m\éthode
+          k-anonymity : seuls les 5 premiers caract\ères du hash SHA-1 sont envoy\és au serveur. Le mot de passe
+          complet n'est jamais transmis ni stock\é.
         </span>
       </div>
 
@@ -508,7 +508,7 @@ function PasswordChecker({ post: apiPost }) {
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={e => { setPassword(e.target.value); setResult(null); }}
-            placeholder="Entrez un mot de passe \u00e0 v\u00e9rifier"
+            placeholder="Entrez un mot de passe \à v\érifier"
             className="w-full px-3.5 py-2.5 pr-10 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
             onKeyDown={e => { if (e.key === "Enter") handleCheck(); }}
           />
@@ -533,12 +533,12 @@ function PasswordChecker({ post: apiPost }) {
           {checking ? (
             <>
               <div className="w-3.5 h-3.5 border-2 border-[rgba(107,114,128,0.3)] border-t-[#6b7280] rounded-full animate-[vault-spin_0.8s_linear_infinite]" />
-              V\u00e9rification...
+              V\érification...
             </>
           ) : (
             <>
               <LockIcon size={14} color={!password.trim() ? "#6b7280" : "#0f0f11"} />
-              V\u00e9rifier
+              V\érifier
             </>
           )}
         </button>
@@ -589,14 +589,14 @@ function PasswordChecker({ post: apiPost }) {
             <div>
               <div className="text-[13px] font-semibold" style={{ color: result.breached ? "#fca5a5" : "#86efac" }}>
                 {result.breached
-                  ? `Ce mot de passe a \u00e9t\u00e9 trouv\u00e9 dans ${result.breachCount.toLocaleString("fr-FR")} fuite${result.breachCount > 1 ? "s" : ""} de donn\u00e9es`
-                  : "Ce mot de passe n'appara\u00eet dans aucune fuite connue"
+                  ? `Ce mot de passe a \ét\é trouv\é dans ${result.breachCount.toLocaleString("fr-FR")} fuite${result.breachCount > 1 ? "s" : ""} de donn\ées`
+                  : "Ce mot de passe n'appara\ît dans aucune fuite connue"
                 }
               </div>
               <div className="text-[11px] text-[#9ca3af] mt-0.5">
                 {result.breached
                   ? "Ne l'utilisez jamais. Choisissez un mot de passe unique et complexe."
-                  : "Bonne nouvelle ! Cela ne garantit pas qu'il est s\u00fbr \u2014 privil\u00e9giez un mot de passe long et unique."
+                  : "Bonne nouvelle ! Cela ne garantit pas qu'il est s\ûr \u2014 privil\égiez un mot de passe long et unique."
                 }
               </div>
             </div>
@@ -660,7 +660,7 @@ export default function VaultDashboardPage() {
             Vault
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
-            Surveillance des fuites de donn\u00e9es
+            Surveillance des fuites de donn\ées
           </p>
         </div>
       </div>
@@ -673,11 +673,11 @@ export default function VaultDashboardPage() {
         <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
           <strong className="text-[#f0f0f3]">Comment fonctionne Vault ?</strong>
           <br />
-          Vault v\u00e9rifie si les adresses email de votre entreprise apparaissent dans des bases de donn\u00e9es pirat\u00e9es.
-          Ces bases contiennent des informations vol\u00e9es lors d'attaques sur des sites comme LinkedIn, Adobe, Facebook, etc.
+          Vault v\érifie si les adresses email de votre entreprise apparaissent dans des bases de donn\ées pirat\ées.
+          Ces bases contiennent des informations vol\ées lors d'attaques sur des sites comme LinkedIn, Adobe, Facebook, etc.
           <br />
           <span className="text-[#6b7280]">
-            Aucune donn\u00e9e sensible n'est stock\u00e9e de notre c\u00f4t\u00e9. Seul le r\u00e9sultat de l'analyse est conserv\u00e9.
+            Aucune donn\ée sensible n'est stock\ée de notre c\ôt\é. Seul le r\ésultat de l'analyse est conserv\é.
           </span>
         </div>
       </div>
@@ -712,7 +712,7 @@ export default function VaultDashboardPage() {
           {/* Emails textarea */}
           <div className="mb-5">
             <label className="block text-[13px] font-medium text-[#6b7280] mb-1.5">
-              Adresses email \u00e0 v\u00e9rifier
+              Adresses email \à v\érifier
             </label>
             <textarea
               value={emailsText}
@@ -759,7 +759,7 @@ export default function VaultDashboardPage() {
             <div className="flex items-center gap-2">
               <ShieldIcon size={18} color={ACCENT} />
               <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
-                R\u00e9sultats de l'analyse
+                R\ésultats de l'analyse
               </h2>
             </div>
             <button

@@ -7,7 +7,7 @@ const VAULT_NAV = [
   { path: "/app/vault", label: "Scanner", end: true },
   { path: "/app/vault/monitoring", label: "Surveillance" },
   { path: "/app/vault/history", label: "Historique" },
-  { path: "/app/vault/rgpd", label: "Conformit\u00e9 RGPD" },
+  { path: "/app/vault/rgpd", label: "Conformit\é RGPD" },
 ];
 
 const ACCENT = "#06b6d4";
@@ -23,7 +23,7 @@ const RISK_COLORS = {
 
 const RISK_LABELS = {
   critical: "Critique",
-  high: "\u00c9lev\u00e9",
+  high: "\Élev\é",
   medium: "Moyen",
   low: "Faible",
 };
@@ -78,7 +78,7 @@ export default function VaultHistoryPage() {
 
   const handleDelete = useCallback(async (e, scanId) => {
     e.stopPropagation();
-    if (!confirm("Supprimer cette analyse ? Cette action est irr\u00e9versible.")) return;
+    if (!confirm("Supprimer cette analyse ? Cette action est irr\éversible.")) return;
     try {
       setDeletingId(scanId);
       await del(`/api/vault/scan/${scanId}`);
@@ -100,7 +100,7 @@ export default function VaultHistoryPage() {
           Historique des analyses
         </h1>
         <p className="text-sm text-[#9ca3af]">
-          Retrouvez toutes vos analyses de s\u00e9curit\u00e9 pass\u00e9es
+          Retrouvez toutes vos analyses de s\écurit\é pass\ées
         </p>
       </div>
 
@@ -125,10 +125,10 @@ export default function VaultHistoryPage() {
         <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] text-center px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
           <ShieldIcon size={48} color="#3f3f46" />
           <div className="text-base font-semibold text-[#9ca3af] mt-4 mb-2">
-            Aucune analyse effectu\u00e9e
+            Aucune analyse effectu\ée
           </div>
           <div className="text-[13px] text-[#d1d5db] leading-relaxed mb-5">
-            Vous n'avez pas encore lanc\u00e9 d'analyse de s\u00e9curit\u00e9.
+            Vous n'avez pas encore lanc\é d'analyse de s\écurit\é.
             <br />Commencez par scanner les emails de votre entreprise.
           </div>
           <button

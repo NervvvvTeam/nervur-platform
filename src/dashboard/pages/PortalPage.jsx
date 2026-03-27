@@ -592,9 +592,9 @@ const TOOLS = [
 ];
 
 const TIPS = [
-  "Repondez aux avis dans les 24h pour ameliorer votre score.",
-  "Utilisez Phantom pour optimiser le SEO de vos pages cles.",
-  "Lancez un scan Vault chaque mois pour verifier vos emails.",
+  "Répondez aux avis dans les 24h pour améliorer votre score.",
+  "Utilisez Phantom pour optimiser le SEO de vos pages clés.",
+  "Lancez un scan Vault chaque mois pour vérifier vos emails.",
   "Surveillez votre uptime avec Pulse pour ne rater aucune panne.",
 ];
 

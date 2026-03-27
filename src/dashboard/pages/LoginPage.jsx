@@ -44,7 +44,31 @@ export default function LoginPage() {
       display: "flex",
       flexDirection: isWide ? "row" : "column",
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+      position: "relative",
     }}>
+      {/* Bouton retour site vitrine */}
+      <button
+        onClick={() => navigate('/')}
+        style={{
+          position: "absolute",
+          top: isWide ? 24 : 16,
+          left: isWide ? 24 : 16,
+          zIndex: 10,
+          background: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: 8,
+          color: "#71717A",
+          fontSize: 13,
+          padding: "8px 16px",
+          cursor: "pointer",
+          fontFamily: "inherit",
+          transition: "all 0.2s",
+        }}
+        onMouseEnter={e => { e.target.style.background = "rgba(255,255,255,0.12)"; e.target.style.color = "#fff"; }}
+        onMouseLeave={e => { e.target.style.background = "rgba(255,255,255,0.06)"; e.target.style.color = "#71717A"; }}
+      >
+        ← Retour au site
+      </button>
       {/* Branding Panel */}
       <div style={{
         background: "#09090B",

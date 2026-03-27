@@ -499,21 +499,21 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
 
           {/* Email deliverability */}
           <div className="mt-3 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
-            <div className="text-[11px] text-[#9ca3af] mb-2.5 font-medium">Delivrabilite email</div>
+            <div className="text-[11px] text-[#9ca3af] mb-2.5 font-medium">Délivrabilité email</div>
             <div className="flex gap-3 flex-wrap">
-              <StatusBadge ok={check.dns?.spf} labelOk="SPF configure" labelFail="SPF absent" />
-              <StatusBadge ok={check.dns?.dmarc} labelOk="DMARC configure" labelFail="DMARC absent" />
+              <StatusBadge ok={check.dns?.spf} labelOk="SPF configuré" labelFail="SPF absent" />
+              <StatusBadge ok={check.dns?.dmarc} labelOk="DMARC configuré" labelFail="DMARC absent" />
               {check.dns?.dkim !== undefined && (
-                <StatusBadge ok={check.dns.dkim} labelOk="DKIM configure" labelFail="DKIM absent" />
+                <StatusBadge ok={check.dns.dkim} labelOk="DKIM configuré" labelFail="DKIM absent" />
               )}
             </div>
             {(!check.dns?.spf || !check.dns?.dmarc) && (
               <div className="text-xs text-[#f59e0b] mt-2 leading-relaxed">
                 {!check.dns?.spf && !check.dns?.dmarc
-                  ? "Ni SPF ni DMARC ne sont configures. Vos emails risquent d'atterrir en spam."
+                  ? "Ni SPF ni DMARC ne sont configurés. Vos emails risquent d'atterrir en spam."
                   : !check.dns?.spf
-                    ? "SPF n'est pas configure. Ajoutez un enregistrement SPF pour ameliorer la delivrabilite."
-                    : "DMARC n'est pas configure. Ajoutez un enregistrement DMARC pour proteger votre domaine."}
+                    ? "SPF n'est pas configuré. Ajoutez un enregistrement SPF pour améliorer la délivrabilité."
+                    : "DMARC n'est pas configuré. Ajoutez un enregistrement DMARC pour protéger votre domaine."}
               </div>
             )}
           </div>
@@ -523,7 +523,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
             <div className="mt-3 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
               <div className="flex items-center gap-2 mb-3">
                 <ShieldIcon size={14} color={ACCENT} />
-                <span className="text-[11px] text-[#9ca3af] font-medium">En-tetes de securite</span>
+                <span className="text-[11px] text-[#9ca3af] font-medium">En-têtes de sécurité</span>
                 {(() => {
                   const keys = Object.keys(check.securityHeaders);
                   const present = keys.filter(k => check.securityHeaders[k]?.present).length;

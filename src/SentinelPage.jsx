@@ -768,7 +768,7 @@ export default function SentinelPage() {
             <div className="text-[10px] tracking-[3px] uppercase text-[#ef4444] font-bold mb-6">ABONNEMENT UNIQUE</div>
 
             <div className="flex items-baseline justify-center gap-1 mb-2">
-              <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>99€</span>
+              <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>29€</span>
               <span className="text-base text-[#52525B] font-semibold">/mois</span>
             </div>
             <p className="text-[13px] text-[#71717A] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
