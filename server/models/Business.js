@@ -14,6 +14,12 @@ const businessSchema = new mongoose.Schema({
   googleRefreshToken: { type: String },
   googleAccountId: { type: String },
   googleLocationId: { type: String },
+  googleOAuth: {
+    accessToken: String,
+    refreshToken: String,
+    expiresAt: Date,
+    connected: { type: Boolean, default: false }
+  },
   mode: { type: String, enum: ["auto", "manual"], default: "manual" },
   scanEnabled: { type: Boolean, default: false },
   lastScanAt: { type: Date },

@@ -26,7 +26,7 @@ const SECTORS = [
 ];
 
 export default function SettingsPage() {
-  const { get, put } = useApi();
+  const { get, put, del } = useApi();
   const [business, setBusiness] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -196,6 +196,31 @@ export default function SettingsPage() {
             {business.googleAccessToken ? "Reconnecter Google" : "Connecter Google"}
           </button>
         </div>
+      </Section>
+
+      <Section title="Réinitialiser les données">
+        <p style={{ fontSize: "12px", color: "#71717A", marginBottom: "16px", lineHeight: 1.6 }}>
+          Supprimer tous les avis, réponses et historiques de votre compte. Cette action est irréversible.
+        </p>
+        <button onClick={async () => {
+          if (!window.confirm("⚠️ Êtes-vous sûr ? Toutes les données Sentinel seront supprimées définitivement.")) return;
+          try {
+            const res = await del(`/api/sentinel/reset`);
+            alert(`✅ Données réinitialisées : ${res.deleted?.reviews || 0} avis, ${res.deleted?.responses || 0} réponses supprimés.`);
+            window.location.reload();
+          } catch (err) {
+            console.error(err);
+            alert("Erreur lors de la réinitialisation");
+          }
+        }}
+          style={{
+            padding: "10px 20px", background: "transparent",
+            border: "1px solid #ef4444", borderRadius: "8px",
+            color: "#ef4444", fontSize: "13px", fontWeight: 600,
+            cursor: "pointer", fontFamily: "inherit"
+          }}>
+          🗑️ Réinitialiser toutes les données
+        </button>
       </Section>
     </div>
   );

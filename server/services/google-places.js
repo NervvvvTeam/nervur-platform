@@ -31,7 +31,7 @@ async function getPlaceDetails(placeId) {
   const res = await fetch(`https://places.googleapis.com/v1/places/${placeId}?languageCode=fr`, {
     headers: {
       "X-Goog-Api-Key": GOOGLE_API_KEY(),
-      "X-Goog-FieldMask": "id,displayName,formattedAddress,rating,userRatingCount,reviews,googleMapsUri"
+      "X-Goog-FieldMask": "id,displayName,formattedAddress,rating,userRatingCount,reviews.originalText,reviews.text,reviews.rating,reviews.authorAttribution,reviews.publishTime,reviews.name,googleMapsUri"
     }
   });
 
@@ -97,10 +97,10 @@ async function fetchGoogleReviews(businessName, googleBusinessUrl) {
     authorName: r.authorAttribution?.displayName || "Anonyme",
     authorPhoto: r.authorAttribution?.photoUri || null,
     rating: r.rating || 3,
-    text: r.text?.text || "",
+    text: r.originalText?.text || r.text?.text || "",
     publishedAt: r.publishTime ? new Date(r.publishTime) : new Date(),
-    language: r.text?.languageCode || "fr",
-    hasReply: !!r.originalText?.text
+    language: r.originalText?.languageCode || r.text?.languageCode || "fr",
+    hasReply: false
   }));
 
   return {

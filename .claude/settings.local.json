@@ -192,7 +192,8 @@
       "Bash(__NEW_LINE_9e735556f11252fb__ curl:*)",
       "Read(//tmp/**)",
       "Bash(rm -f package-lock.json)",
-      "Bash(rm -rf node_modules)"
+      "Bash(rm -rf node_modules)",
+      "Bash(ls *.config.*)"
     ]
   }
 }

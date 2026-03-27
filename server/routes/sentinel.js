@@ -119,4 +119,173 @@ router.post("/scan-reviews", authMiddleware, async (req, res) => {
   }
 });
 
+// GET /oauth/url — Returns the Google OAuth URL for the client to click
+router.get("/oauth/url", authMiddleware, (req, res) => {
+  try {
+    const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
+    if (!clientId) return res.status(500).json({ error: "GOOGLE_OAUTH_CLIENT_ID non configuré" });
+    const redirectUri = encodeURIComponent("https://nervurapi-production.up.railway.app/api/sentinel/oauth/callback");
+    const scope = encodeURIComponent("https://www.googleapis.com/auth/business.manage");
+    const state = req.userId;
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}&access_type=offline&prompt=consent&state=${state}`;
+    res.json({ url });
+  } catch (err) {
+    console.error("[OAUTH URL]", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /oauth/callback — Google redirects here after user authorizes
+router.get("/oauth/callback", async (req, res) => {
+  const { code, state } = req.query;
+  const userId = state;
+
+  try {
+    const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        code,
+        client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
+        client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+        redirect_uri: "https://nervurapi-production.up.railway.app/api/sentinel/oauth/callback",
+        grant_type: "authorization_code"
+      })
+    });
+
+    const tokens = await tokenRes.json();
+    if (tokens.error) throw new Error(tokens.error_description || tokens.error);
+
+    await Business.findOneAndUpdate(
+      { userId },
+      {
+        $set: {
+          "googleOAuth.accessToken": tokens.access_token,
+          "googleOAuth.refreshToken": tokens.refresh_token,
+          "googleOAuth.expiresAt": new Date(Date.now() + tokens.expires_in * 1000),
+          "googleOAuth.connected": true
+        }
+      },
+      { upsert: false }
+    );
+
+    res.redirect("https://nervur.fr/app/sentinel?oauth=success");
+  } catch (err) {
+    console.error("[OAUTH] Error:", err.message);
+    res.redirect("https://nervur.fr/app/sentinel?oauth=error");
+  }
+});
+
+// POST /scan-reviews-oauth — Scan reviews using OAuth (all reviews, not just 5)
+router.post("/scan-reviews-oauth", authMiddleware, async (req, res) => {
+  try {
+    const business = await Business.findOne({ userId: req.userId });
+    if (!business?.googleOAuth?.connected) {
+      return res.status(400).json({ error: "Google Business non connecté" });
+    }
+
+    let accessToken = business.googleOAuth.accessToken;
+
+    // Refresh token if expired
+    if (new Date() >= business.googleOAuth.expiresAt) {
+      const refreshRes = await fetch("https://oauth2.googleapis.com/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          refresh_token: business.googleOAuth.refreshToken,
+          client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
+          client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+          grant_type: "refresh_token"
+        })
+      });
+      const newTokens = await refreshRes.json();
+      accessToken = newTokens.access_token;
+      business.googleOAuth.accessToken = accessToken;
+      business.googleOAuth.expiresAt = new Date(Date.now() + newTokens.expires_in * 1000);
+      await business.save();
+    }
+
+    // List accounts
+    const accountsRes = await fetch("https://mybusinessaccountmanagement.googleapis.com/v1/accounts", {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    });
+    const accountsData = await accountsRes.json();
+    const accounts = accountsData.accounts || [];
+    if (accounts.length === 0) return res.status(404).json({ error: "Aucun compte Google Business trouvé" });
+
+    const accountName = accounts[0].name;
+
+    // List locations
+    const locationsRes = await fetch(`https://mybusinessbusinessinformation.googleapis.com/v1/${accountName}/locations?readMask=name,title,metadata`, {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    });
+    const locationsData = await locationsRes.json();
+    const locations = locationsData.locations || [];
+    if (locations.length === 0) return res.status(404).json({ error: "Aucun établissement trouvé" });
+
+    const location = locations[0];
+
+    // Get reviews for the location (paginated)
+    let allReviews = [];
+    let pageToken = null;
+    do {
+      const url = `https://mybusiness.googleapis.com/v4/${location.name}/reviews${pageToken ? '?pageToken=' + pageToken : ''}`;
+      const reviewsRes = await fetch(url, {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      });
+      const reviewsData = await reviewsRes.json();
+      if (reviewsData.reviews) allReviews = allReviews.concat(reviewsData.reviews);
+      pageToken = reviewsData.nextPageToken || null;
+    } while (pageToken);
+
+    // Save reviews to database
+    let imported = 0;
+    for (const r of allReviews) {
+      const existing = await Review.findOne({ googleReviewId: r.reviewId, businessId: business._id });
+      if (!existing) {
+        await Review.create({
+          businessId: business._id,
+          userId: req.userId,
+          googleReviewId: r.reviewId,
+          authorName: r.reviewer?.displayName || "Anonyme",
+          authorPhoto: r.reviewer?.profilePhotoUrl || null,
+          rating: {"ONE":1,"TWO":2,"THREE":3,"FOUR":4,"FIVE":5}[r.starRating] || 3,
+          text: r.comment || "",
+          publishedAt: r.createTime ? new Date(r.createTime) : new Date(),
+          language: "fr",
+          sentiment: r.starRating === "FOUR" || r.starRating === "FIVE" ? "positif" : r.starRating === "THREE" ? "mixte" : "negatif",
+          status: "pending"
+        });
+        imported++;
+      }
+    }
+
+    res.json({ success: true, total: allReviews.length, imported, existing: allReviews.length - imported });
+  } catch (err) {
+    console.error("[OAUTH SCAN]", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE /reset — Reset all Sentinel data for current user
+router.delete("/reset", authMiddleware, async (req, res) => {
+  try {
+    const Review = require("../models/Review");
+    const reviews = await Review.deleteMany({ userId: req.userId });
+    const businesses = await Business.deleteMany({ userId: req.userId });
+
+    res.json({
+      success: true,
+      deleted: {
+        reviews: reviews.deletedCount,
+        responses: 0,
+        businesses: businesses.deletedCount
+      }
+    });
+  } catch (err) {
+    console.error("[RESET]", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
