@@ -457,8 +457,10 @@ export default function PhantomDashboardPage() {
                       {CATEGORY_LABELS[issue.category] || issue.category}
                     </span>
                     {issue.impact && (
-                      <span className="text-[11px] text-[#10b981] ml-auto">
-                        {issue.impact}
+                      <span className="text-[11px] ml-auto" style={{
+                        color: issue.severity === "critical" ? "#ef4444" : issue.severity === "warning" ? "#f59e0b" : "#10b981",
+                      }}>
+                        {issue.severity === "critical" ? "Impact élevé" : issue.severity === "warning" ? "Impact moyen" : "Impact faible"}
                       </span>
                     )}
                   </div>
