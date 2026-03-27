@@ -183,7 +183,7 @@ export default function SettingsPage() {
           </p>
           <button onClick={async () => {
             try {
-              const res = await get(`/api/sentinel-app/businesses/${business._id}/google-auth-url`);
+              const res = await get(`/api/sentinel/oauth/url`);
               window.location.href = res.url;
             } catch (err) { console.error(err); }
           }}
