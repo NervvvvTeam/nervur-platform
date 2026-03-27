@@ -28,7 +28,7 @@ async function searchPlace(query) {
 
 // Get place details including reviews
 async function getPlaceDetails(placeId) {
-  const res = await fetch(`https://places.googleapis.com/v1/places/${placeId}`, {
+  const res = await fetch(`https://places.googleapis.com/v1/places/${placeId}?languageCode=fr`, {
     headers: {
       "X-Goog-Api-Key": GOOGLE_API_KEY(),
       "X-Goog-FieldMask": "id,displayName,formattedAddress,rating,userRatingCount,reviews,googleMapsUri"

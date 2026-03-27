@@ -44,6 +44,8 @@ const sentinelToolsRoutes = require("./routes/sentinel-tools");
 const vaultRoutes = require("./routes/vault");
 const pulseRoutes = require("./routes/pulse");
 const contactRoutes = require("./routes/contact");
+const { authMiddleware } = require("./middleware/auth");
+const User = require("./models/User");
 
 const app = express();
 const PORT = configPort;
@@ -222,6 +224,53 @@ app.use("/api/sentinel-app/tools", sentinelToolsRoutes);
 app.use("/api/vault", vaultRoutes);
 app.use("/api/pulse", pulseRoutes);
 app.use("/api/contact", contactRoutes);
+
+// Admin: purge all demo data
+app.delete("/api/admin/purge-demo", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    if (!user || user.role !== "admin") return res.status(403).json({ error: "Admin only" });
+
+    const Review = require("./models/Review");
+    const Business = require("./models/Business");
+    const Response = require("./models/Response");
+    const Audit = require("./models/Audit");
+    const BreachScan = require("./models/BreachScan");
+    const RgpdScan = require("./models/RgpdScan");
+    const MonitoredSite = require("./models/MonitoredSite");
+
+    const r1 = await Review.deleteMany({});
+    const r2 = await Business.deleteMany({});
+    const r3 = await Response.deleteMany({});
+    const r4 = await Audit.deleteMany({});
+    const r5 = await BreachScan.deleteMany({});
+    const r6 = await RgpdScan.deleteMany({});
+    const r7 = await MonitoredSite.deleteMany({});
+
+    // Delete demo user
+    await User.deleteMany({ email: "demo@nervur.fr" });
+    const Subscription = require("./models/Subscription");
+    // Keep admin subscriptions, delete demo ones
+    const demoUser = await User.findOne({ email: "demo@nervur.fr" });
+    if (demoUser) await Subscription.deleteMany({ userId: demoUser._id });
+
+    res.json({
+      purged: true,
+      deleted: {
+        reviews: r1.deletedCount,
+        businesses: r2.deletedCount,
+        responses: r3.deletedCount,
+        audits: r4.deletedCount,
+        breachScans: r5.deletedCount,
+        rgpdScans: r6.deletedCount,
+        monitoredSites: r7.deletedCount
+      }
+    });
+  } catch (err) {
+    console.error("[PURGE]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Health check
 app.get("/api/health", (req, res) => {

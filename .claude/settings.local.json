@@ -185,7 +185,14 @@
       "Bash(curl -s -X POST https://nervurapi-production.up.railway.app/api/vault/scan -H \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"test@example.com\"\"}')",
       "Bash(curl -s -X POST https://nervurapi-production.up.railway.app/api/sentinel/scan-reviews -H \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\" -d '{\"\"businessId\"\":\"\"69bde526e13f5bca0a71c118\"\"}')",
       "Bash(curl -s -X POST https://nervurapi-production.up.railway.app/api/sentinel/generate -H \"Content-Type: application/json\" -d '{\"\"\"\"review\"\"\"\":\"\"\"\"test\"\"\"\",\"\"\"\"businessName\"\"\"\":\"\"\"\"test\"\"\"\",\"\"\"\"tone\"\"\"\":\"\"\"\"professional\"\"\"\"}')",
-      "Bash(npx railway:*)"
+      "Bash(npx railway:*)",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWMzMTA5ODM0NmM3YThkNmVmZDk5ODQiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzQ2MTAzODUsImV4cCI6MTc3NDY5Njc4NX0.6uXqfHxHwnrd3_IAUxo6W7zeCGRpt8I6SytLHhrUmR0\")",
+      "Bash(curl -s -X GET \"https://nervurapi-production.up.railway.app/api/sentinel-app/auth/me\" -H \"Authorization: Bearer $TOKEN\")",
+      "Bash(curl -s -X PUT \"https://nervurapi-production.up.railway.app/api/sentinel-app/admin/users/69c31098346c7a8d6efd9984/subscriptions\" -H \"Authorization: Bearer $TOKEN\" -H \"Content-Type: application/json\" -d '{\"\"subscriptions\"\":[\"\"sentinel\"\",\"\"phantom\"\",\"\"vault\"\",\"\"pulse\"\"]}')",
+      "Bash(__NEW_LINE_9e735556f11252fb__ curl:*)",
+      "Read(//tmp/**)",
+      "Bash(rm -f package-lock.json)",
+      "Bash(rm -rf node_modules)"
     ]
   }
 }
