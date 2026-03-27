@@ -4,6 +4,7 @@ const reviewSchema = new mongoose.Schema({
   businessId: { type: mongoose.Schema.Types.ObjectId, ref: "Business", required: true },
   googleReviewId: { type: String, unique: true, sparse: true },
   authorName: { type: String, default: "Anonyme" },
+  authorPhoto: { type: String, default: null },
   rating: { type: Number, required: true, min: 1, max: 5 },
   text: { type: String, default: "" },
   sentiment: { type: String, enum: ["positive", "negative", "mixed"], default: "mixed" },

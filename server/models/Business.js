@@ -19,6 +19,8 @@ const businessSchema = new mongoose.Schema({
   lastScanAt: { type: Date },
   averageRating: { type: Number, default: 0 },
   totalReviews: { type: Number, default: 0 },
+  googleRating: { type: Number, default: 0 },
+  googleTotalReviews: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now }
 });
 
