@@ -483,11 +483,8 @@ function ParticleNetwork({ width = 300, height = 600 }) {
 // ═══════════════════════════════════════════
 const ACTIVITY_ITEMS = [
   { icon: "🛡", text: "Nouvel avis 5 étoiles détecté", tool: "Sentinel", color: "#ef4444", time: "Il y a 2 min" },
-  { icon: "⚡", text: "Score performance amélioré +12%", tool: "Phantom", color: "#8b5cf6", time: "Il y a 15 min" },
-  { icon: "💗", text: "Uptime 99.9% — tous les sites en ligne", tool: "Pulse", color: "#ec4899", time: "Il y a 1h" },
   { icon: "🔒", text: "Scan sécurité terminé — 0 fuite", tool: "Vault", color: "#06b6d4", time: "Il y a 3h" },
   { icon: "🛡", text: "Réponse IA publiée automatiquement", tool: "Sentinel", color: "#ef4444", time: "Il y a 5h" },
-  { icon: "⚡", text: "Nouveau rapport Lighthouse disponible", tool: "Phantom", color: "#8b5cf6", time: "Hier" },
 ];
 
 function LiveTicker() {
@@ -569,20 +566,7 @@ const TOOLS = [
     color: "#ef4444", gradient: "linear-gradient(135deg, #ef4444, #dc2626)",
     Icon: ShieldIcon, path: "/app/sentinel", stats: "Score • Avis • Réponses IA"
   },
-  {
-    id: "phantom", name: "Phantom", subtitle: "Performance web",
-    desc: "Auditez vos pages web, obtenez vos scores Lighthouse et des recommandations d'optimisation.",
-    color: "#8b5cf6", gradient: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
-    Icon: PenIcon, path: "/app/phantom", stats: "Audits • Performance • SEO"
-  },
-  // Nexus retiré — code conservé, réactivable
-
-  {
-    id: "pulse", name: "Pulse", subtitle: "Santé numérique",
-    desc: "Surveillez la santé de vos sites : uptime, SSL, DNS, domaine et délivrabilité email.",
-    color: "#ec4899", gradient: "linear-gradient(135deg, #ec4899, #f472b6)",
-    Icon: HeartPulseIcon, path: "/app/pulse", stats: "Uptime • SSL • DNS • Email"
-  },
+  // Phantom et Pulse retirés — code conservé, réactivable
   {
     id: "vault", name: "Vault", subtitle: "Cybersécurité",
     desc: "Surveillez les fuites de données et vérifiez si vos emails professionnels sont compromis.",
@@ -593,9 +577,7 @@ const TOOLS = [
 
 const TIPS = [
   "Répondez aux avis dans les 24h pour améliorer votre score.",
-  "Utilisez Phantom pour optimiser le SEO de vos pages clés.",
   "Lancez un scan Vault chaque mois pour vérifier vos emails.",
-  "Surveillez votre uptime avec Pulse pour ne rater aucune panne.",
 ];
 
 // ═══════════════════════════════════════════
@@ -644,9 +626,9 @@ function NervurHologram() {
           <div className="absolute -top-[3px] left-1/2 w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]" />
         </div>
 
-        {/* Ring 2 — Purple (Phantom) */}
-        <div className="holo-ring absolute top-1/2 left-1/2 w-[110px] h-[110px] -mt-[55px] -ml-[55px] border-[1.5px] border-[rgba(139,92,246,0.3)] rounded-full [animation:holoRing2_6s_linear_infinite]">
-          <div className="absolute -bottom-[3px] left-1/2 w-1.5 h-1.5 rounded-full bg-violet-500 shadow-[0_0_8px_#8b5cf6]" />
+        {/* Ring 2 — Cyan (Vault) */}
+        <div className="holo-ring absolute top-1/2 left-1/2 w-[110px] h-[110px] -mt-[55px] -ml-[55px] border-[1.5px] border-[rgba(6,182,212,0.3)] rounded-full [animation:holoRing2_6s_linear_infinite]">
+          <div className="absolute -bottom-[3px] left-1/2 w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_8px_#06b6d4]" />
         </div>
 
         {/* Ring 3 — Green (Nexus) */}
@@ -920,7 +902,7 @@ function RightPanel({ hasAccess }) {
             data.scans = scans?.length || 0;
           } catch(e) {}
         }
-        data.tools = [hasAccess("sentinel"), hasAccess("phantom"), hasAccess("vault"), hasAccess("pulse")].filter(Boolean).length;
+        data.tools = [hasAccess("sentinel"), hasAccess("vault")].filter(Boolean).length;
         setStats(data);
       } catch(e) { setStats({ tools: 0 }); }
     }
@@ -932,12 +914,6 @@ function RightPanel({ hasAccess }) {
   if (hasAccess("sentinel")) {
     activities.push({ icon: "🛡", text: "Surveillance e-réputation active", tool: "Sentinel", color: "#ef4444" });
     activities.push({ icon: "💬", text: "Réponses IA générées automatiquement", tool: "Sentinel", color: "#ef4444" });
-  }
-  if (hasAccess("phantom")) {
-    activities.push({ icon: "⚡", text: "Audits de performance disponibles", tool: "Phantom", color: "#8b5cf6" });
-  }
-  if (hasAccess("pulse")) {
-    activities.push({ icon: "💗", text: "Monitoring sante web actif", tool: "Pulse", color: "#ec4899" });
   }
   if (hasAccess("vault")) {
     activities.push({ icon: "🔒", text: "Protection données activée", tool: "Vault", color: "#06b6d4" });
@@ -974,9 +950,7 @@ function RightPanel({ hasAccess }) {
         <div className="mt-4 flex gap-2 flex-wrap">
           {[
             { label: "SEN", color: "#ef4444" },
-            { label: "PHA", color: "#8b5cf6" },
             { label: "VAU", color: "#06b6d4" },
-            { label: "PUL", color: "#ec4899" },
           ].map((t, i) => (
             <div key={i} className="px-2.5 py-1 rounded text-[9px] font-semibold tracking-wide"
               style={{ background: `${t.color}15`, border: `1px solid ${t.color}30`, color: t.color }}>
@@ -1016,9 +990,6 @@ function RightPanel({ hasAccess }) {
           ] : []),
           ...(hasAccess("vault") ? [
             { label: "Scans sécurité", value: stats?.scans ?? "—", color: "#06b6d4" },
-          ] : []),
-          ...(hasAccess("pulse") ? [
-            { label: "Sites surveilles", value: "—", color: "#ec4899" },
           ] : []),
         ].map((stat, i) => (
           <div key={i} className={`flex justify-between items-center py-2 ${i < 3 ? "border-b border-[#2a2d3a]" : ""}`}>

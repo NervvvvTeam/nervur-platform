@@ -20,30 +20,12 @@
     </image:image>
   </url>
   <url>
-    <loc>https://nervur.fr/phantom</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://nervur.fr/og-image.png</image:loc>
-      <image:title>Phantom — Audit de performance web et Core Web Vitals</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://nervur.fr/vault</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://nervur.fr/og-image.png</image:loc>
       <image:title>Vault — Cybersécurité et conformité RGPD pour PME</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://nervur.fr/pulse</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://nervur.fr/og-image.png</image:loc>
-      <image:title>Pulse — Monitoring santé web en temps réel</image:title>
     </image:image>
   </url>
   <url><loc>https://nervur.fr/technologies</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

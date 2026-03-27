@@ -76,33 +76,30 @@ router.post("/scan-reviews", authMiddleware, async (req, res) => {
     let newCount = 0;
     let updatedCount = 0;
     for (const r of reviews) {
-      const existing = await Review.findOne({
-        businessId: business._id,
-        googleReviewId: r.googleReviewId
-      });
+      let sentiment = "mixed";
+      if (r.rating >= 4) sentiment = "positive";
+      else if (r.rating <= 2) sentiment = "negative";
 
-      if (!existing) {
-        // Analyze sentiment
-        let sentiment = "mixed";
-        if (r.rating >= 4) sentiment = "positive";
-        else if (r.rating <= 2) sentiment = "negative";
-
-        await Review.create({
-          businessId: business._id,
-          googleReviewId: r.googleReviewId,
-          authorName: r.authorName,
-          authorPhoto: r.authorPhoto,
-          rating: r.rating,
-          text: r.text,
-          sentiment,
-          publishedAt: r.publishedAt,
-          fetchedAt: new Date(),
-          responseStatus: "pending"
-        });
-        newCount++;
-      } else {
-        updatedCount++;
-      }
+      const result = await Review.updateOne(
+        { googleReviewId: r.googleReviewId },
+        {
+          $setOnInsert: {
+            businessId: business._id,
+            googleReviewId: r.googleReviewId,
+            authorName: r.authorName,
+            authorPhoto: r.authorPhoto,
+            rating: r.rating,
+            text: r.text,
+            sentiment,
+            publishedAt: r.publishedAt,
+            fetchedAt: new Date(),
+            responseStatus: "pending"
+          }
+        },
+        { upsert: true }
+      );
+      if (result.upsertedCount > 0) newCount++;
+      else updatedCount++;
     }
 
     res.json({

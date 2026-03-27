@@ -4,9 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 
 const TOOLS = [
   { name: "Sentinel", color: "#ef4444" },
-  { name: "Phantom", color: "#8b5cf6" },
   { name: "Vault", color: "#06b6d4" },
-  { name: "Pulse", color: "#ec4899" },
 ];
 
 export default function LoginPage() {

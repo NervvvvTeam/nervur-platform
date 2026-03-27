@@ -37,7 +37,6 @@ const DashReviewsPage = lazy(() => import('./dashboard/pages/ReviewsPage'))
 const DashReviewDetailPage = lazy(() => import('./dashboard/pages/ReviewDetailPage'))
 const DashSettingsPage = lazy(() => import('./dashboard/pages/SettingsPage'))
 const DashOnboardingPage = lazy(() => import('./dashboard/pages/OnboardingPage'))
-const DashPhantomPage = lazy(() => import('./dashboard/pages/PhantomDashboardPage'))
 const DashNexusPage = lazy(() => import('./dashboard/pages/NexusDashboardPage'))
 const DashNexusSequencePage = lazy(() => import('./dashboard/pages/NexusSequencePage'))
 const DashNexusCalendarPage = lazy(() => import('./dashboard/pages/NexusCalendarPage'))
@@ -50,20 +49,12 @@ const DashVaultHistoryPage = lazy(() => import('./dashboard/pages/VaultHistoryPa
 const DashVaultScanDetailPage = lazy(() => import('./dashboard/pages/VaultScanDetailPage'))
 const DashVaultMonitoringPage = lazy(() => import('./dashboard/pages/VaultMonitoringPage'))
 const DashVaultRgpdPage = lazy(() => import('./dashboard/pages/VaultRgpdPage'))
-const DashPulseDashboardPage = lazy(() => import('./dashboard/pages/PulseDashboardPage'))
-const DashPulseHistoryPage = lazy(() => import('./dashboard/pages/PulseHistoryPage'))
-const DashPhantomHistoryPage = lazy(() => import('./dashboard/pages/PhantomHistoryPage'))
-const DashPhantomRecommendationsPage = lazy(() => import('./dashboard/pages/PhantomRecommendationsPage'))
 const DashAnalyticsPage = lazy(() => import('./dashboard/pages/AnalyticsPage'))
 const DashCompetitorsPage = lazy(() => import('./dashboard/pages/CompetitorsPage'))
 const DashReportsPage = lazy(() => import('./dashboard/pages/ReportsPage'))
 const DashQRCodePage = lazy(() => import('./dashboard/pages/QRCodePage'))
 const DashWidgetPage = lazy(() => import('./dashboard/pages/WidgetPage'))
 const DashAlertsPage = lazy(() => import('./dashboard/pages/AlertsPage'))
-const DashPhantomSchedulePage = lazy(() => import('./dashboard/pages/PhantomSchedulePage'))
-const DashPhantomCompetitorsPage = lazy(() => import('./dashboard/pages/PhantomCompetitorsPage'))
-const DashPulseAlertsPage = lazy(() => import('./dashboard/pages/PulseAlertsPage'))
-const DashPulseStatusPage = lazy(() => import('./dashboard/pages/PulseStatusPage'))
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -135,11 +126,6 @@ function App() {
                 <Route path="qrcode" element={<Suspense fallback={<DashboardLoader />}><DashQRCodePage /></Suspense>} />
                 <Route path="widget" element={<Suspense fallback={<DashboardLoader />}><DashWidgetPage /></Suspense>} />
                 <Route path="alerts" element={<Suspense fallback={<DashboardLoader />}><DashAlertsPage /></Suspense>} />
-                <Route path="phantom" element={<Suspense fallback={<DashboardLoader />}><DashPhantomPage /></Suspense>} />
-                <Route path="phantom/history" element={<Suspense fallback={<DashboardLoader />}><DashPhantomHistoryPage /></Suspense>} />
-                <Route path="phantom/recommendations" element={<Suspense fallback={<DashboardLoader />}><DashPhantomRecommendationsPage /></Suspense>} />
-                <Route path="phantom/competitors" element={<Suspense fallback={<DashboardLoader />}><DashPhantomCompetitorsPage /></Suspense>} />
-                <Route path="phantom/schedule" element={<Suspense fallback={<DashboardLoader />}><DashPhantomSchedulePage /></Suspense>} />
                 <Route path="nexus" element={<Suspense fallback={<DashboardLoader />}><DashNexusPage /></Suspense>} />
                 <Route path="nexus/sequences" element={<Suspense fallback={<DashboardLoader />}><DashNexusSequencePage /></Suspense>} />
                 <Route path="nexus/calendar" element={<Suspense fallback={<DashboardLoader />}><DashNexusCalendarPage /></Suspense>} />
@@ -147,10 +133,6 @@ function App() {
                 <Route path="nexus/campaigns" element={<Suspense fallback={<DashboardLoader />}><DashNexusCampaignsPage /></Suspense>} />
                 <Route path="forge" element={<Suspense fallback={<DashboardLoader />}><DashForgeDashboardPage /></Suspense>} />
                 <Route path="forge/history" element={<Suspense fallback={<DashboardLoader />}><DashForgeHistoryPage /></Suspense>} />
-                <Route path="pulse" element={<Suspense fallback={<DashboardLoader />}><DashPulseDashboardPage /></Suspense>} />
-                <Route path="pulse/history" element={<Suspense fallback={<DashboardLoader />}><DashPulseHistoryPage /></Suspense>} />
-                <Route path="pulse/alerts" element={<Suspense fallback={<DashboardLoader />}><DashPulseAlertsPage /></Suspense>} />
-                <Route path="pulse/status" element={<Suspense fallback={<DashboardLoader />}><DashPulseStatusPage /></Suspense>} />
                 <Route path="vault" element={<Suspense fallback={<DashboardLoader />}><DashVaultDashboardPage /></Suspense>} />
                 <Route path="vault/history" element={<Suspense fallback={<DashboardLoader />}><DashVaultHistoryPage /></Suspense>} />
                 <Route path="vault/scan/:id" element={<Suspense fallback={<DashboardLoader />}><DashVaultScanDetailPage /></Suspense>} />

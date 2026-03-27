@@ -31,23 +31,6 @@ const TOOLS = [
     ),
   },
   {
-    id: "phantom",
-    name: "PHANTOM",
-    subtitle: "Performance web",
-    color: "#8b5cf6",
-    description: "Auditez vos pages web, obtenez vos scores Lighthouse et des recommandations d'optimisation par IA.",
-    features: ["Audit Lighthouse complet", "Scores Performance + SEO", "Core Web Vitals", "Recommandations IA", "Historique + évolution", "Comparaison concurrents"],
-    price: "19",
-    link: "/phantom",
-    icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <defs><linearGradient id="g-phantom" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#c4b5fd"/><stop offset="100%" stopColor="#8b5cf6"/></linearGradient></defs>
-        <path d="M12 20h9" stroke="url(#g-phantom)"/>
-        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="url(#g-phantom)" fill="none"/>
-      </svg>
-    ),
-  },
-  {
     id: "vault",
     name: "VAULT",
     subtitle: "Cybersécurité",
@@ -64,23 +47,6 @@ const TOOLS = [
       </svg>
     ),
   },
-  {
-    id: "pulse",
-    name: "PULSE",
-    subtitle: "Monitoring santé web",
-    color: "#ec4899",
-    description: "Surveillez la santé de vos sites en temps réel. Uptime, SSL, DNS et délivrabilité email.",
-    features: ["Surveillance uptime 24/7", "Certificat SSL & expiration", "Analyse DNS & DMARC", "Headers de sécurité", "Page de statut publique", "Alertes email"],
-    price: "19",
-    link: "/contact",
-    icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <defs><linearGradient id="g-pulse" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f9a8d4"/><stop offset="100%" stopColor="#ec4899"/></linearGradient></defs>
-        <path d="M19.5 12.572l-7.5 7.428-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572" stroke="url(#g-pulse)" fill="none"/>
-        <path d="M12 6v4l2 2-2 2v4" stroke="url(#g-pulse)" fill="none"/>
-      </svg>
-    ),
-  },
 ];
 
 export default function TechnologiesPage() {
@@ -89,8 +55,8 @@ export default function TechnologiesPage() {
 
   useSEO(
     "Nos Outils & Technologies | NERVUR",
-    "Découvrez la suite complète d'outils SaaS NERVUR : Sentinel, Phantom, Pulse et Vault. Technologies IA pour PME.",
-    { path: "/technologies", keywords: "outils SaaS PME, technologies IA, Sentinel, Phantom, Pulse, Vault, NERVUR" }
+    "Découvrez les outils SaaS NERVUR : Sentinel et Vault. Technologies IA pour PME.",
+    { path: "/technologies", keywords: "outils SaaS PME, technologies IA, Sentinel, Vault, NERVUR" }
   );
 
   useEffect(() => {
@@ -182,7 +148,7 @@ export default function TechnologiesPage() {
             Des outils puissants pour votre business
           </h1>
           <p style={{ fontSize: "16px", color: "#71717A", maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}>
-            Quatre solutions professionnelles pour surveiller, analyser et protéger votre présence en ligne.
+            Deux solutions professionnelles pour surveiller et protéger votre présence en ligne.
           </p>
         </section>
 
@@ -298,7 +264,7 @@ export default function TechnologiesPage() {
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>49&#8364;</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
-              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>Les 4 outils inclus</p>
+              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>Les 2 outils inclus</p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "12px 32px", background: "#818CF8", border: "none",
                 color: "#0f1117", fontWeight: 700, fontSize: "13px", cursor: "pointer",
