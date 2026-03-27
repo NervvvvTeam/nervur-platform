@@ -4,10 +4,10 @@ import { useAuth } from "../hooks/useAuth";
 import SubNav from "../components/SubNav";
 
 const VAULT_NAV = [
-  { path: "/app/vault", label: "Scanner", end: true },
-  { path: "/app/vault/monitoring", label: "Surveillance" },
-  { path: "/app/vault/history", label: "Historique" },
-  { path: "/app/vault/rgpd", label: "Conformité RGPD" },
+  { path: "/app/vault", label: "Dashboard", end: true },
+  { path: "/app/vault/rgpd", label: "Scan RGPD" },
+  { path: "/app/vault/generateur", label: "Générateur" },
+  { path: "/app/vault/historique", label: "Historique" },
 ];
 
 const ACCENT = "#06b6d4";
@@ -352,10 +352,10 @@ export default function VaultRgpdPage() {
         </div>
         <div>
           <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
-            Conformité RGPD
+            Scan RGPD
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
-            Analysez la conformité RGPD de n'importe quel site web
+            Vérifiez la conformité juridique de votre site en quelques secondes
           </p>
         </div>
       </div>
@@ -369,13 +369,13 @@ export default function VaultRgpdPage() {
           <GlobeIcon size={20} color={ACCENT} />
         </div>
         <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
-          <strong className="text-[#f0f0f3]">Shield \u2014 Analyse RGPD</strong>
+          <strong className="text-[#f0f0f3]">Vault — Scan RGPD</strong>
           <br />
-          Entrez l'URL d'un site web pour vérifier sa conformité RGPD. L'outil analyse 8 critères
-          clés : mentions légales, politique de confidentialité, cookies, CGV, contacts, SSL, trackers et consentement.
+          Entrez l'adresse de votre site web pour vérifier sa conformité juridique. L'outil vérifie 8 points
+          essentiels : mentions légales, politique de confidentialité, cookies, CGV, contacts, HTTPS, trackers et consentement.
           <br />
           <span className="text-[#6b7280]">
-            L'analyse porte sur la page d'accueil du site. Pour une conformité complète, un audit approfondi est recommandé.
+            L'analyse porte sur la page d'accueil. Pour les documents manquants, utilisez notre générateur automatique.
           </span>
         </div>
       </div>

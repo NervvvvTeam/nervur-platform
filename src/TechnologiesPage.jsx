@@ -33,10 +33,10 @@ const TOOLS = [
   {
     id: "vault",
     name: "VAULT",
-    subtitle: "Cybersécurité",
+    subtitle: "Conformité juridique",
     color: "#06b6d4",
-    description: "Surveillez les fuites de données, vérifiez vos emails et assurez votre conformité RGPD.",
-    features: ["Détection fuites de données", "Scan emails professionnels", "Conformité RGPD", "Monitoring continu", "Alertes en temps réel", "Rapport PDF"],
+    description: "Vérifiez la conformité RGPD de votre site et générez vos documents juridiques en quelques clics.",
+    features: ["Scan conformité RGPD", "Générateur mentions légales", "Générateur CGV", "Politique cookies", "Score de conformité", "Recommandations IA"],
     price: "19",
     link: "/contact",
     icon: (

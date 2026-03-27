@@ -392,11 +392,11 @@ export default function NervurAurora() {
 
   useSEO(
     "NERVÜR — Agence Digitale & Nouvelles Technologies",
-    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation) et Vault (cybersécurité). À partir de 19€/mois.",
+    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation) et Vault (conformité juridique). À partir de 19€/mois.",
     {
       path: "/",
-      keywords: "SaaS PME, e-réputation, cybersécurité, outils PME, NERVÜR, Sentinel, Vault",
-      imageAlt: "NERVÜR — Outils SaaS pour PME : e-réputation, audit web, monitoring, cybersécurité",
+      keywords: "SaaS PME, e-réputation, conformité juridique, RGPD, outils PME, NERVÜR, Sentinel, Vault",
+      imageAlt: "NERVÜR — Outils SaaS pour PME : e-réputation, audit web, monitoring, conformité juridique",
     }
   );
 
@@ -457,7 +457,7 @@ export default function NervurAurora() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "NERVÜR Vault",
-    "description": "Surveillance cybersécurité pour PME. Détection de fuites de données, monitoring du dark web, alertes de sécurité.",
+    "description": "Conformité juridique pour TPE/PME. Scan RGPD, générateur de mentions légales, CGV et politique de confidentialité.",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "url": "https://nervur.fr/vault",
@@ -1206,15 +1206,15 @@ export default function NervurAurora() {
                 <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               </div>
               <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Vault</h3>
-              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#06b6d4", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Surveillance des fuites de donnees</p>
+              <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#06b6d4", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Conformité & Protection juridique</p>
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
-                Scannez vos emails professionnels sur les bases piratées. Alertes en temps réel et recommandations IA de cybersécurité.
+                Vérifiez la conformité RGPD de votre site et générez vos documents juridiques : mentions légales, CGV, politique cookies.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "vault" ? null : "vault"); }} style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.4)", color: "#06b6d4", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "vault" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "vault" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
-                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps réel", "Rapport PDF + recommandations IA"].map((f, i) => (
+                {["Scan conformité RGPD", "Générateur mentions légales", "Générateur CGV & cookies", "Score de conformité", "Recommandations IA"].map((f, i) => (
                   <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1290,13 +1290,13 @@ export default function NervurAurora() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               </div>
               <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Vault</h3>
-              <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 500, marginBottom: "16px" }}>Cybersécurité</p>
+              <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 500, marginBottom: "16px" }}>Conformité juridique</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>19€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Detection fuites de donnees", "Scan emails professionnels", "Monitoring continu", "Alertes en temps réel", "Rapport PDF + recommandations IA"].map((f, i) => (
+                {["Scan conformité RGPD", "Générateur mentions légales", "Générateur CGV & cookies", "Score de conformité", "Recommandations IA"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1341,7 +1341,7 @@ export default function NervurAurora() {
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
                 <span style={{ fontSize: "13px", color: "#52525B", textDecoration: "line-through", marginLeft: "8px" }}>67€</span>
               </div>
-              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px" }}>Sentinel + Vault. Economisez sur le pack complet.</p>
+              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px" }}>Sentinel + Vault. Économisez sur le pack complet.</p>
               <button onClick={() => navigate("/contact")} style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${A1}, ${A3})`, border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
                 Tout prendre
               </button>
@@ -1618,7 +1618,7 @@ export default function NervurAurora() {
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Outils</p>
             {[
               { name: "Sentinel — E-réputation", path: "/sentinel" },
-              { name: "Vault — Cybersécurité", path: "/contact" },
+              { name: "Vault — Conformité juridique", path: "/contact" },
             ].map((t, i) => (
               <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
                 onMouseEnter={e => e.target.style.color = A1}

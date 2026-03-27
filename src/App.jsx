@@ -49,6 +49,8 @@ const DashVaultHistoryPage = lazy(() => import('./dashboard/pages/VaultHistoryPa
 const DashVaultScanDetailPage = lazy(() => import('./dashboard/pages/VaultScanDetailPage'))
 const DashVaultMonitoringPage = lazy(() => import('./dashboard/pages/VaultMonitoringPage'))
 const DashVaultRgpdPage = lazy(() => import('./dashboard/pages/VaultRgpdPage'))
+const DashVaultGenerateurPage = lazy(() => import('./dashboard/pages/VaultGenerateurPage'))
+const DashVaultHistoriquePage = lazy(() => import('./dashboard/pages/VaultHistoriquePage'))
 const DashAnalyticsPage = lazy(() => import('./dashboard/pages/AnalyticsPage'))
 const DashCompetitorsPage = lazy(() => import('./dashboard/pages/CompetitorsPage'))
 const DashReportsPage = lazy(() => import('./dashboard/pages/ReportsPage'))
@@ -138,6 +140,8 @@ function App() {
                 <Route path="vault/scan/:id" element={<Suspense fallback={<DashboardLoader />}><DashVaultScanDetailPage /></Suspense>} />
                 <Route path="vault/monitoring" element={<Suspense fallback={<DashboardLoader />}><DashVaultMonitoringPage /></Suspense>} />
                 <Route path="vault/rgpd" element={<Suspense fallback={<DashboardLoader />}><DashVaultRgpdPage /></Suspense>} />
+                <Route path="vault/generateur" element={<Suspense fallback={<DashboardLoader />}><DashVaultGenerateurPage /></Suspense>} />
+                <Route path="vault/historique" element={<Suspense fallback={<DashboardLoader />}><DashVaultHistoriquePage /></Suspense>} />
                 <Route path="settings" element={<Suspense fallback={<DashboardLoader />}><DashSettingsPage /></Suspense>} />
                 <Route path="onboarding" element={<Suspense fallback={<DashboardLoader />}><DashOnboardingPage /></Suspense>} />
                 <Route index element={<Navigate to="/app/portal" replace />} />

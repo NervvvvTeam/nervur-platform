@@ -1282,4 +1282,351 @@ router.get("/rgpd-scan/:id/pdf", authMiddleware, async (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════════
+// DOCUMENT GENERATOR — legal documents for TPE/PME
+// ═══════════════════════════════════════════════════
+
+function generateMentionsLegales(info) {
+  const lines = [];
+  lines.push("MENTIONS LÉGALES");
+  lines.push("================\n");
+  lines.push("Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l'Économie Numérique (LCEN), il est porté à la connaissance des utilisateurs et visiteurs du site les présentes mentions légales.\n");
+
+  lines.push("1. ÉDITEUR DU SITE\n");
+  if (info.nomEntreprise) lines.push(`Raison sociale : ${info.nomEntreprise}`);
+  if (info.formeJuridique) lines.push(`Forme juridique : ${info.formeJuridique}`);
+  if (info.adresse) lines.push(`Siège social : ${info.adresse}`);
+  if (info.siret) lines.push(`Numéro SIRET : ${info.siret}`);
+  if (info.email) lines.push(`Email : ${info.email}`);
+  if (info.telephone) lines.push(`Téléphone : ${info.telephone}`);
+  if (info.directeurPublication) lines.push(`Directeur de la publication : ${info.directeurPublication}`);
+  lines.push("");
+
+  lines.push("2. HÉBERGEUR DU SITE\n");
+  if (info.hebergeur) {
+    lines.push(`Le site est hébergé par : ${info.hebergeur}`);
+  } else {
+    lines.push("Le site est hébergé par : [À compléter — nom, adresse et coordonnées de l'hébergeur]");
+  }
+  lines.push("");
+
+  lines.push("3. PROPRIÉTÉ INTELLECTUELLE\n");
+  lines.push(`L'ensemble du contenu de ce site (textes, images, vidéos, logos, icônes) est la propriété exclusive de ${info.nomEntreprise || "[Nom de l'entreprise]"}, sauf mention contraire. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du site est interdite sans l'autorisation écrite préalable de ${info.nomEntreprise || "[Nom de l'entreprise]"}.`);
+  lines.push("");
+
+  lines.push("4. RESPONSABILITÉ\n");
+  lines.push(`${info.nomEntreprise || "[Nom de l'entreprise]"} s'efforce de fournir sur le site des informations aussi précises que possible. Toutefois, ${info.nomEntreprise || "[Nom de l'entreprise]"} ne pourra être tenue responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu'elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.`);
+  lines.push("");
+
+  lines.push("5. DONNÉES PERSONNELLES\n");
+  lines.push(`Pour toute question relative à la protection de vos données personnelles, vous pouvez contacter ${info.nomEntreprise || "[Nom de l'entreprise]"} à l'adresse : ${info.email || "[email de contact]"}.`);
+  lines.push("Pour plus d'informations, consultez notre Politique de confidentialité.");
+  lines.push("");
+
+  lines.push("6. COOKIES\n");
+  lines.push("Le site peut être amené à utiliser des cookies. L'utilisateur est informé que lors de ses visites sur le site, un cookie peut s'installer automatiquement sur son logiciel de navigation. Pour plus d'informations, consultez notre Politique de cookies.");
+  lines.push("");
+
+  lines.push("7. DROIT APPLICABLE\n");
+  lines.push("Les présentes mentions légales sont soumises au droit français. En cas de litige, les tribunaux français seront seuls compétents.");
+
+  return lines.join("\n");
+}
+
+function generatePolitiqueConfidentialite(info) {
+  const lines = [];
+  lines.push("POLITIQUE DE CONFIDENTIALITÉ");
+  lines.push("============================\n");
+  lines.push(`Dernière mise à jour : ${new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}\n`);
+
+  lines.push("1. RESPONSABLE DU TRAITEMENT\n");
+  lines.push(`Le responsable du traitement des données personnelles est ${info.nomEntreprise || "[Nom de l'entreprise]"}, ${info.formeJuridique || ""}, dont le siège social est situé au ${info.adresse || "[adresse]"}.`);
+  lines.push(`Contact : ${info.email || "[email]"}`);
+  lines.push("");
+
+  lines.push("2. DONNÉES COLLECTÉES\n");
+  lines.push("Nous pouvons collecter les données personnelles suivantes :");
+  lines.push("- Nom et prénom");
+  lines.push("- Adresse email");
+  lines.push("- Numéro de téléphone");
+  lines.push("- Adresse postale");
+  lines.push("- Données de navigation (cookies, adresse IP)");
+  lines.push("- Toute autre information que vous nous fournissez volontairement via nos formulaires");
+  lines.push("");
+
+  lines.push("3. FINALITÉS DU TRAITEMENT\n");
+  lines.push("Vos données personnelles sont collectées pour les finalités suivantes :");
+  lines.push("- Gestion de la relation client et des demandes de contact");
+  lines.push("- Fourniture de nos services et exécution des contrats");
+  lines.push("- Envoi de communications commerciales (avec votre consentement)");
+  lines.push("- Amélioration de nos services et de l'expérience utilisateur");
+  lines.push("- Respect de nos obligations légales et réglementaires");
+  lines.push("");
+
+  lines.push("4. BASE LÉGALE DU TRAITEMENT\n");
+  lines.push("Le traitement de vos données repose sur :");
+  lines.push("- Votre consentement (Art. 6.1.a du RGPD)");
+  lines.push("- L'exécution d'un contrat (Art. 6.1.b du RGPD)");
+  lines.push("- Le respect d'une obligation légale (Art. 6.1.c du RGPD)");
+  lines.push("- L'intérêt légitime de l'entreprise (Art. 6.1.f du RGPD)");
+  lines.push("");
+
+  lines.push("5. DURÉE DE CONSERVATION\n");
+  lines.push("Vos données personnelles sont conservées pendant la durée nécessaire aux finalités pour lesquelles elles ont été collectées, et au maximum :");
+  lines.push("- Données clients : 3 ans après la fin de la relation commerciale");
+  lines.push("- Données prospects : 3 ans après le dernier contact");
+  lines.push("- Cookies : 13 mois maximum");
+  lines.push("");
+
+  lines.push("6. VOS DROITS\n");
+  lines.push("Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez des droits suivants :");
+  lines.push("- Droit d'accès à vos données personnelles");
+  lines.push("- Droit de rectification de vos données");
+  lines.push("- Droit à l'effacement (droit à l'oubli)");
+  lines.push("- Droit à la limitation du traitement");
+  lines.push("- Droit à la portabilité de vos données");
+  lines.push("- Droit d'opposition au traitement");
+  lines.push("- Droit de retirer votre consentement à tout moment");
+  lines.push("");
+  lines.push(`Pour exercer vos droits, contactez-nous à : ${info.email || "[email de contact]"}`);
+  lines.push("Vous pouvez également introduire une réclamation auprès de la CNIL (www.cnil.fr).");
+  lines.push("");
+
+  lines.push("7. DESTINATAIRES DES DONNÉES\n");
+  lines.push("Vos données personnelles peuvent être transmises à :");
+  lines.push("- Nos sous-traitants techniques (hébergement, envoi d'emails)");
+  lines.push("- Les autorités compétentes en cas d'obligation légale");
+  lines.push("Vos données ne sont pas transférées en dehors de l'Union européenne sans garanties appropriées.");
+  lines.push("");
+
+  lines.push("8. SÉCURITÉ\n");
+  lines.push(`${info.nomEntreprise || "[Nom de l'entreprise]"} met en œuvre les mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre la destruction, la perte, l'altération ou l'accès non autorisé.`);
+  lines.push("");
+
+  lines.push("9. CONTACT DPO\n");
+  lines.push(`Pour toute question relative à la protection de vos données, vous pouvez contacter notre délégué à la protection des données (DPO) à l'adresse : ${info.email || "[email DPO]"}`);
+
+  return lines.join("\n");
+}
+
+function generateCGV(info) {
+  const lines = [];
+  lines.push("CONDITIONS GÉNÉRALES DE VENTE");
+  lines.push("=============================\n");
+  lines.push(`Dernière mise à jour : ${new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}\n`);
+
+  lines.push("ARTICLE 1 — OBJET\n");
+  lines.push(`Les présentes Conditions Générales de Vente (CGV) régissent les ventes de produits et/ou services effectuées par ${info.nomEntreprise || "[Nom de l'entreprise]"}, ${info.formeJuridique || ""}, SIRET ${info.siret || "[SIRET]"}, dont le siège social est situé au ${info.adresse || "[adresse]"}.`);
+  if (info.activite) lines.push(`Activité : ${info.activite}`);
+  lines.push("");
+
+  lines.push("ARTICLE 2 — PRIX\n");
+  lines.push("Les prix sont indiqués en euros, toutes taxes comprises (TTC). Ils sont susceptibles d'être modifiés à tout moment, étant entendu que le prix applicable est celui en vigueur au moment de la validation de la commande par le client.");
+  lines.push("");
+
+  lines.push("ARTICLE 3 — COMMANDES\n");
+  lines.push("Toute commande implique l'acceptation sans réserve des présentes CGV. La confirmation de commande entraîne acceptation des présentes conditions de vente.");
+  lines.push("");
+
+  lines.push("ARTICLE 4 — PAIEMENT\n");
+  lines.push("Le paiement est exigible immédiatement à la commande. Les moyens de paiement acceptés sont : carte bancaire, virement bancaire. En cas de non-paiement, le vendeur se réserve le droit d'annuler la commande.");
+  lines.push("");
+
+  lines.push("ARTICLE 5 — LIVRAISON\n");
+  lines.push("Les délais de livraison sont donnés à titre indicatif. Un retard de livraison ne peut donner lieu à l'annulation de la commande sauf accord contraire entre les parties.");
+  lines.push("");
+
+  lines.push("ARTICLE 6 — DROIT DE RÉTRACTATION\n");
+  lines.push("Conformément à l'article L221-18 du Code de la consommation, le client dispose d'un délai de 14 jours à compter de la réception du produit ou de la conclusion du contrat pour les services, pour exercer son droit de rétractation sans avoir à justifier de motifs ni à payer de pénalités.");
+  lines.push("");
+  lines.push(`Pour exercer ce droit, contactez-nous à : ${info.email || "[email]"}`);
+  lines.push("");
+
+  lines.push("ARTICLE 7 — GARANTIES\n");
+  lines.push("Tous nos produits bénéficient de la garantie légale de conformité (articles L217-4 à L217-14 du Code de la consommation) et de la garantie des vices cachés (articles 1641 à 1649 du Code civil).");
+  lines.push("");
+
+  lines.push("ARTICLE 8 — RÉCLAMATIONS\n");
+  lines.push(`Toute réclamation doit être adressée à : ${info.email || "[email]"} ou par courrier à ${info.adresse || "[adresse]"}.`);
+  lines.push("");
+
+  lines.push("ARTICLE 9 — DONNÉES PERSONNELLES\n");
+  lines.push(`Les données personnelles collectées dans le cadre de la vente sont traitées conformément à notre Politique de confidentialité, consultable sur le site ${info.siteUrl || "[URL du site]"}.`);
+  lines.push("");
+
+  lines.push("ARTICLE 10 — MÉDIATION\n");
+  lines.push("En cas de litige, le client peut recourir gratuitement au service de médiation de la consommation. Le médiateur compétent est : [À compléter — nom et coordonnées du médiateur]. Vous pouvez également accéder à la plateforme européenne de règlement des litiges en ligne : https://ec.europa.eu/consumers/odr");
+  lines.push("");
+
+  lines.push("ARTICLE 11 — DROIT APPLICABLE\n");
+  lines.push("Les présentes CGV sont soumises au droit français. Tout litige relatif à leur interprétation et/ou à leur exécution relève des tribunaux français compétents.");
+
+  return lines.join("\n");
+}
+
+function generatePolitiqueCookies(info) {
+  const lines = [];
+  lines.push("POLITIQUE DE COOKIES");
+  lines.push("====================\n");
+  lines.push(`Dernière mise à jour : ${new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}\n`);
+
+  lines.push("1. QU'EST-CE QU'UN COOKIE ?\n");
+  lines.push("Un cookie est un petit fichier texte déposé sur votre terminal (ordinateur, tablette, smartphone) lors de la visite d'un site web. Il permet au site de mémoriser certaines informations concernant votre visite, comme vos préférences de langue et d'autres paramètres.");
+  lines.push("");
+
+  lines.push("2. COOKIES UTILISÉS SUR CE SITE\n");
+  lines.push("Nous utilisons les catégories de cookies suivantes :\n");
+  lines.push("a) Cookies strictement nécessaires");
+  lines.push("Ces cookies sont indispensables au fonctionnement du site. Ils permettent l'utilisation des principales fonctionnalités du site (par exemple, l'accès à votre compte). Sans ces cookies, vous ne pouvez pas utiliser normalement le site.\n");
+  lines.push("b) Cookies analytiques / de mesure d'audience");
+  lines.push("Ces cookies nous permettent de mesurer le nombre de visites et de comprendre comment les visiteurs utilisent le site. Ils nous aident à améliorer le fonctionnement du site.\n");
+  lines.push("c) Cookies de personnalisation");
+  lines.push("Ces cookies permettent de personnaliser votre expérience sur le site en mémorisant vos préférences.\n");
+  lines.push("d) Cookies marketing / publicitaires");
+  lines.push("Ces cookies sont utilisés pour afficher des publicités pertinentes. Ils peuvent être déposés par des tiers partenaires.");
+  lines.push("");
+
+  lines.push("3. DURÉE DE CONSERVATION\n");
+  lines.push("Conformément aux recommandations de la CNIL, les cookies sont conservés pour une durée maximale de 13 mois après leur premier dépôt. Au-delà de ce délai, votre consentement sera à nouveau requis.");
+  lines.push("");
+
+  lines.push("4. GESTION DE VOS PRÉFÉRENCES\n");
+  lines.push("Lors de votre première visite, une bannière vous informe de la présence de ces cookies et vous invite à accepter ou refuser leur utilisation. Vous pouvez modifier vos préférences à tout moment.\n");
+  lines.push("Vous pouvez également configurer votre navigateur pour refuser les cookies :");
+  lines.push("- Chrome : Paramètres > Confidentialité et sécurité > Cookies");
+  lines.push("- Firefox : Options > Vie privée et sécurité");
+  lines.push("- Safari : Préférences > Confidentialité");
+  lines.push("- Edge : Paramètres > Cookies et autorisations de sites");
+  lines.push("");
+
+  lines.push("5. CONSENTEMENT\n");
+  lines.push("Le dépôt de cookies non essentiels nécessite votre consentement préalable. Vous pouvez retirer votre consentement à tout moment. Le retrait du consentement ne compromet pas la licéité du traitement fondé sur le consentement effectué avant ce retrait.");
+  lines.push("");
+
+  lines.push("6. CONTACT\n");
+  lines.push(`Pour toute question relative à notre politique de cookies, contactez-nous à : ${info.email || "[email de contact]"}`);
+
+  return lines.join("\n");
+}
+
+// POST /api/vault/generate-document — generate a legal document
+router.post("/generate-document", authMiddleware, async (req, res) => {
+  try {
+    const { documentType, companyInfo } = req.body;
+
+    if (!documentType || !companyInfo) {
+      return res.status(400).json({ error: "Type de document et informations de l'entreprise requis." });
+    }
+
+    const validTypes = ["mentions-legales", "politique-confidentialite", "cgv", "politique-cookies"];
+    if (!validTypes.includes(documentType)) {
+      return res.status(400).json({ error: "Type de document invalide." });
+    }
+
+    if (!companyInfo.nomEntreprise || !companyInfo.email) {
+      return res.status(400).json({ error: "Le nom de l'entreprise et l'email de contact sont obligatoires." });
+    }
+
+    let content;
+    switch (documentType) {
+      case "mentions-legales":
+        content = generateMentionsLegales(companyInfo);
+        break;
+      case "politique-confidentialite":
+        content = generatePolitiqueConfidentialite(companyInfo);
+        break;
+      case "cgv":
+        content = generateCGV(companyInfo);
+        break;
+      case "politique-cookies":
+        content = generatePolitiqueCookies(companyInfo);
+        break;
+    }
+
+    res.json({ content, documentType, generatedAt: new Date().toISOString() });
+  } catch (err) {
+    console.error("Erreur generation document:", err);
+    res.status(500).json({ error: "Erreur lors de la génération du document." });
+  }
+});
+
+// POST /api/vault/generate-document/pdf — generate a PDF of a legal document
+router.post("/generate-document/pdf", authMiddleware, async (req, res) => {
+  try {
+    const { documentType, companyInfo, content } = req.body;
+
+    if (!content) {
+      return res.status(400).json({ error: "Contenu du document requis." });
+    }
+
+    const docLabels = {
+      "mentions-legales": "Mentions Légales",
+      "politique-confidentialite": "Politique de Confidentialité",
+      "cgv": "Conditions Générales de Vente",
+      "politique-cookies": "Politique de Cookies",
+    };
+    const title = docLabels[documentType] || "Document Juridique";
+
+    const doc = new PDFDocument({ size: "A4", margin: 50 });
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="${documentType || "document"}.pdf"`);
+    doc.pipe(res);
+
+    // Header bar
+    doc.rect(0, 0, 595.28, 70).fill("#0e7490");
+    doc.fontSize(22).fill("#ffffff").text(title.toUpperCase(), 50, 20);
+    doc.fontSize(10).fill("rgba(255,255,255,0.85)").text(companyInfo?.nomEntreprise || "", 50, 46);
+
+    doc.y = 90;
+
+    // Date
+    const genDate = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+    doc.fontSize(9).fill("#6b7280").text(`Document généré le ${genDate}`, 50);
+    doc.moveDown(1.5);
+
+    // Content
+    const lines = content.split("\n");
+    for (const line of lines) {
+      if (doc.y > 740) { doc.addPage(); doc.y = 50; }
+
+      if (line.match(/^={3,}/)) continue; // Skip separator lines
+
+      if (line === line.toUpperCase() && line.trim().length > 3 && !line.startsWith("-") && !line.startsWith("a)") && !line.startsWith("b)") && !line.startsWith("c)") && !line.startsWith("d)")) {
+        doc.fontSize(13).fill("#0e7490").text(line, 50, doc.y, { width: 495 });
+        doc.moveDown(0.3);
+      } else if (line.startsWith("ARTICLE ")) {
+        doc.moveDown(0.5);
+        doc.fontSize(11).fill("#1a1a2e").text(line, 50, doc.y, { width: 495 });
+        doc.moveDown(0.3);
+      } else if (line.match(/^\d+\./)) {
+        doc.moveDown(0.3);
+        doc.fontSize(11).fill("#1a1a2e").text(line, 50, doc.y, { width: 495 });
+        doc.moveDown(0.2);
+      } else if (line.startsWith("- ")) {
+        doc.fontSize(9.5).fill("#374151").text(line, 60, doc.y, { width: 485 });
+      } else if (line.trim() === "") {
+        doc.moveDown(0.3);
+      } else {
+        doc.fontSize(9.5).fill("#374151").text(line, 50, doc.y, { width: 495 });
+      }
+    }
+
+    // Footer
+    doc.moveDown(2);
+    if (doc.y > 720) { doc.addPage(); doc.y = 50; }
+    doc.fontSize(8).fill("#9ca3af").text(
+      `Document généré par NERVÜR Vault — ${genDate}`,
+      50, doc.y, { width: 495, align: "center" }
+    );
+
+    doc.end();
+  } catch (err) {
+    console.error("Erreur generation PDF document:", err);
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Erreur lors de la génération du PDF." });
+    }
+  }
+});
+
 module.exports = router;

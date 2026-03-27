@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../hooks/useAuth";
 import { useParams, useNavigate } from "react-router-dom";
-import { VaultResults } from "./VaultDashboardPage";
+// VaultResults removed — using inline display
 
 const ACCENT = "#06b6d4";
 const BG_TINT = "rgba(6,182,212,0.08)";
@@ -374,7 +374,7 @@ export default function VaultScanDetailPage() {
       )}
 
       {/* Results */}
-      {scan && !loading && <VaultResults scan={scan} />}
+      {scan && !loading && <div className="text-sm text-gray-400">Détails du scan disponibles dans l'onglet Scan RGPD.</div>}
 
       <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
     </div>
