@@ -105,6 +105,16 @@ export default function PhantomHistoryPage() {
     }
   };
 
+  const handleDeleteDomain = async (domain) => {
+    if (!window.confirm(`Supprimer tous les audits de ${domain} ?`)) return;
+    try {
+      await api.del('/api/phantom/history/domain/' + encodeURIComponent(domain));
+      await loadHistory();
+    } catch (err) {
+      console.error("Delete domain error:", err);
+    }
+  };
+
   const handleCompare = async (currentId, previousId) => {
     if (!currentId || !previousId) return;
     setComparingId(currentId);
@@ -293,6 +303,19 @@ export default function PhantomHistoryPage() {
                         </>
                       )}
                     </button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleDeleteDomain(domain); }}
+                      title={`Supprimer tous les audits de ${domain}`}
+                      style={{
+                        padding: "8px", background: "transparent",
+                        border: "1px solid #3a3d4a", borderRadius: "6px",
+                        color: "#ef4444", cursor: "pointer", display: "flex",
+                        alignItems: "center", justifyContent: "center",
+                      }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                      </svg>
+                    </button>
                   </div>
                 </div>
 
@@ -358,6 +381,15 @@ export default function PhantomHistoryPage() {
                                 {comparingId === audit._id ? "..." : "Comparer"}
                               </button>
                             )}
+                            <button
+                              onClick={() => navigate(`/app/phantom?auditId=${audit._id}`)}
+                              style={{
+                                padding: "4px 10px", background: "#2a2d3a",
+                                border: "1px solid #3a3d4a", borderRadius: "4px",
+                                color: "#8b5cf6", fontSize: "11px", cursor: "pointer", fontFamily: "inherit",
+                              }}>
+                              Voir
+                            </button>
                           </div>
                         </div>
                       );

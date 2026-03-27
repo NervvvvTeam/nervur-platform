@@ -404,6 +404,36 @@ router.post("/compare/:id", requireAuth, async (req, res) => {
   }
 });
 
+// DELETE /api/phantom/history/domain/:domain — Delete all audits for a domain
+router.delete("/history/domain/:domain", requireAuth, async (req, res) => {
+  try {
+    const domain = req.params.domain;
+    if (!domain || typeof domain !== "string" || domain.length > 253) {
+      return res.status(400).json({ error: "Domaine invalide" });
+    }
+    const result = await Audit.deleteMany({ userId: req.userId, domain });
+    res.json({ deleted: result.deletedCount });
+  } catch (err) {
+    console.error("[Phantom] Delete domain error:", err.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+// DELETE /api/phantom/history/:id — Delete a single audit by ID
+router.delete("/history/:id", requireAuth, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: "Identifiant invalide" });
+    }
+    const result = await Audit.findOneAndDelete({ _id: req.params.id, userId: req.userId });
+    if (!result) return res.status(404).json({ error: "Audit non trouve" });
+    res.json({ deleted: 1 });
+  } catch (err) {
+    console.error("[Phantom] Delete audit error:", err.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
 // GET /api/phantom/audit/:id/pdf — Generate PDF report for an audit
 router.get("/audit/:id/pdf", requireAuth, async (req, res) => {
   try {
