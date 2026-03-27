@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../hooks/useAuth";
 import SubNav from "../components/SubNav";
@@ -86,6 +87,7 @@ function ComparisonArrow({ diff }) {
 export default function PhantomDashboardPage() {
   const api = useApi();
   const { token } = useAuth();
+  const [searchParams] = useSearchParams();
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -100,6 +102,33 @@ export default function PhantomDashboardPage() {
   const [comparison, setComparison] = useState(null);
   const [comparingLoading, setComparingLoading] = useState(false);
   const [pdfLoading, setPdfLoading] = useState(false);
+
+  // Load audit from URL param (from history "Voir" button)
+  useEffect(() => {
+    const auditId = searchParams.get("auditId");
+    if (auditId) {
+      loadAuditById(auditId);
+    }
+  }, [searchParams]);
+
+  const loadAuditById = async (id) => {
+    setLoading(true);
+    setProgress(100);
+    setPhase("Chargement de l'audit...");
+    try {
+      const data = await api.get(`/api/phantom/audit/${id}`);
+      if (data && data.scores) {
+        setResult(data);
+        setUrl(data.url || "");
+      }
+    } catch (err) {
+      setError("Impossible de charger cet audit.");
+    } finally {
+      setLoading(false);
+      setProgress(0);
+      setPhase("");
+    }
+  };
 
   const phases = [
     "Connexion au site...",
