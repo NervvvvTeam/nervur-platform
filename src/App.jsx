@@ -50,6 +50,10 @@ const DashVaultScanDetailPage = lazy(() => import('./dashboard/pages/VaultScanDe
 const DashVaultMonitoringPage = lazy(() => import('./dashboard/pages/VaultMonitoringPage'))
 const DashVaultRgpdPage = lazy(() => import('./dashboard/pages/VaultRgpdPage'))
 const DashVaultGenerateurPage = lazy(() => import('./dashboard/pages/VaultGenerateurPage'))
+const DashVaultRegistrePage = lazy(() => import('./dashboard/pages/VaultRegistrePage'))
+const DashVaultChecklistPage = lazy(() => import('./dashboard/pages/VaultChecklistPage'))
+const DashVaultBadgePage = lazy(() => import('./dashboard/pages/VaultBadgePage'))
+const DashVaultVeillePage = lazy(() => import('./dashboard/pages/VaultVeillePage'))
 const DashVaultHistoriquePage = lazy(() => import('./dashboard/pages/VaultHistoriquePage'))
 const DashAnalyticsPage = lazy(() => import('./dashboard/pages/AnalyticsPage'))
 const DashCompetitorsPage = lazy(() => import('./dashboard/pages/CompetitorsPage'))
@@ -141,6 +145,10 @@ function App() {
                 <Route path="vault/monitoring" element={<Suspense fallback={<DashboardLoader />}><DashVaultMonitoringPage /></Suspense>} />
                 <Route path="vault/rgpd" element={<Suspense fallback={<DashboardLoader />}><DashVaultRgpdPage /></Suspense>} />
                 <Route path="vault/generateur" element={<Suspense fallback={<DashboardLoader />}><DashVaultGenerateurPage /></Suspense>} />
+                <Route path="vault/registre" element={<Suspense fallback={<DashboardLoader />}><DashVaultRegistrePage /></Suspense>} />
+                <Route path="vault/checklist" element={<Suspense fallback={<DashboardLoader />}><DashVaultChecklistPage /></Suspense>} />
+                <Route path="vault/badge" element={<Suspense fallback={<DashboardLoader />}><DashVaultBadgePage /></Suspense>} />
+                <Route path="vault/veille" element={<Suspense fallback={<DashboardLoader />}><DashVaultVeillePage /></Suspense>} />
                 <Route path="vault/historique" element={<Suspense fallback={<DashboardLoader />}><DashVaultHistoriquePage /></Suspense>} />
                 <Route path="settings" element={<Suspense fallback={<DashboardLoader />}><DashSettingsPage /></Suspense>} />
                 <Route path="onboarding" element={<Suspense fallback={<DashboardLoader />}><DashOnboardingPage /></Suspense>} />

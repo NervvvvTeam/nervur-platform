@@ -1629,4 +1629,161 @@ router.post("/generate-document/pdf", authMiddleware, async (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════
+// Registre des traitements RGPD
+// ═══════════════════════════════════════════════
+
+const vaultRegistreSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  name: { type: String, required: true },
+  purpose: { type: String, required: true },
+  dataCategories: [String],
+  legalBasis: String,
+  retention: String,
+  recipients: String,
+  createdAt: { type: Date, default: Date.now },
+});
+const VaultRegistre = mongoose.models.VaultRegistre || mongoose.model("VaultRegistre", vaultRegistreSchema);
+
+// GET all treatments for user
+router.get("/registre", authMiddleware, async (req, res) => {
+  try {
+    const treatments = await VaultRegistre.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    res.json(treatments);
+  } catch (err) {
+    console.error("Erreur GET registre:", err);
+    res.status(500).json({ error: "Erreur lors du chargement du registre." });
+  }
+});
+
+// POST create or update a treatment
+router.post("/registre", authMiddleware, async (req, res) => {
+  try {
+    const { _id, name, purpose, dataCategories, legalBasis, retention, recipients } = req.body;
+
+    if (_id) {
+      // Update existing
+      const updated = await VaultRegistre.findOneAndUpdate(
+        { _id, userId: req.user._id },
+        { name, purpose, dataCategories, legalBasis, retention, recipients },
+        { new: true }
+      );
+      if (!updated) return res.status(404).json({ error: "Traitement introuvable." });
+      return res.json(updated);
+    }
+
+    // Create new
+    const treatment = await VaultRegistre.create({
+      userId: req.user._id,
+      name,
+      purpose,
+      dataCategories: dataCategories || [],
+      legalBasis,
+      retention,
+      recipients,
+    });
+    res.json(treatment);
+  } catch (err) {
+    console.error("Erreur POST registre:", err);
+    res.status(500).json({ error: "Erreur lors de l'enregistrement du traitement." });
+  }
+});
+
+// DELETE a treatment
+router.delete("/registre/:id", authMiddleware, async (req, res) => {
+  try {
+    const result = await VaultRegistre.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
+    if (!result) return res.status(404).json({ error: "Traitement introuvable." });
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Erreur DELETE registre:", err);
+    res.status(500).json({ error: "Erreur lors de la suppression." });
+  }
+});
+
+// GET export registre as PDF
+router.get("/registre/export-pdf", authMiddleware, async (req, res) => {
+  try {
+    const treatments = await VaultRegistre.find({ userId: req.user._id }).sort({ createdAt: -1 });
+
+    const doc = new PDFDocument({ margin: 50, size: "A4" });
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=registre-traitements-rgpd.pdf");
+    doc.pipe(res);
+
+    doc.fontSize(20).font("Helvetica-Bold").text("Registre des traitements RGPD", { align: "center" });
+    doc.moveDown(0.5);
+    doc.fontSize(10).font("Helvetica").fillColor("#666666")
+      .text(`Généré le ${new Date().toLocaleDateString("fr-FR")} — NERVÜR Vault`, { align: "center" });
+    doc.moveDown(1.5);
+
+    if (treatments.length === 0) {
+      doc.fontSize(12).fillColor("#333333").text("Aucun traitement enregistré.", { align: "center" });
+    } else {
+      treatments.forEach((t, i) => {
+        if (i > 0) doc.moveDown(1);
+
+        doc.fontSize(14).font("Helvetica-Bold").fillColor("#06b6d4")
+          .text(`${i + 1}. ${t.name}`);
+        doc.moveDown(0.3);
+
+        doc.fontSize(10).font("Helvetica").fillColor("#333333");
+        doc.text(`Finalité : ${t.purpose}`);
+        if (t.dataCategories && t.dataCategories.length > 0) {
+          doc.text(`Catégories de données : ${t.dataCategories.join(", ")}`);
+        }
+        if (t.legalBasis) doc.text(`Base légale : ${t.legalBasis}`);
+        if (t.retention) doc.text(`Durée de conservation : ${t.retention}`);
+        if (t.recipients) doc.text(`Destinataires : ${t.recipients}`);
+        doc.text(`Date de création : ${new Date(t.createdAt).toLocaleDateString("fr-FR")}`);
+      });
+    }
+
+    doc.end();
+  } catch (err) {
+    console.error("Erreur export PDF registre:", err);
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Erreur lors de l'export PDF." });
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════
+// Checklist de conformité
+// ═══════════════════════════════════════════════
+
+const vaultChecklistSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, unique: true },
+  items: { type: mongoose.Schema.Types.Mixed, default: {} },
+  updatedAt: { type: Date, default: Date.now },
+});
+const VaultChecklist = mongoose.models.VaultChecklist || mongoose.model("VaultChecklist", vaultChecklistSchema);
+
+// GET checklist state
+router.get("/checklist", authMiddleware, async (req, res) => {
+  try {
+    const checklist = await VaultChecklist.findOne({ userId: req.user._id });
+    res.json(checklist || { items: {} });
+  } catch (err) {
+    console.error("Erreur GET checklist:", err);
+    res.status(500).json({ error: "Erreur lors du chargement de la checklist." });
+  }
+});
+
+// POST save checklist state
+router.post("/checklist", authMiddleware, async (req, res) => {
+  try {
+    const { items } = req.body;
+    const checklist = await VaultChecklist.findOneAndUpdate(
+      { userId: req.user._id },
+      { items, updatedAt: new Date() },
+      { upsert: true, new: true }
+    );
+    res.json(checklist);
+  } catch (err) {
+    console.error("Erreur POST checklist:", err);
+    res.status(500).json({ error: "Erreur lors de la sauvegarde de la checklist." });
+  }
+});
+
 module.exports = router;
