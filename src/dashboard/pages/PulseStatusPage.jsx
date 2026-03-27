@@ -4,7 +4,7 @@ import SubNav from "../components/SubNav";
 
 const PULSE_NAV = [
   { path: "/app/pulse", label: "Moniteur", end: true },
-  { path: "/app/pulse/history", label: "\Évolution" },
+  { path: "/app/pulse/history", label: "Évolution" },
   { path: "/app/pulse/alerts", label: "Alertes" },
   { path: "/app/pulse/status", label: "Page de statut" },
 ];

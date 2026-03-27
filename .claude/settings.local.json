@@ -193,7 +193,10 @@
       "Read(//tmp/**)",
       "Bash(rm -f package-lock.json)",
       "Bash(rm -rf node_modules)",
-      "Bash(ls *.config.*)"
+      "Bash(ls *.config.*)",
+      "Bash(grep -rn '\\\\\\\\é\\\\|\\\\\\\\è\\\\|\\\\\\\\ê\\\\|\\\\\\\\à\\\\|\\\\\\\\ô\\\\|\\\\\\\\â\\\\|\\\\\\\\î\\\\|\\\\\\\\û\\\\|\\\\\\\\ç' src/dashboard/)",
+      "Bash(grep -rn '\\\\\\\\è\\\\|\\\\\\\\é\\\\|\\\\\\\\ê\\\\|\\\\\\\\à\\\\|\\\\\\\\ô\\\\|\\\\\\\\â' src/dashboard/pages/PhantomHistoryPage.jsx)",
+      "Bash(grep -rn '\\\\\\\\é\\\\|\\\\\\\\è\\\\|\\\\\\\\ê\\\\|\\\\\\\\à\\\\|\\\\\\\\ô\\\\|\\\\\\\\â' src/dashboard/pages/)"
     ]
   }
 }

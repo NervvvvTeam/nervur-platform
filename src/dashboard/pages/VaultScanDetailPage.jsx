@@ -252,7 +252,7 @@ export default function VaultScanDetailPage() {
       <div className="mb-8">
         <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
         <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
-          {scan ? scan.domain : "D\étails de l'analyse"}
+          {scan ? scan.domain : "Détails de l'analyse"}
         </h1>
         <p className="text-sm text-[#9ca3af]">
           {scan ? `Analyse du ${formatDate(scan.createdAt || scan.date)}` : "Chargement..."}
@@ -281,7 +281,7 @@ export default function VaultScanDetailPage() {
           <div className="flex items-center gap-2 mb-5">
             <ShieldIcon size={20} color={ACCENT} />
             <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
-              Score de s\écurit\é global
+              Score de sécurité global
             </h2>
           </div>
 
@@ -297,17 +297,17 @@ export default function VaultScanDetailPage() {
                 <ScoreBadge score={securityScore.overallScore} />
               </div>
               <MetricBar
-                label="Fuites de donn\ées"
+                label="Fuites de données"
                 score={securityScore.scores.breaches}
                 icon={<AlertTriangleIcon size={13} color={securityScore.scores.breaches >= 60 ? "#22c55e" : "#ef4444"} />}
               />
               <MetricBar
-                label="Conformit\é RGPD"
+                label="Conformité RGPD"
                 score={securityScore.scores.rgpd}
                 icon={<ShieldIcon size={13} color={securityScore.scores.rgpd >= 60 ? "#22c55e" : "#ef4444"} />}
               />
               <MetricBar
-                label="S\écurit\é emails"
+                label="Sécurité emails"
                 score={securityScore.scores.emails}
                 icon={<ShieldIcon size={13} color={securityScore.scores.emails >= 60 ? "#22c55e" : "#ef4444"} />}
               />
@@ -318,7 +318,7 @@ export default function VaultScanDetailPage() {
               />
               {!securityScore.rgpdAvailable && (
                 <div className="mt-2 px-3 py-2 bg-[rgba(234,179,8,0.08)] border border-[rgba(234,179,8,0.2)] rounded-md text-[11px] text-[#eab308]">
-                  Score RGPD estim\é \u2014 lancez une analyse RGPD pour un r\ésultat pr\écis.
+                  Score RGPD estimé \u2014 lancez une analyse RGPD pour un résultat précis.
                 </div>
               )}
             </div>
@@ -330,7 +330,7 @@ export default function VaultScanDetailPage() {
               <div className="flex items-center gap-2 mb-3.5">
                 <AlertTriangleIcon size={16} color={ACCENT} />
                 <h3 className="text-sm font-semibold text-[#f0f0f3] m-0">
-                  Actions recommand\ées
+                  Actions recommandées
                 </h3>
               </div>
               <div className="flex flex-col gap-2">
@@ -369,7 +369,7 @@ export default function VaultScanDetailPage() {
       {scan && !loading && loadingScore && (
         <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] text-center p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
           <div className="w-6 h-6 mx-auto mb-2 border-2 border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite]" />
-          <div className="text-xs text-[#9ca3af]">Calcul du score de s\écurit\é...</div>
+          <div className="text-xs text-[#9ca3af]">Calcul du score de sécurité...</div>
         </div>
       )}
 

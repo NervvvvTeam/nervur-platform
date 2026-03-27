@@ -7,7 +7,7 @@ const VAULT_NAV = [
   { path: "/app/vault", label: "Scanner", end: true },
   { path: "/app/vault/monitoring", label: "Surveillance" },
   { path: "/app/vault/history", label: "Historique" },
-  { path: "/app/vault/rgpd", label: "Conformit\é RGPD" },
+  { path: "/app/vault/rgpd", label: "Conformité RGPD" },
 ];
 
 const ACCENT = "#06b6d4";
@@ -45,13 +45,13 @@ const ClockIcon = ({ size = 14, color = "#9ca3af" }) => (
 );
 
 const COMPLIANCE_LABELS = {
-  mentionsLegales: { label: "Mentions l\égales", icon: "doc", description: "Obligation l\égale pour tout site professionnel (LCEN)" },
-  politiqueConfidentialite: { label: "Politique de confidentialit\é", icon: "lock", description: "Obligatoire selon les articles 13-14 du RGPD" },
-  cookieBanner: { label: "Banni\ère cookies", icon: "cookie", description: "Consentement requis avant d\ép\ôt de cookies (CNIL)" },
-  cgv: { label: "CGV / CGU", icon: "file", description: "Conditions g\én\érales de vente ou d'utilisation" },
-  contactInfo: { label: "Informations de contact", icon: "phone", description: "Coordonn\ées obligatoires dans les mentions l\égales" },
-  ssl: { label: "Certificat SSL (HTTPS)", icon: "shield", description: "Chiffrement des donn\ées en transit" },
-  thirdPartyTrackers: { label: "Trackers tiers", icon: "eye", description: "D\étection de scripts de suivi tiers" },
+  mentionsLegales: { label: "Mentions légales", icon: "doc", description: "Obligation légale pour tout site professionnel (LCEN)" },
+  politiqueConfidentialite: { label: "Politique de confidentialité", icon: "lock", description: "Obligatoire selon les articles 13-14 du RGPD" },
+  cookieBanner: { label: "Bannière cookies", icon: "cookie", description: "Consentement requis avant dépôt de cookies (CNIL)" },
+  cgv: { label: "CGV / CGU", icon: "file", description: "Conditions générales de vente ou d'utilisation" },
+  contactInfo: { label: "Informations de contact", icon: "phone", description: "Coordonnées obligatoires dans les mentions légales" },
+  ssl: { label: "Certificat SSL (HTTPS)", icon: "shield", description: "Chiffrement des données en transit" },
+  thirdPartyTrackers: { label: "Trackers tiers", icon: "eye", description: "Détection de scripts de suivi tiers" },
   formConsent: { label: "Consentement formulaires", icon: "check", description: "Cases de consentement dans les formulaires" },
 };
 
@@ -172,43 +172,43 @@ const WrenchIcon = ({ size = 16, color = ACCENT }) => (
 // Action plan items for each RGPD issue
 const RGPD_ACTION_PLANS = {
   mentionsLegales: {
-    issue: "Mentions l\égales absentes ou incompl\ètes",
-    fix: "Cr\éez une page \"Mentions l\égales\" sur votre site avec : nom/raison sociale, adresse du si\ège, num\éro SIRET, nom du directeur de publication, coordonn\ées de l'h\ébergeur. Vous pouvez utiliser un g\én\érateur gratuit comme mentions-legales.fr.",
+    issue: "Mentions légales absentes ou incomplètes",
+    fix: "Créez une page \"Mentions légales\" sur votre site avec : nom/raison sociale, adresse du siège, numéro SIRET, nom du directeur de publication, coordonnées de l'hébergeur. Vous pouvez utiliser un générateur gratuit comme mentions-legales.fr.",
     time: "30 minutes",
   },
   politiqueConfidentialite: {
-    issue: "Politique de confidentialit\é manquante",
-    fix: "R\édigez une page d\édi\ée expliquant : quelles donn\ées vous collectez, pourquoi, combien de temps vous les conservez, et les droits de vos utilisateurs (acc\ès, rectification, suppression). Ajoutez un lien visible dans le pied de page du site.",
-    time: "1 \à 2 heures",
+    issue: "Politique de confidentialité manquante",
+    fix: "Rédigez une page dédiée expliquant : quelles données vous collectez, pourquoi, combien de temps vous les conservez, et les droits de vos utilisateurs (accès, rectification, suppression). Ajoutez un lien visible dans le pied de page du site.",
+    time: "1 à 2 heures",
   },
   cookieBanner: {
-    issue: "Banni\ère de cookies absente",
-    fix: "Installez une solution de gestion des cookies comme Tarteaucitron (gratuit, open source) ou Axeptio. La banni\ère doit permettre d'accepter ou refuser les cookies non essentiels AVANT leur d\ép\ôt.",
+    issue: "Bannière de cookies absente",
+    fix: "Installez une solution de gestion des cookies comme Tarteaucitron (gratuit, open source) ou Axeptio. La bannière doit permettre d'accepter ou refuser les cookies non essentiels AVANT leur dépôt.",
     time: "1 heure",
   },
   cgv: {
-    issue: "Conditions g\én\érales (CGV/CGU) absentes",
-    fix: "R\édigez des CGV si vous vendez des produits/services, ou des CGU si votre site propose des fonctionnalit\és. Incluez : description du service, prix, modalit\és de paiement, droit de r\étractation, et r\ésolution des litiges.",
-    time: "2 \à 4 heures",
+    issue: "Conditions générales (CGV/CGU) absentes",
+    fix: "Rédigez des CGV si vous vendez des produits/services, ou des CGU si votre site propose des fonctionnalités. Incluez : description du service, prix, modalités de paiement, droit de rétractation, et résolution des litiges.",
+    time: "2 à 4 heures",
   },
   contactInfo: {
     issue: "Informations de contact introuvables",
-    fix: "Ajoutez sur votre site : une adresse email de contact, un num\éro de t\él\éphone, et votre adresse postale. Ces informations doivent \être facilement accessibles (page contact ou mentions l\égales).",
+    fix: "Ajoutez sur votre site : une adresse email de contact, un numéro de téléphone, et votre adresse postale. Ces informations doivent être facilement accessibles (page contact ou mentions légales).",
     time: "15 minutes",
   },
   ssl: {
-    issue: "Site non s\écuris\é (pas de HTTPS)",
-    fix: "Activez le certificat SSL sur votre h\ébergement. La plupart des h\ébergeurs (OVH, o2switch, Infomaniak) proposent un certificat Let's Encrypt gratuit. Activez-le depuis votre panneau de gestion, puis forcez la redirection HTTP vers HTTPS.",
-    time: "30 minutes \à 1 heure",
+    issue: "Site non sécurisé (pas de HTTPS)",
+    fix: "Activez le certificat SSL sur votre hébergement. La plupart des hébergeurs (OVH, o2switch, Infomaniak) proposent un certificat Let's Encrypt gratuit. Activez-le depuis votre panneau de gestion, puis forcez la redirection HTTP vers HTTPS.",
+    time: "30 minutes à 1 heure",
   },
   thirdPartyTrackers: {
-    issue: "Trackers tiers d\étect\és sans consentement",
-    fix: "Les scripts de suivi (Google Analytics, Facebook Pixel, etc.) ne doivent se charger qu'APR\ÈS le consentement de l'utilisateur. Configurez votre banni\ère cookies pour bloquer ces scripts par d\éfaut et ne les activer qu'apr\ès acceptation.",
-    time: "1 \à 2 heures",
+    issue: "Trackers tiers détectés sans consentement",
+    fix: "Les scripts de suivi (Google Analytics, Facebook Pixel, etc.) ne doivent se charger qu'APRÈS le consentement de l'utilisateur. Configurez votre bannière cookies pour bloquer ces scripts par défaut et ne les activer qu'après acceptation.",
+    time: "1 à 2 heures",
   },
   formConsent: {
     issue: "Formulaires sans case de consentement",
-    fix: "Ajoutez une case \à cocher (non pr\é-coch\ée) sous chaque formulaire avec un texte du type : \"J'accepte que mes donn\ées soient trait\ées conform\ément \à la politique de confidentialit\é\". Ajoutez un lien vers votre politique de confidentialit\é.",
+    fix: "Ajoutez une case à cocher (non pré-cochée) sous chaque formulaire avec un texte du type : \"J'accepte que mes données soient traitées conformément à la politique de confidentialité\". Ajoutez un lien vers votre politique de confidentialité.",
     time: "30 minutes par formulaire",
   },
 };
@@ -311,7 +311,7 @@ export default function VaultRgpdPage() {
       const res = await fetch(`${API}/api/vault/rgpd-scan/${scan._id}/pdf`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!res.ok) throw new Error("Erreur lors du t\él\échargement du rapport.");
+      if (!res.ok) throw new Error("Erreur lors du téléchargement du rapport.");
       const blob = await res.blob();
       const blobUrl = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -352,10 +352,10 @@ export default function VaultRgpdPage() {
         </div>
         <div>
           <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
-            Conformit\é RGPD
+            Conformité RGPD
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
-            Analysez la conformit\é RGPD de n'importe quel site web
+            Analysez la conformité RGPD de n'importe quel site web
           </p>
         </div>
       </div>
@@ -371,11 +371,11 @@ export default function VaultRgpdPage() {
         <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
           <strong className="text-[#f0f0f3]">Shield \u2014 Analyse RGPD</strong>
           <br />
-          Entrez l'URL d'un site web pour v\érifier sa conformit\é RGPD. L'outil analyse 8 crit\ères
-          cl\és : mentions l\égales, politique de confidentialit\é, cookies, CGV, contacts, SSL, trackers et consentement.
+          Entrez l'URL d'un site web pour vérifier sa conformité RGPD. L'outil analyse 8 critères
+          clés : mentions légales, politique de confidentialité, cookies, CGV, contacts, SSL, trackers et consentement.
           <br />
           <span className="text-[#6b7280]">
-            L'analyse porte sur la page d'accueil du site. Pour une conformit\é compl\ète, un audit approfondi est recommand\é.
+            L'analyse porte sur la page d'accueil du site. Pour une conformité complète, un audit approfondi est recommandé.
           </span>
         </div>
       </div>
@@ -400,7 +400,7 @@ export default function VaultRgpdPage() {
               onKeyDown={e => { if (e.key === "Enter") handleScan(); }}
             />
             <div className="text-[11px] text-[#6b7280] mt-1">
-              URL compl\ète du site \à analyser (la page d'accueil sera scann\ée)
+              URL complète du site à analyser (la page d'accueil sera scannée)
             </div>
           </div>
           <button
@@ -445,7 +445,7 @@ export default function VaultRgpdPage() {
             Analyse RGPD en cours...
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed">
-            Nous analysons le site pour v\érifier sa conformit\é RGPD.
+            Nous analysons le site pour vérifier sa conformité RGPD.
             <br />Cela peut prendre quelques secondes.
           </div>
           <style>{`@keyframes rgpd-spin { to { transform: rotate(360deg); } }`}</style>
@@ -459,7 +459,7 @@ export default function VaultRgpdPage() {
             <div className="flex items-center gap-2">
               <ShieldIcon size={18} color={ACCENT} />
               <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
-                R\ésultats \u2014 {scan.domain}
+                Résultats \u2014 {scan.domain}
               </h2>
             </div>
             <div className="flex gap-2 items-center">
@@ -476,12 +476,12 @@ export default function VaultRgpdPage() {
                 {downloadingPdf ? (
                   <>
                     <div className="w-[13px] h-[13px] border-2 border-[rgba(255,255,255,0.3)] border-t-white rounded-full animate-[rgpd-spin_0.8s_linear_infinite]" />
-                    G\én\ération...
+                    Génération...
                   </>
                 ) : (
                   <>
                     <DownloadIcon size={14} />
-                    T\él\écharger le rapport RGPD
+                    Télécharger le rapport RGPD
                   </>
                 )}
               </button>
@@ -498,7 +498,7 @@ export default function VaultRgpdPage() {
           <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
             <ScoreGauge score={scan.score || 0} />
             <div className="text-[13px] text-[#9ca3af] mt-3">
-              Score de conformit\é RGPD
+              Score de conformité RGPD
             </div>
           </div>
 
@@ -535,7 +535,7 @@ export default function VaultRgpdPage() {
                   Plan d'action
                 </h3>
                 <span className="text-[11px] font-semibold text-[#06b6d4] bg-[rgba(6,182,212,0.15)] px-2 py-0.5 rounded">
-                  {actionPlanItems.length} {actionPlanItems.length > 1 ? "\étapes" : "\étape"}
+                  {actionPlanItems.length} {actionPlanItems.length > 1 ? "étapes" : "étape"}
                 </span>
               </div>
 
@@ -568,7 +568,7 @@ export default function VaultRgpdPage() {
                         {/* Estimated time */}
                         <div className="inline-flex items-center gap-1.5 text-[11px] text-[#9ca3af]">
                           <ClockIcon size={12} color="#9ca3af" />
-                          Temps estim\é : {item.time}
+                          Temps estimé : {item.time}
                         </div>
                       </div>
                     </div>
@@ -583,11 +583,11 @@ export default function VaultRgpdPage() {
             <div className="bg-[rgba(34,197,94,0.06)] border border-[rgba(34,197,94,0.25)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
               <CheckCircle size={40} color="#22c55e" />
               <div className="text-base font-semibold text-[#22c55e] mt-3 mb-1.5">
-                F\élicitations !
+                Félicitations !
               </div>
               <div className="text-[13px] text-[#86efac] leading-relaxed max-w-[440px] mx-auto">
-                Votre site respecte les principaux crit\ères de conformit\é RGPD.
-                Continuez \à surveiller r\éguli\èrement pour maintenir cette conformit\é.
+                Votre site respecte les principaux critères de conformité RGPD.
+                Continuez à surveiller régulièrement pour maintenir cette conformité.
               </div>
             </div>
           )}
@@ -611,7 +611,7 @@ export default function VaultRgpdPage() {
 
         {!loadingHistory && history.length === 0 && (
           <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center text-[#6b7280] text-[13px]">
-            Aucune analyse RGPD effectu\ée. Lancez votre premi\ère analyse ci-dessus.
+            Aucune analyse RGPD effectuée. Lancez votre première analyse ci-dessus.
           </div>
         )}
 

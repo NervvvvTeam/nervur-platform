@@ -160,7 +160,7 @@ export default function PhantomHistoryPage() {
           Historique des audits
         </h1>
         <p style={{ fontSize: "14px", color: "#9ca3af" }}>
-          Suivez l'\évolution de vos scores au fil du temps.
+          Suivez l'évolution de vos scores au fil du temps.
         </p>
       </div>
 
@@ -223,7 +223,7 @@ export default function PhantomHistoryPage() {
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ fontSize: "16px", color: "#9ca3af", marginBottom: "12px" }}>
-            Aucun audit enregistr\é
+            Aucun audit enregistré
           </div>
           <p style={{ fontSize: "14px", color: "#d1d5db", marginBottom: "20px" }}>
             Lancez votre premier audit depuis la page Audit.
@@ -299,7 +299,7 @@ export default function PhantomHistoryPage() {
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M21 12a9 9 0 0 0-9-9"/><path d="M3 12a9 9 0 0 0 9 9"/><polyline points="21 3 21 12 12 12"/>
                           </svg>
-                          Mettre \à jour
+                          Mettre à jour
                         </>
                       )}
                     </button>
@@ -323,7 +323,7 @@ export default function PhantomHistoryPage() {
                 <div style={{ padding: "0 22px 16px", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px" }}>
                   {[
                     { key: "performance", label: "Performance", color: "#8b5cf6" },
-                    { key: "accessibility", label: "Accessibilit\é", color: "#3b82f6" },
+                    { key: "accessibility", label: "Accessibilité", color: "#3b82f6" },
                     { key: "seo", label: "SEO", color: "#10b981" },
                     { key: "bestPractices", label: "Bonnes pratiques", color: "#f59e0b" },
                   ].map(({ key, label, color }) => (
@@ -511,7 +511,7 @@ export default function PhantomHistoryPage() {
                 border: "1px solid rgba(16,185,129,0.15)", borderRadius: "8px", textAlign: "center"
               }}>
                 <div style={{ fontSize: "20px", fontWeight: 600, color: "#10b981" }}>{compareResult.resolvedIssues || 0}</div>
-                <div style={{ fontSize: "11px", color: "#9ca3af" }}>R\ésolus</div>
+                <div style={{ fontSize: "11px", color: "#9ca3af" }}>Résolus</div>
               </div>
               <div style={{
                 flex: 1, padding: "12px", background: "rgba(239,68,68,0.06)",
@@ -533,7 +533,7 @@ export default function PhantomHistoryPage() {
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ fontSize: "13px", color: "#9ca3af", marginBottom: "16px" }}>
-            \Évolution du score global
+            Évolution du score global
           </div>
           <div style={{ position: "relative", height: chartHeight + 30, overflow: "hidden" }}>
             <svg width="100%" height={chartHeight + 30} viewBox={`0 0 ${chartWidth} ${chartHeight + 30}`} preserveAspectRatio="xMidYMid meet">

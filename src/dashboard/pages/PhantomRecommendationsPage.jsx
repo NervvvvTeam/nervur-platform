@@ -12,7 +12,7 @@ const PHANTOM_NAV = [
 
 const CATEGORY_LABELS = {
   performance: "Performance",
-  accessibility: "Accessibilit\é",
+  accessibility: "Accessibilité",
   seo: "SEO",
   bestPractices: "Bonnes pratiques",
 };
@@ -47,11 +47,11 @@ function getEstimatedImpact(severity, impact) {
   // Parse the impact string if available, otherwise derive from severity
   if (impact) {
     const num = parseInt(impact.replace(/[^0-9]/g, ""));
-    if (num >= 10) return { label: "Impact \élev\é", color: "#ef4444", bg: "rgba(239,68,68,0.10)" };
+    if (num >= 10) return { label: "Impact élevé", color: "#ef4444", bg: "rgba(239,68,68,0.10)" };
     if (num >= 5) return { label: "Impact moyen", color: "#f59e0b", bg: "rgba(245,158,11,0.10)" };
     return { label: "Impact faible", color: "#10b981", bg: "rgba(16,185,129,0.10)" };
   }
-  if (severity === "critical") return { label: "Impact \élev\é", color: "#ef4444", bg: "rgba(239,68,68,0.10)" };
+  if (severity === "critical") return { label: "Impact élevé", color: "#ef4444", bg: "rgba(239,68,68,0.10)" };
   if (severity === "warning") return { label: "Impact moyen", color: "#f59e0b", bg: "rgba(245,158,11,0.10)" };
   return { label: "Impact faible", color: "#10b981", bg: "rgba(16,185,129,0.10)" };
 }
@@ -189,14 +189,14 @@ export default function PhantomRecommendationsPage() {
           Recommandations
         </h1>
         <p style={{ fontSize: "14px", color: "#9ca3af" }}>
-          Actions prioris\ées par impact pour am\éliorer vos sites.
+          Actions priorisées par impact pour améliorer vos sites.
         </p>
       </div>
 
       {/* Stats */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "24px" }}>
         {[
-          { label: "Critique", sublabel: "Impact \élev\é", count: criticalCount, color: "#ef4444" },
+          { label: "Critique", sublabel: "Impact élevé", count: criticalCount, color: "#ef4444" },
           { label: "Important", sublabel: "Impact moyen", count: warningCount, color: "#f59e0b" },
           { label: "Optionnel", sublabel: "Impact faible", count: infoCount, color: "#10b981" },
         ].map(s => (
@@ -251,7 +251,7 @@ export default function PhantomRecommendationsPage() {
               fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
               background: viewMode === "category" ? "#8b5cf6" : "#2a2d3a",
               color: viewMode === "category" ? "#fff" : "#6b7280",
-            }}>Par cat\égorie</button>
+            }}>Par catégorie</button>
           <button onClick={() => setViewMode("list")}
             style={{
               padding: "5px 12px", borderRadius: "6px", border: "none",
