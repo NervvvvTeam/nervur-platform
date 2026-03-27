@@ -19,6 +19,9 @@ const dashStyles = `
   from { opacity: 0; }
   to { opacity: 1; }
 }
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 `;
 
 const fadeInUp = (delay = 0) => ({
@@ -39,7 +42,7 @@ const SENTINEL_NAV = [
 ];
 
 export default function DashboardPage() {
-  const { get } = useApi();
+  const { get, post } = useApi();
   const { user } = useAuth();
   const [business, setBusiness] = useState(null);
   const [stats, setStats] = useState(null);
@@ -47,6 +50,8 @@ export default function DashboardPage() {
   const [nps, setNps] = useState(null);
   const [recentReviews, setRecentReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [scanning, setScanning] = useState(false);
+  const [scanResult, setScanResult] = useState(null);
 
   useEffect(() => { loadData(); }, []);
 
@@ -72,6 +77,22 @@ export default function DashboardPage() {
       console.error("Dashboard load error:", err);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function scanReviews() {
+    if (!business || scanning) return;
+    setScanning(true);
+    setScanResult(null);
+    try {
+      const result = await post("/api/sentinel/scan-reviews", { businessId: business._id });
+      setScanResult(result);
+      // Reload data after scan
+      await loadData();
+    } catch (err) {
+      setScanResult({ error: err.message });
+    } finally {
+      setScanning(false);
     }
   }
 
@@ -130,7 +151,7 @@ export default function DashboardPage() {
           <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
         </div>
         <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>{business.businessName}</h1>
-        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+        <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
           <span style={{
             fontSize: "12px", fontWeight: 500, padding: "2px 8px", borderRadius: "4px",
             background: stats?.mode === "auto" ? "rgba(99,102,241,0.12)" : "rgba(113,113,122,0.12)",
@@ -139,7 +160,48 @@ export default function DashboardPage() {
             {stats?.mode === "auto" ? "Auto" : "Manuel"}
           </span>
           <span style={{ fontSize: "13px", color: "#9ca3af" }}>{business.sector}</span>
+          <button
+            onClick={scanReviews}
+            disabled={scanning}
+            style={{
+              marginLeft: "auto",
+              padding: "8px 18px",
+              background: scanning ? "#2a2d3a" : "linear-gradient(135deg, #ef4444, #dc2626)",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "13px",
+              fontWeight: 600,
+              cursor: scanning ? "wait" : "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              transition: "all 0.3s ease",
+              boxShadow: scanning ? "none" : "0 2px 12px rgba(239,68,68,0.3)"
+            }}
+          >
+            {scanning ? (
+              <><span style={{ display: "inline-block", width: "14px", height: "14px", border: "2px solid rgba(255,255,255,0.3)", borderTopColor: "#fff", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} /> Scan en cours...</>
+            ) : (
+              <><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 11-6.219-8.56"/><polyline points="21 3 21 9 15 9"/></svg> Scanner les avis Google</>
+            )}
+          </button>
         </div>
+        {scanResult && (
+          <div style={{
+            marginTop: "10px", padding: "10px 14px", borderRadius: "8px", fontSize: "13px",
+            background: scanResult.error ? "rgba(239,68,68,0.1)" : "rgba(34,197,94,0.1)",
+            border: `1px solid ${scanResult.error ? "rgba(239,68,68,0.2)" : "rgba(34,197,94,0.2)"}`,
+            color: scanResult.error ? "#ef4444" : "#22c55e"
+          }}>
+            {scanResult.error || scanResult.message}
+            {scanResult.place && (
+              <span style={{ marginLeft: "8px", color: "#9ca3af" }}>
+                ({scanResult.place.name} — {scanResult.place.rating}/5, {scanResult.place.totalReviews} avis)
+              </span>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Main stats */}
