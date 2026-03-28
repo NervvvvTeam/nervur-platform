@@ -1777,6 +1777,130 @@ router.get("/registre/export-pdf", authMiddleware, async (req, res) => {
 });
 
 // ═══════════════════════════════════════════════
+// Veille juridique
+// ═══════════════════════════════════════════════
+
+const vaultVeilleSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  summary: { type: String, required: true },
+  category: { type: String, enum: ["RGPD", "Droit commercial", "E-commerce", "Droit du travail", "Fiscalité"], required: true },
+  impact: { type: String, enum: ["urgent", "attention", "info"], default: "info" },
+  source: String,
+  url: String,
+  date: { type: Date, default: Date.now },
+});
+const VaultVeille = mongoose.models.VaultVeille || mongoose.model("VaultVeille", vaultVeilleSchema);
+
+// Seed demo articles if collection is empty
+async function seedVeilleIfEmpty() {
+  try {
+    const count = await VaultVeille.countDocuments();
+    if (count > 0) return;
+    await VaultVeille.insertMany([
+      {
+        title: "Nouvelles lignes directrices CNIL sur les cookies et traceurs",
+        summary: "La CNIL met à jour ses recommandations sur le consentement aux cookies. Les entreprises doivent s'assurer que le refus est aussi simple que l'acceptation. Contrôles renforcés prévus au T2 2026.",
+        category: "RGPD",
+        impact: "urgent",
+        source: "CNIL",
+        url: "https://www.cnil.fr/fr/cookies-et-autres-traceurs",
+        date: new Date("2026-03-25"),
+      },
+      {
+        title: "Règlement européen sur l'IA : obligations pour les entreprises",
+        summary: "L'AI Act entre en application progressive. Les systèmes à haut risque doivent être déclarés et documentés. Les PME bénéficient d'un délai supplémentaire jusqu'en août 2026.",
+        category: "E-commerce",
+        impact: "attention",
+        source: "Journal Officiel UE",
+        url: "https://eur-lex.europa.eu/",
+        date: new Date("2026-03-20"),
+      },
+      {
+        title: "Transferts de données hors UE : nouveau cadre de conformité",
+        summary: "Mise à jour des clauses contractuelles types (CCT) pour les transferts vers les pays tiers. Vérification obligatoire des garanties supplémentaires pour les sous-traitants extra-européens.",
+        category: "RGPD",
+        impact: "attention",
+        source: "CEPD",
+        url: "https://edpb.europa.eu/",
+        date: new Date("2026-03-18"),
+      },
+      {
+        title: "Obligation de facturation électronique : calendrier confirmé",
+        summary: "La facturation électronique devient obligatoire pour toutes les entreprises assujetties à la TVA. Réception obligatoire dès septembre 2026, émission selon le calendrier par taille d'entreprise.",
+        category: "Fiscalité",
+        impact: "urgent",
+        source: "DGFIP",
+        url: "https://www.impots.gouv.fr/",
+        date: new Date("2026-03-15"),
+      },
+      {
+        title: "Droit de rétractation e-commerce : précisions jurisprudentielles",
+        summary: "La Cour de cassation précise les conditions d'exercice du droit de rétractation pour les produits personnalisés vendus en ligne. Impact sur les CGV des sites marchands.",
+        category: "E-commerce",
+        impact: "info",
+        source: "Legifrance",
+        url: "https://www.legifrance.gouv.fr/",
+        date: new Date("2026-03-12"),
+      },
+      {
+        title: "Mise à jour du Code du travail : télétravail et droit à la déconnexion",
+        summary: "Nouvelles dispositions renforçant le droit à la déconnexion des salariés en télétravail. Les entreprises de plus de 50 salariés doivent mettre à jour leur charte télétravail.",
+        category: "Droit du travail",
+        impact: "attention",
+        source: "Legifrance",
+        url: "https://www.legifrance.gouv.fr/",
+        date: new Date("2026-03-10"),
+      },
+      {
+        title: "Délais de paiement B2B : renforcement des sanctions",
+        summary: "La DGCCRF intensifie les contrôles sur le respect des délais de paiement inter-entreprises (60 jours max). Amendes administratives pouvant atteindre 2 millions d'euros pour les récidivistes.",
+        category: "Droit commercial",
+        impact: "info",
+        source: "DGCCRF",
+        url: "https://www.economie.gouv.fr/dgccrf",
+        date: new Date("2026-03-08"),
+      },
+      {
+        title: "RGPD : sanction record pour collecte excessive de données",
+        summary: "La CNIL inflige une amende de 32 millions d'euros à une entreprise française pour collecte disproportionnée de données personnelles via son application mobile. Rappel des principes de minimisation.",
+        category: "RGPD",
+        impact: "info",
+        source: "CNIL",
+        url: "https://www.cnil.fr/",
+        date: new Date("2026-03-05"),
+      },
+    ]);
+    console.log("[VAULT] Veille juridique seeded with demo articles");
+  } catch (err) {
+    console.error("[VAULT] Error seeding veille:", err.message);
+  }
+}
+seedVeilleIfEmpty();
+
+router.get("/veille", authMiddleware, async (req, res) => {
+  try {
+    const articles = await VaultVeille.find().sort({ date: -1 }).limit(50).lean();
+    const mapped = articles.map(a => ({
+      id: a._id.toString(),
+      title: a.title,
+      summary: a.summary,
+      category: a.category,
+      impact: a.impact,
+      source: a.source || null,
+      url: a.url || null,
+      date: a.date,
+    }));
+    res.json({
+      articles: mapped,
+      lastUpdated: articles.length > 0 ? articles[0].date : null,
+    });
+  } catch (err) {
+    console.error("Erreur GET veille:", err);
+    res.status(500).json({ error: "Erreur lors du chargement de la veille juridique." });
+  }
+});
+
+// ═══════════════════════════════════════════════
 // Checklist de conformité
 // ═══════════════════════════════════════════════
 
