@@ -285,4 +285,68 @@ router.delete("/reset", authMiddleware, async (req, res) => {
   }
 });
 
+// ═══ DEMO ENDPOINT (no auth, rate limited) ═══
+const demoRateLimit = new Map(); // IP -> { count, resetAt }
+
+router.get("/demo", async (req, res) => {
+  try {
+    // Rate limit: 5 requests per hour per IP
+    const ip = req.headers["x-forwarded-for"]?.split(",")[0]?.trim() || req.ip || req.connection.remoteAddress;
+    const now = Date.now();
+    const hourMs = 60 * 60 * 1000;
+    let entry = demoRateLimit.get(ip);
+
+    if (!entry || now > entry.resetAt) {
+      entry = { count: 0, resetAt: now + hourMs };
+      demoRateLimit.set(ip, entry);
+    }
+
+    if (entry.count >= 5) {
+      return res.status(429).json({ error: "Limite atteinte. Reessayez dans une heure ou contactez-nous pour un acces complet." });
+    }
+    entry.count++;
+
+    const { q } = req.query;
+    if (!q || typeof q !== "string" || q.trim().length === 0) {
+      return res.status(400).json({ error: "Parametre 'q' requis (nom de l'entreprise ou URL Google Maps)." });
+    }
+
+    if (q.trim().length > 300) {
+      return res.status(400).json({ error: "Requete trop longue (max 300 caracteres)." });
+    }
+
+    // Use the existing fetchGoogleReviews function
+    const { place, reviews } = await fetchGoogleReviews(q.trim(), null);
+
+    if (!place) {
+      return res.status(404).json({ error: "Etablissement introuvable sur Google Maps. Verifiez le nom ou l'URL." });
+    }
+
+    // Return limited data for demo (name, rating, total reviews, max 3 reviews)
+    const demoReviews = (reviews || []).slice(0, 3).map(r => ({
+      authorName: r.authorName || "Anonyme",
+      rating: r.rating,
+      text: r.text ? r.text.slice(0, 250) : "",
+    }));
+
+    res.json({
+      name: place.name || q.trim(),
+      rating: place.rating || 0,
+      totalReviews: place.totalReviews || 0,
+      reviews: demoReviews,
+    });
+  } catch (err) {
+    console.error("[SENTINEL DEMO] Error:", err.message);
+    res.status(500).json({ error: "Erreur lors de l'analyse. Reessayez." });
+  }
+});
+
+// Clean up rate limit map periodically (every 30 min)
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, entry] of demoRateLimit) {
+    if (now > entry.resetAt) demoRateLimit.delete(ip);
+  }
+}, 30 * 60 * 1000);
+
 module.exports = router;

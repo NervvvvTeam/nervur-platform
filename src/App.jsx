@@ -29,6 +29,10 @@ const BlogPage = lazy(() => import('./BlogPage'))
 const BlogReputationPage = lazy(() => import('./BlogReputationPage'))
 const BlogSecuritePage = lazy(() => import('./BlogSecuritePage'))
 const BlogPerformancePage = lazy(() => import('./BlogPerformancePage'))
+const BlogAvisGooglePage = lazy(() => import('./BlogAvisGooglePage'))
+const BlogRgpdPage = lazy(() => import('./BlogRgpdPage'))
+const DemoSentinelPage = lazy(() => import('./DemoSentinelPage'))
+const DemoVaultPage = lazy(() => import('./DemoVaultPage'))
 
 // Lazy-loaded dashboard pages
 const DashLoginPage = lazy(() => import('./dashboard/pages/LoginPage'))
@@ -116,8 +120,14 @@ function App() {
             <Route path="/qui-sommes-nous" element={<QuiSommesNousPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/e-reputation" element={<BlogReputationPage />} />
-            <Route path="/blog/cybersecurite" element={<BlogSecuritePage />} />
-            <Route path="/blog/performance-web" element={<BlogPerformancePage />} />
+            <Route path="/blog/conformite-juridique" element={<BlogSecuritePage />} />
+            <Route path="/blog/cybersecurite" element={<Navigate to="/blog/conformite-juridique" replace />} />
+            <Route path="/blog/presence-digitale" element={<BlogPerformancePage />} />
+            <Route path="/blog/performance-web" element={<Navigate to="/blog/presence-digitale" replace />} />
+            <Route path="/blog/avis-google" element={<BlogAvisGooglePage />} />
+            <Route path="/blog/rgpd-guide" element={<BlogRgpdPage />} />
+            <Route path="/demo/sentinel" element={<DemoSentinelPage />} />
+            <Route path="/demo/vault" element={<DemoVaultPage />} />
 
             {/* ═══ Espace Client (Dashboard) ═══ */}
             <Route path="/app/login" element={<Suspense fallback={<DashboardLoader />}><DashLoginPage /></Suspense>} />

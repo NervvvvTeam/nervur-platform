@@ -88,120 +88,18 @@ const Blockquote = ({ children, color }) => (
   </blockquote>
 );
 
-/* ───── Mini Scanner Demo ───── */
-function ScannerDemo() {
-  const [phase, setPhase] = useState("idle"); // idle, scanning, results
-  const [progress, setProgress] = useState(0);
-  const [scanLine, setScanLine] = useState(0);
-
-  const startScan = () => {
-    setPhase("scanning");
-    setProgress(0);
-    setScanLine(0);
-    const lines = [
-      "Connexion aux bases de donnees...",
-      "Analyse du dark web...",
-      "Verification des fuites recentes...",
-      "Croisement avec les bases compromises...",
-      "Analyse des mots de passe exposes...",
-      "Generation du rapport...",
-    ];
-    let step = 0;
-    const interval = setInterval(() => {
-      step++;
-      setProgress(Math.min((step / lines.length) * 100, 100));
-      setScanLine(Math.min(step, lines.length - 1));
-      if (step >= lines.length) {
-        clearInterval(interval);
-        setTimeout(() => setPhase("results"), 600);
-      }
-    }, 800);
-  };
-
-  if (phase === "idle") {
-    return (
-      <div style={{ textAlign: "center", padding: "48px 32px", margin: "40px 0", background: "rgba(6,182,212,0.04)", border: "1px solid rgba(6,182,212,0.15)", borderRadius: "12px" }}>
-        <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT, marginBottom: "16px" }}>Demo interactive</div>
-        <h3 style={{ fontSize: "22px", fontWeight: 700, color: V, margin: "0 0 12px" }}>Simulateur de scan dark web</h3>
-        <p style={{ fontSize: "15px", color: V3, marginBottom: "24px" }}>Decouvrez comment Vault detecte les fuites en quelques secondes</p>
-        <button onClick={startScan} style={{
-          background: `linear-gradient(135deg, ${ACCENT}, #0891b2)`, border: "none", color: V,
-          padding: "14px 36px", fontSize: "14px", fontWeight: 700, letterSpacing: "1px",
-          cursor: "pointer", fontFamily: "inherit", borderRadius: "6px",
-          boxShadow: "0 4px 24px rgba(6,182,212,0.3)", transition: "transform 0.2s",
-        }}
-          onMouseEnter={e => e.target.style.transform = "translateY(-2px)"}
-          onMouseLeave={e => e.target.style.transform = "translateY(0)"}
-        >Lancer le scan</button>
-      </div>
-    );
-  }
-
-  if (phase === "scanning") {
-    const lines = [
-      "Connexion aux bases de donnees...",
-      "Analyse du dark web...",
-      "Verification des fuites recentes...",
-      "Croisement avec les bases compromises...",
-      "Analyse des mots de passe exposes...",
-      "Generation du rapport...",
-    ];
-    return (
-      <div style={{ padding: "40px 32px", margin: "40px 0", background: "rgba(6,182,212,0.04)", border: "1px solid rgba(6,182,212,0.15)", borderRadius: "12px" }}>
-        <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT, marginBottom: "20px" }}>Scan en cours...</div>
-        <div style={{ height: "4px", background: "rgba(6,182,212,0.1)", borderRadius: "2px", marginBottom: "20px", overflow: "hidden" }}>
-          <div style={{ height: "100%", width: `${progress}%`, background: `linear-gradient(90deg, ${ACCENT}, #22d3ee)`, borderRadius: "2px", transition: "width 0.5s ease" }} />
-        </div>
-        <div style={{ fontFamily: "monospace", fontSize: "13px", lineHeight: 2 }}>
-          {lines.slice(0, scanLine + 1).map((line, i) => (
-            <div key={i} style={{ color: i === scanLine ? ACCENT : V3, transition: "color 0.3s" }}>
-              <span style={{ color: ACCENT2, marginRight: "8px" }}>&gt;</span>{line}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ padding: "40px 32px", margin: "40px 0", background: "rgba(6,182,212,0.04)", border: "1px solid rgba(6,182,212,0.15)", borderRadius: "12px" }}>
-      <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#ef4444", marginBottom: "20px" }}>Resultats du scan</div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "12px", marginBottom: "24px" }}>
-        <div style={{ textAlign: "center", padding: "16px", background: "rgba(239,68,68,0.08)", borderRadius: "8px" }}>
-          <div style={{ fontSize: "32px", fontWeight: 900, color: "#ef4444" }}>3</div>
-          <div style={{ fontSize: "11px", color: V3, marginTop: "4px" }}>fuites detectees</div>
-        </div>
-        <div style={{ textAlign: "center", padding: "16px", background: "rgba(245,158,11,0.08)", borderRadius: "8px" }}>
-          <div style={{ fontSize: "32px", fontWeight: 900, color: "#f59e0b" }}>7</div>
-          <div style={{ fontSize: "11px", color: V3, marginTop: "4px" }}>mots de passe exposes</div>
-        </div>
-        <div style={{ textAlign: "center", padding: "16px", background: "rgba(6,182,212,0.08)", borderRadius: "8px" }}>
-          <div style={{ fontSize: "32px", fontWeight: 900, color: ACCENT }}>12</div>
-          <div style={{ fontSize: "11px", color: V3, marginTop: "4px" }}>emails compromis</div>
-        </div>
-      </div>
-      <p style={{ fontSize: "14px", color: V3, lineHeight: 1.7, marginBottom: "20px" }}>
-        Ceci est une simulation. Pour un veritable audit de vos donnees, utilisez Vault.
-      </p>
-      <button onClick={() => setPhase("idle")} style={{
-        background: "none", border: `1px solid ${VG(0.2)}`, color: V3, padding: "10px 20px", fontSize: "13px",
-        cursor: "pointer", fontFamily: "inherit", borderRadius: "4px", marginRight: "12px",
-      }}>Relancer</button>
-    </div>
-  );
-}
-
-/* ───── Expandable Checklist ───── */
-function SecurityChecklist() {
+/* ───── RGPD Compliance Checklist ───── */
+function RgpdChecklist() {
   const [checked, setChecked] = useState({});
   const items = [
-    "Activer l'authentification a deux facteurs (2FA) sur tous les comptes critiques",
-    "Utiliser un gestionnaire de mots de passe (Bitwarden, 1Password)",
-    "Verifier regulierement les fuites via un outil de surveillance",
-    "Former les employes aux techniques de phishing",
-    "Mettre a jour tous les logiciels et systemes d'exploitation",
-    "Chiffrer les donnees sensibles au repos et en transit",
-    "Effectuer des sauvegardes regulieres et tester leur restauration",
+    "Nommer un referent RGPD (DPO ou responsable interne)",
+    "Tenir un registre des traitements de donnees personnelles",
+    "Rediger et afficher une politique de confidentialite conforme",
+    "Recueillir le consentement explicite pour chaque traitement",
+    "Securiser le stockage des donnees personnelles (chiffrement)",
+    "Mettre en place une procedure de reponse aux demandes d'exercice de droits",
+    "Documenter les mesures de securite techniques et organisationnelles",
+    "Prevoir un plan de notification en cas de violation de donnees",
   ];
   const toggle = (i) => setChecked(prev => ({ ...prev, [i]: !prev[i] }));
   const count = Object.values(checked).filter(Boolean).length;
@@ -209,7 +107,7 @@ function SecurityChecklist() {
   return (
     <div style={{ margin: "40px 0", padding: "32px", background: "rgba(6,182,212,0.04)", border: "1px solid rgba(6,182,212,0.12)", borderRadius: "12px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-        <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT }}>Checklist securite</span>
+        <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT }}>Checklist conformite RGPD</span>
         <span style={{ fontSize: "13px", color: count === items.length ? ACCENT2 : V3 }}>{count}/{items.length}</span>
       </div>
       <div style={{ height: "4px", background: "rgba(6,182,212,0.1)", borderRadius: "2px", marginBottom: "24px", overflow: "hidden" }}>
@@ -240,11 +138,11 @@ function SecurityChecklist() {
 function FAQSection() {
   const [open, setOpen] = useState(null);
   const faqs = [
-    { q: "Comment savoir si mes mots de passe sont sur le dark web ?", a: "Des outils comme Vault scannent en continu les bases de donnees compromises et les forums du dark web pour detecter vos identifiants. Le processus est entierement automatise et les resultats arrivent en quelques secondes. Vous pouvez aussi verifier manuellement sur haveibeenpwned.com pour un premier diagnostic." },
-    { q: "Que faire si mes donnees ont fuite ?", a: "Changez immediatement les mots de passe des comptes concernes. Activez l'authentification a deux facteurs partout ou c'est possible. Surveillez vos comptes bancaires pendant les semaines suivantes. Si des donnees clients sont concernees, vous avez l'obligation legale RGPD de notifier la CNIL sous 72 heures." },
-    { q: "Les PME sont-elles vraiment ciblees par les hackers ?", a: "Oui, et de plus en plus. 43% des cyberattaques ciblent les PME selon le rapport Verizon DBIR 2025. Les PME sont des cibles privilegiees car elles disposent souvent de moins de protections que les grandes entreprises, tout en detenant des donnees precieuses (clients, fournisseurs, donnees bancaires)." },
-    { q: "Quel est le cout moyen d'une fuite de donnees pour une PME ?", a: "Selon IBM Security, le cout moyen d'une violation de donnees pour une PME est d'environ 120 000 euros en France en 2025. Ce montant inclut les frais directs (remediation, notification), les amendes RGPD potentielles, la perte de clients et l'atteinte a la reputation." },
-    { q: "La conformite RGPD protege-t-elle contre les fuites ?", a: "La conformite RGPD impose des mesures de protection qui reduisent significativement les risques, mais elle ne garantit pas une protection totale. En revanche, une entreprise non conforme s'expose a des amendes pouvant atteindre 4% de son CA annuel en cas de fuite, en plus des couts directs de l'incident." },
+    { q: "Le RGPD s'applique-t-il a toutes les entreprises ?", a: "Oui. Le RGPD s'applique a toute organisation, quelle que soit sa taille, qui traite des donnees personnelles de residents europeens. Cela inclut les TPE, les PME, les auto-entrepreneurs et les associations. Il n'existe aucune exemption liee a la taille de l'entreprise, meme si les obligations de documentation sont allégées pour les structures de moins de 250 salaries." },
+    { q: "Faut-il obligatoirement nommer un DPO ?", a: "La designation d'un DPO (Delegue a la Protection des Donnees) est obligatoire pour les organismes publics, les entreprises dont l'activite principale implique un suivi regulier et systematique des personnes a grande echelle, et celles qui traitent des donnees sensibles a grande echelle. Pour les TPE/PME classiques, un referent RGPD interne suffit generalement." },
+    { q: "Quels sont les risques en cas de non-conformite ?", a: "Les sanctions peuvent atteindre 20 millions d'euros ou 4% du chiffre d'affaires annuel mondial. En pratique, la CNIL privilegie d'abord les mises en demeure et les injonctions. Cependant, les amendes prononcees contre des PME se multiplient depuis 2024, avec des montants allant de 5 000 a 150 000 euros selon la gravite des manquements." },
+    { q: "Combien de temps prend une mise en conformite RGPD ?", a: "Pour une TPE/PME standard, comptez 2 a 4 semaines pour mettre en place les fondamentaux : registre des traitements, politique de confidentialite, formulaires de consentement et procedures de gestion des droits. Un outil specialise comme Vault peut reduire ce delai a quelques jours grace a l'automatisation des documents et du suivi." },
+    { q: "Les donnees des employes sont-elles concernees par le RGPD ?", a: "Absolument. Les fiches de paie, les CV, les evaluations, les horaires, les adresses personnelles — toutes ces donnees sont des donnees personnelles protegees par le RGPD. L'entreprise doit informer ses salaries des traitements effectues, limiter la collecte au strict necessaire et securiser le stockage de ces informations." },
   ];
   return (
     <div style={{ margin: "48px 0" }}>
@@ -316,10 +214,10 @@ function CopyLinkButton() {
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
 const TOC_SECTIONS = [
-  { id: "sec-fuites", label: "Comment les fuites arrivent" },
-  { id: "sec-consequences", label: "Consequences pour les PME" },
-  { id: "sec-verifier", label: "Verifier vos donnees" },
-  { id: "sec-mesures", label: "7 mesures essentielles" },
+  { id: "sec-contexte", label: "Pourquoi le RGPD en 2026" },
+  { id: "sec-obligations", label: "Les 6 obligations cles" },
+  { id: "sec-sanctions", label: "Sanctions et controles" },
+  { id: "sec-etapes", label: "5 etapes pour se conformer" },
   { id: "sec-faq", label: "FAQ" },
 ];
 
@@ -330,15 +228,15 @@ export default function BlogSecuritePage() {
   const [activeId, setActiveId] = useState("");
 
   useSEO(
-    "Vos mots de passe sont sur le dark web : comment le savoir en 30 secondes | NERVUR",
-    "En moyenne, chaque employe a 3 mots de passe compromis. Decouvrez comment verifier si vos donnees d'entreprise ont fuite et les mesures pour vous proteger.",
+    "Conformite RGPD : guide complet pour les TPE/PME en 2026 | NERVUR",
+    "RGPD pour les TPE et PME : obligations legales, sanctions, etapes de mise en conformite. Guide pratique pour respecter le reglement europeen sur la protection des donnees.",
     {
-      path: "/blog/cybersecurite",
+      path: "/blog/conformite-juridique",
       type: "article",
-      keywords: "fuite donnees entreprise, mot de passe dark web, cybersecurite PME, RGPD conformite",
+      keywords: "RGPD PME, conformite RGPD, protection donnees entreprise, obligations legales RGPD 2026",
       author: "L'equipe NERVUR",
       publishedTime: "2026-03-18T08:00:00+01:00",
-      modifiedTime: "2026-03-24T10:00:00+01:00",
+      modifiedTime: "2026-03-28T10:00:00+01:00",
     }
   );
 
@@ -348,14 +246,14 @@ export default function BlogSecuritePage() {
     script.text = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Article",
-      headline: "Vos mots de passe sont sur le dark web : comment le savoir en 30 secondes",
-      description: "Guide cybersecurite PME : detecter les fuites de donnees, proteger ses mots de passe, assurer la conformite RGPD.",
+      headline: "Conformite RGPD : guide complet pour les TPE/PME en 2026",
+      description: "Guide pratique RGPD pour les TPE/PME : obligations legales, sanctions CNIL, etapes de mise en conformite et outils pour automatiser le processus.",
       author: { "@type": "Organization", name: "NERVUR" },
       publisher: { "@type": "Organization", name: "NERVUR", url: "https://nervur.fr" },
       datePublished: "2026-03-18",
-      dateModified: "2026-03-24",
-      mainEntityOfPage: "https://nervur.fr/blog/cybersecurite",
-      keywords: "fuite donnees entreprise, mot de passe dark web, cybersecurite PME, RGPD conformite",
+      dateModified: "2026-03-28",
+      mainEntityOfPage: "https://nervur.fr/blog/conformite-juridique",
+      keywords: "RGPD PME, conformite RGPD, protection donnees entreprise, obligations legales RGPD 2026",
     });
     document.head.appendChild(script);
     return () => { document.head.removeChild(script); };
@@ -405,17 +303,17 @@ export default function BlogSecuritePage() {
         {/* Hero */}
         <Section>
           <div style={{ marginBottom: "20px" }}>
-            <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT, border: `1px solid rgba(6,182,212,0.3)`, padding: "4px 12px", borderRadius: "2px" }}>Cybersecurite</span>
-            <span style={{ fontSize: "13px", color: V3, marginLeft: "16px" }}>14 min de lecture</span>
+            <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT, border: `1px solid rgba(6,182,212,0.3)`, padding: "4px 12px", borderRadius: "2px" }}>Conformite juridique</span>
+            <span style={{ fontSize: "13px", color: V3, marginLeft: "16px" }}>12 min de lecture</span>
           </div>
           <h1 style={{
             fontSize: isMobile ? "28px" : "42px", fontWeight: 900, lineHeight: 1.1, margin: "0 0 24px", letterSpacing: "-1px",
             background: `linear-gradient(135deg, ${V}, ${ACCENT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
           }}>
-            Vos mots de passe sont sur le dark web : comment le savoir en 30 secondes
+            Conformite RGPD : guide complet pour les TPE/PME en 2026
           </h1>
           <P style={{ fontSize: "19px", color: V3 }}>
-            En moyenne, chaque employe d'une PME possede 3 mots de passe deja compromis dans des fuites de donnees. Le plus inquietant ? La grande majorite des dirigeants l'ignorent completement. Cet article vous explique comment les fuites se produisent, comment verifier votre exposition et surtout comment vous proteger avant qu'il ne soit trop tard.
+            Le RGPD n'est pas reserve aux grandes entreprises. En 2026, la CNIL intensifie ses controles aupres des TPE et PME, avec des amendes qui se comptent en dizaines de milliers d'euros. Pourtant, la grande majorite des petites structures francaises ne sont toujours pas en conformite. Ce guide vous explique concretement ce que vous devez faire, pourquoi c'est urgent, et comment y parvenir sans mobiliser des ressources disproportionnees.
           </P>
           <div style={{ display: "flex", alignItems: "center", gap: "16px", paddingTop: "12px", borderTop: `1px solid ${VG(0.1)}`, marginTop: "8px", flexWrap: "wrap" }}>
             <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: `linear-gradient(135deg, ${ACCENT}, #0891b2)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", fontWeight: 700 }}>N</div>
@@ -430,91 +328,45 @@ export default function BlogSecuritePage() {
         {/* Stats */}
         <Section>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: "12px", margin: "40px 0" }}>
-            <StatCard number="43%" label="des cyberattaques ciblent les PME" color="#ef4444" />
-            <StatCard number="120K&#8364;" label="cout moyen d'une fuite pour une PME" color="#f59e0b" />
-            <StatCard number="72h" label="delai RGPD pour notifier la CNIL" color={ACCENT} />
+            <StatCard number="74%" label="des PME francaises ne sont pas conformes au RGPD" color="#ef4444" />
+            <StatCard number="20M&#8364;" label="amende maximale prevue par le reglement" color="#f59e0b" />
+            <StatCard number="+180%" label="d'augmentation des controles CNIL en 2025" color={ACCENT} />
           </div>
         </Section>
 
         {/* Section 1 */}
         <Section>
-          <H2 id="sec-fuites">Comment les fuites de donnees arrivent</H2>
+          <H2 id="sec-contexte">Pourquoi la conformite RGPD est incontournable en 2026</H2>
           <P>
-            Les fuites de donnees ne sont pas reservees aux grandes entreprises. En 2025, le nombre de PME touchees par des violations de donnees a augmente de 38% par rapport a l'annee precedente. Les mecanismes sont souvent plus simples qu'on ne le pense, et c'est precisement ce qui les rend dangereux.
+            Le Reglement General sur la Protection des Donnees (RGPD) est entre en vigueur le 25 mai 2018. Huit ans plus tard, force est de constater que la majorite des TPE et PME francaises n'ont pas encore pris la mesure de leurs obligations. Selon les dernieres estimations de la CNIL, pres de 74% des petites entreprises presentent des lacunes significatives en matiere de conformite.
           </P>
           <P>
-            Le vecteur numero un reste le phishing : un email qui imite un fournisseur, une banque ou un service connu incite un employe a saisir ses identifiants sur un faux site. En 2025, les attaques de phishing sont devenues extremement sophistiquees grace a l'IA generative, capable de produire des emails indiscernables des vrais, avec un francais parfait et des logos identiques.
-          </P>
-          <P>
-            Le deuxieme vecteur est la reutilisation des mots de passe. Quand un employe utilise le meme mot de passe pour son compte personnel Netflix et pour le CRM de l'entreprise, une fuite chez Netflix compromet automatiquement l'acces au CRM. Les bases de donnees volees circulent sur le dark web et sont utilisees pour des attaques dites de "credential stuffing" — des robots testent automatiquement des millions de combinaisons email/mot de passe sur des centaines de services.
+            Cette situation etait toleree pendant les premieres annees d'application, la CNIL privilegiant la pedagogie. Mais le contexte a radicalement change. Depuis 2024, le regulateur a adopte une posture beaucoup plus ferme, avec une augmentation de 180% du nombre de controles cibles sur les TPE/PME. Les secteurs les plus vises sont le commerce en ligne, la sante, l'immobilier et les services a la personne.
           </P>
           <Blockquote color={ACCENT}>
-            81% des violations de donnees impliquent des mots de passe faibles ou reutilises. La premiere vulnerabilite d'une entreprise, c'est l'humain.
+            Le RGPD n'est pas une contrainte administrative de plus. C'est un avantage concurrentiel : les clients font davantage confiance aux entreprises qui protegent leurs donnees.
           </Blockquote>
           <P>
-            Les autres vecteurs incluent les logiciels obsoletes non mis a jour, les appareils personnels non securises utilises pour le travail (BYOD), les acces Wi-Fi publics non proteges et les fournisseurs tiers dont la securite est insuffisante. Une PME peut etre parfaitement protegee en interne et se retrouver compromise via un prestataire.
+            Les consommateurs sont desormais sensibilises a la protection de leurs donnees. Une etude IFOP de 2025 revele que 68% des Francais verifient la politique de confidentialite avant de transmettre leurs coordonnees a une entreprise. Les mentions de conformite RGPD sur un site web augmentent le taux de conversion de 12% en moyenne. La conformite n'est donc pas seulement une obligation legale — c'est un levier commercial.
+          </P>
+          <P>
+            En 2026, de nouvelles directives europeennes renforcent encore les exigences, notamment sur le consentement aux cookies, la portabilite des donnees et les transferts hors UE. Les entreprises qui n'ont pas encore entame leur mise en conformite s'exposent a des risques juridiques et financiers croissants.
           </P>
         </Section>
 
         {/* Section 2 */}
         <Section>
-          <H2 id="sec-consequences">Les consequences pour une PME : amendes RGPD et perte de confiance</H2>
+          <H2 id="sec-obligations">Les 6 obligations cles du RGPD pour les TPE/PME</H2>
           <P>
-            Les consequences d'une fuite de donnees pour une PME sont devastatrices et multi-dimensionnelles. L'impact financier immediat — couts de remediation, notification des clients, expertise forensique — n'est souvent que la partie visible de l'iceberg.
-          </P>
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px", margin: "28px 0" }}>
-            <StatCard number="4%" label="du CA annuel : amende RGPD maximale" color="#ef4444" />
-            <StatCard number="60%" label="des PME ferment dans les 6 mois apres une cyberattaque majeure" color="#f59e0b" />
-          </div>
-          <P>
-            Le RGPD impose des obligations strictes. En cas de fuite de donnees personnelles, l'entreprise doit notifier la CNIL dans un delai de 72 heures et informer individuellement les personnes concernees si le risque est eleve. Le non-respect de ces obligations entraine des amendes pouvant atteindre 20 millions d'euros ou 4% du chiffre d'affaires annuel mondial.
-          </P>
-          <P>
-            Mais c'est souvent la perte de confiance qui fait le plus de degats a long terme. Les clients dont les donnees ont ete compromises perdent confiance en l'entreprise. Selon les etudes, 65% des consommateurs cessent de faire affaire avec une entreprise apres une violation de donnees. Pour une PME dont l'activite repose sur la proximite et la confiance, cet impact peut etre fatal.
-          </P>
-          <Blockquote color="#ef4444">
-            La question n'est pas de savoir si votre entreprise sera ciblee, mais quand. La preparation est la seule defense efficace.
-          </Blockquote>
-        </Section>
-
-        {/* Scanner Demo */}
-        <ScannerDemo />
-
-        {/* Section 3 */}
-        <Section>
-          <H2 id="sec-verifier">Comment verifier si vos donnees ont fuite</H2>
-          <P>
-            Verifier votre exposition aux fuites de donnees est la premiere etape indispensable. Plusieurs approches complementaires existent, de la verification manuelle gratuite a la surveillance automatisee permanente.
-          </P>
-          <P>
-            Le site haveibeenpwned.com, cree par le chercheur en securite Troy Hunt, permet de verifier gratuitement si une adresse email apparait dans des fuites connues. C'est un bon point de depart, mais il ne couvre qu'une fraction des fuites existantes et ne surveille pas en temps reel.
-          </P>
-          <P>
-            Pour une protection reellement efficace, les PME ont besoin d'un outil de surveillance continue qui scanne les bases de donnees compromises, les forums du dark web et les paste sites en temps reel. Ces outils alertent immediatement des que des identifiants lies a votre domaine sont detectes, permettant une reaction en minutes au lieu de mois.
-          </P>
-          <BulletList items={[
-            "Verifiez chaque adresse email de l'entreprise sur haveibeenpwned.com",
-            "Auditez les mots de passe stockes dans les navigateurs de vos employes",
-            "Recherchez votre nom de domaine dans les bases de fuites connues",
-            "Mettez en place une surveillance automatisee continue de votre domaine",
-            "Testez regulierement la resistance de vos mots de passe a des attaques par dictionnaire",
-          ]} />
-        </Section>
-
-        {/* Section 4 */}
-        <Section>
-          <H2 id="sec-mesures">Les 7 mesures de protection essentielles</H2>
-          <P>
-            La cybersecurite d'une PME repose sur des mesures concretes et applicables immediatement. Voici les sept piliers d'une protection efficace, classes par priorite.
+            Le RGPD repose sur plusieurs principes fondamentaux que chaque entreprise doit respecter, independamment de sa taille. Voici les six obligations essentielles que toute TPE/PME doit maitriser.
           </P>
           {[
-            { num: "01", title: "Authentification a deux facteurs (2FA)", desc: "Activez le 2FA sur tous les comptes critiques : email professionnel, CRM, comptabilite, banque. Privilegiez les applications d'authentification (Google Authenticator, Authy) au SMS, plus vulnerable aux attaques par SIM swapping.", color: ACCENT },
-            { num: "02", title: "Gestionnaire de mots de passe", desc: "Deployez un gestionnaire de mots de passe (Bitwarden, 1Password) pour toute l'equipe. Chaque compte doit avoir un mot de passe unique, complexe et genere aleatoirement. Le gestionnaire elimine le besoin de memoriser les mots de passe.", color: ACCENT2 },
-            { num: "03", title: "Surveillance des fuites en continu", desc: "Un outil comme Vault scanne en permanence les bases de donnees compromises et le dark web pour detecter vos identifiants. L'alerte immediate permet de changer les mots de passe compromis avant qu'ils ne soient exploites.", color: ACCENT },
-            { num: "04", title: "Formation anti-phishing", desc: "Formez regulierement vos employes a reconnaitre les tentatives de phishing. Les simulations de phishing internes sont un excellent outil pedagogique. Un employe averti est la meilleure defense contre l'ingenierie sociale.", color: "#f59e0b" },
-            { num: "05", title: "Mises a jour systematiques", desc: "Les logiciels obsoletes sont des portes ouvertes pour les attaquants. Automatisez les mises a jour de tous les systemes d'exploitation, navigateurs et logiciels metier. Les failles zero-day sont patchees en quelques heures par les editeurs.", color: ACCENT },
-            { num: "06", title: "Chiffrement des donnees", desc: "Chiffrez les donnees sensibles au repos (disques durs, sauvegardes) et en transit (HTTPS, VPN). En cas de vol physique d'un ordinateur ou d'interception reseau, les donnees restent illisibles sans la cle de dechiffrement.", color: ACCENT2 },
-            { num: "07", title: "Plan de reponse aux incidents", desc: "Preparez un plan d'action en cas de fuite : qui prevenir, comment isoler la breche, comment notifier la CNIL et les clients, comment communiquer. Un plan teste et repete regulierement reduit le temps de reaction de 75% en moyenne.", color: "#ef4444" },
+            { num: "01", title: "Tenir un registre des traitements", desc: "Chaque entreprise doit documenter l'ensemble des traitements de donnees personnelles qu'elle effectue : finalite, categories de donnees, destinataires, duree de conservation. Ce registre est le document fondamental de la conformite RGPD. Il doit etre tenu a jour et accessible en cas de controle. Pour les structures de moins de 250 salaries, une version allégée est acceptee, mais le registre reste obligatoire des lors que le traitement est regulier.", color: ACCENT },
+            { num: "02", title: "Informer les personnes concernees", desc: "Toute personne dont vous collectez des donnees doit etre informee de maniere claire et accessible : quelles donnees, pourquoi, combien de temps, quels droits. Cette information doit figurer dans votre politique de confidentialite, vos formulaires de contact, vos conditions generales et vos contrats de travail.", color: ACCENT2 },
+            { num: "03", title: "Recueillir un consentement valide", desc: "Le consentement doit etre libre, specifique, eclaire et univoque. Les cases pre-cochees, le consentement implicite ou les formulations ambigues sont proscrits. Chaque finalite de traitement necessite un consentement distinct. L'entreprise doit pouvoir prouver que le consentement a ete recueilli et permettre son retrait a tout moment.", color: "#f59e0b" },
+            { num: "04", title: "Garantir les droits des personnes", desc: "Vos clients, prospects et employes disposent de droits precis : acces, rectification, effacement, portabilite, opposition et limitation du traitement. Vous devez mettre en place une procedure pour repondre a ces demandes dans un delai d'un mois maximum. L'absence de reponse constitue un manquement sanctionnable.", color: "#ef4444" },
+            { num: "05", title: "Securiser les donnees personnelles", desc: "Le RGPD impose des mesures de securite techniques et organisationnelles adaptees au niveau de risque : chiffrement, controle d'acces, sauvegardes, pseudonymisation. Ces mesures doivent etre documentees et regulierement reevaluees. En cas de violation, l'entreprise doit notifier la CNIL sous 72 heures.", color: ACCENT },
+            { num: "06", title: "Encadrer les sous-traitants", desc: "Si vous confiez des donnees personnelles a des prestataires (hebergeur, outil CRM, comptable en ligne), vous devez formaliser la relation par un contrat incluant des clauses RGPD specifiques. Vous restez responsable du traitement meme lorsqu'un sous-traitant intervient. Verifiez que vos fournisseurs sont eux-memes conformes.", color: "#f59e0b" },
           ].map((m, i) => (
             <div key={i} style={{ display: "flex", gap: "20px", margin: "24px 0", padding: "24px", background: "rgba(255,255,255,0.015)", borderRadius: "8px", border: `1px solid ${VG(0.06)}` }}>
               <div style={{ fontSize: "32px", fontWeight: 900, color: m.color, lineHeight: 1, flexShrink: 0, minWidth: "48px" }}>{m.num}</div>
@@ -526,21 +378,63 @@ export default function BlogSecuritePage() {
           ))}
         </Section>
 
+        {/* Section 3 */}
+        <Section>
+          <H2 id="sec-sanctions">Sanctions CNIL : ce que risquent les TPE/PME</H2>
+          <P>
+            Les sanctions financieres ne sont plus reservees aux geants du numerique. Depuis 2024, la CNIL prononce regulierement des amendes contre des TPE et PME. Les montants varient de 5 000 euros pour des manquements mineurs a plus de 150 000 euros pour des infractions graves, comme l'absence de registre des traitements ou le defaut de notification apres une violation de donnees.
+          </P>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px", margin: "28px 0" }}>
+            <StatCard number="4%" label="du CA annuel mondial : amende maximale RGPD" color="#ef4444" />
+            <StatCard number="72h" label="delai pour notifier la CNIL en cas de violation" color="#f59e0b" />
+          </div>
+          <P>
+            Au-dela des amendes, la CNIL dispose d'un arsenal de mesures coercitives : mise en demeure publique (atteinte a la reputation), injonction de cesser un traitement (blocage de l'activite), limitation temporaire d'un traitement et astreintes journalieres. Une mise en demeure publique peut avoir des consequences commerciales bien superieures a l'amende elle-meme.
+          </P>
+          <P>
+            Les controles de la CNIL peuvent etre declenches par une plainte d'un client ou d'un employe, par une violation de donnees signalee, par une campagne sectorielle de controles ou meme par une simple visite de votre site web. Les agents de la CNIL verifient en priorite : la presence d'une politique de confidentialite, la conformite du bandeau cookies, le registre des traitements et les procedures de gestion des droits.
+          </P>
+          <Blockquote color="#ef4444">
+            En 2025, la CNIL a recu plus de 16 000 plaintes, dont 40% concernaient des TPE/PME. Ne pas etre en conformite, c'est jouer a la roulette avec la perennite de votre entreprise.
+          </Blockquote>
+        </Section>
+
         {/* Interactive Checklist */}
-        <SecurityChecklist />
+        <RgpdChecklist />
+
+        {/* Section 4 */}
+        <Section>
+          <H2 id="sec-etapes">5 etapes pour mettre votre entreprise en conformite</H2>
+          <P>
+            La mise en conformite RGPD peut sembler complexe, mais elle se decompose en etapes logiques et progressives. Voici un plan d'action concret adapte aux TPE/PME, realisable en quelques semaines.
+          </P>
+          <BulletList items={[
+            "Etape 1 : Cartographiez vos traitements de donnees — listez tous les fichiers, bases de donnees, formulaires et outils qui collectent des donnees personnelles (clients, prospects, employes, fournisseurs)",
+            "Etape 2 : Redigez votre registre des traitements — pour chaque traitement, documentez la finalite, les categories de donnees, les destinataires, la duree de conservation et les mesures de securite",
+            "Etape 3 : Mettez a jour votre information — redigez ou actualisez votre politique de confidentialite, vos mentions legales, vos formulaires et vos bandeaux cookies",
+            "Etape 4 : Securisez vos donnees — mettez en place le chiffrement, les sauvegardes, le controle d'acces et formez vos equipes aux bonnes pratiques",
+            "Etape 5 : Instaurez des procedures — creez un processus de reponse aux demandes d'exercice de droits et un plan de notification en cas de violation",
+          ]} />
+          <P>
+            Un outil comme Vault automatise une grande partie de ces etapes : generation du registre des traitements, modeles de politique de confidentialite, suivi des demandes de droits, alertes de conformite et tableau de bord de suivi. Ce qui prend des semaines manuellement peut etre realise en quelques jours avec l'aide de l'automatisation.
+          </P>
+          <P>
+            N'attendez pas un controle ou une plainte pour agir. La mise en conformite proactive est toujours moins couteuse — en temps, en argent et en stress — que la remediation en urgence apres un incident. Les entreprises conformes beneficient en outre d'une meilleure image aupres de leurs clients et partenaires.
+          </P>
+        </Section>
 
         {/* CTA */}
         <Section>
           <div style={{ textAlign: "center", padding: isMobile ? "40px 24px" : "56px 40px", margin: "48px 0", background: "linear-gradient(135deg, rgba(6,182,212,0.1), rgba(8,145,178,0.04))", borderRadius: "16px", border: "1px solid rgba(6,182,212,0.15)" }}>
             <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT }}>Vault par NERVUR</span>
-            <h3 style={{ fontSize: "28px", fontWeight: 700, color: V, margin: "16px 0 12px" }}>Protegez votre entreprise des fuites de donnees</h3>
+            <h3 style={{ fontSize: "28px", fontWeight: 700, color: V, margin: "16px 0 12px" }}>Simplifiez votre conformite RGPD</h3>
             <P style={{ maxWidth: "480px", margin: "0 auto 8px", color: V3 }}>
-              Vault surveille le dark web en continu, detecte les fuites de donnees liees a votre entreprise et vous guide vers la conformite RGPD. Configuration en 5 minutes.
+              Vault genere votre registre des traitements, vos documents de conformite et surveille vos obligations en continu. Configuration en 5 minutes, conformite en quelques jours.
             </P>
             <P style={{ maxWidth: "480px", margin: "0 auto 28px", color: V3, fontSize: "15px" }}>
               A partir de <span style={{ color: ACCENT, fontWeight: 700 }}>69&#8364;/mois</span> &middot; Essai gratuit 14 jours &middot; Sans engagement
             </P>
-            <button onClick={() => navigate("/vault")} style={{
+            <button onClick={() => navigate("/demo/vault")} style={{
               background: `linear-gradient(135deg, ${ACCENT}, #0891b2)`, border: "none", color: V,
               padding: "14px 40px", fontSize: "14px", fontWeight: 700, letterSpacing: "1.5px",
               textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit", borderRadius: "6px",
@@ -554,7 +448,7 @@ export default function BlogSecuritePage() {
 
         {/* FAQ */}
         <Section>
-          <H2 id="sec-faq">Questions frequentes sur la cybersecurite</H2>
+          <H2 id="sec-faq">Questions frequentes sur le RGPD</H2>
           <FAQSection />
         </Section>
 
@@ -565,7 +459,7 @@ export default function BlogSecuritePage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
                 { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#818CF8" },
-                { title: "Votre site web vous coute des clients : 7 signaux d'alerte invisibles", path: "/blog/performance-web", color: "#ec4899" },
+                { title: "RGPD pour les TPE/PME : les 10 obligations que vous devez respecter en 2026", path: "/blog/rgpd-guide", color: "#8b5cf6" },
               ].map((a, i) => (
                 <div key={i} onClick={() => navigate(a.path)} style={{
                   padding: "16px 20px", background: "rgba(255,255,255,0.02)", border: `1px solid ${VG(0.08)}`,
@@ -590,7 +484,7 @@ export default function BlogSecuritePage() {
             <div>
               <div style={{ fontSize: "16px", color: V, fontWeight: 700 }}>L'equipe NERVUR</div>
               <p style={{ fontSize: "14px", color: V3, lineHeight: 1.6, margin: "4px 0 0" }}>
-                NERVUR conçoit des outils SaaS pour aider les PME francaises a maitriser leur presence digitale : e-reputation, cybersecurite, audit web et SEO.
+                NERVUR conçoit des outils SaaS pour aider les PME francaises a maitriser leur presence digitale : e-reputation avec Sentinel et conformite juridique avec Vault.
               </p>
             </div>
           </div>
@@ -599,7 +493,7 @@ export default function BlogSecuritePage() {
         {/* Footer */}
         <div style={{ borderTop: `1px solid ${VG(0.08)}`, padding: "24px 0", marginTop: "40px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
           <div style={{ fontSize: "13px", color: V3 }}>
-            <span style={{ fontWeight: 600, color: V2 }}>L'equipe NERVUR</span> &middot; 18 mars 2026 &middot; 14 min de lecture
+            <span style={{ fontWeight: 600, color: V2 }}>L'equipe NERVUR</span> &middot; 18 mars 2026 &middot; 12 min de lecture
           </div>
           <span onClick={() => navigate("/")} style={{ fontSize: "12px", color: V3, cursor: "pointer", letterSpacing: "1px" }}
             onMouseEnter={e => e.target.style.color = ACCENT} onMouseLeave={e => e.target.style.color = V3}>

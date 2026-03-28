@@ -433,8 +433,8 @@ export default function BlogReputationPage() {
             <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: V3, display: "block", marginBottom: "20px" }}>Articles connexes</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
-                { title: "Vos mots de passe sont sur le dark web : comment le savoir en 30 secondes", path: "/blog/cybersecurite", color: "#06b6d4" },
-                { title: "Votre site web vous coute des clients : 7 signaux d'alerte invisibles", path: "/blog/performance-web", color: "#ec4899" },
+                { title: "Conformite RGPD : guide complet pour les TPE/PME en 2026", path: "/blog/conformite-juridique", color: "#06b6d4" },
+                { title: "Avis Google : comment gerer et ameliorer votre e-reputation en 2026", path: "/blog/avis-google", color: "#f59e0b" },
               ].map((a, i) => (
                 <div key={i} onClick={() => navigate(a.path)} style={{
                   padding: "16px 20px", background: "rgba(255,255,255,0.02)", border: `1px solid ${VG(0.08)}`,
@@ -459,7 +459,7 @@ export default function BlogReputationPage() {
             <div>
               <div style={{ fontSize: "16px", color: V, fontWeight: 700 }}>L'equipe NERVUR</div>
               <p style={{ fontSize: "14px", color: V3, lineHeight: 1.6, margin: "4px 0 0" }}>
-                NERVUR conçoit des outils SaaS pour aider les PME francaises a maitriser leur presence digitale : e-reputation, cybersecurite, audit web et SEO.
+                NERVUR conçoit des outils SaaS pour aider les PME francaises a maitriser leur presence digitale : e-reputation avec Sentinel et conformite juridique avec Vault.
               </p>
             </div>
           </div>

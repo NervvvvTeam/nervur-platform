@@ -210,15 +210,25 @@ export default function TechnologiesPage() {
                 ))}
               </ul>
 
-              {/* Price + CTA */}
+              {/* Price + CTAs */}
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
                   <span style={{ fontSize: "32px", fontWeight: 800 }}>{tool.price}&#8364;</span>
                   <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
                 </div>
-                <button className="cta-link" onClick={() => navigate(tool.link)} style={{ color: tool.color }}>
-                  Essayer la démo &rarr;
-                </button>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
+                  <button className="cta-link" onClick={() => navigate(tool.id === "sentinel" ? "/demo/sentinel" : "/demo/vault")} style={{
+                    color: "#0f1117", background: tool.color, padding: "8px 18px", borderRadius: "8px",
+                    fontSize: "13px", fontWeight: 700, border: "none", cursor: "pointer", transition: "all 0.3s",
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${tool.color}50`; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
+                    Essayer gratuitement
+                  </button>
+                  <button className="cta-link" onClick={() => navigate(tool.link)} style={{ color: tool.color }}>
+                    En savoir plus &rarr;
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -237,34 +247,38 @@ export default function TechnologiesPage() {
             </p>
           </div>
 
-          <div style={{ display: "flex", gap: "20px", flexDirection: isMobile ? "column" : "row" }}>
-            {/* Pack Duo */}
+          <div style={{ display: "flex", gap: "20px", flexDirection: isMobile ? "column" : "row", alignItems: "stretch" }}>
+            {/* Sentinel seul */}
             <div className="pack-card">
-              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#818CF8", fontWeight: 700, marginBottom: "12px" }}>Pack Duo</div>
+              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#ef4444", fontWeight: 700, marginBottom: "12px" }}>Sentinel seul</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
-                <span style={{ fontSize: "40px", fontWeight: 800 }}>39&#8364;</span>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>29&#8364;</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
-              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>2 outils au choix</p>
+              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>E-reputation & gestion des avis</p>
               <button onClick={() => navigate("/contact")} style={{
-                padding: "12px 32px", background: "transparent", border: "1px solid rgba(129,140,248,0.3)",
-                color: "#818CF8", fontWeight: 600, fontSize: "13px", cursor: "pointer",
+                padding: "12px 32px", background: "transparent", border: "1px solid rgba(239,68,68,0.3)",
+                color: "#ef4444", fontWeight: 600, fontSize: "13px", cursor: "pointer",
                 fontFamily: "inherit", transition: "all 0.3s", borderRadius: "8px",
               }}
-                onMouseEnter={e => { e.target.style.background = "rgba(129,140,248,0.1)"; e.target.style.borderColor = "#818CF8"; }}
-                onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.borderColor = "rgba(129,140,248,0.3)"; }}>
+                onMouseEnter={e => { e.target.style.background = "rgba(239,68,68,0.1)"; e.target.style.borderColor = "#ef4444"; }}
+                onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.borderColor = "rgba(239,68,68,0.3)"; }}>
                 Contactez-nous
               </button>
             </div>
 
-            {/* Pack Total */}
-            <div className="pack-card" style={{ border: "1px solid rgba(129,140,248,0.25)", background: "rgba(99,102,241,0.06)" }}>
-              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#818CF8", fontWeight: 700, marginBottom: "12px" }}>Pack Total</div>
-              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
-                <span style={{ fontSize: "40px", fontWeight: 800 }}>49&#8364;</span>
+            {/* Pack Duo — recommended */}
+            <div className="pack-card" style={{ border: "2px solid rgba(129,140,248,0.5)", background: "rgba(99,102,241,0.08)", position: "relative", transform: isMobile ? "none" : "scale(1.04)" }}>
+              <div style={{ position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)", background: "#818CF8", color: "#0f1117", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", padding: "4px 16px", borderRadius: "20px" }}>
+                Recommand&eacute;
+              </div>
+              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#818CF8", fontWeight: 700, marginBottom: "12px", marginTop: "8px" }}>Pack Duo</div>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "4px" }}>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>39&#8364;</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
-              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>Les 2 outils inclus</p>
+              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "4px", lineHeight: 1.6 }}>Sentinel + Vault</p>
+              <p style={{ fontSize: "12px", color: "#ef4444", fontWeight: 600, marginBottom: "20px" }}>au lieu de 48&#8364; &mdash; &eacute;conomisez 9&#8364;/mois</p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "12px 32px", background: "#818CF8", border: "none",
                 color: "#0f1117", fontWeight: 700, fontSize: "13px", cursor: "pointer",
@@ -272,6 +286,25 @@ export default function TechnologiesPage() {
               }}
                 onMouseEnter={e => { e.target.style.background = "#a5b4fc"; e.target.style.transform = "translateY(-2px)"; }}
                 onMouseLeave={e => { e.target.style.background = "#818CF8"; e.target.style.transform = "translateY(0)"; }}>
+                Contactez-nous
+              </button>
+            </div>
+
+            {/* Vault seul */}
+            <div className="pack-card">
+              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#06b6d4", fontWeight: 700, marginBottom: "12px" }}>Vault seul</div>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>19&#8364;</span>
+                <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
+              </div>
+              <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>Agent Juridique IA & RGPD</p>
+              <button onClick={() => navigate("/contact")} style={{
+                padding: "12px 32px", background: "transparent", border: "1px solid rgba(6,182,212,0.3)",
+                color: "#06b6d4", fontWeight: 600, fontSize: "13px", cursor: "pointer",
+                fontFamily: "inherit", transition: "all 0.3s", borderRadius: "8px",
+              }}
+                onMouseEnter={e => { e.target.style.background = "rgba(6,182,212,0.1)"; e.target.style.borderColor = "#06b6d4"; }}
+                onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.borderColor = "rgba(6,182,212,0.3)"; }}>
                 Contactez-nous
               </button>
             </div>

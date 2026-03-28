@@ -1814,4 +1814,129 @@ router.post("/checklist", authMiddleware, async (req, res) => {
   }
 });
 
+// ═══ DEMO ENDPOINT (no auth, rate limited) ═══
+const demoRateLimit = new Map(); // IP -> { count, resetAt }
+
+router.post("/demo", async (req, res) => {
+  try {
+    // Rate limit: 5 requests per hour per IP
+    const ip = req.headers["x-forwarded-for"]?.split(",")[0]?.trim() || req.ip || req.connection.remoteAddress;
+    const now = Date.now();
+    const hourMs = 60 * 60 * 1000;
+    let entry = demoRateLimit.get(ip);
+
+    if (!entry || now > entry.resetAt) {
+      entry = { count: 0, resetAt: now + hourMs };
+      demoRateLimit.set(ip, entry);
+    }
+
+    if (entry.count >= 5) {
+      return res.status(429).json({ error: "Limite atteinte. Reessayez dans une heure ou contactez-nous pour un acces complet." });
+    }
+    entry.count++;
+
+    let { url } = req.body;
+    if (!url || typeof url !== "string" || url.trim().length === 0) {
+      return res.status(400).json({ error: "URL requise." });
+    }
+
+    url = url.trim();
+    if (url.length > 500) {
+      return res.status(400).json({ error: "URL trop longue." });
+    }
+
+    // Normalize URL
+    let normalizedUrl = url;
+    if (!normalizedUrl.startsWith("http://") && !normalizedUrl.startsWith("https://")) {
+      normalizedUrl = "https://" + normalizedUrl;
+    }
+
+    // Validate URL
+    try {
+      new URL(normalizedUrl);
+    } catch {
+      return res.status(400).json({ error: "URL invalide. Exemple : https://www.monsite.fr" });
+    }
+
+    // Fetch the page
+    let html;
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      const response = await fetch(normalizedUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (compatible; NERVUR-RGPD-Scanner/1.0)",
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Language": "fr-FR,fr;q=0.9,en;q=0.5",
+        },
+        signal: controller.signal,
+        redirect: "follow",
+      });
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        return res.status(400).json({ error: `Impossible d'acceder au site (HTTP ${response.status}). Verifiez l'URL.` });
+      }
+
+      html = await response.text();
+    } catch (fetchErr) {
+      return res.status(400).json({
+        error: fetchErr.name === "AbortError"
+          ? "Le site met trop de temps a repondre (timeout 15s)."
+          : `Impossible d'acceder au site : ${fetchErr.message}`,
+      });
+    }
+
+    // Use existing analysis functions
+    const results = await analyzeRgpdCompliance(html, normalizedUrl);
+    const score = calculateRgpdScore(results);
+
+    // Return summary only (no full details, no AI recommendations)
+    const criteria = {
+      mentionsLegales: results.mentionsLegales?.found || false,
+      politiqueConfidentialite: results.politiqueConfidentialite?.found || false,
+      cgv: results.cgv?.found || false,
+      cookieBanner: results.cookieBanner?.found || false,
+    };
+
+    // Generate 2 basic recommendations based on results
+    const recommendations = [];
+    if (!criteria.mentionsLegales) {
+      recommendations.push("Ajoutez une page de mentions legales a votre site. C'est obligatoire pour tout site professionnel en France.");
+    }
+    if (!criteria.politiqueConfidentialite) {
+      recommendations.push("Ajoutez une politique de confidentialite conforme au RGPD (articles 13-14). C'est obligatoire si vous collectez des donnees personnelles.");
+    }
+    if (!criteria.cookieBanner) {
+      recommendations.push("Mettez en place une banniere de cookies avec consentement explicite. Obligatoire pour tout site utilisant des cookies non essentiels.");
+    }
+    if (!criteria.cgv) {
+      recommendations.push("Ajoutez des conditions generales de vente/utilisation. Recommande pour les sites e-commerce et de services.");
+    }
+    // Only send first 2
+    const demoRecommendations = recommendations.slice(0, 2);
+    if (demoRecommendations.length === 0) {
+      demoRecommendations.push("Votre site respecte les criteres principaux. Passez a Vault pour un audit approfondi avec suivi dans le temps.");
+    }
+
+    res.json({
+      url: normalizedUrl,
+      score,
+      criteria,
+      recommendations: demoRecommendations,
+    });
+  } catch (err) {
+    console.error("[VAULT DEMO] Error:", err.message);
+    res.status(500).json({ error: "Erreur lors de l'analyse RGPD. Reessayez." });
+  }
+});
+
+// Clean up rate limit map periodically (every 30 min)
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, entry] of demoRateLimit) {
+    if (now > entry.resetAt) demoRateLimit.delete(ip);
+  }
+}, 30 * 60 * 1000);
+
 module.exports = router;

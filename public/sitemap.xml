@@ -35,8 +35,10 @@
   <url><loc>https://nervur.fr/diagnostic</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://nervur.fr/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nervur.fr/blog/e-reputation</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nervur.fr/blog/cybersecurite</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nervur.fr/blog/performance-web</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/blog/conformite-juridique</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/blog/presence-digitale</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/blog/avis-google</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nervur.fr/blog/rgpd-guide</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nervur.fr/mentions-legales</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://nervur.fr/confidentialite</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://nervur.fr/cgv</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>

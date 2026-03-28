@@ -1182,10 +1182,15 @@ export default function NervurAurora() {
                   <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>29€</span>
                   <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
-                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s", marginBottom: "8px" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(239,68,68,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer
+                </button>
+                <button onClick={() => navigate("/demo/sentinel")} style={{ width: "100%", padding: isMobile ? "8px" : "10px", background: "transparent", border: "1px solid rgba(239,68,68,0.35)", borderRadius: "10px", color: "#ef4444", fontSize: isMobile ? "11px" : "13px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(239,68,68,0.1)"; e.currentTarget.style.borderColor = "#ef4444"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(239,68,68,0.35)"; }}>
+                  Essayer gratuitement &rarr;
                 </button>
               </div>
             </div>
@@ -1226,10 +1231,15 @@ export default function NervurAurora() {
                   <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>19€</span>
                   <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
-                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s", marginBottom: "8px" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(6,182,212,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer
+                </button>
+                <button onClick={() => navigate("/demo/vault")} style={{ width: "100%", padding: isMobile ? "8px" : "10px", background: "transparent", border: "1px solid rgba(6,182,212,0.35)", borderRadius: "10px", color: "#06b6d4", fontSize: isMobile ? "11px" : "13px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(6,182,212,0.1)"; e.currentTarget.style.borderColor = "#06b6d4"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(6,182,212,0.35)"; }}>
+                  Essayer gratuitement &rarr;
                 </button>
               </div>
             </div>
@@ -1651,8 +1661,10 @@ export default function NervurAurora() {
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Blog</p>
             {[
               { name: "E-réputation PME", path: "/blog/e-reputation" },
-              { name: "Conformité juridique PME", path: "/blog/conformite-juridique" },
-              { name: "Performance web", path: "/blog/performance-web" },
+              { name: "Conformité juridique", path: "/blog/conformite-juridique" },
+              { name: "Présence digitale", path: "/blog/presence-digitale" },
+              { name: "Avis Google", path: "/blog/avis-google" },
+              { name: "Guide RGPD", path: "/blog/rgpd-guide" },
             ].map((t, i) => (
               <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
                 onMouseEnter={e => e.target.style.color = A1}
