@@ -235,7 +235,7 @@ export default function ContactPage() {
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>
         <img
-          src="/logo-nervur.svg" alt="NERVÜR"
+          src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR"
           onClick={() => navigate("/")}
           style={{
             height: isMobile ? "40px" : "70px", width: "auto",
@@ -645,7 +645,7 @@ export default function ContactPage() {
         alignItems: "center",
         gap: isMobile ? "12px" : "0",
       }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
+        <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR" style={{
           height: "28px", width: "auto",
           objectFit: "contain",
         }} />

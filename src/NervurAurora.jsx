@@ -598,7 +598,7 @@ export default function NervurAurora() {
         background: "rgba(15,17,23,0.85)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
+        <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR" style={{
           height: isMobile ? "32px" : "40px", width: "auto" }} />
         {/* Desktop nav */}
         {!isMobile && (
@@ -1395,10 +1395,10 @@ export default function NervurAurora() {
           <RevealSection delay={100}>
             <div style={{
               background: "linear-gradient(145deg, #0c0e18 0%, #141828 40%, #1a1040 100%)",
-              aspectRatio: isMobile ? "auto" : "4/3",
-              minHeight: isMobile ? "280px" : "auto",
+              aspectRatio: isMobile ? "auto" : "3/2",
+              minHeight: isMobile ? "200px" : "auto",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              padding: "40px 28px", borderRadius: "18px",
+              padding: "28px 24px", borderRadius: "16px",
               position: "relative", overflow: "hidden",
               border: "1px solid rgba(99,102,241,0.12)",
             }}>
@@ -1418,7 +1418,7 @@ export default function NervurAurora() {
               </div>
 
               {/* Glowing pulse ring */}
-              <div style={{ position: "relative", width: "90px", height: "90px", marginBottom: "24px" }}>
+              <div style={{ position: "relative", width: "70px", height: "70px", marginBottom: "18px" }}>
                 <div style={{
                   position: "absolute", inset: "-8px", borderRadius: "50%",
                   background: "radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)",
@@ -1455,16 +1455,16 @@ export default function NervurAurora() {
                 fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
                 color: "#818CF8", marginBottom: "8px", textAlign: "center",
               }}>
-                Quelque chose arrive
+                En construction
               </div>
               <div style={{
-                fontSize: "22px", fontWeight: 800, color: "#FAFAFA", textAlign: "center",
-                marginBottom: "12px", lineHeight: 1.3,
+                fontSize: "17px", fontWeight: 700, color: "#FAFAFA", textAlign: "center",
+                marginBottom: "6px", lineHeight: 1.3,
               }}>
-                Un nouvel outil se prépare
+                Nouveau projet en cours
               </div>
-              <div style={{ fontSize: "13px", color: "#71717A", textAlign: "center", maxWidth: "260px", lineHeight: 1.7 }}>
-                Une nouvelle solution pensée pour les TPE/PME. Restez connectés.
+              <div style={{ fontSize: "12px", color: "#71717A", textAlign: "center", maxWidth: "220px", lineHeight: 1.5 }}>
+                Restez connectés.
               </div>
 
               {/* Progress bar */}
@@ -1692,7 +1692,7 @@ export default function NervurAurora() {
         <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
-            <img src="/logo-nervur.svg" alt="NERVÜR — Éditeur de technologies de croissance pour PME" style={{ height: "28px", width: "auto", marginBottom: "16px" }} />
+            <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR — Éditeur de technologies de croissance pour PME" style={{ height: "28px", width: "auto", marginBottom: "16px" }} />
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Agence Digital NERVUR</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>

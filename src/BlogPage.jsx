@@ -75,7 +75,7 @@ export default function BlogPage() {
         padding: isMobile ? "16px 20px" : "20px 48px",
         borderBottom: `1px solid ${VG(0.1)}`,
       }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")}
+        <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR" onClick={() => navigate("/")}
           style={{ height: isMobile ? "30px" : "38px", width: "auto", cursor: "pointer" }} />
         <a href="/app/login" style={{
           padding: "8px 20px", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase",
