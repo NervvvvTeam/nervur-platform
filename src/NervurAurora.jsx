@@ -1391,49 +1391,97 @@ export default function NervurAurora() {
 
         {/* ROW 1 — Projets */}
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "20px" }}>
-          {/* Nouveau projet — card with spinner */}
+          {/* Nouveau projet — teaser card */}
           <RevealSection delay={100}>
             <div style={{
-              background: "linear-gradient(135deg, rgba(15,15,15,0.95), rgba(24,24,32,0.95))",
+              background: "linear-gradient(145deg, #0c0e18 0%, #141828 40%, #1a1040 100%)",
               aspectRatio: isMobile ? "auto" : "4/3",
-              minHeight: isMobile ? "220px" : "auto",
+              minHeight: isMobile ? "280px" : "auto",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              padding: "36px 28px", border: "1px solid rgba(99,102,241,0.18)", borderRadius: "16px",
+              padding: "40px 28px", borderRadius: "18px",
               position: "relative", overflow: "hidden",
-              boxShadow: "0 0 40px rgba(99,102,241,0.06), inset 0 1px 0 rgba(129,140,248,0.08)"
+              border: "1px solid rgba(99,102,241,0.12)",
             }}>
-              {/* Subtle gradient glow behind */}
-              <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "200px", height: "200px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
-
-              {/* Spinner circle */}
-              <div style={{ position: "relative", width: "64px", height: "64px", marginBottom: "20px" }}>
-                <div style={{
-                  position: "absolute", inset: 0, borderRadius: "50%",
-                  border: "2.5px solid rgba(99,102,241,0.12)",
-                }} />
-                <div style={{
-                  position: "absolute", inset: 0, borderRadius: "50%",
-                  border: "2.5px solid transparent", borderTopColor: "#818CF8",
-                  animation: "nervur-spin 1.2s linear infinite",
-                }} />
-                {/* Logo inside spinner */}
-                <img src="/logo-nervur.svg" alt="" style={{
-                  position: "absolute", top: "50%", left: "50%",
-                  transform: "translate(-50%, -50%)", height: "24px", width: "auto", opacity: 0.85,
-                }} />
+              {/* Animated background particles */}
+              <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
+                {[...Array(12)].map((_, i) => (
+                  <div key={i} style={{
+                    position: "absolute",
+                    width: `${2 + Math.random() * 3}px`, height: `${2 + Math.random() * 3}px`,
+                    borderRadius: "50%",
+                    background: i % 3 === 0 ? "#818CF8" : i % 3 === 1 ? "#6366f1" : "#a5b4fc",
+                    left: `${10 + Math.random() * 80}%`, top: `${10 + Math.random() * 80}%`,
+                    opacity: 0.15 + Math.random() * 0.25,
+                    animation: `nervur-float ${3 + Math.random() * 4}s ease-in-out ${Math.random() * 2}s infinite alternate`,
+                  }} />
+                ))}
               </div>
 
+              {/* Glowing pulse ring */}
+              <div style={{ position: "relative", width: "90px", height: "90px", marginBottom: "24px" }}>
+                <div style={{
+                  position: "absolute", inset: "-8px", borderRadius: "50%",
+                  background: "radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)",
+                  animation: "nervur-pulse 2.5s ease-in-out infinite",
+                }} />
+                <div style={{
+                  position: "absolute", inset: 0, borderRadius: "50%",
+                  border: "2px solid rgba(99,102,241,0.2)",
+                }} />
+                <div style={{
+                  position: "absolute", inset: 0, borderRadius: "50%",
+                  border: "2px solid transparent", borderTopColor: "#818CF8", borderRightColor: "#6366f1",
+                  animation: "nervur-spin 2s linear infinite",
+                }} />
+                <div style={{
+                  position: "absolute", inset: "8px", borderRadius: "50%",
+                  border: "1.5px solid transparent", borderBottomColor: "#a5b4fc",
+                  animation: "nervur-spin 3s linear infinite reverse",
+                }} />
+                {/* Center icon */}
+                <div style={{
+                  position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+                  width: "36px", height: "36px", borderRadius: "10px",
+                  background: "linear-gradient(135deg, #6366f1, #818CF8)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 0 20px rgba(99,102,241,0.4)",
+                }}>
+                  <span style={{ color: "white", fontSize: "18px", fontWeight: 900 }}>N</span>
+                </div>
+              </div>
+
+              {/* Title */}
               <div style={{
-                fontSize: "11px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase",
-                color: "#818CF8", marginBottom: "10px", textAlign: "center",
+                fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
+                color: "#818CF8", marginBottom: "8px", textAlign: "center",
               }}>
-                Nouveau projet en cours
+                Quelque chose arrive
               </div>
-              <div style={{ fontSize: "12px", color: "#52525B", textAlign: "center", maxWidth: "240px", lineHeight: 1.6 }}>
-                de developpement
+              <div style={{
+                fontSize: "22px", fontWeight: 800, color: "#FAFAFA", textAlign: "center",
+                marginBottom: "12px", lineHeight: 1.3,
+              }}>
+                Un nouvel outil se prépare
+              </div>
+              <div style={{ fontSize: "13px", color: "#71717A", textAlign: "center", maxWidth: "260px", lineHeight: 1.7 }}>
+                Une nouvelle solution pensée pour les TPE/PME. Restez connectés.
               </div>
 
-              <style>{`@keyframes nervur-spin { to { transform: rotate(360deg); } }`}</style>
+              {/* Progress bar */}
+              <div style={{ marginTop: "24px", width: "140px", height: "3px", borderRadius: "2px", background: "rgba(99,102,241,0.15)", overflow: "hidden" }}>
+                <div style={{
+                  width: "60%", height: "100%", borderRadius: "2px",
+                  background: "linear-gradient(90deg, #6366f1, #818CF8)",
+                  animation: "nervur-progress 2s ease-in-out infinite",
+                }} />
+              </div>
+
+              <style>{`
+                @keyframes nervur-spin { to { transform: rotate(360deg); } }
+                @keyframes nervur-pulse { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+                @keyframes nervur-float { 0% { transform: translateY(0px); } 100% { transform: translateY(-15px); } }
+                @keyframes nervur-progress { 0% { transform: translateX(-100%); } 50% { transform: translateX(0%); } 100% { transform: translateX(100%); } }
+              `}</style>
             </div>
           </RevealSection>
         </div>
