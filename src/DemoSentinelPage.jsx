@@ -96,8 +96,8 @@ export default function DemoSentinelPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)"
       }}>
-        <img src="/logo-nav.png" alt="NERVÜR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "40px" : "70px", width: "auto", cursor: "pointer", filter: "invert(1) brightness(1.15)" }} />
+        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")}
+          style={{ height: isMobile ? "40px" : "70px", width: "auto", cursor: "pointer" }} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             background: "transparent", border: "1px solid rgba(239,68,68,0.3)", color: "#A1A1AA",

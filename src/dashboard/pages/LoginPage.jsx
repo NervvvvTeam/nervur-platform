@@ -92,9 +92,9 @@ export default function LoginPage() {
         }} />
 
         <img
-          src="/logo-nav.png"
+          src="/logo-nervur.svg"
           alt="NERVÜR"
-          style={{ height: isWide ? 64 : 44, width: "auto", marginBottom: isWide ? 24 : 10, position: "relative", filter: "invert(1) brightness(1.15)" }}
+          style={{ height: isWide ? 64 : 44, width: "auto", marginBottom: isWide ? 24 : 10, position: "relative" }}
         />
 
         <h1 style={{

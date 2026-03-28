@@ -202,7 +202,9 @@
       "Bash(node -c routes/vault.js)",
       "Bash(grep -n '\\\\\\\\u00\\\\|\\\\\\\\u20\\\\|\\\\\\\\u21\\\\|\\\\\\\\u26\\\\|\\\\\\\\u27' src/SimulateurPage.jsx)",
       "Bash(grep -n '\\\\\\\\u00\\\\|\\\\\\\\u20\\\\|\\\\\\\\u21\\\\|\\\\\\\\u26\\\\|\\\\\\\\u27' src/DiagnosticPage.jsx)",
-      "Bash(npx --no-install vite build --mode development)"
+      "Bash(npx --no-install vite build --mode development)",
+      "Bash(find src:*)",
+      "Bash(while read:*)"
     ]
   }
 }

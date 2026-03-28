@@ -598,8 +598,8 @@ export default function NervurAurora() {
         background: "rgba(15,17,23,0.85)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <img src="/logo-nav.png" alt="NERVÜR" style={{
-          height: isMobile ? "32px" : "40px", width: "auto", filter: "invert(1) brightness(1.15)" }} />
+        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
+          height: isMobile ? "32px" : "40px", width: "auto" }} />
         {/* Desktop nav */}
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
@@ -1391,25 +1391,49 @@ export default function NervurAurora() {
 
         {/* ROW 1 — Projets */}
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "20px" }}>
-          {/* Nouveau projet — pill badge */}
+          {/* Nouveau projet — card with spinner */}
           <RevealSection delay={100}>
             <div style={{
-              background: "linear-gradient(135deg, #0f0f0f, #181818)",
+              background: "linear-gradient(135deg, rgba(15,15,15,0.95), rgba(24,24,32,0.95))",
               aspectRatio: isMobile ? "auto" : "4/3",
-              minHeight: isMobile ? "200px" : "auto",
+              minHeight: isMobile ? "220px" : "auto",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              padding: "32px 28px", border: `1px solid ${VG(0.08)}`, position: "relative", overflow: "hidden"
+              padding: "36px 28px", border: "1px solid rgba(99,102,241,0.18)", borderRadius: "16px",
+              position: "relative", overflow: "hidden",
+              boxShadow: "0 0 40px rgba(99,102,241,0.06), inset 0 1px 0 rgba(129,140,248,0.08)"
             }}>
-              <span style={{
-                fontSize: "10px", fontWeight: 500, letterSpacing: "1px",
-                background: "rgba(99,102,241,0.12)", color: "#818CF8",
-                padding: "4px 14px", borderRadius: "20px", marginBottom: "16px",
+              {/* Subtle gradient glow behind */}
+              <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "200px", height: "200px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
+
+              {/* Spinner circle */}
+              <div style={{ position: "relative", width: "64px", height: "64px", marginBottom: "20px" }}>
+                <div style={{
+                  position: "absolute", inset: 0, borderRadius: "50%",
+                  border: "2.5px solid rgba(99,102,241,0.12)",
+                }} />
+                <div style={{
+                  position: "absolute", inset: 0, borderRadius: "50%",
+                  border: "2.5px solid transparent", borderTopColor: "#818CF8",
+                  animation: "nervur-spin 1.2s linear infinite",
+                }} />
+                {/* Logo inside spinner */}
+                <img src="/logo-nervur.svg" alt="" style={{
+                  position: "absolute", top: "50%", left: "50%",
+                  transform: "translate(-50%, -50%)", height: "24px", width: "auto", opacity: 0.85,
+                }} />
+              </div>
+
+              <div style={{
+                fontSize: "11px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase",
+                color: "#818CF8", marginBottom: "10px", textAlign: "center",
               }}>
                 Nouveau projet en cours
-              </span>
-              <div style={{ fontSize: "12px", color: "#52525B", textAlign: "center", maxWidth: "240px", lineHeight: 1.6 }}>
-                Restez connectes.
               </div>
+              <div style={{ fontSize: "12px", color: "#52525B", textAlign: "center", maxWidth: "240px", lineHeight: 1.6 }}>
+                de developpement
+              </div>
+
+              <style>{`@keyframes nervur-spin { to { transform: rotate(360deg); } }`}</style>
             </div>
           </RevealSection>
         </div>
@@ -1620,7 +1644,7 @@ export default function NervurAurora() {
         <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
-            <img src="/logo-nav.png" alt="NERVÜR — Éditeur de technologies de croissance pour PME" style={{ height: "28px", width: "auto", marginBottom: "16px", filter: "invert(1) brightness(1.15)" }} />
+            <img src="/logo-nervur.svg" alt="NERVÜR — Éditeur de technologies de croissance pour PME" style={{ height: "28px", width: "auto", marginBottom: "16px" }} />
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Agence Digital NERVUR</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>
