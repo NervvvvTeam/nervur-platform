@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import NervurAurora from './NervurAurora'
+import CookieBanner from './components/CookieBanner'
 import './index.css'
 
 // ═══ Dashboard imports ═══
@@ -111,6 +112,7 @@ function App() {
             <Route path="/vertex" element={<Navigate to="/oracle" replace />} />
             <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
             <Route path="/confidentialite" element={<PolitiqueConfidentialitePage />} />
+            <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialitePage />} />
             <Route path="/cgv" element={<CGVPage />} />
             <Route path="/qui-sommes-nous" element={<QuiSommesNousPage />} />
             <Route path="/blog" element={<BlogPage />} />
@@ -157,6 +159,7 @@ function App() {
             </Route>
           </Routes>
         </Suspense>
+        <CookieBanner />
       </AuthProvider>
     </BrowserRouter>
   )

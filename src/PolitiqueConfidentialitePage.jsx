@@ -31,7 +31,8 @@ export default function PolitiqueConfidentialitePage() {
           <div style={{ fontSize: "14px", lineHeight: 2, color: "#d4d4d8" }}>
             <p>Agence Digital NERVÜR — Li Glanchard</p>
             <p>SIRET : 102 415 916 00018</p>
-            <p>Email : contact@nervur.com</p>
+            <p>Email : contact@nervurpro.com</p>
+            <p>Site : nervur.fr</p>
           </div>
         </section>
 
@@ -94,15 +95,25 @@ export default function PolitiqueConfidentialitePage() {
             <p style={{ marginLeft: "16px" }}>— Droit à la limitation du traitement</p>
             <p style={{ marginLeft: "16px" }}>— Droit à la portabilité des données</p>
             <p style={{ marginLeft: "16px" }}>— Droit d'opposition</p>
-            <p style={{ marginTop: "8px" }}>Pour exercer vos droits : contact@nervur.com</p>
+            <p style={{ marginTop: "8px" }}>Pour exercer vos droits, contactez notre DPO : contact@nervurpro.com</p>
             <p>Vous pouvez également adresser une réclamation à la CNIL (cnil.fr).</p>
           </div>
         </section>
 
         <section style={{ marginBottom: "32px" }}>
           <h2 style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#a1a1aa", marginBottom: "16px" }}>8. Cookies</h2>
+          <div style={{ fontSize: "14px", lineHeight: 2, color: "#d4d4d8" }}>
+            <p>Ce site utilise les cookies suivants :</p>
+            <p style={{ marginLeft: "16px" }}>— Cookies essentiels : strictement n&eacute;cessaires au fonctionnement du site (toujours actifs)</p>
+            <p style={{ marginLeft: "16px" }}>— Cookies analytiques : Google Tag Manager (GTM-MCHC6NMK) pour la mesure d'audience — activ&eacute;s uniquement apr&egrave;s consentement explicite de l'utilisateur</p>
+            <p style={{ marginTop: "8px" }}>Lors de votre premi&egrave;re visite, un bandeau vous permet d'accepter, refuser ou personnaliser l'utilisation des cookies. Votre choix est conserv&eacute; dans le stockage local de votre navigateur. Vous pouvez modifier vos pr&eacute;f&eacute;rences &agrave; tout moment en supprimant les donn&eacute;es de navigation de votre navigateur.</p>
+          </div>
+        </section>
+
+        <section style={{ marginBottom: "32px" }}>
+          <h2 style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#a1a1aa", marginBottom: "16px" }}>9. Transferts de donn&eacute;es hors UE</h2>
           <p style={{ fontSize: "14px", lineHeight: 2, color: "#d4d4d8" }}>
-            Ce site n'utilise pas de cookies de tracking ou publicitaires. Seuls des cookies techniques strictement nécessaires au fonctionnement du site peuvent être utilisés.
+            Certains de nos sous-traitants techniques (Netlify, Railway, Google, Anthropic) sont situ&eacute;s aux &Eacute;tats-Unis. Ces transferts sont encadr&eacute;s par les clauses contractuelles types de la Commission europ&eacute;enne et/ou le cadre EU-US Data Privacy Framework, conform&eacute;ment au chapitre V du RGPD.
           </p>
         </section>
 

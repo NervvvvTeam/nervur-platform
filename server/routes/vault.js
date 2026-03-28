@@ -1648,7 +1648,7 @@ const VaultRegistre = mongoose.models.VaultRegistre || mongoose.model("VaultRegi
 // GET all treatments for user
 router.get("/registre", authMiddleware, async (req, res) => {
   try {
-    const treatments = await VaultRegistre.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    const treatments = await VaultRegistre.find({ userId: req.userId }).sort({ createdAt: -1 });
     res.json(treatments);
   } catch (err) {
     console.error("Erreur GET registre:", err);
@@ -1664,7 +1664,7 @@ router.post("/registre", authMiddleware, async (req, res) => {
     if (_id) {
       // Update existing
       const updated = await VaultRegistre.findOneAndUpdate(
-        { _id, userId: req.user._id },
+        { _id, userId: req.userId },
         { name, purpose, dataCategories, legalBasis, retention, recipients },
         { new: true }
       );
@@ -1674,7 +1674,7 @@ router.post("/registre", authMiddleware, async (req, res) => {
 
     // Create new
     const treatment = await VaultRegistre.create({
-      userId: req.user._id,
+      userId: req.userId,
       name,
       purpose,
       dataCategories: dataCategories || [],
@@ -1692,7 +1692,7 @@ router.post("/registre", authMiddleware, async (req, res) => {
 // DELETE a treatment
 router.delete("/registre/:id", authMiddleware, async (req, res) => {
   try {
-    const result = await VaultRegistre.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
+    const result = await VaultRegistre.findOneAndDelete({ _id: req.params.id, userId: req.userId });
     if (!result) return res.status(404).json({ error: "Traitement introuvable." });
     res.json({ success: true });
   } catch (err) {
@@ -1704,7 +1704,7 @@ router.delete("/registre/:id", authMiddleware, async (req, res) => {
 // GET export registre as PDF
 router.get("/registre/export-pdf", authMiddleware, async (req, res) => {
   try {
-    const treatments = await VaultRegistre.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    const treatments = await VaultRegistre.find({ userId: req.userId }).sort({ createdAt: -1 });
 
     const doc = new PDFDocument({ margin: 50, size: "A4" });
     res.setHeader("Content-Type", "application/pdf");
@@ -1762,7 +1762,7 @@ const VaultChecklist = mongoose.models.VaultChecklist || mongoose.model("VaultCh
 // GET checklist state
 router.get("/checklist", authMiddleware, async (req, res) => {
   try {
-    const checklist = await VaultChecklist.findOne({ userId: req.user._id });
+    const checklist = await VaultChecklist.findOne({ userId: req.userId });
     res.json(checklist || { items: {} });
   } catch (err) {
     console.error("Erreur GET checklist:", err);
@@ -1775,7 +1775,7 @@ router.post("/checklist", authMiddleware, async (req, res) => {
   try {
     const { items } = req.body;
     const checklist = await VaultChecklist.findOneAndUpdate(
-      { userId: req.user._id },
+      { userId: req.userId },
       { items, updatedAt: new Date() },
       { upsert: true, new: true }
     );

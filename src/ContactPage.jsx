@@ -46,6 +46,7 @@ export default function ContactPage() {
 
   const [form, setForm] = useState({ nom: "", email: "", tel: "", sujet: "", message: "" });
   const [honeypot, setHoneypot] = useState("");
+  const [consent, setConsent] = useState(false);
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState([]);
   const [submitting, setSubmitting] = useState(false);
@@ -418,10 +419,45 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {/* RGPD Consent */}
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                  <input
+                    type="checkbox"
+                    id="contact-consent"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    required
+                    style={{
+                      marginTop: "3px",
+                      accentColor: "#6366f1",
+                      width: "16px",
+                      height: "16px",
+                      cursor: "pointer",
+                      flexShrink: 0,
+                    }}
+                  />
+                  <label htmlFor="contact-consent" style={{
+                    fontSize: "13px",
+                    color: "#A1A1AA",
+                    lineHeight: 1.6,
+                    cursor: "pointer",
+                  }}>
+                    J'accepte que mes donn&eacute;es soient trait&eacute;es conform&eacute;ment &agrave; la{" "}
+                    <a
+                      href="/politique-de-confidentialite"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#818CF8", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                    >
+                      politique de confidentialit&eacute;
+                    </a>.
+                  </label>
+                </div>
+
                 {/* Submit */}
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !consent}
                   style={{
                     padding: "16px 32px",
                     background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
@@ -431,21 +467,21 @@ export default function ContactPage() {
                     letterSpacing: "0.5px",
                     border: "none",
                     borderRadius: "8px",
-                    cursor: submitting ? "not-allowed" : "pointer",
+                    cursor: (submitting || !consent) ? "not-allowed" : "pointer",
                     transition: "opacity 0.2s, transform 0.2s",
                     fontFamily: "inherit",
                     width: "100%",
-                    opacity: submitting ? 0.6 : 1,
+                    opacity: (submitting || !consent) ? 0.6 : 1,
                   }}
                   onMouseEnter={(e) => {
-                    if (!submitting) {
+                    if (!submitting && consent) {
                       e.currentTarget.style.transform = "translateY(-1px)";
                       e.currentTarget.style.opacity = "0.9";
                     }
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.opacity = submitting ? "0.6" : "1";
+                    e.currentTarget.style.opacity = (submitting || !consent) ? "0.6" : "1";
                   }}
                 >
                   {submitting ? "Envoi en cours..." : "Envoyer le message"}

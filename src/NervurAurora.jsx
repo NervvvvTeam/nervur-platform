@@ -1667,7 +1667,7 @@ export default function NervurAurora() {
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Legal</p>
             {[
               { name: "Mentions legales", path: "/mentions-legales" },
-              { name: "Politique de confidentialite", path: "/confidentialite" },
+              { name: "Politique de confidentialite", path: "/politique-de-confidentialite" },
               { name: "CGV", path: "/cgv" },
               { name: "Qui sommes-nous", path: "/qui-sommes-nous" },
             ].map((t, i) => (
@@ -1677,7 +1677,7 @@ export default function NervurAurora() {
                 {t.name}
               </p>
             ))}
-            <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, marginTop: "8px" }}>contact@nervurpro.fr</p>
+            <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, marginTop: "8px" }}>contact@nervurpro.com</p>
           </div>
         </div>
 

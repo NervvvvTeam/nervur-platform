@@ -94,7 +94,7 @@ export default function CGVPage() {
               Conformément aux articles L221-18 et suivants du Code de la consommation, le Client consommateur dispose d'un délai de 14 jours calendaires à compter de la souscription de l'abonnement ou de l'acceptation du devis pour exercer son droit de rétractation, sans avoir à justifier de motifs ni à payer de pénalités.
             </p>
             <p style={{ marginTop: "8px" }}>
-              Pour exercer ce droit, le Client doit adresser sa demande par email à contact@nervurpro.fr ou par courrier postal à l'adresse du siège social du Prestataire. Le remboursement sera effectué dans un délai de 14 jours suivant la réception de la demande, par le même moyen de paiement que celui utilisé pour la transaction initiale.
+              Pour exercer ce droit, le Client doit adresser sa demande par email à contact@nervurpro.com ou par courrier postal à l'adresse du siège social du Prestataire. Le remboursement sera effectué dans un délai de 14 jours suivant la réception de la demande, par le même moyen de paiement que celui utilisé pour la transaction initiale.
             </p>
             <p style={{ marginTop: "8px" }}>
               Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne peut être exercé pour les prestations de services pleinement exécutées avant la fin du délai de rétractation et dont l'exécution a commencé avec l'accord préalable et exprès du Client et renoncement exprès à son droit de rétractation.
@@ -106,7 +106,7 @@ export default function CGVPage() {
           <h2 style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#a1a1aa", marginBottom: "16px" }}>9. Résiliation</h2>
           <div style={{ fontSize: "14px", lineHeight: 2, color: "#d4d4d8" }}>
             <p>
-              Pour les abonnements, le Client peut résilier à tout moment par email à contact@nervurpro.fr. La résiliation prend effet à la fin de la période mensuelle en cours. Aucun remboursement au prorata ne sera effectué pour le mois en cours.
+              Pour les abonnements, le Client peut résilier à tout moment par email à contact@nervurpro.com. La résiliation prend effet à la fin de la période mensuelle en cours. Aucun remboursement au prorata ne sera effectué pour le mois en cours.
             </p>
             <p style={{ marginTop: "8px" }}>
               En cas de manquement grave de l'une des parties à ses obligations, l'autre partie pourra résilier le contrat par lettre recommandée après mise en demeure restée infructueuse pendant 15 jours. Les prestations réalisées avant la résiliation restent dues.
@@ -129,7 +129,7 @@ export default function CGVPage() {
               Plateforme européenne de règlement en ligne des litiges : <span style={{ color: "#818CF8" }}>https://ec.europa.eu/consumers/odr</span>
             </p>
             <p style={{ marginTop: "8px" }}>
-              Avant de saisir le médiateur, le Client doit avoir préalablement adressé une réclamation écrite au Prestataire par email (contact@nervurpro.fr) ou par courrier postal.
+              Avant de saisir le médiateur, le Client doit avoir préalablement adressé une réclamation écrite au Prestataire par email (contact@nervurpro.com) ou par courrier postal.
             </p>
           </div>
         </section>

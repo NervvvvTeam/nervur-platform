@@ -269,11 +269,17 @@ export default function LoginPage() {
 
           <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid #2a2d3a" }}>
             <p style={{ fontSize: 12, color: "#4b5563", lineHeight: 1.6, margin: 0 }}>
-              Votre compte est créé par l'équipe NERVÜR lors de votre souscription.
+              Votre compte est cr&eacute;&eacute; par l'&eacute;quipe NERV&Uuml;R lors de votre souscription.
             </p>
             <a href="/contact" style={{ fontSize: 13, color: "#6366f1", textDecoration: "none", fontWeight: 500, display: "inline-block", marginTop: 8 }}>
-              Pas encore client ? Contactez-nous →
+              Pas encore client ? Contactez-nous &rarr;
             </a>
+            <p style={{ fontSize: 11, color: "#4b5563", lineHeight: 1.6, marginTop: 12 }}>
+              En vous connectant, vos donn&eacute;es sont trait&eacute;es conform&eacute;ment &agrave; notre{" "}
+              <a href="/politique-de-confidentialite" style={{ color: "#6366f1", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                politique de confidentialit&eacute;
+              </a>.
+            </p>
           </div>
         </div>
       </div>
