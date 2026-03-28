@@ -96,8 +96,8 @@ export default function DemoSentinelPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)"
       }}>
-        <img src="/logo-nervur.svg" alt="NERVUR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "40px" : "70px", width: "auto", cursor: "pointer" }} />
+        <img src="/logo-nav.png" alt="NERVÜR" onClick={() => navigate("/")}
+          style={{ height: isMobile ? "40px" : "70px", width: "auto", cursor: "pointer", filter: "invert(1) brightness(1.15)" }} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             background: "transparent", border: "1px solid rgba(239,68,68,0.3)", color: "#A1A1AA",
@@ -225,14 +225,15 @@ export default function DemoSentinelPage() {
               </div>
             </div>
 
-            {/* Recent Reviews */}
-            <div style={{ marginBottom: "24px" }}>
-              <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px", color: "#A1A1AA" }}>Derniers avis</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                {(result.reviews || []).map((review, i) => (
-                  <div key={i} style={{
+            {/* Single Review + AI Response Suggestion */}
+            {(result.reviews || []).length > 0 && (() => {
+              const review = result.reviews[0];
+              return (
+                <div style={{ marginBottom: "24px" }}>
+                  <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px", color: "#A1A1AA" }}>Dernier avis</h3>
+                  <div style={{
                     padding: "20px", borderRadius: "12px",
-                    border: "1px solid rgba(255,255,255,0.08)", background: "rgba(24,24,27,0.5)",
+                    border: "1px solid rgba(255,255,255,0.08)", background: "rgba(24,24,27,0.5)", marginBottom: "16px",
                   }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "8px" }}>
                       <span style={{ fontSize: "14px", fontWeight: 600 }}>{review.authorName}</span>
@@ -242,41 +243,45 @@ export default function DemoSentinelPage() {
                       {review.text ? (review.text.length > 200 ? review.text.slice(0, 200) + "..." : review.text) : <em style={{ color: "#52525B" }}>Aucun commentaire</em>}
                     </p>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            {/* AI Analysis Teaser (blurred) */}
-            <div style={{ position: "relative", marginBottom: "40px" }}>
-              <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px", color: "#A1A1AA" }}>Analyse IA</h3>
-              <div style={{
-                padding: "24px", borderRadius: "12px",
-                border: "1px solid rgba(239,68,68,0.15)", background: "rgba(24,24,27,0.5)",
-              }}>
-                <p style={{ fontSize: "14px", color: "#A1A1AA", lineHeight: 1.7, marginBottom: "12px" }}>
-                  Votre etablissement affiche une note de <strong style={{ color: "#FAFAFA" }}>{result.rating}/5</strong> basee sur <strong style={{ color: "#FAFAFA" }}>{result.totalReviews} avis</strong>.
-                  {result.rating >= 4 ? " C'est un excellent signal de confiance pour vos prospects." : result.rating >= 3 ? " Il y a du potentiel d'amelioration." : " Des actions correctives sont recommandees."}
-                </p>
-                {/* Blurred content */}
-                <div className="blur-overlay">
-                  <p style={{ fontSize: "14px", color: "#A1A1AA", lineHeight: 1.7, marginBottom: "8px" }}>
-                    Analyse semantique detaillee : les themes les plus mentionnes dans vos avis sont la qualite du service, l'accueil et le rapport qualite-prix. Tendances sur 6 mois : votre note progresse de +0.3 points.
-                  </p>
-                  <p style={{ fontSize: "14px", color: "#A1A1AA", lineHeight: 1.7 }}>
-                    Recommandations personnalisees : 4 actions prioritaires pour ameliorer votre e-reputation et repondre strategiquement aux avis negatifs.
-                  </p>
+                  {/* AI Response Suggestion */}
+                  <div style={{
+                    padding: "20px", borderRadius: "12px",
+                    border: "1px solid rgba(239,68,68,0.15)", background: "rgba(239,68,68,0.03)",
+                  }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg>
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: "#ef4444", letterSpacing: "0.5px" }}>Suggestion de reponse IA</span>
+                    </div>
+                    <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.7, fontStyle: "italic" }}>
+                      {review.rating >= 4
+                        ? `Merci beaucoup ${review.authorName} pour votre retour positif ! Nous sommes ravis que votre experience chez ${result.name} vous ait satisfait. Au plaisir de vous revoir bientot.`
+                        : review.rating >= 3
+                        ? `Merci ${review.authorName} pour votre avis. Nous prenons note de vos remarques et travaillons constamment a ameliorer nos services chez ${result.name}. N'hesitez pas a nous contacter directement.`
+                        : `Merci ${review.authorName} pour votre retour. Nous sommes desoles que votre experience n'ait pas ete a la hauteur de vos attentes. Nous aimerions en discuter avec vous pour trouver une solution. Contactez-nous directement.`
+                      }
+                    </p>
+                  </div>
                 </div>
+              );
+            })()}
+
+            {/* Blurred/Locked rest of analysis */}
+            <div style={{ position: "relative", marginBottom: "40px" }}>
+              <div className="blur-overlay" style={{ padding: "24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(24,24,27,0.4)" }}>
+                <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "12px", color: "#A1A1AA" }}>Analyse complete</h3>
+                <p style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.7, marginBottom: "8px" }}>Tendances sur 6 mois, analyse semantique, themes recurrents, veille concurrentielle, alertes en temps reel...</p>
+                <p style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.7 }}>3 autres avis recents avec reponses IA personnalisees et rapport PDF exportable.</p>
               </div>
-              {/* Lock overlay */}
               <div style={{
-                position: "absolute", bottom: 0, left: 0, right: 0, height: "70%",
-                background: "linear-gradient(transparent, rgba(15,17,23,0.95) 60%)",
-                display: "flex", alignItems: "flex-end", justifyContent: "center", paddingBottom: "20px",
-                borderRadius: "0 0 12px 12px",
+                position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+                background: "linear-gradient(transparent 10%, rgba(15,17,23,0.95) 70%)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                borderRadius: "12px",
               }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#ef4444", fontSize: "13px", fontWeight: 600 }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  Contenu verrouille &mdash; Passez a Sentinel pour l'analyse complete
+                <div style={{ textAlign: "center" }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" style={{ margin: "0 auto 10px" }}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <p style={{ color: "#ef4444", fontSize: "14px", fontWeight: 700 }}>Debloquez l'outil complet</p>
                 </div>
               </div>
             </div>
@@ -288,10 +293,10 @@ export default function DemoSentinelPage() {
               background: "linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02))",
             }}>
               <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, marginBottom: "12px", letterSpacing: "-0.5px" }}>
-                Debloquez l'analyse complete
+                Debloquez l'outil complet
               </h2>
               <p style={{ fontSize: "14px", color: "#71717A", marginBottom: "24px", maxWidth: "460px", margin: "0 auto 24px", lineHeight: 1.7 }}>
-                Reponses IA automatiques, veille concurrentielle, alertes en temps reel, rapports PDF, QR Code et bien plus.
+                Reponses IA automatiques, veille concurrentielle, alertes en temps reel, rapports PDF et QR Code.
               </p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "16px 44px", background: "#ef4444", border: "none", borderRadius: "12px",
@@ -300,7 +305,7 @@ export default function DemoSentinelPage() {
               }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 40px rgba(239,68,68,0.35)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                Debloquez l'analyse complete &mdash; 29&#8364;/mois
+                Contactez-nous
               </button>
               <p style={{ fontSize: "12px", color: "#52525B", marginTop: "12px" }}>Sans engagement. Annulez a tout moment.</p>
             </div>

@@ -19,14 +19,14 @@ const useIsMobile = (bp = 768) => {
 
 // ═══ INDUSTRY DATA (based on BrightLocal 2025 & Ifop 2024) ═══
 const INDUSTRIES = [
-  { id: "restauration",  label: "Restauration",       emoji: "\🍽", avgNote: 3.8, reviewImpact: 0.25, avgTicket: 35, monthlyClients: 400 },
-  { id: "ecommerce",     label: "E-commerce",         emoji: "\🛒", avgNote: 3.6, reviewImpact: 0.20, avgTicket: 65, monthlyClients: 800 },
-  { id: "services-b2b",  label: "Services B2B",       emoji: "\💼", avgNote: 4.0, reviewImpact: 0.18, avgTicket: 500, monthlyClients: 30 },
-  { id: "artisan-btp",   label: "Artisan / BTP",      emoji: "\🔧", avgNote: 3.9, reviewImpact: 0.22, avgTicket: 250, monthlyClients: 25 },
-  { id: "sante",         label: "Sant\u00e9 / Bien-\u00eatre",  emoji: "\❤", avgNote: 4.1, reviewImpact: 0.20, avgTicket: 80, monthlyClients: 120 },
-  { id: "immobilier",    label: "Immobilier",         emoji: "\🏢", avgNote: 3.5, reviewImpact: 0.22, avgTicket: 1500, monthlyClients: 15 },
-  { id: "formation",     label: "Formation",          emoji: "\📚", avgNote: 3.7, reviewImpact: 0.20, avgTicket: 200, monthlyClients: 50 },
-  { id: "autre",         label: "Autre",              emoji: "\➕", avgNote: 3.7, reviewImpact: 0.20, avgTicket: 150, monthlyClients: 60 },
+  { id: "restauration",  label: "Restauration",       avgNote: 3.8, reviewImpact: 0.25, avgTicket: 35, monthlyClients: 400 },
+  { id: "ecommerce",     label: "E-commerce",         avgNote: 3.6, reviewImpact: 0.20, avgTicket: 65, monthlyClients: 800 },
+  { id: "services-b2b",  label: "Services B2B",       avgNote: 4.0, reviewImpact: 0.18, avgTicket: 500, monthlyClients: 30 },
+  { id: "artisan-btp",   label: "Artisan / BTP",      avgNote: 3.9, reviewImpact: 0.22, avgTicket: 250, monthlyClients: 25 },
+  { id: "sante",         label: "Santé / Bien-être",  avgNote: 4.1, reviewImpact: 0.20, avgTicket: 80, monthlyClients: 120 },
+  { id: "immobilier",    label: "Immobilier",         avgNote: 3.5, reviewImpact: 0.22, avgTicket: 1500, monthlyClients: 15 },
+  { id: "formation",     label: "Formation",          avgNote: 3.7, reviewImpact: 0.20, avgTicket: 200, monthlyClients: 50 },
+  { id: "autre",         label: "Autre",              avgNote: 3.7, reviewImpact: 0.20, avgTicket: 150, monthlyClients: 60 },
 ];
 
 // ═══ STEP INDICATOR ═══
@@ -153,7 +153,7 @@ const ComparisonBar = ({ label, before, after, maxVal, formatFn }) => {
       </div>
       {/* After */}
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <span style={{ fontSize: "10px", color: V, width: "48px", fontWeight: 700, flexShrink: 0 }}>Apr\u00e8s</span>
+        <span style={{ fontSize: "10px", color: V, width: "48px", fontWeight: 700, flexShrink: 0 }}>Après</span>
         <div style={{ flex: 1, height: "10px", background: VG(0.06), overflow: "hidden", borderRadius: "5px" }}>
           <div style={{
             width: vis ? `${(after / maxVal) * 100}%` : "0%", height: "100%",
@@ -200,7 +200,7 @@ export default function SimulateurPage() {
     }
   }, [industry]);
 
-  useSEO("Simulateur ROI E-R\u00e9putation \u2014 Estimez votre retour | NERV\u00dcR", "Estimez le retour sur investissement de la gestion de votre e-r\u00e9putation et conformit\u00e9 RGPD. R\u00e9sultats personnalis\u00e9s en 2 minutes.", { path: "/simulateur" });
+  useSEO("Simulateur ROI E-Réputation — Estimez votre retour | NERVÜR", "Estimez le retour sur investissement de la gestion de votre e-réputation et conformité RGPD. Résultats personnalisés en 2 minutes.", { path: "/simulateur" });
 
   // Scroll top on step change
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [step]);
@@ -285,8 +285,8 @@ export default function SimulateurPage() {
   // Navigation
   const goNext = () => {
     setErrors([]);
-    if (step === 0 && !industry) { setErrors(["S\u00e9lectionnez votre secteur d'activit\u00e9."]); return; }
-    if (step === 1 && !useSentinel && !useVault) { setErrors(["S\u00e9lectionnez au moins un outil."]); return; }
+    if (step === 0 && !industry) { setErrors(["Sélectionnez votre secteur d'activité."]); return; }
+    if (step === 1 && !useSentinel && !useVault) { setErrors(["Sélectionnez au moins un outil."]); return; }
     setStep(prev => Math.min(prev + 1, 2));
   };
   const goBack = () => { setErrors([]); setStep(prev => Math.max(prev - 1, 0)); };
@@ -317,11 +317,11 @@ export default function SimulateurPage() {
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(15,17,23,0.92)", backdropFilter: "blur(24px)",
         borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERV\u00dcR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
+        <img src="/logo-nav.png" alt="NERVÜR" onClick={() => navigate("/")}
+          style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer", filter: "invert(1) brightness(1.15)" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" onClick={() => navigate("/")}>
-            \u2190 Accueil
+            ← Accueil
           </button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>
             Contact
@@ -338,7 +338,7 @@ export default function SimulateurPage() {
         }}
           onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
           onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
-          \u2190 Retour
+          ← Retour
         </button>
       </div>
 
@@ -351,19 +351,19 @@ export default function SimulateurPage() {
             fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase",
             color: "#6B7280", display: "block", marginBottom: "20px", fontFamily: "monospace",
           }}>
-            // Simulateur ROI e-r\u00e9putation
+            // Simulateur ROI e-réputation
           </span>
           <h1 style={{
             fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, letterSpacing: "-2px",
             lineHeight: 1.1, marginBottom: "16px",
           }}>
-            {step === 0 && <>Votre <span style={{ color: V }}>activit\u00e9</span>.</>}
+            {step === 0 && <>Votre <span style={{ color: V }}>activité</span>.</>}
             {step === 1 && <>Vos <span style={{ color: V }}>outils</span>.</>}
             {step === 2 && <>Votre <span style={{ color: V }}>projection</span>.</>}
           </h1>
           <p style={{ fontSize: "16px", color: "#6B7280", lineHeight: 1.8, maxWidth: "520px" }}>
-            {step === 0 && "Renseignez votre secteur et vos chiffres actuels pour une estimation personnalis\u00e9e."}
-            {step === 1 && "Quels outils NERV\u00dcR souhaitez-vous utiliser ?"}
+            {step === 0 && "Renseignez votre secteur et vos chiffres actuels pour une estimation personnalisée."}
+            {step === 1 && "Quels outils NERVÜR souhaitez-vous utiliser ?"}
             {step === 2 && "Voici la projection de votre retour sur investissement."}
           </p>
         </div>
@@ -383,7 +383,7 @@ export default function SimulateurPage() {
           <div>
             {/* Industry Grid */}
             <h3 style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: V2, marginBottom: "20px", fontWeight: 700 }}>
-              Votre secteur d'activit\u00e9
+              Votre secteur d'activité
             </h3>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))", gap: "12px", marginBottom: "48px" }}>
               {INDUSTRIES.map(ind => (
@@ -396,9 +396,9 @@ export default function SimulateurPage() {
                 }}
                   onMouseEnter={e => { if (industry !== ind.id) { e.currentTarget.style.borderColor = VG(0.2); e.currentTarget.style.color = V; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}}
                   onMouseLeave={e => { if (industry !== ind.id) { e.currentTarget.style.borderColor = VG(0.08); e.currentTarget.style.color = V3; e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}}>
-                  <span style={{ display: "block", marginBottom: "10px", fontSize: "22px" }}>{ind.emoji}</span>
+                  <span style={{ display: "block", marginBottom: "10px", fontSize: "12px", color: "#818CF8", letterSpacing: "1px", textTransform: "uppercase" }}>{ind.id.charAt(0).toUpperCase()}</span>
                   <span style={{ fontSize: "14px", fontWeight: industry === ind.id ? 700 : 500, display: "block" }}>{ind.label}</span>
-                  {industry === ind.id && <span style={{ position: "absolute", top: "12px", right: "12px", fontSize: "10px", color: A1 }}>\u2713</span>}
+                  {industry === ind.id && <span style={{ position: "absolute", top: "12px", right: "12px", fontSize: "10px", color: A1 }}>✓</span>}
                 </button>
               ))}
             </div>
@@ -417,13 +417,13 @@ export default function SimulateurPage() {
               <SliderInput
                 label="Panier moyen" min={10} max={5000} step={10}
                 value={avgTicket} onChange={setAvgTicket}
-                formatValue={v => `${v.toLocaleString("fr-FR")} \u20ac`}
+                formatValue={v => `${v.toLocaleString("fr-FR")} €`}
                 sublabel="Revenu moyen par client / transaction"
               />
               <SliderInput
                 label="Note Google actuelle" min={1} max={5} step={0.1}
                 value={currentNote} onChange={setCurrentNote}
-                formatValue={v => `${v.toFixed(1)} \u2605`}
+                formatValue={v => `${v.toFixed(1)} ★`}
                 sublabel="Votre note moyenne sur Google (sur 5)"
               />
             </div>
@@ -435,7 +435,7 @@ export default function SimulateurPage() {
         {step === 1 && (
           <div>
             <h3 style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: V2, marginBottom: "20px", fontWeight: 700 }}>
-              Outils NERV\u00dcR
+              Outils NERVÜR
             </h3>
             <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "32px" }}>
 
@@ -452,22 +452,22 @@ export default function SimulateurPage() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                   <div>
                     <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-                      <span style={{ fontSize: "20px" }}>🛡</span>
+                      <span style={{ fontSize: "14px", fontWeight: 700, color: "#ef4444" }}>S</span>
                       <span style={{ fontSize: "18px", fontWeight: 700 }}>Sentinel</span>
                       {useSentinel && <span style={{ fontSize: "10px", background: A1, color: "#0f1117", padding: "2px 8px", borderRadius: "4px", fontWeight: 700 }}>ACTIF</span>}
                     </div>
                     <p style={{ fontSize: "14px", color: useSentinel ? V3 : "#6B7280", lineHeight: 1.6, maxWidth: "500px" }}>
-                      Surveillance e-r\u00e9putation, gestion des avis Google, alertes en temps r\u00e9el, r\u00e9ponses assist\u00e9es par IA.
+                      Surveillance e-réputation, gestion des avis Google, alertes en temps réel, réponses assistées par IA.
                     </p>
                     <div style={{ display: "flex", gap: "16px", marginTop: "16px", flexWrap: "wrap" }}>
                       <span style={{ fontSize: "11px", padding: "4px 12px", border: `1px solid ${VG(0.1)}`, borderRadius: "4px", color: A2 }}>+15-25% de clients</span>
-                      <span style={{ fontSize: "11px", padding: "4px 12px", border: `1px solid ${VG(0.1)}`, borderRadius: "4px", color: V3 }}>8h/mois gagn\u00e9es</span>
+                      <span style={{ fontSize: "11px", padding: "4px 12px", border: `1px solid ${VG(0.1)}`, borderRadius: "4px", color: V3 }}>8h/mois gagnées</span>
                     </div>
                     <p style={{ fontSize: "10px", color: "#6B7280", marginTop: "8px", fontStyle: "italic" }}>
                       Source : BrightLocal 2025, Harvard Business School
                     </p>
                   </div>
-                  <span style={{ fontSize: "16px", fontWeight: 700, color: useSentinel ? V : "#6B7280", whiteSpace: "nowrap" }}>99 \u20ac/mois</span>
+                  <span style={{ fontSize: "16px", fontWeight: 700, color: useSentinel ? V : "#6B7280", whiteSpace: "nowrap" }}>99 €/mois</span>
                 </div>
               </button>
 
@@ -484,22 +484,22 @@ export default function SimulateurPage() {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                   <div>
                     <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
-                      <span style={{ fontSize: "20px" }}>\🔒</span>
+                      <span style={{ fontSize: "14px", fontWeight: 700, color: "#06b6d4" }}>V</span>
                       <span style={{ fontSize: "18px", fontWeight: 700 }}>Vault</span>
                       {useVault && <span style={{ fontSize: "10px", background: A2, color: "#0f1117", padding: "2px 8px", borderRadius: "4px", fontWeight: 700 }}>ACTIF</span>}
                     </div>
                     <p style={{ fontSize: "14px", color: useVault ? V3 : "#6B7280", lineHeight: 1.6, maxWidth: "500px" }}>
-                      Conformit\u00e9 RGPD automatis\u00e9e, mentions l\u00e9gales, politique de confidentialit\u00e9, banni\u00e8re cookies, registre des traitements.
+                      Conformité RGPD automatisée, mentions légales, politique de confidentialité, bannière cookies, registre des traitements.
                     </p>
                     <div style={{ display: "flex", gap: "16px", marginTop: "16px", flexWrap: "wrap" }}>
-                      <span style={{ fontSize: "11px", padding: "4px 12px", border: `1px solid ${VG(0.1)}`, borderRadius: "4px", color: A2 }}>10h/mois gagn\u00e9es</span>
-                      <span style={{ fontSize: "11px", padding: "4px 12px", border: `1px solid ${VG(0.1)}`, borderRadius: "4px", color: V3 }}>Risque RGPD r\u00e9duit</span>
+                      <span style={{ fontSize: "11px", padding: "4px 12px", border: `1px solid ${VG(0.1)}`, borderRadius: "4px", color: A2 }}>10h/mois gagnées</span>
+                      <span style={{ fontSize: "11px", padding: "4px 12px", border: `1px solid ${VG(0.1)}`, borderRadius: "4px", color: V3 }}>Risque RGPD réduit</span>
                     </div>
                     <p style={{ fontSize: "10px", color: "#6B7280", marginTop: "8px", fontStyle: "italic" }}>
-                      Source : CNIL 2025, amende moyenne PME : 15 000-50 000 \u20ac
+                      Source : CNIL 2025, amende moyenne PME : 15 000-50 000 €
                     </p>
                   </div>
-                  <span style={{ fontSize: "16px", fontWeight: 700, color: useVault ? V : "#6B7280", whiteSpace: "nowrap" }}>79 \u20ac/mois</span>
+                  <span style={{ fontSize: "16px", fontWeight: 700, color: useVault ? V : "#6B7280", whiteSpace: "nowrap" }}>79 €/mois</span>
                 </div>
               </button>
             </div>
@@ -512,7 +512,7 @@ export default function SimulateurPage() {
                     Investissement mensuel
                   </span>
                   <span style={{ fontSize: "20px", fontWeight: 800, color: V, letterSpacing: "-0.5px" }}>
-                    {(useSentinel ? 99 : 0) + (useVault ? 79 : 0)} \u20ac/mois
+                    {(useSentinel ? 99 : 0) + (useVault ? 79 : 0)} €/mois
                   </span>
                 </div>
               </div>
@@ -528,10 +528,10 @@ export default function SimulateurPage() {
             <RevealSection>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px", marginBottom: "48px" }}>
                 {[
-                  { label: "Revenu mensuel actuel", value: results.currentMonthlyRevenue, suffix: " \u20ac", prefix: "", color: V3 },
-                  { label: "Revenu mensuel projet\u00e9", value: results.projMonthlyRevenue, suffix: " \u20ac", prefix: "", color: V },
-                  { label: "Gain mensuel estim\u00e9", value: results.revenueIncrease, suffix: " \u20ac", prefix: "+", color: "#4ADE80" },
-                  { label: "Gain annuel estim\u00e9", value: results.annualRevenueIncrease, suffix: " \u20ac", prefix: "+", color: "#4ADE80" },
+                  { label: "Revenu mensuel actuel", value: results.currentMonthlyRevenue, suffix: " €", prefix: "", color: V3 },
+                  { label: "Revenu mensuel projeté", value: results.projMonthlyRevenue, suffix: " €", prefix: "", color: V },
+                  { label: "Gain mensuel estimé", value: results.revenueIncrease, suffix: " €", prefix: "+", color: "#4ADE80" },
+                  { label: "Gain annuel estimé", value: results.annualRevenueIncrease, suffix: " €", prefix: "+", color: "#4ADE80" },
                 ].map((stat, i) => (
                   <div key={i} style={{
                     padding: "32px 28px", border: `1px solid ${VG(0.08)}`,
@@ -557,13 +557,13 @@ export default function SimulateurPage() {
                 border: `1px solid ${VG(0.08)}`, background: "rgba(255,255,255,0.02)", borderRadius: "12px",
               }}>
                 <span style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "8px" }}>
-                  Croissance estim\u00e9e du chiffre d'affaires
+                  Croissance estimée du chiffre d'affaires
                 </span>
                 <span style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-3px", color: V }}>
                   <AnimatedCounter target={results.percentIncrease} prefix="+" suffix="%" />
                 </span>
                 <p style={{ fontSize: "11px", color: "#6B7280", marginTop: "8px", fontStyle: "italic" }}>
-                  Estimation bas\u00e9e sur les donn\u00e9es BrightLocal 2025 et Harvard Business School
+                  Estimation basée sur les données BrightLocal 2025 et Harvard Business School
                 </p>
               </div>
             </RevealSection>
@@ -572,10 +572,10 @@ export default function SimulateurPage() {
             <RevealSection>
               <div style={{ padding: "32px", border: `1px solid ${VG(0.08)}`, background: "rgba(255,255,255,0.02)", marginBottom: "48px", borderRadius: "12px" }}>
                 <h3 style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: V2, marginBottom: "28px", fontWeight: 700 }}>
-                  Comparaison avant / apr\u00e8s
+                  Comparaison avant / après
                 </h3>
                 <ComparisonBar label="Revenu mensuel" before={results.currentMonthlyRevenue} after={results.projMonthlyRevenue}
-                  maxVal={results.projMonthlyRevenue * 1.1} formatFn={v => `${v.toLocaleString("fr-FR")} \u20ac`} />
+                  maxVal={results.projMonthlyRevenue * 1.1} formatFn={v => `${v.toLocaleString("fr-FR")} €`} />
                 <ComparisonBar label="Clients par mois" before={monthlyClients} after={results.projMonthlyClients}
                   maxVal={results.projMonthlyClients * 1.1} formatFn={v => v.toLocaleString("fr-FR")} />
               </div>
@@ -585,18 +585,18 @@ export default function SimulateurPage() {
             <RevealSection>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: "16px", marginBottom: "48px" }}>
                 <div style={{ padding: "24px", border: `1px solid ${VG(0.08)}`, background: "rgba(255,255,255,0.02)", borderRadius: "12px" }}>
-                  <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "8px" }}>Co\u00fbt mensuel</span>
-                  <span style={{ fontSize: "24px", fontWeight: 800, color: V }}>{results.totalMonthlyCost} \u20ac</span>
+                  <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "8px" }}>Coût mensuel</span>
+                  <span style={{ fontSize: "24px", fontWeight: 800, color: V }}>{results.totalMonthlyCost} €</span>
                 </div>
                 <div style={{ padding: "24px", border: `1px solid ${VG(0.08)}`, background: "rgba(255,255,255,0.02)", borderRadius: "12px" }}>
-                  <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "8px" }}>Temps gagn\u00e9 / mois</span>
+                  <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "8px" }}>Temps gagné / mois</span>
                   <span style={{ fontSize: "24px", fontWeight: 800, color: "#4ADE80" }}>{results.monthlySavingsHours}h</span>
-                  <span style={{ fontSize: "11px", color: "#6B7280", display: "block", marginTop: "4px" }}>soit ~{results.monthlySavingsEuros} \u20ac \u00e9conomis\u00e9s</span>
+                  <span style={{ fontSize: "11px", color: "#6B7280", display: "block", marginTop: "4px" }}>soit ~{results.monthlySavingsEuros} € économisés</span>
                 </div>
                 {results.complianceRiskReduction > 0 && (
                   <div style={{ padding: "24px", border: `1px solid ${VG(0.08)}`, background: "rgba(255,255,255,0.02)", borderRadius: "12px" }}>
-                    <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "8px" }}>Risque RGPD \u00e9vit\u00e9</span>
-                    <span style={{ fontSize: "24px", fontWeight: 800, color: "#F59E0B" }}>~{results.complianceRiskReduction.toLocaleString("fr-FR")} \u20ac</span>
+                    <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "8px" }}>Risque RGPD évité</span>
+                    <span style={{ fontSize: "24px", fontWeight: 800, color: "#F59E0B" }}>~{results.complianceRiskReduction.toLocaleString("fr-FR")} €</span>
                     <span style={{ fontSize: "11px", color: "#6B7280", display: "block", marginTop: "4px" }}>Source : CNIL 2025</span>
                   </div>
                 )}
@@ -616,7 +616,7 @@ export default function SimulateurPage() {
                   <AnimatedCounter target={results.monthlyROI} suffix="%" />
                 </span>
                 <p style={{ fontSize: "13px", color: V3, marginTop: "8px" }}>
-                  Pour chaque euro investi, vous g\u00e9n\u00e9rez {(results.monthlyROI / 100).toFixed(1)}\u20ac de valeur
+                  Pour chaque euro investi, vous générez {(results.monthlyROI / 100).toFixed(1)}€ de valeur
                 </p>
               </div>
             </RevealSection>
@@ -624,14 +624,14 @@ export default function SimulateurPage() {
             {/* Sources */}
             <RevealSection>
               <div style={{ padding: "24px", border: `1px solid ${VG(0.06)}`, background: "rgba(255,255,255,0.01)", marginBottom: "48px", borderRadius: "10px" }}>
-                <h4 style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", marginBottom: "12px" }}>Sources et m\u00e9thodologie</h4>
+                <h4 style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7280", marginBottom: "12px" }}>Sources et méthodologie</h4>
                 <ul style={{ fontSize: "12px", color: "#6B7280", lineHeight: 2, listStyle: "none", padding: 0 }}>
-                  <li>\u2022 BrightLocal 2025 : 98% des consommateurs lisent les avis en ligne avant un achat</li>
-                  <li>\u2022 Harvard Business School : +1 \u00e9toile Google = +5 \u00e0 9% de chiffre d'affaires</li>
-                  <li>\u2022 Ifop 2024 : 92% des Fran\u00e7ais consultent les avis avant d'acheter</li>
-                  <li>\u2022 Spiegel Research Center : afficher des avis augmente la conversion de 270%</li>
-                  <li>\u2022 CNIL 2025 : amende moyenne RGPD pour TPE/PME : 15 000 \u00e0 50 000 \u20ac</li>
-                  <li>\u2022 Temps valoris\u00e9 au taux horaire moyen TPE/PME : 35 \u20ac/h</li>
+                  <li>• BrightLocal 2025 : 98% des consommateurs lisent les avis en ligne avant un achat</li>
+                  <li>• Harvard Business School : +1 étoile Google = +5 à 9% de chiffre d'affaires</li>
+                  <li>• Ifop 2024 : 92% des Français consultent les avis avant d'acheter</li>
+                  <li>• Spiegel Research Center : afficher des avis augmente la conversion de 270%</li>
+                  <li>• CNIL 2025 : amende moyenne RGPD pour TPE/PME : 15 000 à 50 000 €</li>
+                  <li>• Temps valorisé au taux horaire moyen TPE/PME : 35 €/h</li>
                 </ul>
               </div>
             </RevealSection>
@@ -645,10 +645,10 @@ export default function SimulateurPage() {
               }}>
                 <div style={{ position: "relative", zIndex: 2 }}>
                   <p style={{ fontSize: "18px", color: V3, marginBottom: "8px", lineHeight: 1.6 }}>
-                    Pr\u00eat \u00e0 transformer ces projections
+                    Prêt à transformer ces projections
                   </p>
                   <p style={{ fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 800, letterSpacing: "-1px", marginBottom: "28px" }}>
-                    en r\u00e9sultats <span style={{ color: V }}>concrets</span> ?
+                    en résultats <span style={{ color: V }}>concrets</span> ?
                   </p>
                   <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
                     <button onClick={() => navigate("/contact")} style={{
@@ -658,7 +658,7 @@ export default function SimulateurPage() {
                     }}
                       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(129,140,248,0.3)"; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                      Discuter de votre projet \u2192
+                      Discuter de votre projet →
                     </button>
                     <button onClick={goBack} style={{
                       padding: "18px 32px", background: "transparent", border: `1px solid ${VG(0.2)}`,
@@ -667,7 +667,7 @@ export default function SimulateurPage() {
                     }}
                       onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.4); e.currentTarget.style.color = V; }}
                       onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.2); e.currentTarget.style.color = V3; }}>
-                      \u2190 Modifier
+                      ← Modifier
                     </button>
                   </div>
                 </div>
@@ -688,7 +688,7 @@ export default function SimulateurPage() {
               }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.4); e.currentTarget.style.color = V; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.15); e.currentTarget.style.color = V3; }}>
-                \u2190 Retour
+                ← Retour
               </button>
             ) : <div />}
             <button onClick={goNext} style={{
@@ -698,7 +698,7 @@ export default function SimulateurPage() {
             }}
               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(129,140,248,0.3)"; }}
               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-              Continuer \u2192
+              Continuer →
             </button>
           </div>
         )}
@@ -722,10 +722,10 @@ export default function SimulateurPage() {
         padding: isMobile ? "24px 20px" : "32px 48px", borderTop: `1px solid ${VG(0.06)}`,
         display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: "center", gap: isMobile ? "12px" : "0",
       }}>
-        <img src="/logo-nervur.svg" alt="NERV\u00dcR" style={{
-          height: "28px", width: "auto", objectFit: "contain",
+        <img src="/logo-nav.png" alt="NERVÜR" style={{
+          height: "28px", width: "auto", objectFit: "contain", filter: "invert(1) brightness(1.15)",
         }} />
-        <span style={{ fontSize: "11px", color: "#4B5563" }}>\u00a9 2026 NERV\u00dcR \u2014 Tous droits r\u00e9serv\u00e9s</span>
+        <span style={{ fontSize: "11px", color: "#4B5563" }}>© 2026 NERVÜR — Tous droits réservés</span>
       </footer>
 
       <style>{`

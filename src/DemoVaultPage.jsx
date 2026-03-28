@@ -109,8 +109,8 @@ export default function DemoVaultPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)"
       }}>
-        <img src="/logo-nervur.svg" alt="NERVUR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "40px" : "70px", width: "auto", cursor: "pointer" }} />
+        <img src="/logo-nav.png" alt="NERVÜR" onClick={() => navigate("/")}
+          style={{ height: isMobile ? "40px" : "70px", width: "auto", cursor: "pointer", filter: "invert(1) brightness(1.15)" }} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             background: "transparent", border: "1px solid rgba(6,182,212,0.3)", color: "#A1A1AA",
@@ -243,7 +243,7 @@ export default function DemoVaultPage() {
               <p style={{ fontSize: "16px", fontWeight: 700, color: getScoreColor(result.score) }}>{getScoreLabel(result.score)}</p>
             </div>
 
-            {/* Criteria */}
+            {/* 4 Criteria - simple check/cross */}
             <div style={{ marginBottom: "24px" }}>
               <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px", color: "#A1A1AA" }}>Criteres analyses</h3>
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "12px" }}>
@@ -256,60 +256,30 @@ export default function DemoVaultPage() {
                       background: found ? "rgba(74,222,128,0.05)" : "rgba(239,68,68,0.05)",
                       display: "flex", alignItems: "center", gap: "12px",
                     }}>
-                      <span style={{ fontSize: "20px" }}>{found ? "\u2705" : "\u274C"}</span>
-                      <div>
-                        <p style={{ fontSize: "14px", fontWeight: 600, marginBottom: "2px" }}>{meta.label}</p>
-                        <p style={{ fontSize: "11px", color: found ? "#4ade80" : "#ef4444" }}>
-                          {found ? "Detecte" : "Non detecte"}
-                        </p>
-                      </div>
+                      <span style={{ fontSize: "18px", color: found ? "#4ade80" : "#ef4444" }}>{found ? "\u2713" : "\u2717"}</span>
+                      <span style={{ fontSize: "14px", fontWeight: 600 }}>{meta.label}</span>
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Recommendations (partially visible, rest blurred) */}
+            {/* Locked recommendations */}
             <div style={{ position: "relative", marginBottom: "40px" }}>
-              <h3 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "16px", color: "#A1A1AA" }}>Recommandations</h3>
-              <div style={{
-                padding: "24px", borderRadius: "12px",
-                border: "1px solid rgba(6,182,212,0.15)", background: "rgba(24,24,27,0.5)",
-              }}>
-                {/* Visible recommendations */}
-                {(result.recommendations || []).slice(0, 2).map((rec, i) => (
-                  <div key={i} style={{ display: "flex", gap: "10px", marginBottom: "14px" }}>
-                    <span style={{ color: "#06b6d4", fontWeight: 700, fontSize: "14px", minWidth: "20px" }}>{i + 1}.</span>
-                    <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6 }}>{rec}</p>
-                  </div>
-                ))}
-
-                {/* Blurred recommendations */}
-                <div className="blur-overlay">
-                  <div style={{ display: "flex", gap: "10px", marginBottom: "14px" }}>
-                    <span style={{ color: "#06b6d4", fontWeight: 700, fontSize: "14px", minWidth: "20px" }}>3.</span>
-                    <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6 }}>Ajoutez un registre des traitements RGPD pour documenter l'ensemble de vos traitements de donnees personnelles conformement a l'article 30 du RGPD.</p>
-                  </div>
-                  <div style={{ display: "flex", gap: "10px", marginBottom: "14px" }}>
-                    <span style={{ color: "#06b6d4", fontWeight: 700, fontSize: "14px", minWidth: "20px" }}>4.</span>
-                    <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6 }}>Verifiez que votre formulaire de contact integre une case a cocher de consentement explicite pour la collecte des donnees.</p>
-                  </div>
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <span style={{ color: "#06b6d4", fontWeight: 700, fontSize: "14px", minWidth: "20px" }}>5.</span>
-                    <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6 }}>Mettez en place une procedure de notification en cas de violation de donnees dans un delai de 72 heures comme exige par le RGPD.</p>
-                  </div>
-                </div>
+              <div className="blur-overlay" style={{ padding: "24px", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.06)", background: "rgba(24,24,27,0.4)" }}>
+                <h3 style={{ fontSize: "15px", fontWeight: 700, marginBottom: "12px", color: "#A1A1AA" }}>Recommandations</h3>
+                <p style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.7, marginBottom: "8px" }}>Generateur automatique de mentions legales, politique de confidentialite et CGV conformes...</p>
+                <p style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.7 }}>Audit RGPD complet avec registre des traitements et plan d'action personnalise.</p>
               </div>
-              {/* Lock overlay */}
               <div style={{
-                position: "absolute", bottom: 0, left: 0, right: 0, height: "60%",
-                background: "linear-gradient(transparent, rgba(15,17,23,0.95) 60%)",
-                display: "flex", alignItems: "flex-end", justifyContent: "center", paddingBottom: "20px",
-                borderRadius: "0 0 12px 12px",
+                position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+                background: "linear-gradient(transparent 10%, rgba(15,17,23,0.95) 70%)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                borderRadius: "12px",
               }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", color: "#06b6d4", fontSize: "13px", fontWeight: 600 }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  Contenu verrouille &mdash; Passez a Vault pour le rapport complet
+                <div style={{ textAlign: "center" }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" style={{ margin: "0 auto 10px" }}><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <p style={{ color: "#06b6d4", fontSize: "14px", fontWeight: 700 }}>Debloquez l'outil complet</p>
                 </div>
               </div>
             </div>
@@ -324,7 +294,7 @@ export default function DemoVaultPage() {
                 Debloquez le rapport complet
               </h2>
               <p style={{ fontSize: "14px", color: "#71717A", marginBottom: "24px", maxWidth: "460px", margin: "0 auto 24px", lineHeight: 1.7 }}>
-                Generateur de documents legaux, registre RGPD, veille juridique, historique des scans et recommandations IA completes.
+                Generateur de documents legaux, registre RGPD, veille juridique et recommandations IA.
               </p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "16px 44px", background: "#06b6d4", border: "none", borderRadius: "12px",
@@ -333,7 +303,7 @@ export default function DemoVaultPage() {
               }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 40px rgba(6,182,212,0.35)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                Debloquez le rapport complet + generateur &mdash; 19&#8364;/mois
+                Contactez-nous
               </button>
               <p style={{ fontSize: "12px", color: "#52525B", marginTop: "12px" }}>Sans engagement. Annulez a tout moment.</p>
             </div>

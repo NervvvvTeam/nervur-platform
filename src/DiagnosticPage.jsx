@@ -19,9 +19,9 @@ const useIsMobile = (bp = 768) => {
 
 // ═══ CATEGORIES ═══
 const CATEGORIES = {
-  reputation: { label: "E-r\u00e9putation", color: "#818CF8", emoji: "\🛡" },
-  conformite: { label: "Conformit\u00e9 l\u00e9gale", color: "#4ADE80", emoji: "\🔒" },
-  presence: { label: "Pr\u00e9sence digitale", color: "#60A5FA", emoji: "\🌐" },
+  reputation: { label: "E-réputation", color: "#818CF8" },
+  conformite: { label: "Conformité légale", color: "#4ADE80" },
+  presence: { label: "Présence digitale", color: "#60A5FA" },
 };
 
 // ═══ QUESTIONS (TPE/PME focused, Yes/No/Je ne sais pas) ═══
@@ -38,7 +38,7 @@ const QUESTIONS = [
   },
   {
     id: 2, category: "reputation",
-    question: "G\u00e9rez-vous activement vos avis Google ?",
+    question: "Gérez-vous activement vos avis Google ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -47,7 +47,7 @@ const QUESTIONS = [
   },
   {
     id: 3, category: "reputation",
-    question: "R\u00e9pondez-vous aux avis de vos clients (positifs et n\u00e9gatifs) ?",
+    question: "Répondez-vous aux avis de vos clients (positifs et négatifs) ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -65,7 +65,7 @@ const QUESTIONS = [
   },
   {
     id: 5, category: "reputation",
-    question: "Demandez-vous \u00e0 vos clients satisfaits de laisser un avis ?",
+    question: "Demandez-vous à vos clients satisfaits de laisser un avis ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -75,7 +75,7 @@ const QUESTIONS = [
   // Conformité (5 questions)
   {
     id: 6, category: "conformite",
-    question: "Avez-vous des mentions l\u00e9gales sur votre site web ?",
+    question: "Avez-vous des mentions légales sur votre site web ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -84,7 +84,7 @@ const QUESTIONS = [
   },
   {
     id: 7, category: "conformite",
-    question: "Votre site a-t-il une banni\u00e8re de consentement cookies (RGPD) ?",
+    question: "Votre site a-t-il une bannière de consentement cookies (RGPD) ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -93,7 +93,7 @@ const QUESTIONS = [
   },
   {
     id: 8, category: "conformite",
-    question: "Avez-vous une politique de confidentialit\u00e9 \u00e0 jour ?",
+    question: "Avez-vous une politique de confidentialité à jour ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -102,7 +102,7 @@ const QUESTIONS = [
   },
   {
     id: 9, category: "conformite",
-    question: "Savez-vous quelles donn\u00e9es personnelles vous collectez sur vos clients ?",
+    question: "Savez-vous quelles données personnelles vous collectez sur vos clients ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -111,7 +111,7 @@ const QUESTIONS = [
   },
   {
     id: 10, category: "conformite",
-    question: "Avez-vous d\u00e9sign\u00e9 un responsable de la protection des donn\u00e9es (DPO) ?",
+    question: "Avez-vous désigné un responsable de la protection des données (DPO) ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -130,7 +130,7 @@ const QUESTIONS = [
   },
   {
     id: 12, category: "presence",
-    question: "Votre site est-il adapt\u00e9 aux mobiles (responsive) ?",
+    question: "Votre site est-il adapté aux mobiles (responsive) ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -139,7 +139,7 @@ const QUESTIONS = [
   },
   {
     id: 13, category: "presence",
-    question: "Utilisez-vous Google My Business (fiche \u00e9tablissement) ?",
+    question: "Utilisez-vous Google My Business (fiche établissement) ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -148,7 +148,7 @@ const QUESTIONS = [
   },
   {
     id: 14, category: "presence",
-    question: "\u00cates-vous pr\u00e9sent sur les r\u00e9seaux sociaux professionnels ?",
+    question: "Êtes-vous présent sur les réseaux sociaux professionnels ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -157,7 +157,7 @@ const QUESTIONS = [
   },
   {
     id: 15, category: "presence",
-    question: "Apparaissez-vous dans les r\u00e9sultats Google pour votre activit\u00e9 ?",
+    question: "Apparaissez-vous dans les résultats Google pour votre activité ?",
     options: [
       { label: "Oui", score: 10 },
       { label: "Non", score: 0 },
@@ -206,11 +206,11 @@ const RevealSection = ({ children }) => {
 
 // ═══ GRADE LABEL ═══
 const getGrade = (score) => {
-  if (score >= 85) return { grade: "A", label: "Excellent", color: "#4ADE80", desc: "Votre pr\u00e9sence digitale est bien g\u00e9r\u00e9e. Quelques optimisations pour atteindre la perfection." };
-  if (score >= 70) return { grade: "B", label: "Bon", color: "#60A5FA", desc: "Bonne base. Des axes d'am\u00e9lioration concrets peuvent vous faire passer au niveau sup\u00e9rieur." };
-  if (score >= 50) return { grade: "C", label: "Moyen", color: "#FBBF24", desc: "Votre pr\u00e9sence digitale a du potentiel mais manque de structure. Un plan d'action cibl\u00e9 changerait tout." };
-  if (score >= 30) return { grade: "D", label: "Insuffisant", color: "#F97316", desc: "Plusieurs fondamentaux manquent. Un accompagnement adapt\u00e9 peut rapidement am\u00e9liorer votre situation." };
-  return { grade: "E", label: "Critique", color: "#EF4444", desc: "Des actions urgentes sont n\u00e9cessaires. La bonne nouvelle : chaque am\u00e9lioration aura un impact imm\u00e9diat." };
+  if (score >= 85) return { grade: "A", label: "Excellent", color: "#4ADE80", desc: "Votre présence digitale est bien gérée. Quelques optimisations pour atteindre la perfection." };
+  if (score >= 70) return { grade: "B", label: "Bon", color: "#60A5FA", desc: "Bonne base. Des axes d'amélioration concrets peuvent vous faire passer au niveau supérieur." };
+  if (score >= 50) return { grade: "C", label: "Moyen", color: "#FBBF24", desc: "Votre présence digitale a du potentiel mais manque de structure. Un plan d'action ciblé changerait tout." };
+  if (score >= 30) return { grade: "D", label: "Insuffisant", color: "#F97316", desc: "Plusieurs fondamentaux manquent. Un accompagnement adapté peut rapidement améliorer votre situation." };
+  return { grade: "E", label: "Critique", color: "#EF4444", desc: "Des actions urgentes sont nécessaires. La bonne nouvelle : chaque amélioration aura un impact immédiat." };
 };
 
 // ═══ RADAR CHART (Pure SVG) ═══
@@ -229,7 +229,7 @@ const RadarChart = ({ scores, size = 280 }) => {
   const dataPath = dataPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ") + " Z";
 
   return (
-    <svg width={size} height={size} style={{ display: "block", margin: "0 auto" }} role="img" aria-label="R\u00e9sultats du diagnostic">
+    <svg width={size} height={size} style={{ display: "block", margin: "0 auto" }} role="img" aria-label="Résultats du diagnostic">
       {/* Grid levels */}
       {levels.map((lvl, li) => (
         <polygon key={li} points={categories.map((_, i) => { const p = getPoint(i, lvl); return `${p.x},${p.y}`; }).join(" ")}
@@ -273,7 +273,7 @@ export default function DiagnosticPage() {
   const [showResults, setShowResults] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  useSEO("Diagnostic E-R\u00e9putation & Conformit\u00e9 Gratuit | NERV\u00dcR", "\u00c9valuez la gestion de votre e-r\u00e9putation et votre conformit\u00e9 RGPD en 3 minutes. Diagnostic gratuit avec recommandations personnalis\u00e9es.", { path: "/diagnostic" });
+  useSEO("Diagnostic E-Réputation & Conformité Gratuit | NERVÜR", "Évaluez la gestion de votre e-réputation et votre conformité RGPD en 3 minutes. Diagnostic gratuit avec recommandations personnalisées.", { path: "/diagnostic" });
 
   const selectAnswer = (qIndex, optionIndex, score) => {
     setSelectedOption(optionIndex);
@@ -317,16 +317,16 @@ export default function DiagnosticPage() {
       recs.push({
         cat: "reputation",
         tool: "Sentinel",
-        title: "Surveillance e-r\u00e9putation urgente",
-        desc: "Vos avis Google ne sont pas g\u00e9r\u00e9s. 92% des consommateurs consultent les avis avant d'acheter (Ifop 2024). Sentinel surveille, alerte et vous aide \u00e0 r\u00e9pondre automatiquement.",
+        title: "Surveillance e-réputation urgente",
+        desc: "Vos avis Google ne sont pas gérés. 92% des consommateurs consultent les avis avant d'acheter (Ifop 2024). Sentinel surveille, alerte et vous aide à répondre automatiquement.",
         priority: "Haute",
       });
     } else if (catScores.reputation < 80) {
       recs.push({
         cat: "reputation",
         tool: "Sentinel",
-        title: "Optimisation e-r\u00e9putation",
-        desc: "Votre gestion des avis peut \u00eatre am\u00e9lior\u00e9e. Sentinel automatise la surveillance et g\u00e9n\u00e8re des r\u00e9ponses personnalis\u00e9es pour am\u00e9liorer votre note Google.",
+        title: "Optimisation e-réputation",
+        desc: "Votre gestion des avis peut être améliorée. Sentinel automatise la surveillance et génère des réponses personnalisées pour améliorer votre note Google.",
         priority: "Moyenne",
       });
     }
@@ -336,16 +336,16 @@ export default function DiagnosticPage() {
       recs.push({
         cat: "conformite",
         tool: "Vault",
-        title: "Mise en conformit\u00e9 RGPD urgente",
-        desc: "Votre site pr\u00e9sente des risques l\u00e9gaux importants. L'amende moyenne RGPD pour une PME est de 15 000 \u00e0 50 000 \u20ac (CNIL 2025). Vault g\u00e9n\u00e8re automatiquement vos mentions l\u00e9gales, politique de confidentialit\u00e9 et banni\u00e8re cookies.",
+        title: "Mise en conformité RGPD urgente",
+        desc: "Votre site présente des risques légaux importants. L'amende moyenne RGPD pour une PME est de 15 000 à 50 000 € (CNIL 2025). Vault génère automatiquement vos mentions légales, politique de confidentialité et bannière cookies.",
         priority: "Haute",
       });
     } else if (catScores.conformite < 80) {
       recs.push({
         cat: "conformite",
         tool: "Vault",
-        title: "Renforcement conformit\u00e9",
-        desc: "Quelques points de conformit\u00e9 peuvent \u00eatre am\u00e9lior\u00e9s. Vault v\u00e9rifie et maintient automatiquement vos documents l\u00e9gaux \u00e0 jour.",
+        title: "Renforcement conformité",
+        desc: "Quelques points de conformité peuvent être améliorés. Vault vérifie et maintient automatiquement vos documents légaux à jour.",
         priority: "Moyenne",
       });
     }
@@ -355,8 +355,8 @@ export default function DiagnosticPage() {
       recs.push({
         cat: "presence",
         tool: "Sentinel",
-        title: "Am\u00e9lioration de la visibilit\u00e9",
-        desc: "Votre pr\u00e9sence en ligne est faible. Sentinel vous aide \u00e0 am\u00e9liorer votre visibilit\u00e9 Google gr\u00e2ce \u00e0 une meilleure gestion de vos avis et de votre fiche \u00e9tablissement.",
+        title: "Amélioration de la visibilité",
+        desc: "Votre présence en ligne est faible. Sentinel vous aide à améliorer votre visibilité Google grâce à une meilleure gestion de vos avis et de votre fiche établissement.",
         priority: "Haute",
       });
     }
@@ -367,7 +367,7 @@ export default function DiagnosticPage() {
         cat: "reputation",
         tool: "Sentinel + Vault",
         title: "Maintien et automatisation",
-        desc: "Votre pr\u00e9sence digitale est bien g\u00e9r\u00e9e. Sentinel et Vault peuvent automatiser vos t\u00e2ches r\u00e9p\u00e9titives et vous faire gagner du temps.",
+        desc: "Votre présence digitale est bien gérée. Sentinel et Vault peuvent automatiser vos tâches répétitives et vous faire gagner du temps.",
         priority: "Basse",
       });
     }
@@ -404,11 +404,11 @@ export default function DiagnosticPage() {
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(15,17,23,0.92)", backdropFilter: "blur(24px)",
         borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERV\u00dcR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
+        <img src="/logo-nav.png" alt="NERVÜR" onClick={() => navigate("/")}
+          style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer", filter: "invert(1) brightness(1.15)" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" onClick={() => navigate("/")}>
-            \u2190 Accueil
+            ← Accueil
           </button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>
             Contact
@@ -425,7 +425,7 @@ export default function DiagnosticPage() {
         }}
           onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
           onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
-          \u2190 Retour
+          ← Retour
         </button>
       </div>
 
@@ -435,7 +435,7 @@ export default function DiagnosticPage() {
         {!showResults && (
           <div>
             <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "20px", fontFamily: "monospace" }}>
-              // Diagnostic e-r\u00e9putation & conformit\u00e9
+              // Diagnostic e-réputation & conformité
             </span>
 
             {/* Progress bar */}
@@ -445,7 +445,7 @@ export default function DiagnosticPage() {
                   Question {String(currentQ + 1).padStart(2, "0")} / {String(QUESTIONS.length).padStart(2, "0")}
                 </span>
                 <span style={{ fontSize: "10px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#6B7280", display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span>{CATEGORIES[q.category].emoji}</span>
+                  <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: CATEGORIES[q.category].color, display: "inline-block" }} />
                   {CATEGORIES[q.category].label}
                 </span>
               </div>
@@ -493,7 +493,7 @@ export default function DiagnosticPage() {
                       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                       transition: "all 0.3s",
                     }}>
-                      {isSelected ? "\u2713" : String.fromCharCode(65 + i)}
+                      {isSelected ? "✓" : String.fromCharCode(65 + i)}
                     </span>
                     {opt.label}
                     {/* Slide accent */}
@@ -517,7 +517,7 @@ export default function DiagnosticPage() {
               }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.2); e.currentTarget.style.color = V3; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.08); e.currentTarget.style.color = "#6B7280"; }}>
-                \u2190 Pr\u00e9c\u00e9dente
+                ← Précédente
               </button>
             )}
           </div>
@@ -528,7 +528,7 @@ export default function DiagnosticPage() {
         {showResults && results && (
           <div>
             <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#6B7280", display: "block", marginBottom: "20px", fontFamily: "monospace" }}>
-              // R\u00e9sultats du diagnostic
+              // Résultats du diagnostic
             </span>
 
             {/* Grade hero */}
@@ -564,7 +564,7 @@ export default function DiagnosticPage() {
                 textAlign: "center", borderRadius: "12px",
               }}>
                 <h3 style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: V2, marginBottom: "32px", fontWeight: 700 }}>
-                  R\u00e9partition par cat\u00e9gorie
+                  Répartition par catégorie
                 </h3>
                 <RadarChart scores={results.catScores} />
               </div>
@@ -580,7 +580,7 @@ export default function DiagnosticPage() {
                   }}>
                     <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "2px", background: `linear-gradient(90deg, transparent, ${CATEGORIES[cat].color}, transparent)` }} />
                     <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
-                      <span style={{ fontSize: "16px" }}>{CATEGORIES[cat].emoji}</span>
+                      <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: CATEGORIES[cat].color, display: "inline-block", flexShrink: 0 }} />
                       <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: CATEGORIES[cat].color, fontWeight: 600 }}>
                         {CATEGORIES[cat].label}
                       </span>
@@ -605,7 +605,7 @@ export default function DiagnosticPage() {
               <RevealSection>
                 <div style={{ marginBottom: "48px" }}>
                   <h3 style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: V2, marginBottom: "20px", fontWeight: 700 }}>
-                    Recommandations personnalis\u00e9es
+                    Recommandations personnalisées
                   </h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                     {results.recs.map((rec, i) => (
@@ -650,7 +650,7 @@ export default function DiagnosticPage() {
                 position: "relative", overflow: "hidden", borderRadius: "16px",
               }}>
                 <div style={{ position: "relative", zIndex: 2 }}>
-                  <p style={{ fontSize: "16px", color: V3, marginBottom: "8px" }}>Passez de {results.grade} \u00e0 A avec</p>
+                  <p style={{ fontSize: "16px", color: V3, marginBottom: "8px" }}>Passez de {results.grade} à A avec</p>
                   <p style={{ fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 800, letterSpacing: "-1px", marginBottom: "28px" }}>
                     <span style={{ background: `linear-gradient(135deg, ${A1}, ${A2})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Sentinel</span> et{" "}
                     <span style={{ background: `linear-gradient(135deg, ${A2}, ${A1})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Vault</span>.
@@ -663,7 +663,7 @@ export default function DiagnosticPage() {
                     }}
                       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(129,140,248,0.3)"; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                      Discuter avec un expert \u2192
+                      Discuter avec un expert →
                     </button>
                     <button onClick={() => navigate("/simulateur")} style={{
                       padding: "18px 32px", background: "transparent", border: `1px solid ${VG(0.2)}`,
@@ -672,7 +672,7 @@ export default function DiagnosticPage() {
                     }}
                       onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.4); e.currentTarget.style.color = V; }}
                       onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.2); e.currentTarget.style.color = V3; }}>
-                      Calculer mon ROI \u2192
+                      Calculer mon ROI →
                     </button>
                   </div>
                 </div>
@@ -704,7 +704,7 @@ export default function DiagnosticPage() {
           }}>
             <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4ADE80", flexShrink: 0 }} />
             <span style={{ fontSize: "11px", color: V3, letterSpacing: "0.5px" }}>
-              ~<strong style={{ color: V }}>3 min</strong> \u00b7 100% gratuit
+              ~<strong style={{ color: V }}>3 min</strong> · 100% gratuit
             </span>
           </div>
         </aside>
@@ -715,8 +715,8 @@ export default function DiagnosticPage() {
         padding: isMobile ? "24px 20px" : "32px 48px", borderTop: `1px solid ${VG(0.06)}`,
         display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: "center", gap: isMobile ? "12px" : "0",
       }}>
-        <img src="/logo-nervur.svg" alt="NERV\u00dcR" style={{ height: "28px", width: "auto", objectFit: "contain" }} />
-        <span style={{ fontSize: "11px", color: "#4B5563" }}>\u00a9 2026 NERV\u00dcR \u2014 Tous droits r\u00e9serv\u00e9s</span>
+        <img src="/logo-nav.png" alt="NERVÜR" style={{ height: "28px", width: "auto", objectFit: "contain", filter: "invert(1) brightness(1.15)" }} />
+        <span style={{ fontSize: "11px", color: "#4B5563" }}>© 2026 NERVÜR — Tous droits réservés</span>
       </footer>
 
       <style>{`

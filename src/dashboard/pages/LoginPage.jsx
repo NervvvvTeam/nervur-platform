@@ -74,10 +74,10 @@ export default function LoginPage() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        padding: isWide ? "60px" : "28px 20px",
+        padding: isWide ? "60px" : "48px 20px",
         position: "relative",
         overflow: "hidden",
-        ...(isWide ? { flex: 1 } : {}),
+        ...(isWide ? { flex: 1 } : { minHeight: "220px" }),
       }}>
         <div style={{
           position: "absolute",
@@ -92,9 +92,9 @@ export default function LoginPage() {
         }} />
 
         <img
-          src="/logo-nervur.svg"
+          src="/logo-nav.png"
           alt="NERVÜR"
-          style={{ height: isWide ? 64 : 44, width: "auto", marginBottom: isWide ? 24 : 10, position: "relative" }}
+          style={{ height: isWide ? 64 : 44, width: "auto", marginBottom: isWide ? 24 : 10, position: "relative", filter: "invert(1) brightness(1.15)" }}
         />
 
         <h1 style={{
@@ -269,15 +269,15 @@ export default function LoginPage() {
 
           <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid #2a2d3a" }}>
             <p style={{ fontSize: 12, color: "#4b5563", lineHeight: 1.6, margin: 0 }}>
-              Votre compte est cr&eacute;&eacute; par l'&eacute;quipe NERV&Uuml;R lors de votre souscription.
+              Votre compte est créé par l'équipe NERVÜR lors de votre souscription.
             </p>
             <a href="/contact" style={{ fontSize: 13, color: "#6366f1", textDecoration: "none", fontWeight: 500, display: "inline-block", marginTop: 8 }}>
-              Pas encore client ? Contactez-nous &rarr;
+              Pas encore client ? Contactez-nous →
             </a>
             <p style={{ fontSize: 11, color: "#4b5563", lineHeight: 1.6, marginTop: 12 }}>
-              En vous connectant, vos donn&eacute;es sont trait&eacute;es conform&eacute;ment &agrave; notre{" "}
+              En vous connectant, vos données sont traitées conformément à notre{" "}
               <a href="/politique-de-confidentialite" style={{ color: "#6366f1", textDecoration: "underline", textUnderlineOffset: "3px" }}>
-                politique de confidentialit&eacute;
+                politique de confidentialité
               </a>.
             </p>
           </div>

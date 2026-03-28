@@ -199,7 +199,10 @@
       "Bash(grep -rn '\\\\\\\\é\\\\|\\\\\\\\è\\\\|\\\\\\\\ê\\\\|\\\\\\\\à\\\\|\\\\\\\\ô\\\\|\\\\\\\\â' src/dashboard/pages/)",
       "Bash(sed -i \"s|url.replace\\(/\\\\/$/, ''''\\)|url.replace\\(/\\\\/$/, ''''\\)|\" routes/vault.js)",
       "Bash(sed -i \"s|url.replace\\(//$/, ''''\\)|url.replace\\(/\\\\/$/, ''''\\)|\" routes/vault.js)",
-      "Bash(node -c routes/vault.js)"
+      "Bash(node -c routes/vault.js)",
+      "Bash(grep -n '\\\\\\\\u00\\\\|\\\\\\\\u20\\\\|\\\\\\\\u21\\\\|\\\\\\\\u26\\\\|\\\\\\\\u27' src/SimulateurPage.jsx)",
+      "Bash(grep -n '\\\\\\\\u00\\\\|\\\\\\\\u20\\\\|\\\\\\\\u21\\\\|\\\\\\\\u26\\\\|\\\\\\\\u27' src/DiagnosticPage.jsx)",
+      "Bash(npx --no-install vite build --mode development)"
     ]
   }
 }

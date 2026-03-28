@@ -293,7 +293,7 @@ export default function SentinelPage() {
 
       {/* NAV */}
       <nav aria-label="Navigation principale" className="flex justify-between items-center fixed top-0 left-0 right-0 z-[100] bg-[rgba(9,9,11,0.92)] backdrop-blur-[24px]" style={{ padding: isMobile ? "12px 20px" : "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} className="w-auto object-contain cursor-pointer" style={{ height: isMobile ? "34px" : "42px" }} />
+        <img src="/logo-nav.png" alt="NERVÜR" onClick={() => navigate("/")} className="w-auto object-contain cursor-pointer" style={{ height: isMobile ? "34px" : "42px", filter: "invert(1) brightness(1.15)" }} />
         <div className="flex items-center gap-4">
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
