@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useMemo, useState, useEffect } from "react";
+import LogoNervur from "../../components/LogoNervur";
 
 function useBreakpoint() {
   const getBreakpoint = () => {
@@ -197,7 +198,7 @@ export default function Layout() {
               <div className="font-bold text-[#FAFAFA] tracking-wider text-xs">N</div>
             ) : (
               <>
-                <img src="/logo-nervur.svg" alt="NERVÜR" className="h-[32px] w-auto object-contain" />
+                <LogoNervur height={32} onClick={() => navigate("/app/portal")} />
                 <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>
               </>
             )}
@@ -232,7 +233,7 @@ export default function Layout() {
       {isMobile && (
         <>
           <header className="fixed top-0 left-0 right-0 z-50 bg-[#12131a]/95 backdrop-blur-md border-b border-[#1e1e2a] px-4 py-2.5 flex justify-between items-center">
-            <img src="/logo-nervur.svg" alt="NERVÜR" className="h-[28px] w-auto object-contain" />
+            <LogoNervur height={28} onClick={() => navigate("/app/portal")} />
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="bg-transparent border-none text-[#A1A1AA] text-xl cursor-pointer p-1.5 rounded-lg hover:bg-[#1e1e2a] transition-colors duration-150">
               {mobileMenuOpen ? "✕" : "☰"}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import useJsonLd from "./useJsonLd";
 import useFadeOnScroll from "./useFadeOnScroll";
+import LogoNervur from "./components/LogoNervur";
 
 // ─── NERVÜR AURORA ───
 // Dark theme + 3-accent palette (Indigo, Green, Pink)
@@ -598,8 +599,7 @@ export default function NervurAurora() {
         background: "rgba(15,17,23,0.85)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
-          height: isMobile ? "32px" : "40px", width: "auto" }} />
+        <LogoNervur height={isMobile ? 32 : 40} onClick={() => navigate("/")} />
         {/* Desktop nav */}
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
@@ -1395,16 +1395,15 @@ export default function NervurAurora() {
           <RevealSection delay={100}>
             <div style={{
               background: "linear-gradient(145deg, #0c0e18 0%, #141828 40%, #1a1040 100%)",
-              aspectRatio: isMobile ? "auto" : "3/2",
-              minHeight: isMobile ? "200px" : "auto",
+              minHeight: isMobile ? "160px" : "auto",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              padding: "28px 24px", borderRadius: "16px",
+              padding: "24px 20px", borderRadius: "16px",
               position: "relative", overflow: "hidden",
               border: "1px solid rgba(99,102,241,0.12)",
             }}>
               {/* Animated background particles */}
               <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
-                {[...Array(12)].map((_, i) => (
+                {[...Array(6)].map((_, i) => (
                   <div key={i} style={{
                     position: "absolute",
                     width: `${2 + Math.random() * 3}px`, height: `${2 + Math.random() * 3}px`,
@@ -1418,9 +1417,9 @@ export default function NervurAurora() {
               </div>
 
               {/* Glowing pulse ring */}
-              <div style={{ position: "relative", width: "70px", height: "70px", marginBottom: "18px" }}>
+              <div style={{ position: "relative", width: "50px", height: "50px", marginBottom: "14px" }}>
                 <div style={{
-                  position: "absolute", inset: "-8px", borderRadius: "50%",
+                  position: "absolute", inset: "-6px", borderRadius: "50%",
                   background: "radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%)",
                   animation: "nervur-pulse 2.5s ease-in-out infinite",
                 }} />
@@ -1434,41 +1433,41 @@ export default function NervurAurora() {
                   animation: "nervur-spin 2s linear infinite",
                 }} />
                 <div style={{
-                  position: "absolute", inset: "8px", borderRadius: "50%",
+                  position: "absolute", inset: "6px", borderRadius: "50%",
                   border: "1.5px solid transparent", borderBottomColor: "#a5b4fc",
                   animation: "nervur-spin 3s linear infinite reverse",
                 }} />
                 {/* Center icon */}
                 <div style={{
                   position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-                  width: "36px", height: "36px", borderRadius: "10px",
+                  width: "28px", height: "28px", borderRadius: "8px",
                   background: "linear-gradient(135deg, #6366f1, #818CF8)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  boxShadow: "0 0 20px rgba(99,102,241,0.4)",
+                  boxShadow: "0 0 16px rgba(99,102,241,0.4)",
                 }}>
-                  <span style={{ color: "white", fontSize: "18px", fontWeight: 900 }}>N</span>
+                  <span style={{ color: "white", fontSize: "14px", fontWeight: 900 }}>N</span>
                 </div>
               </div>
 
               {/* Title */}
               <div style={{
-                fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
-                color: "#818CF8", marginBottom: "8px", textAlign: "center",
+                fontSize: "11px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase",
+                color: "#818CF8", marginBottom: "6px", textAlign: "center",
               }}>
                 En construction
               </div>
               <div style={{
-                fontSize: "17px", fontWeight: 700, color: "#FAFAFA", textAlign: "center",
-                marginBottom: "6px", lineHeight: 1.3,
+                fontSize: "14px", fontWeight: 700, color: "#FAFAFA", textAlign: "center",
+                marginBottom: "4px", lineHeight: 1.3,
               }}>
                 Nouveau projet en cours
               </div>
-              <div style={{ fontSize: "12px", color: "#71717A", textAlign: "center", maxWidth: "220px", lineHeight: 1.5 }}>
+              <div style={{ fontSize: "11px", color: "#71717A", textAlign: "center", maxWidth: "200px", lineHeight: 1.5 }}>
                 Restez connectés.
               </div>
 
               {/* Progress bar */}
-              <div style={{ marginTop: "24px", width: "140px", height: "3px", borderRadius: "2px", background: "rgba(99,102,241,0.15)", overflow: "hidden" }}>
+              <div style={{ marginTop: "16px", width: "110px", height: "2px", borderRadius: "2px", background: "rgba(99,102,241,0.15)", overflow: "hidden" }}>
                 <div style={{
                   width: "60%", height: "100%", borderRadius: "2px",
                   background: "linear-gradient(90deg, #6366f1, #818CF8)",
@@ -1692,7 +1691,7 @@ export default function NervurAurora() {
         <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
-            <img src="/logo-nervur.svg" alt="NERVÜR — Éditeur de technologies de croissance pour PME" style={{ height: "28px", width: "auto", marginBottom: "16px" }} />
+            <LogoNervur height={28} onClick={() => navigate("/")} style={{ marginBottom: "16px" }} />
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Agence Digital NERVUR</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
             <p style={{ fontSize: "12px", color: "#52525B", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>

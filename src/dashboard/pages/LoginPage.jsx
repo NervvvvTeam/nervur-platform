@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import LogoNervur from "../../components/LogoNervur";
 
 const TOOLS = [
   { name: "Sentinel", color: "#ef4444" },
@@ -91,11 +92,7 @@ export default function LoginPage() {
           pointerEvents: "none",
         }} />
 
-        <img
-          src="/logo-nervur.svg"
-          alt="NERVÜR"
-          style={{ height: isWide ? 64 : 44, width: "auto", marginBottom: isWide ? 24 : 10, position: "relative" }}
-        />
+        <LogoNervur height={isWide ? 64 : 44} onClick={() => navigate("/")} style={{ marginBottom: isWide ? 24 : 10, position: "relative" }} />
 
         <h1 style={{
           fontSize: isWide ? 32 : 20,
