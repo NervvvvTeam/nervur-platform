@@ -483,7 +483,7 @@ function ParticleNetwork({ width = 300, height = 600 }) {
 // ═══════════════════════════════════════════
 const ACTIVITY_ITEMS = [
   { icon: "🛡", text: "Nouvel avis 5 étoiles détecté", tool: "Sentinel", color: "#ef4444", time: "Il y a 2 min" },
-  { icon: "🔒", text: "Scan sécurité terminé — 0 fuite", tool: "Vault", color: "#06b6d4", time: "Il y a 3h" },
+  { icon: "🔒", text: "Scan conformité RGPD terminé", tool: "Vault", color: "#06b6d4", time: "Il y a 3h" },
   { icon: "🛡", text: "Réponse IA publiée automatiquement", tool: "Sentinel", color: "#ef4444", time: "Il y a 5h" },
 ];
 
@@ -568,16 +568,16 @@ const TOOLS = [
   },
   // Phantom et Pulse retirés — code conservé, réactivable
   {
-    id: "vault", name: "Vault", subtitle: "Cybersécurité",
-    desc: "Surveillez les fuites de données et vérifiez si vos emails professionnels sont compromis.",
+    id: "vault", name: "Vault", subtitle: "Agent Juridique IA",
+    desc: "Agent Juridique IA — Conformité & Protection juridique. Scan RGPD, documents légaux et veille juridique.",
     color: "#06b6d4", gradient: "linear-gradient(135deg, #06b6d4, #22d3ee)",
-    Icon: ShieldCheckIcon, path: "/app/vault", stats: "Scans • Alertes • Surveillance"
+    Icon: ShieldCheckIcon, path: "/app/vault", stats: "RGPD • Générateur • Registre • Veille"
   },
 ];
 
 const TIPS = [
   "Répondez aux avis dans les 24h pour améliorer votre score.",
-  "Lancez un scan Vault chaque mois pour vérifier vos emails.",
+  "Lancez un scan Vault chaque mois pour vérifier votre conformité RGPD.",
 ];
 
 // ═══════════════════════════════════════════
@@ -898,8 +898,12 @@ function RightPanel({ hasAccess }) {
         }
         if (hasAccess("vault")) {
           try {
-            const scans = await get("/api/vault/history");
-            data.scans = scans?.length || 0;
+            const checklist = await get("/api/vault/checklist");
+            const registre = await get("/api/vault/registre");
+            const total = checklist?.items?.length || 0;
+            const done = checklist?.items?.filter(i => i.done)?.length || 0;
+            data.conformiteScore = total > 0 ? Math.round((done / total) * 100) : "—";
+            data.registreCount = registre?.length || 0;
           } catch(e) {}
         }
         data.tools = [hasAccess("sentinel"), hasAccess("vault")].filter(Boolean).length;
@@ -916,7 +920,7 @@ function RightPanel({ hasAccess }) {
     activities.push({ icon: "💬", text: "Réponses IA générées automatiquement", tool: "Sentinel", color: "#ef4444" });
   }
   if (hasAccess("vault")) {
-    activities.push({ icon: "🔒", text: "Protection données activée", tool: "Vault", color: "#06b6d4" });
+    activities.push({ icon: "🔒", text: "Conformité juridique surveillée", tool: "Vault", color: "#06b6d4" });
   }
   if (activities.length === 0) {
     activities.push({ icon: "👋", text: "Souscrivez à un outil pour commencer", tool: "NERVÜR", color: "#6366f1" });
@@ -983,13 +987,14 @@ function RightPanel({ hasAccess }) {
           Résumé rapide
         </div>
         {[
-          { label: "Outils actifs", value: stats ? `${stats.tools}/${TOOLS.length}` : "—", color: "#22c55e" },
+          { label: "Outils actifs", value: stats ? `${stats.tools}/2` : "—", color: "#22c55e" },
           ...(hasAccess("sentinel") ? [
             { label: "Score réputation", value: stats?.score || "—", color: "#ef4444" },
             { label: "Total avis", value: stats?.reviews ?? "—", color: "#ef4444" },
           ] : []),
           ...(hasAccess("vault") ? [
-            { label: "Scans sécurité", value: stats?.scans ?? "—", color: "#06b6d4" },
+            { label: "Score conformité", value: stats?.conformiteScore != null ? `${stats.conformiteScore}%` : "—", color: "#06b6d4" },
+            { label: "Traitements registre", value: stats?.registreCount ?? "—", color: "#06b6d4" },
           ] : []),
         ].map((stat, i) => (
           <div key={i} className={`flex justify-between items-center py-2 ${i < 3 ? "border-b border-[#2a2d3a]" : ""}`}>

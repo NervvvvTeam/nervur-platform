@@ -116,7 +116,7 @@ export default function LoginPage() {
           position: "relative",
           margin: 0,
         }}>
-          Gérez votre réputation, auditez vos performances et surveillez votre sécurité.
+          Gérez votre réputation et assurez votre conformité juridique.
         </p>
 
         {/* Tool pills */}

@@ -33,10 +33,10 @@ const TOOLS = [
   {
     id: "vault",
     name: "VAULT",
-    subtitle: "Conformité juridique",
+    subtitle: "Agent Juridique IA",
     color: "#06b6d4",
-    description: "Vérifiez la conformité RGPD de votre site et générez vos documents juridiques en quelques clics.",
-    features: ["Scan conformité RGPD", "Générateur mentions légales", "Générateur CGV", "Politique cookies", "Score de conformité", "Recommandations IA"],
+    description: "Agent Juridique IA — Conformité & Protection juridique. Scannez votre site, générez vos documents légaux et suivez votre conformité RGPD.",
+    features: ["Scan RGPD automatisé", "Générateur de documents légaux", "Registre des traitements RGPD", "Veille juridique automatisée", "Historique et évolution du score", "Recommandations IA"],
     price: "19",
     link: "/contact",
     icon: (

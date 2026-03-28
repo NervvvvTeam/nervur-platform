@@ -33,7 +33,7 @@ const ToolIcon = ({ type, color, size = 18 }) => {
 
 const TOOLS = [
   { name: "Sentinel", icon: "sentinel", price: "29€/mois", desc: "E-réputation", color: "#ef4444" },
-  { name: "Vault", icon: "vault", price: "19€/mois", desc: "Cybersécurité", color: "#06b6d4" },
+  { name: "Vault", icon: "vault", price: "19€/mois", desc: "Agent Juridique IA", color: "#06b6d4" },
 ];
 
 const PACKS = [
