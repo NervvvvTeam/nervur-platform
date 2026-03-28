@@ -1786,4 +1786,162 @@ router.post("/checklist", authMiddleware, async (req, res) => {
   }
 });
 
+// ═══ Veille juridique — RSS feeds with in-memory cache ═══
+
+const VEILLE_RSS_FEEDS = [
+  { url: "https://www.cnil.fr/fr/rss.xml", source: "CNIL", defaultCategory: "RGPD" },
+  { url: "https://www.legifrance.gouv.fr/eli/jo/rss", source: "Legifrance (JORF)", defaultCategory: "Droit commercial" },
+  { url: "https://www.service-public.fr/professionnels-entreprises/actualites/rss", source: "Service-Public.fr", defaultCategory: "E-commerce" },
+];
+
+const VEILLE_FALLBACK_ALERTS = [
+  { id: "fallback-1", title: "Nouvelles obligations RGPD pour les sous-traitants", summary: "Les sous-traitants doivent documenter toutes les instructions du responsable de traitement et effectuer une analyse d'impact pour les traitements à risque.", date: "2026-03-25", category: "RGPD", source: "CNIL", url: "https://www.cnil.fr", impact: "urgent" },
+  { id: "fallback-2", title: "Renforcement des sanctions CNIL pour non-conformité cookies", summary: "La CNIL intensifie ses contrôles sur les bannières cookies. Les amendes peuvent atteindre 2% du CA pour non-respect du consentement préalable.", date: "2026-03-20", category: "RGPD", source: "CNIL", url: "https://www.cnil.fr", impact: "urgent" },
+  { id: "fallback-3", title: "DMA : nouvelles obligations pour les marketplaces", summary: "Le Digital Markets Act impose de nouvelles règles de transparence pour les places de marché en ligne.", date: "2026-03-15", category: "E-commerce", source: "Legifrance (JORF)", url: "https://eur-lex.europa.eu", impact: "attention" },
+  { id: "fallback-4", title: "Évolution du droit de rétractation en e-commerce", summary: "Le délai de rétractation reste de 14 jours mais le remboursement doit intervenir sous 7 jours ouvrés après réception du retour.", date: "2026-02-18", category: "E-commerce", source: "Service-Public.fr", url: "https://www.legifrance.gouv.fr", impact: "attention" },
+  { id: "fallback-5", title: "Mise à jour des mentions obligatoires sur les factures", summary: "Nouvelles mentions obligatoires depuis le 1er janvier 2026 : numéro SIREN du client, adresse de livraison, et référence de commande.", date: "2026-01-28", category: "Fiscalité", source: "Service-Public.fr", url: "https://www.economie.gouv.fr", impact: "attention" },
+  { id: "fallback-6", title: "Obligation de médiation de la consommation étendue", summary: "Tous les professionnels vendant aux consommateurs doivent afficher les coordonnées d'un médiateur sur leur site web et dans leurs CGV.", date: "2026-01-15", category: "Droit commercial", source: "Legifrance (JORF)", url: "https://www.economie.gouv.fr", impact: "info" },
+  { id: "fallback-7", title: "Nouvelles règles de facturation électronique", summary: "À compter de septembre 2026, toutes les entreprises assujetties à la TVA devront recevoir des factures électroniques.", date: "2026-09-01", category: "Fiscalité", source: "Service-Public.fr", url: "https://www.impots.gouv.fr", impact: "attention" },
+  { id: "fallback-8", title: "Accessibilité numérique obligatoire pour les PME", summary: "Les PME de plus de 10 salariés doivent rendre leurs sites conformes au RGAA avant fin 2025.", date: "2025-06-28", category: "Droit commercial", source: "Service-Public.fr", url: "https://www.numerique.gouv.fr", impact: "info" },
+];
+
+// In-memory cache: { data, timestamp }
+let veilleCache = { data: null, timestamp: 0 };
+const VEILLE_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+// Regex-based XML parser (no extra dependency)
+function parseRssXml(xml, feedConfig) {
+  const items = [];
+  const itemRegex = /<item>([\s\S]*?)<\/item>/gi;
+  let match;
+  while ((match = itemRegex.exec(xml)) !== null) {
+    const block = match[1];
+    const getTag = (tag) => {
+      const r = new RegExp(`<${tag}[^>]*><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>|<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, "i");
+      const m = block.match(r);
+      return m ? (m[1] || m[2] || "").trim() : "";
+    };
+    const title = getTag("title");
+    const description = getTag("description");
+    const link = getTag("link");
+    const pubDate = getTag("pubDate");
+    if (!title) continue;
+    items.push({
+      title,
+      summary: description.replace(/<[^>]+>/g, "").substring(0, 300),
+      url: link,
+      date: pubDate ? new Date(pubDate).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
+      source: feedConfig.source,
+    });
+  }
+  return items;
+}
+
+// Auto-detect category from title/summary keywords
+function detectCategory(title, summary) {
+  const text = (title + " " + summary).toLowerCase();
+  if (/rgpd|cnil|donn[ée]es personnelles|protection des donn[ée]es|cookies|consentement|vie priv[ée]e/.test(text)) return "RGPD";
+  if (/e-commerce|commerce [ée]lectronique|marketplace|r[ée]tractation|consommateur|vente en ligne/.test(text)) return "E-commerce";
+  if (/travail|salari[ée]|employeur|cse|code du travail|licenciement|t[ée]l[ée]travail/.test(text)) return "Droit du travail";
+  if (/fiscal|tva|imp[ôo]t|factur|tax|contribution/.test(text)) return "Fiscalité";
+  return "Droit commercial";
+}
+
+// Auto-detect impact level
+function detectImpact(title, summary) {
+  const text = (title + " " + summary).toLowerCase();
+  if (/urgent|imm[ée]diat|sanction|amende|obligation|interdiction/.test(text)) return "urgent";
+  if (/attention|modification|changement|mise [àa] jour|nouveau|nouvelle/.test(text)) return "attention";
+  return "info";
+}
+
+async function fetchVeilleArticles() {
+  const https = require("https");
+  const http = require("http");
+  const allArticles = [];
+
+  for (const feed of VEILLE_RSS_FEEDS) {
+    try {
+      const xml = await new Promise((resolve, reject) => {
+        const client = feed.url.startsWith("https") ? https : http;
+        const req = client.get(feed.url, { timeout: 8000, headers: { "User-Agent": "NERVUR-Vault/1.0" } }, (res) => {
+          if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+            // Follow one redirect
+            const redirectClient = res.headers.location.startsWith("https") ? https : http;
+            redirectClient.get(res.headers.location, { timeout: 8000, headers: { "User-Agent": "NERVUR-Vault/1.0" } }, (res2) => {
+              let data = "";
+              res2.on("data", chunk => data += chunk);
+              res2.on("end", () => resolve(data));
+              res2.on("error", reject);
+            }).on("error", reject);
+            return;
+          }
+          let data = "";
+          res.on("data", chunk => data += chunk);
+          res.on("end", () => resolve(data));
+          res.on("error", reject);
+        });
+        req.on("error", reject);
+        req.on("timeout", () => { req.destroy(); reject(new Error("timeout")); });
+      });
+
+      const items = parseRssXml(xml, feed);
+      for (const item of items) {
+        item.category = detectCategory(item.title, item.summary) || feed.defaultCategory;
+        item.impact = detectImpact(item.title, item.summary);
+        item.id = "rss-" + Buffer.from(item.url || item.title).toString("base64").substring(0, 16);
+        allArticles.push(item);
+      }
+    } catch (err) {
+      console.warn(`Veille RSS: échec pour ${feed.source} (${err.message})`);
+    }
+  }
+
+  // Sort by date descending, limit to 30 most recent
+  allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return allArticles.slice(0, 30);
+}
+
+// GET /api/vault/veille — veille juridique via RSS feeds
+router.get("/veille", async (req, res) => {
+  try {
+    const now = Date.now();
+    // Check cache
+    if (veilleCache.data && (now - veilleCache.timestamp) < VEILLE_CACHE_TTL) {
+      return res.json({
+        articles: veilleCache.data,
+        lastUpdated: new Date(veilleCache.timestamp).toISOString(),
+        source: "rss",
+      });
+    }
+
+    const articles = await fetchVeilleArticles();
+
+    if (articles.length > 0) {
+      veilleCache = { data: articles, timestamp: now };
+      return res.json({
+        articles,
+        lastUpdated: new Date(now).toISOString(),
+        source: "rss",
+      });
+    }
+
+    // Fallback if all feeds failed
+    return res.json({
+      articles: VEILLE_FALLBACK_ALERTS,
+      lastUpdated: new Date(now).toISOString(),
+      source: "fallback",
+      notice: "Flux automatique indisponible — dernières alertes manuelles",
+    });
+  } catch (err) {
+    console.error("Erreur veille juridique:", err);
+    return res.json({
+      articles: VEILLE_FALLBACK_ALERTS,
+      lastUpdated: new Date().toISOString(),
+      source: "fallback",
+      notice: "Flux automatique indisponible — dernières alertes manuelles",
+    });
+  }
+});
+
 module.exports = router;

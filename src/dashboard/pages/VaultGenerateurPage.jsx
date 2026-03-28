@@ -7,8 +7,6 @@ const VAULT_NAV = [
   { path: "/app/vault", label: "Dashboard", end: true },
   { path: "/app/vault/generateur", label: "Générateur" },
   { path: "/app/vault/registre", label: "Registre" },
-  { path: "/app/vault/checklist", label: "Checklist" },
-  { path: "/app/vault/badge", label: "Badge" },
   { path: "/app/vault/veille", label: "Veille" },
   { path: "/app/vault/historique", label: "Historique" },
 ];

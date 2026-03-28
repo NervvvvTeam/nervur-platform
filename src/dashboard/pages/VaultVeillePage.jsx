@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useApi } from "../hooks/useApi";
 import SubNav from "../components/SubNav";
 
 const VAULT_NAV = [
   { path: "/app/vault", label: "Dashboard", end: true },
   { path: "/app/vault/generateur", label: "Générateur" },
   { path: "/app/vault/registre", label: "Registre" },
-  { path: "/app/vault/checklist", label: "Checklist" },
-  { path: "/app/vault/badge", label: "Badge" },
   { path: "/app/vault/veille", label: "Veille" },
   { path: "/app/vault/historique", label: "Historique" },
 ];
@@ -25,13 +24,19 @@ const ExternalLinkIcon = ({ size = 13, color = ACCENT }) => (
   </svg>
 );
 
+const RefreshIcon = ({ size = 14, color = ACCENT }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+  </svg>
+);
+
 const CATEGORIES = [
   { key: "all", label: "Toutes", color: "#6b7280" },
-  { key: "rgpd", label: "RGPD", color: "#06b6d4" },
-  { key: "commercial", label: "Droit commercial", color: "#8b5cf6" },
-  { key: "ecommerce", label: "E-commerce", color: "#f59e0b" },
-  { key: "travail", label: "Droit du travail", color: "#22c55e" },
-  { key: "fiscalite", label: "Fiscalité", color: "#ef4444" },
+  { key: "RGPD", label: "RGPD", color: "#06b6d4" },
+  { key: "Droit commercial", label: "Droit commercial", color: "#8b5cf6" },
+  { key: "E-commerce", label: "E-commerce", color: "#f59e0b" },
+  { key: "Droit du travail", label: "Droit du travail", color: "#22c55e" },
+  { key: "Fiscalité", label: "Fiscalité", color: "#ef4444" },
 ];
 
 const IMPACT_CONFIG = {
@@ -40,108 +45,59 @@ const IMPACT_CONFIG = {
   info: { label: "Info", color: "#06b6d4", bg: "rgba(6,182,212,0.1)", border: "rgba(6,182,212,0.25)" },
 };
 
-const SAMPLE_ALERTS = [
-  {
-    id: "v1",
-    date: "2026-03-25",
-    title: "Nouvelles obligations RGPD pour les sous-traitants",
-    category: "rgpd",
-    summary: "Les sous-traitants doivent désormais documenter toutes les instructions reçues du responsable de traitement et effectuer une analyse d'impact systématique pour les traitements à risque.",
-    impact: "urgent",
-    link: "https://www.cnil.fr",
-    read: false,
-  },
-  {
-    id: "v2",
-    date: "2026-03-20",
-    title: "Renforcement des sanctions CNIL pour non-conformité cookies",
-    category: "rgpd",
-    summary: "La CNIL intensifie ses contrôles sur les bannières cookies. Les amendes peuvent désormais atteindre 2% du chiffre d'affaires pour les sites ne respectant pas le consentement préalable.",
-    impact: "urgent",
-    link: "https://www.cnil.fr",
-    read: false,
-  },
-  {
-    id: "v3",
-    date: "2026-03-15",
-    title: "DMA : nouvelles obligations pour les marketplaces",
-    category: "ecommerce",
-    summary: "Le Digital Markets Act impose de nouvelles règles de transparence pour les places de marché en ligne, notamment sur le classement des offres et l'accès aux données des vendeurs.",
-    impact: "attention",
-    link: "https://eur-lex.europa.eu",
-    read: false,
-  },
-  {
-    id: "v4",
-    date: "2026-02-18",
-    title: "Évolution du droit de rétractation en e-commerce",
-    category: "ecommerce",
-    summary: "Le délai de rétractation reste de 14 jours mais les modalités de remboursement sont précisées : le remboursement doit désormais intervenir sous 7 jours ouvrés après réception du retour.",
-    impact: "attention",
-    link: "https://www.legifrance.gouv.fr",
-    read: false,
-  },
-  {
-    id: "v5",
-    date: "2026-01-28",
-    title: "Mise à jour des mentions obligatoires sur les factures",
-    category: "fiscalite",
-    summary: "De nouvelles mentions sont obligatoires sur les factures depuis le 1er janvier 2026 : numéro SIREN du client, adresse de livraison si différente de la facturation, et référence de la commande.",
-    impact: "attention",
-    link: "https://www.economie.gouv.fr",
-    read: false,
-  },
-  {
-    id: "v6",
-    date: "2026-01-15",
-    title: "Obligation de médiation de la consommation étendue",
-    category: "commercial",
-    summary: "Tous les professionnels vendant aux consommateurs doivent désormais afficher les coordonnées d'un médiateur de la consommation sur leur site web et dans leurs CGV.",
-    impact: "info",
-    link: "https://www.economie.gouv.fr",
-    read: false,
-  },
-  {
-    id: "v7",
-    date: "2026-09-01",
-    title: "Nouvelles règles de facturation électronique",
-    category: "fiscalite",
-    summary: "À compter de septembre 2026, toutes les entreprises assujetties à la TVA devront être en mesure de recevoir des factures électroniques. L'obligation d'émission sera progressive selon la taille de l'entreprise.",
-    impact: "attention",
-    link: "https://www.impots.gouv.fr",
-    read: false,
-  },
-  {
-    id: "v8",
-    date: "2025-06-28",
-    title: "Accessibilité numérique obligatoire pour les PME",
-    category: "commercial",
-    summary: "Les PME de plus de 10 salariés doivent rendre leurs sites web conformes au RGAA (Référentiel Général d'Amélioration de l'Accessibilité) avant fin 2025.",
-    impact: "info",
-    link: "https://www.numerique.gouv.fr",
-    read: true,
-  },
-];
-
 export default function VaultVeillePage() {
-  const [alerts, setAlerts] = useState(SAMPLE_ALERTS);
+  const { get } = useApi();
+  const [alerts, setAlerts] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [readIds, setReadIds] = useState(() => {
+    try { return new Set(JSON.parse(localStorage.getItem("vault_veille_read") || "[]")); }
+    catch { return new Set(); }
+  });
+  const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [notice, setNotice] = useState(null);
+
+  const fetchVeille = useCallback(async () => {
+    setLoading(true);
+    setNotice(null);
+    try {
+      const data = await get("/api/vault/veille");
+      setAlerts(data.articles || []);
+      setLastUpdated(data.lastUpdated);
+      if (data.notice) setNotice(data.notice);
+    } catch (err) {
+      console.error("Erreur veille:", err);
+      setNotice("Impossible de charger la veille juridique.");
+    } finally {
+      setLoading(false);
+    }
+  }, [get]);
+
+  useEffect(() => { fetchVeille(); }, [fetchVeille]);
+
+  const toggleRead = (id) => {
+    setReadIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      localStorage.setItem("vault_veille_read", JSON.stringify([...next]));
+      return next;
+    });
+  };
+
+  const isRead = (id) => readIds.has(id);
 
   const filteredAlerts = activeCategory === "all"
     ? alerts
     : alerts.filter(a => a.category === activeCategory);
 
-  const unreadCount = alerts.filter(a => !a.read).length;
-
-  const toggleRead = (id) => {
-    setAlerts(prev => prev.map(a => a.id === id ? { ...a, read: !a.read } : a));
-  };
+  const unreadCount = alerts.filter(a => !isRead(a.id)).length;
 
   const getCategoryInfo = (key) => CATEGORIES.find(c => c.key === key) || CATEGORIES[0];
 
   const sortedAlerts = [...filteredAlerts].sort((a, b) => {
-    // Unread first, then by date descending
-    if (a.read !== b.read) return a.read ? 1 : -1;
+    const aRead = isRead(a.id);
+    const bRead = isRead(b.id);
+    if (aRead !== bRead) return aRead ? 1 : -1;
     return new Date(b.date) - new Date(a.date);
   });
 
@@ -170,7 +126,24 @@ export default function VaultVeillePage() {
       </div>
 
       {/* Gradient bar */}
-      <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-6 mt-4" />
+      <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-4 mt-4" />
+
+      {/* Agent IA branding */}
+      <div className="flex items-center gap-2 mb-5 px-3 py-2 bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-lg">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.27A7 7 0 0 1 7.27 19H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+        </svg>
+        <span className="text-[12px] text-[#06b6d4] font-medium">
+          Alimenté par notre Agent Juridique IA — surveillance continue des sources officielles (CNIL, Legifrance, DILA)
+        </span>
+      </div>
+
+      {/* Notice banner */}
+      {notice && (
+        <div className="px-3.5 py-2.5 mb-4 bg-[rgba(245,158,11,0.1)] border border-[rgba(245,158,11,0.25)] rounded-md text-[13px] text-[#fbbf24]">
+          {notice}
+        </div>
+      )}
 
       {/* Category filters */}
       <div className="flex flex-wrap gap-2 mb-6">
@@ -195,7 +168,7 @@ export default function VaultVeillePage() {
         ))}
       </div>
 
-      {/* Alerts count */}
+      {/* Alerts count + last updated */}
       <div className="flex items-center justify-between mb-4">
         <div className="text-[13px] text-[#6b7280]">
           {sortedAlerts.length} alerte{sortedAlerts.length !== 1 ? "s" : ""}
@@ -203,10 +176,33 @@ export default function VaultVeillePage() {
             <span className="ml-1.5 text-[#ef4444]">({unreadCount} non lue{unreadCount !== 1 ? "s" : ""})</span>
           )}
         </div>
+        <div className="flex items-center gap-3">
+          {lastUpdated && (
+            <span className="text-[11px] text-[#52525b]">
+              Dernière mise à jour : {new Date(lastUpdated).toLocaleString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+            </span>
+          )}
+          <button
+            onClick={fetchVeille}
+            disabled={loading}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border border-[#2a2d3a] bg-transparent text-[#6b7280] hover:border-[#06b6d4] hover:text-[#06b6d4]"
+          >
+            <RefreshIcon size={12} color="currentColor" />
+            Actualiser
+          </button>
+        </div>
       </div>
 
+      {/* Loading state */}
+      {loading && alerts.length === 0 && (
+        <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+          <div className="w-10 h-10 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite] mb-4" />
+          <div className="text-[14px] text-[#9ca3af]">Chargement de la veille juridique...</div>
+        </div>
+      )}
+
       {/* Alerts list */}
-      {sortedAlerts.length === 0 ? (
+      {!loading && sortedAlerts.length === 0 ? (
         <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
           <BellIcon size={48} color={ACCENT} />
           <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
@@ -218,23 +214,24 @@ export default function VaultVeillePage() {
           {sortedAlerts.map(alert => {
             const catInfo = getCategoryInfo(alert.category);
             const impactInfo = IMPACT_CONFIG[alert.impact] || IMPACT_CONFIG.info;
+            const read = isRead(alert.id);
 
             return (
               <div
                 key={alert.id}
                 className="bg-[#1e2029] border rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-all duration-150"
                 style={{
-                  borderColor: alert.read ? "rgba(42,45,58,0.8)" : `${impactInfo.color}30`,
-                  opacity: alert.read ? 0.7 : 1,
+                  borderColor: read ? "rgba(42,45,58,0.8)" : `${impactInfo.color}30`,
+                  opacity: read ? 0.7 : 1,
                 }}
               >
                 <div className="flex items-start gap-3">
                   {/* Unread indicator */}
                   <div className="mt-1.5 shrink-0">
-                    {!alert.read && (
+                    {!read && (
                       <div className="w-2.5 h-2.5 rounded-full" style={{ background: impactInfo.color }} />
                     )}
-                    {alert.read && (
+                    {read && (
                       <div className="w-2.5 h-2.5 rounded-full bg-[#2a2d3a]" />
                     )}
                   </div>
@@ -255,10 +252,15 @@ export default function VaultVeillePage() {
                       }}>
                         {impactInfo.label}
                       </span>
+                      {alert.source && (
+                        <span className="text-[10px] text-[#52525b] italic">
+                          {alert.source}
+                        </span>
+                      )}
                     </div>
 
                     {/* Title */}
-                    <div className={`text-[14px] font-semibold mb-2 ${alert.read ? "text-[#9ca3af]" : "text-[#f0f0f3]"}`}>
+                    <div className={`text-[14px] font-semibold mb-2 ${read ? "text-[#9ca3af]" : "text-[#f0f0f3]"}`}>
                       {alert.title}
                     </div>
 
@@ -269,21 +271,23 @@ export default function VaultVeillePage() {
 
                     {/* Actions */}
                     <div className="flex flex-wrap items-center gap-3">
-                      <a
-                        href={alert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[12px] font-medium no-underline transition-colors duration-150 hover:opacity-80"
-                        style={{ color: ACCENT }}
-                      >
-                        En savoir plus
-                        <ExternalLinkIcon size={12} color={ACCENT} />
-                      </a>
+                      {alert.url && (
+                        <a
+                          href={alert.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-[12px] font-medium no-underline transition-colors duration-150 hover:opacity-80"
+                          style={{ color: ACCENT }}
+                        >
+                          En savoir plus
+                          <ExternalLinkIcon size={12} color={ACCENT} />
+                        </a>
+                      )}
                       <button
                         onClick={() => toggleRead(alert.id)}
                         className="text-[12px] text-[#6b7280] bg-transparent border-none cursor-pointer font-[inherit] hover:text-[#9ca3af] transition-colors duration-150"
                       >
-                        {alert.read ? "Marquer comme non lu" : "Marquer comme lu"}
+                        {read ? "Marquer comme non lu" : "Marquer comme lu"}
                       </button>
                     </div>
                   </div>
@@ -293,6 +297,8 @@ export default function VaultVeillePage() {
           })}
         </div>
       )}
+
+      <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }

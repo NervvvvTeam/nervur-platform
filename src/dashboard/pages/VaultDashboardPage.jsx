@@ -8,8 +8,6 @@ const VAULT_NAV = [
   { path: "/app/vault", label: "Dashboard", end: true },
   { path: "/app/vault/generateur", label: "Générateur" },
   { path: "/app/vault/registre", label: "Registre" },
-  { path: "/app/vault/checklist", label: "Checklist" },
-  { path: "/app/vault/badge", label: "Badge" },
   { path: "/app/vault/veille", label: "Veille" },
   { path: "/app/vault/historique", label: "Historique" },
 ];
@@ -189,7 +187,24 @@ export default function VaultDashboardPage() {
       </div>
 
       {/* Gradient bar */}
-      <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-6 mt-4" />
+      <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-5 mt-4" />
+
+      {/* Agent Juridique IA badge */}
+      <div className="flex items-start gap-3 mb-7 px-4 py-3.5 bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.2)] rounded-[10px]">
+        <div className="w-9 h-9 rounded-lg bg-[rgba(6,182,212,0.12)] flex items-center justify-center shrink-0 mt-0.5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.27A7 7 0 0 1 7.27 19H6a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+          </svg>
+        </div>
+        <div>
+          <div className="text-[14px] font-semibold text-[#06b6d4] mb-1">
+            Propulsé par notre Agent Juridique IA
+          </div>
+          <div className="text-[12px] text-[#71717a] leading-relaxed">
+            Surveillance automatisée des évolutions réglementaires &bull; Analyse de conformité en temps réel &bull; Recommandations personnalisées
+          </div>
+        </div>
+      </div>
 
       {/* Quick scan form */}
       <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
