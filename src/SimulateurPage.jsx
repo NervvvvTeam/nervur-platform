@@ -317,7 +317,7 @@ export default function SimulateurPage() {
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(15,17,23,0.92)", backdropFilter: "blur(24px)",
         borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR" onClick={() => navigate("/")}
+        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")}
           style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" onClick={() => navigate("/")}>
@@ -722,7 +722,7 @@ export default function SimulateurPage() {
         padding: isMobile ? "24px 20px" : "32px 48px", borderTop: `1px solid ${VG(0.06)}`,
         display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: "center", gap: isMobile ? "12px" : "0",
       }}>
-        <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR" style={{
+        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
           height: "28px", width: "auto", objectFit: "contain",
         }} />
         <span style={{ fontSize: "11px", color: "#4B5563" }}>© 2026 NERVÜR — Tous droits réservés</span>

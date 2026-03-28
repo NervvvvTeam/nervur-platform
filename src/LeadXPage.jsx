@@ -135,7 +135,7 @@ export default function LeadXPage() {
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR" onClick={() => navigate("/")}
+        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")}
           style={{ height: isMobile ? "40px" : "70px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>

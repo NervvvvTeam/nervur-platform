@@ -89,7 +89,7 @@ export default function ForgePage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#09090B", borderBottom: `1px solid ${VG(0.1)}` }}>
-        <img src="/logo-nav.png" style={{ filter: "invert(1) brightness(1.15)" }} alt="NERVÜR" style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain" }} />
+        <img src="/logo-nervur.svg" alt="NERVÜR" style={{ height: isMobile ? "34px" : "42px", width: "auto", objectFit: "contain" }} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate('/technologies')}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate('/contact')}>Contact</button>
