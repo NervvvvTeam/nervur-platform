@@ -137,16 +137,16 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      {/* Auto report info */}
-      <div style={{
-        marginTop: "20px", padding: "18px", borderRadius: "10px",
-        border: "1px solid rgba(239,68,68,0.15)", background: "rgba(239,68,68,0.06)",
-        display: "flex", gap: "12px", alignItems: "center"
-      }}>
-        <span style={{ fontSize: "14px", color: "#ef4444", flexShrink: 0 }}>i</span>
-        <p style={{ fontSize: "13px", color: "#6b7280", lineHeight: 1.6, margin: 0 }}>
-          {"Le rapport mensuel automatique sera bientôt disponible. Il sera envoyé par email le 1er de chaque mois."}
-        </p>
+      {/* Auto report pill */}
+      <div style={{ marginTop: "20px", display: "flex", alignItems: "center", gap: "10px" }}>
+        <span style={{
+          fontSize: "10px", fontWeight: 500,
+          background: "rgba(239,68,68,0.1)", color: "#f87171",
+          padding: "4px 12px", borderRadius: "20px",
+          display: "inline-block",
+        }}>
+          Rapport mensuel bientôt disponible
+        </span>
       </div>
     </div>
   );

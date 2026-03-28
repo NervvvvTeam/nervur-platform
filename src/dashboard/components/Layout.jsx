@@ -193,8 +193,14 @@ export default function Layout() {
         <aside className={`${isTablet ? "w-[64px]" : "w-[230px]"} border-r border-[#1e1e2a] ${isTablet ? "px-1.5" : "px-3"} py-6 flex flex-col fixed top-0 bottom-0 left-0 bg-[#12131a] z-50 transition-[width] duration-200`}>
           {/* Branding */}
           <div className={`-mx-1 mb-7 border-b border-[#1e1e2a] ${isTablet ? "px-1 text-center" : "px-4"} pt-3 pb-3.5`}>
-            <div className={`font-bold text-[#FAFAFA] tracking-wider ${isTablet ? "text-xs" : "text-base"}`}>{isTablet ? "N" : "NERVÜR"}</div>
-            {!isTablet && <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>}
+            {isTablet ? (
+              <div className="font-bold text-[#FAFAFA] tracking-wider text-xs">N</div>
+            ) : (
+              <>
+                <img src="/logo-nervur.svg" alt="NERVÜR" className="h-[32px] w-auto object-contain" />
+                <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>
+              </>
+            )}
           </div>
 
           {/* Nav */}

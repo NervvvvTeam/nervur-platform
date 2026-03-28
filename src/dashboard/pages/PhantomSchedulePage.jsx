@@ -101,23 +101,16 @@ export default function PhantomSchedulePage() {
         </p>
       </div>
 
-      {/* Coming soon banner */}
-      <div style={{
-        padding: "16px 20px", marginBottom: "24px",
-        background: "rgba(139,92,246,0.08)", border: "1px solid rgba(139,92,246,0.2)",
-        borderRadius: "10px", display: "flex", alignItems: "center", gap: "12px",
-      }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        <div>
-          <div style={{ fontSize: "13px", color: "#a78bfa", fontWeight: 500 }}>
-            Fonctionnalité en cours de développement
-          </div>
-          <div style={{ fontSize: "12px", color: "#9ca3af", marginTop: "2px" }}>
-            La planification automatique sera bientôt disponible. Vous pouvez déjà configurer vos préférences.
-          </div>
-        </div>
+      {/* Development pill */}
+      <div style={{ marginBottom: "24px" }}>
+        <span style={{
+          fontSize: "10px", fontWeight: 500,
+          background: "rgba(139,92,246,0.12)", color: "#a78bfa",
+          padding: "4px 12px", borderRadius: "20px",
+          display: "inline-block",
+        }}>
+          En cours de développement
+        </span>
       </div>
 
       {/* Add schedule form */}

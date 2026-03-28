@@ -94,33 +94,24 @@ export default function ForgeHistoryPage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "80px 24px",
+          padding: "48px 24px",
           textAlign: "center",
         }}>
-          {/* Clock icon */}
-          <div style={{
-            width: "64px", height: "64px", borderRadius: "16px",
-            background: `${ACCENT}12`, border: `1px solid ${ACCENT}30`,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            marginBottom: "20px",
+          <span style={{
+            fontSize: "10px", fontWeight: 500,
+            background: `${ACCENT}15`, color: ACCENT,
+            padding: "4px 12px", borderRadius: "20px", marginBottom: "16px",
+            display: "inline-block",
           }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-          </div>
-          <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", margin: "0 0 8px" }}>
             Bientôt disponible
-          </h3>
-          <p style={{ fontSize: "14px", color: "#71717A", margin: 0, maxWidth: "400px", lineHeight: "1.6" }}>
-            L'historique de vos pages générées sera bientôt accessible ici.
-            En attendant, vous pouvez créer de nouvelles landing pages depuis l'onglet "Créer une page".
+          </span>
+          <p style={{ fontSize: "13px", color: "#71717A", margin: "0 0 16px", maxWidth: "360px", lineHeight: "1.6" }}>
+            L'historique de vos pages générées sera accessible ici prochainement.
           </p>
           <a
             href="/app/forge"
             style={{
-              marginTop: "24px",
-              padding: "10px 22px",
+              padding: "8px 18px",
               borderRadius: "8px",
               fontSize: "13px",
               fontWeight: 500,

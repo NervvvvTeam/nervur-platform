@@ -599,7 +599,7 @@ export default function NervurAurora() {
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <img src="/logo-nervur.svg" alt="NERVÜR" style={{
-          height: isMobile ? "34px" : "42px", width: "auto" }} />
+          height: isMobile ? "32px" : "40px", width: "auto" }} />
         {/* Desktop nav */}
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
@@ -929,7 +929,9 @@ export default function NervurAurora() {
       </section>
 
       {/* ═══ SERVICES & OFFRES — TABBED ═══ */}
-      <section id="services" aria-label="Nos services" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", borderTop: `1px solid ${VG(0.1)}` }}>
+      {/* Accent divider — indigo */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent)" }} />
+      <section id="services" aria-label="Nos services" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", background: "rgba(99,102,241,0.02)" }}>
         <RevealSection>
           <div style={{ textAlign: "center", marginBottom: "24px" }}>
             <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: V2, display: "block", marginBottom: "16px" }}>
@@ -1130,7 +1132,9 @@ export default function NervurAurora() {
 
 
       {/* ═══ OUTILS SaaS ═══ */}
-      <section id="outils" aria-label="Nos outils" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", borderTop: `1px solid ${VG(0.1)}` }}>
+      {/* Accent divider — red/cyan */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(239,68,68,0.25), rgba(6,182,212,0.25), transparent)" }} />
+      <section id="outils" aria-label="Nos outils" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", background: "rgba(239,68,68,0.015)" }}>
         <RevealSection>
           <div style={{ textAlign: "center", marginBottom: isMobile ? "30px" : "60px" }}>
             <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: V2, display: "block", marginBottom: "16px" }}>
@@ -1363,7 +1367,9 @@ export default function NervurAurora() {
       {/* Technologies section moved to /technologies page */}
 
       {/* ═══ PORTFOLIO — BENTO GRID (2+2+3) + CODENAMES ═══ */}
-      <section id="projets" aria-label="Nos projets" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "100px 48px", borderTop: `1px solid ${VG(0.1)}` }}>
+      {/* Accent divider — green */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(74,222,128,0.25), transparent)" }} />
+      <section id="projets" aria-label="Nos projets" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "100px 48px" }}>
         <RevealSection>
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", marginBottom: isMobile ? "40px" : "64px", gap: isMobile ? "16px" : "0" }}>
             <div>
@@ -1385,36 +1391,24 @@ export default function NervurAurora() {
 
         {/* ROW 1 — Projets */}
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "20px" }}>
-          {/* EN COURS DE DÉVELOPPEMENT */}
+          {/* Nouveau projet — pill badge */}
           <RevealSection delay={100}>
             <div style={{
               background: "linear-gradient(135deg, #0f0f0f, #181818)",
               aspectRatio: isMobile ? "auto" : "4/3",
-              minHeight: isMobile ? "280px" : "auto",
+              minHeight: isMobile ? "200px" : "auto",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              padding: "40px 28px", border: `1px dashed ${VG(0.15)}`, position: "relative", overflow: "hidden"
+              padding: "32px 28px", border: `1px solid ${VG(0.08)}`, position: "relative", overflow: "hidden"
             }}>
-              <div style={{ width: "48px", height: "48px", marginBottom: "24px", position: "relative" }}>
-                <div style={{
-                  width: "48px", height: "48px", border: `2px solid ${VG(0.08)}`, borderTop: `2px solid ${VG(0.4)}`,
-                  borderRadius: "50%", animation: "spin 1.2s linear infinite"
-                }} />
-                <div style={{
-                  position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-                  fontSize: "14px", color: VG(0.3), fontFamily: "monospace"
-                }}>%</div>
-              </div>
-              <div style={{ fontSize: "13px", letterSpacing: "4px", textTransform: "uppercase", color: V3, marginBottom: "12px", textAlign: "center" }}>
-                En cours de developpement
-              </div>
-              <div style={{ width: "160px", height: "3px", background: VG(0.08), borderRadius: "2px", overflow: "hidden", marginBottom: "16px" }}>
-                <div style={{
-                  width: "40%", height: "100%", background: `linear-gradient(90deg, ${VG(0.2)}, ${VG(0.5)})`,
-                  borderRadius: "2px", animation: "loading 2.5s ease-in-out infinite"
-                }} />
-              </div>
-              <div style={{ fontSize: "11px", color: "#52525B", textAlign: "center", maxWidth: "240px", lineHeight: 1.6 }}>
-                Nouveau projet en preparation. Restez connectes.
+              <span style={{
+                fontSize: "10px", fontWeight: 500, letterSpacing: "1px",
+                background: "rgba(99,102,241,0.12)", color: "#818CF8",
+                padding: "4px 14px", borderRadius: "20px", marginBottom: "16px",
+              }}>
+                Nouveau projet en cours
+              </span>
+              <div style={{ fontSize: "12px", color: "#52525B", textAlign: "center", maxWidth: "240px", lineHeight: 1.6 }}>
+                Restez connectes.
               </div>
             </div>
           </RevealSection>
@@ -1422,7 +1416,9 @@ export default function NervurAurora() {
       </section>
 
       {/* ═══ VALUE STRIP ═══ */}
-      <section aria-label="Pourquoi NERVÜR" style={{ padding: isMobile ? "60px 20px" : "100px 48px", borderTop: `1px solid ${VG(0.1)}`, borderBottom: `1px solid ${VG(0.1)}`, position: "relative", overflow: "hidden" }}>
+      {/* Accent divider — purple */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(196,181,253,0.25), transparent)" }} />
+      <section aria-label="Pourquoi NERVÜR" style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: "rgba(99,102,241,0.02)", position: "relative", overflow: "hidden" }}>
         {/* Background subtle gradient */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(129,140,248,0.03) 0%, transparent 70%)", pointerEvents: "none" }} />
 
@@ -1463,7 +1459,9 @@ export default function NervurAurora() {
       {/* Témoignage retiré */}
 
       {/* ═══ PROCESS ═══ */}
-      <section id="approche" aria-label="Notre méthode" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", borderTop: `1px solid ${VG(0.1)}` }}>
+      {/* Accent divider — pink */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(244,114,182,0.25), transparent)" }} />
+      <section id="approche" aria-label="Notre méthode" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px" }}>
         <RevealSection>
           <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: V2, display: "block", marginBottom: "16px" }}>
             // Notre méthode
@@ -1506,8 +1504,10 @@ export default function NervurAurora() {
 
 
       {/* ═══ CTA FINAL ═══ */}
+      {/* Accent divider — indigo */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent)" }} />
       <section id="contact" aria-label="Nous contacter" className="fade-section" style={{
-        padding: isMobile ? "80px 20px" : "140px 48px", borderTop: `1px solid ${VG(0.1)}`,
+        padding: isMobile ? "80px 20px" : "140px 48px", background: "rgba(99,102,241,0.015)",
         textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center",
         position: "relative" }}>
         <div style={{
@@ -1574,7 +1574,9 @@ export default function NervurAurora() {
       </section>
 
       {/* ═══ TECH MARQUEE — GRILLE TECHNIQUE ═══ */}
-      <section aria-label="Technologies utilisées" style={{ borderTop: `1px solid ${VG(0.15)}`, padding: "0", overflow: "hidden", background: "rgba(129,140,248,0.03)" }}>
+      {/* Accent divider — cyan */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(6,182,212,0.3), transparent)" }} />
+      <section aria-label="Technologies utilisées" style={{ padding: "0", overflow: "hidden", background: "rgba(129,140,248,0.03)" }}>
         <div style={{ borderBottom: `1px solid ${VG(0.1)}`, padding: "24px 0", overflow: "hidden" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "48px", animation: "marquee 30s linear infinite", width: "max-content" }}>
             {[...Array(4)].flatMap((_, setIdx) =>
@@ -1607,13 +1609,14 @@ export default function NervurAurora() {
           transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
           pointerEvents: showBackToTop ? "auto" : "none",
           boxShadow: "0 8px 30px rgba(0,0,0,0.4)",
-          mixBlendMode: "difference",
+          /* mixBlendMode removed — logo is already white */
         }}>
         <span aria-hidden="true">↑</span>
       </button>
 
       {/* ═══ FOOTER ═══ */}
-      <footer style={{ borderTop: `1px solid ${VG(0.1)}` }}>
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.2), transparent)" }} />
+      <footer style={{ background: "rgba(15,17,23,0.5)" }}>
         <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
