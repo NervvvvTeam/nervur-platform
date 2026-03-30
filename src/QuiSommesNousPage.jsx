@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 export default function QuiSommesNousPage() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export default function QuiSommesNousPage() {
   return (
     <main style={{ background: "#0f1117", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} style={{ height: "42px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <button onClick={() => navigate("/")} style={{ background: "transparent", border: `1px solid ${VG(0.15)}`, color: "#a1a1aa", padding: "8px 22px", fontSize: "11px", letterSpacing: "2.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>
           Accueil
         </button>

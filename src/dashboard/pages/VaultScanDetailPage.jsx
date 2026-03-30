@@ -211,7 +211,7 @@ export default function VaultScanDetailPage() {
   };
 
   return (
-    <div className="max-w-[860px]">
+    <div className="max-w-[1100px]">
       {/* Top actions */}
       <div className="flex items-center gap-2.5 mb-6 flex-wrap">
         <button

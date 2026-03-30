@@ -393,7 +393,7 @@ export default function NervurAurora() {
 
   useSEO(
     "NERVÜR — Agence Digitale & Nouvelles Technologies",
-    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation) et Vault (conformité juridique). À partir de 19€/mois.",
+    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation) et Vault (conformité juridique). À partir de 39€/mois.",
     {
       path: "/",
       keywords: "SaaS PME, e-réputation, conformité juridique, RGPD, outils PME, NERVÜR, Sentinel, Vault",
@@ -1144,7 +1144,7 @@ export default function NervurAurora() {
               Des outils <span style={{ background: `linear-gradient(135deg, #ef4444, #06b6d4)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>puissants</span> pour votre business.
             </h2>
             <p style={{ fontSize: "16px", color: "#71717A", marginTop: "16px", maxWidth: "560px", margin: "16px auto 0" }}>
-              Deux outils SaaS conçus pour les PME. Simples, efficaces, sans engagement.
+              Deux outils SaaS conçus pour les TPE/PME. Simples, efficaces, sans engagement.
             </p>
           </div>
         </RevealSection>
@@ -1183,18 +1183,13 @@ export default function NervurAurora() {
               </ul>}
               <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
-                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>29€</span>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>39€</span>
                   <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
                 <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s", marginBottom: "8px" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(239,68,68,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer
-                </button>
-                <button onClick={() => navigate("/demo/sentinel")} style={{ width: "100%", padding: isMobile ? "8px" : "10px", background: "transparent", border: "1px solid rgba(239,68,68,0.35)", borderRadius: "10px", color: "#ef4444", fontSize: isMobile ? "11px" : "13px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(239,68,68,0.1)"; e.currentTarget.style.borderColor = "#ef4444"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(239,68,68,0.35)"; }}>
-                  Essayer gratuitement &rarr;
                 </button>
               </div>
             </div>
@@ -1223,7 +1218,7 @@ export default function NervurAurora() {
                 {expandedTool === "vault" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "vault" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
-                {["Scan RGPD automatisé", "Générateur de documents légaux (mentions légales, CGV, confidentialité, cookies)", "Registre des traitements RGPD", "Veille juridique automatisée", "Historique et évolution du score"].map((f, i) => (
+                {["Scan RGPD automatisé", "Générateur de documents légaux (mentions légales, CGV, confidentialité, cookies)", "Alertes intelligentes SSL & RGPD", "Veille juridique automatisée", "Timeline de conformité (accountability)"].map((f, i) => (
                   <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1232,18 +1227,13 @@ export default function NervurAurora() {
               </ul>}
               <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
-                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>19€</span>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>79€</span>
                   <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#71717A" }}>/mois</span>
                 </div>
                 <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s", marginBottom: "8px" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(6,182,212,0.3)"; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
                   Commencer
-                </button>
-                <button onClick={() => navigate("/demo/vault")} style={{ width: "100%", padding: isMobile ? "8px" : "10px", background: "transparent", border: "1px solid rgba(6,182,212,0.35)", borderRadius: "10px", color: "#06b6d4", fontSize: isMobile ? "11px" : "13px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s" }}
-                  onMouseEnter={e => { e.currentTarget.style.background = "rgba(6,182,212,0.1)"; e.currentTarget.style.borderColor = "#06b6d4"; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(6,182,212,0.35)"; }}>
-                  Essayer gratuitement &rarr;
                 </button>
               </div>
             </div>
@@ -1279,7 +1269,7 @@ export default function NervurAurora() {
               <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Sentinel</h3>
               <p style={{ fontSize: "13px", color: "#ef4444", fontWeight: 500, marginBottom: "16px" }}>E-réputation</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
-                <span style={{ fontSize: "40px", fontWeight: 800 }}>29€</span>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>39€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -1306,11 +1296,11 @@ export default function NervurAurora() {
               <h3 style={{ fontSize: "22px", fontWeight: 700, marginBottom: "4px" }}>Vault</h3>
               <p style={{ fontSize: "13px", color: "#06b6d4", fontWeight: 500, marginBottom: "16px" }}>Agent Juridique IA — Conformité & Protection juridique</p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
-                <span style={{ fontSize: "40px", fontWeight: 800 }}>19€</span>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>79€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Scan RGPD automatisé", "Générateur de documents légaux (mentions légales, CGV, confidentialité, cookies)", "Registre des traitements RGPD", "Veille juridique automatisée", "Historique et évolution du score"].map((f, i) => (
+                {["Scan RGPD automatisé", "Générateur de documents légaux (mentions légales, CGV, confidentialité, cookies)", "Alertes intelligentes SSL & RGPD", "Veille juridique automatisée", "Timeline de conformité (accountability)"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1333,9 +1323,9 @@ export default function NervurAurora() {
               <span style={{ fontSize: "11px", letterSpacing: "2px", color: A1, fontWeight: 600 }}>PACK DUO</span>
               <h3 style={{ fontSize: "20px", fontWeight: 700, marginTop: "8px" }}>2 outils au choix</h3>
               <div style={{ display: "flex", alignItems: "baseline", gap: "8px", margin: "16px 0" }}>
-                <span style={{ fontSize: "36px", fontWeight: 800 }}>39€</span>
+                <span style={{ fontSize: "36px", fontWeight: 800 }}>99€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
-                <span style={{ fontSize: "13px", color: "#52525B", textDecoration: "line-through", marginLeft: "8px" }}>48€</span>
+                <span style={{ fontSize: "13px", color: "#52525B", textDecoration: "line-through", marginLeft: "8px" }}>118€</span>
               </div>
               <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px" }}>Economisez 19% en combinant 2 outils.</p>
               <button onClick={() => navigate("/contact")} style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${A1}, ${A3})`, border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
@@ -1351,9 +1341,9 @@ export default function NervurAurora() {
               <span style={{ fontSize: "11px", letterSpacing: "2px", color: A1, fontWeight: 600 }}>PACK TOTAL</span>
               <h3 style={{ fontSize: "20px", fontWeight: 700, marginTop: "8px" }}>Les 2 outils</h3>
               <div style={{ display: "flex", alignItems: "baseline", gap: "8px", margin: "16px 0" }}>
-                <span style={{ fontSize: "36px", fontWeight: 800 }}>49€</span>
+                <span style={{ fontSize: "36px", fontWeight: 800 }}>129€</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
-                <span style={{ fontSize: "13px", color: "#52525B", textDecoration: "line-through", marginLeft: "8px" }}>67€</span>
+                <span style={{ fontSize: "13px", color: "#52525B", textDecoration: "line-through", marginLeft: "8px" }}>148€</span>
               </div>
               <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px" }}>Sentinel + Vault. Économisez sur le pack complet.</p>
               <button onClick={() => navigate("/contact")} style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${A1}, ${A3})`, border: "none", borderRadius: "10px", color: "#fff", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>

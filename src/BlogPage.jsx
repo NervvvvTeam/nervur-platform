@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import LogoNervur from "./components/LogoNervur";
 
 const V = "#FAFAFA";
 const VG = (a) => `rgba(250,250,250,${a})`;
@@ -75,8 +76,7 @@ export default function BlogPage() {
         padding: isMobile ? "16px 20px" : "20px 48px",
         borderBottom: `1px solid ${VG(0.1)}`,
       }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "30px" : "38px", width: "auto", cursor: "pointer" }} />
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <a href="/app/login" style={{
           padding: "8px 20px", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase",
           fontWeight: 700, color: "#09090B", background: "#FAFAFA", border: "none", borderRadius: "6px",

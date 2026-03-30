@@ -2,16 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../hooks/useAuth";
 import SubNav from "../components/SubNav";
-
-const VAULT_NAV = [
-  { path: "/app/vault", label: "Dashboard", end: true },
-  { path: "/app/vault/generateur", label: "Générateur" },
-  { path: "/app/vault/registre", label: "Registre" },
-  { path: "/app/vault/veille", label: "Veille" },
-  { path: "/app/vault/historique", label: "Historique" },
-];
-
-const ACCENT = "#06b6d4";
+import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 const BG_TINT = "rgba(6,182,212,0.08)";
 const BORDER_TINT = "rgba(6,182,212,0.2)";
 
@@ -343,7 +334,7 @@ export default function VaultRgpdPage() {
   ];
 
   return (
-    <div className="max-w-[860px]">
+    <div className="max-w-[1100px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
 
       {/* Header */}

@@ -53,7 +53,7 @@ export default function WidgetPage() {
   if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
 
   return (
-    <div style={{ maxWidth: "800px" }}>
+    <div style={{ maxWidth: "1100px" }}>
       <SubNav color="#ef4444" items={SENTINEL_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{

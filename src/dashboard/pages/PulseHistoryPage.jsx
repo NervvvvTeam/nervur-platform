@@ -330,7 +330,7 @@ export default function PulseHistoryPage() {
   const currentSite = sites.find(s => s._id === selectedSite);
 
   return (
-    <div className="max-w-[900px]">
+    <div className="max-w-[1100px]">
       <SubNav color={ACCENT} items={PULSE_NAV} />
 
       {/* Header */}

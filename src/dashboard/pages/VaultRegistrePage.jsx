@@ -2,16 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../hooks/useAuth";
 import SubNav from "../components/SubNav";
-
-const VAULT_NAV = [
-  { path: "/app/vault", label: "Dashboard", end: true },
-  { path: "/app/vault/generateur", label: "Générateur" },
-  { path: "/app/vault/registre", label: "Registre" },
-  { path: "/app/vault/veille", label: "Veille" },
-  { path: "/app/vault/historique", label: "Historique" },
-];
-
-const ACCENT = "#06b6d4";
+import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 
 const ListIcon = ({ size = 28, color = ACCENT }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -203,7 +194,7 @@ export default function VaultRegistrePage() {
   const labelStyle = "block text-[13px] font-medium text-[#d1d5db] mb-1.5";
 
   return (
-    <div className="max-w-[860px]">
+    <div className="max-w-[1100px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
 
       {/* Header */}

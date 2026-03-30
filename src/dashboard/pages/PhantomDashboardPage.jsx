@@ -250,7 +250,7 @@ export default function PhantomDashboardPage() {
   };
 
   return (
-    <div className="max-w-[900px]">
+    <div className="max-w-[1100px]">
       <SubNav color="#8b5cf6" items={PHANTOM_NAV} />
       {/* Header */}
       <div className="mb-8">

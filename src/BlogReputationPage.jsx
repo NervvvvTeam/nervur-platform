@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 const BG = "#0f1117";
 const V = "#FFFFFF";
@@ -258,6 +259,32 @@ export default function BlogReputationPage() {
         a.blog-link:hover { border-color: ${ACCENT}; }
       `}</style>
 
+      {/* Navigation */}
+      <nav style={{
+        position: "sticky", top: 0, zIndex: 50,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "12px 24px",
+        background: "rgba(15,17,23,0.95)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+      }}>
+        <LogoNervur height={32} onClick={() => navigate("/")} />
+        <div style={{ display: "flex", gap: "12px" }}>
+          <button onClick={() => navigate("/")} style={{
+            padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
+            letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
+            transition: "all 0.15s",
+          }}>ACCUEIL</button>
+          <button onClick={() => navigate("/contact")} style={{
+            padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
+            letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
+            transition: "all 0.15s",
+          }}>CONTACT</button>
+        </div>
+      </nav>
+
       {/* Scroll progress bar */}
       <div style={{ position: "fixed", top: 0, left: 0, width: `${scrollProgress}%`, height: "3px", background: `linear-gradient(90deg, ${ACCENT}, #a78bfa)`, zIndex: 200, transition: "width 0.1s linear" }} />
 
@@ -407,7 +434,7 @@ export default function BlogReputationPage() {
               Sentinel surveille, analyse et vous aide a repondre a tous vos avis en ligne grace a l'IA. Detection en temps reel, reponses personnalisees, rapports hebdomadaires.
             </P>
             <P style={{ maxWidth: "480px", margin: "0 auto 28px", color: V3, fontSize: "15px" }}>
-              A partir de <span style={{ color: ACCENT, fontWeight: 700 }}>49&#8364;/mois</span> &middot; Essai gratuit 14 jours &middot; Sans engagement
+              A partir de <span style={{ color: ACCENT, fontWeight: 700 }}>39&#8364;/mois</span> &middot; Sans engagement
             </P>
             <button onClick={() => navigate("/sentinel")} style={{
               background: `linear-gradient(135deg, ${ACCENT}, #6366f1)`, border: "none", color: V,
@@ -470,10 +497,7 @@ export default function BlogReputationPage() {
           <div style={{ fontSize: "13px", color: V3 }}>
             <span style={{ fontWeight: 600, color: V2 }}>L'equipe NERVUR</span> &middot; 20 mars 2026 &middot; 12 min de lecture
           </div>
-          <span onClick={() => navigate("/")} style={{ fontSize: "12px", color: V3, cursor: "pointer", letterSpacing: "1px" }}
-            onMouseEnter={e => e.target.style.color = ACCENT} onMouseLeave={e => e.target.style.color = V3}>
-            nervur.fr
-          </span>
+          <LogoNervur height={22} onClick={() => navigate("/")} />
         </div>
       </div>
     </div>

@@ -52,7 +52,7 @@ export default function NexusSequencePage() {
   };
 
   return (
-    <div style={{ maxWidth: "800px" }}>
+    <div style={{ maxWidth: "1100px" }}>
       <SubNav color="#10b981" items={NEXUS_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{

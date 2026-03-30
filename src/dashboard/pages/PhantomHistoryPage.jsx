@@ -147,7 +147,7 @@ export default function PhantomHistoryPage() {
   const maxScore = 100;
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div style={{ maxWidth: "1100px" }}>
       <SubNav color="#8b5cf6" items={PHANTOM_NAV} />
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>

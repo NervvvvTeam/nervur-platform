@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 const V = "#FFFFFF", V2 = "#D4D4D8", V3 = "#A1A1AA";
 const VG = (a) => `rgba(255,255,255,${a})`;
@@ -293,7 +294,7 @@ export default function SentinelPage() {
 
       {/* NAV */}
       <nav aria-label="Navigation principale" className="flex justify-between items-center fixed top-0 left-0 right-0 z-[100] bg-[rgba(9,9,11,0.92)] backdrop-blur-[24px]" style={{ padding: isMobile ? "12px 20px" : "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")} className="w-auto object-contain cursor-pointer" style={{ height: isMobile ? "34px" : "42px" }} />
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div className="flex items-center gap-4">
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -768,7 +769,7 @@ export default function SentinelPage() {
             <div className="text-[10px] tracking-[3px] uppercase text-[#ef4444] font-bold mb-6">ABONNEMENT UNIQUE</div>
 
             <div className="flex items-baseline justify-center gap-1 mb-2">
-              <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>29€</span>
+              <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>39€</span>
               <span className="text-base text-[#52525B] font-semibold">/mois</span>
             </div>
             <p className="text-[13px] text-[#71717A] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
@@ -816,7 +817,7 @@ export default function SentinelPage() {
           <button onClick={() => navigate('/contact?outil=sentinel')} className="bg-white text-[#0f1117] border-none font-extrabold text-[13px] tracking-[1.5px] uppercase cursor-pointer transition-all duration-300 font-[inherit]" style={{ padding: "16px 40px" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(255,255,255,0.2)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
-            Réserver une démo gratuite →
+            Nous contacter →
           </button>
         </section>
       </main>

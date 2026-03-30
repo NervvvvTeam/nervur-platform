@@ -83,7 +83,7 @@ export default function PhantomSchedulePage() {
   };
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div style={{ maxWidth: "1100px" }}>
       <SubNav color="#8b5cf6" items={PHANTOM_NAV} />
 
       {/* Header */}

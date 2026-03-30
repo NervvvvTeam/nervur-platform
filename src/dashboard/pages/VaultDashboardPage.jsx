@@ -3,16 +3,8 @@ import { useApi } from "../hooks/useApi";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import SubNav from "../components/SubNav";
-
-const VAULT_NAV = [
-  { path: "/app/vault", label: "Dashboard", end: true },
-  { path: "/app/vault/generateur", label: "Générateur" },
-  { path: "/app/vault/registre", label: "Registre" },
-  { path: "/app/vault/veille", label: "Veille" },
-  { path: "/app/vault/historique", label: "Historique" },
-];
-
-const ACCENT = "#06b6d4";
+import VaultMiaChat from "../components/VaultMiaChat";
+import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 
 const ShieldIcon = ({ size = 28, color = ACCENT }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -95,6 +87,34 @@ const COMPLIANCE_AREAS = [
   { key: "cookies", label: "Cookies", description: "Consentement et bannière", icon: "cookie" },
 ];
 
+const MODULES = [
+  { label: "Registre", path: "/app/vault/registre", stat: "12 traitements", icon: "list", color: "#06b6d4" },
+  { label: "Audit (AIPD)", path: "/app/vault/aipd", stat: "3 analyses", icon: "scale", color: "#8b5cf6" },
+  { label: "Plan d'action", path: "/app/vault/actions", stat: "5/12 terminées", icon: "clipboard", color: "#22c55e" },
+  { label: "Incidents", path: "/app/vault/actions", stat: "0 actif", icon: "alert", color: "#ef4444" },
+  { label: "Checklist", path: "/app/vault/checklist", stat: "72% complété", icon: "check", color: "#06b6d4" },
+];
+
+const ModuleIcon = ({ icon, color, size = 18 }) => {
+  const props = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: color, strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" };
+  switch (icon) {
+    case "list":
+      return <svg {...props}><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>;
+    case "scale":
+      return <svg {...props}><path d="M16 3l-8 0"/><path d="M12 3l0 18"/><path d="M4 14l4-7 4 7"/><path d="M5 14l6 0"/><path d="M12 14l4-7 4 7"/><path d="M13 14l6 0"/></svg>;
+    case "user":
+      return <svg {...props}><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+    case "clipboard":
+      return <svg {...props}><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>;
+    case "alert":
+      return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+    case "check":
+      return <svg {...props}><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>;
+    default:
+      return null;
+  }
+};
+
 function getAreaStatus(scanResults, areaKey) {
   if (!scanResults) return null;
   switch (areaKey) {
@@ -168,7 +188,7 @@ export default function VaultDashboardPage() {
   const hasResults = lastScan && lastScan.status === "completed";
 
   return (
-    <div className="max-w-[860px]">
+    <div className="max-w-[1100px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
 
       {/* Header */}
@@ -395,6 +415,40 @@ export default function VaultDashboardPage() {
             </button>
           </div>
 
+          {/* Module status grid */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-3.5">
+              <ShieldIcon size={18} color={ACCENT} />
+              <h3 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+                Vos modules de conformité
+              </h3>
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {MODULES.map((mod) => (
+                <button
+                  key={mod.label}
+                  onClick={() => navigate(mod.path)}
+                  className="bg-[#1e2029] rounded-[10px] px-4 py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] flex items-center gap-3 cursor-pointer font-[inherit] text-left transition-all duration-150 hover:bg-[rgba(255,255,255,0.03)]"
+                  style={{
+                    border: "1px solid rgba(255,255,255,0.06)",
+                    borderLeft: `3px solid ${mod.color}`,
+                  }}
+                >
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ background: `${mod.color}15` }}
+                  >
+                    <ModuleIcon icon={mod.icon} color={mod.color} size={16} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[13px] font-semibold text-[#f0f0f3] truncate">{mod.label}</div>
+                    <div className="text-[11px] text-[#6b7280] mt-0.5">{mod.stat}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* All compliant message */}
           {score >= 80 && (
             <div className="bg-[rgba(34,197,94,0.06)] border border-[rgba(34,197,94,0.25)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
@@ -412,6 +466,7 @@ export default function VaultDashboardPage() {
       )}
 
       <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
+      <VaultMiaChat />
     </div>
   );
 }

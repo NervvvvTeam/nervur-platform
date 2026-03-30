@@ -12,7 +12,6 @@ import { SkeletonGrid, SkeletonText } from './dashboard/components/Skeleton'
 
 // Lazy-loaded marketing pages
 const ContactPage = lazy(() => import('./ContactPage'))
-const SimulateurPage = lazy(() => import('./SimulateurPage'))
 const DiagnosticPage = lazy(() => import('./DiagnosticPage'))
 const SentinelPage = lazy(() => import('./SentinelPage'))
 const TechnologiesPage = lazy(() => import('./TechnologiesPage'))
@@ -31,8 +30,6 @@ const BlogSecuritePage = lazy(() => import('./BlogSecuritePage'))
 const BlogPerformancePage = lazy(() => import('./BlogPerformancePage'))
 const BlogAvisGooglePage = lazy(() => import('./BlogAvisGooglePage'))
 const BlogRgpdPage = lazy(() => import('./BlogRgpdPage'))
-const DemoSentinelPage = lazy(() => import('./DemoSentinelPage'))
-const DemoVaultPage = lazy(() => import('./DemoVaultPage'))
 
 // Lazy-loaded dashboard pages
 const DashLoginPage = lazy(() => import('./dashboard/pages/LoginPage'))
@@ -56,9 +53,14 @@ const DashVaultMonitoringPage = lazy(() => import('./dashboard/pages/VaultMonito
 const DashVaultRgpdPage = lazy(() => import('./dashboard/pages/VaultRgpdPage'))
 const DashVaultGenerateurPage = lazy(() => import('./dashboard/pages/VaultGenerateurPage'))
 const DashVaultRegistrePage = lazy(() => import('./dashboard/pages/VaultRegistrePage'))
+const DashVaultAipdPage = lazy(() => import('./dashboard/pages/VaultAipdPage'))
+const DashVaultActionsPage = lazy(() => import('./dashboard/pages/VaultActionsPage'))
+
 // Checklist and Badge pages removed from routing (files kept)
 const DashVaultVeillePage = lazy(() => import('./dashboard/pages/VaultVeillePage'))
 const DashVaultHistoriquePage = lazy(() => import('./dashboard/pages/VaultHistoriquePage'))
+const DashVaultAlertsPage = lazy(() => import('./dashboard/pages/VaultAlertsPage'))
+const DashVaultTimelinePage = lazy(() => import('./dashboard/pages/VaultTimelinePage'))
 const DashAnalyticsPage = lazy(() => import('./dashboard/pages/AnalyticsPage'))
 const DashCompetitorsPage = lazy(() => import('./dashboard/pages/CompetitorsPage'))
 const DashReportsPage = lazy(() => import('./dashboard/pages/ReportsPage'))
@@ -99,7 +101,6 @@ function App() {
             {/* ═══ Marketing site ═══ */}
             <Route path="/" element={<NervurAurora />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/simulateur" element={<SimulateurPage />} />
             <Route path="/diagnostic" element={<DiagnosticPage />} />
             <Route path="/sentinel" element={<SentinelPage />} />
             <Route path="/technologies" element={<TechnologiesPage />} />
@@ -126,8 +127,6 @@ function App() {
             <Route path="/blog/performance-web" element={<Navigate to="/blog/presence-digitale" replace />} />
             <Route path="/blog/avis-google" element={<BlogAvisGooglePage />} />
             <Route path="/blog/rgpd-guide" element={<BlogRgpdPage />} />
-            <Route path="/demo/sentinel" element={<DemoSentinelPage />} />
-            <Route path="/demo/vault" element={<DemoVaultPage />} />
 
             {/* ═══ Espace Client (Dashboard) ═══ */}
             <Route path="/app/login" element={<Suspense fallback={<DashboardLoader />}><DashLoginPage /></Suspense>} />
@@ -157,7 +156,12 @@ function App() {
                 <Route path="vault/rgpd" element={<Suspense fallback={<DashboardLoader />}><DashVaultRgpdPage /></Suspense>} />
                 <Route path="vault/generateur" element={<Suspense fallback={<DashboardLoader />}><DashVaultGenerateurPage /></Suspense>} />
                 <Route path="vault/registre" element={<Suspense fallback={<DashboardLoader />}><DashVaultRegistrePage /></Suspense>} />
+                <Route path="vault/aipd" element={<Suspense fallback={<DashboardLoader />}><DashVaultAipdPage /></Suspense>} />
+                <Route path="vault/actions" element={<Suspense fallback={<DashboardLoader />}><DashVaultActionsPage /></Suspense>} />
+
                 <Route path="vault/veille" element={<Suspense fallback={<DashboardLoader />}><DashVaultVeillePage /></Suspense>} />
+                <Route path="vault/alertes" element={<Suspense fallback={<DashboardLoader />}><DashVaultAlertsPage /></Suspense>} />
+                <Route path="vault/timeline" element={<Suspense fallback={<DashboardLoader />}><DashVaultTimelinePage /></Suspense>} />
                 <Route path="vault/historique" element={<Suspense fallback={<DashboardLoader />}><DashVaultHistoriquePage /></Suspense>} />
                 <Route path="settings" element={<Suspense fallback={<DashboardLoader />}><DashSettingsPage /></Suspense>} />
                 <Route path="onboarding" element={<Suspense fallback={<DashboardLoader />}><DashOnboardingPage /></Suspense>} />

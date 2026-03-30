@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -20,7 +21,7 @@ const TOOLS = [
     color: "#ef4444",
     description: "Surveillez vos avis Google, répondez automatiquement avec l'IA et analysez votre réputation en ligne.",
     features: ["Avis Google en temps réel", "Réponses IA automatiques", "Analyse sémantique", "Veille concurrentielle", "QR Code & Widget", "Rapports PDF"],
-    price: "29",
+    price: "39",
     link: "/sentinel",
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -36,8 +37,8 @@ const TOOLS = [
     subtitle: "Agent Juridique IA",
     color: "#06b6d4",
     description: "Agent Juridique IA — Conformité & Protection juridique. Scannez votre site, générez vos documents légaux et suivez votre conformité RGPD.",
-    features: ["Scan RGPD automatisé", "Générateur de documents légaux", "Registre des traitements RGPD", "Veille juridique automatisée", "Historique et évolution du score", "Recommandations IA"],
-    price: "19",
+    features: ["Scan RGPD automatisé", "Générateur de documents légaux", "Alertes intelligentes SSL & RGPD", "Veille juridique automatisée", "Timeline de conformité (accountability)", "Recommandations IA"],
+    price: "79",
     link: "/contact",
     icon: (
       <svg width="36" height="36" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -117,8 +118,7 @@ export default function TechnologiesPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255,255,255,0.08)"
       }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" onClick={() => navigate("/")}
-          style={{ height: isMobile ? "40px" : "70px", width: "auto", objectFit: "contain", cursor: "pointer" }} />
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour à l'accueil" onClick={() => navigate("/")}>Accueil</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -217,13 +217,13 @@ export default function TechnologiesPage() {
                   <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
-                  <button className="cta-link" onClick={() => navigate(tool.id === "sentinel" ? "/demo/sentinel" : "/demo/vault")} style={{
+                  <button className="cta-link" onClick={() => navigate("/contact")} style={{
                     color: "#0f1117", background: tool.color, padding: "8px 18px", borderRadius: "8px",
                     fontSize: "13px", fontWeight: 700, border: "none", cursor: "pointer", transition: "all 0.3s",
                   }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${tool.color}50`; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                    Essayer gratuitement
+                    Nous contacter
                   </button>
                   <button className="cta-link" onClick={() => navigate(tool.link)} style={{ color: tool.color }}>
                     En savoir plus &rarr;
@@ -252,7 +252,7 @@ export default function TechnologiesPage() {
             <div className="pack-card">
               <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#ef4444", fontWeight: 700, marginBottom: "12px" }}>Sentinel seul</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
-                <span style={{ fontSize: "40px", fontWeight: 800 }}>29&#8364;</span>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>39&#8364;</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>E-reputation & gestion des avis</p>
@@ -274,11 +274,11 @@ export default function TechnologiesPage() {
               </div>
               <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#818CF8", fontWeight: 700, marginBottom: "12px", marginTop: "8px" }}>Pack Duo</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "4px" }}>
-                <span style={{ fontSize: "40px", fontWeight: 800 }}>39&#8364;</span>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>99&#8364;</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "4px", lineHeight: 1.6 }}>Sentinel + Vault</p>
-              <p style={{ fontSize: "12px", color: "#ef4444", fontWeight: 600, marginBottom: "20px" }}>au lieu de 48&#8364; &mdash; &eacute;conomisez 9&#8364;/mois</p>
+              <p style={{ fontSize: "12px", color: "#ef4444", fontWeight: 600, marginBottom: "20px" }}>au lieu de 118&#8364; &mdash; &eacute;conomisez 19&#8364;/mois</p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "12px 32px", background: "#818CF8", border: "none",
                 color: "#0f1117", fontWeight: 700, fontSize: "13px", cursor: "pointer",
@@ -294,7 +294,7 @@ export default function TechnologiesPage() {
             <div className="pack-card">
               <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#06b6d4", fontWeight: 700, marginBottom: "12px" }}>Vault seul</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
-                <span style={{ fontSize: "40px", fontWeight: 800 }}>19&#8364;</span>
+                <span style={{ fontSize: "40px", fontWeight: 800 }}>79&#8364;</span>
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <p style={{ fontSize: "13px", color: "#71717A", marginBottom: "20px", lineHeight: 1.6 }}>Agent Juridique IA & RGPD</p>

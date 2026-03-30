@@ -204,7 +204,28 @@
       "Bash(grep -n '\\\\\\\\u00\\\\|\\\\\\\\u20\\\\|\\\\\\\\u21\\\\|\\\\\\\\u26\\\\|\\\\\\\\u27' src/DiagnosticPage.jsx)",
       "Bash(npx --no-install vite build --mode development)",
       "Bash(find src:*)",
-      "Bash(while read:*)"
+      "Bash(while read:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://nervur-backend.onrender.com/api/vault/veille)",
+      "Bash(curl -s https://nervur-backend.onrender.com/api/vault/veille)",
+      "Bash(curl -s -w '\\\\nHTTP: %{http_code}' https://nervurapi-production.up.railway.app/api/vault/veille)",
+      "Bash(curl -s -w '\\\\nHTTP: %{http_code}' -H 'Authorization: Bearer fake' https://nervurapi-production.up.railway.app/api/vault/veille)",
+      "Bash(curl -s -w '\\\\nHTTP: %{http_code}' https://nervurapi-production.up.railway.app/api/vault/registre)",
+      "Read(//c/tmp/NervurAPI//**)",
+      "Read(//c/tmp/NervurAPI/**)",
+      "Bash(git config:*)",
+      "Bash(grep -l \"logo-nervur\\\\|LogoNervur\" /c/Escriba/AGencer/src/dashboard/pages/*.jsx)",
+      "Bash(do if:*)",
+      "Bash(then echo:*)",
+      "Bash(fi)",
+      "Bash(ls \"C:/Escriba/AGencer/src/\"*imulat*)",
+      "Bash(npx -y acorn-loose --ecma2020 src/dashboard/pages/VaultHistoriquePage.jsx)",
+      "Bash(ls C:/Escriba/AGencer/src/dashboard/pages/VaultAipd*)",
+      "Bash(ls C:/Escriba/AGencer/src/dashboard/pages/Vault*.jsx)",
+      "Bash(node -e \"const fs = require\\(''fs''\\); console.log\\(fs.existsSync\\(''src/dashboard/pages/VaultAipdPage.jsx''\\)\\)\")",
+      "Bash(grep -o 'Audit.*stroke' dist/assets/js/index-*.js)",
+      "Bash(grep -rl 'max-w-\\\\[860px\\\\]' src/dashboard/pages/*.jsx)",
+      "Bash(grep -rl 'maxWidth.*\"\"\"\"900px\"\"\"\"\\\\|maxWidth.*\"\"\"\"800px\"\"\"\"\\\\|max-w-\\\\[900px\\\\]' src/dashboard/pages/*.jsx)",
+      "Bash(xargs sed:*)"
     ]
   }
 }

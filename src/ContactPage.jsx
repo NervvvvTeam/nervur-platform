@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { sanitizeInput, validateContactForm } from "./security";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== "undefined" ? window.innerWidth <= bp : false);
@@ -15,9 +16,9 @@ const useIsMobile = (bp = 768) => {
 
 const SUJETS = [
   "Demande d'information",
-  "Souscrire à Sentinel (29€/mois)",
-  "Souscrire à Vault (19€/mois)",
-  "Pack Duo — 2 outils (39€/mois)",
+  "Souscrire à Sentinel (39€/mois)",
+  "Souscrire à Vault (79€/mois)",
+  "Pack Duo — 2 outils (99€/mois)",
   "Projet de développement web",
   "SEO & Marketing",
   "Autre",
@@ -32,12 +33,12 @@ const ToolIcon = ({ type, color, size = 18 }) => {
 };
 
 const TOOLS = [
-  { name: "Sentinel", icon: "sentinel", price: "29€/mois", desc: "E-réputation", color: "#ef4444" },
-  { name: "Vault", icon: "vault", price: "19€/mois", desc: "Agent Juridique IA", color: "#06b6d4" },
+  { name: "Sentinel", icon: "sentinel", price: "39€/mois", desc: "E-réputation", color: "#ef4444" },
+  { name: "Vault", icon: "vault", price: "79€/mois", desc: "Agent Juridique IA", color: "#06b6d4" },
 ];
 
 const PACKS = [
-  { name: "Pack Duo", price: "39\u20AC/mois", desc: "Sentinel + Vault" },
+  { name: "Pack Duo", price: "99\u20AC/mois", desc: "Sentinel + Vault" },
 ];
 
 export default function ContactPage() {
@@ -234,14 +235,7 @@ export default function ContactPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>
-        <img
-          src="/logo-nervur.svg" alt="NERVÜR"
-          onClick={() => navigate("/")}
-          style={{
-            height: isMobile ? "40px" : "70px", width: "auto",
-            objectFit: "contain", cursor: "pointer",
-          }}
-        />
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <button className="contact-nav-btn" onClick={() => navigate("/")}>
           Accueil
         </button>
@@ -645,10 +639,7 @@ export default function ContactPage() {
         alignItems: "center",
         gap: isMobile ? "12px" : "0",
       }}>
-        <img src="/logo-nervur.svg" alt="NERVÜR" style={{
-          height: "28px", width: "auto",
-          objectFit: "contain",
-        }} />
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <span style={{ fontSize: "11px", color: "#3F3F46" }}>
           © 2026 NERVÜR — Tous droits réservés
         </span>

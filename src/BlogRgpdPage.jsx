@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 const BG = "#0f1117";
 const V = "#FFFFFF";
@@ -277,6 +278,32 @@ export default function BlogRgpdPage() {
         a.blog-link:hover { border-color: ${ACCENT}; }
       `}</style>
 
+      {/* Navigation */}
+      <nav style={{
+        position: "sticky", top: 0, zIndex: 50,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "12px 24px",
+        background: "rgba(15,17,23,0.95)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+      }}>
+        <LogoNervur height={32} onClick={() => navigate("/")} />
+        <div style={{ display: "flex", gap: "12px" }}>
+          <button onClick={() => navigate("/")} style={{
+            padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
+            letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
+            transition: "all 0.15s",
+          }}>ACCUEIL</button>
+          <button onClick={() => navigate("/contact")} style={{
+            padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
+            letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
+            transition: "all 0.15s",
+          }}>CONTACT</button>
+        </div>
+      </nav>
+
       {/* Scroll progress bar */}
       <div style={{ position: "fixed", top: 0, left: 0, width: `${scrollProgress}%`, height: "3px", background: `linear-gradient(90deg, ${ACCENT}, #34d399)`, zIndex: 200, transition: "width 0.1s linear" }} />
 
@@ -423,9 +450,9 @@ export default function BlogRgpdPage() {
               Vault genere votre registre, vos documents de conformite et surveille vos obligations en continu. Conçu pour les TPE/PME, sans jargon juridique.
             </P>
             <P style={{ maxWidth: "480px", margin: "0 auto 28px", color: V3, fontSize: "15px" }}>
-              A partir de <span style={{ color: ACCENT, fontWeight: 700 }}>69&#8364;/mois</span> &middot; Essai gratuit 14 jours &middot; Sans engagement
+              A partir de <span style={{ color: ACCENT, fontWeight: 700 }}>79&#8364;/mois</span> &middot; Sans engagement
             </P>
-            <button onClick={() => navigate("/demo/vault")} style={{
+            <button onClick={() => navigate("/contact")} style={{
               background: `linear-gradient(135deg, ${ACCENT}, #059669)`, border: "none", color: V,
               padding: "14px 40px", fontSize: "14px", fontWeight: 700, letterSpacing: "1.5px",
               textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit", borderRadius: "6px",
@@ -433,7 +460,7 @@ export default function BlogRgpdPage() {
             }}
               onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 32px rgba(16,185,129,0.4)"; }}
               onMouseLeave={e => { e.target.style.transform = "translateY(0)"; e.target.style.boxShadow = "0 4px 24px rgba(16,185,129,0.3)"; }}
-            >Decouvrir Vault</button>
+            >Contactez-nous</button>
           </div>
         </Section>
 
@@ -486,10 +513,7 @@ export default function BlogRgpdPage() {
           <div style={{ fontSize: "13px", color: V3 }}>
             <span style={{ fontWeight: 600, color: V2 }}>L'equipe NERVUR</span> &middot; 26 mars 2026 &middot; 13 min de lecture
           </div>
-          <span onClick={() => navigate("/")} style={{ fontSize: "12px", color: V3, cursor: "pointer", letterSpacing: "1px" }}
-            onMouseEnter={e => e.target.style.color = ACCENT} onMouseLeave={e => e.target.style.color = V3}>
-            nervur.fr
-          </span>
+          <LogoNervur height={22} onClick={() => navigate("/")} />
         </div>
       </div>
     </div>

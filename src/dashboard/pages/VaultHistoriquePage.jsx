@@ -2,16 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
 import { useNavigate } from "react-router-dom";
 import SubNav from "../components/SubNav";
-
-const VAULT_NAV = [
-  { path: "/app/vault", label: "Dashboard", end: true },
-  { path: "/app/vault/generateur", label: "Générateur" },
-  { path: "/app/vault/registre", label: "Registre" },
-  { path: "/app/vault/veille", label: "Veille" },
-  { path: "/app/vault/historique", label: "Historique" },
-];
-
-const ACCENT = "#06b6d4";
+import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 
 const ClockIcon = ({ size = 28, color = ACCENT }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -52,11 +43,33 @@ function getScoreLabel(score) {
   return "Critique";
 }
 
+const FileIcon = ({ size = 20, color = ACCENT }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+  </svg>
+);
+
+const DownloadIcon = ({ size = 14, color = "currentColor" }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+);
+
+function formatDateFr(dateStr) {
+  if (!dateStr) return "\u2014";
+  return new Date(dateStr).toLocaleDateString("fr-FR", {
+    day: "numeric", month: "long", year: "numeric",
+  });
+}
+
 export default function VaultHistoriquePage() {
   const { get, del } = useApi();
   const navigate = useNavigate();
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("analyses");
+  const [documents, setDocuments] = useState([]);
+  const [docsLoading, setDocsLoading] = useState(true);
 
   const fetchHistory = useCallback(async () => {
     try {
@@ -72,6 +85,48 @@ export default function VaultHistoriquePage() {
   useEffect(() => {
     fetchHistory();
   }, [fetchHistory]);
+
+  // Fetch generated documents
+  useEffect(() => {
+    async function loadDocs() {
+      try {
+        const docs = await get("/api/vault/documents");
+        setDocuments(docs);
+      } catch {
+        // Demo fallback
+        setDocuments([
+          { id: "demo-doc-1", documentType: "mentions-legales", label: "Mentions l\u00e9gales", company: "Ma Soci\u00e9t\u00e9", createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString() },
+          { id: "demo-doc-2", documentType: "politique-confidentialite", label: "Politique de confidentialit\u00e9", company: "Ma Soci\u00e9t\u00e9", createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() },
+          { id: "demo-doc-3", documentType: "cgv", label: "Conditions g\u00e9n\u00e9rales de vente", company: "Ma Soci\u00e9t\u00e9", createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString() },
+        ]);
+      } finally {
+        setDocsLoading(false);
+      }
+    }
+    loadDocs();
+  }, [get]);
+
+  const downloadPdf = async (docId, label) => {
+    try {
+      const API = import.meta.env.VITE_API_URL || "http://localhost:3001";
+      const token = localStorage.getItem("sentinel_token");
+      const res = await fetch(`${API}/api/vault/documents/${docId}/pdf`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${label.replace(/\s+/g, "-").toLowerCase()}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error("Erreur t\u00e9l\u00e9chargement PDF:", e);
+    }
+  };
 
   const handleDelete = async (id, e) => {
     e.stopPropagation();
@@ -97,7 +152,7 @@ export default function VaultHistoriquePage() {
   }
 
   return (
-    <div className="max-w-[860px]">
+    <div className="max-w-[1100px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
 
       {/* Header */}
@@ -107,17 +162,40 @@ export default function VaultHistoriquePage() {
         </div>
         <div>
           <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
-            Historique des analyses
+            Historique
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
-            Suivez l'évolution de la conformité de vos sites
+            Analyses de conformit&eacute; et documents g&eacute;n&eacute;r&eacute;s
           </p>
         </div>
       </div>
 
       {/* Gradient bar */}
-      <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-6 mt-4" />
+      <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-5 mt-4" />
 
+      {/* Tab buttons */}
+      <div className="flex gap-2 mb-6">
+        {[
+          { key: "analyses", label: "Analyses" },
+          { key: "documents", label: "Documents" },
+        ].map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setActiveTab(t.key)}
+            className="px-4 py-[7px] rounded-lg text-[13px] font-semibold border cursor-pointer transition-all duration-150 font-[inherit]"
+            style={{
+              background: activeTab === t.key ? "rgba(6,182,212,0.12)" : "transparent",
+              color: activeTab === t.key ? ACCENT : "#64748b",
+              borderColor: activeTab === t.key ? "rgba(6,182,212,0.3)" : "rgba(255,255,255,0.06)",
+            }}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {/* ===== ANALYSES TAB ===== */}
+      {activeTab === "analyses" && <>
       {/* Loading */}
       {loading && (
         <div className="text-[13px] text-[#6b7280] text-center py-8">Chargement de l'historique...</div>
@@ -226,6 +304,91 @@ export default function VaultHistoriquePage() {
           ))}
         </div>
       )}
+      </>}
+
+      {/* ===== DOCUMENTS TAB ===== */}
+      {activeTab === "documents" && <>
+        {docsLoading && (
+          <div className="text-[13px] text-[#6b7280] text-center py-8">Chargement des documents...</div>
+        )}
+
+        {/* Empty state */}
+        {!docsLoading && documents.length === 0 && (
+          <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+            <FileIcon size={40} color="#6b7280" />
+            <div className="text-base font-semibold text-[#6b7280] mt-3 mb-1.5">
+              Aucun document g&eacute;n&eacute;r&eacute;
+            </div>
+            <div className="text-[13px] text-[#52525b] leading-relaxed max-w-[440px] mx-auto mb-4">
+              Rendez-vous dans le G&eacute;n&eacute;rateur pour cr&eacute;er vos documents juridiques.
+            </div>
+            <button
+              onClick={() => navigate("/app/vault/generateur")}
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-lg border-none text-sm font-semibold font-[inherit] cursor-pointer"
+              style={{ background: `linear-gradient(135deg, ${ACCENT}, #22d3ee)`, color: "#0f0f11" }}
+            >
+              Ouvrir le g&eacute;n&eacute;rateur
+            </button>
+          </div>
+        )}
+
+        {/* Documents list */}
+        {!docsLoading && documents.length > 0 && (
+          <div className="flex flex-col gap-3">
+            {documents.map((doc) => (
+              <div
+                key={doc.id || doc._id}
+                className="bg-[#1e2029] rounded-[10px] px-5 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)] border border-[#2a2d3a] hover:border-[rgba(6,182,212,0.25)] transition-all duration-150 flex items-center justify-between"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-lg bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.18)] flex items-center justify-center flex-shrink-0">
+                    <FileIcon size={20} color={ACCENT} />
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-semibold text-[#f0f0f3]">
+                      {doc.label}
+                    </div>
+                    <div className="flex items-center gap-3 mt-1">
+                      {doc.company && (
+                        <span className="text-[11px] text-[#9ca3af]">{doc.company}</span>
+                      )}
+                      <span className="text-[11px] text-[#6b7280]">
+                        G&eacute;n&eacute;r&eacute; le {formatDateFr(doc.createdAt)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => navigate("/app/vault/generateur", { state: { viewDocId: doc.id || doc._id } })}
+                    className="flex items-center gap-1.5 px-3 py-[6px] rounded-lg text-[12px] font-semibold border cursor-pointer transition-all duration-150 font-[inherit]"
+                    style={{
+                      background: "transparent",
+                      color: "#9ca3af",
+                      borderColor: "rgba(255,255,255,0.08)",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.3)"; e.currentTarget.style.color = "#f0f0f3"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.color = "#9ca3af"; }}
+                  >
+                    Voir
+                  </button>
+                  <button
+                    onClick={() => downloadPdf(doc.id || doc._id, doc.label)}
+                    className="flex items-center gap-1.5 px-3 py-[6px] rounded-lg text-[12px] font-semibold border-none cursor-pointer transition-all duration-150 font-[inherit]"
+                    style={{
+                      background: `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
+                      color: "#0f0f11",
+                    }}
+                  >
+                    <DownloadIcon size={13} color="#0f0f11" />
+                    T&eacute;l&eacute;charger PDF
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </>}
     </div>
   );
 }

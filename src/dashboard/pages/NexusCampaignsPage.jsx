@@ -111,7 +111,7 @@ export default function NexusCampaignsPage() {
   const formatDate = (d) => new Date(d).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
 
   return (
-    <div style={{ maxWidth: "900px" }}>
+    <div style={{ maxWidth: "1100px" }}>
       <SubNav color="#10b981" items={NEXUS_NAV} />
       <div style={{ marginBottom: "32px" }}>
         <div style={{

@@ -2,15 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useApi } from "../hooks/useApi";
 import { useNavigate } from "react-router-dom";
 import SubNav from "../components/SubNav";
-
-const VAULT_NAV = [
-  { path: "/app/vault", label: "Scanner", end: true },
-  { path: "/app/vault/monitoring", label: "Surveillance" },
-  { path: "/app/vault/history", label: "Historique" },
-  { path: "/app/vault/rgpd", label: "Conformité RGPD" },
-];
-
-const ACCENT = "#06b6d4";
+import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 const ACCENT_LIGHT = "#22d3ee";
 const BG_TINT = "rgba(6,182,212,0.06)";
 const BORDER_TINT = "rgba(6,182,212,0.2)";
@@ -141,7 +133,7 @@ export default function VaultMonitoringPage() {
   };
 
   return (
-    <div className="max-w-[860px]">
+    <div className="max-w-[1100px]">
       <SubNav color="#06b6d4" items={VAULT_NAV} />
       {/* Header bar */}
       <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
