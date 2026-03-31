@@ -392,12 +392,12 @@ export default function NervurAurora() {
   useFadeOnScroll(pageRef);
 
   useSEO(
-    "NERVÜR — Outils SaaS pour TPE/PME | E-réputation & Conformité RGPD",
-    "NERVÜR — 2 outils SaaS pour les TPE/PME : Sentinel (e-réputation, gestion des avis Google, 39€/mois) et Vault (Agent Juridique IA, conformité RGPD automatisée, 79€/mois).",
+    "NERVÜR",
+    "NERVÜR — Éditeur de nouvelles technologies sur mesure pour les entreprises. Création de sites web, développement d'outils SaaS, solutions digitales personnalisées, e-réputation et conformité RGPD.",
     {
       path: "/",
-      keywords: "outil RGPD PME, conformité RGPD TPE, gestion avis Google, e-réputation PME, agent juridique IA, NERVÜR, SaaS PME, registre traitements, AIPD, DPO externalisé",
-      imageAlt: "NERVÜR — Outils SaaS pour TPE/PME : e-réputation et conformité RGPD",
+      keywords: "éditeur nouvelles technologies, création site web sur mesure, développement SaaS, agence digitale, solutions digitales entreprises, NERVÜR, e-réputation, conformité RGPD",
+      imageAlt: "NERVÜR — Éditeur de Nouvelles Technologies sur Mesure",
     }
   );
 
@@ -409,7 +409,7 @@ export default function NervurAurora() {
     "url": "https://nervur.fr",
     "logo": "https://nervur.fr/logo-nav-clean.png",
     "image": "https://nervur.fr/og-image.png",
-    "description": "2 outils SaaS pour les TPE/PME : Sentinel (e-réputation, gestion des avis Google) et Vault (Agent Juridique IA, conformité RGPD automatisée).",
+    "description": "Éditeur de nouvelles technologies sur mesure. Création de sites web, outils SaaS et solutions digitales personnalisées pour les entreprises.",
     "foundingDate": "2024",
     "areaServed": {
       "@type": "Country",
