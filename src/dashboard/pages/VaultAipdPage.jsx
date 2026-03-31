@@ -903,7 +903,7 @@ ${(analysis.actions || []).map(a => {
       <h3 style={{ color: "#e2e8f0", fontSize: 18, fontWeight: 700, marginBottom: 4 }}>Étape 1 — Secteur & Contexte</h3>
       <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Identifiez votre secteur d'activité pour des recommandations personnalisées.</p>
 
-      <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8 }}>Secteur d'activité</label>
+      <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8 }}>Secteur d'activité <span style={{ color: "#ef4444" }}>*</span></label>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: 8, marginBottom: 20 }}>
         {SECTEURS.map((s) => (
           <button key={s.value} onClick={() => updateWiz("sector", s.value)} style={{
@@ -920,7 +920,7 @@ ${(analysis.actions || []).map(a => {
 
       <NoeBox text={noeSuggestion("step1")} />
 
-      <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>Nom de l'entreprise</label>
+      <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>Nom de l'entreprise <span style={{ color: "#ef4444" }}>*</span></label>
       <input value={wiz.company} onChange={(e) => updateWiz("company", e.target.value)} placeholder="Ex : Ma Boutique SAS" style={inputStyle} />
 
       <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>
@@ -930,7 +930,7 @@ ${(analysis.actions || []).map(a => {
         placeholder="Ex : Données collectées via formulaire web → stockées chez OVH → partagées avec expert-comptable → supprimées après 3 ans"
         rows={2} style={{ ...inputStyle, resize: "vertical", marginBottom: 0 }} />
 
-      <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>Nombre de salariés</label>
+      <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>Nombre de salariés <span style={{ color: "#ef4444" }}>*</span></label>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         {EMPLOYEE_RANGES.map((r) => (
           <button key={r} onClick={() => updateWiz("employees", r)} style={{
@@ -953,7 +953,7 @@ ${(analysis.actions || []).map(a => {
         <h3 style={{ color: "#e2e8f0", fontSize: 18, fontWeight: 700, marginBottom: 4 }}>Étape 2 — Description du traitement</h3>
         <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Décrivez précisément le traitement de données que vous souhaitez analyser.</p>
 
-        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Nom du traitement</label>
+        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Nom du traitement <span style={{ color: "#ef4444" }}>*</span></label>
         <input value={wiz.treatmentName} onChange={(e) => updateWiz("treatmentName", e.target.value)} placeholder="Ex : Gestion des commandes" style={inputStyle} />
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 8, marginBottom: 16 }}>
           {suggestions.map((s) => (
@@ -968,7 +968,7 @@ ${(analysis.actions || []).map(a => {
           ))}
         </div>
 
-        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Finalité du traitement</label>
+        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Finalité du traitement <span style={{ color: "#ef4444" }}>*</span></label>
         <textarea value={wiz.treatmentDesc} onChange={(e) => updateWiz("treatmentDesc", e.target.value)}
           placeholder="Décrivez la finalité du traitement et les opérations effectuées sur les données..."
           rows={3} style={{ ...inputStyle, resize: "vertical" }} />
@@ -976,7 +976,7 @@ ${(analysis.actions || []).map(a => {
         <NoeBox text={noeSuggestion("step2")} />
 
         <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8, marginTop: 16 }}>
-          Catégories de données collectées <InfoTooltip text={TOOLTIPS.sensible} />
+          Catégories de données collectées <span style={{ color: "#ef4444" }}>*</span> <InfoTooltip text={TOOLTIPS.sensible} />
         </label>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 20 }}>
           {DATA_CATEGORIES.map((dt) => (
@@ -993,7 +993,7 @@ ${(analysis.actions || []).map(a => {
         </div>
 
         <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8 }}>
-          Base légale <InfoTooltip text={TOOLTIPS.baseLegale} />
+          Base légale <span style={{ color: "#ef4444" }}>*</span> <InfoTooltip text={TOOLTIPS.baseLegale} />
         </label>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 8, marginBottom: 20 }}>
           {LEGAL_BASES.map((lb) => (
@@ -1022,7 +1022,7 @@ ${(analysis.actions || []).map(a => {
         </div>
 
         <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>
-          Durée de conservation <InfoTooltip text={TOOLTIPS.conservation} />
+          Durée de conservation <span style={{ color: "#ef4444" }}>*</span> <InfoTooltip text={TOOLTIPS.conservation} />
         </label>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
           {DURATIONS.map((d) => (
@@ -1725,25 +1725,73 @@ ${(analysis.actions || []).map(a => {
         {wizardSteps[step]()}
       </div>
 
-      {/* Navigation */}
-      {step < 5 && (
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <button onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0}
-            style={{ ...btnSecondary, opacity: step === 0 ? 0.3 : 1 }}>
-            Précédent
-          </button>
-          <button onClick={() => {
-            // Auto-fill risks when entering step 3 (risks)
-            if (step === 2) {
-              const filled = autoFillRisks();
-              setWiz(p => ({ ...p, risks: filled }));
-            }
-            setStep((s) => Math.min(5, s + 1));
-          }} style={btnPrimary}>
-            Suivant
-          </button>
-        </div>
-      )}
+      {/* Navigation with validation */}
+      {step < 5 && (() => {
+        const validations = {
+          0: () => {
+            const missing = [];
+            if (!wiz.sector) missing.push("Secteur d'activité");
+            if (!wiz.company.trim()) missing.push("Nom de l'entreprise");
+            if (!wiz.employees) missing.push("Nombre de salariés");
+            return missing;
+          },
+          1: () => {
+            const missing = [];
+            if (!wiz.treatmentName.trim()) missing.push("Nom du traitement");
+            if (!wiz.treatmentDesc.trim()) missing.push("Finalité du traitement");
+            if (wiz.dataTypes.length === 0) missing.push("Au moins 1 catégorie de données");
+            if (!wiz.legalBasis) missing.push("Base légale");
+            if (!wiz.duration) missing.push("Durée de conservation");
+            return missing;
+          },
+          2: () => {
+            const unanswered = wiz.necessity.filter(n => n === null).length;
+            return unanswered > 0 ? [`${unanswered} question(s) sans réponse`] : [];
+          },
+          3: () => [],
+          4: () => [],
+        };
+        const missing = (validations[step] || (() => []))();
+        const canProceed = missing.length === 0;
+        return (
+          <div>
+            {missing.length > 0 && (
+              <div style={{
+                background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.2)",
+                borderRadius: 8, padding: "10px 16px", marginBottom: 12,
+                display: "flex", alignItems: "flex-start", gap: 10,
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: 2 }}>
+                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <div style={{ fontSize: 12, color: "#f87171" }}>
+                  <strong>Champs obligatoires manquants :</strong> {missing.join(", ")}
+                </div>
+              </div>
+            )}
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <button onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0}
+                style={{ ...btnSecondary, opacity: step === 0 ? 0.3 : 1 }}>
+                Précédent
+              </button>
+              <button onClick={() => {
+                if (!canProceed) return;
+                if (step === 2) {
+                  const filled = autoFillRisks();
+                  setWiz(p => ({ ...p, risks: filled }));
+                }
+                setStep((s) => Math.min(5, s + 1));
+              }} style={{
+                ...btnPrimary,
+                opacity: canProceed ? 1 : 0.4,
+                cursor: canProceed ? "pointer" : "not-allowed",
+              }}>
+                Suivant
+              </button>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 
