@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useApi } from "../hooks/useApi";
 import { useAuth } from "../hooks/useAuth";
 import SubNav from "../components/SubNav";
@@ -67,7 +67,7 @@ const DOC_TYPES = [
 ];
 
 export default function VaultGenerateurPage() {
-  const { post } = useApi();
+  const { get, post } = useApi();
   const { token } = useAuth();
   const [form, setForm] = useState({
     nomEntreprise: "",
@@ -87,9 +87,76 @@ export default function VaultGenerateurPage() {
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(false);
 
+  // Auto-save state
+  const [saveStatus, setSaveStatus] = useState(null); // null | "saving" | "saved" | "error"
+  const saveTimerRef = useRef(null);
+  const fadeTimerRef = useRef(null);
+  const formRef = useRef(form);
+  const initialLoadDone = useRef(false);
+
+  // Keep formRef in sync
+  formRef.current = form;
+
+  // Load company profile on mount
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const data = await get("/api/vault/company");
+        if (!cancelled && data) {
+          const fields = ["nomEntreprise", "formeJuridique", "adresse", "siret", "email", "telephone", "activite", "siteUrl", "hebergeur", "directeurPublication"];
+          setForm(prev => {
+            const updated = { ...prev };
+            for (const key of fields) {
+              if (data[key] !== undefined && data[key] !== null) {
+                updated[key] = data[key];
+              }
+            }
+            return updated;
+          });
+        }
+      } catch (_) {
+        // No saved profile yet — ignore
+      } finally {
+        if (!cancelled) initialLoadDone.current = true;
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [get]);
+
+  // Auto-save function
+  const autoSave = useCallback(async () => {
+    setSaveStatus("saving");
+    if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current);
+    try {
+      await post("/api/vault/company", formRef.current);
+      setSaveStatus("saved");
+      fadeTimerRef.current = setTimeout(() => setSaveStatus(null), 3000);
+    } catch (_) {
+      setSaveStatus("error");
+      fadeTimerRef.current = setTimeout(() => setSaveStatus(null), 3000);
+    }
+  }, [post]);
+
   const updateField = (field, value) => {
     setForm(prev => ({ ...prev, [field]: value }));
+
+    // Debounced auto-save (only after initial load)
+    if (initialLoadDone.current) {
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+      saveTimerRef.current = setTimeout(() => {
+        autoSave();
+      }, 2000);
+    }
   };
+
+  // Cleanup timers on unmount
+  useEffect(() => {
+    return () => {
+      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
+      if (fadeTimerRef.current) clearTimeout(fadeTimerRef.current);
+    };
+  }, []);
 
   const handleGenerate = useCallback(async (docType) => {
     if (!form.nomEntreprise.trim()) {
@@ -187,11 +254,30 @@ export default function VaultGenerateurPage() {
 
       {/* Company info form */}
       <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
-        <div className="flex items-center gap-2 mb-5">
-          <FileIcon size={18} color={ACCENT} />
-          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
-            Informations de votre entreprise
-          </h2>
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2">
+            <FileIcon size={18} color={ACCENT} />
+            <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+              Informations de votre entreprise
+            </h2>
+          </div>
+          {saveStatus && (
+            <span className={`inline-flex items-center gap-1.5 text-[12px] font-medium transition-opacity duration-300 ${
+              saveStatus === "saved" ? "text-[#22c55e]" :
+              saveStatus === "saving" ? "text-[#9ca3af]" :
+              "text-[#ef4444]"
+            }`}>
+              {saveStatus === "saved" && <><CheckIcon size={13} color="#22c55e" /> Sauvegard&eacute;</>}
+              {saveStatus === "saving" && "Sauvegarde..."}
+              {saveStatus === "error" && "Erreur de sauvegarde"}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2 mb-5 px-3 py-2 bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-md">
+          <CheckIcon size={13} color={ACCENT} />
+          <p className="text-[11px] text-[#9ca3af] m-0">
+            Vos informations entreprise sont sauvegard&eacute;es automatiquement
+          </p>
         </div>
         <p className="text-[12px] text-[#6b7280] mb-5 leading-relaxed">
           Ces informations seront utilisées pour générer vos documents juridiques. Plus vous remplissez de champs, plus vos documents seront complets.

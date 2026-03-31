@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { useApi } from "../hooks/useApi";
 
 const DEMO_RESPONSES = {
   "rgpd": "Le **RGPD** (Règlement Général sur la Protection des Données) est le règlement européen n°2016/679 qui encadre le traitement des données personnelles. Il s'applique à toute organisation traitant des données de résidents européens, quel que soit son lieu d'établissement.\n\nLes principes fondamentaux : licéité, loyauté, transparence, limitation des finalités, minimisation, exactitude, limitation de conservation, intégrité et confidentialité.",
@@ -77,6 +78,8 @@ export default function VaultMiaChat() {
   const [mounted, setMounted] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const typewriterRef = useRef(null);
+  const { post } = useApi();
 
   useEffect(() => {
     setMounted(true);
@@ -92,7 +95,34 @@ export default function VaultMiaChat() {
     }
   }, [open]);
 
-  const handleSend = (text) => {
+  // Cleanup typewriter interval on unmount
+  useEffect(() => {
+    return () => {
+      if (typewriterRef.current) clearInterval(typewriterRef.current);
+    };
+  }, []);
+
+  const typewriterEffect = useCallback((fullText) => {
+    let index = 0;
+    // Add an empty bot message that will be filled character by character
+    setMessages((prev) => [...prev, { role: "bot", content: "" }]);
+    setTyping(false);
+
+    typewriterRef.current = setInterval(() => {
+      index++;
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = { role: "bot", content: fullText.slice(0, index) };
+        return updated;
+      });
+      if (index >= fullText.length) {
+        clearInterval(typewriterRef.current);
+        typewriterRef.current = null;
+      }
+    }, 30);
+  }, []);
+
+  const handleSend = async (text) => {
     const msg = (text || input).trim();
     if (!msg || typing) return;
 
@@ -101,11 +131,27 @@ export default function VaultMiaChat() {
     setInput("");
     setTyping(true);
 
-    setTimeout(() => {
-      const response = getResponse(msg);
-      setMessages((prev) => [...prev, { role: "bot", content: response }]);
-      setTyping(false);
-    }, 800);
+    // Build history from existing messages (last 5 user/assistant pairs)
+    const history = [...messages, userMsg]
+      .filter((m) => m.role === "user" || m.role === "bot")
+      .slice(-5)
+      .map((m) => ({ role: m.role === "bot" ? "assistant" : m.role, content: m.content }));
+
+    try {
+      const data = await post("/api/vault/noe-chat", { message: msg, history });
+      if (data && data.response && !data.fallback) {
+        typewriterEffect(data.response);
+      } else {
+        // API returned fallback flag or empty response — use local fallback
+        const fallbackResponse = getResponse(msg);
+        typewriterEffect(fallbackResponse);
+      }
+    } catch (err) {
+      console.error("NOÉ chat API error:", err);
+      // Fallback to keyword-matching
+      const fallbackResponse = getResponse(msg);
+      typewriterEffect(fallbackResponse);
+    }
   };
 
   const handleKeyDown = (e) => {

@@ -5,6 +5,7 @@ export const VAULT_NAV = [
   { path: "/app/vault/aipd", label: "Audit" },
   { path: "/app/vault/actions", label: "Actions" },
   { path: "/app/vault/alertes", label: "Alertes" },
+  { path: "/app/vault/droits", label: "Droits" },
   { path: "/app/vault/veille", label: "Veille" },
   { path: "/app/vault/timeline", label: "Timeline" },
   { path: "/app/vault/historique", label: "Historique" },

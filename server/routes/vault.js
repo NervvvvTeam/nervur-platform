@@ -2063,4 +2063,214 @@ setInterval(() => {
   }
 }, 30 * 60 * 1000);
 
+// ═══════════════════════════════════════════════════════════════════════
+//  NOÉ — AI Legal Assistant (OpenAI GPT)
+// ═══════════════════════════════════════════════════════════════════════
+
+const noeRateLimit = new Map(); // userId -> { count, resetAt }
+
+router.post("/noe-chat", authMiddleware, async (req, res) => {
+  try {
+    const { message, history } = req.body;
+    if (!message || typeof message !== "string" || message.trim().length === 0) {
+      return res.status(400).json({ error: "Le message est requis." });
+    }
+    if (message.length > 2000) {
+      return res.status(400).json({ error: "Message trop long (max 2000 caractères)." });
+    }
+
+    // Rate limit: 20 messages/hour per user
+    const userId = req.userId.toString();
+    const now = Date.now();
+    const hourMs = 60 * 60 * 1000;
+    let entry = noeRateLimit.get(userId);
+    if (!entry || now > entry.resetAt) {
+      entry = { count: 0, resetAt: now + hourMs };
+      noeRateLimit.set(userId, entry);
+    }
+    if (entry.count >= 20) {
+      return res.status(429).json({ error: "Limite atteinte (20 messages/heure). Réessayez dans quelques minutes." });
+    }
+    entry.count++;
+
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return res.status(503).json({ error: "API IA non configurée.", fallback: true });
+    }
+
+    const OpenAI = require("openai");
+    const client = new OpenAI({ apiKey });
+
+    const systemPrompt = `Tu es NOÉ, assistant juridique IA spécialisé en RGPD et droit numérique pour les TPE/PME françaises.
+
+Règles :
+- Réponds en français, de manière claire, structurée et concise.
+- Cite les articles du RGPD, de la loi Informatique et Libertés, ou du Code de commerce quand pertinent.
+- Utilise des listes à puces et du gras (**texte**) pour structurer tes réponses.
+- Ne donne jamais d'avis juridique définitif. Précise que tu es une aide à la compréhension.
+- Pour les cas complexes, recommande de consulter un juriste spécialisé ou la CNIL.
+- Sois pratique : donne des exemples concrets adaptés aux petites entreprises.
+- Si la question sort du périmètre RGPD/juridique, redirige poliment vers le sujet.
+- Maximum 300 mots par réponse.`;
+
+    // Build messages array with last 5 history items for context
+    const messages = [{ role: "system", content: systemPrompt }];
+    if (Array.isArray(history)) {
+      const recent = history.slice(-5);
+      for (const h of recent) {
+        if (h.role === "user" || h.role === "assistant") {
+          messages.push({ role: h.role, content: h.content.slice(0, 500) });
+        }
+      }
+    }
+    messages.push({ role: "user", content: message.trim() });
+
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages,
+      max_tokens: 500,
+      temperature: 0.3,
+    });
+
+    const response = completion.choices[0]?.message?.content || "Désolé, je n'ai pas pu générer de réponse.";
+    res.json({ response });
+  } catch (err) {
+    console.error("[NOÉ CHAT]", err.message);
+    res.status(500).json({ error: "Erreur NOÉ : " + err.message, fallback: true });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  Company Profile — Auto-save for document generation
+// ═══════════════════════════════════════════════════════════════════════
+
+const VaultCompany = require("../models/VaultCompany");
+
+router.get("/company", authMiddleware, async (req, res) => {
+  try {
+    const company = await VaultCompany.findOne({ userId: req.userId });
+    res.json({ company: company || null });
+  } catch (err) {
+    console.error("[VAULT COMPANY GET]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post("/company", authMiddleware, async (req, res) => {
+  try {
+    const data = req.body;
+    const allowed = ["nomEntreprise", "formeJuridique", "adresse", "siret", "email", "telephone", "activite", "siteUrl", "hebergeur", "directeurPublication", "capitalSocial", "rcsVille", "dpoName", "dpoEmail"];
+    const sanitized = {};
+    for (const key of allowed) {
+      if (data[key] !== undefined) sanitized[key] = String(data[key]).slice(0, 500);
+    }
+
+    const company = await VaultCompany.findOneAndUpdate(
+      { userId: req.userId },
+      { $set: { ...sanitized, userId: req.userId } },
+      { upsert: true, new: true, runValidators: true }
+    );
+    res.json({ company });
+  } catch (err) {
+    console.error("[VAULT COMPANY POST]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  DSAR — Data Subject Access Requests (Gestion des droits)
+// ═══════════════════════════════════════════════════════════════════════
+
+const VaultDsar = require("../models/VaultDsar");
+
+router.get("/dsar", authMiddleware, async (req, res) => {
+  try {
+    const requests = await VaultDsar.find({ userId: req.userId }).sort({ receivedAt: -1 });
+    res.json({ requests });
+  } catch (err) {
+    console.error("[VAULT DSAR GET]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get("/dsar/stats", authMiddleware, async (req, res) => {
+  try {
+    const all = await VaultDsar.find({ userId: req.userId });
+    const now = new Date();
+    res.json({
+      total: all.length,
+      enCours: all.filter(r => r.status === "recu" || r.status === "en_cours").length,
+      traitees: all.filter(r => r.status === "traite").length,
+      refusees: all.filter(r => r.status === "refuse").length,
+      enRetard: all.filter(r => (r.status === "recu" || r.status === "en_cours") && r.deadline && r.deadline < now).length,
+    });
+  } catch (err) {
+    console.error("[VAULT DSAR STATS]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post("/dsar", authMiddleware, async (req, res) => {
+  try {
+    const { requesterName, requesterEmail, requestType, description, receivedAt } = req.body;
+    if (!requesterName || !requesterEmail || !requestType) {
+      return res.status(400).json({ error: "Nom, email et type de demande sont requis." });
+    }
+    const validTypes = ["acces", "rectification", "suppression", "portabilite", "opposition", "limitation"];
+    if (!validTypes.includes(requestType)) {
+      return res.status(400).json({ error: "Type de demande invalide." });
+    }
+
+    const dsar = await VaultDsar.create({
+      userId: req.userId,
+      requesterName: requesterName.slice(0, 200),
+      requesterEmail: requesterEmail.slice(0, 200),
+      requestType,
+      description: description ? description.slice(0, 2000) : "",
+      receivedAt: receivedAt ? new Date(receivedAt) : new Date(),
+    });
+    res.json({ dsar });
+  } catch (err) {
+    console.error("[VAULT DSAR POST]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.put("/dsar/:id", authMiddleware, async (req, res) => {
+  try {
+    const { status, response, notes } = req.body;
+    const update = {};
+    if (status) {
+      const validStatuses = ["recu", "en_cours", "traite", "refuse"];
+      if (!validStatuses.includes(status)) return res.status(400).json({ error: "Statut invalide." });
+      update.status = status;
+      if (status === "traite" || status === "refuse") update.treatedAt = new Date();
+    }
+    if (response !== undefined) update.response = String(response).slice(0, 5000);
+    if (notes !== undefined) update.notes = String(notes).slice(0, 2000);
+
+    const dsar = await VaultDsar.findOneAndUpdate(
+      { _id: req.params.id, userId: req.userId },
+      { $set: update },
+      { new: true }
+    );
+    if (!dsar) return res.status(404).json({ error: "Demande introuvable." });
+    res.json({ dsar });
+  } catch (err) {
+    console.error("[VAULT DSAR PUT]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.delete("/dsar/:id", authMiddleware, async (req, res) => {
+  try {
+    const result = await VaultDsar.findOneAndDelete({ _id: req.params.id, userId: req.userId });
+    if (!result) return res.status(404).json({ error: "Demande introuvable." });
+    res.json({ success: true });
+  } catch (err) {
+    console.error("[VAULT DSAR DELETE]", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
