@@ -14,22 +14,9 @@ const DEFAULT_COLUMNS = [
   { id: "done", label: "Terminé" },
 ];
 
-const DEFAULT_ACTIONS = [
-  { id: "a1", title: "Mettre à jour la politique de confidentialité", priority: "critique", category: "RGPD", dueDate: "2026-04-05", status: "todo", description: "" },
-  { id: "a2", title: "Former les équipes au RGPD", priority: "haute", category: "RGPD", dueDate: "2026-04-15", status: "todo", description: "Session de formation pour tous les collaborateurs" },
-  { id: "a3", title: "Installer bannière cookies conforme", priority: "critique", category: "Juridique", dueDate: "2026-04-02", status: "in_progress", description: "" },
-  { id: "a4", title: "Audit de sécurité des sous-traitants", priority: "haute", category: "Sécurité", dueDate: "2026-04-20", status: "in_progress", description: "Vérifier les contrats et mesures de sécurité" },
-  { id: "a5", title: "Documenter les flux de données", priority: "moyenne", category: "RGPD", dueDate: "2026-04-30", status: "in_progress", description: "" },
-  { id: "a6", title: "Mettre en place le chiffrement des emails", priority: "moyenne", category: "Sécurité", dueDate: "2026-05-01", status: "done", description: "" },
-  { id: "a7", title: "Rédiger le contrat sous-traitant RGPD", priority: "haute", category: "Juridique", dueDate: "2026-03-20", status: "done", description: "Contrat Art. 28 avec prestataire hébergement" },
-  { id: "a8", title: "Nommer un DPO référent", priority: "basse", category: "RGPD", dueDate: "2026-05-15", status: "todo", description: "" },
-];
+const DEFAULT_ACTIONS = [];
 
-const DEFAULT_INCIDENTS = [
-  { id: "i1", date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), description: "Accès non autorisé au fichier clients via une API non sécurisée", severity: 3, dataTypes: "Noms, emails, téléphones", affectedCount: 1250, status: "notified_cnil" },
-  { id: "i2", date: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(), description: "Perte d'un ordinateur portable contenant des données RH", severity: 2, dataTypes: "Données RH, bulletins de paie", affectedCount: 45, status: "resolved" },
-  { id: "i3", date: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(), description: "Fuite de données suite à une attaque phishing sur un compte email", severity: 4, dataTypes: "Emails, pièces jointes confidentielles", affectedCount: 320, status: "detected" },
-];
+const DEFAULT_INCIDENTS = [];
 
 /* ── Helpers ── */
 const uid = () => Date.now().toString(36);

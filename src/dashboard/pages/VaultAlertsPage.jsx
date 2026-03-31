@@ -4,50 +4,7 @@ import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 import SubNav from "../components/SubNav";
 
 /* ─── Demo data ──────────────────────────────────────────────── */
-const DEFAULT_ALERTS = [
-  {
-    _id: "demo1", type: "ssl_expiry", severity: "critical",
-    title: "Certificat SSL expire dans 12 jours",
-    message: "Le certificat SSL de monsite.fr expire le 9 avril 2026. Action urgente requise !",
-    deadline: new Date(Date.now() + 12 * 24 * 60 * 60 * 1000).toISOString(),
-    actionLabel: "Vérifier le certificat", actionUrl: "",
-    metadata: { domain: "monsite.fr", daysUntilExpiry: 12 },
-    read: false, createdAt: new Date().toISOString(),
-  },
-  {
-    _id: "demo2", type: "legal_missing", severity: "critical",
-    title: "Politique de confidentialité absente",
-    message: "Aucune politique de confidentialité détectée sur monsite.fr. Obligatoire si vous collectez des données personnelles (RGPD Art. 13-14).",
-    actionUrl: "/app/vault/generateur", actionLabel: "Générer le document",
-    metadata: { domain: "monsite.fr" },
-    read: false, createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    _id: "demo3", type: "cookie_issue", severity: "warning",
-    title: "Bannière cookies non conforme",
-    message: "Pas de bannière de consentement cookies détectée sur monsite.fr. Risque de sanction CNIL.",
-    actionUrl: "/app/vault", actionLabel: "Lancer un scan",
-    metadata: { domain: "monsite.fr" },
-    read: false, createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    _id: "demo4", type: "rgpd_update", severity: "warning",
-    title: "Nouvelle obligation RGPD détectée",
-    message: "Les nouvelles lignes directrices CNIL sur les cookies entrent en vigueur. Mettez à jour votre bannière de consentement.",
-    deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-    actionLabel: "Voir les détails", actionUrl: "/app/vault/veille",
-    metadata: {},
-    read: false, createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    _id: "demo5", type: "compliance_drop", severity: "info",
-    title: "Score de conformité stable — monsite.fr",
-    message: "Votre score est de 68/100. Générez vos documents juridiques manquants pour atteindre 90+.",
-    actionUrl: "/app/vault/generateur", actionLabel: "Améliorer mon score",
-    metadata: { domain: "monsite.fr", newScore: 68 },
-    read: true, createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-];
+const DEFAULT_ALERTS = [];
 
 /* ─── Severity config ────────────────────────────────────────── */
 const SEVERITY = {

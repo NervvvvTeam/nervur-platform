@@ -219,111 +219,7 @@ const NECESSITY_RECS = [
 /*  Demo data                                                             */
 /* ===================================================================== */
 
-const DEMO_AIPDS = [
-  {
-    id: "p1", name: "Gestion des commandes en ligne", sector: "ecommerce", company: "Ma Boutique SAS",
-    employees: "6-20", riskLevel: "moyen", score: 62,
-    date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-    dataTypes: ["Identité", "Coordonnées", "Données bancaires", "Adresse IP"],
-    treatment: "Collecte et traitement des données clients pour la gestion des commandes, livraisons et SAV.",
-    legalBasis: "Contrat", recipients: "Hébergeur web, Prestataire paiement, Livreur", duration: "3 ans",
-    risks: [
-      { name: "Accès illégitime", gravity: 3, likelihood: 2 },
-      { name: "Modification non désirée", gravity: 2, likelihood: 1 },
-      { name: "Disparition des données", gravity: 3, likelihood: 2 },
-      { name: "Collecte excessive", gravity: 2, likelihood: 3 },
-      { name: "Usage détourné", gravity: 2, likelihood: 1 },
-      { name: "Transfert non autorisé", gravity: 3, likelihood: 2 },
-    ],
-    necessity: [true, true, true, false, true, true, false, false],
-    actions: [
-      { title: "Mettre en place le chiffrement des données bancaires", priority: "Critique" },
-      { title: "Signer les contrats sous-traitants avec le prestataire paiement", priority: "Haute" },
-      { title: "Limiter la collecte aux données strictement nécessaires", priority: "Moyenne" },
-    ],
-  },
-  {
-    id: "p2", name: "Vidéosurveillance du magasin", sector: "commerce", company: "Boulangerie Martin",
-    employees: "1-5", riskLevel: "eleve", score: 38,
-    date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
-    dataTypes: ["Images/Vidéo", "Géolocalisation"],
-    treatment: "Système de vidéosurveillance pour la sécurité des locaux et la prévention des vols.",
-    legalBasis: "Intérêt légitime", recipients: "Installateur vidéo", duration: "1 mois",
-    risks: [
-      { name: "Accès illégitime", gravity: 4, likelihood: 2 },
-      { name: "Modification non désirée", gravity: 1, likelihood: 1 },
-      { name: "Disparition des données", gravity: 2, likelihood: 2 },
-      { name: "Collecte excessive", gravity: 3, likelihood: 3 },
-      { name: "Usage détourné", gravity: 4, likelihood: 2 },
-      { name: "Transfert non autorisé", gravity: 3, likelihood: 1 },
-    ],
-    necessity: [false, true, false, false, false, false, true, false],
-    actions: [
-      { title: "Afficher un panneau d'information visible à l'entrée", priority: "Critique" },
-      { title: "Limiter la durée de conservation des images à 30 jours", priority: "Haute" },
-      { title: "Restreindre l'accès aux images au seul gérant", priority: "Haute" },
-      { title: "Réaliser une AIPD approfondie (données sensibles)", priority: "Critique" },
-    ],
-  },
-  {
-    id: "p3", name: "Newsletter marketing", sector: "ecommerce", company: "GreenShop SARL",
-    employees: "6-20", riskLevel: "faible", score: 85,
-    date: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
-    dataTypes: ["Email", "Préférences"],
-    treatment: "Envoi de newsletters promotionnelles aux clients ayant donné leur consentement.",
-    legalBasis: "Consentement", recipients: "Prestataire emailing", duration: "3 ans",
-    risks: [
-      { name: "Accès illégitime", gravity: 1, likelihood: 1 },
-      { name: "Modification non désirée", gravity: 1, likelihood: 1 },
-      { name: "Disparition des données", gravity: 1, likelihood: 1 },
-      { name: "Collecte excessive", gravity: 1, likelihood: 2 },
-      { name: "Usage détourné", gravity: 2, likelihood: 1 },
-      { name: "Transfert non autorisé", gravity: 1, likelihood: 1 },
-    ],
-    necessity: [true, true, true, true, true, true, true, true],
-    actions: [{ title: "Vérifier régulièrement la validité des consentements", priority: "Moyenne" }],
-  },
-  {
-    id: "p4", name: "Réservations en ligne", sector: "restauration", company: "Le Petit Bistrot",
-    employees: "6-20", riskLevel: "faible", score: 78,
-    date: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-    dataTypes: ["Identité", "Coordonnées", "Téléphone"],
-    treatment: "Système de réservation en ligne collectant nom, téléphone et email des clients.",
-    legalBasis: "Contrat", recipients: "Hébergeur web", duration: "1 an",
-    risks: [
-      { name: "Accès illégitime", gravity: 2, likelihood: 1 },
-      { name: "Modification non désirée", gravity: 1, likelihood: 1 },
-      { name: "Disparition des données", gravity: 2, likelihood: 1 },
-      { name: "Collecte excessive", gravity: 1, likelihood: 2 },
-      { name: "Usage détourné", gravity: 2, likelihood: 1 },
-      { name: "Transfert non autorisé", gravity: 1, likelihood: 1 },
-    ],
-    necessity: [true, true, true, true, true, false, true, true],
-    actions: [{ title: "Mettre en place le chiffrement HTTPS pour le formulaire de réservation", priority: "Haute" }],
-  },
-  {
-    id: "p5", name: "Gestion RH et paie", sector: "services", company: "Consult Pro SAS",
-    employees: "21-50", riskLevel: "moyen", score: 55,
-    date: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
-    dataTypes: ["Identité", "Coordonnées", "Données bancaires", "Données professionnelles"],
-    treatment: "Traitement des données salariés pour la gestion administrative, la paie et les déclarations sociales.",
-    legalBasis: "Obligation légale", recipients: "Expert-comptable, Éditeur logiciel paie", duration: "5 ans",
-    risks: [
-      { name: "Accès illégitime", gravity: 3, likelihood: 2 },
-      { name: "Modification non désirée", gravity: 3, likelihood: 1 },
-      { name: "Disparition des données", gravity: 4, likelihood: 1 },
-      { name: "Collecte excessive", gravity: 2, likelihood: 2 },
-      { name: "Usage détourné", gravity: 3, likelihood: 1 },
-      { name: "Transfert non autorisé", gravity: 3, likelihood: 2 },
-    ],
-    necessity: [true, true, true, false, true, false, false, true],
-    actions: [
-      { title: "Chiffrer les bulletins de paie stockés numériquement", priority: "Critique" },
-      { title: "Restreindre l'accès RH aux seuls responsables habilités", priority: "Haute" },
-      { title: "Vérifier les contrats sous-traitants avec le cabinet comptable", priority: "Haute" },
-    ],
-  },
-];
+const DEMO_AIPDS = [];
 
 /* ===================================================================== */
 /*  SVG Icons                                                             */
@@ -710,6 +606,69 @@ export default function VaultAipdPage() {
   };
 
   const selected = analyses.find((a) => a.id === selectedId);
+
+  const deleteAnalysis = (id) => {
+    if (!window.confirm("Supprimer cette analyse ?")) return;
+    setAnalyses((prev) => {
+      const next = prev.filter((a) => a.id !== id);
+      try { localStorage.setItem("vault_aipd", JSON.stringify(next)); } catch (_) {}
+      return next;
+    });
+    if (selectedId === id) setView("list");
+  };
+
+  const exportPDF = (analysisId) => {
+    const analysis = analysisId ? analyses.find((a) => a.id === analysisId) : selected;
+    if (!analysis) return;
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+    printWindow.document.write(`<!DOCTYPE html>
+<html><head><title>AIPD - ${analysis.name}</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 40px; color: #333; max-width: 800px; margin: 0 auto; }
+  h1 { color: #06b6d4; border-bottom: 2px solid #06b6d4; padding-bottom: 10px; }
+  h2 { color: #1e293b; margin-top: 30px; }
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  .risk-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+  .risk-table th, .risk-table td { border: 1px solid #e2e8f0; padding: 8px 12px; text-align: left; }
+  .risk-table th { background: #f1f5f9; }
+  .action-item { padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+  .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; text-align: center; }
+  @media print { body { padding: 20px; } }
+</style>
+</head><body>
+<h1>Analyse d'Impact — ${analysis.name}</h1>
+<p><strong>Entreprise :</strong> ${analysis.company || '—'} | <strong>Secteur :</strong> ${analysis.sector || '—'} | <strong>Date :</strong> ${new Date(analysis.date).toLocaleDateString('fr-FR')}</p>
+<p><strong>Score de risque :</strong> ${analysis.score}/100 — <strong>Niveau :</strong> ${analysis.riskLevel}</p>
+
+<h2>Données concernées</h2>
+<p>${(analysis.dataTypes || []).join(', ')}</p>
+
+<h2>Description du traitement</h2>
+<p>${analysis.treatment || '—'}</p>
+<p><strong>Base légale :</strong> ${analysis.legalBasis || '—'}</p>
+
+<h2>Analyse des risques</h2>
+<table class="risk-table">
+  <thead><tr><th>Scénario</th><th>Gravité</th><th>Vraisemblance</th><th>Score</th></tr></thead>
+  <tbody>
+    ${(analysis.risks || []).map(r =>
+      '<tr><td>' + r.name + '</td><td>' + r.gravity + '/4</td><td>' + r.likelihood + '/4</td><td>' + (r.gravity * r.likelihood) + '/16</td></tr>'
+    ).join('')}
+  </tbody>
+</table>
+
+<h2>Plan d'action</h2>
+${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a === 'string' ? a : a.title || a) + '</div>').join('')}
+
+<div class="footer">
+  Ce document constitue une preuve d'accountability RGPD (Article 35).<br>
+  Généré par NERVÜR Vault — Agent Juridique IA — ${new Date().toLocaleDateString('fr-FR')}
+</div>
+</body></html>`);
+    printWindow.document.close();
+    printWindow.print();
+  };
 
   /* ------------------------------------------------------------------ */
   /*  Common styles                                                      */
@@ -1126,7 +1085,7 @@ export default function VaultAipdPage() {
         {/* Save / Export */}
         <div style={{ display: "flex", gap: 12 }}>
           <button onClick={saveAnalysis} style={btnPrimary}>Enregistrer l'analyse</button>
-          <button onClick={() => alert("Export PDF bientôt disponible")} style={btnSecondary}>Exporter PDF</button>
+          <button onClick={() => exportPDF()} style={btnSecondary}>Exporter PDF</button>
         </div>
       </div>
     );
@@ -1268,7 +1227,7 @@ export default function VaultAipdPage() {
           </div>
         </div>
 
-        <button onClick={() => alert("Export PDF bientôt disponible")} style={btnSecondary}>Exporter PDF</button>
+        <button onClick={() => exportPDF()} style={btnSecondary}>Exporter PDF</button>
       </div>
     );
   };
@@ -1310,6 +1269,25 @@ export default function VaultAipdPage() {
       </div>
 
       {/* Cards */}
+      {analyses.length === 0 ? (
+        <div style={{
+          textAlign: "center", padding: "60px 20px", background: "#1e2029",
+          borderRadius: 12, border: "1px solid #2a2d3a",
+        }}>
+          <div style={{
+            background: "rgba(6,182,212,0.08)", width: 56, height: 56, borderRadius: "50%",
+            display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px",
+          }}>
+            <ScaleIcon size={24} />
+          </div>
+          <div style={{ fontSize: 15, fontWeight: 600, color: "#e2e8f0", marginBottom: 6 }}>
+            Aucune analyse d'impact
+          </div>
+          <div style={{ fontSize: 13, color: "#64748b" }}>
+            Cliquez sur 'Nouvelle analyse' pour commencer.
+          </div>
+        </div>
+      ) : (
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {analyses.map((a) => {
           const sc = sectorInfo(a.sector);
@@ -1354,10 +1332,39 @@ export default function VaultAipdPage() {
                 <div style={{ fontSize: 26, fontWeight: 800, color }}>{a.score}</div>
                 <div style={{ fontSize: 10, color: "#64748b" }}>/100</div>
               </div>
+              <div style={{ display: "flex", gap: 6, flexShrink: 0, marginLeft: 8 }} onClick={(e) => e.stopPropagation()}>
+                <button
+                  title="Modifier"
+                  onClick={() => openDetail(a.id)}
+                  style={{
+                    background: "transparent", border: "1px solid #2a2d3a", borderRadius: 6,
+                    padding: "5px 7px", cursor: "pointer", color: "#64748b", display: "flex", alignItems: "center",
+                    transition: "color .15s, border-color .15s",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = ACCENT; e.currentTarget.style.borderColor = ACCENT + "66"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.borderColor = "#2a2d3a"; }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button
+                  title="Supprimer"
+                  onClick={() => deleteAnalysis(a.id)}
+                  style={{
+                    background: "transparent", border: "1px solid #2a2d3a", borderRadius: 6,
+                    padding: "5px 7px", cursor: "pointer", color: "#64748b", display: "flex", alignItems: "center",
+                    transition: "color .15s, border-color .15s",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = "#ef4444"; e.currentTarget.style.borderColor = "#ef444466"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.borderColor = "#2a2d3a"; }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+              </div>
             </div>
           );
         })}
       </div>
+      )}
     </div>
   );
 

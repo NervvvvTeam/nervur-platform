@@ -3,7 +3,6 @@ import { useApi } from "../hooks/useApi";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import SubNav from "../components/SubNav";
-import VaultMiaChat from "../components/VaultMiaChat";
 import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 
 const ShieldIcon = ({ size = 28, color = ACCENT }) => (
@@ -466,7 +465,6 @@ export default function VaultDashboardPage() {
       )}
 
       <style>{`@keyframes vault-spin { to { transform: rotate(360deg); } }`}</style>
-      <VaultMiaChat />
     </div>
   );
 }

@@ -4,12 +4,21 @@ require("dotenv").config();
 const { validateEnv } = require("./config");
 const { isDev, PORT: configPort } = validateEnv();
 
-// Support alternative variable names
+// Support alternative variable names (French aliases on Railway)
 if (!process.env.OPENAI_API_KEY && process.env["CLÉ_API_OPENAI"]) {
   process.env.OPENAI_API_KEY = process.env["CLÉ_API_OPENAI"];
 }
 if (!process.env.ANTHROPIC_API_KEY && process.env["CLÉ_API_ANTHROPIC"]) {
   process.env.ANTHROPIC_API_KEY = process.env["CLÉ_API_ANTHROPIC"];
+}
+if (!process.env.GOOGLE_API_KEY && process.env["CLÉ_API_GOOGLE"]) {
+  process.env.GOOGLE_API_KEY = process.env["CLÉ_API_GOOGLE"];
+}
+if (!process.env.GOOGLE_OAUTH_CLIENT_ID && process.env["ID_CLIENT_OAUTH_GOOGLE"]) {
+  process.env.GOOGLE_OAUTH_CLIENT_ID = process.env["ID_CLIENT_OAUTH_GOOGLE"];
+}
+if (!process.env.GOOGLE_OAUTH_CLIENT_SECRET && process.env["SECRET_DU_CLIENT_GOOGLE_OAUTH"]) {
+  process.env.GOOGLE_OAUTH_CLIENT_SECRET = process.env["SECRET_DU_CLIENT_GOOGLE_OAUTH"];
 }
 
 const express = require("express");

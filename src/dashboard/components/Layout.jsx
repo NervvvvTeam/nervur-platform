@@ -2,6 +2,7 @@ import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useMemo, useState, useEffect } from "react";
 import LogoNervur from "../../components/LogoNervur";
+import VaultMiaChat from "./VaultMiaChat";
 
 function useBreakpoint() {
   const getBreakpoint = () => {
@@ -259,6 +260,9 @@ export default function Layout() {
         }}>
         <Outlet />
       </main>
+
+      {/* NOÉ chat — available on all Vault pages */}
+      {location.pathname.startsWith("/app/vault") && <VaultMiaChat />}
     </div>
   );
 }

@@ -37,7 +37,20 @@ function getResponse(input) {
   return DEMO_RESPONSES["default"];
 }
 
-const SparkleIcon = ({ size = 26 }) => (
+const ChatBubbleIcon = ({ size = 28 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    <path d="M8 10h.01" strokeWidth="2.5"/><path d="M12 10h.01" strokeWidth="2.5"/><path d="M16 10h.01" strokeWidth="2.5"/>
+  </svg>
+);
+
+const XIcon = ({ size = 26 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
+const SparkleIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 3v1m0 16v1m-7.07-2.93l.71-.71M5.64 5.64l-.71-.71M3 12h1m16 0h1m-2.93 7.07l-.71-.71M18.36 5.64l.71-.71" />
     <circle cx="12" cy="12" r="4" fill="#06b6d4" stroke="none" />
@@ -108,28 +121,38 @@ export default function VaultMiaChat() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Ouvrir NOÉ"
+        title="Posez vos questions juridiques à NOÉ"
         style={{
           position: "fixed",
           bottom: 24,
           right: 24,
           zIndex: 1000,
-          width: 56,
-          height: 56,
+          width: 64,
+          height: 64,
           borderRadius: "50%",
           background: "linear-gradient(135deg, #06b6d4, #22d3ee)",
           border: "none",
           boxShadow: "0 4px 20px rgba(6,182,212,0.4)",
           cursor: "pointer",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          gap: open ? 0 : 1,
           transition: "transform 0.2s, box-shadow 0.2s",
           animation: mounted && !open ? "noe-pulse 2s ease-in-out 1" : "none",
         }}
         onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.08)"; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
       >
-        <SparkleIcon size={26} />
+        {open ? (
+          <XIcon size={26} />
+        ) : (
+          <>
+            <ChatBubbleIcon size={26} />
+            <span style={{ fontSize: 9, fontWeight: 700, color: "#fff", lineHeight: 1, letterSpacing: "0.5px", marginTop: 1 }}>NOÉ</span>
+          </>
+        )}
       </button>
 
       {/* Chat panel */}
