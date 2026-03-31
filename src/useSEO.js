@@ -96,14 +96,14 @@ export default function useSEO(title, description, opts) {
 
     // Cleanup: restore defaults on unmount
     return () => {
-      document.title = "NERVÜR — Outils SaaS pour PME";
-      setMeta("name", "description", "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel, Phantom, Pulse, Vault.");
+      document.title = "NERVÜR — Outils SaaS pour TPE/PME | E-réputation & Conformité RGPD";
+      setMeta("name", "description", "NERVÜR — 2 outils SaaS pour les TPE/PME : Sentinel (e-réputation, gestion des avis Google, 39€/mois) et Vault (Agent Juridique IA, conformité RGPD automatisée, 79€/mois).");
       setLink("canonical", SITE + "/");
-      setMeta("property", "og:title", "NERVÜR — Outils SaaS pour PME");
-      setMeta("property", "og:description", "Outils SaaS innovants pour les PME.");
+      setMeta("property", "og:title", "NERVÜR — Outils SaaS pour TPE/PME | E-réputation, Conformité RGPD");
+      setMeta("property", "og:description", "2 outils SaaS pour les TPE/PME : Sentinel (e-réputation, 39€/mois) et Vault (Agent Juridique IA, conformité RGPD, 79€/mois).");
       setMeta("property", "og:url", SITE + "/");
-      setMeta("name", "twitter:title", "NERVÜR — Outils SaaS pour PME");
-      setMeta("name", "twitter:description", "Outils SaaS innovants pour les PME.");
+      setMeta("name", "twitter:title", "NERVÜR — Outils SaaS pour TPE/PME | E-réputation, Conformité RGPD");
+      setMeta("name", "twitter:description", "2 outils SaaS pour les TPE/PME : Sentinel (e-réputation, 39€/mois) et Vault (Agent Juridique IA, conformité RGPD, 79€/mois).");
     };
   }, [title, description, path, image, type, imageAlt, keywords]);
 }

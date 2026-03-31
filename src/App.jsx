@@ -30,6 +30,9 @@ const BlogSecuritePage = lazy(() => import('./BlogSecuritePage'))
 const BlogPerformancePage = lazy(() => import('./BlogPerformancePage'))
 const BlogAvisGooglePage = lazy(() => import('./BlogAvisGooglePage'))
 const BlogRgpdPage = lazy(() => import('./BlogRgpdPage'))
+const BlogRegistrePage = lazy(() => import('./BlogRegistrePage'))
+const BlogAipdPage = lazy(() => import('./BlogAipdPage'))
+const BlogDroitsPage = lazy(() => import('./BlogDroitsPage'))
 
 // Lazy-loaded dashboard pages
 const DashLoginPage = lazy(() => import('./dashboard/pages/LoginPage'))
@@ -128,6 +131,9 @@ function App() {
             <Route path="/blog/performance-web" element={<Navigate to="/blog/presence-digitale" replace />} />
             <Route path="/blog/avis-google" element={<BlogAvisGooglePage />} />
             <Route path="/blog/rgpd-guide" element={<BlogRgpdPage />} />
+            <Route path="/blog/registre-traitements" element={<BlogRegistrePage />} />
+            <Route path="/blog/aipd-guide" element={<BlogAipdPage />} />
+            <Route path="/blog/droits-personnes-rgpd" element={<BlogDroitsPage />} />
 
             {/* ═══ Espace Client (Dashboard) ═══ */}
             <Route path="/app/login" element={<Suspense fallback={<DashboardLoader />}><DashLoginPage /></Suspense>} />

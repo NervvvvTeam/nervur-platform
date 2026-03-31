@@ -51,6 +51,33 @@ const ARTICLES = [
     date: "26 mars 2026",
     readTime: "13 min",
   },
+  {
+    slug: "registre-traitements",
+    title: "Registre des traitements RGPD : modele et guide complet pour TPE/PME",
+    desc: "Comment creer et maintenir votre registre des traitements RGPD. Modele gratuit, obligations legales, exemples concrets pour TPE et PME.",
+    color: "#06b6d4",
+    tag: "REGISTRE RGPD",
+    date: "31 mars 2026",
+    readTime: "11 min",
+  },
+  {
+    slug: "aipd-guide",
+    title: "AIPD RGPD : guide complet de l'analyse d'impact pour les PME",
+    desc: "Quand et comment realiser une AIPD. Methodologie CNIL, criteres obligatoires, etapes pratiques pour les TPE/PME.",
+    color: "#f59e0b",
+    tag: "AIPD",
+    date: "31 mars 2026",
+    readTime: "12 min",
+  },
+  {
+    slug: "droits-personnes-rgpd",
+    title: "Droits des personnes RGPD : gerer les demandes (DSAR) en 2026",
+    desc: "Comment gerer les demandes de droits RGPD : acces, suppression, portabilite. Delais legaux, procedures et modeles de reponse pour PME.",
+    color: "#8b5cf6",
+    tag: "DROITS RGPD",
+    date: "31 mars 2026",
+    readTime: "10 min",
+  },
 ];
 
 export default function BlogPage() {

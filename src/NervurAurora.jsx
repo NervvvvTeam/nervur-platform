@@ -392,12 +392,12 @@ export default function NervurAurora() {
   useFadeOnScroll(pageRef);
 
   useSEO(
-    "NERVÜR — Agence Digitale & Nouvelles Technologies",
-    "NERVÜR propose des outils SaaS innovants pour les PME : Sentinel (e-réputation) et Vault (conformité juridique). À partir de 39€/mois.",
+    "NERVÜR — Outils SaaS pour TPE/PME | E-réputation & Conformité RGPD",
+    "NERVÜR — 2 outils SaaS pour les TPE/PME : Sentinel (e-réputation, gestion des avis Google, 39€/mois) et Vault (Agent Juridique IA, conformité RGPD automatisée, 79€/mois).",
     {
       path: "/",
-      keywords: "SaaS PME, e-réputation, conformité juridique, RGPD, outils PME, NERVÜR, Sentinel, Vault",
-      imageAlt: "NERVÜR — Outils SaaS pour PME : e-réputation, audit web, monitoring, conformité juridique",
+      keywords: "outil RGPD PME, conformité RGPD TPE, gestion avis Google, e-réputation PME, agent juridique IA, NERVÜR, SaaS PME, registre traitements, AIPD, DPO externalisé",
+      imageAlt: "NERVÜR — Outils SaaS pour TPE/PME : e-réputation et conformité RGPD",
     }
   );
 
@@ -409,7 +409,7 @@ export default function NervurAurora() {
     "url": "https://nervur.fr",
     "logo": "https://nervur.fr/logo-nav-clean.png",
     "image": "https://nervur.fr/og-image.png",
-    "description": "Éditeur de technologies de croissance pour les PME. 2 outils SaaS : e-réputation et conformité juridique.",
+    "description": "2 outils SaaS pour les TPE/PME : Sentinel (e-réputation, gestion des avis Google) et Vault (Agent Juridique IA, conformité RGPD automatisée).",
     "foundingDate": "2024",
     "areaServed": {
       "@type": "Country",
@@ -450,7 +450,7 @@ export default function NervurAurora() {
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "url": "https://nervur.fr/sentinel",
-    "offers": { "@type": "Offer", "price": "29", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+    "offers": { "@type": "Offer", "price": "39", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
   });
 
   // SoftwareApplication structured data — Vault
@@ -458,11 +458,11 @@ export default function NervurAurora() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "NERVÜR Vault",
-    "description": "Agent Juridique IA pour TPE/PME. Veille réglementaire automatisée, scan RGPD, générateur de mentions légales, CGV et politique de confidentialité.",
+    "description": "Agent Juridique IA pour TPE/PME. Assistant IA RGPD, registre des traitements, audit d'impact CNIL, gestion des droits (DSAR), générateur de documents légaux pré-remplis, veille juridique automatisée.",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "url": "https://nervur.fr/vault",
-    "offers": { "@type": "Offer", "price": "19", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
+    "offers": { "@type": "Offer", "price": "79", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
   });
 
   // Oscillating hero values
@@ -1212,13 +1212,13 @@ export default function NervurAurora() {
               <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Vault</h3>
               <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#06b6d4", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Agent Juridique IA — Conformité & Protection juridique</p>
               {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#71717A", marginBottom: "20px" }}>
-                Votre assistant juridique automatisé : il scanne la conformité RGPD de votre site, génère vos documents légaux et surveille les évolutions réglementaires pour vous.
+                Votre DPO virtuel : assistant IA RGPD, registre des traitements, audit d'impact CNIL, gestion des droits, générateur de documents légaux pré-remplis et veille juridique automatisée.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "vault" ? null : "vault"); }} style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.4)", color: "#06b6d4", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
                 {expandedTool === "vault" ? "Réduire ▲" : "En savoir + ▼"}
               </button>}
               {(expandedTool === "vault" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
-                {["Scan RGPD automatisé", "Générateur de documents légaux (mentions légales, CGV, confidentialité, cookies)", "Alertes intelligentes SSL & RGPD", "Veille juridique automatisée", "Timeline de conformité (accountability)"].map((f, i) => (
+                {["Assistant IA RGPD (NOÉ) — réponses instantanées", "Générateur de documents légaux pré-remplis", "Registre des traitements automatisé", "Audit d'impact (AIPD) conforme CNIL", "Gestion des droits des personnes (DSAR)", "Veille juridique automatisée"].map((f, i) => (
                   <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1300,7 +1300,7 @@ export default function NervurAurora() {
                 <span style={{ fontSize: "14px", color: "#71717A" }}>/mois</span>
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "flex", flexDirection: "column", gap: "10px" }}>
-                {["Scan RGPD automatisé", "Générateur de documents légaux (mentions légales, CGV, confidentialité, cookies)", "Alertes intelligentes SSL & RGPD", "Veille juridique automatisée", "Timeline de conformité (accountability)"].map((f, i) => (
+                {["Assistant IA RGPD (NOÉ) — réponses instantanées", "Générateur de documents légaux pré-remplis", "Registre des traitements automatisé", "Audit d'impact (AIPD) conforme CNIL", "Gestion des droits des personnes (DSAR)", "Veille juridique automatisée"].map((f, i) => (
                   <li key={i} style={{ fontSize: "13px", color: "#A1A1AA", display: "flex", alignItems: "center", gap: "8px" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
@@ -1725,10 +1725,11 @@ export default function NervurAurora() {
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#71717A", marginBottom: "16px" }}>Blog</p>
             {[
               { name: "E-réputation PME", path: "/blog/e-reputation" },
-              { name: "Conformité juridique", path: "/blog/conformite-juridique" },
-              { name: "Présence digitale", path: "/blog/presence-digitale" },
-              { name: "Avis Google", path: "/blog/avis-google" },
               { name: "Guide RGPD", path: "/blog/rgpd-guide" },
+              { name: "Registre des traitements", path: "/blog/registre-traitements" },
+              { name: "AIPD — Analyse d'impact", path: "/blog/aipd-guide" },
+              { name: "Droits des personnes", path: "/blog/droits-personnes-rgpd" },
+              { name: "Avis Google", path: "/blog/avis-google" },
             ].map((t, i) => (
               <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#52525B", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
                 onMouseEnter={e => e.target.style.color = A1}
