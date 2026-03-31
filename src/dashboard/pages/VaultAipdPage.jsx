@@ -34,8 +34,8 @@ const SectorIcon = ({ type, size = 24, color = ACCENT }) => {
 const SECTEURS = [
   { value: "commerce", label: "Commerce / Retail" },
   { value: "ecommerce", label: "E-commerce" },
-  { value: "restauration", label: "Restauration / Hotellerie" },
-  { value: "sante", label: "Sante / Medical" },
+  { value: "restauration", label: "Restauration / Hôtellerie" },
+  { value: "sante", label: "Santé / Médical" },
   { value: "services", label: "Services / Consulting" },
   { value: "artisan", label: "Artisanat / BTP" },
   { value: "education", label: "Education / Formation" },
@@ -494,14 +494,14 @@ const HeatMap = ({ risks }) => {
     const li = Math.min(Math.max((r.likelihood || 1) - 1, 0), 3);
     grid[3 - gi][li].push(i);
   });
-  const axisLabels = ["Negl.", "Limitee", "Import.", "Maximale"];
+  const axisLabels = ["Negl.", "Limitée", "Import.", "Maximale"];
   const cellW = 60;
   const cellH = 52;
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
       {/* Y-axis label */}
       <div style={{ marginLeft: 62, marginBottom: 4 }}>
-        <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: 600, letterSpacing: 1, textTransform: "uppercase" }}>Gravite &#8593;</span>
+        <span style={{ fontSize: 10, color: "#94a3b8", fontWeight: 600, letterSpacing: 1, textTransform: "uppercase" }}>Gravité &#8593;</span>
       </div>
       <div style={{ display: "flex", gap: 0 }}>
         {/* Y labels */}
@@ -759,13 +759,18 @@ export default function VaultAipdPage() {
   .action-item { padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
   .cnil-alert { background: #fef2f2; border: 2px solid #ef4444; border-radius: 8px; padding: 16px; margin: 20px 0; color: #991b1b; }
   .cnil-alert strong { color: #ef4444; }
-  .signature-block { display: inline-block; width: 45%; vertical-align: top; margin-top: 20px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; }
+  .signature-block { display: inline-block; width: 45%; vertical-align: top; margin-top: 20px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; page-break-inside: avoid; break-inside: avoid; }
   .signature-line { border-bottom: 1px solid #333; width: 200px; margin-top: 40px; margin-bottom: 4px; }
-  .disclaimer { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin-top: 20px; font-size: 11px; color: #92400e; }
-  .footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #e2e8f0; font-size: 10px; color: #94a3b8; text-align: center; }
+  .disclaimer { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin-top: 20px; font-size: 11px; color: #92400e; page-break-inside: avoid; break-inside: avoid; }
+  .footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #e2e8f0; font-size: 10px; color: #94a3b8; text-align: center; page-break-inside: avoid; break-inside: avoid; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
   .grid-item { font-size: 12px; }
   .grid-item span { color: #6b7280; }
+  .timestamp { page-break-inside: avoid; break-inside: avoid; }
+  .cnil-alert { page-break-inside: avoid; break-inside: avoid; }
+  h2 { page-break-after: avoid; break-after: avoid; }
+  .risk-table { page-break-inside: avoid; break-inside: avoid; }
+  .validation-section { page-break-inside: avoid; break-inside: avoid; page-break-before: always; break-before: page; }
   @media print { body { padding: 20px; } }
 </style>
 </head><body>
@@ -842,6 +847,7 @@ ${(analysis.actions || []).map(a => {
   return '<div class="action-item"><strong>[' + priority + ']</strong> ' + title + '</div>';
 }).join('')}
 
+<div class="validation-section">
 <h2>6. Validation</h2>
 <div style="display:flex; gap:20px; flex-wrap:wrap;">
   <div class="signature-block">
@@ -857,6 +863,7 @@ ${(analysis.actions || []).map(a => {
     <div class="signature-line"></div>
     <span style="font-size:11px;color:#6b7280">Signature — Date : ___/___/______</span>
   </div>
+</div>
 </div>
 
 <div class="disclaimer">
