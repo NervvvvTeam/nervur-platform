@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { VAULT_NAV, VAULT_ACCENT as ACCENT } from "./vaultNav";
 import SubNav from "../components/SubNav";
 import { useApi } from "../hooks/useApi";
@@ -8,27 +8,27 @@ const CARD_BG = "#1e2029";
 const CARD_BORDER = "#2a2d3a";
 
 const TYPE_CONFIG = {
-  acces:         { label: "Droit d'acces", color: "#3b82f6", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)" },
+  acces:         { label: "Droit d'accès", color: "#3b82f6", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)" },
   rectification: { label: "Rectification",  color: "#f59e0b", bg: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.25)" },
   suppression:   { label: "Suppression",    color: "#ef4444", bg: "rgba(239,68,68,0.08)",  border: "rgba(239,68,68,0.25)"  },
-  portabilite:   { label: "Portabilite",    color: "#8b5cf6", bg: "rgba(139,92,246,0.08)", border: "rgba(139,92,246,0.25)" },
+  portabilite:   { label: "Portabilité",    color: "#8b5cf6", bg: "rgba(139,92,246,0.08)", border: "rgba(139,92,246,0.25)" },
   opposition:    { label: "Opposition",     color: "#f97316", bg: "rgba(249,115,22,0.08)", border: "rgba(249,115,22,0.25)" },
   limitation:    { label: "Limitation",     color: "#6b7280", bg: "rgba(107,114,128,0.08)",border: "rgba(107,114,128,0.25)"},
 };
 
 const STATUS_CONFIG = {
-  recu:     { label: "Recue",    color: "#3b82f6", bg: "rgba(59,130,246,0.08)",  border: "rgba(59,130,246,0.25)" },
+  recu:     { label: "Reçue",    color: "#3b82f6", bg: "rgba(59,130,246,0.08)",  border: "rgba(59,130,246,0.25)" },
   en_cours: { label: "En cours", color: "#f59e0b", bg: "rgba(245,158,11,0.08)",  border: "rgba(245,158,11,0.25)" },
-  traite:   { label: "Traitee",  color: "#22c55e", bg: "rgba(34,197,94,0.08)",   border: "rgba(34,197,94,0.25)"  },
-  refuse:   { label: "Refusee",  color: "#ef4444", bg: "rgba(239,68,68,0.08)",   border: "rgba(239,68,68,0.25)"  },
+  traite:   { label: "Traitée",  color: "#22c55e", bg: "rgba(34,197,94,0.08)",   border: "rgba(34,197,94,0.25)"  },
+  refuse:   { label: "Refusée",  color: "#ef4444", bg: "rgba(239,68,68,0.08)",   border: "rgba(239,68,68,0.25)"  },
 };
 
 const FILTER_TABS = [
   { key: "all",      label: "Toutes" },
-  { key: "recu",     label: "Recues" },
+  { key: "recu",     label: "Reçues" },
   { key: "en_cours", label: "En cours" },
-  { key: "traite",   label: "Traitees" },
-  { key: "refuse",   label: "Refusees" },
+  { key: "traite",   label: "Traitées" },
+  { key: "refuse",   label: "Refusées" },
 ];
 
 const TYPE_OPTIONS = ["acces", "rectification", "suppression", "portabilite", "opposition", "limitation"];
@@ -187,7 +187,7 @@ export default function VaultDsarPage() {
   }, []);
 
   /* ── API calls ──────────────────────────────────────────────── */
-  const loadData = useCallback(async () => {
+  const loadData = async () => {
     try {
       setLoading(true);
       const [reqRes, statsRes] = await Promise.all([
@@ -201,9 +201,10 @@ export default function VaultDsarPage() {
     } finally {
       setLoading(false);
     }
-  }, [api]);
+  };
 
-  useEffect(() => { loadData(); }, [loadData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { loadData(); }, []);
 
   const handleCreate = async (formData) => {
     try {
@@ -266,7 +267,7 @@ export default function VaultDsarPage() {
         {[
           { label: "Total demandes", value: stats.total, color: ACCENT },
           { label: "En cours",       value: stats.enCours, color: "#3b82f6" },
-          { label: "Traitees",       value: stats.traitees, color: "#22c55e" },
+          { label: "Traitées",       value: stats.traitees, color: "#22c55e" },
           { label: "En retard",      value: stats.enRetard, color: "#ef4444" },
         ].map((s) => (
           <div key={s.label} style={{
