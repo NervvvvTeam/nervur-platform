@@ -59,7 +59,7 @@ const DashVaultActionsPage = lazy(() => import('./dashboard/pages/VaultActionsPa
 // Checklist and Badge pages removed from routing (files kept)
 const DashVaultVeillePage = lazy(() => import('./dashboard/pages/VaultVeillePage'))
 const DashVaultHistoriquePage = lazy(() => import('./dashboard/pages/VaultHistoriquePage'))
-const DashVaultAlertsPage = lazy(() => import('./dashboard/pages/VaultAlertsPage'))
+// const DashVaultAlertsPage = lazy(() => import('./dashboard/pages/VaultAlertsPage'))
 const DashVaultDsarPage = lazy(() => import('./dashboard/pages/VaultDsarPage'))
 const DashVaultTimelinePage = lazy(() => import('./dashboard/pages/VaultTimelinePage'))
 const DashAnalyticsPage = lazy(() => import('./dashboard/pages/AnalyticsPage'))
@@ -161,7 +161,7 @@ function App() {
                 <Route path="vault/actions" element={<Suspense fallback={<DashboardLoader />}><DashVaultActionsPage /></Suspense>} />
 
                 <Route path="vault/veille" element={<Suspense fallback={<DashboardLoader />}><DashVaultVeillePage /></Suspense>} />
-                <Route path="vault/alertes" element={<Suspense fallback={<DashboardLoader />}><DashVaultAlertsPage /></Suspense>} />
+                {/* Alertes page removed */}
                 <Route path="vault/droits" element={<Suspense fallback={<DashboardLoader />}><DashVaultDsarPage /></Suspense>} />
                 <Route path="vault/timeline" element={<Suspense fallback={<DashboardLoader />}><DashVaultTimelinePage /></Suspense>} />
                 <Route path="vault/historique" element={<Suspense fallback={<DashboardLoader />}><DashVaultHistoriquePage /></Suspense>} />
