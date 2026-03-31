@@ -75,6 +75,8 @@ const NECESSITY_QUESTIONS = [
   { q: "Les données sont-elles chiffrées au repos et en transit ?", ref: "Sécurité - Art. 32" },
   { q: "L'accès aux données est-il restreint aux personnes habilitées ?", ref: "Contrôle d'accès" },
   { q: "Un contrat sous-traitant RGPD est-il signé avec chaque prestataire ?", ref: "Art. 28" },
+  { q: "Le traitement est-il proportionné à la finalité poursuivie ?", ref: "Proportionnalité - Art. 5.1.c" },
+  { q: "Les transferts de données hors UE sont-ils encadrés ?", ref: "Transferts internationaux - Art. 44-49" },
 ];
 
 const RISK_SCENARIOS = [
@@ -213,7 +215,22 @@ const NECESSITY_RECS = [
   "Implémentez le chiffrement TLS/SSL pour les transmissions et le chiffrement AES-256 pour le stockage.",
   "Mettez en place une politique de gestion des accès avec authentification forte et traçabilité.",
   "Signez un contrat de sous-traitance RGPD (Art. 28) avec chaque prestataire ayant accès aux données.",
+  "Vérifiez que seules les données strictement nécessaires sont collectées par rapport à la finalité déclarée.",
+  "Mettez en place des clauses contractuelles types (CCT) ou vérifiez la décision d'adéquation pour les transferts hors UE.",
 ];
+
+const TOOLTIPS = {
+  aipd: "L'Analyse d'Impact sur la Protection des Données (AIPD) est obligatoire pour les traitements susceptibles d'engendrer un risque élevé pour les droits et libertés des personnes (Art. 35 RGPD).",
+  sensible: "Art. 9 RGPD — Données sensibles : données de santé, biométriques, opinions politiques, orientation sexuelle, origine ethnique, convictions religieuses, appartenance syndicale, données génétiques.",
+  baseLegale: "La base légale justifie pourquoi vous avez le droit de traiter ces données. Les 6 bases du RGPD : consentement, contrat, obligation légale, intérêt vital, mission publique, intérêt légitime.",
+  interetLegitime: "L'intérêt légitime nécessite un test de mise en balance (LIA) : votre intérêt ne doit pas porter atteinte aux droits et libertés des personnes concernées.",
+  gravite: "1 = Négligeable (simple désagrément), 2 = Limitée (préjudice réel mais surmontable), 3 = Importante (conséquences significatives), 4 = Maximale (conséquences irréversibles).",
+  vraisemblance: "1 = Négligeable (improbable), 2 = Limitée (peu probable mais possible), 3 = Importante (probable), 4 = Maximale (quasi-certain).",
+  proportionnalite: "Le principe de proportionnalité impose de ne collecter que les données strictement nécessaires à la finalité du traitement (minimisation des données, Art. 5.1.c RGPD).",
+  conservation: "Recommandations CNIL : clients actifs 3 ans, prospects 3 ans après dernier contact, cookies 13 mois, vidéosurveillance 30 jours, bulletins de paie 5 ans, données comptables 10 ans.",
+  cnilConsultation: "Art. 36 RGPD — Si, malgré les mesures envisagées, le risque résiduel reste élevé, le responsable de traitement doit consulter la CNIL avant de mettre en oeuvre le traitement.",
+  dataFlows: "Décrivez le parcours des données : d'où proviennent-elles (formulaire, API, import...), où sont-elles stockées, à qui sont-elles transmises, et comment sont-elles supprimées.",
+};
 
 /* ===================================================================== */
 /*  Demo data                                                             */
@@ -255,6 +272,87 @@ const XIcon = ({ size = 16, color = "#ef4444" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
   </svg>
+);
+
+/* InfoTooltip — hover ? icon with help text */
+const InfoTooltip = ({ text, style: extraStyle }) => {
+  const [show, setShow] = useState(false);
+  return (
+    <span style={{ position: "relative", display: "inline-flex", alignItems: "center", ...extraStyle }}
+      onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+      <span style={{
+        width: 16, height: 16, borderRadius: "50%", background: "rgba(6,182,212,0.12)",
+        border: "1px solid rgba(6,182,212,0.3)", display: "inline-flex", alignItems: "center",
+        justifyContent: "center", cursor: "help", fontSize: 10, fontWeight: 700, color: ACCENT,
+        marginLeft: 6, flexShrink: 0,
+      }}>?</span>
+      {show && (
+        <div style={{
+          position: "absolute", bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)",
+          background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: 8, padding: "10px 14px",
+          fontSize: 12, color: "#94a3b8", lineHeight: 1.6, width: 300, zIndex: 50,
+          boxShadow: "0 4px 20px rgba(0,0,0,0.4)", pointerEvents: "none",
+        }}>
+          {text}
+          <div style={{
+            position: "absolute", bottom: -5, left: "50%", transform: "translateX(-50%) rotate(45deg)",
+            width: 10, height: 10, background: "#1e2029", borderRight: "1px solid #2a2d3a",
+            borderBottom: "1px solid #2a2d3a",
+          }} />
+        </div>
+      )}
+    </span>
+  );
+};
+
+/* CNIL consultation alert banner */
+const CnilAlert = ({ residualScore }) => {
+  if (residualScore > 25) return null;
+  return (
+    <div style={{
+      background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.3)",
+      borderLeft: "4px solid #ef4444", borderRadius: 10, padding: "16px 20px",
+      marginTop: 16, marginBottom: 16,
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span style={{ color: "#ef4444", fontSize: 14, fontWeight: 700 }}>CONSULTATION CNIL OBLIGATOIRE (Art. 36)</span>
+      </div>
+      <p style={{ color: "#f87171", fontSize: 13, lineHeight: 1.6, margin: 0 }}>
+        Le risque résiduel reste <strong>ÉLEVÉ</strong> après les mesures correctives envisagées.
+        Conformément à l'article 36 du RGPD, vous devez consulter la CNIL avant de démarrer ce traitement.
+        La consultation se fait via le formulaire en ligne sur <strong>cnil.fr</strong>.
+      </p>
+    </div>
+  );
+};
+
+/* Legal disclaimer banner */
+const DisclaimerBanner = () => (
+  <div style={{
+    background: "rgba(6,182,212,0.04)", border: "1px solid rgba(6,182,212,0.15)",
+    borderRadius: 10, padding: "16px 20px", marginBottom: 16,
+  }}>
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: 12 }}>
+      <span style={{ fontSize: 18, flexShrink: 0 }}>&#128220;</span>
+      <div style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>
+        <strong style={{ color: "#e2e8f0" }}>Preuve d'accountability RGPD (Art. 35)</strong><br />
+        Cette AIPD constitue votre preuve de conformité. Conservez ce document et mettez-le à jour lors de toute modification du traitement.
+      </div>
+    </div>
+    <div style={{ display: "flex", alignItems: "flex-start", gap: 12, borderTop: "1px solid rgba(6,182,212,0.1)", paddingTop: 12 }}>
+      <span style={{ fontSize: 18, flexShrink: 0 }}>&#9878;&#65039;</span>
+      <div style={{ color: "#64748b", fontSize: 11, lineHeight: 1.6 }}>
+        <strong style={{ color: "#94a3b8" }}>Avertissement légal</strong><br />
+        Cet outil est une aide à la documentation de votre conformité RGPD. Il ne constitue pas un avis juridique
+        et ne valide pas la conformité de votre traitement. La responsabilité finale de la conformité incombe
+        au Responsable de Traitement. En cas de doute, consultez un juriste spécialisé ou la CNIL.
+      </div>
+    </div>
+  </div>
 );
 
 /* ===================================================================== */
@@ -326,7 +424,7 @@ const NoeBox = ({ text }) => {
 
 /* Step progress bar */
 const StepProgress = ({ current, total = 6 }) => {
-  const labels = ["Contexte", "Traitement", "Nécessité", "Risques", "Carte", "Actions"];
+  const labels = ["Contexte", "Traitement", "Principes", "Risques", "Carte", "Validation"];
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 0, marginBottom: 24, overflowX: "auto" }}>
       {labels.map((lab, i) => {
@@ -465,12 +563,14 @@ export default function VaultAipdPage() {
 
   /* Wizard state */
   const [wiz, setWiz] = useState({
-    sector: "", company: "", employees: "",
+    sector: "", company: "", employees: "", dataFlows: "",
     treatmentName: "", treatmentDesc: "", dataTypes: [],
     legalBasis: "", recipients: "", duration: "",
-    necessity: Array(8).fill(null),
+    necessity: Array(10).fill(null),
     risks: RISK_SCENARIOS.map(() => ({ gravity: 1, likelihood: 1 })),
+    residualRisks: RISK_SCENARIOS.map(() => ({ gravity: 1, likelihood: 1 })),
     actions: [],
+    dpoName: "", dpoComment: "", rtName: "", startDate: "", priorConfirmation: false,
   });
 
   const updateWiz = (key, val) => setWiz((p) => ({ ...p, [key]: val }));
@@ -526,14 +626,24 @@ export default function VaultAipdPage() {
     return keys.map(k => ({ gravity: Math.min(4, base[k].gravity), likelihood: Math.min(4, base[k].likelihood) }));
   };
 
+  const setResidualRisk = (idx, field, val) => {
+    setWiz((p) => {
+      const r = [...p.residualRisks];
+      r[idx] = { ...r[idx], [field]: val };
+      return { ...p, residualRisks: r };
+    });
+  };
+
   const startWizard = () => {
     setWiz({
-      sector: "", company: "", employees: "",
+      sector: "", company: "", employees: "", dataFlows: "",
       treatmentName: "", treatmentDesc: "", dataTypes: [],
       legalBasis: "", recipients: "", duration: "",
-      necessity: Array(8).fill(null),
+      necessity: Array(10).fill(null),
       risks: RISK_SCENARIOS.map(() => ({ gravity: 1, likelihood: 1 })),
+      residualRisks: RISK_SCENARIOS.map(() => ({ gravity: 1, likelihood: 1 })),
       actions: [],
+      dpoName: "", dpoComment: "", rtName: "", startDate: "", priorConfirmation: false,
     });
     setStep(0);
     setView("wizard");
@@ -578,6 +688,7 @@ export default function VaultAipdPage() {
   const saveAnalysis = () => {
     const score = calcRiskScore(wiz.risks.map((r, i) => ({ ...r, name: RISK_SCENARIOS[i].name })));
     const level = scoreToLevel(score);
+    const residualScore = calcRiskScore(wiz.residualRisks.map((r, i) => ({ ...r, name: RISK_SCENARIOS[i].name })));
     const newA = {
       id: "p" + Date.now(),
       name: wiz.treatmentName || "Analyse sans nom",
@@ -586,15 +697,23 @@ export default function VaultAipdPage() {
       employees: wiz.employees || "1-5",
       riskLevel: level,
       score,
+      residualScore,
       date: new Date().toISOString(),
       dataTypes: wiz.dataTypes,
+      dataFlows: wiz.dataFlows,
       treatment: wiz.treatmentDesc,
       legalBasis: wiz.legalBasis,
       recipients: wiz.recipients,
       duration: wiz.duration,
       risks: wiz.risks.map((r, i) => ({ name: RISK_SCENARIOS[i].name, gravity: r.gravity, likelihood: r.likelihood })),
+      residualRisks: wiz.residualRisks.map((r, i) => ({ name: RISK_SCENARIOS[i].name, gravity: r.gravity, likelihood: r.likelihood })),
       necessity: wiz.necessity,
       actions: wiz.actions.map((a) => ({ title: a.title, priority: a.priority })),
+      dpoName: wiz.dpoName,
+      dpoComment: wiz.dpoComment,
+      rtName: wiz.rtName,
+      startDate: wiz.startDate,
+      priorConfirmation: wiz.priorConfirmation,
     };
     setAnalyses((prev) => [newA, ...prev]);
     setView("list");
@@ -622,48 +741,134 @@ export default function VaultAipdPage() {
     if (!analysis) return;
     const printWindow = window.open('', '_blank');
     if (!printWindow) return;
+    const creationDate = new Date(analysis.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    const exportDate = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    const startDate = analysis.startDate ? new Date(analysis.startDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Non définie';
+    const resScore = analysis.residualScore != null ? analysis.residualScore : '—';
+    const needsCnil = analysis.residualScore != null && analysis.residualScore <= 25;
     printWindow.document.write(`<!DOCTYPE html>
 <html><head><title>AIPD - ${analysis.name}</title>
 <style>
-  body { font-family: Arial, sans-serif; padding: 40px; color: #333; max-width: 800px; margin: 0 auto; }
-  h1 { color: #06b6d4; border-bottom: 2px solid #06b6d4; padding-bottom: 10px; }
-  h2 { color: #1e293b; margin-top: 30px; }
-  .badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+  body { font-family: Arial, sans-serif; padding: 40px; color: #333; max-width: 800px; margin: 0 auto; font-size: 13px; }
+  h1 { color: #06b6d4; border-bottom: 2px solid #06b6d4; padding-bottom: 10px; font-size: 22px; }
+  h2 { color: #1e293b; margin-top: 30px; font-size: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+  .timestamp { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: #0369a1; }
   .risk-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-  .risk-table th, .risk-table td { border: 1px solid #e2e8f0; padding: 8px 12px; text-align: left; }
-  .risk-table th { background: #f1f5f9; }
+  .risk-table th, .risk-table td { border: 1px solid #e2e8f0; padding: 8px 12px; text-align: left; font-size: 12px; }
+  .risk-table th { background: #f1f5f9; font-weight: 600; }
   .action-item { padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
-  .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; text-align: center; }
+  .cnil-alert { background: #fef2f2; border: 2px solid #ef4444; border-radius: 8px; padding: 16px; margin: 20px 0; color: #991b1b; }
+  .cnil-alert strong { color: #ef4444; }
+  .signature-block { display: inline-block; width: 45%; vertical-align: top; margin-top: 20px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; }
+  .signature-line { border-bottom: 1px solid #333; width: 200px; margin-top: 40px; margin-bottom: 4px; }
+  .disclaimer { background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 12px 16px; margin-top: 20px; font-size: 11px; color: #92400e; }
+  .footer { margin-top: 40px; padding-top: 20px; border-top: 2px solid #e2e8f0; font-size: 10px; color: #94a3b8; text-align: center; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+  .grid-item { font-size: 12px; }
+  .grid-item span { color: #6b7280; }
   @media print { body { padding: 20px; } }
 </style>
 </head><body>
-<h1>Analyse d'Impact — ${analysis.name}</h1>
-<p><strong>Entreprise :</strong> ${analysis.company || '—'} | <strong>Secteur :</strong> ${analysis.sector || '—'} | <strong>Date :</strong> ${new Date(analysis.date).toLocaleDateString('fr-FR')}</p>
-<p><strong>Score de risque :</strong> ${analysis.score}/100 — <strong>Niveau :</strong> ${analysis.riskLevel}</p>
 
-<h2>Données concernées</h2>
-<p>${(analysis.dataTypes || []).join(', ')}</p>
+<h1>Analyse d'Impact sur la Protection des Données (AIPD)</h1>
+<p style="font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 4px;">${analysis.name}</p>
 
-<h2>Description du traitement</h2>
-<p>${analysis.treatment || '—'}</p>
-<p><strong>Base légale :</strong> ${analysis.legalBasis || '—'}</p>
+<div class="timestamp">
+  <strong>Horodatage :</strong> Analyse réalisée le <strong>${creationDate}</strong> — Document exporté le <strong>${exportDate}</strong><br>
+  Date prévue de démarrage du traitement : <strong>${startDate}</strong><br>
+  ${analysis.priorConfirmation ? '✅ Cette analyse a été réalisée <strong>a priori</strong>, avant le démarrage du traitement.' : '⚠️ Confirmation a priori non cochée.'}
+</div>
 
-<h2>Analyse des risques</h2>
+<h2>1. Description du contexte</h2>
+<div class="grid">
+  <div class="grid-item"><span>Entreprise :</span> <strong>${analysis.company || '—'}</strong></div>
+  <div class="grid-item"><span>Secteur :</span> <strong>${analysis.sector || '—'}</strong></div>
+  <div class="grid-item"><span>Effectif :</span> <strong>${analysis.employees || '—'} salariés</strong></div>
+  <div class="grid-item"><span>Base légale :</span> <strong>${analysis.legalBasis || '—'}</strong></div>
+  <div class="grid-item"><span>Destinataires :</span> <strong>${analysis.recipients || '—'}</strong></div>
+  <div class="grid-item"><span>Conservation :</span> <strong>${analysis.duration || '—'}</strong></div>
+</div>
+<p><strong>Données collectées :</strong> ${(analysis.dataTypes || []).join(', ') || '—'}</p>
+<p><strong>Finalité du traitement :</strong> ${analysis.treatment || '—'}</p>
+${analysis.dataFlows ? '<p><strong>Flux de données :</strong> ' + analysis.dataFlows + '</p>' : ''}
+
+<h2>2. Principes fondamentaux (Nécessité & Proportionnalité)</h2>
 <table class="risk-table">
-  <thead><tr><th>Scénario</th><th>Gravité</th><th>Vraisemblance</th><th>Score</th></tr></thead>
+  <thead><tr><th>Critère</th><th>Référence</th><th>Conforme</th></tr></thead>
+  <tbody>
+    ${NECESSITY_QUESTIONS.map((nq, i) => {
+      const val = analysis.necessity ? analysis.necessity[i] : null;
+      return '<tr><td>' + nq.q + '</td><td style="font-size:11px;color:#6b7280">' + nq.ref + '</td><td style="text-align:center;font-weight:600;color:' + (val === true ? '#22c55e' : val === false ? '#ef4444' : '#6b7280') + '">' + (val === true ? 'OUI' : val === false ? 'NON' : '—') + '</td></tr>';
+    }).join('')}
+  </tbody>
+</table>
+
+<h2>3. Analyse des risques</h2>
+<p><strong>Score de risque initial :</strong> ${analysis.score}/100 — <strong>Niveau :</strong> ${analysis.riskLevel}</p>
+<table class="risk-table">
+  <thead><tr><th>Scénario de menace</th><th>Gravité</th><th>Vraisemblance</th><th>Score</th></tr></thead>
   <tbody>
     ${(analysis.risks || []).map(r =>
-      '<tr><td>' + r.name + '</td><td>' + r.gravity + '/4</td><td>' + r.likelihood + '/4</td><td>' + (r.gravity * r.likelihood) + '/16</td></tr>'
+      '<tr><td>' + r.name + '</td><td>' + r.gravity + '/4</td><td>' + r.likelihood + '/4</td><td style="font-weight:600">' + (r.gravity * r.likelihood) + '/16</td></tr>'
     ).join('')}
   </tbody>
 </table>
 
-<h2>Plan d'action</h2>
-${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a === 'string' ? a : a.title || a) + '</div>').join('')}
+${analysis.residualRisks ? `
+<h2>4. Risques résiduels (après mesures)</h2>
+<p><strong>Score résiduel :</strong> ${resScore}/100</p>
+<table class="risk-table">
+  <thead><tr><th>Scénario</th><th>Gravité rés.</th><th>Vraisemblance rés.</th><th>Score rés.</th></tr></thead>
+  <tbody>
+    ${(analysis.residualRisks || []).map(r =>
+      '<tr><td>' + r.name + '</td><td>' + r.gravity + '/4</td><td>' + r.likelihood + '/4</td><td style="font-weight:600">' + (r.gravity * r.likelihood) + '/16</td></tr>'
+    ).join('')}
+  </tbody>
+</table>
+` : ''}
+
+${needsCnil ? `
+<div class="cnil-alert">
+  <strong>⚠️ CONSULTATION CNIL OBLIGATOIRE (Article 36 RGPD)</strong><br>
+  Le risque résiduel reste ÉLEVÉ après les mesures correctives envisagées.
+  Le responsable de traitement doit consulter la CNIL avant de mettre en oeuvre ce traitement.
+</div>
+` : ''}
+
+<h2>5. Plan d'action correctif</h2>
+${(analysis.actions || []).map(a => {
+  const title = typeof a === 'string' ? a : a.title || a;
+  const priority = typeof a === 'string' ? 'Haute' : a.priority || 'Haute';
+  return '<div class="action-item"><strong>[' + priority + ']</strong> ' + title + '</div>';
+}).join('')}
+
+<h2>6. Validation</h2>
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+  <div class="signature-block">
+    <strong>Avis du DPO (consultatif)</strong><br>
+    <p>Nom : ${analysis.dpoName || '______________________'}</p>
+    ${analysis.dpoComment ? '<p style="font-style:italic;color:#6b7280">Avis : ' + analysis.dpoComment + '</p>' : ''}
+    <div class="signature-line"></div>
+    <span style="font-size:11px;color:#6b7280">Signature — Date : ___/___/______</span>
+  </div>
+  <div class="signature-block">
+    <strong>Validation du Responsable de Traitement</strong><br>
+    <p>Nom : ${analysis.rtName || '______________________'}</p>
+    <div class="signature-line"></div>
+    <span style="font-size:11px;color:#6b7280">Signature — Date : ___/___/______</span>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <strong>⚖️ Avertissement légal :</strong> Cet outil est une aide à la documentation de votre conformité RGPD.
+  Il ne constitue pas un avis juridique et ne valide pas la conformité de votre traitement.
+  La responsabilité finale de la conformité incombe au Responsable de Traitement.
+  En cas de doute, consultez un juriste spécialisé ou la CNIL.
+</div>
 
 <div class="footer">
-  Ce document constitue une preuve d'accountability RGPD (Article 35).<br>
-  Généré par NERVÜR Vault — Agent Juridique IA — ${new Date().toLocaleDateString('fr-FR')}
+  Document généré par NERVÜR Vault — Agent Juridique IA<br>
+  ${exportDate} — Article 35 RGPD — Preuve d'accountability
 </div>
 </body></html>`);
     printWindow.document.close();
@@ -718,6 +923,13 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
       <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>Nom de l'entreprise</label>
       <input value={wiz.company} onChange={(e) => updateWiz("company", e.target.value)} placeholder="Ex : Ma Boutique SAS" style={inputStyle} />
 
+      <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>
+        Flux de données <InfoTooltip text={TOOLTIPS.dataFlows} />
+      </label>
+      <textarea value={wiz.dataFlows} onChange={(e) => updateWiz("dataFlows", e.target.value)}
+        placeholder="Ex : Données collectées via formulaire web → stockées chez OVH → partagées avec expert-comptable → supprimées après 3 ans"
+        rows={2} style={{ ...inputStyle, resize: "vertical", marginBottom: 0 }} />
+
       <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6, marginTop: 16 }}>Nombre de salariés</label>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         {EMPLOYEE_RANGES.map((r) => (
@@ -763,7 +975,9 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
 
         <NoeBox text={noeSuggestion("step2")} />
 
-        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8, marginTop: 16 }}>Catégories de données collectées</label>
+        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8, marginTop: 16 }}>
+          Catégories de données collectées <InfoTooltip text={TOOLTIPS.sensible} />
+        </label>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 20 }}>
           {DATA_CATEGORIES.map((dt) => (
             <button key={dt} onClick={() => toggleDataType(dt)} style={{
@@ -778,7 +992,9 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
           ))}
         </div>
 
-        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8 }}>Base légale</label>
+        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 8 }}>
+          Base légale <InfoTooltip text={TOOLTIPS.baseLegale} />
+        </label>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 8, marginBottom: 20 }}>
           {LEGAL_BASES.map((lb) => (
             <button key={lb.value} onClick={() => updateWiz("legalBasis", lb.value)} style={{
@@ -805,7 +1021,9 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
           ))}
         </div>
 
-        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Durée de conservation</label>
+        <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>
+          Durée de conservation <InfoTooltip text={TOOLTIPS.conservation} />
+        </label>
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
           {DURATIONS.map((d) => (
             <button key={d} onClick={() => updateWiz("duration", d)} style={{
@@ -825,8 +1043,10 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
 
   const renderStep2 = () => (
     <div>
-      <h3 style={{ color: "#e2e8f0", fontSize: 18, fontWeight: 700, marginBottom: 4 }}>Étape 3 — Nécessité & Proportionnalité</h3>
-      <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Évaluez la conformité de votre traitement aux principes du RGPD.</p>
+      <h3 style={{ color: "#e2e8f0", fontSize: 18, fontWeight: 700, marginBottom: 4 }}>
+        Étape 3 — Principes fondamentaux <InfoTooltip text={TOOLTIPS.proportionnalite} />
+      </h3>
+      <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Évaluez la conformité aux 3 piliers CNIL : proportionnalité, nécessité, droits des personnes.</p>
 
       <NoeBox text={noeSuggestion("step3")} />
 
@@ -897,7 +1117,9 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
               </div>
               <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
                 <div>
-                  <label style={{ color: "#94a3b8", fontSize: 11, fontWeight: 600, display: "block", marginBottom: 4 }}>Gravité</label>
+                  <label style={{ color: "#94a3b8", fontSize: 11, fontWeight: 600, display: "block", marginBottom: 4 }}>
+                    Gravité <InfoTooltip text={TOOLTIPS.gravite} />
+                  </label>
                   <div style={{ display: "flex", gap: 4 }}>
                     {[1, 2, 3, 4].map((v) => (
                       <button key={v} onClick={() => setRisk(i, "gravity", v)} style={{
@@ -913,7 +1135,9 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
                   </div>
                 </div>
                 <div>
-                  <label style={{ color: "#94a3b8", fontSize: 11, fontWeight: 600, display: "block", marginBottom: 4 }}>Vraisemblance</label>
+                  <label style={{ color: "#94a3b8", fontSize: 11, fontWeight: 600, display: "block", marginBottom: 4 }}>
+                    Vraisemblance <InfoTooltip text={TOOLTIPS.vraisemblance} />
+                  </label>
                   <div style={{ display: "flex", gap: 4 }}>
                     {[1, 2, 3, 4].map((v) => (
                       <button key={v} onClick={() => setRisk(i, "likelihood", v)} style={{
@@ -989,6 +1213,65 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
               </div>
             );
           })}
+        </div>
+
+        {/* Residual risks section */}
+        <div style={{ ...card, padding: 20, marginBottom: 16 }}>
+          <div style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, marginBottom: 12, display: "flex", alignItems: "center" }}>
+            Risques résiduels (après mesures) <InfoTooltip text={TOOLTIPS.cnilConsultation} />
+          </div>
+          <p style={{ color: "#64748b", fontSize: 12, marginBottom: 16 }}>
+            Estimez le niveau de risque qui subsistera après la mise en place des mesures correctives.
+          </p>
+          {RISK_SCENARIOS.map((rs, i) => {
+            const initProduct = wiz.risks[i].gravity * wiz.risks[i].likelihood;
+            const resProduct = wiz.residualRisks[i].gravity * wiz.residualRisks[i].likelihood;
+            const resColor = heatCellColor(resProduct);
+            if (initProduct < 6) return null; // Only show for medium+ risks
+            return (
+              <div key={rs.key} style={{ display: "flex", alignItems: "center", gap: 16, padding: "10px 0", borderBottom: "1px solid #2a2d3a22" }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ color: "#e2e8f0", fontSize: 12, fontWeight: 500 }}>{rs.name}</div>
+                  <div style={{ color: "#64748b", fontSize: 10 }}>Initial: {initProduct}/16</div>
+                </div>
+                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                  <div>
+                    <div style={{ fontSize: 9, color: "#64748b", marginBottom: 2 }}>Gravité rés.</div>
+                    <div style={{ display: "flex", gap: 2 }}>
+                      {[1, 2, 3, 4].map(v => (
+                        <button key={v} onClick={() => setResidualRisk(i, "gravity", v)} style={{
+                          background: wiz.residualRisks[i].gravity === v ? `${heatCellColor(v * wiz.residualRisks[i].likelihood)}22` : "#161820",
+                          border: `1px solid ${wiz.residualRisks[i].gravity === v ? heatCellColor(v * wiz.residualRisks[i].likelihood) : "#2a2d3a"}`,
+                          borderRadius: 4, padding: "3px 6px", fontSize: 10, fontWeight: 600, cursor: "pointer",
+                          color: wiz.residualRisks[i].gravity === v ? heatCellColor(v * wiz.residualRisks[i].likelihood) : "#475569",
+                          minWidth: 24,
+                        }}>{v}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, color: "#64748b", marginBottom: 2 }}>Vrais. rés.</div>
+                    <div style={{ display: "flex", gap: 2 }}>
+                      {[1, 2, 3, 4].map(v => (
+                        <button key={v} onClick={() => setResidualRisk(i, "likelihood", v)} style={{
+                          background: wiz.residualRisks[i].likelihood === v ? `${heatCellColor(wiz.residualRisks[i].gravity * v)}22` : "#161820",
+                          border: `1px solid ${wiz.residualRisks[i].likelihood === v ? heatCellColor(wiz.residualRisks[i].gravity * v) : "#2a2d3a"}`,
+                          borderRadius: 4, padding: "3px 6px", fontSize: 10, fontWeight: 600, cursor: "pointer",
+                          color: wiz.residualRisks[i].likelihood === v ? heatCellColor(wiz.residualRisks[i].gravity * v) : "#475569",
+                          minWidth: 24,
+                        }}>{v}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <span style={{
+                    background: `${resColor}22`, color: resColor, fontSize: 11, fontWeight: 700,
+                    padding: "4px 10px", borderRadius: 6, border: `1px solid ${resColor}44`,
+                  }}>{resProduct}/16</span>
+                </div>
+              </div>
+            );
+          })}
+          <CnilAlert residualScore={calcRiskScore(wiz.residualRisks.map((r, i) => ({ ...r, name: RISK_SCENARIOS[i].name })))} />
         </div>
 
         <NoeBox text={noeSuggestion("step5")} />
@@ -1070,17 +1353,69 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
           ))}
         </div>
 
-        {/* Accountability banner */}
-        <div style={{
-          background: "rgba(6,182,212,0.06)", border: "1px solid rgba(6,182,212,0.2)",
-          borderRadius: 10, padding: "14px 18px", marginBottom: 20, display: "flex", alignItems: "flex-start", gap: 12,
-        }}>
-          <span style={{ fontSize: 20 }}>📜</span>
-          <div style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>
-            <strong style={{ color: "#e2e8f0" }}>Preuve d'accountability RGPD</strong><br />
-            Cette AIPD constitue votre preuve de conformité au titre de l'article 35 du RGPD. Conservez ce document et mettez-le à jour lors de toute modification du traitement.
+        {/* Validation section — DPO + RT */}
+        <div style={{ ...card, padding: 20, marginBottom: 16 }}>
+          <h4 style={{ color: ACCENT, fontSize: 14, fontWeight: 700, marginBottom: 16, marginTop: 0 }}>
+            Validation & Signatures
+          </h4>
+
+          {/* Date de démarrage prévue */}
+          <label style={{ color: "#94a3b8", fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>
+            Date prévue de démarrage du traitement
+          </label>
+          <input type="date" value={wiz.startDate} onChange={(e) => updateWiz("startDate", e.target.value)}
+            style={{ ...inputStyle, width: 220, marginBottom: 16 }} />
+
+          {/* DPO */}
+          <div style={{ background: "#161820", borderRadius: 10, padding: 16, marginBottom: 12, border: "1px solid #2a2d3a" }}>
+            <div style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 600, marginBottom: 10 }}>
+              Avis du Délégué à la Protection des Données (DPO)
+            </div>
+            <label style={{ color: "#64748b", fontSize: 11, display: "block", marginBottom: 4 }}>Nom du DPO</label>
+            <input value={wiz.dpoName} onChange={(e) => updateWiz("dpoName", e.target.value)}
+              placeholder="Ex : Jean Dupont" style={{ ...inputStyle, marginBottom: 10 }} />
+            <label style={{ color: "#64748b", fontSize: 11, display: "block", marginBottom: 4 }}>Avis consultatif</label>
+            <textarea value={wiz.dpoComment} onChange={(e) => updateWiz("dpoComment", e.target.value)}
+              placeholder="Avis du DPO sur cette analyse d'impact..."
+              rows={3} style={{ ...inputStyle, resize: "vertical" }} />
           </div>
+
+          {/* Responsable de traitement */}
+          <div style={{ background: "#161820", borderRadius: 10, padding: 16, marginBottom: 16, border: "1px solid #2a2d3a" }}>
+            <div style={{ color: "#e2e8f0", fontSize: 13, fontWeight: 600, marginBottom: 10 }}>
+              Validation du Responsable de Traitement
+            </div>
+            <label style={{ color: "#64748b", fontSize: 11, display: "block", marginBottom: 4 }}>Nom du Responsable</label>
+            <input value={wiz.rtName} onChange={(e) => updateWiz("rtName", e.target.value)}
+              placeholder="Ex : Marie Martin, Directrice Générale" style={{ ...inputStyle }} />
+          </div>
+
+          {/* Prior confirmation checkbox */}
+          <label style={{
+            display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer",
+            padding: "12px 16px", borderRadius: 8, border: `1px solid ${wiz.priorConfirmation ? ACCENT + "44" : "#2a2d3a"}`,
+            background: wiz.priorConfirmation ? "rgba(6,182,212,0.06)" : "transparent",
+          }} onClick={() => updateWiz("priorConfirmation", !wiz.priorConfirmation)}>
+            <div style={{
+              width: 18, height: 18, borderRadius: 4, flexShrink: 0, marginTop: 1,
+              border: `2px solid ${wiz.priorConfirmation ? ACCENT : "#475569"}`,
+              background: wiz.priorConfirmation ? ACCENT : "transparent",
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              {wiz.priorConfirmation && <CheckIcon size={12} color="#fff" />}
+            </div>
+            <span style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.5 }}>
+              Je confirme que cette analyse d'impact a été réalisée <strong style={{ color: "#e2e8f0" }}>a priori</strong>,
+              avant le démarrage du traitement, conformément à l'article 35 du RGPD.
+            </span>
+          </label>
         </div>
+
+        {/* CNIL Alert if residual risk is high */}
+        <CnilAlert residualScore={calcRiskScore(wiz.residualRisks.map((r, i) => ({ ...r, name: RISK_SCENARIOS[i].name })))} />
+
+        {/* Disclaimer banner */}
+        <DisclaimerBanner />
 
         {/* Save / Export */}
         <div style={{ display: "flex", gap: 12 }}>
@@ -1215,17 +1550,23 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
           })}
         </div>
 
-        {/* Accountability banner */}
-        <div style={{
-          background: "rgba(6,182,212,0.06)", border: "1px solid rgba(6,182,212,0.2)",
-          borderRadius: 10, padding: "14px 18px", marginBottom: 16, display: "flex", alignItems: "flex-start", gap: 12,
-        }}>
-          <span style={{ fontSize: 20 }}>📜</span>
-          <div style={{ color: "#94a3b8", fontSize: 12, lineHeight: 1.6 }}>
-            <strong style={{ color: "#e2e8f0" }}>Preuve d'accountability RGPD</strong><br />
-            Cette AIPD constitue votre preuve de conformité au titre de l'article 35 du RGPD. Conservez ce document et mettez-le à jour lors de toute modification du traitement.
+        {/* Validation info */}
+        {(s.dpoName || s.rtName) && (
+          <div style={{ ...card, marginBottom: 12 }}>
+            <h4 style={{ color: ACCENT, fontSize: 14, fontWeight: 700, marginBottom: 10, marginTop: 0 }}>6. Validation</h4>
+            {s.dpoName && <div style={{ fontSize: 13, color: "#e2e8f0", marginBottom: 4 }}>DPO : <strong>{s.dpoName}</strong></div>}
+            {s.dpoComment && <div style={{ fontSize: 12, color: "#94a3b8", fontStyle: "italic", marginBottom: 8 }}>{s.dpoComment}</div>}
+            {s.rtName && <div style={{ fontSize: 13, color: "#e2e8f0" }}>Responsable de Traitement : <strong>{s.rtName}</strong></div>}
+            {s.startDate && <div style={{ fontSize: 12, color: "#64748b", marginTop: 6 }}>Démarrage prévu : {fmtDate(s.startDate)}</div>}
+            {s.priorConfirmation && <div style={{ fontSize: 12, color: "#22c55e", marginTop: 4 }}>Analyse réalisée a priori</div>}
           </div>
-        </div>
+        )}
+
+        {/* CNIL alert if needed */}
+        {s.residualScore != null && <CnilAlert residualScore={s.residualScore} />}
+
+        {/* Disclaimer */}
+        <DisclaimerBanner />
 
         <button onClick={() => exportPDF()} style={btnSecondary}>Exporter PDF</button>
       </div>
@@ -1241,7 +1582,7 @@ ${(analysis.actions || []).map(a => '<div class="action-item">• ' + (typeof a 
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
         <div>
           <h2 style={{ color: "#e2e8f0", fontSize: 20, fontWeight: 700, margin: 0, display: "flex", alignItems: "center", gap: 10 }}>
-            <ScaleIcon size={24} /> Analyses d'Impact (AIPD)
+            <ScaleIcon size={24} /> Analyses d'Impact (AIPD) <InfoTooltip text={TOOLTIPS.aipd} />
           </h2>
           <p style={{ color: "#64748b", fontSize: 13, margin: "4px 0 0" }}>
             Gérez vos analyses d'impact sur la protection des données — Article 35 RGPD
