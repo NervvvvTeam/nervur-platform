@@ -5,7 +5,21 @@
 const GOOGLE_API_KEY = () => process.env.GOOGLE_API_KEY || "";
 
 // Search for a place by name and get its Place ID
-async function searchPlace(query) {
+async function searchPlace(query, locationBias) {
+  const body = { textQuery: query, languageCode: "fr" };
+
+  // Default: bias search to France to avoid finding businesses in other countries
+  if (locationBias) {
+    body.locationBias = locationBias;
+  } else {
+    body.locationBias = {
+      rectangle: {
+        low: { latitude: 41.3, longitude: -5.2 },   // SW France
+        high: { latitude: 51.1, longitude: 9.6 }     // NE France
+      }
+    };
+  }
+
   const res = await fetch("https://places.googleapis.com/v1/places:searchText", {
     method: "POST",
     headers: {
@@ -13,7 +27,7 @@ async function searchPlace(query) {
       "X-Goog-Api-Key": GOOGLE_API_KEY(),
       "X-Goog-FieldMask": "places.id,places.displayName,places.formattedAddress,places.rating,places.userRatingCount,places.googleMapsUri"
     },
-    body: JSON.stringify({ textQuery: query, languageCode: "fr" })
+    body: JSON.stringify(body)
   });
 
   if (!res.ok) {
@@ -57,16 +71,27 @@ async function resolveGoogleMapsUrl(url) {
     }
   }
 
+  // Try to extract coordinates from URL for precise location bias
+  let locationBias = null;
+  const coordMatch = finalUrl.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+  if (coordMatch) {
+    const lat = parseFloat(coordMatch[1]);
+    const lng = parseFloat(coordMatch[2]);
+    locationBias = {
+      circle: { center: { latitude: lat, longitude: lng }, radius: 500.0 }
+    };
+  }
+
   // Try to extract place name from URL
   const nameMatch = finalUrl.match(/place\/([^/@]+)/);
   if (nameMatch) {
     const placeName = decodeURIComponent(nameMatch[1]).replace(/\+/g, " ");
-    const places = await searchPlace(placeName);
+    const places = await searchPlace(placeName, locationBias);
     if (places.length > 0) return places[0];
   }
 
   // Fallback: search with the full URL text
-  const places = await searchPlace(url);
+  const places = await searchPlace(url, locationBias);
   return places.length > 0 ? places[0] : null;
 }
 

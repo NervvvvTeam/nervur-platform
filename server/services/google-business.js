@@ -5,9 +5,9 @@ const SCOPES = ["https://www.googleapis.com/auth/business.manage"];
 // Create OAuth2 client
 function createOAuth2Client() {
   return new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
-    `${process.env.API_URL || "http://localhost:3001"}/api/sentinel-app/businesses/google-callback`
+    process.env.GOOGLE_OAUTH_CLIENT_ID || process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_OAUTH_CLIENT_SECRET || process.env.GOOGLE_CLIENT_SECRET,
+    `${process.env.API_URL || "https://nervurapi-production.up.railway.app"}/api/sentinel-app/businesses/google-callback`
   );
 }
 

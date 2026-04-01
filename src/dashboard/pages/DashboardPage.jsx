@@ -64,7 +64,7 @@ export default function DashboardPage() {
 
       const [statsRes, reviewsRes, trendsRes, npsRes] = await Promise.all([
         get(`/api/sentinel-app/businesses/${biz._id}/stats`),
-        get(`/api/sentinel-app/reviews/${biz._id}?limit=5`),
+        get(`/api/sentinel-app/reviews/${biz._id}?limit=20`),
         get(`/api/sentinel-app/analytics/${biz._id}/trends`).catch(() => null),
         get(`/api/sentinel-app/analytics/${biz._id}/nps`).catch(() => null),
       ]);

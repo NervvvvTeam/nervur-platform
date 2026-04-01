@@ -19,15 +19,23 @@ export default function OnboardingPage() {
   const [sector, setSector] = useState("");
   const [googleUrl, setGoogleUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const { post } = useApi();
+  const { post, get } = useApi();
   const navigate = useNavigate();
 
-  const handleFinish = async () => {
+  const handleFinish = async (connectGoogle = false) => {
     setLoading(true);
     try {
-      await post("/api/sentinel-app/businesses", {
+      const result = await post("/api/sentinel-app/businesses", {
         businessName, sector, googleBusinessUrl: googleUrl
       });
+      if (connectGoogle && result.business?._id) {
+        // Get Google OAuth URL and redirect
+        const authRes = await get(`/api/sentinel-app/businesses/${result.business._id}/google-auth-url`);
+        if (authRes.url) {
+          window.location.href = authRes.url;
+          return;
+        }
+      }
       navigate("/app/sentinel");
     } catch (err) {
       console.error(err);
@@ -138,10 +146,12 @@ export default function OnboardingPage() {
           </div>
 
           {/* Option 2: Google OAuth */}
-          <div style={{
-            padding: "20px", borderRadius: "10px", border: "1px solid #2a2d3a",
-            background: "#1e2029", marginBottom: "24px", opacity: 0.5, cursor: "not-allowed"
-          }}>
+          <div onClick={() => handleFinish(true)} style={{
+            padding: "20px", borderRadius: "10px", border: "1px solid rgba(234,67,53,0.3)",
+            background: "#1e2029", marginBottom: "24px", cursor: "pointer", transition: "all 0.2s"
+          }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(234,67,53,0.6)"; e.currentTarget.style.background = "rgba(234,67,53,0.05)"; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(234,67,53,0.3)"; e.currentTarget.style.background = "#1e2029"; }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <div style={{
                 width: "32px", height: "32px", borderRadius: "8px",
@@ -156,13 +166,13 @@ export default function OnboardingPage() {
               </div>
               <div>
                 <div style={{ fontSize: "14px", fontWeight: 600, color: "#f0f0f3" }}>Se connecter avec Google</div>
-                <div style={{ fontSize: "12px", color: "#6b7280" }}>Bientôt disponible — Accès à tous vos avis</div>
+                <div style={{ fontSize: "12px", color: "#6b7280" }}>Accès direct à tous vos avis Google</div>
               </div>
               <span style={{
                 marginLeft: "auto", fontSize: "10px", fontWeight: 600,
                 padding: "3px 8px", borderRadius: "4px",
-                background: "rgba(99,102,241,0.1)", color: "#818CF8"
-              }}>BIENTÔT</span>
+                background: "rgba(52,168,83,0.1)", color: "#34A853"
+              }}>RECOMMANDÉ</span>
             </div>
           </div>
 

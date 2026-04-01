@@ -34,12 +34,12 @@ router.get("/google-callback", async (req, res) => {
     business.scanEnabled = true;
     await business.save();
 
-    const dashboardUrl = process.env.DASHBOARD_URL || "https://app.nervur.fr";
-    res.redirect(`${dashboardUrl}/settings?google=connected`);
+    const dashboardUrl = process.env.DASHBOARD_URL || "https://nervur.fr";
+    res.redirect(`${dashboardUrl}/app/sentinel?google=connected`);
   } catch (err) {
     console.error("[GOOGLE] OAuth callback error:", err.message);
-    const dashboardUrl = process.env.DASHBOARD_URL || "https://app.nervur.fr";
-    res.redirect(`${dashboardUrl}/settings?google=error`);
+    const dashboardUrl = process.env.DASHBOARD_URL || "https://nervur.fr";
+    res.redirect(`${dashboardUrl}/app/sentinel?google=error`);
   }
 });
 
