@@ -392,7 +392,7 @@ export default function NervurAurora() {
   useFadeOnScroll(pageRef);
 
   useSEO(
-    "NERVÜR",
+    "NERVÜR — Agence Digitale & Nouvelles Technologies sur Mesure",
     "NERVÜR — Éditeur de nouvelles technologies sur mesure pour les entreprises. Création de sites web, développement d'outils SaaS, solutions digitales personnalisées, e-réputation et conformité RGPD.",
     {
       path: "/",

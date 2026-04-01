@@ -96,13 +96,13 @@ export default function useSEO(title, description, opts) {
 
     // Cleanup: restore defaults on unmount
     return () => {
-      document.title = "NERVÜR — Éditeur de Nouvelles Technologies sur Mesure | Création de Sites & SaaS";
+      document.title = "NERVÜR — Agence Digitale & Nouvelles Technologies sur Mesure";
       setMeta("name", "description", "NERVÜR — Éditeur de nouvelles technologies sur mesure pour les entreprises. Création de sites web, développement d'outils SaaS, solutions digitales personnalisées.");
       setLink("canonical", SITE + "/");
-      setMeta("property", "og:title", "NERVÜR — Éditeur de Nouvelles Technologies sur Mesure");
+      setMeta("property", "og:title", "NERVÜR — Agence Digitale & Nouvelles Technologies sur Mesure");
       setMeta("property", "og:description", "Éditeur de nouvelles technologies sur mesure. Création de sites web, outils SaaS, solutions digitales personnalisées pour les entreprises.");
       setMeta("property", "og:url", SITE + "/");
-      setMeta("name", "twitter:title", "NERVÜR — Éditeur de Nouvelles Technologies sur Mesure");
+      setMeta("name", "twitter:title", "NERVÜR — Agence Digitale & Nouvelles Technologies sur Mesure");
       setMeta("name", "twitter:description", "Éditeur de nouvelles technologies sur mesure. Création de sites web, outils SaaS, solutions digitales personnalisées pour les entreprises.");
     };
   }, [title, description, path, image, type, imageAlt, keywords]);
