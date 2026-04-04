@@ -94,13 +94,120 @@ function Marquee({ items }) {
   );
 }
 
-/* ───── Gradient Blob Background ───── */
+/* ───── Interactive Particle Canvas ───── */
+function ParticleCanvas({ width, height }) {
+  const canvasRef = useRef(null);
+  const mouseRef = useRef({ x: width / 2, y: height / 2 });
+  const particlesRef = useRef([]);
+  const frameRef = useRef(null);
+
+  useEffect(() => {
+    const COLORS = [
+      { r: 108, g: 92, b: 231 },  // purple
+      { r: 0, g: 180, b: 216 },   // cyan
+      { r: 255, g: 107, b: 107 }, // red
+      { r: 0, g: 196, b: 140 },   // green
+      { r: 255, g: 190, b: 11 },  // amber
+    ];
+    const count = 50;
+    const particles = [];
+    for (let i = 0; i < count; i++) {
+      const c = COLORS[i % COLORS.length];
+      particles.push({
+        x: Math.random() * width, y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+        r: Math.random() * 3 + 1.5, c, alpha: Math.random() * 0.5 + 0.3,
+      });
+    }
+    particlesRef.current = particles;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      // Mouse glow
+      const glow = ctx.createRadialGradient(mx, my, 0, mx, my, 150);
+      glow.addColorStop(0, "rgba(108,92,231,0.08)");
+      glow.addColorStop(1, "transparent");
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, width, height);
+
+      for (const p of particles) {
+        // Mouse attraction
+        const dx = mx - p.x, dy = my - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 200) {
+          p.vx += dx * 0.00008;
+          p.vy += dy * 0.00008;
+        }
+
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.99; p.vy *= 0.99;
+
+        // Bounce
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c.r},${p.c.g},${p.c.b},${p.alpha})`;
+        ctx.fill();
+
+        // Glow
+        const pg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+        pg.addColorStop(0, `rgba(${p.c.r},${p.c.g},${p.c.b},0.15)`);
+        pg.addColorStop(1, "transparent");
+        ctx.fillStyle = pg;
+        ctx.fillRect(p.x - p.r * 4, p.y - p.r * 4, p.r * 8, p.r * 8);
+      }
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const d = Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+          if (d < 120) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(108,92,231,${0.08 * (1 - d / 120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      frameRef.current = requestAnimationFrame(draw);
+    }
+    draw();
+    return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
+  }, [width, height]);
+
+  return (
+    <canvas ref={canvasRef} width={width} height={height}
+      onMouseMove={e => {
+        const r = e.currentTarget.getBoundingClientRect();
+        mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top };
+      }}
+      onMouseLeave={() => { mouseRef.current = { x: width / 2, y: height / 2 }; }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", cursor: "crosshair" }}
+    />
+  );
+}
+
+/* ───── Gradient Blob Background (for CTA) ───── */
 function GradientBlobs() {
   return (
     <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-      <div style={{ position: "absolute", top: "-20%", left: "-10%", width: "50%", height: "60%", borderRadius: "50%", background: "radial-gradient(circle, rgba(108,92,231,0.15) 0%, transparent 70%)", filter: "blur(60px)", animation: "blobMove1 15s ease-in-out infinite" }} />
-      <div style={{ position: "absolute", bottom: "-20%", right: "-10%", width: "45%", height: "55%", borderRadius: "50%", background: "radial-gradient(circle, rgba(0,180,216,0.12) 0%, transparent 70%)", filter: "blur(60px)", animation: "blobMove2 18s ease-in-out infinite" }} />
-      <div style={{ position: "absolute", top: "30%", right: "20%", width: "30%", height: "40%", borderRadius: "50%", background: "radial-gradient(circle, rgba(255,107,107,0.08) 0%, transparent 70%)", filter: "blur(60px)", animation: "blobMove3 20s ease-in-out infinite" }} />
+      <div style={{ position: "absolute", top: "-20%", left: "-10%", width: "50%", height: "60%", borderRadius: "50%", background: "radial-gradient(circle, rgba(108,92,231,0.2) 0%, transparent 70%)", filter: "blur(60px)", animation: "blobMove1 15s ease-in-out infinite" }} />
+      <div style={{ position: "absolute", bottom: "-20%", right: "-10%", width: "45%", height: "55%", borderRadius: "50%", background: "radial-gradient(circle, rgba(0,180,216,0.15) 0%, transparent 70%)", filter: "blur(60px)", animation: "blobMove2 18s ease-in-out infinite" }} />
+      <div style={{ position: "absolute", top: "30%", right: "20%", width: "30%", height: "40%", borderRadius: "50%", background: "radial-gradient(circle, rgba(255,107,107,0.1) 0%, transparent 70%)", filter: "blur(60px)", animation: "blobMove3 20s ease-in-out infinite" }} />
     </div>
   );
 }
@@ -215,7 +322,7 @@ export default function NervurAurora() {
         </div>
       )}
 
-      {/* ═══ HERO — Full screen with animated gradient background ═══ */}
+      {/* ═══ HERO — Full screen with interactive particle canvas ═══ */}
       <section style={{
         minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center",
         alignItems: "center", textAlign: "center", position: "relative", overflow: "hidden",
@@ -223,22 +330,9 @@ export default function NervurAurora() {
         background: `linear-gradient(135deg, ${C.dark} 0%, #1E2235 30%, #1A2A3A 60%, ${C.dark} 100%)`,
         backgroundSize: "300% 300%", animation: "gradientShift 12s ease infinite",
       }}>
-        <GradientBlobs />
-
-        {/* Scan line effect */}
-        <div style={{ position: "absolute", left: 0, right: 0, height: "1px", background: `linear-gradient(90deg, transparent, ${C.accent}40, transparent)`, animation: "scanLine 4s linear infinite", pointerEvents: "none", zIndex: 1 }} />
-
-        {/* Floating particles */}
-        {!isMobile && [
-          { top: "15%", left: "10%", size: 6, color: C.accent, dur: "5s", delay: "0s" },
-          { top: "25%", right: "15%", size: 4, color: C.green, dur: "6s", delay: "1s" },
-          { bottom: "30%", left: "20%", size: 5, color: C.sentinel, dur: "4.5s", delay: "0.5s" },
-          { bottom: "20%", right: "25%", size: 3, color: C.vault, dur: "5.5s", delay: "2s" },
-          { top: "40%", left: "5%", size: 4, color: C.amber, dur: "7s", delay: "1.5s" },
-          { top: "60%", right: "8%", size: 5, color: C.accent, dur: "6.5s", delay: "0.8s" },
-        ].map((p, i) => (
-          <div key={i} style={{ position: "absolute", ...p, width: p.size, height: p.size, borderRadius: "50%", background: p.color, opacity: 0.6, animation: `floatSlow ${p.dur} ease-in-out ${p.delay} infinite`, pointerEvents: "none" }} />
-        ))}
+        {/* Interactive particle canvas — follows mouse */}
+        {!isMobile && <ParticleCanvas width={1920} height={1080} />}
+        {isMobile && <GradientBlobs />}
 
         <div style={{ position: "relative", zIndex: 2, maxWidth: "800px" }}>
           <div style={{ animation: loaded ? "fadeInScale 0.6s ease 0.1s both" : "none" }}>
@@ -430,13 +524,13 @@ export default function NervurAurora() {
           </GsapReveal>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "20px" }}>
             {[
-              { title: "Donnees reelles", desc: "Chaque metrique vient de vos vrais avis et vraies donnees. Zero demo, zero fake.", color: C.green, icon: "📊" },
-              { title: "Resultats mesurables", desc: "Score de reputation, taux de conformite — tout est chiffre et tracable.", color: C.accent, icon: "📈" },
-              { title: "Support reactif", desc: "Une question ? On repond sous 24h. Pas un chatbot, une vraie equipe.", color: C.amber, icon: "💬" },
+              { title: "Donnees reelles", desc: "Chaque metrique vient de vos vrais avis et vraies donnees. Zero demo, zero fake.", color: C.green, icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={C.green} strokeWidth="2"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/><path d="M21 3l-9 9"/></svg> },
+              { title: "Resultats mesurables", desc: "Score de reputation, taux de conformite — tout est chiffre et tracable.", color: C.accent, icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg> },
+              { title: "Support reactif", desc: "Une question ? On repond sous 24h. Pas un chatbot, une vraie equipe.", color: C.amber, icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={C.amber} strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> },
             ].map((v, i) => (
               <GsapReveal key={i} delay={i * 100}>
                 <TiltCard style={{ background: C.bgCard, border: `1px solid ${C.border}`, borderRadius: "16px", padding: "32px", cursor: "pointer", height: "100%" }}>
-                  <div style={{ fontSize: "32px", marginBottom: "16px" }}>{v.icon}</div>
+                  <div style={{ width: "48px", height: "48px", borderRadius: "12px", background: `${v.color}12`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>{v.icon}</div>
                   <h3 style={{ fontSize: "18px", fontWeight: 700, color: C.text, marginBottom: "10px" }}>{v.title}</h3>
                   <p style={{ fontSize: "14px", color: C.body, lineHeight: 1.7, margin: 0 }}>{v.desc}</p>
                 </TiltCard>
