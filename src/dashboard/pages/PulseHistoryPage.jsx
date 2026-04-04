@@ -60,14 +60,14 @@ function ScoreChart({ history, width = 820, height = 180 }) {
       </defs>
       {[0, 25, 50, 75, 100].map(v => (
         <g key={v}>
-          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#2a2d3a" strokeWidth="1" />
-          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#6b7280" fontSize="9">{v}</text>
+          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#E2E8F0" strokeWidth="1" />
+          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#64748B" fontSize="9">{v}</text>
         </g>
       ))}
       <path d={areaD} fill="url(#pulseGrad)" />
       <path d={pathD} fill="none" stroke={ACCENT} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       {points.map((p, i) => (
-        <circle key={i} cx={getX(i)} cy={getY(p.score)} r="3" fill={ACCENT} stroke="#1e2029" strokeWidth="1.5" />
+        <circle key={i} cx={getX(i)} cy={getY(p.score)} r="3" fill={ACCENT} stroke="#F8FAFC" strokeWidth="1.5" />
       ))}
     </svg>
   );
@@ -108,8 +108,8 @@ function ResponseTimeChart({ history, width = 820, height = 160 }) {
       </defs>
       {gridValues.map(v => (
         <g key={v}>
-          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#2a2d3a" strokeWidth="1" />
-          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#6b7280" fontSize="9">{v}ms</text>
+          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#E2E8F0" strokeWidth="1" />
+          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#64748B" fontSize="9">{v}ms</text>
         </g>
       ))}
       <path d={areaD} fill="url(#rtGradHist)" />
@@ -117,7 +117,7 @@ function ResponseTimeChart({ history, width = 820, height = 160 }) {
       {points.map((p, i) => {
         const color = p.responseTime < 500 ? "#10b981" : p.responseTime < 1500 ? "#f59e0b" : "#ef4444";
         return (
-          <circle key={i} cx={getX(i)} cy={getY(p.responseTime)} r="3" fill={color} stroke="#1e2029" strokeWidth="1.5" />
+          <circle key={i} cx={getX(i)} cy={getY(p.responseTime)} r="3" fill={color} stroke="#F8FAFC" strokeWidth="1.5" />
         );
       })}
     </svg>
@@ -264,7 +264,7 @@ function HistoryTable({ history }) {
             const diff = prev ? entry.score - prev.score : 0;
             const scoreColor = entry.score >= 80 ? "#10b981" : entry.score >= 50 ? "#f59e0b" : "#ef4444";
             const isDown = entry.uptimeStatus === false;
-            const rtColor = entry.responseTime == null ? "#6b7280" : entry.responseTime < 500 ? "#10b981" : entry.responseTime < 1500 ? "#f59e0b" : "#ef4444";
+            const rtColor = entry.responseTime == null ? "#64748B" : entry.responseTime < 500 ? "#10b981" : entry.responseTime < 1500 ? "#f59e0b" : "#ef4444";
             return (
               <tr key={i} className="border-b border-[#2a2d3a]/[0.12]" style={{ background: isDown ? "rgba(239,68,68,0.04)" : "transparent" }}>
                 <td className="px-3.5 py-2.5 text-[#d1d5db]">
@@ -292,7 +292,7 @@ function HistoryTable({ history }) {
                 <td className="px-3.5 py-2.5 text-center text-xs font-medium" style={{ color: rtColor }}>
                   {entry.responseTime != null ? `${entry.responseTime}ms` : "\u2014"}
                 </td>
-                <td className="px-3.5 py-2.5 text-right text-xs font-medium" style={{ color: diff > 0 ? "#10b981" : diff < 0 ? "#ef4444" : "#6b7280" }}>
+                <td className="px-3.5 py-2.5 text-right text-xs font-medium" style={{ color: diff > 0 ? "#10b981" : diff < 0 ? "#ef4444" : "#64748B" }}>
                   {diff > 0 ? `+${diff}` : diff < 0 ? `${diff}` : "="}
                 </td>
               </tr>
@@ -382,9 +382,9 @@ export default function PulseHistoryPage() {
                   onClick={() => setSelectedSite(site._id)}
                   className="px-4 py-2 rounded-md text-[13px] font-medium cursor-pointer font-[inherit]"
                   style={{
-                    background: selectedSite === site._id ? `${ACCENT}20` : "#1e2029",
-                    color: selectedSite === site._id ? ACCENT : "#9ca3af",
-                    border: `1px solid ${selectedSite === site._id ? BORDER_TINT : "#2a2d3a"}`,
+                    background: selectedSite === site._id ? `${ACCENT}20` : "#F8FAFC",
+                    color: selectedSite === site._id ? ACCENT : "#64748B",
+                    border: `1px solid ${selectedSite === site._id ? BORDER_TINT : "#E2E8F0"}`,
                   }}
                 >
                   {site.domain}

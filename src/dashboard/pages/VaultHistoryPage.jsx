@@ -32,7 +32,7 @@ const ClockIcon = ({ size = 18, color = ACCENT }) => (
   </svg>
 );
 
-const TrashIcon = ({ size = 15, color = "#9ca3af" }) => (
+const TrashIcon = ({ size = 15, color = "#64748B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
   </svg>
@@ -115,7 +115,7 @@ export default function VaultHistoryPage() {
       {/* Empty state */}
       {!loading && !error && scans.length === 0 && (
         <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] text-center px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
-          <ShieldIcon size={48} color="#3f3f46" />
+          <ShieldIcon size={48} color="#94A3B8" />
           <div className="text-base font-semibold text-[#9ca3af] mt-4 mb-2">
             Aucune analyse effectuée
           </div>

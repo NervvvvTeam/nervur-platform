@@ -57,7 +57,7 @@ function ScoreGauge({ score }) {
   return (
     <div className="flex flex-col items-center gap-2">
       <svg height={radius * 2} width={radius * 2} className="-rotate-90">
-        <circle stroke="#2a2d3a" fill="transparent" strokeWidth={stroke} r={normalizedRadius} cx={radius} cy={radius} />
+        <circle stroke="#E2E8F0" fill="transparent" strokeWidth={stroke} r={normalizedRadius} cx={radius} cy={radius} />
         <circle
           stroke={color} fill="transparent" strokeWidth={stroke} strokeLinecap="round"
           strokeDasharray={circumference + " " + circumference}
@@ -253,8 +253,8 @@ export default function VaultDashboardPage() {
             disabled={loading}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border-none text-sm font-semibold font-[inherit] transition-all duration-150 whitespace-nowrap shrink-0"
             style={{
-              background: loading ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
-              color: loading ? "#6b7280" : "#0f0f11",
+              background: loading ? "#E2E8F0" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
+              color: loading ? "#64748B" : "#0f0f11",
               cursor: loading ? "not-allowed" : "pointer",
               boxShadow: loading ? "none" : "0 4px 16px rgba(6,182,212,0.25)",
             }}
@@ -355,7 +355,7 @@ export default function VaultDashboardPage() {
                   <div className="text-[11px] text-[#6b7280]">{area.description}</div>
                   <div className="mt-2">
                     <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{
-                      color: isUnknown ? "#6b7280" : isPass ? "#22c55e" : "#ef4444",
+                      color: isUnknown ? "#64748B" : isPass ? "#22c55e" : "#ef4444",
                       background: isUnknown ? "rgba(107,114,128,0.15)" : isPass ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)",
                     }}>
                       {isUnknown ? "Non analysé" : isPass ? "Conforme" : "Non conforme"}
@@ -396,7 +396,7 @@ export default function VaultDashboardPage() {
                 <div className="text-sm font-semibold text-[#f0f0f3]">Scan RGPD détaillé</div>
                 <div className="text-[11px] text-[#6b7280] mt-0.5">8 critères analysés en profondeur</div>
               </div>
-              <ArrowRight size={16} color="#6b7280" />
+              <ArrowRight size={16} color="#64748B" />
             </button>
 
             <button
@@ -410,7 +410,7 @@ export default function VaultDashboardPage() {
                 <div className="text-sm font-semibold text-[#f0f0f3]">Générer vos documents</div>
                 <div className="text-[11px] text-[#6b7280] mt-0.5">Mentions légales, CGV, politique cookies...</div>
               </div>
-              <ArrowRight size={16} color="#6b7280" />
+              <ArrowRight size={16} color="#64748B" />
             </button>
           </div>
 
@@ -429,7 +429,7 @@ export default function VaultDashboardPage() {
                   onClick={() => navigate(mod.path)}
                   className="bg-[#1e2029] rounded-[10px] px-4 py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] flex items-center gap-3 cursor-pointer font-[inherit] text-left transition-all duration-150 hover:bg-[rgba(255,255,255,0.03)]"
                   style={{
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    border: "1px solid #E2E8F0",
                     borderLeft: `3px solid ${mod.color}`,
                   }}
                 >

@@ -13,7 +13,7 @@ const EyeIcon = ({ size = 20, color = ACCENT }) => (
   </svg>
 );
 
-const TrashIcon = ({ size = 15, color = "#9ca3af" }) => (
+const TrashIcon = ({ size = 15, color = "#64748B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
   </svg>
@@ -176,7 +176,7 @@ export default function VaultMonitoringPage() {
 
         {!loading && configs.length === 0 && (
           <div className="px-6 py-10 text-center bg-[rgba(6,182,212,0.06)] border border-dashed border-[rgba(6,182,212,0.2)] rounded-lg">
-            <EyeIcon size={36} color="#d1d5db" />
+            <EyeIcon size={36} color="#334155" />
             <p className="text-sm text-[#9ca3af] mt-3 mb-1">
               Aucune surveillance configuree
             </p>
@@ -191,7 +191,7 @@ export default function VaultMonitoringPage() {
             {configs.map(config => (
               <div key={config._id} className="px-[18px] py-4 rounded-lg transition-all duration-200" style={{
                 background: config.enabled ? BG_TINT : "rgba(39,39,42,0.3)",
-                border: `1px solid ${config.enabled ? BORDER_TINT : "#d1d5db"}`,
+                border: `1px solid ${config.enabled ? BORDER_TINT : "#334155"}`,
                 opacity: config.enabled ? 1 : 0.65,
               }}>
                 <div className="flex items-center justify-between flex-wrap gap-2.5">
@@ -203,7 +203,7 @@ export default function VaultMonitoringPage() {
                       </span>
                       <span className="text-[10px] font-medium px-2 py-0.5 rounded-[10px]" style={{
                         background: config.enabled ? "rgba(6,182,212,0.15)" : "rgba(113,113,122,0.15)",
-                        color: config.enabled ? ACCENT_LIGHT : "#9ca3af",
+                        color: config.enabled ? ACCENT_LIGHT : "#64748B",
                       }}>
                         {config.enabled ? "Active" : "En pause"}
                       </span>
@@ -336,7 +336,7 @@ export default function VaultMonitoringPage() {
             disabled={submitting}
             className="flex items-center justify-center gap-2 px-6 py-[11px] rounded-lg border-none text-white text-sm font-semibold font-[inherit] transition-all duration-200 self-start"
             style={{
-              background: submitting ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
+              background: submitting ? "#E2E8F0" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
               cursor: submitting ? "not-allowed" : "pointer",
             }}
           >

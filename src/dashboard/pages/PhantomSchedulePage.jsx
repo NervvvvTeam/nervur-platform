@@ -93,10 +93,10 @@ export default function PhantomSchedulePage() {
           background: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", marginBottom: "6px" }}>
           Planification des audits
         </h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
+        <p style={{ fontSize: "14px", color: "#64748B" }}>
           Programmez des audits automatiques pour vos sites.
         </p>
       </div>
@@ -115,26 +115,26 @@ export default function PhantomSchedulePage() {
 
       {/* Add schedule form */}
       <div style={{
-        padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
+        padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a",
         borderRadius: "10px", marginBottom: "24px",
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
       }}>
-        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", marginBottom: "16px" }}>
+        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#0F172A", marginBottom: "16px" }}>
           Ajouter un audit planifié
         </h2>
 
         {loading ? (
-          <div style={{ padding: "20px 0", textAlign: "center", color: "#9ca3af", fontSize: "14px" }}>
+          <div style={{ padding: "20px 0", textAlign: "center", color: "#64748B", fontSize: "14px" }}>
             Chargement...
           </div>
         ) : domains.length === 0 ? (
-          <div style={{ padding: "20px 0", textAlign: "center", color: "#9ca3af", fontSize: "13px" }}>
+          <div style={{ padding: "20px 0", textAlign: "center", color: "#64748B", fontSize: "13px" }}>
             Aucun domaine trouvé. Lancez d'abord un audit depuis l'onglet Audit.
           </div>
         ) : (
           <div style={{ display: "flex", gap: "12px", alignItems: "flex-end", flexWrap: "wrap" }}>
             <div style={{ flex: 1, minWidth: "200px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "6px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "6px" }}>
                 Domaine
               </label>
               <select
@@ -142,7 +142,7 @@ export default function PhantomSchedulePage() {
                 onChange={e => setSelectedDomain(e.target.value)}
                 style={{
                   width: "100%", padding: "10px 14px", background: "#161820",
-                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
+                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
                   fontSize: "13px", fontFamily: "inherit", outline: "none",
                 }}
               >
@@ -154,7 +154,7 @@ export default function PhantomSchedulePage() {
             </div>
 
             <div style={{ minWidth: "180px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "6px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "6px" }}>
                 Fréquence
               </label>
               <select
@@ -162,7 +162,7 @@ export default function PhantomSchedulePage() {
                 onChange={e => setFrequency(e.target.value)}
                 style={{
                   width: "100%", padding: "10px 14px", background: "#161820",
-                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
+                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
                   fontSize: "13px", fontFamily: "inherit", outline: "none",
                 }}
               >
@@ -177,7 +177,7 @@ export default function PhantomSchedulePage() {
               disabled={!selectedDomain}
               style={{
                 padding: "10px 24px",
-                background: selectedDomain ? "linear-gradient(135deg, #8b5cf6, #a78bfa)" : "#2a2d3a",
+                background: selectedDomain ? "linear-gradient(135deg, #8b5cf6, #a78bfa)" : "#E2E8F0",
                 color: "#fff", border: "none", borderRadius: "8px",
                 fontSize: "13px", fontWeight: 500, cursor: selectedDomain ? "pointer" : "not-allowed",
                 fontFamily: "inherit", opacity: selectedDomain ? 1 : 0.5,
@@ -192,7 +192,7 @@ export default function PhantomSchedulePage() {
 
       {/* Scheduled audits list */}
       <div style={{
-        background: "#1e2029", border: "1px solid #2a2d3a",
+        background: "#F8FAFC", border: "1px solid #2a2d3a",
         borderRadius: "10px", overflow: "hidden",
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
       }}>
@@ -200,7 +200,7 @@ export default function PhantomSchedulePage() {
           padding: "18px 22px", borderBottom: "1px solid #2a2d3a",
           display: "flex", alignItems: "center", justifyContent: "space-between",
         }}>
-          <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+          <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#0F172A", margin: 0 }}>
             Audits planifiés
           </h2>
           <span style={{
@@ -213,13 +213,13 @@ export default function PhantomSchedulePage() {
 
         {schedules.length === 0 ? (
           <div style={{ padding: "48px 24px", textAlign: "center" }}>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2a2d3a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "12px" }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: "12px" }}>
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
-            <div style={{ fontSize: "14px", color: "#9ca3af", marginBottom: "4px" }}>
+            <div style={{ fontSize: "14px", color: "#64748B", marginBottom: "4px" }}>
               Aucun audit planifié
             </div>
-            <div style={{ fontSize: "12px", color: "#6b7280" }}>
+            <div style={{ fontSize: "12px", color: "#64748B" }}>
               Ajoutez un domaine ci-dessus pour programmer des audits automatiques.
             </div>
           </div>
@@ -243,10 +243,10 @@ export default function PhantomSchedulePage() {
                     </svg>
                   </div>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: 500, color: "#d1d5db" }}>
+                    <div style={{ fontSize: "14px", fontWeight: 500, color: "#334155" }}>
                       {schedule.domain}
                     </div>
-                    <div style={{ fontSize: "12px", color: "#9ca3af" }}>
+                    <div style={{ fontSize: "12px", color: "#64748B" }}>
                       {FREQUENCIES.find(f => f.value === schedule.frequency)?.label || schedule.frequency}
                     </div>
                   </div>
@@ -255,7 +255,7 @@ export default function PhantomSchedulePage() {
                   <span style={{
                     fontSize: "11px", fontWeight: 500, padding: "3px 10px", borderRadius: "4px",
                     background: schedule.enabled ? "rgba(16,185,129,0.12)" : "rgba(107,114,128,0.12)",
-                    color: schedule.enabled ? "#10b981" : "#6b7280",
+                    color: schedule.enabled ? "#10b981" : "#64748B",
                   }}>
                     {schedule.enabled ? "Actif" : "Inactif"}
                   </span>
@@ -264,7 +264,7 @@ export default function PhantomSchedulePage() {
                     onClick={() => toggleSchedule(schedule._id || schedule.id)}
                     style={{
                       width: "40px", height: "22px", borderRadius: "11px", border: "none",
-                      background: schedule.enabled ? "#8b5cf6" : "#2a2d3a",
+                      background: schedule.enabled ? "#8b5cf6" : "#E2E8F0",
                       cursor: "pointer", position: "relative", transition: "background 0.2s",
                     }}
                   >
@@ -279,7 +279,7 @@ export default function PhantomSchedulePage() {
                   <button
                     onClick={() => removeSchedule(schedule._id || schedule.id)}
                     style={{
-                      background: "none", border: "none", color: "#6b7280",
+                      background: "none", border: "none", color: "#64748B",
                       cursor: "pointer", padding: "4px", fontSize: "16px",
                     }}
                   >

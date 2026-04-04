@@ -4,8 +4,8 @@ import SubNav from "../components/SubNav";
 import { useApi } from "../hooks/useApi";
 
 /* ─── Constants ──────────────────────────────────────────────── */
-const CARD_BG = "#1e2029";
-const CARD_BORDER = "#2a2d3a";
+const CARD_BG = "#F8FAFC";
+const CARD_BORDER = "#E2E8F0";
 
 const TYPE_CONFIG = {
   acces:         { label: "Droit d'accès", color: "#3b82f6", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)" },
@@ -13,7 +13,7 @@ const TYPE_CONFIG = {
   suppression:   { label: "Suppression",    color: "#ef4444", bg: "rgba(239,68,68,0.08)",  border: "rgba(239,68,68,0.25)"  },
   portabilite:   { label: "Portabilité",    color: "#8b5cf6", bg: "rgba(139,92,246,0.08)", border: "rgba(139,92,246,0.25)" },
   opposition:    { label: "Opposition",     color: "#f97316", bg: "rgba(249,115,22,0.08)", border: "rgba(249,115,22,0.25)" },
-  limitation:    { label: "Limitation",     color: "#6b7280", bg: "rgba(107,114,128,0.08)",border: "rgba(107,114,128,0.25)"},
+  limitation:    { label: "Limitation",     color: "#64748B", bg: "rgba(107,114,128,0.08)",border: "rgba(107,114,128,0.25)"},
 };
 
 const STATUS_CONFIG = {
@@ -292,7 +292,7 @@ export default function VaultDsarPage() {
                 border: "1px solid",
                 background: filter === t.key ? "rgba(6,182,212,0.12)" : "transparent",
                 color: filter === t.key ? ACCENT : "#64748b",
-                borderColor: filter === t.key ? "rgba(6,182,212,0.3)" : "rgba(255,255,255,0.06)",
+                borderColor: filter === t.key ? "rgba(6,182,212,0.3)" : "#E2E8F0",
                 transition: "all 0.15s ease",
               }}
             >
@@ -461,7 +461,7 @@ export default function VaultDsarPage() {
                     onClick={() => handleDelete(req._id)}
                     style={{
                       fontSize: 12, fontWeight: 500, color: "#64748b",
-                      background: "transparent", border: "1px solid rgba(255,255,255,0.06)",
+                      background: "transparent", border: "1px solid #E2E8F0",
                       borderRadius: 8, padding: "6px 12px", cursor: "pointer",
                       display: "flex", alignItems: "center", gap: 5,
                       transition: "all 0.15s ease",
@@ -473,7 +473,7 @@ export default function VaultDsarPage() {
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.color = "#64748b";
-                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+                      e.currentTarget.style.borderColor = "#E2E8F0";
                       e.currentTarget.style.background = "transparent";
                     }}
                   >
@@ -580,7 +580,7 @@ function NewRequestModal({ onClose, onSubmit }) {
                     cursor: "pointer", transition: "all 0.15s ease",
                     background: active ? conf.bg : "transparent",
                     color: active ? conf.color : "#64748b",
-                    border: `1px solid ${active ? conf.border : "rgba(255,255,255,0.06)"}`,
+                    border: `1px solid ${active ? conf.border : "#E2E8F0"}`,
                   }}
                 >
                   {conf.label}
@@ -619,7 +619,7 @@ function NewRequestModal({ onClose, onSubmit }) {
           disabled={!valid || submitting}
           style={{
             width: "100%", fontSize: 13, fontWeight: 700, color: "#fff",
-            background: valid ? `linear-gradient(135deg, ${ACCENT}, #0891b2)` : "#2a2d3a",
+            background: valid ? `linear-gradient(135deg, ${ACCENT}, #0891b2)` : "#E2E8F0",
             border: "none", borderRadius: 10, padding: "11px 0",
             cursor: valid ? "pointer" : "not-allowed", opacity: submitting ? 0.6 : 1,
             transition: "all 0.15s ease",

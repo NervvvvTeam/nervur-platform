@@ -100,7 +100,7 @@ export default function PulseStatusPage() {
             <button
               onClick={() => setStatusEnabled(!statusEnabled)}
               className="w-11 h-6 rounded-xl border-none cursor-pointer relative transition-colors duration-200"
-              style={{ background: statusEnabled ? ACCENT : "#2a2d3a" }}
+              style={{ background: statusEnabled ? ACCENT : "#E2E8F0" }}
             >
               <div
                 className="w-[18px] h-[18px] rounded-full bg-white absolute top-[3px] transition-[left] duration-200"
@@ -119,7 +119,7 @@ export default function PulseStatusPage() {
                 className="text-[11px] font-medium px-2.5 py-[3px] rounded"
                 style={{
                   background: statusEnabled ? "rgba(16,185,129,0.12)" : "rgba(107,114,128,0.12)",
-                  color: statusEnabled ? "#10b981" : "#6b7280",
+                  color: statusEnabled ? "#10b981" : "#64748B",
                 }}
               >
                 {statusEnabled ? "Activée" : "Désactivée"}

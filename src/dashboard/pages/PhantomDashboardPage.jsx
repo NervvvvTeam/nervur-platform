@@ -31,7 +31,7 @@ const CATEGORY_COLORS = {
 const SEVERITY_COLORS = {
   critical: "#ef4444",
   warning: "#f59e0b",
-  info: "#6366f1",
+  info: "#4F46E5",
 };
 
 function ScoreCircle({ score, label, color, size = 80 }) {
@@ -44,7 +44,7 @@ function ScoreCircle({ score, label, color, size = 80 }) {
     <div className="text-center">
       <div className="relative mx-auto" style={{ width: size, height: size }}>
         <svg width={size} height={size} className="-rotate-90">
-          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#2a2d3a" strokeWidth="5" />
+          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#E2E8F0" strokeWidth="5" />
           <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke={color || scoreColor}
             strokeWidth="5" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
             className="transition-[stroke-dashoffset] duration-1000 ease-out" />
@@ -69,7 +69,7 @@ function CWVItem({ label, data }) {
           {data.display || `${data.value}${data.unit}`}
         </div>
       </div>
-      <div className="w-2.5 h-2.5 rounded-full" style={{ background: colors[data.status] || "#9ca3af" }} />
+      <div className="w-2.5 h-2.5 rounded-full" style={{ background: colors[data.status] || "#64748B" }} />
     </div>
   );
 }
@@ -432,8 +432,8 @@ export default function PhantomDashboardPage() {
                   <button key={f} onClick={() => setFilter(f)}
                     className="px-3 py-1 rounded border-none text-xs cursor-pointer font-[inherit]"
                     style={{
-                      background: filter === f ? (f === "all" ? "#2a2d3a" : SEVERITY_COLORS[f] + "20") : "transparent",
-                      color: filter === f ? (f === "all" ? "#f0f0f3" : SEVERITY_COLORS[f]) : "#9ca3af",
+                      background: filter === f ? (f === "all" ? "#E2E8F0" : SEVERITY_COLORS[f] + "20") : "transparent",
+                      color: filter === f ? (f === "all" ? "#0F172A" : SEVERITY_COLORS[f]) : "#64748B",
                     }}>
                     {f === "all" ? "Tous" : f === "critical" ? "Critique" : f === "warning" ? "Attention" : "Info"}
                   </button>
@@ -444,16 +444,16 @@ export default function PhantomDashboardPage() {
             <div className="flex flex-col gap-2">
               {filteredIssues.map((issue, i) => (
                 <div key={i} className="px-5 py-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.2)]"
-                  style={{ borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#9ca3af"}` }}>
+                  style={{ borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#64748B"}` }}>
                   <div className="flex items-center gap-2.5 mb-1.5">
                     <span className="text-[11px] font-medium px-2 py-0.5 rounded"
                       style={{
-                        background: (SEVERITY_COLORS[issue.severity] || "#9ca3af") + "18",
-                        color: SEVERITY_COLORS[issue.severity] || "#9ca3af",
+                        background: (SEVERITY_COLORS[issue.severity] || "#64748B") + "18",
+                        color: SEVERITY_COLORS[issue.severity] || "#64748B",
                       }}>
                       {issue.severity === "critical" ? "Critique" : issue.severity === "warning" ? "Attention" : "Info"}
                     </span>
-                    <span className="text-[11px]" style={{ color: CATEGORY_COLORS[issue.category] || "#9ca3af" }}>
+                    <span className="text-[11px]" style={{ color: CATEGORY_COLORS[issue.category] || "#64748B" }}>
                       {CATEGORY_LABELS[issue.category] || issue.category}
                     </span>
                     {issue.impact && (

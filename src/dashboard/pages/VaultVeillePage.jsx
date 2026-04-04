@@ -22,7 +22,7 @@ const RefreshIcon = ({ size = 14, color = ACCENT }) => (
 );
 
 const CATEGORIES = [
-  { key: "all", label: "Toutes", color: "#6b7280" },
+  { key: "all", label: "Toutes", color: "#64748B" },
   { key: "RGPD", label: "RGPD", color: "#06b6d4" },
   { key: "Droit commercial", label: "Droit commercial", color: "#8b5cf6" },
   { key: "E-commerce", label: "E-commerce", color: "#f59e0b" },
@@ -145,8 +145,8 @@ export default function VaultVeillePage() {
             className="px-3.5 py-1.5 rounded-lg text-[13px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border"
             style={{
               background: activeCategory === cat.key ? `${cat.color}20` : "transparent",
-              borderColor: activeCategory === cat.key ? cat.color : "#2a2d3a",
-              color: activeCategory === cat.key ? cat.color : "#6b7280",
+              borderColor: activeCategory === cat.key ? cat.color : "#E2E8F0",
+              color: activeCategory === cat.key ? cat.color : "#64748B",
             }}
           >
             {cat.label}

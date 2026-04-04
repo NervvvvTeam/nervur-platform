@@ -30,7 +30,7 @@ const GlobeIcon = ({ size = 20, color = ACCENT }) => (
   </svg>
 );
 
-const ClockIcon = ({ size = 14, color = "#9ca3af" }) => (
+const ClockIcon = ({ size = 14, color = "#64748B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
   </svg>
@@ -64,7 +64,7 @@ function ScoreGauge({ score }) {
     <div className="flex flex-col items-center gap-2">
       <svg height={radius * 2} width={radius * 2} className="-rotate-90">
         <circle
-          stroke="#2a2d3a"
+          stroke="#E2E8F0"
           fill="transparent"
           strokeWidth={stroke}
           r={normalizedRadius}
@@ -400,8 +400,8 @@ export default function VaultRgpdPage() {
             disabled={loading}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border-none text-sm font-semibold font-[inherit] transition-all duration-150 whitespace-nowrap shrink-0"
             style={{
-              background: loading ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
-              color: loading ? "#6b7280" : "#0f0f11",
+              background: loading ? "#E2E8F0" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
+              color: loading ? "#64748B" : "#0f0f11",
               cursor: loading ? "not-allowed" : "pointer",
               boxShadow: loading ? "none" : "0 4px 16px rgba(6,182,212,0.25)",
             }}
@@ -460,7 +460,7 @@ export default function VaultRgpdPage() {
                 disabled={downloadingPdf}
                 className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md border-none text-white text-xs font-medium font-[inherit] transition-all duration-150"
                 style={{
-                  background: downloadingPdf ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+                  background: downloadingPdf ? "#E2E8F0" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
                   cursor: downloadingPdf ? "not-allowed" : "pointer",
                   opacity: downloadingPdf ? 0.7 : 1,
                 }}
@@ -559,7 +559,7 @@ export default function VaultRgpdPage() {
 
                         {/* Estimated time */}
                         <div className="inline-flex items-center gap-1.5 text-[11px] text-[#9ca3af]">
-                          <ClockIcon size={12} color="#9ca3af" />
+                          <ClockIcon size={12} color="#64748B" />
                           Temps estimé : {item.time}
                         </div>
                       </div>
@@ -589,7 +589,7 @@ export default function VaultRgpdPage() {
       {/* History section */}
       <div className="mt-4">
         <div className="flex items-center gap-2 mb-3.5">
-          <ClockIcon size={16} color="#9ca3af" />
+          <ClockIcon size={16} color="#64748B" />
           <h3 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
             Historique des analyses
           </h3>
@@ -616,11 +616,11 @@ export default function VaultRgpdPage() {
                 className="bg-[#1e2029] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between"
                 style={{
                   border: selectedHistoryId === h._id ? `1px solid ${ACCENT}` : "1px solid #2a2d3a",
-                  background: selectedHistoryId === h._id ? BG_TINT : "#1e2029",
+                  background: selectedHistoryId === h._id ? BG_TINT : "#F8FAFC",
                 }}
               >
                 <div className="flex items-center gap-3">
-                  <GlobeIcon size={16} color="#6b7280" />
+                  <GlobeIcon size={16} color="#64748B" />
                   <div>
                     <div className="text-[13px] font-semibold text-[#f0f0f3]">
                       {h.domain || h.url}

@@ -61,7 +61,7 @@ const TOOL_COLORS = {
   forge: "#f59e0b",
   vault: "#06b6d4",
   atlas: "#f59e0b",
-  general: "#6366f1",
+  general: "#4F46E5",
 };
 
 // Map paths to their tool color
@@ -94,7 +94,7 @@ const PATH_COLORS = {
   "/app/atlas/history": TOOL_COLORS.atlas,
   "/app/atlas/suggestions": TOOL_COLORS.atlas,
   "/app/atlas/reports": TOOL_COLORS.atlas,
-  "/app/settings": "#71717A",
+  "/app/settings": "#64748B",
 };
 
 export default function Layout() {
@@ -158,7 +158,7 @@ export default function Layout() {
           if (!isItemActive) {
             e.currentTarget.style.borderLeft = `3px solid ${toolColor}60`;
             e.currentTarget.style.background = `${toolColor}08`;
-            e.currentTarget.style.color = "#FAFAFA";
+            e.currentTarget.style.color = "#0F172A";
             const dot = e.currentTarget.querySelector("[data-dot]");
             if (dot) dot.style.background = toolColor;
             const icon = e.currentTarget.querySelector("[data-icon] svg");
@@ -171,15 +171,15 @@ export default function Layout() {
             e.currentTarget.style.background = "transparent";
             e.currentTarget.style.color = "#A1A1AA";
             const dot = e.currentTarget.querySelector("[data-dot]");
-            if (dot) dot.style.background = "#3f3f46";
+            if (dot) dot.style.background = "#94A3B8";
             const icon = e.currentTarget.querySelector("[data-icon] svg");
-            if (icon) icon.style.stroke = "#71717A";
+            if (icon) icon.style.stroke = "#64748B";
           }
         }}>
         {!tablet && <span data-dot className="w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-200"
-          style={{ background: isItemActive ? toolColor : "#3f3f46" }} />}
+          style={{ background: isItemActive ? toolColor : "#94A3B8" }} />}
         <span data-icon className="flex items-center transition-all duration-200">
-          {iconFn ? iconFn(isItemActive ? toolColor : "#71717A") : null}
+          {iconFn ? iconFn(isItemActive ? toolColor : "#64748B") : null}
         </span>
         {!tablet && <span>{item.label}</span>}
       </NavLink>

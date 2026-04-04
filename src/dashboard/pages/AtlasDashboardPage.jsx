@@ -25,7 +25,7 @@ function PositionBadge({ position }) {
 }
 
 function ChangeBadge({ change }) {
-  if (!change || change === 0) return <span style={{ color: "#6b7280", fontSize: "12px" }}>--</span>;
+  if (!change || change === 0) return <span style={{ color: "#64748B", fontSize: "12px" }}>--</span>;
   const up = change > 0;
   return (
     <span style={{
@@ -38,7 +38,7 @@ function ChangeBadge({ change }) {
 }
 
 function CompetitionBadge({ level }) {
-  if (!level) return <span style={{ color: "#6b7280", fontSize: "12px" }}>--</span>;
+  if (!level) return <span style={{ color: "#64748B", fontSize: "12px" }}>--</span>;
   const colors = {
     low: { bg: "rgba(34,197,94,0.12)", color: "#22c55e", label: "Faible" },
     medium: { bg: "rgba(245,158,11,0.12)", color: "#f59e0b", label: "Moyen" },
@@ -64,26 +64,26 @@ function SuggestionsModal({ suggestions, loading, onClose, onAdd }) {
       justifyContent: "center", zIndex: 1000, padding: "20px",
     }}>
       <div style={{
-        background: "#1e2029", borderRadius: "16px", padding: "28px",
+        background: "#F8FAFC", borderRadius: "16px", padding: "28px",
         border: "1px solid #2a2d3a", maxWidth: "560px", width: "100%",
         maxHeight: "80vh", overflow: "auto",
       }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: 0 }}>
+          <h3 style={{ color: "#0F172A", fontSize: "16px", fontWeight: 600, margin: 0 }}>
             Suggestions IA
           </h3>
           <button onClick={onClose} style={{
-            background: "transparent", border: "none", color: "#6b7280",
+            background: "transparent", border: "none", color: "#64748B",
             fontSize: "20px", cursor: "pointer", padding: "4px",
           }}>&times;</button>
         </div>
         {loading ? (
-          <div style={{ textAlign: "center", padding: "40px 0", color: "#9ca3af", fontSize: "13px" }}>
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#64748B", fontSize: "13px" }}>
             <div style={{ marginBottom: "12px", fontSize: "20px" }}>&#x1f9e0;</div>
             Analyse IA en cours...
           </div>
         ) : suggestions.length === 0 ? (
-          <div style={{ textAlign: "center", padding: "40px 0", color: "#6b7280", fontSize: "13px" }}>
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#64748B", fontSize: "13px" }}>
             Aucune suggestion disponible.
           </div>
         ) : (
@@ -95,8 +95,8 @@ function SuggestionsModal({ suggestions, loading, onClose, onAdd }) {
                 border: "1px solid #2a2d3a", gap: "12px",
               }}>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ color: "#f0f0f3", fontSize: "13px", fontWeight: 500 }}>{s.keyword}</div>
-                  <div style={{ color: "#6b7280", fontSize: "11px", marginTop: "2px" }}>{s.reason}</div>
+                  <div style={{ color: "#0F172A", fontSize: "13px", fontWeight: 500 }}>{s.keyword}</div>
+                  <div style={{ color: "#64748B", fontSize: "11px", marginTop: "2px" }}>{s.reason}</div>
                 </div>
                 <button onClick={() => onAdd(s.keyword)} style={{
                   padding: "6px 12px", borderRadius: "6px", border: "none",
@@ -123,26 +123,26 @@ function ReportModal({ report, loading, onClose }) {
       justifyContent: "center", zIndex: 1000, padding: "20px",
     }}>
       <div style={{
-        background: "#1e2029", borderRadius: "16px", padding: "28px",
+        background: "#F8FAFC", borderRadius: "16px", padding: "28px",
         border: "1px solid #2a2d3a", maxWidth: "640px", width: "100%",
         maxHeight: "85vh", overflow: "auto",
       }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: 0 }}>
+          <h3 style={{ color: "#0F172A", fontSize: "16px", fontWeight: 600, margin: 0 }}>
             Rapport SEO
           </h3>
           <button onClick={onClose} style={{
-            background: "transparent", border: "none", color: "#6b7280",
+            background: "transparent", border: "none", color: "#64748B",
             fontSize: "20px", cursor: "pointer", padding: "4px",
           }}>&times;</button>
         </div>
         {loading ? (
-          <div style={{ textAlign: "center", padding: "40px 0", color: "#9ca3af", fontSize: "13px" }}>
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#64748B", fontSize: "13px" }}>
             <div style={{ marginBottom: "12px", fontSize: "20px" }}>&#x1f4ca;</div>
             Generation du rapport IA...
           </div>
         ) : !report ? (
-          <div style={{ textAlign: "center", padding: "40px 0", color: "#6b7280", fontSize: "13px" }}>
+          <div style={{ textAlign: "center", padding: "40px 0", color: "#64748B", fontSize: "13px" }}>
             Erreur lors de la generation du rapport.
           </div>
         ) : (
@@ -160,12 +160,12 @@ function ReportModal({ report, loading, onClose }) {
                   color: report.score >= 70 ? "#22c55e" : report.score >= 40 ? "#f59e0b" : "#ef4444",
                 }}>{report.score}</span>
               </div>
-              <div style={{ color: "#9ca3af", fontSize: "11px", marginTop: "8px" }}>Score SEO global</div>
+              <div style={{ color: "#64748B", fontSize: "11px", marginTop: "8px" }}>Score SEO global</div>
             </div>
 
             {/* Summary */}
             <div style={{ background: "#16171f", borderRadius: "10px", padding: "16px", border: "1px solid #2a2d3a" }}>
-              <div style={{ color: "#d1d5db", fontSize: "13px", lineHeight: "1.6" }}>{report.summary}</div>
+              <div style={{ color: "#334155", fontSize: "13px", lineHeight: "1.6" }}>{report.summary}</div>
             </div>
 
             {/* Stats row */}
@@ -181,8 +181,8 @@ function ReportModal({ report, loading, onClose }) {
                     background: "#16171f", borderRadius: "8px", padding: "12px",
                     border: "1px solid #2a2d3a", textAlign: "center",
                   }}>
-                    <div style={{ fontSize: "16px", fontWeight: 700, color: "#f0f0f3" }}>{s.value}</div>
-                    <div style={{ fontSize: "10px", color: "#6b7280", marginTop: "4px" }}>{s.label}</div>
+                    <div style={{ fontSize: "16px", fontWeight: 700, color: "#0F172A" }}>{s.value}</div>
+                    <div style={{ fontSize: "10px", color: "#64748B", marginTop: "4px" }}>{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -201,12 +201,12 @@ function ReportModal({ report, loading, onClose }) {
             {report.forecast && (
               <div style={{ background: "rgba(245,158,11,0.08)", borderRadius: "10px", padding: "16px", border: "1px solid rgba(245,158,11,0.15)" }}>
                 <div style={{ fontSize: "12px", fontWeight: 600, color: "#f59e0b", marginBottom: "6px" }}>Prevision a 3 mois</div>
-                <div style={{ color: "#d1d5db", fontSize: "13px", lineHeight: "1.5" }}>{report.forecast}</div>
+                <div style={{ color: "#334155", fontSize: "13px", lineHeight: "1.5" }}>{report.forecast}</div>
               </div>
             )}
 
             {report.generatedAt && (
-              <div style={{ textAlign: "right", fontSize: "10px", color: "#4b5563" }}>
+              <div style={{ textAlign: "right", fontSize: "10px", color: "#94A3B8" }}>
                 Genere le {new Date(report.generatedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
               </div>
             )}
@@ -221,7 +221,7 @@ function ReportSection({ title, items, color, icon }) {
   if (!items || items.length === 0) return null;
   return (
     <div>
-      <div style={{ fontSize: "12px", fontWeight: 600, color: "#f0f0f3", marginBottom: "8px" }}>{title}</div>
+      <div style={{ fontSize: "12px", fontWeight: 600, color: "#0F172A", marginBottom: "8px" }}>{title}</div>
       <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
         {items.map((item, i) => (
           <div key={i} style={{
@@ -230,7 +230,7 @@ function ReportSection({ title, items, color, icon }) {
             border: "1px solid #2a2d3a",
           }}>
             <span style={{ color, fontSize: "12px", fontWeight: 700, marginTop: "1px", flexShrink: 0 }}>{icon}</span>
-            <span style={{ color: "#d1d5db", fontSize: "12px", lineHeight: "1.4" }}>{item}</span>
+            <span style={{ color: "#334155", fontSize: "12px", lineHeight: "1.4" }}>{item}</span>
           </div>
         ))}
       </div>
@@ -390,8 +390,8 @@ export default function AtlasDashboardPage() {
   }, 0);
 
   const inputStyle = {
-    width: "100%", padding: "10px 14px", background: "#1e2029",
-    border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
+    width: "100%", padding: "10px 14px", background: "#F8FAFC",
+    border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
     fontSize: "13px", fontFamily: "inherit", outline: "none",
   };
 
@@ -411,10 +411,10 @@ export default function AtlasDashboardPage() {
         }} />
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
           <div>
-            <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#f0f0f3", margin: 0, marginBottom: "6px" }}>
+            <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#0F172A", margin: 0, marginBottom: "6px" }}>
               Atlas — Suivi SEO
             </h1>
-            <p style={{ color: "#9ca3af", fontSize: "13px", margin: 0 }}>
+            <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>
               Suivez vos positions Google et surveillez vos mots-cles
             </p>
           </div>
@@ -434,14 +434,14 @@ export default function AtlasDashboardPage() {
           { label: "Mots-cles suivis", value: totalKeywords, suffix: "" },
           { label: "Position moyenne", value: avgPosition || "--", suffix: "" },
           { label: "Trafic mensuel est.", value: totalEstimatedTraffic > 0 ? totalEstimatedTraffic.toLocaleString("fr-FR") : "--", suffix: "", color: "#f59e0b" },
-          { label: "Mots-cles Top 10", value: keywordsInTop10, suffix: "", color: keywordsInTop10 > 0 ? "#22c55e" : "#9ca3af" },
+          { label: "Mots-cles Top 10", value: keywordsInTop10, suffix: "", color: keywordsInTop10 > 0 ? "#22c55e" : "#64748B" },
         ].map((stat, i) => (
           <div key={i} style={{
-            background: "#1e2029", borderRadius: "12px", padding: "20px",
+            background: "#F8FAFC", borderRadius: "12px", padding: "20px",
             border: "1px solid #2a2d3a",
           }}>
-            <div style={{ fontSize: "11px", color: "#9ca3af", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>{stat.label}</div>
-            <div style={{ fontSize: "24px", fontWeight: 700, color: stat.color || "#f0f0f3" }}>{stat.value}{stat.suffix}</div>
+            <div style={{ fontSize: "11px", color: "#64748B", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>{stat.label}</div>
+            <div style={{ fontSize: "24px", fontWeight: 700, color: stat.color || "#0F172A" }}>{stat.value}{stat.suffix}</div>
           </div>
         ))}
       </div>
@@ -449,24 +449,24 @@ export default function AtlasDashboardPage() {
       {/* New Project Form */}
       {showForm && (
         <form onSubmit={handleCreate} style={{
-          background: "#1e2029", borderRadius: "14px", padding: "24px",
+          background: "#F8FAFC", borderRadius: "14px", padding: "24px",
           border: "1px solid #2a2d3a", marginBottom: "28px",
         }}>
-          <h3 style={{ color: "#f0f0f3", fontSize: "15px", fontWeight: 600, margin: "0 0 16px" }}>Nouveau projet SEO</h3>
+          <h3 style={{ color: "#0F172A", fontSize: "15px", fontWeight: 600, margin: "0 0 16px" }}>Nouveau projet SEO</h3>
           {error && (
             <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.2)", borderRadius: "8px", padding: "10px 14px", marginBottom: "16px", color: "#ef4444", fontSize: "13px" }}>
               {error}
             </div>
           )}
           <div style={{ marginBottom: "14px" }}>
-            <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "6px" }}>Domaine</label>
+            <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "6px" }}>Domaine</label>
             <input
               type="text" value={formDomain} onChange={e => setFormDomain(e.target.value)}
               placeholder="exemple.fr" style={inputStyle}
             />
           </div>
           <div style={{ marginBottom: "16px" }}>
-            <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "6px" }}>Mots-cles (un par ligne)</label>
+            <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "6px" }}>Mots-cles (un par ligne)</label>
             <textarea
               value={formKeywords} onChange={e => setFormKeywords(e.target.value)}
               placeholder={"agence web paris\nreferencement naturel\ncreation site internet"}
@@ -476,8 +476,8 @@ export default function AtlasDashboardPage() {
           </div>
           <button type="submit" disabled={creating} style={{
             padding: "10px 24px", borderRadius: "8px", border: "none",
-            background: creating ? "#4b5563" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
-            color: creating ? "#9ca3af" : "#000", fontSize: "13px", fontWeight: 600,
+            background: creating ? "#94A3B8" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
+            color: creating ? "#64748B" : "#000", fontSize: "13px", fontWeight: 600,
             cursor: creating ? "default" : "pointer", fontFamily: "inherit",
           }}>
             {creating ? "Creation..." : "Creer le projet"}
@@ -487,10 +487,10 @@ export default function AtlasDashboardPage() {
 
       {/* Projects List */}
       {loading ? (
-        <div style={{ textAlign: "center", padding: "60px 0", color: "#6b7280" }}>Chargement...</div>
+        <div style={{ textAlign: "center", padding: "60px 0", color: "#64748B" }}>Chargement...</div>
       ) : projects.length === 0 ? (
         <div style={{
-          background: "#1e2029", borderRadius: "14px", padding: "60px 32px",
+          background: "#F8FAFC", borderRadius: "14px", padding: "60px 32px",
           border: "1px solid #2a2d3a", textAlign: "center",
         }}>
           <div style={{ fontSize: "36px", marginBottom: "12px" }}>
@@ -498,8 +498,8 @@ export default function AtlasDashboardPage() {
               <circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 7 8 11.7z"/>
             </svg>
           </div>
-          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet SEO</h3>
-          <p style={{ color: "#6b7280", fontSize: "13px", margin: 0 }}>Creez votre premier projet pour commencer le suivi de vos positions Google.</p>
+          <h3 style={{ color: "#0F172A", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet SEO</h3>
+          <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>Creez votre premier projet pour commencer le suivi de vos positions Google.</p>
         </div>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -508,7 +508,7 @@ export default function AtlasDashboardPage() {
             const projectTraffic = (project.rankings || []).reduce((s, r) => s + (r.estimatedTraffic || 0), 0);
             return (
               <div key={project._id} style={{
-                background: "#1e2029", borderRadius: "14px",
+                background: "#F8FAFC", borderRadius: "14px",
                 border: isExpanded ? "1px solid rgba(245,158,11,0.3)" : "1px solid #2a2d3a",
                 overflow: "hidden", transition: "border-color 0.2s",
               }}>
@@ -532,8 +532,8 @@ export default function AtlasDashboardPage() {
                       </svg>
                     </div>
                     <div>
-                      <div style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600 }}>{project.domain}</div>
-                      <div style={{ color: "#6b7280", fontSize: "12px", marginTop: "2px" }}>
+                      <div style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600 }}>{project.domain}</div>
+                      <div style={{ color: "#64748B", fontSize: "12px", marginTop: "2px" }}>
                         {project.keywords?.length || 0} mots-cles
                         {project.lastCheckAt && ` \u2022 Dernier check: ${new Date(project.lastCheckAt).toLocaleDateString("fr-FR")}`}
                       </div>
@@ -542,20 +542,20 @@ export default function AtlasDashboardPage() {
                   <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                     {project.averagePosition && (
                       <div style={{ textAlign: "center" }}>
-                        <div style={{ fontSize: "11px", color: "#6b7280" }}>Pos. moy.</div>
+                        <div style={{ fontSize: "11px", color: "#64748B" }}>Pos. moy.</div>
                         <PositionBadge position={project.averagePosition} />
                       </div>
                     )}
                     {projectTraffic > 0 && (
                       <div style={{ textAlign: "center" }}>
-                        <div style={{ fontSize: "11px", color: "#6b7280" }}>Trafic est.</div>
+                        <div style={{ fontSize: "11px", color: "#64748B" }}>Trafic est.</div>
                         <span style={{ fontSize: "13px", fontWeight: 600, color: "#f59e0b" }}>{projectTraffic.toLocaleString("fr-FR")}</span>
                       </div>
                     )}
                     {project.totalChange !== 0 && (
                       <ChangeBadge change={project.totalChange} />
                     )}
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2"
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="2"
                       style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>
                       <polyline points="6 9 12 15 18 9"/>
                     </svg>
@@ -572,8 +572,8 @@ export default function AtlasDashboardPage() {
                         disabled={checking === project._id}
                         style={{
                           padding: "8px 16px", borderRadius: "8px", border: "none",
-                          background: checking === project._id ? "#4b5563" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
-                          color: checking === project._id ? "#9ca3af" : "#000",
+                          background: checking === project._id ? "#94A3B8" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
+                          color: checking === project._id ? "#64748B" : "#000",
                           fontSize: "12px", fontWeight: 600, cursor: checking === project._id ? "default" : "pointer",
                           fontFamily: "inherit",
                         }}
@@ -626,7 +626,7 @@ export default function AtlasDashboardPage() {
                               {["Mot-cle", "Position", "Variation", "Volume", "Competition", "Trafic est.", "URL"].map(h => (
                                 <th key={h} style={{
                                   textAlign: "left", padding: "10px 12px",
-                                  fontSize: "11px", color: "#6b7280", fontWeight: 500,
+                                  fontSize: "11px", color: "#64748B", fontWeight: 500,
                                   textTransform: "uppercase", letterSpacing: "0.5px",
                                   borderBottom: "1px solid #2a2d3a",
                                 }}>{h}</th>
@@ -636,7 +636,7 @@ export default function AtlasDashboardPage() {
                           <tbody>
                             {project.rankings.map((r, i) => (
                               <tr key={i} style={{ borderBottom: "1px solid #2a2d3a20" }}>
-                                <td style={{ padding: "10px 12px", color: "#f0f0f3", fontSize: "13px", fontWeight: 500 }}>
+                                <td style={{ padding: "10px 12px", color: "#0F172A", fontSize: "13px", fontWeight: 500 }}>
                                   {r.keyword}
                                 </td>
                                 <td style={{ padding: "10px 12px" }}>
@@ -645,7 +645,7 @@ export default function AtlasDashboardPage() {
                                 <td style={{ padding: "10px 12px" }}>
                                   <ChangeBadge change={r.change} />
                                 </td>
-                                <td style={{ padding: "10px 12px", color: "#d1d5db", fontSize: "12px" }}>
+                                <td style={{ padding: "10px 12px", color: "#334155", fontSize: "12px" }}>
                                   {r.searchVolume ? r.searchVolume.toLocaleString("fr-FR") : "--"}
                                 </td>
                                 <td style={{ padding: "10px 12px" }}>
@@ -654,7 +654,7 @@ export default function AtlasDashboardPage() {
                                 <td style={{ padding: "10px 12px", color: "#f59e0b", fontSize: "12px", fontWeight: 500 }}>
                                   {r.estimatedTraffic ? r.estimatedTraffic.toLocaleString("fr-FR") : "--"}
                                 </td>
-                                <td style={{ padding: "10px 12px", color: "#6b7280", fontSize: "12px", maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                <td style={{ padding: "10px 12px", color: "#64748B", fontSize: "12px", maxWidth: "200px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                   {r.url}
                                 </td>
                               </tr>
@@ -663,7 +663,7 @@ export default function AtlasDashboardPage() {
                         </table>
                       </div>
                     ) : (
-                      <div style={{ textAlign: "center", padding: "24px 0", color: "#6b7280", fontSize: "13px" }}>
+                      <div style={{ textAlign: "center", padding: "24px 0", color: "#64748B", fontSize: "13px" }}>
                         Aucun resultat. Cliquez sur "Verifier les positions" pour lancer un check.
                       </div>
                     )}

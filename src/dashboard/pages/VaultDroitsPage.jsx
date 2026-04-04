@@ -11,7 +11,7 @@ const DROIT_TYPES = {
 };
 
 const STATUS_CONFIG = {
-  recue: { label: "Re\u00e7ue", color: "#6b7280" },
+  recue: { label: "Re\u00e7ue", color: "#64748B" },
   en_cours: { label: "En cours", color: "#06b6d4" },
   traitee: { label: "Trait\u00e9e", color: "#22c55e" },
   refusee: { label: "Refus\u00e9e", color: "#ef4444" },
@@ -25,8 +25,8 @@ const DEMO_DSARS = [
   { id: "d5", date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), demandeur: "A. Moreau", type: "opposition", status: "recue", receivedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString() },
 ];
 
-const CARD_BG = "#1e2029";
-const CARD_BORDER = "rgba(255,255,255,0.06)";
+const CARD_BG = "#F8FAFC";
+const CARD_BORDER = "#E2E8F0";
 const DEADLINE_DAYS = 30;
 
 const FILTER_TABS = [
@@ -180,7 +180,7 @@ export default function VaultDroitsPage() {
                 fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 8, cursor: "pointer", border: "1px solid",
                 background: isActive ? "rgba(6,182,212,0.12)" : "transparent",
                 color: isActive ? ACCENT : "#64748b",
-                borderColor: isActive ? "rgba(6,182,212,0.3)" : "rgba(255,255,255,0.06)",
+                borderColor: isActive ? "rgba(6,182,212,0.3)" : "#E2E8F0",
                 transition: "all 0.15s ease",
               }}
             >
@@ -311,7 +311,7 @@ export default function VaultDroitsPage() {
                   <button style={{
                     fontSize: 12, fontWeight: 500, color: "#94a3b8",
                     background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.08)",
+                    border: "1px solid #E2E8F0",
                     borderRadius: 8, padding: "7px 14px", cursor: "pointer",
                   }}>
                     D&eacute;tails

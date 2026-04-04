@@ -6,9 +6,9 @@ import { VAULT_NAV } from "./vaultNav";
 const DEMO_TIMELINE = [];
 
 const ACCENT = "#06b6d4";
-const BG = "#0f1117";
-const CARD_BG = "#1e2029";
-const CARD_BORDER = "rgba(255,255,255,0.06)";
+const BG = "#FFFFFF";
+const CARD_BG = "#F8FAFC";
+const CARD_BORDER = "#E2E8F0";
 
 const ICON_MAP = {
   scan: { d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z", color: ACCENT },
@@ -162,7 +162,7 @@ export default function VaultTimelinePage() {
               {/* Month marker */}
               <div style={{ display: "flex", alignItems: "center", gap: 10, margin: gi === 0 ? "0 0 16px" : "28px 0 16px" }}>
                 <span style={{ fontSize: 13, fontWeight: 700, color: "#e2e8f0", letterSpacing: "-0.01em" }}>{group.month}</span>
-                <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.06)" }} />
+                <div style={{ flex: 1, height: 1, background: "#E2E8F0" }} />
               </div>
 
               {/* Timeline entries */}

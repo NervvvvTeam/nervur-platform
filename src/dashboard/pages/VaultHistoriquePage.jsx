@@ -10,7 +10,7 @@ const ClockIcon = ({ size = 28, color = ACCENT }) => (
   </svg>
 );
 
-const GlobeIcon = ({ size = 16, color = "#6b7280" }) => (
+const GlobeIcon = ({ size = 16, color = "#64748B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
   </svg>
@@ -186,7 +186,7 @@ export default function VaultHistoriquePage() {
             style={{
               background: activeTab === t.key ? "rgba(6,182,212,0.12)" : "transparent",
               color: activeTab === t.key ? ACCENT : "#64748b",
-              borderColor: activeTab === t.key ? "rgba(6,182,212,0.3)" : "rgba(255,255,255,0.06)",
+              borderColor: activeTab === t.key ? "rgba(6,182,212,0.3)" : "#E2E8F0",
             }}
           >
             {t.label}
@@ -204,7 +204,7 @@ export default function VaultHistoriquePage() {
       {/* Empty state */}
       {!loading && history.length === 0 && (
         <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
-          <ClockIcon size={40} color="#6b7280" />
+          <ClockIcon size={40} color="#64748B" />
           <div className="text-base font-semibold text-[#6b7280] mt-3 mb-1.5">
             Aucune analyse effectuée
           </div>
@@ -262,7 +262,7 @@ export default function VaultHistoriquePage() {
                     className="bg-[#1e2029] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between border border-[#2a2d3a] hover:border-[rgba(6,182,212,0.3)] hover:bg-[rgba(6,182,212,0.04)]"
                   >
                     <div className="flex items-center gap-3">
-                      <GlobeIcon size={16} color="#6b7280" />
+                      <GlobeIcon size={16} color="#64748B" />
                       <div>
                         <div className="text-[13px] font-semibold text-[#f0f0f3]">
                           {scan.url || scan.domain}
@@ -315,7 +315,7 @@ export default function VaultHistoriquePage() {
         {/* Empty state */}
         {!docsLoading && documents.length === 0 && (
           <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
-            <FileIcon size={40} color="#6b7280" />
+            <FileIcon size={40} color="#64748B" />
             <div className="text-base font-semibold text-[#6b7280] mt-3 mb-1.5">
               Aucun document g&eacute;n&eacute;r&eacute;
             </div>
@@ -364,11 +364,11 @@ export default function VaultHistoriquePage() {
                     className="flex items-center gap-1.5 px-3 py-[6px] rounded-lg text-[12px] font-semibold border cursor-pointer transition-all duration-150 font-[inherit]"
                     style={{
                       background: "transparent",
-                      color: "#9ca3af",
-                      borderColor: "rgba(255,255,255,0.08)",
+                      color: "#64748B",
+                      borderColor: "#E2E8F0",
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.3)"; e.currentTarget.style.color = "#f0f0f3"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.color = "#9ca3af"; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.3)"; e.currentTarget.style.color = "#0F172A"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E2E8F0"; e.currentTarget.style.color = "#64748B"; }}
                   >
                     Voir
                   </button>

@@ -12,7 +12,7 @@ const ATLAS_NAV = [
 ];
 
 const cardStyle = {
-  background: "#1e2029",
+  background: "#F8FAFC",
   borderRadius: "14px",
   padding: "24px",
   border: "1px solid #2a2d3a",
@@ -24,7 +24,7 @@ function ScoreMeter({ score, label }) {
     <div style={{ textAlign: "center" }}>
       <div style={{ position: "relative", width: "80px", height: "80px", margin: "0 auto 8px" }}>
         <svg width="80" height="80" viewBox="0 0 80 80">
-          <circle cx="40" cy="40" r="34" fill="none" stroke="#2a2d3a" strokeWidth="6" />
+          <circle cx="40" cy="40" r="34" fill="none" stroke="#E2E8F0" strokeWidth="6" />
           <circle cx="40" cy="40" r="34" fill="none" stroke={color} strokeWidth="6"
             strokeDasharray={`${(score / 100) * 213.6} 213.6`}
             strokeLinecap="round"
@@ -38,7 +38,7 @@ function ScoreMeter({ score, label }) {
           {score}
         </div>
       </div>
-      <div style={{ fontSize: "12px", color: "#9ca3af" }}>{label}</div>
+      <div style={{ fontSize: "12px", color: "#64748B" }}>{label}</div>
     </div>
   );
 }
@@ -98,20 +98,20 @@ export default function AtlasReportsPage() {
           position: "absolute", top: 0, left: 0, right: 0, height: "3px",
           background: "linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b)",
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#f0f0f3", margin: 0, marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#0F172A", margin: 0, marginBottom: "6px" }}>
           Rapports SEO
         </h1>
-        <p style={{ color: "#9ca3af", fontSize: "13px", margin: 0 }}>
+        <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>
           Générez des rapports d'analyse SEO détaillés pour vos projets.
         </p>
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: "60px 0", color: "#6b7280" }}>Chargement...</div>
+        <div style={{ textAlign: "center", padding: "60px 0", color: "#64748B" }}>Chargement...</div>
       ) : projects.length === 0 ? (
         <div style={{ ...cardStyle, textAlign: "center", padding: "60px 32px" }}>
-          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet</h3>
-          <p style={{ color: "#6b7280", fontSize: "13px", margin: 0 }}>
+          <h3 style={{ color: "#0F172A", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet</h3>
+          <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>
             Créez un projet dans l'onglet Projets pour générer un rapport.
           </p>
         </div>
@@ -123,7 +123,7 @@ export default function AtlasReportsPage() {
             display: "flex", gap: "16px", alignItems: "flex-end", flexWrap: "wrap",
           }}>
             <div style={{ flex: 1, minWidth: "220px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "8px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "8px" }}>
                 Projet
               </label>
               <select
@@ -131,7 +131,7 @@ export default function AtlasReportsPage() {
                 onChange={e => setSelectedProject(e.target.value)}
                 style={{
                   width: "100%", padding: "10px 14px", background: "#161820",
-                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
+                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
                   fontSize: "13px", fontFamily: "inherit", outline: "none",
                 }}
               >
@@ -146,8 +146,8 @@ export default function AtlasReportsPage() {
                 disabled={loadingReport || !selectedProject}
                 style={{
                   padding: "10px 24px",
-                  background: loadingReport ? "#2a2d3a" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
-                  color: loadingReport ? "#9ca3af" : "#1e2029",
+                  background: loadingReport ? "#E2E8F0" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
+                  color: loadingReport ? "#64748B" : "#F8FAFC",
                   border: "none", borderRadius: "8px",
                   fontSize: "13px", fontWeight: 600,
                   cursor: loadingReport ? "wait" : "pointer",
@@ -185,12 +185,12 @@ export default function AtlasReportsPage() {
                   display: "flex", alignItems: "center", justifyContent: "space-between",
                   marginBottom: "20px",
                 }}>
-                  <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+                  <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#0F172A", margin: 0 }}>
                     Rapport SEO — {currentProject?.domain}
                   </h2>
                   <button
                     style={{
-                      padding: "8px 16px", background: "#2a2d3a", color: "#9ca3af",
+                      padding: "8px 16px", background: "#E2E8F0", color: "#64748B",
                       border: "1px solid #3a3d4a", borderRadius: "6px",
                       fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
                       display: "flex", alignItems: "center", gap: "6px",
@@ -232,7 +232,7 @@ export default function AtlasReportsPage() {
                       <div key={i} style={{
                         padding: "12px 16px", background: "rgba(16,185,129,0.06)",
                         border: "1px solid rgba(16,185,129,0.12)", borderRadius: "8px",
-                        fontSize: "13px", color: "#d1d5db",
+                        fontSize: "13px", color: "#334155",
                       }}>
                         {typeof s === "string" ? s : s.text || s.description}
                       </div>
@@ -258,7 +258,7 @@ export default function AtlasReportsPage() {
                       <div key={i} style={{
                         padding: "12px 16px", background: "rgba(239,68,68,0.06)",
                         border: "1px solid rgba(239,68,68,0.12)", borderRadius: "8px",
-                        fontSize: "13px", color: "#d1d5db",
+                        fontSize: "13px", color: "#334155",
                       }}>
                         {typeof w === "string" ? w : w.text || w.description}
                       </div>
@@ -295,7 +295,7 @@ export default function AtlasReportsPage() {
                         }}>
                           {i + 1}
                         </span>
-                        <span style={{ fontSize: "13px", color: "#d1d5db", lineHeight: 1.5 }}>
+                        <span style={{ fontSize: "13px", color: "#334155", lineHeight: 1.5 }}>
                           {typeof a === "string" ? a : a.text || a.description}
                         </span>
                       </div>
@@ -319,7 +319,7 @@ export default function AtlasReportsPage() {
                   <div style={{
                     padding: "16px", background: "rgba(59,130,246,0.06)",
                     border: "1px solid rgba(59,130,246,0.12)", borderRadius: "8px",
-                    fontSize: "13px", color: "#d1d5db", lineHeight: 1.6,
+                    fontSize: "13px", color: "#334155", lineHeight: 1.6,
                   }}>
                     {typeof report.forecast === "string" ? report.forecast : report.forecast.text || report.forecast.description}
                   </div>
@@ -331,11 +331,11 @@ export default function AtlasReportsPage() {
           {/* Empty state */}
           {!loadingReport && !report && !error && (
             <div style={{ ...cardStyle, textAlign: "center", padding: "48px 32px" }}>
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2a2d3a" strokeWidth="1.5" style={{ marginBottom: "12px" }}>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" strokeWidth="1.5" style={{ marginBottom: "12px" }}>
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                 <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
               </svg>
-              <div style={{ fontSize: "14px", color: "#9ca3af" }}>
+              <div style={{ fontSize: "14px", color: "#64748B" }}>
                 Sélectionnez un projet et cliquez sur "Générer un rapport" pour obtenir une analyse SEO complète.
               </div>
             </div>

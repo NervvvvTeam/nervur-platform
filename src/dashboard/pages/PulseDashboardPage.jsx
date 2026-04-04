@@ -63,7 +63,7 @@ function ScoreGauge({ score, size = 100 }) {
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#2a2d3a" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#E2E8F0" strokeWidth="6" />
         <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={scoreColor}
           strokeWidth="6" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
           style={{ transition: "stroke-dashoffset 1s ease" }} />
@@ -91,7 +91,7 @@ function StatusBadge({ ok, labelOk, labelFail }) {
   );
 }
 
-function Chip({ label, color = "#9ca3af" }) {
+function Chip({ label, color = "#64748B" }) {
   return (
     <span
       className="inline-flex items-center px-2.5 py-0.5 rounded-xl text-[11px] font-medium"
@@ -128,7 +128,7 @@ function MiniResponseTimeChart({ history, width = 260, height = 60 }) {
       <path d={pathD + ` L ${getX(points.length - 1)} ${height - padding.bottom} L ${getX(0)} ${height - padding.bottom} Z`} fill="url(#rtGrad)" />
       <path d={pathD} fill="none" stroke={ACCENT} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       {points.map((p, i) => (
-        <circle key={i} cx={getX(i)} cy={getY(p.responseTime || 0)} r="3" fill={ACCENT} stroke="#1e2029" strokeWidth="1.5" />
+        <circle key={i} cx={getX(i)} cy={getY(p.responseTime || 0)} r="3" fill={ACCENT} stroke="#F8FAFC" strokeWidth="1.5" />
       ))}
     </svg>
   );
@@ -183,7 +183,7 @@ function AlertsConfig({ site, onSave }) {
             <button
               onClick={toggle}
               className="w-9 h-5 rounded-[10px] border-none cursor-pointer relative transition-colors duration-200 shrink-0"
-              style={{ background: active ? ACCENT : "#2a2d3a" }}
+              style={{ background: active ? ACCENT : "#E2E8F0" }}
             >
               <div
                 className="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-[left] duration-200"
@@ -367,7 +367,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
           >
             <TrashIcon size={14} />
           </button>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#64748B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
             className="transition-transform duration-200"
             style={{ transform: expanded ? "rotate(180deg)" : "rotate(0deg)" }}>
             <polyline points="6 9 12 15 18 9" />

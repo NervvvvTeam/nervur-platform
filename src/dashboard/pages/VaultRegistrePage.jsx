@@ -299,8 +299,8 @@ export default function VaultRegistrePage() {
                     className="px-3 py-1.5 rounded-md text-[12px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border"
                     style={{
                       background: selected ? "rgba(6,182,212,0.15)" : "transparent",
-                      borderColor: selected ? "#06b6d4" : "#2a2d3a",
-                      color: selected ? "#22d3ee" : "#9ca3af",
+                      borderColor: selected ? "#06b6d4" : "#E2E8F0",
+                      color: selected ? "#22d3ee" : "#64748B",
                     }}
                   >
                     {selected ? "\u2713 " : ""}{cat.label}
@@ -316,8 +316,8 @@ export default function VaultRegistrePage() {
               disabled={saving}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border-none text-sm font-semibold font-[inherit] transition-all duration-150 cursor-pointer"
               style={{
-                background: saving ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
-                color: saving ? "#6b7280" : "#0f0f11",
+                background: saving ? "#E2E8F0" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+                color: saving ? "#64748B" : "#0f0f11",
                 cursor: saving ? "not-allowed" : "pointer",
               }}
             >

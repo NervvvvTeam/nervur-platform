@@ -21,7 +21,7 @@ const ShieldIcon = ({ size = 28, color = ACCENT }) => (
   </svg>
 );
 
-const ArrowLeftIcon = ({ size = 16, color = "#6b7280" }) => (
+const ArrowLeftIcon = ({ size = 16, color = "#64748B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
   </svg>
@@ -72,22 +72,22 @@ function RadarChart({ scores }) {
       {gridLevels.map(level => {
         const points = labels.map((_, i) => getPoint(i, level));
         const path = points.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ") + " Z";
-        return <path key={level} d={path} fill="none" stroke="#2a2d3a" strokeWidth="1" />;
+        return <path key={level} d={path} fill="none" stroke="#E2E8F0" strokeWidth="1" />;
       })}
       {labels.map((_, i) => {
         const p = getPoint(i, 100);
-        return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#2a2d3a" strokeWidth="1" />;
+        return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#E2E8F0" strokeWidth="1" />;
       })}
       <path d={dataPath} fill="rgba(6,182,212,0.15)" stroke={ACCENT} strokeWidth="2" />
       {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="4" fill={ACCENT} stroke="#1e2029" strokeWidth="2" />
+        <circle key={i} cx={p.x} cy={p.y} r="4" fill={ACCENT} stroke="#F8FAFC" strokeWidth="2" />
       ))}
       {labels.map((l, i) => {
         const p = getPoint(i, 120);
         const anchor = p.x < cx - 10 ? "end" : p.x > cx + 10 ? "start" : "middle";
         return (
           <text key={i} x={p.x} y={p.y} textAnchor={anchor} dominantBaseline="middle"
-            fill="#d1d5db" fontSize="11" fontWeight="500" fontFamily="inherit">
+            fill="#334155" fontSize="11" fontWeight="500" fontFamily="inherit">
             {l.label}
           </text>
         );
@@ -228,7 +228,7 @@ export default function VaultScanDetailPage() {
             disabled={downloadingPdf}
             className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md border-none text-white text-xs font-medium font-[inherit] transition-all duration-150"
             style={{
-              background: downloadingPdf ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+              background: downloadingPdf ? "#E2E8F0" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
               cursor: downloadingPdf ? "not-allowed" : "pointer",
               opacity: downloadingPdf ? 0.7 : 1,
             }}

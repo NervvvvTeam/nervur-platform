@@ -167,7 +167,7 @@ export default function VaultChecklistPage() {
           <div className="flex flex-col items-center shrink-0">
             <div className="relative w-20 h-20">
               <svg className="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="34" fill="none" stroke="#2a2d3a" strokeWidth="6" />
+                <circle cx="40" cy="40" r="34" fill="none" stroke="#E2E8F0" strokeWidth="6" />
                 <circle cx="40" cy="40" r="34" fill="none" stroke={scoreColor} strokeWidth="6"
                   strokeLinecap="round"
                   strokeDasharray={`${2 * Math.PI * 34}`}
@@ -203,14 +203,14 @@ export default function VaultChecklistPage() {
                     className="bg-[#1e2029] border rounded-lg px-4 py-3 shadow-[0_1px_4px_rgba(0,0,0,0.15)] flex items-start gap-3 transition-all duration-150"
                     style={{
                       borderColor: checked ? `${cat.color}40` : "rgba(42,45,58,0.8)",
-                      background: checked ? `${cat.color}08` : "#1e2029",
+                      background: checked ? `${cat.color}08` : "#F8FAFC",
                     }}
                   >
                     <button
                       onClick={() => toggleItem(item.id)}
                       className="mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center cursor-pointer shrink-0 transition-all duration-150"
                       style={{
-                        borderColor: checked ? cat.color : "#3f3f46",
+                        borderColor: checked ? cat.color : "#94A3B8",
                         background: checked ? cat.color : "transparent",
                       }}
                     >

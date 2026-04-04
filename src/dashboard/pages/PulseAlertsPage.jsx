@@ -160,7 +160,7 @@ export default function PulseAlertsPage() {
             <button
               onClick={() => setEmailNotif(!emailNotif)}
               className="w-11 h-6 rounded-xl border-none cursor-pointer relative transition-colors duration-200"
-              style={{ background: emailNotif ? ACCENT : "#2a2d3a" }}
+              style={{ background: emailNotif ? ACCENT : "#E2E8F0" }}
             >
               <div
                 className="w-[18px] h-[18px] rounded-full bg-white absolute top-[3px] transition-[left] duration-200"
@@ -197,7 +197,7 @@ export default function PulseAlertsPage() {
                       <button
                         onClick={() => toggleAlert(site._id, alert.key)}
                         className="w-9 h-5 rounded-[10px] border-none cursor-pointer relative transition-colors duration-200 shrink-0 ml-3"
-                        style={{ background: alertConfigs[site._id]?.[alert.key] ? ACCENT : "#2a2d3a" }}
+                        style={{ background: alertConfigs[site._id]?.[alert.key] ? ACCENT : "#E2E8F0" }}
                       >
                         <div
                           className="w-3.5 h-3.5 rounded-full bg-white absolute top-[3px] transition-[left] duration-200"
@@ -237,7 +237,7 @@ export default function PulseAlertsPage() {
                   <div key={idx} className={`px-[22px] py-3.5 flex items-center gap-3 ${idx < alertLog.length - 1 ? "border-b border-[#2a2d3a]" : ""}`}>
                     <div
                       className="w-2 h-2 rounded-full shrink-0"
-                      style={{ background: alertTypeColors[log.type] || "#9ca3af" }}
+                      style={{ background: alertTypeColors[log.type] || "#64748B" }}
                     />
                     <div className="flex-1">
                       <div className="text-[13px] text-[#d1d5db]">
@@ -253,8 +253,8 @@ export default function PulseAlertsPage() {
                     <span
                       className="text-[11px] font-medium px-2 py-[3px] rounded"
                       style={{
-                        background: `${alertTypeColors[log.type] || "#9ca3af"}15`,
-                        color: alertTypeColors[log.type] || "#9ca3af",
+                        background: `${alertTypeColors[log.type] || "#64748B"}15`,
+                        color: alertTypeColors[log.type] || "#64748B",
                       }}
                     >
                       {alertTypeLabels[log.type] || log.type}

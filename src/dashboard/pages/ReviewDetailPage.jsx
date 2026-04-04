@@ -85,8 +85,8 @@ export default function ReviewDetailPage() {
     await loadReview();
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
-  if (!review) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Avis introuvable</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Chargement...</div>;
+  if (!review) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Avis introuvable</div>;
 
   const sent = SENTIMENT_CONFIG[review.sentiment] || SENTIMENT_CONFIG.mixed;
   const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
@@ -101,33 +101,33 @@ export default function ReviewDetailPage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Détail de l'avis</h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>Consultez et répondez à cet avis client.</p>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", marginBottom: "6px" }}>Détail de l'avis</h1>
+        <p style={{ fontSize: "14px", color: "#64748B" }}>Consultez et répondez à cet avis client.</p>
       </div>
 
       {/* Back */}
       <button onClick={() => navigate("/app/reviews")}
         style={{
-          background: "none", border: "none", color: "#9ca3af", fontSize: "13px",
+          background: "none", border: "none", color: "#64748B", fontSize: "13px",
           cursor: "pointer", marginBottom: "24px", fontFamily: "inherit",
           padding: 0
         }}
-        onMouseEnter={e => { e.target.style.color = "#f0f0f3"; }}
-        onMouseLeave={e => { e.target.style.color = "#9ca3af"; }}>
+        onMouseEnter={e => { e.target.style.color = "#0F172A"; }}
+        onMouseLeave={e => { e.target.style.color = "#64748B"; }}>
         ← Retour aux avis
       </button>
 
       {/* Review */}
       <div style={{
         border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
-        borderLeft: `3px solid ${sent.color}`, background: "#1e2029",
+        borderLeft: `3px solid ${sent.color}`, background: "#F8FAFC",
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "24px"
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
           <div>
             <span style={{ color: "#ef4444", fontSize: "18px" }}>{stars}</span>
-            <span style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", marginLeft: "12px" }}>{review.authorName}</span>
+            <span style={{ fontSize: "15px", fontWeight: 600, color: "#0F172A", marginLeft: "12px" }}>{review.authorName}</span>
           </div>
           <span style={{
             fontSize: "11px", fontWeight: 500, padding: "4px 10px",
@@ -135,11 +135,11 @@ export default function ReviewDetailPage() {
           }}>{sent.label}</span>
         </div>
 
-        <p style={{ fontSize: "15px", color: "#d1d5db", lineHeight: 1.8, marginBottom: "12px" }}>
+        <p style={{ fontSize: "15px", color: "#334155", lineHeight: 1.8, marginBottom: "12px" }}>
           {review.text || "(Avis sans texte — uniquement une note)"}
         </p>
 
-        <div style={{ fontSize: "11px", color: "#d1d5db" }}>
+        <div style={{ fontSize: "11px", color: "#334155" }}>
           Publié le {review.publishedAt ? new Date(review.publishedAt).toLocaleDateString("fr-FR") : "—"}
         </div>
       </div>
@@ -158,7 +158,7 @@ export default function ReviewDetailPage() {
           border: "1px dashed #2a2d3a", borderRadius: "10px", padding: "40px",
           textAlign: "center"
         }}>
-          <p style={{ color: "#9ca3af", marginBottom: "20px", fontSize: "14px" }}>
+          <p style={{ color: "#64748B", marginBottom: "20px", fontSize: "14px" }}>
             Aucune réponse IA générée pour cet avis.
           </p>
           <button onClick={handleGenerate} disabled={generating}

@@ -38,7 +38,7 @@ const inputStyle = {
   background: "#0f0f11",
   border: "1px solid #27272A",
   borderRadius: "8px",
-  color: "#FAFAFA",
+  color: "#0F172A",
   fontSize: "14px",
   fontFamily: "inherit",
   outline: "none",
@@ -192,10 +192,10 @@ export default function ForgeDashboardPage() {
           background: "linear-gradient(135deg, #f59e0b, #fbbf24)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0, marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", margin: 0, marginBottom: "6px" }}>
           Générateur de landing pages
         </h1>
-        <p style={{ fontSize: "14px", color: "#71717A", margin: 0 }}>
+        <p style={{ fontSize: "14px", color: "#64748B", margin: 0 }}>
           Générez des landing pages professionnelles en quelques secondes avec l'IA.
         </p>
       </div>
@@ -219,10 +219,10 @@ export default function ForgeDashboardPage() {
             flexWrap: "wrap", gap: "12px", marginBottom: "20px",
           }}>
             <div>
-              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#0F172A", margin: 0 }}>
                 {result.businessName || "Landing Page"}
               </h2>
-              <p style={{ fontSize: "13px", color: "#71717A", margin: "4px 0 0" }}>
+              <p style={{ fontSize: "13px", color: "#64748B", margin: "4px 0 0" }}>
                 {result.objective || "Page générée"}
               </p>
             </div>
@@ -255,12 +255,12 @@ export default function ForgeDashboardPage() {
                 onClick={handleReset}
                 style={{
                   padding: "9px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 500,
-                  background: "transparent", color: "#71717A",
+                  background: "transparent", color: "#64748B",
                   border: "1px solid #1e1e22",
                   cursor: "pointer", fontFamily: "inherit", transition: "all 0.15s",
                 }}
-                onMouseEnter={(e) => { e.target.style.borderColor = "#3f3f46"; e.target.style.color = "#A1A1AA"; }}
-                onMouseLeave={(e) => { e.target.style.borderColor = "#1e1e22"; e.target.style.color = "#71717A"; }}
+                onMouseEnter={(e) => { e.target.style.borderColor = "#94A3B8"; e.target.style.color = "#A1A1AA"; }}
+                onMouseLeave={(e) => { e.target.style.borderColor = "#1e1e22"; e.target.style.color = "#64748B"; }}
               >
                 Nouvelle page
               </button>
@@ -283,7 +283,7 @@ export default function ForgeDashboardPage() {
               <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
               <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
               <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#10b981" }} />
-              <span style={{ fontSize: "12px", color: "#52525B", marginLeft: "8px" }}>
+              <span style={{ fontSize: "12px", color: "#64748B", marginLeft: "8px" }}>
                 Aperçu — {result.businessName || "landing-page"}.html
               </span>
             </div>
@@ -315,7 +315,7 @@ export default function ForgeDashboardPage() {
                 onChange={updateField("businessName")}
                 style={inputStyle}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E2E8F0")}
               />
             </div>
 
@@ -329,7 +329,7 @@ export default function ForgeDashboardPage() {
                 onChange={updateField("sector")}
                 style={inputStyle}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E2E8F0")}
               />
             </div>
 
@@ -343,7 +343,7 @@ export default function ForgeDashboardPage() {
                 onChange={updateField("objective")}
                 style={inputStyle}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E2E8F0")}
               />
             </div>
 
@@ -361,7 +361,7 @@ export default function ForgeDashboardPage() {
                   minHeight: "80px",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E2E8F0")}
               />
             </div>
 
@@ -422,7 +422,7 @@ export default function ForgeDashboardPage() {
                 borderRadius: "8px",
                 fontSize: "14px",
                 fontWeight: 600,
-                background: loading ? "#52525B" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
+                background: loading ? "#64748B" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
                 color: loading ? "#A1A1AA" : "#000",
                 border: "none",
                 boxShadow: loading ? "none" : "0 4px 16px rgba(245,158,11,0.4)",

@@ -38,8 +38,8 @@ const BADGE_STYLES = [
     key: "dark",
     label: "Sombre",
     bg: "#1a1b26",
-    text: "#f0f0f3",
-    border: "#2a2d3a",
+    text: "#0F172A",
+    border: "#E2E8F0",
     accent: "#22d3ee",
     shieldFill: "#06b6d4",
     shieldStroke: "#22d3ee",
@@ -48,8 +48,8 @@ const BADGE_STYLES = [
     key: "minimal",
     label: "Minimal",
     bg: "transparent",
-    text: "#6b7280",
-    border: "#d1d5db",
+    text: "#64748B",
+    border: "#334155",
     accent: "#06b6d4",
     shieldFill: "none",
     shieldStroke: "#06b6d4",
@@ -151,7 +151,7 @@ export default function VaultBadgePage() {
           style={{
             backgroundImage: selectedStyle === "light" ? "linear-gradient(45deg, #f8fafc 25%, #f1f5f9 25%, #f1f5f9 50%, #f8fafc 50%, #f8fafc 75%, #f1f5f9 75%, #f1f5f9 100%)" : undefined,
             backgroundSize: selectedStyle === "light" ? "20px 20px" : undefined,
-            background: selectedStyle === "light" ? undefined : "#141520",
+            background: selectedStyle === "light" ? undefined : "#F8FAFC",
           }}>
           {loading ? (
             <div className="text-[13px] text-[#6b7280]">Chargement du score...</div>
@@ -171,8 +171,8 @@ export default function VaultBadgePage() {
                 className="px-4 py-2 rounded-lg text-[13px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border"
                 style={{
                   background: selectedStyle === style.key ? "rgba(6,182,212,0.15)" : "transparent",
-                  borderColor: selectedStyle === style.key ? "#06b6d4" : "#2a2d3a",
-                  color: selectedStyle === style.key ? "#22d3ee" : "#9ca3af",
+                  borderColor: selectedStyle === style.key ? "#06b6d4" : "#E2E8F0",
+                  color: selectedStyle === style.key ? "#22d3ee" : "#64748B",
                 }}
               >
                 {style.label}

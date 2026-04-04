@@ -71,58 +71,58 @@ export default function NexusCalendarPage() {
           background: "linear-gradient(135deg, #10b981, #34d399)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", marginBottom: "6px" }}>
           Calendrier éditorial
         </h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
+        <p style={{ fontSize: "14px", color: "#64748B" }}>
           Planifiez vos publications sur plusieurs semaines en un clic.
         </p>
       </div>
 
       {/* Form */}
       <div style={{
-        padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
+        padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a",
         borderRadius: "10px", marginBottom: "20px"
       }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "14px", marginBottom: "18px" }}>
           <div>
-            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Secteur d'activité</div>
+            <div style={{ fontSize: "12px", color: "#64748B", marginBottom: "8px", fontWeight: 500 }}>Secteur d'activité</div>
             <input type="text" value={sector} onChange={e => setSector(e.target.value)}
               placeholder="Restauration, e-commerce, SaaS..."
               style={{
-                width: "100%", padding: "10px 14px", background: "#1e2029",
+                width: "100%", padding: "10px 14px", background: "#F8FAFC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
-                color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
+                color: "#0F172A", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
               }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
+              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
           </div>
           <div>
-            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Entreprise</div>
+            <div style={{ fontSize: "12px", color: "#64748B", marginBottom: "8px", fontWeight: 500 }}>Entreprise</div>
             <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)}
               placeholder="NERVÜR"
               style={{
-                width: "100%", padding: "10px 14px", background: "#1e2029",
+                width: "100%", padding: "10px 14px", background: "#F8FAFC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
-                color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit",
+                color: "#0F172A", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
               }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
+              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
           </div>
         </div>
 
         <div style={{ marginBottom: "18px" }}>
-          <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>Plateformes</div>
+          <div style={{ fontSize: "12px", color: "#64748B", marginBottom: "8px", fontWeight: 500 }}>Plateformes</div>
           <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
             {PLATFORMS.map(p => (
               <button key={p} onClick={() => togglePlatform(p)}
                 style={{
                   padding: "7px 16px", borderRadius: "6px",
                   fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                  background: selectedPlatforms.includes(p) ? (PLATFORM_COLORS[p] || "#10b981") + "20" : "#1e2029",
-                  color: selectedPlatforms.includes(p) ? (PLATFORM_COLORS[p] || "#10b981") : "#9ca3af",
+                  background: selectedPlatforms.includes(p) ? (PLATFORM_COLORS[p] || "#10b981") + "20" : "#F8FAFC",
+                  color: selectedPlatforms.includes(p) ? (PLATFORM_COLORS[p] || "#10b981") : "#64748B",
                   border: selectedPlatforms.includes(p) ? `1px solid ${(PLATFORM_COLORS[p] || "#10b981")}30` : "1px solid #2a2d3a",
                 }}>{p}</button>
             ))}
@@ -130,7 +130,7 @@ export default function NexusCalendarPage() {
         </div>
 
         <div style={{ marginBottom: "20px" }}>
-          <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px", fontWeight: 500 }}>
+          <div style={{ fontSize: "12px", color: "#64748B", marginBottom: "8px", fontWeight: 500 }}>
             Nombre de semaines : {weekCount}
           </div>
           <input type="range" min={1} max={4} value={weekCount} onChange={e => setWeekCount(+e.target.value)}
@@ -169,14 +169,14 @@ export default function NexusCalendarPage() {
               marginBottom: "16px"
             }}>
               <div style={{ fontSize: "12px", color: "#10b981", marginBottom: "6px", fontWeight: 500 }}>Stratégie éditoriale</div>
-              <p style={{ fontSize: "14px", color: "#d1d5db", lineHeight: 1.6, margin: 0 }}>{result.strategy}</p>
+              <p style={{ fontSize: "14px", color: "#334155", lineHeight: 1.6, margin: 0 }}>{result.strategy}</p>
             </div>
           )}
 
           {(result.weeks || []).map((week, wi) => (
             <div key={wi} style={{ marginBottom: "24px" }}>
               <div style={{
-                fontSize: "14px", fontWeight: 600, color: "#f0f0f3",
+                fontSize: "14px", fontWeight: 600, color: "#0F172A",
                 marginBottom: "12px", display: "flex", alignItems: "center", gap: "8px"
               }}>
                 <span style={{
@@ -191,25 +191,25 @@ export default function NexusCalendarPage() {
                   const pColor = PLATFORM_COLORS[post.platform] || "#10b981";
                   return (
                     <div key={pi} style={{
-                      padding: "18px 20px", background: "#1e2029", border: "1px solid #2a2d3a",
+                      padding: "18px 20px", background: "#F8FAFC", border: "1px solid #2a2d3a",
                       borderRadius: "10px", borderLeft: `3px solid ${pColor}`,
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                          <span style={{ fontSize: "13px", fontWeight: 500, color: "#d1d5db" }}>{post.day}</span>
+                          <span style={{ fontSize: "13px", fontWeight: 500, color: "#334155" }}>{post.day}</span>
                           <span style={{
                             fontSize: "11px", padding: "2px 8px", borderRadius: "4px",
                             background: pColor + "18", color: pColor,
                           }}>{post.platform}</span>
                           {post.type && (
-                            <span style={{ fontSize: "11px", color: "#d1d5db" }}>{post.type}</span>
+                            <span style={{ fontSize: "11px", color: "#334155" }}>{post.type}</span>
                           )}
                         </div>
                         <button onClick={() => copyPost(post, postId)}
                           style={{
-                            padding: "4px 12px", background: copiedId === postId ? "#10b98120" : "#1e2029",
+                            padding: "4px 12px", background: copiedId === postId ? "#10b98120" : "#F8FAFC",
                             border: "1px solid #2a2d3a", borderRadius: "4px",
-                            color: copiedId === postId ? "#10b981" : "#9ca3af",
+                            color: copiedId === postId ? "#10b981" : "#64748B",
                             fontSize: "11px", cursor: "pointer", fontFamily: "inherit",
                           }}>
                           {copiedId === postId ? "Copié !" : "Copier"}
@@ -217,13 +217,13 @@ export default function NexusCalendarPage() {
                       </div>
 
                       {post.topic && (
-                        <div style={{ fontSize: "13px", fontWeight: 500, color: "#6b7280", marginBottom: "8px" }}>
+                        <div style={{ fontSize: "13px", fontWeight: 500, color: "#64748B", marginBottom: "8px" }}>
                           {post.topic}
                         </div>
                       )}
 
                       <div style={{
-                        fontSize: "14px", color: "#d1d5db", lineHeight: 1.7,
+                        fontSize: "14px", color: "#334155", lineHeight: 1.7,
                         whiteSpace: "pre-wrap",
                       }}>
                         {post.content}

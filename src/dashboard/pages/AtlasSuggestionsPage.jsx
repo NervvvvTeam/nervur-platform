@@ -12,7 +12,7 @@ const ATLAS_NAV = [
 ];
 
 const cardStyle = {
-  background: "#1e2029",
+  background: "#F8FAFC",
   borderRadius: "14px",
   padding: "24px",
   border: "1px solid #2a2d3a",
@@ -101,22 +101,22 @@ export default function AtlasSuggestionsPage() {
           position: "absolute", top: 0, left: 0, right: 0, height: "3px",
           background: "linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b)",
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#f0f0f3", margin: 0, marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#0F172A", margin: 0, marginBottom: "6px" }}>
           Suggestions de mots-clés IA
         </h1>
-        <p style={{ color: "#9ca3af", fontSize: "13px", margin: 0 }}>
+        <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>
           Découvrez de nouvelles opportunités de mots-clés grâce à l'intelligence artificielle.
         </p>
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: "60px 0", color: "#6b7280" }}>Chargement...</div>
+        <div style={{ textAlign: "center", padding: "60px 0", color: "#64748B" }}>Chargement...</div>
       ) : projects.length === 0 ? (
         <div style={{
           ...cardStyle, textAlign: "center", padding: "60px 32px",
         }}>
-          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet</h3>
-          <p style={{ color: "#6b7280", fontSize: "13px", margin: 0 }}>
+          <h3 style={{ color: "#0F172A", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet</h3>
+          <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>
             Créez un projet dans l'onglet Projets pour obtenir des suggestions.
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function AtlasSuggestionsPage() {
             display: "flex", gap: "16px", alignItems: "flex-end", flexWrap: "wrap",
           }}>
             <div style={{ flex: 1, minWidth: "220px" }}>
-              <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "8px" }}>
+              <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "8px" }}>
                 Projet
               </label>
               <select
@@ -136,7 +136,7 @@ export default function AtlasSuggestionsPage() {
                 onChange={e => setSelectedProject(e.target.value)}
                 style={{
                   width: "100%", padding: "10px 14px", background: "#161820",
-                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
+                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
                   fontSize: "13px", fontFamily: "inherit", outline: "none",
                 }}
               >
@@ -150,8 +150,8 @@ export default function AtlasSuggestionsPage() {
               disabled={loadingSuggestions || !selectedProject}
               style={{
                 padding: "10px 24px",
-                background: loadingSuggestions ? "#2a2d3a" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
-                color: loadingSuggestions ? "#9ca3af" : "#1e2029",
+                background: loadingSuggestions ? "#E2E8F0" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
+                color: loadingSuggestions ? "#64748B" : "#F8FAFC",
                 border: "none", borderRadius: "8px",
                 fontSize: "13px", fontWeight: 600,
                 cursor: loadingSuggestions ? "wait" : "pointer",
@@ -186,7 +186,7 @@ export default function AtlasSuggestionsPage() {
                 padding: "18px 24px", borderBottom: "1px solid #2a2d3a",
                 display: "flex", alignItems: "center", justifyContent: "space-between",
               }}>
-                <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
+                <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#0F172A", margin: 0 }}>
                   Suggestions pour {currentProject?.domain}
                 </h2>
                 <span style={{
@@ -204,7 +204,7 @@ export default function AtlasSuggestionsPage() {
                       {["Mot-clé", "Volume", "Concurrence", "Score", "Action"].map(h => (
                         <th key={h} style={{
                           textAlign: h === "Action" ? "center" : "left", padding: "12px 24px",
-                          fontSize: "11px", color: "#6b7280", fontWeight: 500,
+                          fontSize: "11px", color: "#64748B", fontWeight: 500,
                           textTransform: "uppercase", letterSpacing: "0.5px",
                           borderBottom: "1px solid #2a2d3a",
                         }}>{h}</th>
@@ -218,10 +218,10 @@ export default function AtlasSuggestionsPage() {
                       const isAdded = addedKeywords.has(keywordStr);
                       return (
                         <tr key={i} style={{ borderBottom: "1px solid #2a2d3a20" }}>
-                          <td style={{ padding: "14px 24px", color: "#f0f0f3", fontSize: "13px", fontWeight: 500 }}>
+                          <td style={{ padding: "14px 24px", color: "#0F172A", fontSize: "13px", fontWeight: 500 }}>
                             {keywordStr}
                           </td>
-                          <td style={{ padding: "14px 24px", color: "#d1d5db", fontSize: "13px" }}>
+                          <td style={{ padding: "14px 24px", color: "#334155", fontSize: "13px" }}>
                             {sug.volume ? sug.volume.toLocaleString("fr-FR") : "--"}
                           </td>
                           <td style={{ padding: "14px 24px" }}>
@@ -264,10 +264,10 @@ export default function AtlasSuggestionsPage() {
           {/* Empty state after request */}
           {!loadingSuggestions && suggestions.length === 0 && !error && (
             <div style={{ ...cardStyle, textAlign: "center", padding: "48px 32px" }}>
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2a2d3a" strokeWidth="1.5" style={{ marginBottom: "12px" }}>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" strokeWidth="1.5" style={{ marginBottom: "12px" }}>
                 <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
               </svg>
-              <div style={{ fontSize: "14px", color: "#9ca3af" }}>
+              <div style={{ fontSize: "14px", color: "#64748B" }}>
                 Sélectionnez un projet et cliquez sur "Obtenir des suggestions" pour découvrir de nouveaux mots-clés.
               </div>
             </div>

@@ -64,12 +64,12 @@ export default function LoginPage() {
       }}>
         <button onClick={() => navigate("/")} style={{
           position: "absolute", top: isWide ? 24 : 16, left: isWide ? 24 : 16,
-          background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)",
+          background: "#E2E8F0", border: "1px solid #E2E8F0",
           borderRadius: "8px", color: "rgba(255,255,255,0.5)", fontSize: "13px",
           padding: "8px 16px", cursor: "pointer", fontFamily: FONT, transition: "all 0.2s",
         }}
-          onMouseEnter={e => { e.target.style.background = "rgba(255,255,255,0.15)"; e.target.style.color = "#fff"; }}
-          onMouseLeave={e => { e.target.style.background = "rgba(255,255,255,0.08)"; e.target.style.color = "rgba(255,255,255,0.5)"; }}
+          onMouseEnter={e => { e.target.style.background = "#E2E8F0"; e.target.style.color = "#fff"; }}
+          onMouseLeave={e => { e.target.style.background = "#E2E8F0"; e.target.style.color = "rgba(255,255,255,0.5)"; }}
         >&#8592; Retour au site</button>
 
         <LogoNervur height={isWide ? 56 : 40} onClick={() => navigate("/")} variant="dark" style={{ marginBottom: isWide ? 24 : 12 }} />
