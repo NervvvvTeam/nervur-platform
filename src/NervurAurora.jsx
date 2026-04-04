@@ -87,6 +87,17 @@ function RevealSection({ children, delay = 0 }) {
   );
 }
 
+function useOscillate(base, range, interval) {
+  const [val, setVal] = useState(base);
+  useEffect(() => {
+    const iv = setInterval(() => {
+      setVal(base + (Math.random() - 0.5) * 2 * range);
+    }, interval);
+    return () => clearInterval(iv);
+  }, [base, range, interval]);
+  return val;
+}
+
 function AnimatedCounter({ target, suffix = "", prefix = "" }) {
   const ref = useRef(null);
   const [val, setVal] = useState(0);
@@ -261,6 +272,10 @@ export default function NervurAurora() {
     "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "url": "https://nervur.fr/vault",
     "offers": { "@type": "Offer", "price": "79", "priceCurrency": "EUR", "priceValidUntil": "2026-12-31" }
   });
+
+  const perfScore = useOscillate(98, 1.5, 2800);
+  const convRate = useOscillate(4.8, 0.3, 3200);
+  const trafficGrowth = useOscillate(147, 8, 3000);
 
   useEffect(() => { setTimeout(() => setLoaded(true), 200); }, []);
   useEffect(() => {
@@ -437,17 +452,37 @@ export default function NervurAurora() {
                   <span style={{ fontSize: "11px", color: C.faint }}>nervur.fr</span>
                 </div>
               </div>
-              <div style={{ textAlign: "center", padding: "60px 20px 20px", position: "relative", width: "100%" }}>
-                <div style={{ width: "48px", height: "48px", borderRadius: "12px", background: C.accentLight, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
-                  <svg width="24" height="24" viewBox="0 0 24 28" fill="none"><path d="M2 26V2L22 26V2" stroke={C.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </div>
-                <p style={{ fontSize: "14px", color: C.muted, fontWeight: 500 }}>Dashboard Sentinel & Vault</p>
-                <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginTop: "16px" }}>
-                  {[{ n: "4.7", l: "Score" }, { n: "127", l: "Avis" }, { n: "98%", l: "Conforme" }].map((s, i) => (
-                    <div key={i} style={{ padding: "10px 16px", background: C.bg, borderRadius: "8px", border: `1px solid ${C.border}` }}>
-                      <div style={{ fontSize: "18px", fontWeight: 700, color: C.text }}>{s.n}</div>
-                      <div style={{ fontSize: "11px", color: C.faint }}>{s.l}</div>
+              <div style={{ padding: "52px 20px 20px", position: "relative", width: "100%" }}>
+                {/* Mini dashboard header */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", padding: "0 8px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <div style={{ width: "28px", height: "28px", borderRadius: "8px", background: C.accentLight, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <svg width="14" height="14" viewBox="0 0 24 28" fill="none"><path d="M2 26V2L22 26V2" stroke={C.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
                     </div>
+                    <span style={{ fontSize: "13px", fontWeight: 600, color: C.text }}>NERVÜR Dashboard</span>
+                  </div>
+                  <span style={{ fontSize: "11px", color: "#22c55e", fontWeight: 600, display: "flex", alignItems: "center", gap: "4px" }}>
+                    <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22c55e", display: "inline-block", animation: "pulse 2s ease infinite" }} />
+                    En ligne
+                  </span>
+                </div>
+                {/* Stats */}
+                <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginBottom: "16px" }}>
+                  {[{ n: Math.round(perfScore), l: "Score", c: C.accent }, { n: Math.round(trafficGrowth), l: "Avis", c: "#22c55e" }, { n: "98%", l: "Conforme", c: C.vault }].map((s, i) => (
+                    <div key={i} style={{ flex: 1, padding: "10px 8px", background: C.bg, borderRadius: "8px", border: `1px solid ${C.border}`, textAlign: "center" }}>
+                      <div style={{ fontSize: "18px", fontWeight: 700, color: s.c, transition: "all 0.6s ease" }}>{s.n}</div>
+                      <div style={{ fontSize: "10px", color: C.faint, marginTop: "2px" }}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+                {/* Mini chart bars */}
+                <div style={{ display: "flex", gap: "4px", alignItems: "flex-end", height: "40px", padding: "0 8px" }}>
+                  {[65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 50, 88].map((h, i) => (
+                    <div key={i} style={{
+                      flex: 1, borderRadius: "2px",
+                      background: h > 80 ? C.accent : h > 60 ? `${C.accent}60` : `${C.accent}30`,
+                      height: `${h}%`, transition: `height 0.8s ${EASE} ${i * 50}ms`,
+                    }} />
                   ))}
                 </div>
               </div>
@@ -461,15 +496,15 @@ export default function NervurAurora() {
           gap: "16px", marginTop: "60px",
         }}>
           {[
-            { value: 147, suffix: "%", prefix: "+", label: "Trafic organique moyen", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> },
-            { value: 98, suffix: "/100", prefix: "", label: "Score performance", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> },
-            { value: 4.8, suffix: "%", prefix: "", label: "Taux de conversion", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg> },
+            { value: trafficGrowth, display: `+${Math.round(trafficGrowth)}%`, label: "Trafic organique moyen", color: "#22c55e", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> },
+            { value: perfScore, display: `${Math.round(perfScore)}/100`, label: "Score performance", color: C.accent, icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> },
+            { value: convRate, display: `${convRate.toFixed(1)}%`, label: "Taux de conversion", color: "#f59e0b", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg> },
           ].map((s, i) => (
             <RevealSection key={i} delay={i * 150}>
               <Card style={{ textAlign: "center", padding: "32px 24px" }}>
                 <div style={{ display: "flex", justifyContent: "center", marginBottom: "12px" }}>{s.icon}</div>
-                <div style={{ fontSize: "42px", fontWeight: 700, color: C.accent, lineHeight: 1 }}>
-                  {s.value === 4.8 ? "4.8%" : <AnimatedCounter target={s.value} suffix={s.suffix} prefix={s.prefix} />}
+                <div style={{ fontSize: "42px", fontWeight: 700, color: s.color, lineHeight: 1, transition: "all 0.6s ease" }}>
+                  {s.display}
                 </div>
                 <div style={{ fontSize: "14px", color: C.muted, marginTop: "10px", fontWeight: 500 }}>{s.label}</div>
               </Card>
