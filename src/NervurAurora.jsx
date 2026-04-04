@@ -132,8 +132,10 @@ function RotatingWord({ words }) {
   );
 }
 
-/* Card wrapper with hover lift */
-function Card({ children, style = {}, hoverLift = true, ...props }) {
+/* Card wrapper with hover lift + accent glow */
+function Card({ children, style = {}, hoverLift = true, accentColor, ...props }) {
+  const hoverBorder = accentColor ? `${accentColor}40` : C.accent + "30";
+  const hoverBg = accentColor ? `${accentColor}04` : C.accentLight;
   return (
     <div
       style={{
@@ -142,11 +144,21 @@ function Card({ children, style = {}, hoverLift = true, ...props }) {
         borderRadius: "16px",
         padding: "36px 32px",
         boxShadow: cardShadow,
-        transition: `all 0.3s ${EASE}`,
+        transition: `all 0.4s ${EASE}`,
         ...style,
       }}
-      onMouseEnter={hoverLift ? e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = cardHoverShadow; e.currentTarget.style.borderColor = C.borderHover; } : undefined}
-      onMouseLeave={hoverLift ? e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = cardShadow; e.currentTarget.style.borderColor = C.border; } : undefined}
+      onMouseEnter={hoverLift ? e => {
+        e.currentTarget.style.transform = "translateY(-6px)";
+        e.currentTarget.style.boxShadow = `0 16px 40px rgba(79,70,229,0.08)`;
+        e.currentTarget.style.borderColor = hoverBorder;
+        e.currentTarget.style.background = hoverBg;
+      } : undefined}
+      onMouseLeave={hoverLift ? e => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = cardShadow;
+        e.currentTarget.style.borderColor = C.border;
+        e.currentTarget.style.background = C.bg;
+      } : undefined}
       {...props}
     >{children}</div>
   );
@@ -276,6 +288,10 @@ export default function NervurAurora() {
 
       <style>{`
         @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeInScale { from { opacity:0; transform:scale(0.95) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+        @keyframes slideInLeft { from { opacity:0; transform:translateX(-30px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes pulse { 0%, 100% { opacity:1; } 50% { opacity:0.7; } }
+        @keyframes countUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
         html { scroll-behavior: smooth; }
         * { box-sizing: border-box; margin: 0; }
         ::selection { background: ${C.accentLight}; color: ${C.accent}; }
@@ -368,39 +384,48 @@ export default function NervurAurora() {
           gap: isMobile ? "40px" : "60px", alignItems: "center",
         }}>
           {/* Left — Text */}
-          <div style={{ animation: loaded ? "fadeInUp 0.8s ease both" : "none" }}>
+          <div>
             <span style={{
               display: "inline-block", background: C.accentLight, color: C.accent,
               padding: "6px 16px", borderRadius: "9999px", fontSize: "13px", fontWeight: 600,
               marginBottom: "24px",
+              animation: loaded ? "fadeInScale 0.6s ease 0.1s both" : "none",
             }}>Agence Digitale & Technologies</span>
 
             <h1 style={{
               fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 700, color: C.text,
               letterSpacing: "-1.5px", lineHeight: 1.1, marginBottom: "24px",
+              animation: loaded ? "fadeInUp 0.7s ease 0.2s both" : "none",
             }}>
               On construit vos<br/>
               outils{" "}
               <RotatingWord words={["digitaux", "sur mesure", "de croissance", "SaaS"]} />
             </h1>
 
-            <p style={{ fontSize: "18px", color: C.body, lineHeight: 1.7, maxWidth: "480px", marginBottom: "36px" }}>
+            <p style={{
+              fontSize: "18px", color: C.body, lineHeight: 1.7, maxWidth: "480px", marginBottom: "36px",
+              animation: loaded ? "fadeInUp 0.7s ease 0.35s both" : "none",
+            }}>
               Sites web, applications metiers, outils SaaS — nous concevons les technologies qui font grandir votre entreprise.
             </p>
 
-            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", animation: loaded ? "fadeInUp 0.7s ease 0.5s both" : "none" }}>
               <BtnPrimary onClick={() => navigate("/contact")}>Discuter de votre projet</BtnPrimary>
               <BtnSecondary onClick={() => scrollTo("#outils")}>Voir nos outils</BtnSecondary>
             </div>
           </div>
 
           {/* Right — Product Mockup */}
-          <div style={{ animation: loaded ? "fadeInUp 0.8s ease 0.2s both" : "none" }}>
+          <div style={{ animation: loaded ? "fadeInScale 0.8s ease 0.3s both" : "none" }}>
             <div style={{
               borderRadius: "16px", border: `1px solid ${C.border}`, background: C.bgAlt,
               boxShadow: "0 24px 48px rgba(0,0,0,0.08)", overflow: "hidden",
               aspectRatio: "16/10", display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
+              transition: `all 0.4s ${EASE}`, position: "relative",
+            }}
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 32px 64px rgba(0,0,0,0.12)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 24px 48px rgba(0,0,0,0.08)"; }}
+            >
               {/* Browser chrome bar */}
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, padding: "12px 16px",
                 background: C.bg, borderBottom: `1px solid ${C.border}`,
@@ -436,16 +461,17 @@ export default function NervurAurora() {
           gap: "16px", marginTop: "60px",
         }}>
           {[
-            { value: 147, suffix: "%", label: "Trafic organique moyen" },
-            { value: 98, suffix: "/100", label: "Score performance" },
-            { value: 4.8, suffix: "%", label: "Taux de conversion" },
+            { value: 147, suffix: "%", prefix: "+", label: "Trafic organique moyen", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> },
+            { value: 98, suffix: "/100", prefix: "", label: "Score performance", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> },
+            { value: 4.8, suffix: "%", prefix: "", label: "Taux de conversion", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg> },
           ].map((s, i) => (
-            <RevealSection key={i} delay={i * 100}>
-              <Card style={{ textAlign: "center", padding: "28px 24px" }}>
-                <div style={{ fontSize: "36px", fontWeight: 700, color: C.accent, lineHeight: 1 }}>
-                  {s.value === 4.8 ? "4.8%" : <AnimatedCounter target={s.value} suffix={s.suffix} />}
+            <RevealSection key={i} delay={i * 150}>
+              <Card style={{ textAlign: "center", padding: "32px 24px" }}>
+                <div style={{ display: "flex", justifyContent: "center", marginBottom: "12px" }}>{s.icon}</div>
+                <div style={{ fontSize: "42px", fontWeight: 700, color: C.accent, lineHeight: 1 }}>
+                  {s.value === 4.8 ? "4.8%" : <AnimatedCounter target={s.value} suffix={s.suffix} prefix={s.prefix} />}
                 </div>
-                <div style={{ fontSize: "14px", color: C.muted, marginTop: "8px" }}>{s.label}</div>
+                <div style={{ fontSize: "14px", color: C.muted, marginTop: "10px", fontWeight: 500 }}>{s.label}</div>
               </Card>
             </RevealSection>
           ))}
@@ -498,13 +524,17 @@ export default function NervurAurora() {
                     tags: ["Landing page", "Responsive", "Animations", "SEO-ready"] },
                 ].map((c, i) => (
                   <RevealSection key={i} delay={i * 120}>
-                    <Card style={{ height: "100%" }}>
-                      <div style={{ marginBottom: "20px" }}>{c.icon}</div>
+                    <Card style={{ height: "100%", position: "relative", overflow: "hidden" }}>
+                      <div style={{ position: "absolute", top: 0, left: 0, width: "3px", height: "0%", background: C.accent, borderRadius: "0 2px 2px 0", transition: `height 0.4s ${EASE}` }} className="card-accent-bar" />
+                      <div style={{ marginBottom: "20px", width: "44px", height: "44px", borderRadius: "12px", background: C.accentLight, display: "flex", alignItems: "center", justifyContent: "center", transition: `all 0.3s ${EASE}` }}>{c.icon}</div>
                       <h3 style={{ fontSize: "22px", fontWeight: 600, color: C.text, marginBottom: "10px", letterSpacing: "-0.3px" }}>{c.title}</h3>
                       <p style={{ fontSize: "15px", color: C.body, lineHeight: 1.7, marginBottom: "20px" }}>{c.desc}</p>
                       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                         {c.tags.map((t, j) => (
-                          <span key={j} style={{ fontSize: "12px", color: C.body, padding: "4px 12px", background: C.bgAlt, borderRadius: "6px" }}>{t}</span>
+                          <span key={j} style={{ fontSize: "12px", color: C.body, padding: "5px 14px", background: C.bgAlt, borderRadius: "6px", transition: `all 0.2s ${EASE}` }}
+                            onMouseEnter={e => { e.currentTarget.style.background = C.accentLight; e.currentTarget.style.color = C.accent; }}
+                            onMouseLeave={e => { e.currentTarget.style.background = C.bgAlt; e.currentTarget.style.color = C.body; }}
+                          >{t}</span>
                         ))}
                       </div>
                     </Card>
