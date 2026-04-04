@@ -107,7 +107,7 @@ export default function VaultVeillePage() {
           )}
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">
             Veille juridique
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -176,7 +176,7 @@ export default function VaultVeillePage() {
           <button
             onClick={fetchVeille}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border border-[#2a2d3a] bg-transparent text-[#6b7280] hover:border-[#06b6d4] hover:text-[#06b6d4]"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border border-[#E2E8F0] bg-transparent text-[#6b7280] hover:border-[#06b6d4] hover:text-[#06b6d4]"
           >
             <RefreshIcon size={12} color="currentColor" />
             Actualiser
@@ -196,7 +196,7 @@ export default function VaultVeillePage() {
       {!loading && sortedAlerts.length === 0 ? (
         <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
           <BellIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#0F172A] mt-4 mb-2">
             Aucune alerte dans cette catégorie
           </div>
         </div>
@@ -210,7 +210,7 @@ export default function VaultVeillePage() {
             return (
               <div
                 key={alert.id}
-                className="bg-[#1e2029] border rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-all duration-150"
+                className="bg-[#F8FAFC] border rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-all duration-150"
                 style={{
                   borderColor: read ? "rgba(42,45,58,0.8)" : `${impactInfo.color}30`,
                   opacity: read ? 0.7 : 1,
@@ -251,7 +251,7 @@ export default function VaultVeillePage() {
                     </div>
 
                     {/* Title */}
-                    <div className={`text-[14px] font-semibold mb-2 ${read ? "text-[#9ca3af]" : "text-[#f0f0f3]"}`}>
+                    <div className={`text-[14px] font-semibold mb-2 ${read ? "text-[#9ca3af]" : "text-[#0F172A]"}`}>
                       {alert.title}
                     </div>
 

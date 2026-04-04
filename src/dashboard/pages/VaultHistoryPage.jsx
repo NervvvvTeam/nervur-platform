@@ -88,7 +88,7 @@ export default function VaultHistoryPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
-        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
+        <h1 className="text-[22px] font-semibold text-[#0F172A] mb-1.5">
           Historique des analyses
         </h1>
         <p className="text-sm text-[#9ca3af]">
@@ -146,7 +146,7 @@ export default function VaultHistoryPage() {
               <div
                 key={scanId}
                 onClick={() => navigate(`/app/vault/scan/${scanId}`)}
-                className="bg-[#1e2029] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center gap-4 hover:bg-[rgba(6,182,212,0.08)]"
+                className="bg-[#F8FAFC] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center gap-4 hover:bg-[rgba(6,182,212,0.08)]"
                 style={{
                   border: `1px solid ${BORDER_TINT}`,
                   borderLeft: `3px solid ${ACCENT}`,
@@ -163,7 +163,7 @@ export default function VaultHistoryPage() {
                 {/* Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2.5 mb-1 flex-wrap">
-                    <span className="text-sm font-semibold text-[#f0f0f3]">
+                    <span className="text-sm font-semibold text-[#0F172A]">
                       {scan.domain}
                     </span>
                     <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{

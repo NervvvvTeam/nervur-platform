@@ -760,7 +760,7 @@ export default function VaultActionsPage() {
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">
             Plan d'action &amp; Incidents
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -776,7 +776,7 @@ export default function VaultActionsPage() {
       <div className="grid grid-cols-4 gap-3 mb-4" style={{ fontSize: 13 }}>
         <div style={cardStyle}>
           <p className="text-[11px] text-[#6b7280] m-0 mb-1 uppercase tracking-wider font-medium">Total actions</p>
-          <p className="text-[22px] font-bold text-[#f0f0f3] m-0">{totalActions}</p>
+          <p className="text-[22px] font-bold text-[#0F172A] m-0">{totalActions}</p>
         </div>
         <div style={cardStyle}>
           <p className="text-[11px] text-[#6b7280] m-0 mb-1 uppercase tracking-wider font-medium">Actions critiques</p>

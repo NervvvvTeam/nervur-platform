@@ -161,7 +161,7 @@ export default function VaultHistoriquePage() {
           <ClockIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">
             Historique
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -203,7 +203,7 @@ export default function VaultHistoriquePage() {
 
       {/* Empty state */}
       {!loading && history.length === 0 && (
-        <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+        <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
           <ClockIcon size={40} color="#64748B" />
           <div className="text-base font-semibold text-[#6b7280] mt-3 mb-1.5">
             Aucune analyse effectuée
@@ -228,7 +228,7 @@ export default function VaultHistoriquePage() {
             <div key={domain}>
               <div className="flex items-center gap-2 mb-3">
                 <GlobeIcon size={16} color={ACCENT} />
-                <h3 className="text-[15px] font-semibold text-[#f0f0f3] m-0">{domain}</h3>
+                <h3 className="text-[15px] font-semibold text-[#0F172A] m-0">{domain}</h3>
                 <span className="text-[11px] text-[#6b7280] bg-[rgba(107,114,128,0.15)] px-2 py-0.5 rounded">
                   {scans.length} analyse{scans.length > 1 ? "s" : ""}
                 </span>
@@ -259,12 +259,12 @@ export default function VaultHistoriquePage() {
                   <div
                     key={scan._id}
                     onClick={() => handleView(scan._id)}
-                    className="bg-[#1e2029] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between border border-[#2a2d3a] hover:border-[rgba(6,182,212,0.3)] hover:bg-[rgba(6,182,212,0.04)]"
+                    className="bg-[#F8FAFC] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between border border-[#E2E8F0] hover:border-[rgba(6,182,212,0.3)] hover:bg-[rgba(6,182,212,0.04)]"
                   >
                     <div className="flex items-center gap-3">
                       <GlobeIcon size={16} color="#64748B" />
                       <div>
-                        <div className="text-[13px] font-semibold text-[#f0f0f3]">
+                        <div className="text-[13px] font-semibold text-[#0F172A]">
                           {scan.url || scan.domain}
                         </div>
                         <div className="text-[11px] text-[#6b7280] mt-0.5">
@@ -314,7 +314,7 @@ export default function VaultHistoriquePage() {
 
         {/* Empty state */}
         {!docsLoading && documents.length === 0 && (
-          <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+          <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
             <FileIcon size={40} color="#64748B" />
             <div className="text-base font-semibold text-[#6b7280] mt-3 mb-1.5">
               Aucun document g&eacute;n&eacute;r&eacute;
@@ -338,14 +338,14 @@ export default function VaultHistoriquePage() {
             {documents.map((doc) => (
               <div
                 key={doc.id || doc._id}
-                className="bg-[#1e2029] rounded-[10px] px-5 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)] border border-[#2a2d3a] hover:border-[rgba(6,182,212,0.25)] transition-all duration-150 flex items-center justify-between"
+                className="bg-[#F8FAFC] rounded-[10px] px-5 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)] border border-[#E2E8F0] hover:border-[rgba(6,182,212,0.25)] transition-all duration-150 flex items-center justify-between"
               >
                 <div className="flex items-center gap-3.5">
                   <div className="w-10 h-10 rounded-lg bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.18)] flex items-center justify-center flex-shrink-0">
                     <FileIcon size={20} color={ACCENT} />
                   </div>
                   <div>
-                    <div className="text-[14px] font-semibold text-[#f0f0f3]">
+                    <div className="text-[14px] font-semibold text-[#0F172A]">
                       {doc.label}
                     </div>
                     <div className="flex items-center gap-3 mt-1">

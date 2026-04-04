@@ -118,7 +118,7 @@ function ComplianceCard({ keyName, result }) {
         </div>
         <div className="flex-1">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-sm font-semibold text-[#f0f0f3]">
+            <span className="text-sm font-semibold text-[#0F172A]">
               {info.label}
             </span>
             <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{
@@ -343,7 +343,7 @@ export default function VaultRgpdPage() {
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">
             Scan RGPD
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -361,7 +361,7 @@ export default function VaultRgpdPage() {
           <GlobeIcon size={20} color={ACCENT} />
         </div>
         <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
-          <strong className="text-[#f0f0f3]">Vault — Scan RGPD</strong>
+          <strong className="text-[#0F172A]">Vault — Scan RGPD</strong>
           <br />
           Entrez l'adresse de votre site web pour vérifier sa conformité juridique. L'outil vérifie 8 points
           essentiels : mentions légales, politique de confidentialité, cookies, CGV, contacts, HTTPS, trackers et consentement.
@@ -373,10 +373,10 @@ export default function VaultRgpdPage() {
       </div>
 
       {/* Scan form */}
-      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+      <div className="bg-[#F8FAFC] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
         <div className="flex items-center gap-2 mb-5">
           <GlobeIcon size={18} color={ACCENT} />
-          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          <h2 className="text-[15px] font-semibold text-[#0F172A] m-0">
             Analyser un site
           </h2>
         </div>
@@ -388,7 +388,7 @@ export default function VaultRgpdPage() {
               value={url}
               onChange={e => setUrl(e.target.value)}
               placeholder="https://monsite.fr"
-              className="w-full px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
+              className="w-full px-3.5 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-[#334155] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
               onKeyDown={e => { if (e.key === "Enter") handleScan(); }}
             />
             <div className="text-[11px] text-[#6b7280] mt-1">
@@ -433,7 +433,7 @@ export default function VaultRgpdPage() {
           <div className="mb-5">
             <div className="w-16 h-16 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[rgpd-spin_1s_linear_infinite]" />
           </div>
-          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
+          <div className="text-base font-semibold text-[#0F172A] mb-2">
             Analyse RGPD en cours...
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed">
@@ -450,7 +450,7 @@ export default function VaultRgpdPage() {
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
               <ShieldIcon size={18} color={ACCENT} />
-              <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
+              <h2 className="text-base font-semibold text-[#0F172A] m-0">
                 Résultats \u2014 {scan.domain}
               </h2>
             </div>
@@ -506,7 +506,7 @@ export default function VaultRgpdPage() {
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-3.5">
                 <ShieldIcon size={18} color={ACCENT} />
-                <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
+                <h3 className="text-base font-semibold text-[#0F172A] m-0">
                   Recommandations IA
                 </h3>
               </div>
@@ -523,7 +523,7 @@ export default function VaultRgpdPage() {
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-3.5">
                 <WrenchIcon size={18} color={ACCENT} />
-                <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
+                <h3 className="text-base font-semibold text-[#0F172A] m-0">
                   Plan d'action
                 </h3>
                 <span className="text-[11px] font-semibold text-[#06b6d4] bg-[rgba(6,182,212,0.15)] px-2 py-0.5 rounded">
@@ -543,7 +543,7 @@ export default function VaultRgpdPage() {
                       </div>
                       <div className="flex-1">
                         {/* Issue title */}
-                        <div className="text-sm font-semibold text-[#f0f0f3] mb-2">
+                        <div className="text-sm font-semibold text-[#0F172A] mb-2">
                           {item.issue}
                         </div>
 
@@ -590,7 +590,7 @@ export default function VaultRgpdPage() {
       <div className="mt-4">
         <div className="flex items-center gap-2 mb-3.5">
           <ClockIcon size={16} color="#64748B" />
-          <h3 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          <h3 className="text-[15px] font-semibold text-[#0F172A] m-0">
             Historique des analyses
           </h3>
         </div>
@@ -602,7 +602,7 @@ export default function VaultRgpdPage() {
         )}
 
         {!loadingHistory && history.length === 0 && (
-          <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center text-[#6b7280] text-[13px]">
+          <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center text-[#6b7280] text-[13px]">
             Aucune analyse RGPD effectuée. Lancez votre première analyse ci-dessus.
           </div>
         )}
@@ -613,7 +613,7 @@ export default function VaultRgpdPage() {
               <div
                 key={h._id}
                 onClick={() => loadScanDetail(h._id)}
-                className="bg-[#1e2029] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between"
+                className="bg-[#F8FAFC] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between"
                 style={{
                   border: selectedHistoryId === h._id ? `1px solid ${ACCENT}` : "1px solid #2a2d3a",
                   background: selectedHistoryId === h._id ? BG_TINT : "#F8FAFC",
@@ -622,7 +622,7 @@ export default function VaultRgpdPage() {
                 <div className="flex items-center gap-3">
                   <GlobeIcon size={16} color="#64748B" />
                   <div>
-                    <div className="text-[13px] font-semibold text-[#f0f0f3]">
+                    <div className="text-[13px] font-semibold text-[#0F172A]">
                       {h.domain || h.url}
                     </div>
                     <div className="text-[11px] text-[#6b7280] mt-0.5">

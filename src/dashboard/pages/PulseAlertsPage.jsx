@@ -113,7 +113,7 @@ export default function PulseAlertsPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="h-[3px] w-10 rounded-sm mb-4 bg-gradient-to-br from-[#ec4899] to-[#f472b6]" />
-        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
+        <h1 className="text-[22px] font-semibold text-[#0F172A] mb-1.5">
           Configuration des alertes
         </h1>
         <p className="text-sm text-[#9ca3af]">
@@ -122,7 +122,7 @@ export default function PulseAlertsPage() {
       </div>
 
       {loading && (
-        <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+        <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
           <div
             className="w-12 h-12 mx-auto mb-4 border-[3px] border-[rgba(236,72,153,0.18)] border-t-[#ec4899] rounded-full animate-[pulse-alert-spin_1s_linear_infinite]"
           />
@@ -136,7 +136,7 @@ export default function PulseAlertsPage() {
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4 mx-auto">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
           </svg>
-          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
+          <div className="text-base font-semibold text-[#0F172A] mb-2">
             Aucun site surveillé
           </div>
           <div className="text-[13px] text-[#9ca3af]">
@@ -148,9 +148,9 @@ export default function PulseAlertsPage() {
       {!loading && sites.length > 0 && (
         <>
           {/* Email notification toggle */}
-          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5 flex items-center justify-between">
+          <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5 flex items-center justify-between">
             <div>
-              <div className="text-sm font-medium text-[#f0f0f3]">
+              <div className="text-sm font-medium text-[#0F172A]">
                 Notifications par email
               </div>
               <div className="text-xs text-[#9ca3af] mt-0.5">
@@ -172,8 +172,8 @@ export default function PulseAlertsPage() {
           {/* Per-site alert config */}
           <div className="flex flex-col gap-3 mb-6">
             {sites.map(site => (
-              <div key={site._id} className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
-                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#2a2d3a]">
+              <div key={site._id} className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#E2E8F0]">
                   <div
                     className="w-2 h-2 rounded-full"
                     style={{ background: site.lastCheck?.uptimeStatus !== false ? "#10b981" : "#ef4444" }}
@@ -185,7 +185,7 @@ export default function PulseAlertsPage() {
 
                 <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3">
                   {ALERT_TYPES.map(alert => (
-                    <div key={alert.key} className="p-3.5 bg-[#161820] rounded-lg border border-[#2a2d3a] flex items-center justify-between">
+                    <div key={alert.key} className="p-3.5 bg-[#161820] rounded-lg border border-[#E2E8F0] flex items-center justify-between">
                       <div>
                         <div className="text-[13px] font-medium text-[#d1d5db]">
                           {alert.label}
@@ -212,9 +212,9 @@ export default function PulseAlertsPage() {
           </div>
 
           {/* Alert history log */}
-          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)] p-0 overflow-hidden">
-            <div className="px-[22px] py-[18px] border-b border-[#2a2d3a] flex items-center justify-between">
-              <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)] p-0 overflow-hidden">
+            <div className="px-[22px] py-[18px] border-b border-[#E2E8F0] flex items-center justify-between">
+              <h2 className="text-[15px] font-semibold text-[#0F172A] m-0">
                 Historique des alertes
               </h2>
               <span className="text-xs text-[#ec4899] font-medium px-2.5 py-[3px] bg-[rgba(236,72,153,0.08)] rounded-md">
@@ -234,7 +234,7 @@ export default function PulseAlertsPage() {
             ) : (
               <div>
                 {alertLog.map((log, idx) => (
-                  <div key={idx} className={`px-[22px] py-3.5 flex items-center gap-3 ${idx < alertLog.length - 1 ? "border-b border-[#2a2d3a]" : ""}`}>
+                  <div key={idx} className={`px-[22px] py-3.5 flex items-center gap-3 ${idx < alertLog.length - 1 ? "border-b border-[#E2E8F0]" : ""}`}>
                     <div
                       className="w-2 h-2 rounded-full shrink-0"
                       style={{ background: alertTypeColors[log.type] || "#64748B" }}

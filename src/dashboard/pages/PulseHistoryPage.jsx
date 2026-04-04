@@ -251,11 +251,11 @@ function HistoryTable({ history }) {
       <table className="w-full border-collapse text-[13px]">
         <thead>
           <tr>
-            <th className="text-left px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Date</th>
-            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Statut</th>
-            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Score</th>
-            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Temps de reponse</th>
-            <th className="text-right px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#2a2d3a] text-xs">Tendance</th>
+            <th className="text-left px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E2E8F0] text-xs">Date</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E2E8F0] text-xs">Statut</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E2E8F0] text-xs">Score</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E2E8F0] text-xs">Temps de reponse</th>
+            <th className="text-right px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E2E8F0] text-xs">Tendance</th>
           </tr>
         </thead>
         <tbody>
@@ -266,7 +266,7 @@ function HistoryTable({ history }) {
             const isDown = entry.uptimeStatus === false;
             const rtColor = entry.responseTime == null ? "#64748B" : entry.responseTime < 500 ? "#10b981" : entry.responseTime < 1500 ? "#f59e0b" : "#ef4444";
             return (
-              <tr key={i} className="border-b border-[#2a2d3a]/[0.12]" style={{ background: isDown ? "rgba(239,68,68,0.04)" : "transparent" }}>
+              <tr key={i} className="border-b border-[#E2E8F0]/[0.12]" style={{ background: isDown ? "rgba(239,68,68,0.04)" : "transparent" }}>
                 <td className="px-3.5 py-2.5 text-[#d1d5db]">
                   {new Date(entry.checkedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                 </td>
@@ -339,7 +339,7 @@ export default function PulseHistoryPage() {
           <HeartPulseIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">Evolution</h1>
+          <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">Evolution</h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
             Suivez l'evolution du score de sante de vos sites
           </p>
@@ -351,7 +351,7 @@ export default function PulseHistoryPage() {
 
       {/* Loading */}
       {loading && (
-        <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+        <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
           <div className="w-12 h-12 mx-auto mb-4 border-[3px] border-[rgba(236,72,153,0.18)] border-t-[#ec4899] rounded-full animate-[pulse-hist-spin_1s_linear_infinite]" />
           <div className="text-sm text-[#9ca3af]">Chargement...</div>
           <style>{`@keyframes pulse-hist-spin { to { transform: rotate(360deg); } }`}</style>
@@ -362,7 +362,7 @@ export default function PulseHistoryPage() {
       {!loading && sites.length === 0 && (
         <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
           <HeartPulseIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#0F172A] mt-4 mb-2">
             Aucun site surveille
           </div>
           <div className="text-[13px] text-[#9ca3af]">
@@ -396,7 +396,7 @@ export default function PulseHistoryPage() {
           {currentSite && (
             <>
               {/* Score chart */}
-              <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-4">
+              <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-4">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="w-[5px] h-[5px] rounded-full bg-[#ec4899] inline-block" />
                   <span className="text-[13px] text-[#9ca3af]">Evolution du score — {currentSite.domain}</span>
@@ -405,7 +405,7 @@ export default function PulseHistoryPage() {
               </div>
 
               {/* Response time chart */}
-              <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-4">
+              <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-4">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="w-[5px] h-[5px] rounded-full bg-[#3b82f6] inline-block" />
                   <span className="text-[13px] text-[#9ca3af]">Temps de reponse — {currentSite.domain}</span>
@@ -432,7 +432,7 @@ export default function PulseHistoryPage() {
               {/* Two-column: Downtime incidents + SSL/Domain expiry */}
               <div className="grid grid-cols-2 gap-4 mb-4">
                 {/* Downtime incidents */}
-                <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
                   <div className="flex items-center gap-2 mb-4">
                     <AlertTriangleIcon size={14} color="#ef4444" />
                     <span className="text-[13px] text-[#9ca3af]">Incidents de downtime</span>
@@ -449,7 +449,7 @@ export default function PulseHistoryPage() {
                 </div>
 
                 {/* SSL / Domain expiry timeline */}
-                <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+                <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-[5px] h-[5px] rounded-full bg-[#10b981] inline-block" />
                     <span className="text-[13px] text-[#9ca3af]">Expiration SSL / Domaine</span>
@@ -459,7 +459,7 @@ export default function PulseHistoryPage() {
               </div>
 
               {/* History table */}
-              <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+              <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="w-[5px] h-[5px] rounded-full bg-[#ec4899] inline-block" />
                   <span className="text-[13px] text-[#9ca3af]">Historique des analyses</span>

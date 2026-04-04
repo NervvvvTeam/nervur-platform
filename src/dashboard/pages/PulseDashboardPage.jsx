@@ -155,10 +155,10 @@ function AlertsConfig({ site, onSave }) {
   };
 
   return (
-    <div className="mt-4 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
+    <div className="mt-4 p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg border-l-[3px] border-l-[#ec4899]">
       <div className="flex items-center gap-2 mb-3.5">
         <BellIcon size={16} color={ACCENT} />
-        <span className="text-[13px] font-semibold text-[#f0f0f3]">Configurer les alertes</span>
+        <span className="text-[13px] font-semibold text-[#0F172A]">Configurer les alertes</span>
       </div>
 
       <div className="mb-3">
@@ -168,7 +168,7 @@ function AlertsConfig({ site, onSave }) {
           value={email}
           onChange={e => setEmail(e.target.value)}
           placeholder="votre@email.com"
-          className="w-full px-3 py-2 bg-[#141520] border border-[#2a2d3a] rounded-md text-[#f0f0f3] text-[13px] font-[inherit] outline-none box-border"
+          className="w-full px-3 py-2 bg-[#F8FAFC] border border-[#E2E8F0] rounded-md text-[#0F172A] text-[13px] font-[inherit] outline-none box-border"
         />
       </div>
 
@@ -224,14 +224,14 @@ function StatusPagePreview({ site, statusData, onClose }) {
       onClick={onClose}
     >
       <div
-        className="w-[600px] max-h-[80vh] overflow-auto bg-[#141520] rounded-xl border border-[#2a2d3a] p-8"
+        className="w-[600px] max-h-[80vh] overflow-auto bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] p-8"
         onClick={e => e.stopPropagation()}
       >
         {/* Status page header */}
         <div className="text-center mb-7">
           <div className="flex items-center justify-center gap-2.5 mb-2">
             <GlobeIcon size={24} color={ACCENT} />
-            <h2 className="text-xl font-bold text-[#f0f0f3] m-0">
+            <h2 className="text-xl font-bold text-[#0F172A] m-0">
               {statusData.domain}
             </h2>
           </div>
@@ -258,19 +258,19 @@ function StatusPagePreview({ site, statusData, onClose }) {
 
         {/* Stats grid */}
         <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="p-4 bg-[#1e2029] rounded-lg text-center">
+          <div className="p-4 bg-[#F8FAFC] rounded-lg text-center">
             <div className="text-[11px] text-[#9ca3af] mb-1.5">Temps de reponse</div>
-            <div className="text-xl font-bold text-[#f0f0f3]">
+            <div className="text-xl font-bold text-[#0F172A]">
               {statusData.responseTime ? `${statusData.responseTime}ms` : "N/A"}
             </div>
           </div>
-          <div className="p-4 bg-[#1e2029] rounded-lg text-center">
+          <div className="p-4 bg-[#F8FAFC] rounded-lg text-center">
             <div className="text-[11px] text-[#9ca3af] mb-1.5">Certificat SSL</div>
             <div className="text-xl font-bold" style={{ color: statusData.ssl?.valid ? "#10b981" : "#ef4444" }}>
               {statusData.ssl?.valid ? `${statusData.ssl.daysLeft}j` : "Invalide"}
             </div>
           </div>
-          <div className="p-4 bg-[#1e2029] rounded-lg text-center">
+          <div className="p-4 bg-[#F8FAFC] rounded-lg text-center">
             <div className="text-[11px] text-[#9ca3af] mb-1.5">Uptime</div>
             <div className="text-xl font-bold" style={{ color: statusData.uptimePercentage >= 99 ? "#10b981" : "#f59e0b" }}>
               {statusData.uptimePercentage}%
@@ -340,7 +340,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
         <div className="flex items-center gap-4">
           <ScoreGauge score={score} size={64} />
           <div>
-            <div className="text-base font-semibold text-[#f0f0f3]">{site.domain}</div>
+            <div className="text-base font-semibold text-[#0F172A]">{site.domain}</div>
             <div className="text-xs text-[#6b7280] mt-1">
               {check.checkedAt
                 ? `Dernier check : ${new Date(check.checkedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}`
@@ -386,7 +386,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
 
           <div className="grid grid-cols-2 gap-3">
             {/* Uptime card with response time graph */}
-            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${check.uptime?.status ? "#10b981" : "#ef4444"}` }}>
+            <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg" style={{ borderLeft: `3px solid ${check.uptime?.status ? "#10b981" : "#ef4444"}` }}>
               <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">Uptime</div>
               <StatusBadge ok={check.uptime?.status} labelOk="En ligne" labelFail="Hors ligne" />
               {check.uptime?.responseTime && (
@@ -409,7 +409,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
             </div>
 
             {/* SSL card with full details */}
-            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${sslColor}` }}>
+            <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg" style={{ borderLeft: `3px solid ${sslColor}` }}>
               <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">Certificat SSL</div>
               <StatusBadge ok={check.ssl?.valid} labelOk="Valide" labelFail="Invalide" />
               {check.ssl?.valid && (
@@ -445,7 +445,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
             </div>
 
             {/* Domain card */}
-            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${domainColor}` }}>
+            <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg" style={{ borderLeft: `3px solid ${domainColor}` }}>
               <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">Domaine</div>
               <div className="text-xs text-[#6b7280]">
                 Expire dans : <span className="font-semibold" style={{ color: domainColor }}>
@@ -472,7 +472,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
             </div>
 
             {/* DNS card with chips */}
-            <div className="p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg" style={{ borderLeft: `3px solid ${check.dns?.aRecords ? "#10b981" : "#ef4444"}` }}>
+            <div className="p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg" style={{ borderLeft: `3px solid ${check.dns?.aRecords ? "#10b981" : "#ef4444"}` }}>
               <div className="text-[11px] text-[#9ca3af] mb-2 font-medium">DNS</div>
               {check.dns?.aRecords ? (
                 <div className="flex flex-wrap gap-1.5">
@@ -498,7 +498,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
           </div>
 
           {/* Email deliverability */}
-          <div className="mt-3 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
+          <div className="mt-3 p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg border-l-[3px] border-l-[#ec4899]">
             <div className="text-[11px] text-[#9ca3af] mb-2.5 font-medium">Délivrabilité email</div>
             <div className="flex gap-3 flex-wrap">
               <StatusBadge ok={check.dns?.spf} labelOk="SPF configuré" labelFail="SPF absent" />
@@ -520,7 +520,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
 
           {/* Security headers */}
           {check.securityHeaders && Object.keys(check.securityHeaders).length > 0 && (
-            <div className="mt-3 p-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg border-l-[3px] border-l-[#ec4899]">
+            <div className="mt-3 p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg border-l-[3px] border-l-[#ec4899]">
               <div className="flex items-center gap-2 mb-3">
                 <ShieldIcon size={14} color={ACCENT} />
                 <span className="text-[11px] text-[#9ca3af] font-medium">En-têtes de sécurité</span>
@@ -557,7 +557,7 @@ function SiteCard({ site, onRecheck, onDelete, onSaveAlerts, onShowStatusPage, r
 
           {/* HTTP/2 */}
           {check.http2 && (
-            <div className="mt-3 px-4 py-3 bg-[#1e2029] border border-[#2a2d3a] rounded-lg flex items-center justify-between">
+            <div className="mt-3 px-4 py-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg flex items-center justify-between">
               <span className="text-xs text-[#9ca3af]">Support HTTP/2</span>
               <StatusBadge ok={check.http2.supported} labelOk="Supporte" labelFail="Non detecte" />
             </div>
@@ -670,7 +670,7 @@ export default function PulseDashboardPage() {
           <HeartPulseIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">Pulse</h1>
+          <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">Pulse</h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
             Surveillance de la sante numerique de vos sites
           </p>
@@ -681,10 +681,10 @@ export default function PulseDashboardPage() {
       <div className="h-[3px] rounded-sm mb-7 mt-4 bg-gradient-to-br from-[#ec4899] to-[#f472b6]" />
 
       {/* Add site form */}
-      <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+      <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
         <div className="flex items-center gap-2 mb-4">
           <HeartPulseIcon size={18} color={ACCENT} />
-          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          <h2 className="text-[15px] font-semibold text-[#0F172A] m-0">
             Ajouter un site
           </h2>
         </div>
@@ -695,7 +695,7 @@ export default function PulseDashboardPage() {
             onChange={e => setDomain(e.target.value)}
             placeholder="exemple.com"
             onKeyDown={e => e.key === "Enter" && !adding && addSite()}
-            className="flex-1 px-4 py-3 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#f0f0f3] text-sm font-[inherit] outline-none box-border transition-[border-color,box-shadow] duration-200 focus:border-[#ec4899] focus:shadow-[0_0_0_3px_rgba(236,72,153,0.18)]"
+            className="flex-1 px-4 py-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-[#0F172A] text-sm font-[inherit] outline-none box-border transition-[border-color,box-shadow] duration-200 focus:border-[#ec4899] focus:shadow-[0_0_0_3px_rgba(236,72,153,0.18)]"
           />
           <button
             onClick={addSite}
@@ -738,7 +738,7 @@ export default function PulseDashboardPage() {
       {!loading && sites.length === 0 && (
         <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
           <HeartPulseIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#0F172A] mt-4 mb-2">
             Aucun site surveille
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed max-w-[400px] mx-auto">

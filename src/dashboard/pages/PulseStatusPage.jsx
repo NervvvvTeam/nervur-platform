@@ -56,7 +56,7 @@ export default function PulseStatusPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="h-[3px] w-10 rounded-sm mb-4 bg-gradient-to-br from-[#ec4899] to-[#f472b6]" />
-        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
+        <h1 className="text-[22px] font-semibold text-[#0F172A] mb-1.5">
           Page de statut publique
         </h1>
         <p className="text-sm text-[#9ca3af]">
@@ -65,7 +65,7 @@ export default function PulseStatusPage() {
       </div>
 
       {loading && (
-        <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
+        <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
           <div
             className="w-12 h-12 mx-auto mb-4 border-[3px] border-[rgba(236,72,153,0.18)] border-t-[#ec4899] rounded-full animate-[pulse-status-spin_1s_linear_infinite]"
           />
@@ -76,7 +76,7 @@ export default function PulseStatusPage() {
 
       {!loading && sites.length === 0 && (
         <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center py-12">
-          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
+          <div className="text-base font-semibold text-[#0F172A] mb-2">
             Aucun site surveillé
           </div>
           <div className="text-[13px] text-[#9ca3af]">
@@ -88,9 +88,9 @@ export default function PulseStatusPage() {
       {!loading && sites.length > 0 && (
         <>
           {/* Toggle activation */}
-          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5 flex items-center justify-between">
+          <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5 flex items-center justify-between">
             <div>
-              <div className="text-sm font-medium text-[#f0f0f3]">
+              <div className="text-sm font-medium text-[#0F172A]">
                 Activer la page de statut publique
               </div>
               <div className="text-xs text-[#9ca3af] mt-0.5">
@@ -110,9 +110,9 @@ export default function PulseStatusPage() {
           </div>
 
           {/* Preview */}
-          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5">
+          <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-5">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+              <h2 className="text-[15px] font-semibold text-[#0F172A] m-0">
                 Aperçu de la page de statut
               </h2>
               <span
@@ -128,7 +128,7 @@ export default function PulseStatusPage() {
 
             {/* Mock status page */}
             <div
-              className="bg-[#161820] rounded-xl border border-[#2a2d3a] p-7 transition-opacity duration-300"
+              className="bg-[#161820] rounded-xl border border-[#E2E8F0] p-7 transition-opacity duration-300"
               style={{ opacity: statusEnabled ? 1 : 0.5 }}
             >
               {/* Status page header */}
@@ -139,7 +139,7 @@ export default function PulseStatusPage() {
                     <path d="M12 6v4l2 2-2 2v4"/>
                   </svg>
                 </div>
-                <h3 className="text-base font-semibold text-[#f0f0f3] m-0 mb-1">
+                <h3 className="text-base font-semibold text-[#0F172A] m-0 mb-1">
                   Statut des services
                 </h3>
                 <div className="text-xs text-[#9ca3af]">
@@ -177,7 +177,7 @@ export default function PulseStatusPage() {
                   const isUp = site.lastCheck?.uptimeStatus !== false;
                   const score = site.lastCheck?.score || 0;
                   return (
-                    <div key={site._id} className="flex items-center justify-between py-3.5 px-[18px] bg-[#1e2029] rounded-lg border border-[#2a2d3a]">
+                    <div key={site._id} className="flex items-center justify-between py-3.5 px-[18px] bg-[#F8FAFC] rounded-lg border border-[#E2E8F0]">
                       <div className="flex items-center gap-2.5">
                         <div
                           className="w-2 h-2 rounded-full"
@@ -233,8 +233,8 @@ export default function PulseStatusPage() {
           </div>
 
           {/* Embed code */}
-          <div className="bg-[#1e2029] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
-            <h2 className="text-[15px] font-semibold text-[#f0f0f3] mb-2">
+          <div className="bg-[#F8FAFC] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+            <h2 className="text-[15px] font-semibold text-[#0F172A] mb-2">
               Code d'intégration
             </h2>
             <p className="text-xs text-[#9ca3af] mb-4">
@@ -242,7 +242,7 @@ export default function PulseStatusPage() {
             </p>
 
             <div className="relative">
-              <pre className="p-4 bg-[#161820] rounded-lg border border-[#2a2d3a] text-[#a78bfa] text-xs overflow-auto leading-relaxed m-0">
+              <pre className="p-4 bg-[#161820] rounded-lg border border-[#E2E8F0] text-[#a78bfa] text-xs overflow-auto leading-relaxed m-0">
                 {embedCode}
               </pre>
               <button
