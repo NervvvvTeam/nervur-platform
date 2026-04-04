@@ -393,7 +393,16 @@ export default function NervurAurora() {
       <section style={{
         padding: isMobile ? "60px 20px 40px" : "100px 48px 80px",
         maxWidth: "1200px", margin: "0 auto",
+        position: "relative", overflow: "hidden",
       }}>
+        {/* Decorative background elements */}
+        {!isMobile && <>
+          <div style={{ position: "absolute", top: "-60px", right: "-40px", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(79,70,229,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: "-100px", left: "-80px", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(8,145,178,0.04) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: "40px", right: "15%", width: "6px", height: "6px", borderRadius: "50%", background: C.accent, opacity: 0.3 }} />
+          <div style={{ position: "absolute", top: "120px", right: "8%", width: "4px", height: "4px", borderRadius: "50%", background: "#22c55e", opacity: 0.4 }} />
+          <div style={{ position: "absolute", bottom: "180px", left: "5%", width: "5px", height: "5px", borderRadius: "50%", background: "#f59e0b", opacity: 0.3 }} />
+        </>}
         <div style={{
           display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
           gap: isMobile ? "40px" : "60px", alignItems: "center",
@@ -515,7 +524,8 @@ export default function NervurAurora() {
 
 
       {/* ═══ SERVICES ═══ */}
-      <section id="services" style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: C.bgAlt }}>
+      <section id="services" style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: `linear-gradient(180deg, ${C.bgAlt} 0%, #F1F5F9 50%, ${C.bgAlt} 100%)`, position: "relative" }}>
+        {!isMobile && <div style={{ position: "absolute", top: "50%", right: "0", width: "200px", height: "200px", borderRadius: "50%", background: "radial-gradient(circle, rgba(79,70,229,0.04) 0%, transparent 70%)", pointerEvents: "none", transform: "translateY(-50%)" }} />}
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <RevealSection>
             <div style={{ textAlign: "center", marginBottom: "48px" }}>
@@ -621,7 +631,8 @@ export default function NervurAurora() {
 
 
       {/* ═══ OUTILS SaaS ═══ */}
-      <section id="outils" style={{ padding: isMobile ? "60px 20px" : "100px 48px" }}>
+      <section id="outils" style={{ padding: isMobile ? "60px 20px" : "100px 48px", position: "relative" }}>
+        {!isMobile && <div style={{ position: "absolute", top: "0", left: "0", right: "0", height: "1px", background: `linear-gradient(90deg, transparent, ${C.border}, transparent)` }} />}
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <RevealSection>
             <div style={{ textAlign: "center", marginBottom: isMobile ? "30px" : "60px" }}>
@@ -713,7 +724,7 @@ export default function NervurAurora() {
 
 
       {/* ═══ POURQUOI NERVÜR ═══ */}
-      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: C.bgAlt }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: `linear-gradient(135deg, #EEF2FF 0%, ${C.bgAlt} 50%, #F0FDFA 100%)`, position: "relative" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <RevealSection>
             <div style={{ textAlign: "center", marginBottom: "48px" }}>
@@ -740,7 +751,7 @@ export default function NervurAurora() {
 
 
       {/* ═══ METHODOLOGIE ═══ */}
-      <section id="approche" style={{ padding: isMobile ? "60px 20px" : "100px 48px" }}>
+      <section id="approche" style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: C.bg, borderTop: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <RevealSection>
             <div style={{ textAlign: "center", marginBottom: "48px" }}>
@@ -769,7 +780,11 @@ export default function NervurAurora() {
 
 
       {/* ═══ CTA FINAL ═══ */}
-      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px", background: C.dark, textAlign: "center" }}>
+      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px", background: `linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%)`, textAlign: "center", position: "relative", overflow: "hidden" }}>
+        {!isMobile && <>
+          <div style={{ position: "absolute", top: "-50px", left: "20%", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: "-80px", right: "15%", width: "250px", height: "250px", borderRadius: "50%", background: "radial-gradient(circle, rgba(8,145,178,0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
+        </>}
         <RevealSection>
           <h2 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: "#FFFFFF", letterSpacing: "-1px", lineHeight: 1.15, marginBottom: "20px" }}>
             Votre entreprise merite<br/>une <span style={{ color: "#818CF8" }}>vraie structure</span> digitale.
