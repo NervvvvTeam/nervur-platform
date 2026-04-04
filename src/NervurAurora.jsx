@@ -440,84 +440,65 @@ export default function NervurAurora() {
             </div>
           </div>
 
-          {/* Right — Product Mockup */}
-          <div style={{ animation: loaded ? "fadeInScale 0.8s ease 0.3s both" : "none" }}>
+          {/* Right — Floating Stats Cards */}
+          <div style={{ position: "relative", minHeight: isMobile ? "300px" : "420px", animation: loaded ? "fadeInScale 0.8s ease 0.3s both" : "none" }}>
+            {/* Floating stat card 1 — Trafic */}
             <div style={{
-              borderRadius: "16px", border: `1px solid ${C.border}`, background: C.bgCard,
-              boxShadow: "0 24px 48px rgba(0,0,0,0.4)", overflow: "hidden",
-              aspectRatio: "16/10", display: "flex", alignItems: "center", justifyContent: "center",
-              position: "relative", animation: "float 6s ease-in-out infinite",
+              position: isMobile ? "relative" : "absolute", top: isMobile ? 0 : "10px", right: isMobile ? 0 : "20px",
+              padding: "20px 28px", borderRadius: "14px", background: C.bgCard,
+              border: `1px solid ${C.border}`, boxShadow: "0 16px 40px rgba(0,0,0,0.3)",
+              animation: loaded ? "float 5s ease-in-out infinite" : "none",
+              marginBottom: isMobile ? "12px" : 0, zIndex: 3,
             }}>
-              {/* Browser chrome bar */}
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, padding: "12px 16px",
-                background: C.bgAlt, borderBottom: `1px solid ${C.border}`,
-                display: "flex", gap: "6px", alignItems: "center" }}>
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
-                <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#22c55e" }} />
-                <div style={{ flex: 1, marginLeft: "12px", height: "24px", background: C.bgAlt, borderRadius: "6px", display: "flex", alignItems: "center", paddingLeft: "12px" }}>
-                  <span style={{ fontSize: "11px", color: C.faint }}>nervur.fr</span>
-                </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                <span style={{ fontSize: "12px", color: C.muted, fontWeight: 500 }}>Trafic organique</span>
               </div>
-              <div style={{ padding: "52px 20px 20px", position: "relative", width: "100%" }}>
-                {/* Mini dashboard header */}
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", padding: "0 8px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <div style={{ width: "28px", height: "28px", borderRadius: "8px", background: C.accentLight, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <svg width="14" height="14" viewBox="0 0 24 28" fill="none"><path d="M2 26V2L22 26V2" stroke={C.accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </div>
-                    <span style={{ fontSize: "13px", fontWeight: 600, color: C.text }}>NERVÜR Dashboard</span>
-                  </div>
-                  <span style={{ fontSize: "11px", color: "#22c55e", fontWeight: 600, display: "flex", alignItems: "center", gap: "4px" }}>
-                    <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#22c55e", display: "inline-block", animation: "pulse 2s ease infinite" }} />
-                    En ligne
-                  </span>
-                </div>
-                {/* Stats */}
-                <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginBottom: "16px" }}>
-                  {[{ n: Math.round(perfScore), l: "Score", c: C.accent }, { n: Math.round(trafficGrowth), l: "Avis", c: "#22c55e" }, { n: "98%", l: "Conforme", c: C.vault }].map((s, i) => (
-                    <div key={i} style={{ flex: 1, padding: "10px 8px", background: C.bgAlt, borderRadius: "8px", border: `1px solid ${C.border}`, textAlign: "center" }}>
-                      <div style={{ fontSize: "18px", fontWeight: 700, color: s.c, transition: "all 0.6s ease" }}>{s.n}</div>
-                      <div style={{ fontSize: "10px", color: C.faint, marginTop: "2px" }}>{s.l}</div>
-                    </div>
-                  ))}
-                </div>
-                {/* Mini chart bars */}
-                <div style={{ display: "flex", gap: "4px", alignItems: "flex-end", height: "40px", padding: "0 8px" }}>
-                  {[65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 50, 88].map((h, i) => (
-                    <div key={i} style={{
-                      flex: 1, borderRadius: "2px",
-                      background: h > 80 ? C.accent : h > 60 ? `${C.accent}60` : `${C.accent}30`,
-                      height: `${h}%`, transition: `height 0.8s ${EASE} ${i * 50}ms`,
-                    }} />
-                  ))}
-                </div>
-              </div>
+              <div style={{ fontSize: "36px", fontWeight: 700, color: "#22c55e", lineHeight: 1, transition: "all 0.6s" }}>+{Math.round(trafficGrowth)}%</div>
             </div>
+
+            {/* Floating stat card 2 — Performance */}
+            <div style={{
+              position: isMobile ? "relative" : "absolute", top: isMobile ? 0 : "140px", left: isMobile ? 0 : "0px",
+              padding: "20px 28px", borderRadius: "14px", background: C.bgCard,
+              border: `1px solid ${C.border}`, boxShadow: "0 16px 40px rgba(0,0,0,0.3)",
+              animation: loaded ? "float 6s ease-in-out 0.5s infinite" : "none",
+              marginBottom: isMobile ? "12px" : 0, zIndex: 2,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <span style={{ fontSize: "12px", color: C.muted, fontWeight: 500 }}>Performance</span>
+              </div>
+              <div style={{ fontSize: "36px", fontWeight: 700, color: C.accent, lineHeight: 1, transition: "all 0.6s" }}>{Math.round(perfScore)}/100</div>
+            </div>
+
+            {/* Floating stat card 3 — Conversion */}
+            <div style={{
+              position: isMobile ? "relative" : "absolute", bottom: isMobile ? 0 : "20px", right: isMobile ? 0 : "40px",
+              padding: "20px 28px", borderRadius: "14px", background: C.bgCard,
+              border: `1px solid ${C.border}`, boxShadow: "0 16px 40px rgba(0,0,0,0.3)",
+              animation: loaded ? "float 5.5s ease-in-out 1s infinite" : "none",
+              zIndex: 1,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                <span style={{ fontSize: "12px", color: C.muted, fontWeight: 500 }}>Conversion</span>
+              </div>
+              <div style={{ fontSize: "36px", fontWeight: 700, color: "#f59e0b", lineHeight: 1, transition: "all 0.6s" }}>{convRate.toFixed(1)}%</div>
+            </div>
+
+            {/* Ambient glow behind cards */}
+            {!isMobile && <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)", pointerEvents: "none" }} />}
           </div>
         </div>
 
-        {/* Stats row */}
-        <div style={{
-          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
-          gap: "16px", marginTop: "60px",
-        }}>
-          {[
-            { value: trafficGrowth, display: `+${Math.round(trafficGrowth)}%`, label: "Trafic organique moyen", color: "#22c55e", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> },
-            { value: perfScore, display: `${Math.round(perfScore)}/100`, label: "Score performance", color: C.accent, icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> },
-            { value: convRate, display: `${convRate.toFixed(1)}%`, label: "Taux de conversion", color: "#f59e0b", icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg> },
-          ].map((s, i) => (
-            <RevealSection key={i} delay={i * 150}>
-              <Card style={{ textAlign: "center", padding: "32px 24px" }}>
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: "12px" }}>{s.icon}</div>
-                <div style={{ fontSize: "42px", fontWeight: 700, color: s.color, lineHeight: 1, transition: "all 0.6s ease" }}>
-                  {s.display}
-                </div>
-                <div style={{ fontSize: "14px", color: C.muted, marginTop: "10px", fontWeight: 500 }}>{s.label}</div>
-              </Card>
-            </RevealSection>
-          ))}
-        </div>
+        {/* Scroll indicator */}
+        {!isMobile && (
+          <div style={{ textAlign: "center", marginTop: "40px", animation: loaded ? "fadeInUp 0.7s ease 1s both" : "none" }}>
+            <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: C.faint }}>Scroll</span>
+            <div style={{ width: "1px", height: "40px", background: `linear-gradient(180deg, ${C.muted}, transparent)`, margin: "8px auto 0" }} />
+          </div>
+        )}
       </section>
 
 
