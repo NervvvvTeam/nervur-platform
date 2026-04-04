@@ -49,8 +49,8 @@ export default function WidgetPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
 
   return (
     <div style={{ maxWidth: "1100px" }}>
@@ -61,8 +61,8 @@ export default function WidgetPage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", marginBottom: "6px" }}>Widget Avis</h1>
-        <p style={{ fontSize: "14px", color: "#64748B", lineHeight: 1.6 }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Widget Avis</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af", lineHeight: 1.6 }}>
           {"Intégrez vos meilleurs avis directement sur votre site web. Le widget affiche automatiquement vos avis 4 et 5 étoiles."}
         </p>
       </div>
@@ -71,10 +71,10 @@ export default function WidgetPage() {
         {/* Embed code */}
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+          border: "1px solid #2a2d3a", background: "#1e2029", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-            <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B" }}>
+            <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af" }}>
               Code d'intégration
             </h3>
             <button onClick={copyCode}
@@ -90,7 +90,7 @@ export default function WidgetPage() {
           </div>
           <pre style={{
             background: "rgba(239,68,68,0.06)", borderRadius: "8px", padding: "16px",
-            fontSize: "11px", color: "#64748B", overflow: "auto", maxHeight: "400px",
+            fontSize: "11px", color: "#6b7280", overflow: "auto", maxHeight: "400px",
             lineHeight: 1.5, whiteSpace: "pre-wrap", wordBreak: "break-all",
             border: "1px solid rgba(239,68,68,0.15)"
           }}>
@@ -101,13 +101,13 @@ export default function WidgetPage() {
         {/* Preview */}
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+          border: "1px solid #2a2d3a", background: "#1e2029", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
-          <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "16px" }}>
+          <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "16px" }}>
             Aperçu
           </h3>
           <div style={{
-            background: "#F0F1F3", borderRadius: "10px", padding: "24px",
+            background: "#FFFFFF", borderRadius: "10px", padding: "24px",
             boxShadow: "0 2px 12px rgba(0,0,0,0.3)"
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
@@ -138,9 +138,9 @@ export default function WidgetPage() {
       {/* Instructions */}
       <div style={{
         marginTop: "24px", padding: "18px", borderRadius: "10px",
-        border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+        border: "1px solid #2a2d3a", background: "#1e2029", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "16px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "16px" }}>
           Comment intégrer
         </h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
@@ -157,7 +157,7 @@ export default function WidgetPage() {
                 justifyContent: "center", fontSize: "12px", fontWeight: 600,
                 color: "#ef4444", flexShrink: 0
               }}>{i + 1}</span>
-              <span style={{ fontSize: "14px", color: "#334155" }}>{step}</span>
+              <span style={{ fontSize: "14px", color: "#d1d5db" }}>{step}</span>
             </div>
           ))}
         </div>

@@ -120,23 +120,23 @@ export default function NexusContactsPage() {
           background: "linear-gradient(135deg, #10b981, #34d399)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", marginBottom: "6px" }}>Contacts</h1>
-        <p style={{ fontSize: "14px", color: "#64748B" }}>Gérez vos listes de contacts pour vos campagnes email.</p>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Contacts</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>Gérez vos listes de contacts pour vos campagnes email.</p>
       </div>
 
       {/* Stats */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "24px" }}>
-        <div style={{ padding: "16px 20px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", borderLeft: "3px solid #10b981", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
-          <div style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A" }}>{total}</div>
-          <div style={{ fontSize: "13px", color: "#64748B" }}>Total contacts</div>
+        <div style={{ padding: "16px 20px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px", borderLeft: "3px solid #10b981", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
+          <div style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3" }}>{total}</div>
+          <div style={{ fontSize: "13px", color: "#9ca3af" }}>Total contacts</div>
         </div>
-        <div style={{ padding: "16px 20px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", borderLeft: "3px solid #10b981", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
+        <div style={{ padding: "16px 20px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px", borderLeft: "3px solid #10b981", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
           <div style={{ fontSize: "22px", fontWeight: 600, color: "#10b981" }}>{active}</div>
-          <div style={{ fontSize: "13px", color: "#64748B" }}>Actifs</div>
+          <div style={{ fontSize: "13px", color: "#9ca3af" }}>Actifs</div>
         </div>
-        <div style={{ padding: "16px 20px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", borderLeft: "3px solid #10b981", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
-          <div style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A" }}>{lists.length}</div>
-          <div style={{ fontSize: "13px", color: "#64748B" }}>Listes</div>
+        <div style={{ padding: "16px 20px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px", borderLeft: "3px solid #10b981", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
+          <div style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3" }}>{lists.length}</div>
+          <div style={{ fontSize: "13px", color: "#9ca3af" }}>Listes</div>
         </div>
       </div>
 
@@ -146,49 +146,49 @@ export default function NexusContactsPage() {
           style={{ padding: "9px 18px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 500, cursor: "pointer", fontFamily: "inherit", boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>
           + Ajouter un contact
         </button>
-        <label style={{ padding: "9px 18px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", fontSize: "13px", color: "#64748B", cursor: "pointer", fontFamily: "inherit" }}>
+        <label style={{ padding: "9px 18px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "8px", fontSize: "13px", color: "#6b7280", cursor: "pointer", fontFamily: "inherit" }}>
           {importing ? "Import..." : "Importer CSV"}
           <input ref={fileRef} type="file" accept=".csv,.txt" onChange={handleCSV} style={{ display: "none" }} />
         </label>
         <input type="text" value={search} onChange={e => setSearch(e.target.value)}
           placeholder="Rechercher..."
-          style={{ padding: "9px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "13px", fontFamily: "inherit", outline: "none", flex: 1, minWidth: "150px", transition: "border-color 0.2s" }}
+          style={{ padding: "9px 14px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3", fontSize: "13px", fontFamily: "inherit", outline: "none", flex: 1, minWidth: "150px", transition: "border-color 0.2s" }}
           onFocus={e => e.target.style.borderColor = "#10b981"}
-          onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+          onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
       </div>
 
       {/* Import result */}
       {importResult && (
         <div style={{ padding: "14px 18px", background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.15)", borderRadius: "10px", marginBottom: "16px", fontSize: "14px", color: "#10b981" }}>
           {importResult.imported} contacts importés, {importResult.skipped} ignorés sur {importResult.total} lignes.
-          <button onClick={() => setImportResult(null)} style={{ marginLeft: "12px", background: "none", border: "none", color: "#64748B", cursor: "pointer", fontSize: "12px" }}>✕</button>
+          <button onClick={() => setImportResult(null)} style={{ marginLeft: "12px", background: "none", border: "none", color: "#9ca3af", cursor: "pointer", fontSize: "12px" }}>✕</button>
         </div>
       )}
 
       {/* Add form */}
       {showAdd && (
-        <div style={{ padding: "20px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)", marginBottom: "16px" }}>
+        <div style={{ padding: "20px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)", marginBottom: "16px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "10px", marginBottom: "12px" }}>
             <input type="email" value={newContact.email} onChange={e => setNewContact(p => ({ ...p, email: e.target.value }))}
-              placeholder="email@exemple.com" style={{ padding: "10px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
+              placeholder="email@exemple.com" style={{ padding: "10px 14px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
             <input type="text" value={newContact.firstName} onChange={e => setNewContact(p => ({ ...p, firstName: e.target.value }))}
-              placeholder="Prénom" style={{ padding: "10px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
+              placeholder="Prénom" style={{ padding: "10px 14px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
             <input type="text" value={newContact.lastName} onChange={e => setNewContact(p => ({ ...p, lastName: e.target.value }))}
-              placeholder="Nom" style={{ padding: "10px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
+              placeholder="Nom" style={{ padding: "10px 14px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
             <input type="text" value={newContact.company} onChange={e => setNewContact(p => ({ ...p, company: e.target.value }))}
-              placeholder="Entreprise" style={{ padding: "10px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
+              placeholder="Entreprise" style={{ padding: "10px 14px", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none", transition: "border-color 0.2s" }}
               onFocus={e => e.target.style.borderColor = "#10b981"}
-              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
           </div>
           <div style={{ display: "flex", gap: "8px" }}>
             <button onClick={addContact} style={{ padding: "8px 18px", background: "linear-gradient(135deg, #10b981, #34d399)", color: "#fff", border: "none", borderRadius: "6px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit", boxShadow: "0 4px 16px rgba(16,185,129,0.4)" }}>Ajouter</button>
-            <button onClick={() => setShowAdd(false)} style={{ padding: "8px 18px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#64748B", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Annuler</button>
+            <button onClick={() => setShowAdd(false)} style={{ padding: "8px 18px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#9ca3af", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Annuler</button>
           </div>
         </div>
       )}
@@ -197,12 +197,12 @@ export default function NexusContactsPage() {
       {lists.length > 1 && (
         <div style={{ display: "flex", gap: "6px", marginBottom: "16px", flexWrap: "wrap" }}>
           <button onClick={() => setSelectedList("")}
-            style={{ padding: "5px 14px", borderRadius: "6px", border: "none", fontSize: "12px", cursor: "pointer", fontFamily: "inherit", background: !selectedList ? "#10b981" : "#E2E8F0", color: !selectedList ? "#fff" : "#64748B" }}>
+            style={{ padding: "5px 14px", borderRadius: "6px", border: "none", fontSize: "12px", cursor: "pointer", fontFamily: "inherit", background: !selectedList ? "#10b981" : "#2a2d3a", color: !selectedList ? "#fff" : "#6b7280" }}>
             Tous
           </button>
           {lists.map(l => (
             <button key={l} onClick={() => setSelectedList(l)}
-              style={{ padding: "5px 14px", borderRadius: "6px", border: "none", fontSize: "12px", cursor: "pointer", fontFamily: "inherit", background: selectedList === l ? "#10b981" : "#E2E8F0", color: selectedList === l ? "#fff" : "#64748B" }}>
+              style={{ padding: "5px 14px", borderRadius: "6px", border: "none", fontSize: "12px", cursor: "pointer", fontFamily: "inherit", background: selectedList === l ? "#10b981" : "#2a2d3a", color: selectedList === l ? "#fff" : "#6b7280" }}>
               {l}
             </button>
           ))}
@@ -211,23 +211,23 @@ export default function NexusContactsPage() {
 
       {/* Contact list */}
       {loading ? (
-        <div style={{ padding: "60px 0", textAlign: "center", color: "#64748B", fontSize: "14px" }}>Chargement...</div>
+        <div style={{ padding: "60px 0", textAlign: "center", color: "#9ca3af", fontSize: "14px" }}>Chargement...</div>
       ) : contacts.length === 0 ? (
-        <div style={{ padding: "60px 24px", textAlign: "center", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
-          <div style={{ fontSize: "16px", color: "#64748B", marginBottom: "8px" }}>Aucun contact</div>
-          <p style={{ fontSize: "14px", color: "#334155" }}>Ajoutez des contacts manuellement ou importez un fichier CSV.</p>
+        <div style={{ padding: "60px 24px", textAlign: "center", background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
+          <div style={{ fontSize: "16px", color: "#9ca3af", marginBottom: "8px" }}>Aucun contact</div>
+          <p style={{ fontSize: "14px", color: "#d1d5db" }}>Ajoutez des contacts manuellement ou importez un fichier CSV.</p>
         </div>
       ) : (
-        <div style={{ background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)", overflow: "hidden" }}>
+        <div style={{ background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)", overflow: "hidden" }}>
           {/* Header */}
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 40px", padding: "12px 20px", borderBottom: "1px solid #2a2d3a", fontSize: "11px", color: "#64748B", fontWeight: 500 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 40px", padding: "12px 20px", borderBottom: "1px solid #2a2d3a", fontSize: "11px", color: "#9ca3af", fontWeight: 500 }}>
             <div>Email</div><div>Prénom</div><div>Entreprise</div><div>Statut</div><div></div>
           </div>
           {contacts.map(c => (
             <div key={c._id} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 40px", padding: "12px 20px", borderBottom: "1px solid #2a2d3a", alignItems: "center", fontSize: "13px" }}>
-              <div style={{ color: "#334155" }}>{c.email}</div>
-              <div style={{ color: "#64748B" }}>{c.firstName} {c.lastName}</div>
-              <div style={{ color: "#64748B" }}>{c.company}</div>
+              <div style={{ color: "#d1d5db" }}>{c.email}</div>
+              <div style={{ color: "#6b7280" }}>{c.firstName} {c.lastName}</div>
+              <div style={{ color: "#9ca3af" }}>{c.company}</div>
               <div>
                 <span style={{
                   fontSize: "11px", padding: "2px 8px", borderRadius: "4px",
@@ -236,9 +236,9 @@ export default function NexusContactsPage() {
                 }}>{c.status === "active" ? "Actif" : c.status === "bounced" ? "Bounce" : "Désabonné"}</span>
               </div>
               <button onClick={() => deleteContact(c._id)}
-                style={{ background: "none", border: "none", color: "#334155", cursor: "pointer", fontSize: "14px", padding: "2px" }}
+                style={{ background: "none", border: "none", color: "#d1d5db", cursor: "pointer", fontSize: "14px", padding: "2px" }}
                 onMouseEnter={e => e.target.style.color = "#ef4444"}
-                onMouseLeave={e => e.target.style.color = "#334155"}>
+                onMouseLeave={e => e.target.style.color = "#d1d5db"}>
                 ✕
               </button>
             </div>

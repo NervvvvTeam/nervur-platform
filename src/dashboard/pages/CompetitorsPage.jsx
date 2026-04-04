@@ -69,8 +69,8 @@ export default function CompetitorsPage() {
     } catch (err) { console.error(err); }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
 
   const chartData = data ? [
     { name: data.business.name.substring(0, 15), rating: data.business.rating, isOwn: true },
@@ -90,8 +90,8 @@ export default function CompetitorsPage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", marginBottom: "6px" }}>Veille concurrentielle</h1>
-        <p style={{ fontSize: "14px", color: "#64748B" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>Veille concurrentielle</h1>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Comparez vos scores avec vos concurrents directs.
         </p>
       </div>
@@ -100,20 +100,20 @@ export default function CompetitorsPage() {
       {chartData.length > 1 && (
         <div style={{
           padding: "18px", borderRadius: "10px", border: "1px solid #2a2d3a",
-          background: "#E8E9EC", marginBottom: "24px",
+          background: "#1e2029", marginBottom: "24px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
-          <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "20px" }}>
+          <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "20px" }}>
             Comparaison des scores
           </h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={chartData} barCategoryGap="30%">
-              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-              <XAxis dataKey="name" tick={{ fill: "#64748B", fontSize: 11 }} axisLine={false} />
-              <YAxis domain={[0, 5]} tick={{ fill: "#334155", fontSize: 11 }} axisLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3a" />
+              <XAxis dataKey="name" tick={{ fill: "#6b7280", fontSize: 11 }} axisLine={false} />
+              <YAxis domain={[0, 5]} tick={{ fill: "#d1d5db", fontSize: 11 }} axisLine={false} />
               <Bar dataKey="rating" radius={[6, 6, 0, 0]}>
                 {chartData.map((entry, i) => (
-                  <Cell key={i} fill={entry.isOwn ? "#ef4444" : "#334155"} />
+                  <Cell key={i} fill={entry.isOwn ? "#ef4444" : "#d1d5db"} />
                 ))}
               </Bar>
             </BarChart>
@@ -123,8 +123,8 @@ export default function CompetitorsPage() {
               <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: "#ef4444" }} />
               Votre entreprise
             </span>
-            <span style={{ fontSize: "12px", color: "#64748B", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: "#E2E8F0" }} />
+            <span style={{ fontSize: "12px", color: "#9ca3af", display: "flex", alignItems: "center", gap: "6px" }}>
+              <span style={{ width: "10px", height: "10px", borderRadius: "2px", background: "#2a2d3a" }} />
               Concurrents
             </span>
           </div>
@@ -140,15 +140,15 @@ export default function CompetitorsPage() {
             border: "1px solid rgba(239,68,68,0.25)", background: "rgba(239,68,68,0.04)"
           }}>
             <div style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500, marginBottom: "8px" }}>Vous</div>
-            <h3 style={{ fontSize: "17px", fontWeight: 600, marginBottom: "12px", color: "#0F172A" }}>{data.business.name}</h3>
+            <h3 style={{ fontSize: "17px", fontWeight: 600, marginBottom: "12px", color: "#f0f0f3" }}>{data.business.name}</h3>
             <div style={{ display: "flex", gap: "20px" }}>
               <div>
                 <div style={{ fontSize: "28px", fontWeight: 600, color: "#ef4444" }}>{data.business.rating}</div>
-                <div style={{ fontSize: "11px", color: "#64748B" }}>Score moyen</div>
+                <div style={{ fontSize: "11px", color: "#9ca3af" }}>Score moyen</div>
               </div>
               <div>
-                <div style={{ fontSize: "28px", fontWeight: 600, color: "#334155" }}>{data.business.totalReviews}</div>
-                <div style={{ fontSize: "11px", color: "#64748B" }}>Avis total</div>
+                <div style={{ fontSize: "28px", fontWeight: 600, color: "#d1d5db" }}>{data.business.totalReviews}</div>
+                <div style={{ fontSize: "11px", color: "#9ca3af" }}>Avis total</div>
               </div>
             </div>
           </div>
@@ -161,31 +161,31 @@ export default function CompetitorsPage() {
           return (
             <div key={comp._id} style={{
               padding: "18px", borderRadius: "10px",
-              border: "1px solid #2a2d3a", background: "#E8E9EC",
+              border: "1px solid #2a2d3a", background: "#1e2029",
               boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
               position: "relative"
             }}>
               <button onClick={() => handleDelete(comp._id)}
                 style={{
                   position: "absolute", top: "12px", right: "12px", background: "none",
-                  border: "none", color: "#334155", cursor: "pointer", fontSize: "16px", padding: "4px"
+                  border: "none", color: "#d1d5db", cursor: "pointer", fontSize: "16px", padding: "4px"
                 }}
                 onMouseEnter={e => e.target.style.color = "#ef4444"}
-                onMouseLeave={e => e.target.style.color = "#334155"}>
+                onMouseLeave={e => e.target.style.color = "#d1d5db"}>
                 x
               </button>
-              <div style={{ fontSize: "12px", color: "#64748B", fontWeight: 500, marginBottom: "8px" }}>Concurrent</div>
-              <h3 style={{ fontSize: "17px", fontWeight: 600, marginBottom: "12px", color: "#334155" }}>{comp.name}</h3>
+              <div style={{ fontSize: "12px", color: "#9ca3af", fontWeight: 500, marginBottom: "8px" }}>Concurrent</div>
+              <h3 style={{ fontSize: "17px", fontWeight: 600, marginBottom: "12px", color: "#d1d5db" }}>{comp.name}</h3>
               <div style={{ display: "flex", gap: "20px", alignItems: "flex-end" }}>
                 <div>
-                  <div style={{ fontSize: "28px", fontWeight: 600, color: "#334155" }}>
+                  <div style={{ fontSize: "28px", fontWeight: 600, color: "#d1d5db" }}>
                     {Math.round(comp.currentRating * 10) / 10}
                   </div>
-                  <div style={{ fontSize: "11px", color: "#64748B" }}>Score moyen</div>
+                  <div style={{ fontSize: "11px", color: "#9ca3af" }}>Score moyen</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: "28px", fontWeight: 600, color: "#334155" }}>{comp.totalReviews}</div>
-                  <div style={{ fontSize: "11px", color: "#64748B" }}>Avis</div>
+                  <div style={{ fontSize: "28px", fontWeight: 600, color: "#d1d5db" }}>{comp.totalReviews}</div>
+                  <div style={{ fontSize: "11px", color: "#9ca3af" }}>Avis</div>
                 </div>
                 <div style={{
                   fontSize: "13px", fontWeight: 600, padding: "4px 10px", borderRadius: "6px",
@@ -204,38 +204,38 @@ export default function CompetitorsPage() {
       {(data?.competitors?.length || 0) < 5 && (
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px dashed #2a2d3a", background: "#E8E9EC",
+          border: "1px dashed #2a2d3a", background: "#1e2029",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
-          <h3 style={{ fontSize: "14px", color: "#64748B", marginBottom: "16px", fontWeight: 600 }}>Ajouter un concurrent</h3>
+          <h3 style={{ fontSize: "14px", color: "#6b7280", marginBottom: "16px", fontWeight: 600 }}>Ajouter un concurrent</h3>
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
             <input placeholder="Nom du concurrent" value={newName} onChange={e => setNewName(e.target.value)}
               style={{
-                flex: "2", minWidth: "180px", padding: "12px 16px", background: "#E8E9EC",
+                flex: "2", minWidth: "180px", padding: "12px 16px", background: "#1e2029",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
-                color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none",
+                color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none",
                 boxSizing: "border-box", transition: "border-color 0.2s"
               }}
               onFocus={e => e.target.style.borderColor = "#ef4444"}
-              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
             <input placeholder="Note (ex: 4.2)" value={newRating} onChange={e => setNewRating(e.target.value)}
               style={{
-                flex: "1", minWidth: "100px", padding: "12px 16px", background: "#E8E9EC",
+                flex: "1", minWidth: "100px", padding: "12px 16px", background: "#1e2029",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
-                color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none",
+                color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none",
                 boxSizing: "border-box", transition: "border-color 0.2s"
               }}
               onFocus={e => e.target.style.borderColor = "#ef4444"}
-              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
             <input placeholder="Nb avis" value={newReviews} onChange={e => setNewReviews(e.target.value)}
               style={{
-                flex: "1", minWidth: "80px", padding: "12px 16px", background: "#E8E9EC",
+                flex: "1", minWidth: "80px", padding: "12px 16px", background: "#1e2029",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
-                color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none",
+                color: "#f0f0f3", fontSize: "14px", fontFamily: "inherit", outline: "none",
                 boxSizing: "border-box", transition: "border-color 0.2s"
               }}
               onFocus={e => e.target.style.borderColor = "#ef4444"}
-              onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
+              onBlur={e => e.target.style.borderColor = "#2a2d3a"} />
             <button onClick={handleAdd} disabled={adding}
               style={{
                 padding: "12px 24px",

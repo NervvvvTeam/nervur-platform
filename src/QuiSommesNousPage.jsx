@@ -13,7 +13,7 @@ export default function QuiSommesNousPage() {
   }, []);
 
   const VG = (a) => `rgba(255,255,255,${a})`;
-  const A1 = "#6C5CE7", A2 = "#4ADE80", A3 = "#F472B6";
+  const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
 
   const ValueIcon = ({ type }) => {
     const s = { width: 28, height: 28, stroke: "#3b82f6", strokeWidth: 1.5, fill: "none" };
@@ -55,7 +55,7 @@ export default function QuiSommesNousPage() {
   ];
 
   return (
-    <main style={{ background: "#F0F1F3", color: "#0F172A", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
+    <main style={{ background: "#0f1117", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
         <LogoNervur height={28} onClick={() => navigate("/")} />
         <button onClick={() => navigate("/")} style={{ background: "transparent", border: `1px solid ${VG(0.15)}`, color: "#a1a1aa", padding: "8px 22px", fontSize: "11px", letterSpacing: "2.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>

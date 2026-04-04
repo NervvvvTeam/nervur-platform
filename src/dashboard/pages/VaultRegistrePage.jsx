@@ -190,7 +190,7 @@ export default function VaultRegistrePage() {
     }
   };
 
-  const inputStyle = "w-full px-3.5 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-[#334155] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]";
+  const inputStyle = "w-full px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]";
   const labelStyle = "block text-[13px] font-medium text-[#d1d5db] mb-1.5";
 
   return (
@@ -203,7 +203,7 @@ export default function VaultRegistrePage() {
           <ListIcon size={24} color={ACCENT} />
         </div>
         <div className="flex-1">
-          <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">
+          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
             Registre des traitements
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -247,8 +247,8 @@ export default function VaultRegistrePage() {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-[#F8FAFC] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
-          <h2 className="text-[15px] font-semibold text-[#0F172A] m-0 mb-5">
+        <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0 mb-5">
             {editingId ? "Modifier le traitement" : "Déclarer un nouveau traitement"}
           </h2>
 
@@ -299,8 +299,8 @@ export default function VaultRegistrePage() {
                     className="px-3 py-1.5 rounded-md text-[12px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border"
                     style={{
                       background: selected ? "rgba(6,182,212,0.15)" : "transparent",
-                      borderColor: selected ? "#06b6d4" : "#E2E8F0",
-                      color: selected ? "#22d3ee" : "#64748B",
+                      borderColor: selected ? "#06b6d4" : "#2a2d3a",
+                      color: selected ? "#22d3ee" : "#9ca3af",
                     }}
                   >
                     {selected ? "\u2713 " : ""}{cat.label}
@@ -316,8 +316,8 @@ export default function VaultRegistrePage() {
               disabled={saving}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border-none text-sm font-semibold font-[inherit] transition-all duration-150 cursor-pointer"
               style={{
-                background: saving ? "#E2E8F0" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
-                color: saving ? "#64748B" : "#0f0f11",
+                background: saving ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+                color: saving ? "#6b7280" : "#0f0f11",
                 cursor: saving ? "not-allowed" : "pointer",
               }}
             >
@@ -325,7 +325,7 @@ export default function VaultRegistrePage() {
             </button>
             <button
               onClick={handleCancel}
-              className="px-4 py-2.5 rounded-lg border border-[#E2E8F0] bg-transparent text-[#9ca3af] text-sm cursor-pointer font-[inherit] transition-all duration-150 hover:border-[#3f3f46] hover:text-[#d1d5db]"
+              className="px-4 py-2.5 rounded-lg border border-[#2a2d3a] bg-transparent text-[#9ca3af] text-sm cursor-pointer font-[inherit] transition-all duration-150 hover:border-[#3f3f46] hover:text-[#d1d5db]"
             >
               Annuler
             </button>
@@ -342,7 +342,7 @@ export default function VaultRegistrePage() {
       {!loading && treatments.length === 0 && !showForm && (
         <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
           <ListIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#0F172A] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
             Aucun traitement déclaré
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed max-w-[440px] mx-auto">
@@ -356,10 +356,10 @@ export default function VaultRegistrePage() {
       {!loading && treatments.length > 0 && (
         <div className="flex flex-col gap-3">
           {treatments.map(t => (
-            <div key={t._id} className="bg-[#F8FAFC] border border-[rgba(6,182,212,0.15)] rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+            <div key={t._id} className="bg-[#1e2029] border border-[rgba(6,182,212,0.15)] rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div>
-                  <div className="text-[15px] font-semibold text-[#0F172A]">{t.name}</div>
+                  <div className="text-[15px] font-semibold text-[#f0f0f3]">{t.name}</div>
                   <div className="text-[12px] text-[#6b7280] mt-0.5">
                     Créé le {new Date(t.createdAt).toLocaleDateString("fr-FR")}
                   </div>

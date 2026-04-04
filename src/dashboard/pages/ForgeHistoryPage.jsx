@@ -23,23 +23,23 @@ export default function ForgeHistoryPage() {
           <button
             onClick={() => setSelectedPage(null)}
             style={{
-              background: "none", border: "none", color: "#64748B",
+              background: "none", border: "none", color: "#71717A",
               fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
               padding: "0", display: "flex", alignItems: "center", gap: "6px",
               marginBottom: "12px",
             }}
             onMouseEnter={(e) => (e.target.style.color = "#A1A1AA")}
-            onMouseLeave={(e) => (e.target.style.color = "#64748B")}
+            onMouseLeave={(e) => (e.target.style.color = "#71717A")}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5" /><polyline points="12 19 5 12 12 5" />
             </svg>
             Retour à l'historique
           </button>
-          <h2 style={{ fontSize: "18px", fontWeight: 600, color: "#0F172A", margin: 0 }}>
+          <h2 style={{ fontSize: "18px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
             {selectedPage.businessName}
           </h2>
-          <p style={{ fontSize: "13px", color: "#64748B", margin: "4px 0 0" }}>
+          <p style={{ fontSize: "13px", color: "#71717A", margin: "4px 0 0" }}>
             Généré le {selectedPage.date}
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function ForgeHistoryPage() {
             <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
             <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
             <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#10b981" }} />
-            <span style={{ fontSize: "12px", color: "#64748B", marginLeft: "8px" }}>
+            <span style={{ fontSize: "12px", color: "#52525B", marginLeft: "8px" }}>
               Aperçu — {selectedPage.businessName}.html
             </span>
           </div>
@@ -78,10 +78,10 @@ export default function ForgeHistoryPage() {
           background: "linear-gradient(135deg, #f59e0b, #fbbf24)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", margin: 0, marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0, marginBottom: "6px" }}>
           Historique
         </h1>
-        <p style={{ fontSize: "14px", color: "#64748B", margin: 0 }}>
+        <p style={{ fontSize: "14px", color: "#71717A", margin: 0 }}>
           Retrouvez toutes vos landing pages générées.
         </p>
       </div>
@@ -105,7 +105,7 @@ export default function ForgeHistoryPage() {
           }}>
             Bientôt disponible
           </span>
-          <p style={{ fontSize: "13px", color: "#64748B", margin: "0 0 16px", maxWidth: "360px", lineHeight: "1.6" }}>
+          <p style={{ fontSize: "13px", color: "#71717A", margin: "0 0 16px", maxWidth: "360px", lineHeight: "1.6" }}>
             L'historique de vos pages générées sera accessible ici prochainement.
           </p>
           <a
@@ -138,7 +138,7 @@ export default function ForgeHistoryPage() {
                 transition: "border-color 0.15s",
               }}
               onClick={() => setSelectedPage(page)}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#94A3B8")}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3f3f46")}
               onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#1e1e22")}
             >
               {/* Thumbnail placeholder */}
@@ -161,10 +161,10 @@ export default function ForgeHistoryPage() {
 
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <div>
-                  <h3 style={{ fontSize: "14px", fontWeight: 500, color: "#0F172A", margin: "0 0 4px" }}>
+                  <h3 style={{ fontSize: "14px", fontWeight: 500, color: "#FAFAFA", margin: "0 0 4px" }}>
                     {page.businessName}
                   </h3>
-                  <p style={{ fontSize: "12px", color: "#64748B", margin: 0 }}>
+                  <p style={{ fontSize: "12px", color: "#71717A", margin: 0 }}>
                     {page.date}
                   </p>
                 </div>
@@ -174,12 +174,12 @@ export default function ForgeHistoryPage() {
                     // Delete would go here when backend is ready
                   }}
                   style={{
-                    background: "none", border: "none", color: "#64748B",
+                    background: "none", border: "none", color: "#52525B",
                     cursor: "pointer", padding: "4px", borderRadius: "4px",
                     transition: "color 0.15s",
                   }}
                   onMouseEnter={(e) => (e.target.style.color = "#ef4444")}
-                  onMouseLeave={(e) => (e.target.style.color = "#64748B")}
+                  onMouseLeave={(e) => (e.target.style.color = "#52525B")}
                   title="Supprimer"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

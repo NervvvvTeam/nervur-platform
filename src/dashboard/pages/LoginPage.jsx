@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import LogoNervur from "../../components/LogoNervur";
 
-const C = {
-  bg: "#F0F1F3", bgAlt: "#E8E9EC", text: "#0F172A", body: "#334155",
-  muted: "#64748B", accent: "#6C5CE7", accentHover: "#5A4BD6",
-  accentLight: "#EEF2FF", border: "#E2E8F0",
-};
-const FONT = "'Inter', system-ui, -apple-system, sans-serif";
+const TOOLS = [
+  { name: "Sentinel", color: "#ef4444" },
+  { name: "Vault", color: "#06b6d4" },
+];
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -39,109 +37,245 @@ export default function LoginPage() {
     }
   };
 
-  const inputStyle = {
-    width: "100%", padding: "12px 14px", background: C.bg,
-    border: `1px solid ${C.border}`, borderRadius: "10px",
-    color: C.text, fontSize: "14px", fontFamily: FONT,
-    outline: "none", boxSizing: "border-box",
-    transition: "border-color 0.2s, box-shadow 0.2s",
-  };
-
   return (
     <div style={{
-      minHeight: "100vh", display: "flex",
+      minHeight: "100vh",
+      display: "flex",
       flexDirection: isWide ? "row" : "column",
-      fontFamily: FONT, background: C.bg,
+      fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+      position: "relative",
     }}>
-
-      {/* Left — Branding */}
+      {/* Bouton retour site vitrine */}
+      <button
+        onClick={() => navigate('/')}
+        style={{
+          position: "absolute",
+          top: isWide ? 24 : 16,
+          left: isWide ? 24 : 16,
+          zIndex: 10,
+          background: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: 8,
+          color: "#71717A",
+          fontSize: 13,
+          padding: "8px 16px",
+          cursor: "pointer",
+          fontFamily: "inherit",
+          transition: "all 0.2s",
+        }}
+        onMouseEnter={e => { e.target.style.background = "rgba(255,255,255,0.12)"; e.target.style.color = "#fff"; }}
+        onMouseLeave={e => { e.target.style.background = "rgba(255,255,255,0.06)"; e.target.style.color = "#71717A"; }}
+      >
+        ← Retour au site
+      </button>
+      {/* Branding Panel */}
       <div style={{
-        background: C.text, display: "flex", flexDirection: "column",
-        justifyContent: "center", alignItems: "center",
+        background: "#09090B",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
         padding: isWide ? "60px" : "48px 20px",
         position: "relative",
-        ...(isWide ? { flex: 1 } : { minHeight: "200px" }),
+        overflow: "hidden",
+        ...(isWide ? { flex: 1 } : { minHeight: "220px" }),
       }}>
-        <button onClick={() => navigate("/")} style={{
-          position: "absolute", top: isWide ? 24 : 16, left: isWide ? 24 : 16,
-          background: "#E2E8F0", border: "1px solid #E2E8F0",
-          borderRadius: "8px", color: "rgba(255,255,255,0.5)", fontSize: "13px",
-          padding: "8px 16px", cursor: "pointer", fontFamily: FONT, transition: "all 0.2s",
-        }}
-          onMouseEnter={e => { e.target.style.background = "#E2E8F0"; e.target.style.color = "#fff"; }}
-          onMouseLeave={e => { e.target.style.background = "#E2E8F0"; e.target.style.color = "rgba(255,255,255,0.5)"; }}
-        >&#8592; Retour au site</button>
+        <div style={{
+          position: "absolute",
+          top: "30%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 400,
+          height: 400,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }} />
 
-        <LogoNervur height={isWide ? 56 : 40} onClick={() => navigate("/")} variant="dark" style={{ marginBottom: isWide ? 24 : 12 }} />
-        <h1 style={{ fontSize: isWide ? "28px" : "20px", fontWeight: 700, color: "#F0F1F3", textAlign: "center", marginBottom: "8px" }}>
+        <LogoNervur height={isWide ? 64 : 44} onClick={() => navigate("/")} style={{ marginBottom: isWide ? 24 : 10, position: "relative" }} />
+
+        <h1 style={{
+          fontSize: isWide ? 32 : 20,
+          fontWeight: 700,
+          color: "#FAFAFA",
+          textAlign: "center",
+          marginBottom: 8,
+          position: "relative",
+        }}>
           Bienvenue sur NERVÜR
         </h1>
-        <p style={{ fontSize: isWide ? "15px" : "13px", color: "rgba(255,255,255,0.5)", textAlign: "center", maxWidth: "340px", lineHeight: 1.6, margin: 0 }}>
-          Gerez votre reputation et votre conformite juridique.
+        <p style={{
+          fontSize: isWide ? 15 : 13,
+          color: "#71717A",
+          textAlign: "center",
+          maxWidth: 360,
+          lineHeight: 1.6,
+          position: "relative",
+          margin: 0,
+        }}>
+          Gérez votre réputation et assurez votre conformité juridique.
         </p>
-        <div style={{ display: "flex", gap: "8px", marginTop: isWide ? "24px" : "16px" }}>
-          {[{ name: "Sentinel", color: "#DC2626" }, { name: "Vault", color: "#0891B2" }].map(t => (
-            <span key={t.name} style={{ padding: "5px 14px", borderRadius: "20px", fontSize: "12px", fontWeight: 500, border: `1px solid ${t.color}40`, background: `${t.color}15`, color: t.color }}>{t.name}</span>
+
+        {/* Tool pills */}
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 8,
+          marginTop: isWide ? 28 : 16,
+          justifyContent: "center",
+          position: "relative",
+        }}>
+          {TOOLS.map((t) => (
+            <div key={t.name} style={{
+              padding: "5px 12px",
+              borderRadius: 20,
+              fontSize: 11,
+              fontWeight: 500,
+              border: `1px solid ${t.color}30`,
+              background: `${t.color}10`,
+              color: t.color,
+            }}>
+              {t.name}
+            </div>
           ))}
         </div>
-        {isWide && <p style={{ position: "absolute", bottom: "24px", fontSize: "12px", color: "rgba(255,255,255,0.25)" }}>NERVÜR 2026</p>}
+
+        {isWide && (
+          <div style={{ position: "absolute", bottom: 28, textAlign: "center" }}>
+            <p style={{ fontSize: 12, color: "#3f3f46", margin: 0 }}>
+              © 2026 NERVÜR — Éditeur de Technologies de Croissance
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Right — Login Form */}
+      {/* Login Form */}
       <div style={{
-        ...(isWide ? { width: "480px" } : { flex: 1 }),
-        background: C.bgAlt, display: "flex", flexDirection: "column",
-        justifyContent: "center", padding: isWide ? "60px" : "36px 20px",
-        borderLeft: isWide ? `1px solid ${C.border}` : "none",
+        ...(isWide ? { width: 480 } : { flex: 1 }),
+        background: "#111318",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: isWide ? "60px" : "36px 20px",
+        borderTop: isWide ? "none" : "1px solid #1e1e2a",
+        borderLeft: isWide ? "1px solid #1e1e2a" : "none",
       }}>
-        <div style={{ maxWidth: "340px", width: "100%", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "22px", fontWeight: 600, color: C.text, marginBottom: "6px" }}>Connexion</h2>
-          <p style={{ fontSize: "14px", color: C.muted, marginBottom: "28px" }}>Accedez a votre espace client</p>
+        <div style={{ maxWidth: 340, width: "100%", margin: "0 auto" }}>
+          <h2 style={{ fontSize: 22, fontWeight: 600, color: "#f0f0f3", marginBottom: 6 }}>
+            Connexion
+          </h2>
+          <p style={{ fontSize: 14, color: "#6b7280", marginBottom: 28 }}>
+            Accédez à votre espace client
+          </p>
 
           <form onSubmit={handleSubmit}>
             {error && (
-              <div style={{ padding: "10px 14px", marginBottom: "18px", borderRadius: "10px", background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.15)", color: "#DC2626", fontSize: "13px", lineHeight: 1.5 }}>
+              <div style={{
+                padding: "10px 14px",
+                marginBottom: 18,
+                borderRadius: 10,
+                background: "rgba(239,68,68,0.08)",
+                border: "1px solid rgba(239,68,68,0.2)",
+                color: "#f87171",
+                fontSize: 13,
+                lineHeight: 1.5,
+              }}>
                 {error}
               </div>
             )}
 
-            <div style={{ marginBottom: "18px" }}>
-              <label style={{ display: "block", fontSize: "13px", color: C.body, marginBottom: "6px", fontWeight: 500 }}>Adresse email</label>
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="nom@entreprise.com" style={inputStyle}
-                onFocus={e => { e.target.style.borderColor = C.accent; e.target.style.boxShadow = "0 0 0 3px rgba(79,70,229,0.08)"; }}
-                onBlur={e => { e.target.style.borderColor = C.border; e.target.style.boxShadow = "none"; }}
+            <div style={{ marginBottom: 18 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#9ca3af", marginBottom: 6, fontWeight: 500 }}>
+                Adresse email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="nom@entreprise.com"
+                style={{
+                  width: "100%",
+                  padding: "12px 14px",
+                  background: "#1e2029",
+                  border: "1px solid #2a2d3a",
+                  borderRadius: 10,
+                  color: "#f0f0f3",
+                  fontSize: 14,
+                  fontFamily: "inherit",
+                  outline: "none",
+                  boxSizing: "border-box",
+                  transition: "border-color 0.2s, box-shadow 0.2s",
+                }}
+                onFocus={(e) => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
+                onBlur={(e) => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }}
               />
             </div>
 
-            <div style={{ marginBottom: "24px" }}>
-              <label style={{ display: "block", fontSize: "13px", color: C.body, marginBottom: "6px", fontWeight: 500 }}>Mot de passe</label>
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="••••••••" style={inputStyle}
-                onFocus={e => { e.target.style.borderColor = C.accent; e.target.style.boxShadow = "0 0 0 3px rgba(79,70,229,0.08)"; }}
-                onBlur={e => { e.target.style.borderColor = C.border; e.target.style.boxShadow = "none"; }}
+            <div style={{ marginBottom: 24 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#9ca3af", marginBottom: 6, fontWeight: 500 }}>
+                Mot de passe
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="••••••••"
+                style={{
+                  width: "100%",
+                  padding: "12px 14px",
+                  background: "#1e2029",
+                  border: "1px solid #2a2d3a",
+                  borderRadius: 10,
+                  color: "#f0f0f3",
+                  fontSize: 14,
+                  fontFamily: "inherit",
+                  outline: "none",
+                  boxSizing: "border-box",
+                  transition: "border-color 0.2s, box-shadow 0.2s",
+                }}
+                onFocus={(e) => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
+                onBlur={(e) => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }}
               />
             </div>
 
-            <button type="submit" disabled={loading} style={{
-              width: "100%", padding: "13px 0", background: C.accent, color: "#fff",
-              border: "none", borderRadius: "10px", fontSize: "14px", fontWeight: 600,
-              fontFamily: FONT, cursor: loading ? "wait" : "pointer",
-              transition: "background 0.2s, opacity 0.2s", opacity: loading ? 0.6 : 1,
-            }}
-              onMouseEnter={e => !loading && (e.target.style.background = C.accentHover)}
-              onMouseLeave={e => !loading && (e.target.style.background = C.accent)}
-            >{loading ? "Connexion..." : "Se connecter"}</button>
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                width: "100%",
+                padding: "13px 0",
+                background: "#6366f1",
+                color: "#fff",
+                border: "none",
+                borderRadius: 10,
+                fontSize: 14,
+                fontWeight: 600,
+                fontFamily: "inherit",
+                cursor: loading ? "wait" : "pointer",
+                transition: "background 0.2s, opacity 0.2s",
+                opacity: loading ? 0.6 : 1,
+              }}
+              onMouseEnter={(e) => !loading && (e.target.style.background = "#818CF8")}
+              onMouseLeave={(e) => !loading && (e.target.style.background = "#6366f1")}
+            >
+              {loading ? "Connexion..." : "Se connecter"}
+            </button>
           </form>
 
-          <div style={{ marginTop: "28px", paddingTop: "18px", borderTop: `1px solid ${C.border}` }}>
-            <p style={{ fontSize: "12px", color: C.muted, lineHeight: 1.6, margin: 0 }}>
-              Votre compte est cree par l'equipe NERVÜR lors de votre souscription.
+          <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid #2a2d3a" }}>
+            <p style={{ fontSize: 12, color: "#4b5563", lineHeight: 1.6, margin: 0 }}>
+              Votre compte est créé par l'équipe NERVÜR lors de votre souscription.
             </p>
-            <a href="/contact" style={{ fontSize: "13px", color: C.accent, textDecoration: "none", fontWeight: 500, display: "inline-block", marginTop: "8px" }}>
-              Pas encore client ? Contactez-nous &#8594;
+            <a href="/contact" style={{ fontSize: 13, color: "#6366f1", textDecoration: "none", fontWeight: 500, display: "inline-block", marginTop: 8 }}>
+              Pas encore client ? Contactez-nous →
             </a>
-            <p style={{ fontSize: "11px", color: C.muted, lineHeight: 1.6, marginTop: "12px" }}>
-              En vous connectant, vos donnees sont traitees conformement a notre{" "}
-              <a href="/confidentialite" style={{ color: C.accent, textDecoration: "underline", textUnderlineOffset: "3px" }}>politique de confidentialite</a>.
+            <p style={{ fontSize: 11, color: "#4b5563", lineHeight: 1.6, marginTop: 12 }}>
+              En vous connectant, vos données sont traitées conformément à notre{" "}
+              <a href="/politique-de-confidentialite" style={{ color: "#6366f1", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+                politique de confidentialité
+              </a>.
             </p>
           </div>
         </div>

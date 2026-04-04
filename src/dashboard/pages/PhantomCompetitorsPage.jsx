@@ -129,38 +129,38 @@ export default function PhantomCompetitorsPage() {
           background: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0F172A", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>
           Analyse concurrentielle
         </h1>
-        <p style={{ fontSize: "14px", color: "#64748B" }}>
+        <p style={{ fontSize: "14px", color: "#9ca3af" }}>
           Comparez les performances de votre site avec celles de vos concurrents.
         </p>
       </div>
 
       {/* Comparison form */}
       <div style={{
-        padding: "24px", background: "#E8E9EC", border: "1px solid #2a2d3a",
+        padding: "24px", background: "#1e2029", border: "1px solid #2a2d3a",
         borderRadius: "10px", marginBottom: "24px",
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
       }}>
-        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#0F172A", marginBottom: "16px" }}>
+        <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", marginBottom: "16px" }}>
           Configurer la comparaison
         </h2>
 
         {/* Your domain */}
         <div style={{ marginBottom: "16px" }}>
-          <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "6px" }}>
+          <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "6px" }}>
             Votre site
           </label>
           {loadingDomains ? (
-            <div style={{ color: "#64748B", fontSize: "13px" }}>Chargement...</div>
+            <div style={{ color: "#9ca3af", fontSize: "13px" }}>Chargement...</div>
           ) : domains.length > 0 ? (
             <select
               value={yourDomain}
               onChange={e => setYourDomain(e.target.value)}
               style={{
                 width: "100%", maxWidth: "400px", padding: "10px 14px", background: "#161820",
-                border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
+                border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
                 fontSize: "13px", fontFamily: "inherit", outline: "none",
               }}
             >
@@ -169,7 +169,7 @@ export default function PhantomCompetitorsPage() {
               ))}
             </select>
           ) : (
-            <div style={{ color: "#64748B", fontSize: "13px" }}>
+            <div style={{ color: "#9ca3af", fontSize: "13px" }}>
               Aucun audit trouvé. Lancez d'abord un audit depuis l'onglet Audit.
             </div>
           )}
@@ -177,7 +177,7 @@ export default function PhantomCompetitorsPage() {
 
         {/* Competitor URLs */}
         <div style={{ marginBottom: "20px" }}>
-          <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "6px" }}>
+          <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "6px" }}>
             Sites concurrents (jusqu'à 3)
           </label>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -190,7 +190,7 @@ export default function PhantomCompetitorsPage() {
                 placeholder={`concurrent${i + 1}.com`}
                 style={{
                   maxWidth: "400px", padding: "10px 14px", background: "#161820",
-                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
+                  border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
                   fontSize: "13px", fontFamily: "inherit", outline: "none",
                 }}
               />
@@ -209,7 +209,7 @@ export default function PhantomCompetitorsPage() {
           disabled={loading || !yourDomain}
           style={{
             padding: "10px 28px",
-            background: loading ? "#E2E8F0" : "linear-gradient(135deg, #8b5cf6, #a78bfa)",
+            background: loading ? "#2a2d3a" : "linear-gradient(135deg, #8b5cf6, #a78bfa)",
             color: "#fff", border: "none", borderRadius: "8px",
             fontSize: "14px", fontWeight: 500,
             cursor: loading ? "wait" : "pointer",
@@ -230,14 +230,14 @@ export default function PhantomCompetitorsPage() {
       {/* Results */}
       {results && (
         <div style={{
-          background: "#E8E9EC", border: "1px solid #2a2d3a",
+          background: "#1e2029", border: "1px solid #2a2d3a",
           borderRadius: "10px", overflow: "hidden",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         }}>
           <div style={{
             padding: "18px 22px", borderBottom: "1px solid #2a2d3a",
           }}>
-            <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#0F172A", margin: 0 }}>
+            <h2 style={{ fontSize: "15px", fontWeight: 600, color: "#f0f0f3", margin: 0 }}>
               Résultats de la comparaison
             </h2>
           </div>
@@ -247,7 +247,7 @@ export default function PhantomCompetitorsPage() {
               <thead>
                 <tr>
                   <th style={{
-                    textAlign: "left", padding: "12px 16px", color: "#64748B",
+                    textAlign: "left", padding: "12px 16px", color: "#9ca3af",
                     fontWeight: 500, fontSize: "12px", borderBottom: "1px solid #2a2d3a",
                   }}>Catégorie</th>
                   <th style={{
@@ -259,7 +259,7 @@ export default function PhantomCompetitorsPage() {
                   </th>
                   {results.competitors.map((comp, i) => (
                     <th key={i} style={{
-                      textAlign: "center", padding: "12px 16px", color: "#64748B",
+                      textAlign: "center", padding: "12px 16px", color: "#9ca3af",
                       fontWeight: 500, fontSize: "12px", borderBottom: "1px solid #2a2d3a",
                     }}>
                       {comp.domain}
@@ -276,7 +276,7 @@ export default function PhantomCompetitorsPage() {
                 {SCORE_KEYS.map(({ key, label }) => (
                   <tr key={key} style={{ borderBottom: "1px solid #2a2d3a20" }}>
                     <td style={{
-                      padding: "12px 16px", fontSize: "13px", fontWeight: 500, color: "#334155",
+                      padding: "12px 16px", fontSize: "13px", fontWeight: 500, color: "#d1d5db",
                     }}>
                       {label}
                     </td>
@@ -295,7 +295,7 @@ export default function PhantomCompetitorsPage() {
             padding: "16px 22px", borderTop: "1px solid #2a2d3a",
             background: "rgba(139,92,246,0.04)",
           }}>
-            <div style={{ fontSize: "12px", color: "#64748B", marginBottom: "8px" }}>Résumé</div>
+            <div style={{ fontSize: "12px", color: "#9ca3af", marginBottom: "8px" }}>Résumé</div>
             {(() => {
               const allSites = [results.yours, ...results.competitors.filter(c => c.success)];
               const best = allSites.reduce((a, b) =>
@@ -303,7 +303,7 @@ export default function PhantomCompetitorsPage() {
               );
               const isBest = best.domain === results.yours.domain;
               return (
-                <div style={{ fontSize: "13px", color: "#334155" }}>
+                <div style={{ fontSize: "13px", color: "#d1d5db" }}>
                   {isBest ? (
                     <span>
                       <span style={{ color: "#10b981", fontWeight: 600 }}>Votre site est en tête</span> avec un score global de {results.yours.scores?.global || 0}/100.

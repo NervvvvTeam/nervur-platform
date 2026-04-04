@@ -20,8 +20,8 @@ const FILTER_TABS = [
   { key: "info", label: "Info" },
 ];
 
-const CARD_BG = "#E8E9EC";
-const CARD_BORDER = "#E2E8F0";
+const CARD_BG = "#1e2029";
+const CARD_BORDER = "#2a2d3a";
 const LS_KEY = "vault_alerts";
 const LS_RESOLVED = "vault_alerts_resolved_count";
 
@@ -232,7 +232,7 @@ export default function VaultAlertsPage() {
       </div>
 
       {/* ── Mailbox tabs (Inbox / Traitées) ──────────────────── */}
-      <div style={{ display: "flex", gap: 0, margin: "16px 0 0", borderBottom: "1px solid #E2E8F0" }}>
+      <div style={{ display: "flex", gap: 0, margin: "16px 0 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         {[
           { key: "inbox", label: "Boîte de réception", count: inboxAlerts.length },
           { key: "treated", label: "Traitées", count: treatedAlerts.length },
@@ -289,7 +289,7 @@ export default function VaultAlertsPage() {
               border: "1px solid",
               background: filter === t.key ? "rgba(6,182,212,0.12)" : "transparent",
               color: filter === t.key ? ACCENT : "#64748b",
-              borderColor: filter === t.key ? "rgba(6,182,212,0.3)" : "#E2E8F0",
+              borderColor: filter === t.key ? "rgba(6,182,212,0.3)" : "rgba(255,255,255,0.06)",
               transition: "all 0.15s ease",
             }}
           >
@@ -449,7 +449,7 @@ export default function VaultAlertsPage() {
                       style={{
                         fontSize: 12, fontWeight: 500, color: "#64748b",
                         background: "transparent",
-                        border: "1px solid #E2E8F0",
+                        border: "1px solid rgba(255,255,255,0.06)",
                         borderRadius: 8, padding: "7px 14px", cursor: "pointer",
                         transition: "all 0.15s ease",
                       }}
@@ -460,7 +460,7 @@ export default function VaultAlertsPage() {
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.color = "#64748b";
-                        e.currentTarget.style.borderColor = "#E2E8F0";
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
                         e.currentTarget.style.background = "transparent";
                       }}
                     >
@@ -473,7 +473,7 @@ export default function VaultAlertsPage() {
                       style={{
                         fontSize: 12, fontWeight: 500, color: "#64748b",
                         background: "transparent",
-                        border: "1px solid #E2E8F0",
+                        border: "1px solid rgba(255,255,255,0.06)",
                         borderRadius: 8, padding: "7px 14px", cursor: "pointer",
                         transition: "all 0.15s ease",
                       }}
@@ -484,7 +484,7 @@ export default function VaultAlertsPage() {
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.color = "#64748b";
-                        e.currentTarget.style.borderColor = "#E2E8F0";
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
                         e.currentTarget.style.background = "transparent";
                       }}
                     >

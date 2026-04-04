@@ -28,9 +28,9 @@ const SENTIMENT_CONFIG = {
 };
 
 const STATUS_CONFIG = {
-  pending: { label: "En attente", color: "#64748B" },
-  generated: { label: "Réponse prête", color: "#6C5CE7" },
-  approved: { label: "Approuvée", color: "#6C5CE7" },
+  pending: { label: "En attente", color: "#9ca3af" },
+  generated: { label: "Réponse prête", color: "#6366f1" },
+  approved: { label: "Approuvée", color: "#6366f1" },
   published: { label: "Publiée", color: "#22c55e" },
   failed: { label: "Erreur", color: "#ef4444" }
 };
@@ -58,7 +58,7 @@ export default function ReviewCard({ review, businessId }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <span style={{ color: sent.starColor, fontSize: "13px", letterSpacing: "1px" }}>{stars}</span>
-          <span style={{ fontSize: "14px", fontWeight: 500, color: "#0F172A" }}>{review.authorName}</span>
+          <span style={{ fontSize: "14px", fontWeight: 500, color: "#f0f0f3" }}>{review.authorName}</span>
         </div>
         <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <span style={{
@@ -83,7 +83,7 @@ export default function ReviewCard({ review, businessId }) {
 
       {/* Text */}
       <p style={{
-        fontSize: "13px", color: "#334155", lineHeight: 1.6, margin: 0,
+        fontSize: "13px", color: "#d1d5db", lineHeight: 1.6, margin: 0,
         overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box",
         WebkitLineClamp: 2, WebkitBoxOrient: "vertical"
       }}>
@@ -92,11 +92,11 @@ export default function ReviewCard({ review, businessId }) {
 
       {/* Footer */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "10px" }}>
-        <span style={{ fontSize: "11px", color: "#64748B" }}>
+        <span style={{ fontSize: "11px", color: "#9ca3af" }}>
           {review.publishedAt ? new Date(review.publishedAt).toLocaleDateString("fr-FR") : ""}
         </span>
         {review.response && (
-          <span style={{ fontSize: "11px", color: "#6C5CE7", fontWeight: 500 }}>Réponse IA disponible →</span>
+          <span style={{ fontSize: "11px", color: "#6366f1", fontWeight: 500 }}>Réponse IA disponible →</span>
         )}
       </div>
     </div>

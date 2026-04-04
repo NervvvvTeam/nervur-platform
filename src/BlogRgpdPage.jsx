@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const BG = "#F0F1F3";
-const V = "#0F172A";
-const V2 = "#334155";
-const V3 = "#64748B";
+const BG = "#0f1117";
+const V = "#FFFFFF";
+const V2 = "#D4D4D8";
+const V3 = "#A1A1AA";
 const ACCENT = "#10b981";
 const ACCENT2 = "#4ADE80";
-const VG = (a) => `rgba(100,116,139,${a})`;
+const VG = (a) => `rgba(161,161,170,${a})`;
 
 /* ───── Hooks ───── */
 function useIsMobile() {
@@ -98,12 +98,12 @@ function ComplianceTracker() {
   const pct = Math.round((count / obligations.length) * 100);
 
   return (
-    <div style={{ margin: "40px 0", padding: "32px", background: "rgba(79,70,229,0.03)", border: "1px solid rgba(16,185,129,0.12)", borderRadius: "12px" }}>
+    <div style={{ margin: "40px 0", padding: "32px", background: "rgba(16,185,129,0.04)", border: "1px solid rgba(16,185,129,0.12)", borderRadius: "12px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
         <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: ACCENT, fontWeight: 700 }}>Votre score de conformite</span>
         <span style={{ fontSize: "24px", fontWeight: 900, color: pct >= 80 ? ACCENT2 : pct >= 50 ? "#f59e0b" : "#ef4444" }}>{pct}%</span>
       </div>
-      <div style={{ height: "6px", background: "rgba(79,70,229,0.06)", borderRadius: "3px", marginBottom: "24px", overflow: "hidden" }}>
+      <div style={{ height: "6px", background: "rgba(16,185,129,0.1)", borderRadius: "3px", marginBottom: "24px", overflow: "hidden" }}>
         <div style={{ height: "100%", width: `${pct}%`, background: pct >= 80 ? ACCENT2 : pct >= 50 ? "#f59e0b" : "#ef4444", borderRadius: "3px", transition: "width 0.4s ease" }} />
       </div>
       {obligations.map((item, i) => (
@@ -175,7 +175,7 @@ function TableOfContents({ sections, activeId, isMobile }) {
       {sections.map((s, i) => (
         <div key={i} onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
           style={{
-            fontSize: "12px", color: activeId === s.id ? ACCENT : "#64748B", cursor: "pointer",
+            fontSize: "12px", color: activeId === s.id ? ACCENT : "#52525B", cursor: "pointer",
             padding: "6px 0 6px 12px", borderLeft: `2px solid ${activeId === s.id ? ACCENT : "transparent"}`,
             transition: "all 0.3s", lineHeight: 1.5,
           }}>
@@ -283,22 +283,22 @@ export default function BlogRgpdPage() {
         position: "sticky", top: 0, zIndex: 50,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "12px 24px",
-        background: "rgba(255,255,255,0.95)",
+        background: "rgba(15,17,23,0.95)",
         backdropFilter: "blur(12px)",
-        borderBottom: "1px solid #E2E8F0",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>
         <LogoNervur height={32} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#334155",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
             transition: "all 0.15s",
           }}>ACCUEIL</button>
           <button onClick={() => navigate("/contact")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#334155",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
             transition: "all 0.15s",
           }}>CONTACT</button>
         </div>
@@ -310,10 +310,10 @@ export default function BlogRgpdPage() {
       {/* Floating TOC */}
       <TableOfContents sections={TOC_SECTIONS} activeId={activeId} isMobile={isMobile} />
 
-      <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", boxSizing: "border-box" }}>
+      <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", boxSizing: "border-box" }}>
         {/* Back button */}
         <button onClick={() => navigate(-1)} style={{
-          background: "none", border: "none", color: "#64748B", fontSize: "13px",
+          background: "none", border: "none", color: "#71717A", fontSize: "13px",
           cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: "6px",
           marginBottom: "24px", padding: 0
         }}>

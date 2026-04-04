@@ -13,7 +13,7 @@ const EyeIcon = ({ size = 20, color = ACCENT }) => (
   </svg>
 );
 
-const TrashIcon = ({ size = 15, color = "#64748B" }) => (
+const TrashIcon = ({ size = 15, color = "#9ca3af" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
   </svg>
@@ -139,7 +139,7 @@ export default function VaultMonitoringPage() {
       <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
       <div className="flex items-center gap-3 mb-1.5">
         <EyeIcon size={26} />
-        <h1 className="text-[22px] font-semibold text-[#0F172A] m-0">
+        <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
           Surveillance Vault
         </h1>
       </div>
@@ -176,7 +176,7 @@ export default function VaultMonitoringPage() {
 
         {!loading && configs.length === 0 && (
           <div className="px-6 py-10 text-center bg-[rgba(6,182,212,0.06)] border border-dashed border-[rgba(6,182,212,0.2)] rounded-lg">
-            <EyeIcon size={36} color="#334155" />
+            <EyeIcon size={36} color="#d1d5db" />
             <p className="text-sm text-[#9ca3af] mt-3 mb-1">
               Aucune surveillance configuree
             </p>
@@ -191,19 +191,19 @@ export default function VaultMonitoringPage() {
             {configs.map(config => (
               <div key={config._id} className="px-[18px] py-4 rounded-lg transition-all duration-200" style={{
                 background: config.enabled ? BG_TINT : "rgba(39,39,42,0.3)",
-                border: `1px solid ${config.enabled ? BORDER_TINT : "#334155"}`,
+                border: `1px solid ${config.enabled ? BORDER_TINT : "#d1d5db"}`,
                 opacity: config.enabled ? 1 : 0.65,
               }}>
                 <div className="flex items-center justify-between flex-wrap gap-2.5">
                   {/* Left info */}
                   <div className="flex-1 min-w-[200px]">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <span className="text-[15px] font-semibold text-[#0F172A]">
+                      <span className="text-[15px] font-semibold text-[#f0f0f3]">
                         {config.domain}
                       </span>
                       <span className="text-[10px] font-medium px-2 py-0.5 rounded-[10px]" style={{
                         background: config.enabled ? "rgba(6,182,212,0.15)" : "rgba(113,113,122,0.15)",
-                        color: config.enabled ? ACCENT_LIGHT : "#64748B",
+                        color: config.enabled ? ACCENT_LIGHT : "#9ca3af",
                       }}>
                         {config.enabled ? "Active" : "En pause"}
                       </span>
@@ -282,7 +282,7 @@ export default function VaultMonitoringPage() {
               onChange={e => setDomain(e.target.value)}
               placeholder="monentreprise.fr"
               required
-              className="w-full px-3.5 py-2.5 rounded-md bg-[#F8FAFC] border border-[rgba(6,182,212,0.2)] text-[#0F172A] text-[13px] font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
+              className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
             />
           </div>
 
@@ -297,7 +297,7 @@ export default function VaultMonitoringPage() {
               placeholder={"contact@monentreprise.fr\ndirection@monentreprise.fr\ncompta@monentreprise.fr"}
               rows={4}
               required
-              className="w-full px-3.5 py-2.5 rounded-md bg-[#F8FAFC] border border-[rgba(6,182,212,0.2)] text-[#0F172A] text-[13px] font-[inherit] outline-none resize-y transition-colors duration-150 box-border focus:border-[#06b6d4]"
+              className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none resize-y transition-colors duration-150 box-border focus:border-[#06b6d4]"
             />
           </div>
 
@@ -310,7 +310,7 @@ export default function VaultMonitoringPage() {
               <select
                 value={frequency}
                 onChange={e => setFrequency(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-md bg-[#F8FAFC] border border-[rgba(6,182,212,0.2)] text-[#0F172A] text-[13px] font-[inherit] outline-none cursor-pointer box-border"
+                className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none cursor-pointer box-border"
               >
                 <option value="weekly">Hebdomadaire</option>
                 <option value="monthly">Mensuel</option>
@@ -325,7 +325,7 @@ export default function VaultMonitoringPage() {
                 value={alertEmail}
                 onChange={e => setAlertEmail(e.target.value)}
                 placeholder="alerte@monentreprise.fr"
-                className="w-full px-3.5 py-2.5 rounded-md bg-[#F8FAFC] border border-[rgba(6,182,212,0.2)] text-[#0F172A] text-[13px] font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
+                className="w-full px-3.5 py-2.5 rounded-md bg-[#1e2029] border border-[rgba(6,182,212,0.2)] text-[#f0f0f3] text-[13px] font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
               />
             </div>
           </div>
@@ -336,7 +336,7 @@ export default function VaultMonitoringPage() {
             disabled={submitting}
             className="flex items-center justify-center gap-2 px-6 py-[11px] rounded-lg border-none text-white text-sm font-semibold font-[inherit] transition-all duration-200 self-start"
             style={{
-              background: submitting ? "#E2E8F0" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
+              background: submitting ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, ${ACCENT_LIGHT})`,
               cursor: submitting ? "not-allowed" : "pointer",
             }}
           >

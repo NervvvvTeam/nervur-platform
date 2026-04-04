@@ -37,7 +37,7 @@ function MiniChart({ data, width = 400, height = 160, dataKey = "averagePosition
     const chartH = height - padY * 2;
 
     // Grid lines
-    ctx.strokeStyle = "#E2E8F0";
+    ctx.strokeStyle = "#2a2d3a";
     ctx.lineWidth = 0.5;
     for (let i = 0; i <= 4; i++) {
       const y = padY + (chartH / 4) * i;
@@ -49,7 +49,7 @@ function MiniChart({ data, width = 400, height = 160, dataKey = "averagePosition
       const posVal = inverted
         ? Math.round(maxVal - (range / 4) * i)
         : Math.round(minVal + (range / 4) * (4 - i));
-      ctx.fillStyle = "#64748B";
+      ctx.fillStyle = "#6b7280";
       ctx.font = "10px Inter, sans-serif";
       ctx.textAlign = "right";
       ctx.fillText(posVal.toLocaleString("fr-FR"), padX - 8, y + 4);
@@ -100,7 +100,7 @@ function MiniChart({ data, width = 400, height = 160, dataKey = "averagePosition
       ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
       ctx.fillStyle = color;
       ctx.fill();
-      ctx.strokeStyle = "#E8E9EC";
+      ctx.strokeStyle = "#1e2029";
       ctx.lineWidth = 1.5;
       ctx.stroke();
     });
@@ -109,7 +109,7 @@ function MiniChart({ data, width = 400, height = 160, dataKey = "averagePosition
 
   if (!data || data.length < 2) {
     return (
-      <div style={{ textAlign: "center", padding: "40px 0", color: "#64748B", fontSize: "13px" }}>
+      <div style={{ textAlign: "center", padding: "40px 0", color: "#6b7280", fontSize: "13px" }}>
         Pas assez de donnees pour afficher le graphique. Lancez au moins 2 verifications.
       </div>
     );
@@ -156,7 +156,7 @@ function DistributionBar({ rankings }) {
         {segments.map((seg, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
             <div style={{ width: "8px", height: "8px", borderRadius: "2px", background: seg.color }} />
-            <span style={{ fontSize: "11px", color: "#64748B" }}>{seg.label}: <span style={{ color: seg.color, fontWeight: 600 }}>{seg.count}</span> ({seg.pct}%)</span>
+            <span style={{ fontSize: "11px", color: "#9ca3af" }}>{seg.label}: <span style={{ color: seg.color, fontWeight: 600 }}>{seg.count}</span> ({seg.pct}%)</span>
           </div>
         ))}
       </div>
@@ -174,7 +174,7 @@ function KeywordMovers({ rankings, type = "best" }) {
 
   if (sorted.length === 0) {
     return (
-      <div style={{ textAlign: "center", padding: "20px 0", color: "#64748B", fontSize: "12px" }}>
+      <div style={{ textAlign: "center", padding: "20px 0", color: "#6b7280", fontSize: "12px" }}>
         Aucune variation detectee.
       </div>
     );
@@ -199,7 +199,7 @@ function KeywordMovers({ rankings, type = "best" }) {
             }}>
               {i + 1}
             </span>
-            <span style={{ color: "#0F172A", fontSize: "13px", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <span style={{ color: "#f0f0f3", fontSize: "13px", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {r.keyword}
             </span>
           </div>
@@ -265,35 +265,35 @@ export default function AtlasHistoryPage() {
           position: "absolute", top: 0, left: 0, right: 0, height: "3px",
           background: "linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b)",
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#0F172A", margin: 0, marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 700, color: "#f0f0f3", margin: 0, marginBottom: "6px" }}>
           Evolution des positions
         </h1>
-        <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>
+        <p style={{ color: "#9ca3af", fontSize: "13px", margin: 0 }}>
           Historique de vos positions moyennes au fil du temps
         </p>
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: "60px 0", color: "#64748B" }}>Chargement...</div>
+        <div style={{ textAlign: "center", padding: "60px 0", color: "#6b7280" }}>Chargement...</div>
       ) : projects.length === 0 ? (
         <div style={{
-          background: "#E8E9EC", borderRadius: "14px", padding: "60px 32px",
+          background: "#1e2029", borderRadius: "14px", padding: "60px 32px",
           border: "1px solid #2a2d3a", textAlign: "center",
         }}>
-          <h3 style={{ color: "#0F172A", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet</h3>
-          <p style={{ color: "#64748B", fontSize: "13px", margin: 0 }}>Creez un projet dans l'onglet Projets pour voir son evolution.</p>
+          <h3 style={{ color: "#f0f0f3", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet</h3>
+          <p style={{ color: "#6b7280", fontSize: "13px", margin: 0 }}>Creez un projet dans l'onglet Projets pour voir son evolution.</p>
         </div>
       ) : (
         <>
           {/* Project Selector */}
           <div style={{ marginBottom: "24px" }}>
-            <label style={{ display: "block", fontSize: "12px", color: "#64748B", marginBottom: "8px" }}>Projet</label>
+            <label style={{ display: "block", fontSize: "12px", color: "#9ca3af", marginBottom: "8px" }}>Projet</label>
             <select
               value={selectedProject || ""}
               onChange={e => setSelectedProject(e.target.value)}
               style={{
-                padding: "10px 14px", background: "#E8E9EC",
-                border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
+                padding: "10px 14px", background: "#1e2029",
+                border: "1px solid #2a2d3a", borderRadius: "8px", color: "#f0f0f3",
                 fontSize: "13px", fontFamily: "inherit", outline: "none", minWidth: "260px",
               }}
             >
@@ -306,10 +306,10 @@ export default function AtlasHistoryPage() {
           {/* Position Distribution */}
           {rankings.length > 0 && (
             <div style={{
-              background: "#E8E9EC", borderRadius: "14px", padding: "24px",
+              background: "#1e2029", borderRadius: "14px", padding: "24px",
               border: "1px solid #2a2d3a", marginBottom: "24px",
             }}>
-              <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
+              <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
                 Distribution des positions — {currentProject?.domain}
               </h3>
               <DistributionBar rankings={rankings} />
@@ -320,26 +320,26 @@ export default function AtlasHistoryPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px", marginBottom: "24px" }}>
             {/* Position Chart */}
             <div style={{
-              background: "#E8E9EC", borderRadius: "14px", padding: "24px",
+              background: "#1e2029", borderRadius: "14px", padding: "24px",
               border: "1px solid #2a2d3a",
             }}>
-              <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
+              <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
                 Position moyenne
               </h3>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <MiniChart data={history} width={Math.min(chartWidth, 500)} height={180} dataKey="averagePosition" inverted={true} color="#f59e0b" />
               </div>
-              <div style={{ textAlign: "center", marginTop: "8px", fontSize: "11px", color: "#64748B" }}>
+              <div style={{ textAlign: "center", marginTop: "8px", fontSize: "11px", color: "#6b7280" }}>
                 Note : une position basse (proche de 1) est meilleure
               </div>
             </div>
 
             {/* Traffic Evolution Chart */}
             <div style={{
-              background: "#E8E9EC", borderRadius: "14px", padding: "24px",
+              background: "#1e2029", borderRadius: "14px", padding: "24px",
               border: "1px solid #2a2d3a",
             }}>
-              <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
+              <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
                 Trafic estime
               </h3>
               <div style={{ display: "flex", justifyContent: "center" }}>
@@ -352,7 +352,7 @@ export default function AtlasHistoryPage() {
                   color="#22c55e"
                 />
               </div>
-              <div style={{ textAlign: "center", marginTop: "8px", fontSize: "11px", color: "#64748B" }}>
+              <div style={{ textAlign: "center", marginTop: "8px", fontSize: "11px", color: "#6b7280" }}>
                 Estimation du trafic mensuel total
               </div>
             </div>
@@ -363,10 +363,10 @@ export default function AtlasHistoryPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginBottom: "24px" }}>
               {/* Best Progressions */}
               <div style={{
-                background: "#E8E9EC", borderRadius: "14px", padding: "24px",
+                background: "#1e2029", borderRadius: "14px", padding: "24px",
                 border: "1px solid #2a2d3a",
               }}>
-                <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{ color: "#22c55e" }}>{"\↑"}</span>
                   Meilleures progressions
                 </h3>
@@ -375,10 +375,10 @@ export default function AtlasHistoryPage() {
 
               {/* Biggest Drops */}
               <div style={{
-                background: "#E8E9EC", borderRadius: "14px", padding: "24px",
+                background: "#1e2029", borderRadius: "14px", padding: "24px",
                 border: "1px solid #2a2d3a",
               }}>
-                <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{ color: "#ef4444" }}>{"\↓"}</span>
                   Plus fortes baisses
                 </h3>
@@ -389,14 +389,14 @@ export default function AtlasHistoryPage() {
 
           {/* History Table */}
           <div style={{
-            background: "#E8E9EC", borderRadius: "14px",
+            background: "#1e2029", borderRadius: "14px",
             border: "1px solid #2a2d3a", overflow: "hidden",
           }}>
             <div style={{ padding: "16px 24px", borderBottom: "1px solid #2a2d3a" }}>
-              <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: 0 }}>Historique des verifications</h3>
+              <h3 style={{ color: "#f0f0f3", fontSize: "14px", fontWeight: 600, margin: 0 }}>Historique des verifications</h3>
             </div>
             {history.length === 0 ? (
-              <div style={{ padding: "40px 24px", textAlign: "center", color: "#64748B", fontSize: "13px" }}>
+              <div style={{ padding: "40px 24px", textAlign: "center", color: "#6b7280", fontSize: "13px" }}>
                 Aucune verification effectuee. Lancez un check depuis l'onglet Projets.
               </div>
             ) : (
@@ -407,7 +407,7 @@ export default function AtlasHistoryPage() {
                       {["Date", "Position moyenne", "Mots-cles", "Top 10", "Trafic est."].map(h => (
                         <th key={h} style={{
                           textAlign: "left", padding: "10px 24px",
-                          fontSize: "11px", color: "#64748B", fontWeight: 500,
+                          fontSize: "11px", color: "#6b7280", fontWeight: 500,
                           textTransform: "uppercase", letterSpacing: "0.5px",
                           borderBottom: "1px solid #2a2d3a",
                         }}>{h}</th>
@@ -417,7 +417,7 @@ export default function AtlasHistoryPage() {
                   <tbody>
                     {[...history].reverse().map((h, i) => (
                       <tr key={i} style={{ borderBottom: "1px solid #2a2d3a20" }}>
-                        <td style={{ padding: "12px 24px", color: "#334155", fontSize: "13px" }}>
+                        <td style={{ padding: "12px 24px", color: "#d1d5db", fontSize: "13px" }}>
                           {new Date(h.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                         </td>
                         <td style={{ padding: "12px 24px" }}>
@@ -431,7 +431,7 @@ export default function AtlasHistoryPage() {
                             {h.averagePosition}
                           </span>
                         </td>
-                        <td style={{ padding: "12px 24px", color: "#64748B", fontSize: "13px" }}>
+                        <td style={{ padding: "12px 24px", color: "#9ca3af", fontSize: "13px" }}>
                           {h.keywordCount}
                         </td>
                         <td style={{ padding: "12px 24px", color: "#22c55e", fontSize: "13px", fontWeight: 500 }}>

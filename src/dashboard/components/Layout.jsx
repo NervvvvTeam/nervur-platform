@@ -61,7 +61,7 @@ const TOOL_COLORS = {
   forge: "#f59e0b",
   vault: "#06b6d4",
   atlas: "#f59e0b",
-  general: "#6C5CE7",
+  general: "#6366f1",
 };
 
 // Map paths to their tool color
@@ -94,7 +94,7 @@ const PATH_COLORS = {
   "/app/atlas/history": TOOL_COLORS.atlas,
   "/app/atlas/suggestions": TOOL_COLORS.atlas,
   "/app/atlas/reports": TOOL_COLORS.atlas,
-  "/app/settings": "#64748B",
+  "/app/settings": "#71717A",
 };
 
 export default function Layout() {
@@ -149,7 +149,7 @@ export default function Layout() {
         title={tablet ? item.label : undefined}
         className={`flex items-center ${tablet ? "justify-center" : ""} gap-2.5 rounded-lg no-underline transition-all duration-200 ${
           mobile ? "px-4 py-2.5 text-sm" : tablet ? "px-1 py-2.5 text-[13px]" : "px-3 py-2 text-[13px]"
-        } ${isItemActive ? "font-medium text-[#0F172A]" : "font-normal text-[#64748B]"}`}
+        } ${isItemActive ? "font-medium text-[#FAFAFA]" : "font-normal text-[#A1A1AA]"}`}
         style={{
           background: isItemActive ? `${toolColor}12` : "transparent",
           borderLeft: isItemActive ? `3px solid ${toolColor}` : "3px solid transparent",
@@ -158,7 +158,7 @@ export default function Layout() {
           if (!isItemActive) {
             e.currentTarget.style.borderLeft = `3px solid ${toolColor}60`;
             e.currentTarget.style.background = `${toolColor}08`;
-            e.currentTarget.style.color = "#0F172A";
+            e.currentTarget.style.color = "#FAFAFA";
             const dot = e.currentTarget.querySelector("[data-dot]");
             if (dot) dot.style.background = toolColor;
             const icon = e.currentTarget.querySelector("[data-icon] svg");
@@ -171,15 +171,15 @@ export default function Layout() {
             e.currentTarget.style.background = "transparent";
             e.currentTarget.style.color = "#A1A1AA";
             const dot = e.currentTarget.querySelector("[data-dot]");
-            if (dot) dot.style.background = "#94A3B8";
+            if (dot) dot.style.background = "#3f3f46";
             const icon = e.currentTarget.querySelector("[data-icon] svg");
-            if (icon) icon.style.stroke = "#64748B";
+            if (icon) icon.style.stroke = "#71717A";
           }
         }}>
         {!tablet && <span data-dot className="w-1.5 h-1.5 rounded-full shrink-0 transition-colors duration-200"
-          style={{ background: isItemActive ? toolColor : "#94A3B8" }} />}
+          style={{ background: isItemActive ? toolColor : "#3f3f46" }} />}
         <span data-icon className="flex items-center transition-all duration-200">
-          {iconFn ? iconFn(isItemActive ? toolColor : "#64748B") : null}
+          {iconFn ? iconFn(isItemActive ? toolColor : "#71717A") : null}
         </span>
         {!tablet && <span>{item.label}</span>}
       </NavLink>
@@ -187,18 +187,18 @@ export default function Layout() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F8FAFC] text-gray-700 font-['Inter',system-ui,sans-serif]">
+    <div className="flex min-h-screen bg-[#191b24] text-gray-300 font-['Inter',system-ui,sans-serif]">
       {/* Sidebar — desktop & tablet */}
       {!isMobile && (
-        <aside className={`${isTablet ? "w-[64px]" : "w-[230px]"} border-r border-[#E2E8F0] ${isTablet ? "px-1.5" : "px-3"} py-6 flex flex-col fixed top-0 bottom-0 left-0 bg-white z-50 transition-[width] duration-200`}>
+        <aside className={`${isTablet ? "w-[64px]" : "w-[230px]"} border-r border-[#1e1e2a] ${isTablet ? "px-1.5" : "px-3"} py-6 flex flex-col fixed top-0 bottom-0 left-0 bg-[#12131a] z-50 transition-[width] duration-200`}>
           {/* Branding */}
-          <div className={`-mx-1 mb-7 border-b border-[#E2E8F0] ${isTablet ? "px-1 text-center" : "px-4"} pt-3 pb-3.5`}>
+          <div className={`-mx-1 mb-7 border-b border-[#1e1e2a] ${isTablet ? "px-1 text-center" : "px-4"} pt-3 pb-3.5`}>
             {isTablet ? (
-              <div className="font-bold text-[#0F172A] tracking-wider text-xs">N</div>
+              <div className="font-bold text-[#FAFAFA] tracking-wider text-xs">N</div>
             ) : (
               <>
                 <LogoNervur height={32} onClick={() => navigate("/app/portal")} />
-                <div className="text-[11px] text-[#4F46E5] font-normal mt-0.5">Espace client</div>
+                <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>
               </>
             )}
           </div>
@@ -209,19 +209,19 @@ export default function Layout() {
           </nav>
 
           {/* User */}
-          <div className={`border-t border-[#E2E8F0] pt-4 ${isTablet ? "px-0.5" : "px-2"}`}>
+          <div className={`border-t border-[#1e1e2a] pt-4 ${isTablet ? "px-0.5" : "px-2"}`}>
             <div className={`flex items-center ${isTablet ? "justify-center" : "gap-2.5"} mb-3`}>
-              <div className={`${isTablet ? "w-7 h-7 text-[11px]" : "w-8 h-8 text-[13px]"} rounded-md bg-gradient-to-br from-[#4F46E5] to-[#6366F1] flex items-center justify-center font-semibold text-white shrink-0`}>
+              <div className={`${isTablet ? "w-7 h-7 text-[11px]" : "w-8 h-8 text-[13px]"} rounded-md bg-gradient-to-br from-[#6366f1] to-[#818CF8] flex items-center justify-center font-semibold text-white shrink-0`}>
                 {user?.name?.charAt(0)?.toUpperCase() || "U"}
               </div>
               {!isTablet && <div>
-                <div className="text-[13px] text-[#334155] font-medium">{user?.name}</div>
-                <div className="text-[11px] text-[#94A3B8]">{user?.email}</div>
+                <div className="text-[13px] text-[#D4D4D8] font-medium">{user?.name}</div>
+                <div className="text-[11px] text-[#52525B]">{user?.email}</div>
               </div>}
             </div>
             <button onClick={() => { logout(); navigate("/app/login"); }}
               title={isTablet ? "Se déconnecter" : undefined}
-              className={`w-full py-[7px] bg-transparent border border-[#E2E8F0] rounded-md text-[#64748B] text-xs cursor-pointer font-[inherit] transition-all duration-150 hover:border-[#CBD5E1] hover:text-[#64748B] ${isTablet ? "px-1" : ""}`}>
+              className={`w-full py-[7px] bg-transparent border border-[#27272A] rounded-md text-[#71717A] text-xs cursor-pointer font-[inherit] transition-all duration-150 hover:border-[#3f3f46] hover:text-[#A1A1AA] ${isTablet ? "px-1" : ""}`}>
               {isTablet ? "\u2190" : "Se déconnecter"}
             </button>
           </div>
@@ -231,20 +231,20 @@ export default function Layout() {
       {/* Mobile header */}
       {isMobile && (
         <>
-          <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] px-4 py-2.5 flex justify-between items-center">
+          <header className="fixed top-0 left-0 right-0 z-50 bg-[#12131a]/95 backdrop-blur-md border-b border-[#1e1e2a] px-4 py-2.5 flex justify-between items-center">
             <LogoNervur height={28} onClick={() => navigate("/app/portal")} />
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="bg-transparent border-none text-[#64748B] text-xl cursor-pointer p-1.5 rounded-lg hover:bg-[#F1F5F9] transition-colors duration-150">
+              className="bg-transparent border-none text-[#A1A1AA] text-xl cursor-pointer p-1.5 rounded-lg hover:bg-[#1e1e2a] transition-colors duration-150">
               {mobileMenuOpen ? "✕" : "☰"}
             </button>
           </header>
           {mobileMenuOpen && (
             <>
-            <div className="fixed inset-0 z-[48] bg-black/20 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
-            <div className="fixed top-[48px] left-0 right-0 bottom-0 z-[49] bg-white/98 backdrop-blur-md px-4 py-3 flex flex-col gap-0.5 overflow-y-auto">
+            <div className="fixed inset-0 z-[48] bg-black/50 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
+            <div className="fixed top-[48px] left-0 right-0 bottom-0 z-[49] bg-[#12131a]/98 backdrop-blur-md px-4 py-3 flex flex-col gap-0.5 overflow-y-auto">
               {navItems.map((item, idx) => renderNavItem(item, idx, true))}
               <button onClick={() => { logout(); navigate("/app/login"); }}
-                className="mt-auto p-3 bg-transparent border border-[#E2E8F0] rounded-md text-[#64748B] text-[13px] cursor-pointer font-[inherit]">
+                className="mt-auto p-3 bg-transparent border border-[#27272A] rounded-md text-[#71717A] text-[13px] cursor-pointer font-[inherit]">
                 Se déconnecter
               </button>
             </div>
