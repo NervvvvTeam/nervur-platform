@@ -66,7 +66,7 @@ export default function TechnologiesPage() {
 
   return (
     <div style={{
-      background: "#FFFFFF", color: "#0F172A",
+      background: "#F0F1F3", color: "#0F172A",
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       minHeight: "100vh", position: "relative"
     }}>
@@ -218,7 +218,7 @@ export default function TechnologiesPage() {
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
                   <button className="cta-link" onClick={() => navigate("/contact")} style={{
-                    color: "#FFFFFF", background: tool.color, padding: "8px 18px", borderRadius: "8px",
+                    color: "#F0F1F3", background: tool.color, padding: "8px 18px", borderRadius: "8px",
                     fontSize: "13px", fontWeight: 700, border: "none", cursor: "pointer", transition: "all 0.3s",
                   }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${tool.color}50`; }}
@@ -269,10 +269,10 @@ export default function TechnologiesPage() {
 
             {/* Pack Duo — recommended */}
             <div className="pack-card" style={{ border: "2px solid rgba(129,140,248,0.5)", background: "rgba(99,102,241,0.08)", position: "relative", transform: isMobile ? "none" : "scale(1.04)" }}>
-              <div style={{ position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)", background: "#4F46E5", color: "#FFFFFF", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", padding: "4px 16px", borderRadius: "20px" }}>
+              <div style={{ position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)", background: "#6C5CE7", color: "#F0F1F3", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", padding: "4px 16px", borderRadius: "20px" }}>
                 Recommand&eacute;
               </div>
-              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#4F46E5", fontWeight: 700, marginBottom: "12px", marginTop: "8px" }}>Pack Duo</div>
+              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#6C5CE7", fontWeight: 700, marginBottom: "12px", marginTop: "8px" }}>Pack Duo</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "4px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>99&#8364;</span>
                 <span style={{ fontSize: "14px", color: "#64748B" }}>/mois</span>
@@ -280,12 +280,12 @@ export default function TechnologiesPage() {
               <p style={{ fontSize: "13px", color: "#64748B", marginBottom: "4px", lineHeight: 1.6 }}>Sentinel + Vault</p>
               <p style={{ fontSize: "12px", color: "#ef4444", fontWeight: 600, marginBottom: "20px" }}>au lieu de 118&#8364; &mdash; &eacute;conomisez 19&#8364;/mois</p>
               <button onClick={() => navigate("/contact")} style={{
-                padding: "12px 32px", background: "#4F46E5", border: "none",
-                color: "#FFFFFF", fontWeight: 700, fontSize: "13px", cursor: "pointer",
+                padding: "12px 32px", background: "#6C5CE7", border: "none",
+                color: "#F0F1F3", fontWeight: 700, fontSize: "13px", cursor: "pointer",
                 fontFamily: "inherit", transition: "all 0.3s", borderRadius: "8px",
               }}
                 onMouseEnter={e => { e.target.style.background = "#a5b4fc"; e.target.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={e => { e.target.style.background = "#4F46E5"; e.target.style.transform = "translateY(0)"; }}>
+                onMouseLeave={e => { e.target.style.background = "#6C5CE7"; e.target.style.transform = "translateY(0)"; }}>
                 Contactez-nous
               </button>
             </div>
@@ -324,7 +324,7 @@ export default function TechnologiesPage() {
             On conçoit des outils sur-mesure pour votre entreprise. Parlons de votre projet.
           </p>
           <button onClick={() => navigate('/contact')} style={{
-            padding: "16px 40px", background: "#0F172A", color: "#FFFFFF", border: "none",
+            padding: "16px 40px", background: "#0F172A", color: "#F0F1F3", border: "none",
             fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
             cursor: "pointer", transition: "all 0.3s ease",
           }}

@@ -10,7 +10,7 @@ const ARTICLES = [
     slug: "e-reputation",
     title: "E-réputation : pourquoi 90% des PME perdent des clients sans le savoir",
     desc: "Découvrez les stratégies essentielles pour surveiller, gérer et améliorer votre réputation numérique. Guide complet avec statistiques et solutions concrètes.",
-    color: "#4F46E5",
+    color: "#6C5CE7",
     tag: "E-RÉPUTATION",
     date: "20 mars 2026",
     readTime: "12 min",
@@ -93,7 +93,7 @@ export default function BlogPage() {
   return (
     <div style={{
       minHeight: "100vh",
-      background: "#F8FAFC",
+      background: "#E8E9EC",
       color: V,
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
     }}>

@@ -128,7 +128,7 @@ function MiniResponseTimeChart({ history, width = 260, height = 60 }) {
       <path d={pathD + ` L ${getX(points.length - 1)} ${height - padding.bottom} L ${getX(0)} ${height - padding.bottom} Z`} fill="url(#rtGrad)" />
       <path d={pathD} fill="none" stroke={ACCENT} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       {points.map((p, i) => (
-        <circle key={i} cx={getX(i)} cy={getY(p.responseTime || 0)} r="3" fill={ACCENT} stroke="#F8FAFC" strokeWidth="1.5" />
+        <circle key={i} cx={getX(i)} cy={getY(p.responseTime || 0)} r="3" fill={ACCENT} stroke="#E8E9EC" strokeWidth="1.5" />
       ))}
     </svg>
   );

@@ -68,11 +68,11 @@ export default function OnboardingPage() {
             placeholder="Ex: Restaurant Le Bon Gout"
             autoFocus
             style={{
-              width: "100%", padding: "16px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+              width: "100%", padding: "16px", background: "#E8E9EC", border: "1px solid #2a2d3a",
               borderRadius: "8px", color: "#0F172A", fontSize: "16px", fontFamily: "inherit",
               outline: "none", boxSizing: "border-box", marginBottom: "24px"
             }}
-            onFocus={e => { e.target.style.borderColor = "#4F46E5"; }}
+            onFocus={e => { e.target.style.borderColor = "#6C5CE7"; }}
             onBlur={e => { e.target.style.borderColor = "#E2E8F0"; }}
             onKeyDown={e => { if (e.key === "Enter" && businessName.trim()) setStep(1); }} />
           <button onClick={() => setStep(1)} disabled={!businessName.trim()}
@@ -117,14 +117,14 @@ export default function OnboardingPage() {
           {/* Option 1: Paste URL */}
           <div style={{
             padding: "20px", borderRadius: "10px", border: "1px solid #2a2d3a",
-            background: "#F8FAFC", marginBottom: "12px"
+            background: "#E8E9EC", marginBottom: "12px"
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
               <div style={{
                 width: "32px", height: "32px", borderRadius: "8px",
                 background: "rgba(99,102,241,0.1)", display: "flex", alignItems: "center", justifyContent: "center"
               }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
                   <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
                 </svg>
@@ -137,21 +137,21 @@ export default function OnboardingPage() {
             <input value={googleUrl} onChange={e => setGoogleUrl(e.target.value)}
               placeholder="https://www.google.com/maps/place/..."
               style={{
-                width: "100%", padding: "14px 16px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+                width: "100%", padding: "14px 16px", background: "#E8E9EC", border: "1px solid #2a2d3a",
                 borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box"
               }}
-              onFocus={e => { e.target.style.borderColor = "#4F46E5"; }}
+              onFocus={e => { e.target.style.borderColor = "#6C5CE7"; }}
               onBlur={e => { e.target.style.borderColor = "#E2E8F0"; }} />
           </div>
 
           {/* Option 2: Google OAuth */}
           <div onClick={() => handleFinish(true)} style={{
             padding: "20px", borderRadius: "10px", border: "1px solid rgba(234,67,53,0.3)",
-            background: "#F8FAFC", marginBottom: "24px", cursor: "pointer", transition: "all 0.2s"
+            background: "#E8E9EC", marginBottom: "24px", cursor: "pointer", transition: "all 0.2s"
           }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(234,67,53,0.6)"; e.currentTarget.style.background = "rgba(234,67,53,0.05)"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(234,67,53,0.3)"; e.currentTarget.style.background = "#F8FAFC"; }}>
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(234,67,53,0.3)"; e.currentTarget.style.background = "#E8E9EC"; }}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <div style={{
                 width: "32px", height: "32px", borderRadius: "8px",
@@ -204,7 +204,7 @@ export default function OnboardingPage() {
 }
 
 const nextBtnStyle = (disabled) => ({
-  padding: "14px 28px", background: disabled ? "#E2E8F0" : "#4F46E5", color: "#ffffff",
+  padding: "14px 28px", background: disabled ? "#E2E8F0" : "#6C5CE7", color: "#ffffff",
   border: "none", borderRadius: "8px", fontWeight: 600, fontSize: "13px",
   cursor: disabled ? "not-allowed" : "pointer", fontFamily: "inherit",
   transition: "all 0.2s", opacity: disabled ? 0.5 : 1

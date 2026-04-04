@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#334155", V3 = "#64748B";
+const V = "#F0F1F3", V2 = "#334155", V3 = "#64748B";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#4F46E5", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#6C5CE7", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -79,7 +79,7 @@ export default function VitrinePage() {
   }, []);
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#FFFFFF", color: "#0F172A", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#F0F1F3", color: "#0F172A", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`

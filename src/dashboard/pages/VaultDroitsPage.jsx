@@ -25,7 +25,7 @@ const DEMO_DSARS = [
   { id: "d5", date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), demandeur: "A. Moreau", type: "opposition", status: "recue", receivedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString() },
 ];
 
-const CARD_BG = "#F8FAFC";
+const CARD_BG = "#E8E9EC";
 const CARD_BORDER = "#E2E8F0";
 const DEADLINE_DAYS = 30;
 

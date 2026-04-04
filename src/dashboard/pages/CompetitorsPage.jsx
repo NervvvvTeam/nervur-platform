@@ -100,7 +100,7 @@ export default function CompetitorsPage() {
       {chartData.length > 1 && (
         <div style={{
           padding: "18px", borderRadius: "10px", border: "1px solid #2a2d3a",
-          background: "#F8FAFC", marginBottom: "24px",
+          background: "#E8E9EC", marginBottom: "24px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "20px" }}>
@@ -161,7 +161,7 @@ export default function CompetitorsPage() {
           return (
             <div key={comp._id} style={{
               padding: "18px", borderRadius: "10px",
-              border: "1px solid #2a2d3a", background: "#F8FAFC",
+              border: "1px solid #2a2d3a", background: "#E8E9EC",
               boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
               position: "relative"
             }}>
@@ -204,14 +204,14 @@ export default function CompetitorsPage() {
       {(data?.competitors?.length || 0) < 5 && (
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px dashed #2a2d3a", background: "#F8FAFC",
+          border: "1px dashed #2a2d3a", background: "#E8E9EC",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <h3 style={{ fontSize: "14px", color: "#64748B", marginBottom: "16px", fontWeight: 600 }}>Ajouter un concurrent</h3>
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
             <input placeholder="Nom du concurrent" value={newName} onChange={e => setNewName(e.target.value)}
               style={{
-                flex: "2", minWidth: "180px", padding: "12px 16px", background: "#F8FAFC",
+                flex: "2", minWidth: "180px", padding: "12px 16px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
                 color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none",
                 boxSizing: "border-box", transition: "border-color 0.2s"
@@ -220,7 +220,7 @@ export default function CompetitorsPage() {
               onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
             <input placeholder="Note (ex: 4.2)" value={newRating} onChange={e => setNewRating(e.target.value)}
               style={{
-                flex: "1", minWidth: "100px", padding: "12px 16px", background: "#F8FAFC",
+                flex: "1", minWidth: "100px", padding: "12px 16px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
                 color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none",
                 boxSizing: "border-box", transition: "border-color 0.2s"
@@ -229,7 +229,7 @@ export default function CompetitorsPage() {
               onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
             <input placeholder="Nb avis" value={newReviews} onChange={e => setNewReviews(e.target.value)}
               style={{
-                flex: "1", minWidth: "80px", padding: "12px 16px", background: "#F8FAFC",
+                flex: "1", minWidth: "80px", padding: "12px 16px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
                 color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none",
                 boxSizing: "border-box", transition: "border-color 0.2s"

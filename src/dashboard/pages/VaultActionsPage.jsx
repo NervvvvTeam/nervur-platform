@@ -178,7 +178,7 @@ const ArrowRightIcon = ({ size = 12, color = "#64748B" }) => (
 
 /* ── Shared styles ── */
 const cardStyle = {
-  background: "#F8FAFC",
+  background: "#E8E9EC",
   border: "1px solid #2a2d3a",
   borderRadius: 12,
   padding: "14px 16px",
@@ -430,7 +430,7 @@ function ActionCard({ action, columns, onMove, onEdit, onDelete }) {
   return (
     <div
       style={{
-        background: "#F8FAFC",
+        background: "#E8E9EC",
         borderRadius: 10,
         border: "1px solid #2a2d3a",
         borderLeft: `3px solid ${pColor}`,
@@ -925,7 +925,7 @@ export default function VaultActionsPage() {
 
           <div
             style={{
-              background: "#F8FAFC",
+              background: "#E8E9EC",
               border: "1px solid #2a2d3a",
               borderRadius: 12,
               overflow: "hidden",

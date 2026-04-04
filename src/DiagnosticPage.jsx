@@ -4,9 +4,9 @@ import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
 // ─── NERVÜR DIAGNOSTIC E-RÉPUTATION & CONFORMITÉ ───
-const V = "#FFFFFF", V2 = "#334155", V3 = "#64748B";
+const V = "#F0F1F3", V2 = "#334155", V3 = "#64748B";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#4F46E5", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#6C5CE7", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -20,7 +20,7 @@ const useIsMobile = (bp = 768) => {
 
 // ═══ CATEGORIES ═══
 const CATEGORIES = {
-  reputation: { label: "E-réputation", color: "#4F46E5" },
+  reputation: { label: "E-réputation", color: "#6C5CE7" },
   conformite: { label: "Conformité légale", color: "#4ADE80" },
   presence: { label: "Présence digitale", color: "#60A5FA" },
 };
@@ -246,7 +246,7 @@ const RadarChart = ({ scores, size = 280 }) => {
         fill={VG(0.08)} stroke={V} strokeWidth="2" style={{ transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)" }} />
       {/* Data points */}
       {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="4" fill={CATEGORIES[categories[i]].color} stroke="#FFFFFF" strokeWidth="2"
+        <circle key={i} cx={p.x} cy={p.y} r="4" fill={CATEGORIES[categories[i]].color} stroke="#F0F1F3" strokeWidth="2"
           style={{ transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)" }} />
       ))}
       {/* Labels */}
@@ -488,7 +488,7 @@ export default function DiagnosticPage() {
                     onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.borderColor = VG(0.08); e.currentTarget.style.color = V3; e.currentTarget.style.transform = "translateX(0)"; }}}>
                     {/* Letter */}
                     <span style={{
-                      fontSize: "11px", fontWeight: 700, color: isSelected ? "#FFFFFF" : "#6B7280",
+                      fontSize: "11px", fontWeight: 700, color: isSelected ? "#F0F1F3" : "#6B7280",
                       background: isSelected ? optColor : VG(0.06), width: "28px", height: "28px", borderRadius: "6px",
                       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                       transition: "all 0.3s",
@@ -617,7 +617,7 @@ export default function DiagnosticPage() {
                         onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.15); e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
                         onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.08); e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}>
                         <span style={{
-                          fontSize: "16px", fontWeight: 900, color: "#FFFFFF", width: "28px", height: "28px",
+                          fontSize: "16px", fontWeight: 900, color: "#F0F1F3", width: "28px", height: "28px",
                           display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "6px",
                           background: CATEGORIES[rec.cat].color,
                         }}>{i + 1}</span>
@@ -657,7 +657,7 @@ export default function DiagnosticPage() {
                   </p>
                   <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
                     <button onClick={() => navigate("/contact")} style={{
-                      padding: "18px 48px", background: `linear-gradient(135deg, ${A1}, ${A3})`, color: "#FFFFFF",
+                      padding: "18px 48px", background: `linear-gradient(135deg, ${A1}, ${A3})`, color: "#F0F1F3",
                       fontSize: "14px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase",
                       border: "none", cursor: "pointer", transition: "all 0.3s ease", fontFamily: "inherit", borderRadius: "8px",
                     }}

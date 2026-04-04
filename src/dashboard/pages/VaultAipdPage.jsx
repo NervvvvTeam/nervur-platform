@@ -289,14 +289,14 @@ const InfoTooltip = ({ text, style: extraStyle }) => {
       {show && (
         <div style={{
           position: "absolute", bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)",
-          background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: 8, padding: "10px 14px",
+          background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: 8, padding: "10px 14px",
           fontSize: 12, color: "#94a3b8", lineHeight: 1.6, width: 300, zIndex: 50,
           boxShadow: "0 4px 20px rgba(0,0,0,0.4)", pointerEvents: "none",
         }}>
           {text}
           <div style={{
             position: "absolute", bottom: -5, left: "50%", transform: "translateX(-50%) rotate(45deg)",
-            width: 10, height: 10, background: "#F8FAFC", borderRight: "1px solid #2a2d3a",
+            width: 10, height: 10, background: "#E8E9EC", borderRight: "1px solid #2a2d3a",
             borderBottom: "1px solid #2a2d3a",
           }} />
         </div>
@@ -435,7 +435,7 @@ const StepProgress = ({ current, total = 6 }) => {
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minWidth: 64 }}>
               <div style={{
                 width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
-                background: done ? ACCENT : active ? "rgba(6,182,212,0.15)" : "#F8FAFC",
+                background: done ? ACCENT : active ? "rgba(6,182,212,0.15)" : "#E8E9EC",
                 border: active ? `2px solid ${ACCENT}` : done ? "none" : "2px solid #2a2d3a",
                 color: done ? "#fff" : active ? ACCENT : "#64748b", fontSize: 12, fontWeight: 700,
               }}>
@@ -466,7 +466,7 @@ const ScoreRing = ({ score, size = 120 }) => {
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <div style={{ position: "relative", width: size, height: size }}>
         <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#F8FAFC" strokeWidth={10} />
+          <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#E8E9EC" strokeWidth={10} />
           <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth={10}
             strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
             style={{ transition: "stroke-dashoffset 0.8s ease" }} />
@@ -886,7 +886,7 @@ ${(analysis.actions || []).map(a => {
   /*  Common styles                                                      */
   /* ------------------------------------------------------------------ */
   const card = {
-    background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: 12, padding: 20,
+    background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: 12, padding: 20,
   };
   const inputStyle = {
     width: "100%", background: "#161820", border: "1px solid #2a2d3a", borderRadius: 8,
@@ -1619,7 +1619,7 @@ ${(analysis.actions || []).map(a => {
       {/* Cards */}
       {analyses.length === 0 ? (
         <div style={{
-          textAlign: "center", padding: "60px 20px", background: "#F8FAFC",
+          textAlign: "center", padding: "60px 20px", background: "#E8E9EC",
           borderRadius: 12, border: "1px solid #2a2d3a",
         }}>
           <div style={{

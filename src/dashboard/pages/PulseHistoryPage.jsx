@@ -67,7 +67,7 @@ function ScoreChart({ history, width = 820, height = 180 }) {
       <path d={areaD} fill="url(#pulseGrad)" />
       <path d={pathD} fill="none" stroke={ACCENT} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       {points.map((p, i) => (
-        <circle key={i} cx={getX(i)} cy={getY(p.score)} r="3" fill={ACCENT} stroke="#F8FAFC" strokeWidth="1.5" />
+        <circle key={i} cx={getX(i)} cy={getY(p.score)} r="3" fill={ACCENT} stroke="#E8E9EC" strokeWidth="1.5" />
       ))}
     </svg>
   );
@@ -117,7 +117,7 @@ function ResponseTimeChart({ history, width = 820, height = 160 }) {
       {points.map((p, i) => {
         const color = p.responseTime < 500 ? "#10b981" : p.responseTime < 1500 ? "#f59e0b" : "#ef4444";
         return (
-          <circle key={i} cx={getX(i)} cy={getY(p.responseTime)} r="3" fill={color} stroke="#F8FAFC" strokeWidth="1.5" />
+          <circle key={i} cx={getX(i)} cy={getY(p.responseTime)} r="3" fill={color} stroke="#E8E9EC" strokeWidth="1.5" />
         );
       })}
     </svg>
@@ -382,7 +382,7 @@ export default function PulseHistoryPage() {
                   onClick={() => setSelectedSite(site._id)}
                   className="px-4 py-2 rounded-md text-[13px] font-medium cursor-pointer font-[inherit]"
                   style={{
-                    background: selectedSite === site._id ? `${ACCENT}20` : "#F8FAFC",
+                    background: selectedSite === site._id ? `${ACCENT}20` : "#E8E9EC",
                     color: selectedSite === site._id ? ACCENT : "#64748B",
                     border: `1px solid ${selectedSite === site._id ? BORDER_TINT : "#E2E8F0"}`,
                   }}

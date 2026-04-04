@@ -88,7 +88,7 @@ export default function SettingsPage() {
   }
 
   if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Aucune entreprise configurée. <a href="/app/onboarding" style={{ color: "#4F46E5" }}>Configurer →</a></div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#334155" }}>Aucune entreprise configurée. <a href="/app/onboarding" style={{ color: "#6C5CE7" }}>Configurer →</a></div>;
 
   return (
     <div style={{ maxWidth: "600px" }}>
@@ -118,7 +118,7 @@ export default function SettingsPage() {
           placeholder="https://www.google.com/maps/place/..." />
         <button onClick={handleSave} disabled={saving}
           style={{
-            padding: "10px 24px", background: "#4F46E5", color: "#ffffff",
+            padding: "10px 24px", background: "#6C5CE7", color: "#ffffff",
             border: "none", borderRadius: "8px", fontWeight: 600, fontSize: "13px",
             cursor: saving ? "wait" : "pointer", fontFamily: "inherit",
             transition: "all 0.3s"
@@ -151,7 +151,7 @@ export default function SettingsPage() {
           <button onClick={toggleScan}
             style={{
               width: "48px", height: "28px", borderRadius: "14px", border: "none", cursor: "pointer",
-              background: business.scanEnabled ? "#4F46E5" : "#3a3d4a",
+              background: business.scanEnabled ? "#6C5CE7" : "#3a3d4a",
               position: "relative", transition: "background 0.3s"
             }}>
             <div style={{
@@ -166,13 +166,13 @@ export default function SettingsPage() {
 
       <Section title="Connexion Google Business">
         <div style={{
-          padding: "18px", borderRadius: "8px", background: "#F8FAFC",
+          padding: "18px", borderRadius: "8px", background: "#E8E9EC",
           border: "1px solid #2a2d3a", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
             <div style={{
               width: "8px", height: "8px", borderRadius: "4px",
-              background: business.googleAccessToken ? "#4F46E5" : "#ef4444"
+              background: business.googleAccessToken ? "#6C5CE7" : "#ef4444"
             }} />
             <span style={{ fontSize: "13px", fontWeight: 600, color: "#334155" }}>
               {business.googleAccessToken ? "Connecté" : "Non connecté"}
@@ -188,7 +188,7 @@ export default function SettingsPage() {
             } catch (err) { console.error(err); }
           }}
             style={{
-              padding: "10px 20px", background: business.googleAccessToken ? "transparent" : "#4F46E5",
+              padding: "10px 20px", background: business.googleAccessToken ? "transparent" : "#6C5CE7",
               border: business.googleAccessToken ? "1px solid #2a2d3a" : "none",
               borderRadius: "8px", color: "#ffffff", fontSize: "13px", fontWeight: 600,
               cursor: "pointer", fontFamily: "inherit"
@@ -230,7 +230,7 @@ function Section({ title, children }) {
   return (
     <div style={{
       border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
-      background: "#F8FAFC", marginBottom: "20px",
+      background: "#E8E9EC", marginBottom: "20px",
       boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
     }}>
       <div style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "20px" }}>{title}</div>
@@ -245,7 +245,7 @@ function Field({ label, value, onChange, placeholder }) {
       <label style={labelStyle}>{label}</label>
       <input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={inputStyle}
-        onFocus={e => { e.target.style.borderColor = "#4F46E5"; }}
+        onFocus={e => { e.target.style.borderColor = "#6C5CE7"; }}
         onBlur={e => { e.target.style.borderColor = "#E2E8F0"; }} />
     </div>
   );
@@ -259,7 +259,7 @@ function ModeButton({ active, label, desc, onClick }) {
       border: `1px solid ${active ? "rgba(99,102,241,0.25)" : "#E2E8F0"}`,
       textAlign: "left", transition: "all 0.3s"
     }}>
-      <div style={{ fontSize: "13px", fontWeight: 600, color: active ? "#4F46E5" : "#64748B", marginBottom: "4px" }}>{label}</div>
+      <div style={{ fontSize: "13px", fontWeight: 600, color: active ? "#6C5CE7" : "#64748B", marginBottom: "4px" }}>{label}</div>
       <div style={{ fontSize: "12px", color: "#334155" }}>{desc}</div>
     </button>
   );
@@ -267,7 +267,7 @@ function ModeButton({ active, label, desc, onClick }) {
 
 const labelStyle = { display: "block", fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "8px" };
 const inputStyle = {
-  width: "100%", padding: "12px 14px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+  width: "100%", padding: "12px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a",
   borderRadius: "8px", color: "#334155", fontSize: "14px", fontFamily: "inherit",
   outline: "none", boxSizing: "border-box", transition: "border-color 0.2s"
 };

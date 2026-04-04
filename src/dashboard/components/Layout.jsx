@@ -61,7 +61,7 @@ const TOOL_COLORS = {
   forge: "#f59e0b",
   vault: "#06b6d4",
   atlas: "#f59e0b",
-  general: "#4F46E5",
+  general: "#6C5CE7",
 };
 
 // Map paths to their tool color

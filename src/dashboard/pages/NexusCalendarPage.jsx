@@ -81,7 +81,7 @@ export default function NexusCalendarPage() {
 
       {/* Form */}
       <div style={{
-        padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+        padding: "24px", background: "#E8E9EC", border: "1px solid #2a2d3a",
         borderRadius: "10px", marginBottom: "20px"
       }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "14px", marginBottom: "18px" }}>
@@ -90,7 +90,7 @@ export default function NexusCalendarPage() {
             <input type="text" value={sector} onChange={e => setSector(e.target.value)}
               placeholder="Restauration, e-commerce, SaaS..."
               style={{
-                width: "100%", padding: "10px 14px", background: "#F8FAFC",
+                width: "100%", padding: "10px 14px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
                 color: "#0F172A", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
@@ -103,7 +103,7 @@ export default function NexusCalendarPage() {
             <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)}
               placeholder="NERVÜR"
               style={{
-                width: "100%", padding: "10px 14px", background: "#F8FAFC",
+                width: "100%", padding: "10px 14px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
                 color: "#0F172A", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
@@ -121,7 +121,7 @@ export default function NexusCalendarPage() {
                 style={{
                   padding: "7px 16px", borderRadius: "6px",
                   fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                  background: selectedPlatforms.includes(p) ? (PLATFORM_COLORS[p] || "#10b981") + "20" : "#F8FAFC",
+                  background: selectedPlatforms.includes(p) ? (PLATFORM_COLORS[p] || "#10b981") + "20" : "#E8E9EC",
                   color: selectedPlatforms.includes(p) ? (PLATFORM_COLORS[p] || "#10b981") : "#64748B",
                   border: selectedPlatforms.includes(p) ? `1px solid ${(PLATFORM_COLORS[p] || "#10b981")}30` : "1px solid #2a2d3a",
                 }}>{p}</button>
@@ -191,7 +191,7 @@ export default function NexusCalendarPage() {
                   const pColor = PLATFORM_COLORS[post.platform] || "#10b981";
                   return (
                     <div key={pi} style={{
-                      padding: "18px 20px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+                      padding: "18px 20px", background: "#E8E9EC", border: "1px solid #2a2d3a",
                       borderRadius: "10px", borderLeft: `3px solid ${pColor}`,
                     }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
@@ -207,7 +207,7 @@ export default function NexusCalendarPage() {
                         </div>
                         <button onClick={() => copyPost(post, postId)}
                           style={{
-                            padding: "4px 12px", background: copiedId === postId ? "#10b98120" : "#F8FAFC",
+                            padding: "4px 12px", background: copiedId === postId ? "#10b98120" : "#E8E9EC",
                             border: "1px solid #2a2d3a", borderRadius: "4px",
                             color: copiedId === postId ? "#10b981" : "#64748B",
                             fontSize: "11px", cursor: "pointer", fontFamily: "inherit",

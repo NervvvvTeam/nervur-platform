@@ -4,8 +4,8 @@ import { useAuth } from "../hooks/useAuth";
 import LogoNervur from "../../components/LogoNervur";
 
 const C = {
-  bg: "#FFFFFF", bgAlt: "#F8FAFC", text: "#0F172A", body: "#334155",
-  muted: "#64748B", accent: "#4F46E5", accentHover: "#4338CA",
+  bg: "#F0F1F3", bgAlt: "#E8E9EC", text: "#0F172A", body: "#334155",
+  muted: "#64748B", accent: "#6C5CE7", accentHover: "#5A4BD6",
   accentLight: "#EEF2FF", border: "#E2E8F0",
 };
 const FONT = "'Inter', system-ui, -apple-system, sans-serif";
@@ -73,7 +73,7 @@ export default function LoginPage() {
         >&#8592; Retour au site</button>
 
         <LogoNervur height={isWide ? 56 : 40} onClick={() => navigate("/")} variant="dark" style={{ marginBottom: isWide ? 24 : 12 }} />
-        <h1 style={{ fontSize: isWide ? "28px" : "20px", fontWeight: 700, color: "#FFFFFF", textAlign: "center", marginBottom: "8px" }}>
+        <h1 style={{ fontSize: isWide ? "28px" : "20px", fontWeight: 700, color: "#F0F1F3", textAlign: "center", marginBottom: "8px" }}>
           Bienvenue sur NERVÜR
         </h1>
         <p style={{ fontSize: isWide ? "15px" : "13px", color: "rgba(255,255,255,0.5)", textAlign: "center", maxWidth: "340px", lineHeight: 1.6, margin: 0 }}>

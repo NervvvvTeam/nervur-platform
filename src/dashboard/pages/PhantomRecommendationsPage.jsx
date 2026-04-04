@@ -107,7 +107,7 @@ export default function PhantomRecommendationsPage() {
 
     return (
       <div key={`${rec.domain}-${i}`} style={{
-        padding: "18px 22px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+        padding: "18px 22px", background: "#E8E9EC", border: "1px solid #2a2d3a",
         borderRadius: "10px", borderLeft: `3px solid ${SEVERITY_COLORS[rec.severity] || "#64748B"}`
       }}>
         {/* Meta row */}
@@ -201,7 +201,7 @@ export default function PhantomRecommendationsPage() {
           { label: "Optionnel", sublabel: "Impact faible", count: infoCount, color: "#10b981" },
         ].map(s => (
           <div key={s.label} style={{
-            padding: "18px 20px", background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px",
+            padding: "18px 20px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px",
             borderLeft: `3px solid ${s.color}`
           }}>
             <div style={{ fontSize: "24px", fontWeight: 600, color: s.color, marginBottom: "4px" }}>{s.count}</div>
@@ -271,7 +271,7 @@ export default function PhantomRecommendationsPage() {
       {!loading && recommendations.length === 0 && (
         <div style={{
           padding: "60px 24px", textAlign: "center",
-          background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px"
+          background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px"
         }}>
           <div style={{ fontSize: "16px", color: "#64748B", marginBottom: "8px" }}>
             Aucune recommandation

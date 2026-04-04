@@ -70,7 +70,7 @@ export default function NexusSequencePage() {
 
       {/* Form */}
       <div style={{
-        padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+        padding: "24px", background: "#E8E9EC", border: "1px solid #2a2d3a",
         borderRadius: "10px", marginBottom: "20px"
       }}>
         <div style={{ marginBottom: "18px" }}>
@@ -81,7 +81,7 @@ export default function NexusSequencePage() {
                 style={{
                   padding: "10px 16px", borderRadius: "8px", textAlign: "left",
                   fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                  background: objective === o ? "#10b98112" : "#F8FAFC",
+                  background: objective === o ? "#10b98112" : "#E8E9EC",
                   color: objective === o ? "#10b981" : "#64748B",
                   border: objective === o ? "1px solid #10b98125" : "1px solid #2a2d3a",
                 }}>{o}</button>
@@ -95,7 +95,7 @@ export default function NexusSequencePage() {
             <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)}
               placeholder="NERVÜR"
               style={{
-                width: "100%", padding: "10px 14px", background: "#F8FAFC",
+                width: "100%", padding: "10px 14px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
                 color: "#0F172A", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
@@ -108,7 +108,7 @@ export default function NexusSequencePage() {
             <input type="text" value={audience} onChange={e => setAudience(e.target.value)}
               placeholder="Restaurateurs, e-commerçants..."
               style={{
-                width: "100%", padding: "10px 14px", background: "#F8FAFC",
+                width: "100%", padding: "10px 14px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px",
                 color: "#0F172A", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box", transition: "border-color 0.2s",
@@ -165,7 +165,7 @@ export default function NexusSequencePage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {(result.sequence || []).map((email, i) => (
               <div key={i} style={{
-                padding: "22px 24px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+                padding: "22px 24px", background: "#E8E9EC", border: "1px solid #2a2d3a",
                 borderRadius: "10px", borderLeft: "3px solid #10b981",
               }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
@@ -178,7 +178,7 @@ export default function NexusSequencePage() {
                   </div>
                   <button onClick={() => copyEmail(email)}
                     style={{
-                      padding: "4px 12px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+                      padding: "4px 12px", background: "#E8E9EC", border: "1px solid #2a2d3a",
                       borderRadius: "4px", color: "#64748B", fontSize: "11px",
                       cursor: "pointer", fontFamily: "inherit",
                     }}>Copier</button>
@@ -186,7 +186,7 @@ export default function NexusSequencePage() {
 
                 <div style={{
                   fontSize: "15px", fontWeight: 500, color: "#334155", marginBottom: "10px",
-                  padding: "8px 12px", background: "#F8FAFC", borderRadius: "6px",
+                  padding: "8px 12px", background: "#E8E9EC", borderRadius: "6px",
                 }}>
                   {email.subject}
                 </div>

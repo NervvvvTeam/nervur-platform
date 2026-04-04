@@ -616,7 +616,7 @@ export default function VaultRgpdPage() {
                 className="bg-[#F8FAFC] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between"
                 style={{
                   border: selectedHistoryId === h._id ? `1px solid ${ACCENT}` : "1px solid #2a2d3a",
-                  background: selectedHistoryId === h._id ? BG_TINT : "#F8FAFC",
+                  background: selectedHistoryId === h._id ? BG_TINT : "#E8E9EC",
                 }}
               >
                 <div className="flex items-center gap-3">

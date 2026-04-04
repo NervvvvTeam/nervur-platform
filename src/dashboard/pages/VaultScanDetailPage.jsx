@@ -80,7 +80,7 @@ function RadarChart({ scores }) {
       })}
       <path d={dataPath} fill="rgba(6,182,212,0.15)" stroke={ACCENT} strokeWidth="2" />
       {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="4" fill={ACCENT} stroke="#F8FAFC" strokeWidth="2" />
+        <circle key={i} cx={p.x} cy={p.y} r="4" fill={ACCENT} stroke="#E8E9EC" strokeWidth="2" />
       ))}
       {labels.map((l, i) => {
         const p = getPoint(i, 120);

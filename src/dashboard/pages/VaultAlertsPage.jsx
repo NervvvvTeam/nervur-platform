@@ -20,7 +20,7 @@ const FILTER_TABS = [
   { key: "info", label: "Info" },
 ];
 
-const CARD_BG = "#F8FAFC";
+const CARD_BG = "#E8E9EC";
 const CARD_BORDER = "#E2E8F0";
 const LS_KEY = "vault_alerts";
 const LS_RESOLVED = "vault_alerts_resolved_count";

@@ -29,8 +29,8 @@ const SENTIMENT_CONFIG = {
 
 const STATUS_CONFIG = {
   pending: { label: "En attente", color: "#64748B" },
-  generated: { label: "Réponse prête", color: "#4F46E5" },
-  approved: { label: "Approuvée", color: "#4F46E5" },
+  generated: { label: "Réponse prête", color: "#6C5CE7" },
+  approved: { label: "Approuvée", color: "#6C5CE7" },
   published: { label: "Publiée", color: "#22c55e" },
   failed: { label: "Erreur", color: "#ef4444" }
 };
@@ -96,7 +96,7 @@ export default function ReviewCard({ review, businessId }) {
           {review.publishedAt ? new Date(review.publishedAt).toLocaleDateString("fr-FR") : ""}
         </span>
         {review.response && (
-          <span style={{ fontSize: "11px", color: "#4F46E5", fontWeight: 500 }}>Réponse IA disponible →</span>
+          <span style={{ fontSize: "11px", color: "#6C5CE7", fontWeight: 500 }}>Réponse IA disponible →</span>
         )}
       </div>
     </div>

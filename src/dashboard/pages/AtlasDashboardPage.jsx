@@ -64,7 +64,7 @@ function SuggestionsModal({ suggestions, loading, onClose, onAdd }) {
       justifyContent: "center", zIndex: 1000, padding: "20px",
     }}>
       <div style={{
-        background: "#F8FAFC", borderRadius: "16px", padding: "28px",
+        background: "#E8E9EC", borderRadius: "16px", padding: "28px",
         border: "1px solid #2a2d3a", maxWidth: "560px", width: "100%",
         maxHeight: "80vh", overflow: "auto",
       }}>
@@ -123,7 +123,7 @@ function ReportModal({ report, loading, onClose }) {
       justifyContent: "center", zIndex: 1000, padding: "20px",
     }}>
       <div style={{
-        background: "#F8FAFC", borderRadius: "16px", padding: "28px",
+        background: "#E8E9EC", borderRadius: "16px", padding: "28px",
         border: "1px solid #2a2d3a", maxWidth: "640px", width: "100%",
         maxHeight: "85vh", overflow: "auto",
       }}>
@@ -390,7 +390,7 @@ export default function AtlasDashboardPage() {
   }, 0);
 
   const inputStyle = {
-    width: "100%", padding: "10px 14px", background: "#F8FAFC",
+    width: "100%", padding: "10px 14px", background: "#E8E9EC",
     border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
     fontSize: "13px", fontFamily: "inherit", outline: "none",
   };
@@ -437,7 +437,7 @@ export default function AtlasDashboardPage() {
           { label: "Mots-cles Top 10", value: keywordsInTop10, suffix: "", color: keywordsInTop10 > 0 ? "#22c55e" : "#64748B" },
         ].map((stat, i) => (
           <div key={i} style={{
-            background: "#F8FAFC", borderRadius: "12px", padding: "20px",
+            background: "#E8E9EC", borderRadius: "12px", padding: "20px",
             border: "1px solid #2a2d3a",
           }}>
             <div style={{ fontSize: "11px", color: "#64748B", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>{stat.label}</div>
@@ -449,7 +449,7 @@ export default function AtlasDashboardPage() {
       {/* New Project Form */}
       {showForm && (
         <form onSubmit={handleCreate} style={{
-          background: "#F8FAFC", borderRadius: "14px", padding: "24px",
+          background: "#E8E9EC", borderRadius: "14px", padding: "24px",
           border: "1px solid #2a2d3a", marginBottom: "28px",
         }}>
           <h3 style={{ color: "#0F172A", fontSize: "15px", fontWeight: 600, margin: "0 0 16px" }}>Nouveau projet SEO</h3>
@@ -490,7 +490,7 @@ export default function AtlasDashboardPage() {
         <div style={{ textAlign: "center", padding: "60px 0", color: "#64748B" }}>Chargement...</div>
       ) : projects.length === 0 ? (
         <div style={{
-          background: "#F8FAFC", borderRadius: "14px", padding: "60px 32px",
+          background: "#E8E9EC", borderRadius: "14px", padding: "60px 32px",
           border: "1px solid #2a2d3a", textAlign: "center",
         }}>
           <div style={{ fontSize: "36px", marginBottom: "12px" }}>
@@ -508,7 +508,7 @@ export default function AtlasDashboardPage() {
             const projectTraffic = (project.rankings || []).reduce((s, r) => s + (r.estimatedTraffic || 0), 0);
             return (
               <div key={project._id} style={{
-                background: "#F8FAFC", borderRadius: "14px",
+                background: "#E8E9EC", borderRadius: "14px",
                 border: isExpanded ? "1px solid rgba(245,158,11,0.3)" : "1px solid #2a2d3a",
                 overflow: "hidden", transition: "border-color 0.2s",
               }}>

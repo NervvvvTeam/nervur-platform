@@ -12,7 +12,7 @@ const ATLAS_NAV = [
 ];
 
 const cardStyle = {
-  background: "#F8FAFC",
+  background: "#E8E9EC",
   borderRadius: "14px",
   padding: "24px",
   border: "1px solid #2a2d3a",
@@ -147,7 +147,7 @@ export default function AtlasReportsPage() {
                 style={{
                   padding: "10px 24px",
                   background: loadingReport ? "#E2E8F0" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
-                  color: loadingReport ? "#64748B" : "#F8FAFC",
+                  color: loadingReport ? "#64748B" : "#E8E9EC",
                   border: "none", borderRadius: "8px",
                   fontSize: "13px", fontWeight: 600,
                   cursor: loadingReport ? "wait" : "pointer",

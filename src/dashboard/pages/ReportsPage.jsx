@@ -107,7 +107,7 @@ export default function ReportsPage() {
       {/* Report contents info */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #2a2d3a", background: "#F8FAFC",
+        border: "1px solid #2a2d3a", background: "#E8E9EC",
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
       }}>
         <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "20px" }}>

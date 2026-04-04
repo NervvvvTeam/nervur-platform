@@ -71,7 +71,7 @@ export default function WidgetPage() {
         {/* Embed code */}
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px solid #2a2d3a", background: "#F8FAFC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+          border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
             <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B" }}>
@@ -101,13 +101,13 @@ export default function WidgetPage() {
         {/* Preview */}
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px solid #2a2d3a", background: "#F8FAFC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+          border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "16px" }}>
             Aperçu
           </h3>
           <div style={{
-            background: "#FFFFFF", borderRadius: "10px", padding: "24px",
+            background: "#F0F1F3", borderRadius: "10px", padding: "24px",
             boxShadow: "0 2px 12px rgba(0,0,0,0.3)"
           }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
@@ -138,7 +138,7 @@ export default function WidgetPage() {
       {/* Instructions */}
       <div style={{
         marginTop: "24px", padding: "18px", borderRadius: "10px",
-        border: "1px solid #2a2d3a", background: "#F8FAFC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+        border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
       }}>
         <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "16px" }}>
           Comment intégrer

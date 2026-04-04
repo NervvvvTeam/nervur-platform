@@ -137,7 +137,7 @@ export default function NexusDashboardPage() {
             style={{
               padding: "8px 18px", borderRadius: "6px 6px 0 0", border: "none",
               fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-              background: tab === t.key ? "#F8FAFC" : "transparent",
+              background: tab === t.key ? "#E8E9EC" : "transparent",
               color: tab === t.key ? "#10b981" : "#64748B",
               borderBottom: tab === t.key ? "2px solid #10b981" : "2px solid transparent",
             }}>{t.label}</button>
@@ -147,7 +147,7 @@ export default function NexusDashboardPage() {
       {/* GENERATE TAB */}
       {tab === "generate" && (
         <>
-          <div style={{ padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)", marginBottom: "20px" }}>
+          <div style={{ padding: "24px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)", marginBottom: "20px" }}>
             <div style={{ marginBottom: "18px" }}>
               <div style={{ fontSize: "12px", color: "#64748B", marginBottom: "8px", fontWeight: 500 }}>Type de contenu</div>
               <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
@@ -155,7 +155,7 @@ export default function NexusDashboardPage() {
                   <button key={t.value} onClick={() => setType(t.value)}
                     style={{
                       padding: "7px 16px", borderRadius: "6px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                      background: type === t.value ? "#10b98120" : "#F8FAFC",
+                      background: type === t.value ? "#10b98120" : "#E8E9EC",
                       color: type === t.value ? "#10b981" : "#64748B",
                       border: type === t.value ? "1px solid #10b98130" : "1px solid #2a2d3a",
                     }}>{t.label}</button>
@@ -170,7 +170,7 @@ export default function NexusDashboardPage() {
                   <button key={t.value} onClick={() => setTone(t.value)}
                     style={{
                       padding: "7px 16px", borderRadius: "6px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                      background: tone === t.value ? "#10b98120" : "#F8FAFC",
+                      background: tone === t.value ? "#10b98120" : "#E8E9EC",
                       color: tone === t.value ? "#10b981" : "#64748B",
                       border: tone === t.value ? "1px solid #10b98130" : "1px solid #2a2d3a",
                     }}>{t.label}</button>
@@ -183,7 +183,7 @@ export default function NexusDashboardPage() {
                 Nom de l'entreprise <span style={{ color: "#334155" }}>(optionnel)</span>
               </div>
               <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Ex: NERVÜR"
-                style={{ width: "100%", padding: "10px 14px", background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                style={{ width: "100%", padding: "10px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
                 onFocus={e => e.target.style.borderColor = "#10b981"}
                 onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
             </div>
@@ -192,7 +192,7 @@ export default function NexusDashboardPage() {
               <div style={{ fontSize: "12px", color: "#64748B", marginBottom: "8px", fontWeight: 500 }}>Sujet / Briefing</div>
               <textarea value={topic} onChange={e => setTopic(e.target.value)}
                 placeholder={"Décrivez le sujet de votre contenu...\nEx: Lancement de notre nouvelle offre d'audit SEO pour les restaurants"} rows={3}
-                style={{ width: "100%", padding: "12px 14px", background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", resize: "vertical", lineHeight: 1.6, transition: "border-color 0.2s" }}
+                style={{ width: "100%", padding: "12px 14px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", resize: "vertical", lineHeight: 1.6, transition: "border-color 0.2s" }}
                 onFocus={e => e.target.style.borderColor = "#10b981"}
                 onBlur={e => e.target.style.borderColor = "#E2E8F0"} />
             </div>
@@ -208,14 +208,14 @@ export default function NexusDashboardPage() {
           )}
 
           {result && (
-            <div style={{ padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
+            <div style={{ padding: "24px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <div style={{ fontSize: "13px", color: "#64748B" }}>Résultat</div>
                   <span style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", background: "#10b98114", color: "#10b981" }}>{type}</span>
                 </div>
                 <button onClick={() => copyToClipboard()}
-                  style={{ padding: "6px 14px", background: copied ? "#10b98120" : "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "6px", color: copied ? "#10b981" : "#64748B", fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>
+                  style={{ padding: "6px 14px", background: copied ? "#10b98120" : "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "6px", color: copied ? "#10b981" : "#64748B", fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>
                   {copied ? "Copié !" : "Copier"}
                 </button>
               </div>
@@ -235,7 +235,7 @@ export default function NexusDashboardPage() {
           {templates.map(t => (
             <div key={t.id} onClick={() => useTemplate(t)}
               style={{
-                padding: "18px 20px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+                padding: "18px 20px", background: "#E8E9EC", border: "1px solid #2a2d3a",
                 borderRadius: "10px", cursor: "pointer", transition: "border-color 0.15s",
               }}
               onMouseEnter={e => e.currentTarget.style.borderColor = "#10b98130"}
@@ -257,7 +257,7 @@ export default function NexusDashboardPage() {
           {historyLoading ? (
             <div style={{ padding: "60px 0", textAlign: "center", color: "#64748B" }}>Chargement...</div>
           ) : history.length === 0 ? (
-            <div style={{ padding: "60px 24px", textAlign: "center", background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
+            <div style={{ padding: "60px 24px", textAlign: "center", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
               <div style={{ fontSize: "16px", color: "#64748B", marginBottom: "8px" }}>Aucun contenu généré</div>
               <p style={{ fontSize: "14px", color: "#334155" }}>Vos contenus générés apparaîtront ici.</p>
             </div>
@@ -265,7 +265,7 @@ export default function NexusDashboardPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {history.map(c => (
                 <div key={c._id} style={{
-                  padding: "18px 22px", background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                  padding: "18px 22px", background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
                 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>

@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const BG = "#FFFFFF";
+const BG = "#F0F1F3";
 const V = "#0F172A";
 const V2 = "#334155";
 const V3 = "#64748B";
-const ACCENT = "#4F46E5";
+const ACCENT = "#6C5CE7";
 const ACCENT2 = "#4ADE80";
 const VG = (a) => `rgba(100,116,139,${a})`;
 

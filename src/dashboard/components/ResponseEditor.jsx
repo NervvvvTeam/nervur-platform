@@ -15,7 +15,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
   return (
     <div style={{
       border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
-      background: "#F8FAFC"
+      background: "#E8E9EC"
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
         <div style={{ fontSize: "12px", fontWeight: 500, color: "#64748B" }}>
@@ -26,7 +26,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
             fontSize: "11px", fontWeight: 500, padding: "3px 10px",
             borderRadius: "6px",
             background: isPublished ? "rgba(34,197,94,0.1)" : "rgba(99,102,241,0.1)",
-            color: isPublished ? "#22c55e" : "#4F46E5"
+            color: isPublished ? "#22c55e" : "#6C5CE7"
           }}>
             {isPublished ? "Publiée" : response?.status === "approved" ? "Approuvée" : "Brouillon"}
           </span>
@@ -41,12 +41,12 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
         <>
           <textarea value={text} onChange={e => setText(e.target.value)}
             style={{
-              width: "100%", minHeight: "160px", padding: "16px", background: "#F8FAFC",
+              width: "100%", minHeight: "160px", padding: "16px", background: "#E8E9EC",
               border: "1px solid #2a2d3a", borderRadius: "8px", color: "#334155",
               fontSize: "14px", lineHeight: 1.8, fontFamily: "inherit", resize: "vertical",
               outline: "none", boxSizing: "border-box"
             }}
-            onFocus={e => { e.target.style.borderColor = "#4F46E5"; }}
+            onFocus={e => { e.target.style.borderColor = "#6C5CE7"; }}
             onBlur={e => { e.target.style.borderColor = "#E2E8F0"; }} />
 
           <div style={{ display: "flex", gap: "10px", marginTop: "16px", flexWrap: "wrap" }}>
@@ -56,19 +56,19 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
               </button>
             )}
             {isEdited && onSave && (
-              <button onClick={handleSave} disabled={saving} style={btnStyle("#4F46E5")}>
+              <button onClick={handleSave} disabled={saving} style={btnStyle("#6C5CE7")}>
                 {saving ? "..." : "Sauvegarder"}
               </button>
             )}
             {onApprove && response?.status === "generated" && (
-              <button onClick={onApprove} style={btnStyle("#4F46E5")}>
+              <button onClick={onApprove} style={btnStyle("#6C5CE7")}>
                 Approuver
               </button>
             )}
             {onPublish && (
               <button onClick={() => onPublish(text)} style={{
-                ...btnStyle("#4F46E5"),
-                background: "#4F46E5", color: "#ffffff", borderColor: "#4F46E5"
+                ...btnStyle("#6C5CE7"),
+                background: "#6C5CE7", color: "#ffffff", borderColor: "#6C5CE7"
               }}>
                 Publier →
               </button>

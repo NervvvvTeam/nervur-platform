@@ -139,7 +139,7 @@ export default function PhantomCompetitorsPage() {
 
       {/* Comparison form */}
       <div style={{
-        padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+        padding: "24px", background: "#E8E9EC", border: "1px solid #2a2d3a",
         borderRadius: "10px", marginBottom: "24px",
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
       }}>
@@ -230,7 +230,7 @@ export default function PhantomCompetitorsPage() {
       {/* Results */}
       {results && (
         <div style={{
-          background: "#F8FAFC", border: "1px solid #2a2d3a",
+          background: "#E8E9EC", border: "1px solid #2a2d3a",
           borderRadius: "10px", overflow: "hidden",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         }}>

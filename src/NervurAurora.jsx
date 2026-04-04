@@ -10,26 +10,28 @@ import LogoNervur from "./components/LogoNervur";
 
 /* ───── Design Tokens ───── */
 const C = {
-  bg: "#0B0F1A",
-  bgAlt: "#111827",
-  bgCard: "#151C2C",
-  text: "#F1F5F9",
-  body: "#CBD5E1",
-  muted: "#94A3B8",
-  faint: "#64748B",
-  accent: "#6366F1",
-  accentHover: "#818CF8",
-  accentLight: "rgba(99,102,241,0.12)",
-  border: "rgba(255,255,255,0.08)",
-  borderHover: "rgba(255,255,255,0.15)",
-  sentinel: "#EF4444",
-  vault: "#06B6D4",
-  dark: "#0B0F1A",
+  bg: "#F0F1F3",
+  bgAlt: "#E8E9EC",
+  bgCard: "#FFFFFF",
+  text: "#1A1D23",
+  body: "#4A4D55",
+  muted: "#71747C",
+  faint: "#9B9EA6",
+  accent: "#6C5CE7",
+  accentHover: "#5A4BD6",
+  accentLight: "rgba(108,92,231,0.08)",
+  border: "#D1D3D8",
+  borderHover: "#A8ABB3",
+  sentinel: "#FF6B6B",
+  vault: "#00B4D8",
+  green: "#00C48C",
+  amber: "#FFBE0B",
+  dark: "#1A1D23",
 };
 const FONT = "'Inter', system-ui, -apple-system, sans-serif";
 const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
-const cardShadow = "0 2px 8px rgba(0,0,0,0.3)";
-const cardHoverShadow = "0 16px 40px rgba(0,0,0,0.4)";
+const cardShadow = "0 2px 12px rgba(0,0,0,0.06)";
+const cardHoverShadow = "0 20px 50px rgba(0,0,0,0.12)";
 
 /* ───── Hooks ───── */
 function useIsMobile() {
@@ -320,7 +322,7 @@ export default function NervurAurora() {
         position: "sticky", top: 0, zIndex: 100,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: isMobile ? "14px 20px" : "16px 48px",
-        background: "rgba(11,15,26,0.9)", backdropFilter: "blur(12px)",
+        background: "rgba(26,29,35,0.95)", backdropFilter: "blur(12px)",
         borderBottom: `1px solid ${C.border}`,
       }}>
         <LogoNervur height={isMobile ? 28 : 32} onClick={() => navigate("/")} variant="dark" />
@@ -330,11 +332,11 @@ export default function NervurAurora() {
           <div style={{ display: "flex", gap: "32px", alignItems: "center" }}>
             {NAV_LINKS.map((l, i) => (
               <span key={i} onClick={() => scrollTo(l.href)} style={{
-                fontSize: "15px", fontWeight: 500, color: C.muted, cursor: "pointer",
+                fontSize: "15px", fontWeight: 500, color: "rgba(255,255,255,0.6)", cursor: "pointer",
                 transition: "color 0.2s",
               }}
-                onMouseEnter={e => e.target.style.color = C.text}
-                onMouseLeave={e => e.target.style.color = C.muted}
+                onMouseEnter={e => e.target.style.color = "#FFFFFF"}
+                onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.6)"}
               >{l.label}</span>
             ))}
           </div>
@@ -343,12 +345,12 @@ export default function NervurAurora() {
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
           {!isMobile && (
             <button onClick={() => navigate("/app/login")} style={{
-              padding: "10px 24px", background: C.accent, color: "#FFFFFF",
+              padding: "10px 24px", background: "#FFFFFF", color: C.dark,
               border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 600,
               cursor: "pointer", fontFamily: FONT, transition: `all 0.2s ${EASE}`,
             }}
-              onMouseEnter={e => e.currentTarget.style.background = C.accentHover}
-              onMouseLeave={e => e.currentTarget.style.background = C.accent}
+              onMouseEnter={e => { e.currentTarget.style.background = C.accent; e.currentTarget.style.color = "#FFFFFF"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.color = C.dark; }}
             >Espace Client</button>
           )}
 
@@ -371,13 +373,13 @@ export default function NervurAurora() {
       {isMobile && menuOpen && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 99,
-          background: C.bgAlt, padding: "80px 24px 40px",
+          background: C.dark, padding: "80px 24px 40px",
           display: "flex", flexDirection: "column", gap: "24px",
           animation: "fadeInUp 0.3s ease-out",
         }}>
           {NAV_LINKS.map((l, i) => (
             <span key={i} onClick={() => scrollTo(l.href)} style={{
-              fontSize: "20px", fontWeight: 600, color: C.text, cursor: "pointer",
+              fontSize: "20px", fontWeight: 600, color: "#FFFFFF", cursor: "pointer",
             }}>{l.label}</span>
           ))}
           <button onClick={() => { setMenuOpen(false); navigate("/app/login"); }} style={{
@@ -397,8 +399,8 @@ export default function NervurAurora() {
       }}>
         {/* Decorative background elements */}
         {!isMobile && <>
-          <div style={{ position: "absolute", top: "-60px", right: "-40px", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", bottom: "-100px", left: "-80px", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: "-60px", right: "-40px", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(108,92,231,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: "-100px", left: "-80px", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(0,180,216,0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
           <div style={{ position: "absolute", top: "40px", right: "15%", width: "6px", height: "6px", borderRadius: "50%", background: C.accent, opacity: 0.5, animation: "floatSlow 4s ease-in-out infinite" }} />
           <div style={{ position: "absolute", top: "120px", right: "8%", width: "4px", height: "4px", borderRadius: "50%", background: "#22c55e", opacity: 0.6, animation: "floatSlow 5s ease-in-out 1s infinite" }} />
           <div style={{ position: "absolute", bottom: "180px", left: "5%", width: "5px", height: "5px", borderRadius: "50%", background: "#f59e0b", opacity: 0.5, animation: "floatSlow 6s ease-in-out 0.5s infinite" }} />
@@ -504,7 +506,7 @@ export default function NervurAurora() {
 
       {/* ═══ SERVICES ═══ */}
       <section id="services" style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: C.bgAlt, position: "relative" }}>
-        {!isMobile && <div style={{ position: "absolute", top: "50%", right: "0", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)", pointerEvents: "none", transform: "translateY(-50%)" }} />}
+        {!isMobile && <div style={{ position: "absolute", top: "50%", right: "0", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(108,92,231,0.08) 0%, transparent 70%)", pointerEvents: "none", transform: "translateY(-50%)" }} />}
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <RevealSection>
             <div style={{ textAlign: "center", marginBottom: "48px" }}>
@@ -703,7 +705,7 @@ export default function NervurAurora() {
 
 
       {/* ═══ POURQUOI NERVÜR ═══ */}
-      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: C.bgAlt, position: "relative" }}>
+      <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: `linear-gradient(180deg, ${C.bgAlt} 0%, ${C.bg} 100%)`, position: "relative" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <RevealSection>
             <div style={{ textAlign: "center", marginBottom: "48px" }}>
@@ -759,14 +761,15 @@ export default function NervurAurora() {
 
 
       {/* ═══ CTA FINAL ═══ */}
-      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px", background: `linear-gradient(135deg, rgba(99,102,241,0.08) 0%, ${C.bgCard} 50%, rgba(6,182,212,0.05) 100%)`, textAlign: "center", position: "relative", overflow: "hidden" }}>
+      <section style={{ padding: isMobile ? "80px 20px" : "120px 48px", background: `linear-gradient(135deg, ${C.dark} 0%, #2D1B69 50%, #1A3A4A 100%)`, textAlign: "center", position: "relative", overflow: "hidden" }}>
         {!isMobile && <>
-          <div style={{ position: "absolute", top: "-50px", left: "20%", width: "300px", height: "300px", borderRadius: "50%", background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", bottom: "-80px", right: "15%", width: "250px", height: "250px", borderRadius: "50%", background: "radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: "-50px", left: "20%", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle, rgba(108,92,231,0.25) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: "-80px", right: "15%", width: "350px", height: "350px", borderRadius: "50%", background: "radial-gradient(circle, rgba(0,180,216,0.2) 0%, transparent 70%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle, rgba(255,107,107,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
         </>}
         <RevealSection>
           <h2 style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: "#FFFFFF", letterSpacing: "-1px", lineHeight: 1.15, marginBottom: "20px" }}>
-            Votre entreprise merite<br/>une <span style={{ color: "#818CF8" }}>vraie structure</span> digitale.
+            Votre entreprise merite<br/>une <span style={{ background: "linear-gradient(135deg, #00C48C, #00B4D8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>vraie structure</span> digitale.
           </h2>
           <p style={{ fontSize: "18px", color: "rgba(255,255,255,0.6)", maxWidth: "520px", margin: "0 auto 40px", lineHeight: 1.7 }}>
             Pas un devis. Une conversation. Dites-nous ce dont vous avez besoin.
@@ -790,7 +793,7 @@ export default function NervurAurora() {
 
 
       {/* ═══ FOOTER ═══ */}
-      <footer style={{ background: "#080C15", padding: isMobile ? "48px 20px 24px" : "64px 48px 32px", color: "rgba(255,255,255,0.5)" }}>
+      <footer style={{ background: C.dark, padding: isMobile ? "48px 20px 24px" : "64px 48px 32px", color: "rgba(255,255,255,0.5)" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "48px" }}>
 
           {/* Col 1 — Logo & Desc */}

@@ -1,6 +1,6 @@
 export default function ScoreGauge({ score = 0, label = "Score global" }) {
   const percentage = (score / 5) * 100;
-  const color = score >= 4 ? "#4F46E5" : score >= 3 ? "#64748B" : "#ef4444";
+  const color = score >= 4 ? "#6C5CE7" : score >= 3 ? "#64748B" : "#ef4444";
 
   const radius = 54;
   const circumference = 2 * Math.PI * radius;

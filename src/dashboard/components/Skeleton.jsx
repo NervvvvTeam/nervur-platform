@@ -1,7 +1,7 @@
 export function SkeletonCard({ height = "120px" }) {
   return (
     <div style={{
-      background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px",
+      background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px",
       height, overflow: "hidden", position: "relative"
     }}>
       <div style={{

@@ -203,7 +203,7 @@ export default function VaultChecklistPage() {
                     className="bg-[#F8FAFC] border rounded-lg px-4 py-3 shadow-[0_1px_4px_rgba(0,0,0,0.15)] flex items-start gap-3 transition-all duration-150"
                     style={{
                       borderColor: checked ? `${cat.color}40` : "rgba(42,45,58,0.8)",
-                      background: checked ? `${cat.color}08` : "#F8FAFC",
+                      background: checked ? `${cat.color}08` : "#E8E9EC",
                     }}
                   >
                     <button

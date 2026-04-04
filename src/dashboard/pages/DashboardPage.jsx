@@ -104,7 +104,7 @@ export default function DashboardPage() {
         <div style={{ marginBottom: "28px", ...fadeInUp(0) }}>
           <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ef4444", marginBottom: "10px" }} />
           <div style={{ width: "200px", height: "22px", background: "#E2E8F0", borderRadius: "6px", marginBottom: "8px" }} />
-          <div style={{ width: "120px", height: "14px", background: "#F8FAFC", borderRadius: "4px" }} />
+          <div style={{ width: "120px", height: "14px", background: "#E8E9EC", borderRadius: "4px" }} />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: "12px", marginBottom: "20px" }}>
           {[1,2,3,4,5].map(i => (
@@ -199,7 +199,7 @@ export default function DashboardPage() {
           <span style={{
             fontSize: "12px", fontWeight: 500, padding: "2px 8px", borderRadius: "4px",
             background: stats?.mode === "auto" ? "rgba(99,102,241,0.12)" : "rgba(113,113,122,0.12)",
-            color: stats?.mode === "auto" ? "#4F46E5" : "#64748B"
+            color: stats?.mode === "auto" ? "#6C5CE7" : "#64748B"
           }}>
             {stats?.mode === "auto" ? "Auto" : "Manuel"}
           </span>
@@ -269,7 +269,7 @@ export default function DashboardPage() {
           {/* NPS */}
           {nps && (
             <div style={{ ...cardStyle, borderLeft: "3px solid #6366f1", ...fadeInUp(0.3) }}>
-              <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#4F46E5", display: "inline-block" }} />Score NPS</div>
+              <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#6C5CE7", display: "inline-block" }} />Score NPS</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
                 <span style={{ fontSize: "28px", fontWeight: 600, color: "#0F172A" }}>
                   {nps?.nps ?? "\u2014"}
@@ -342,14 +342,14 @@ export default function DashboardPage() {
       {/* Chart + Score — only show if we have reviews */}
       {stats?.totalReviews > 0 ? (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 180px", gap: "12px", marginBottom: "20px", ...fadeInUp(0.55) }}>
-          <div style={{ ...cardStyle, border: "1px solid #2a2d3a", background: "#F8FAFC" }}>
+          <div style={{ ...cardStyle, border: "1px solid #2a2d3a", background: "#E8E9EC" }}>
             <div style={labelStyle}><span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#ef4444", display: "inline-block" }} />Evolution mensuelle</div>
             {stats?.monthlyTrend?.length > 0 ? (
               <ResponsiveContainer width="100%" height={180}>
                 <LineChart data={stats.monthlyTrend}>
                   <XAxis dataKey="_id" tick={{ fill: "#64748B", fontSize: 11 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: "#64748B", fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <Tooltip contentStyle={{ background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "6px", fontSize: "12px", fontFamily: "Inter", color: "#334155" }} />
+                  <Tooltip contentStyle={{ background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "6px", fontSize: "12px", fontFamily: "Inter", color: "#334155" }} />
                   <Line type="monotone" dataKey="count" stroke="#ef4444" strokeWidth={2} dot={{ fill: "#ef4444", r: 2.5 }} name="Avis" />
                   <Line type="monotone" dataKey="avgRating" stroke="#64748B" strokeWidth={1.5} dot={{ fill: "#64748B", r: 2 }} name="Note moy." />
                 </LineChart>
@@ -435,7 +435,7 @@ export default function DashboardPage() {
 }
 
 const cardStyle = {
-  border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px", background: "#F8FAFC",
+  border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px", background: "#E8E9EC",
   boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
   transition: "box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease"
 };
@@ -457,7 +457,7 @@ function Trend({ value }) {
 
 function StatCard({ label, value, suffix = "", trend, alert }) {
   const [hovered, setHovered] = useState(false);
-  const borderColor = alert ? "#ef4444" : "#4F46E5";
+  const borderColor = alert ? "#ef4444" : "#6C5CE7";
   return (
     <div
       onMouseEnter={() => setHovered(true)}

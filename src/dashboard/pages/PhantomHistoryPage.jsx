@@ -219,7 +219,7 @@ export default function PhantomHistoryPage() {
       {!loading && audits.length === 0 && (
         <div style={{
           padding: "60px 24px", textAlign: "center",
-          background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px",
+          background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{ fontSize: "16px", color: "#64748B", marginBottom: "12px" }}>
@@ -250,7 +250,7 @@ export default function PhantomHistoryPage() {
 
             return (
               <div key={domain} style={{
-                background: "#F8FAFC", border: "1px solid #2a2d3a",
+                background: "#E8E9EC", border: "1px solid #2a2d3a",
                 borderRadius: "10px", borderLeft: "3px solid #8b5cf6",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.2)", overflow: "hidden",
               }}>
@@ -413,7 +413,7 @@ export default function PhantomHistoryPage() {
 
             return (
               <div key={audit._id} style={{
-                padding: "16px 20px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+                padding: "16px 20px", background: "#E8E9EC", border: "1px solid #2a2d3a",
                 borderRadius: "10px", borderLeft: "3px solid #8b5cf6",
                 display: "flex", alignItems: "center", justifyContent: "space-between",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
@@ -464,7 +464,7 @@ export default function PhantomHistoryPage() {
           padding: "20px",
         }} onClick={() => setCompareResult(null)}>
           <div style={{
-            background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "14px",
+            background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "14px",
             padding: "28px", maxWidth: "600px", width: "100%",
             boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
           }} onClick={e => e.stopPropagation()}>
@@ -528,7 +528,7 @@ export default function PhantomHistoryPage() {
       {/* Evolution chart */}
       {!loading && evolution.length >= 2 && (
         <div style={{
-          padding: "24px", background: "#F8FAFC", border: "1px solid #2a2d3a",
+          padding: "24px", background: "#E8E9EC", border: "1px solid #2a2d3a",
           borderRadius: "10px", marginBottom: "16px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>

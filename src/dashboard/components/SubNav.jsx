@@ -122,7 +122,7 @@ export default function SubNav({ items, color }) {
           {moreOpen && (
             <div style={{
               position: "absolute", top: "100%", right: 0, marginTop: "4px",
-              background: "#F8FAFC", border: "1px solid #2a2d3a", borderRadius: "10px",
+              background: "#E8E9EC", border: "1px solid #2a2d3a", borderRadius: "10px",
               padding: "6px", minWidth: "180px", zIndex: 100,
               boxShadow: "0 8px 32px rgba(0,0,0,0.5)"
             }}>

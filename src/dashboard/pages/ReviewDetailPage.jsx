@@ -120,7 +120,7 @@ export default function ReviewDetailPage() {
       {/* Review */}
       <div style={{
         border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
-        borderLeft: `3px solid ${sent.color}`, background: "#F8FAFC",
+        borderLeft: `3px solid ${sent.color}`, background: "#E8E9EC",
         boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "24px"
       }}>

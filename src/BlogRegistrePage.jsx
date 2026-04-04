@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const BG = "#FFFFFF";
+const BG = "#F0F1F3";
 const V = "#0F172A";
 const V2 = "#334155";
 const V3 = "#64748B";

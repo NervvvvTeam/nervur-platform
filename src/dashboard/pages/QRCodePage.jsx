@@ -77,13 +77,13 @@ export default function QRCodePage() {
         {/* QR Code display */}
         <div style={{
           padding: "18px", borderRadius: "10px", textAlign: "center",
-          border: "1px solid #2a2d3a", background: "#F8FAFC",
+          border: "1px solid #2a2d3a", background: "#E8E9EC",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           {qrData?.qrCode ? (
             <>
               <div style={{
-                background: "#FFFFFF", borderRadius: "10px", padding: "24px",
+                background: "#F0F1F3", borderRadius: "10px", padding: "24px",
                 display: "inline-block", marginBottom: "20px"
               }}>
                 <img src={qrData.qrCode} alt="QR Code" style={{ width: "200px", height: "200px" }} />
@@ -110,7 +110,7 @@ export default function QRCodePage() {
         {/* Instructions */}
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px solid #2a2d3a", background: "#F8FAFC",
+          border: "1px solid #2a2d3a", background: "#E8E9EC",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "20px" }}>

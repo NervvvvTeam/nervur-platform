@@ -71,7 +71,7 @@ export default function AnalyticsPage() {
       {analyzing ? (
         <div style={{
           padding: "80px", textAlign: "center", border: "1px solid #2a2d3a",
-          borderRadius: "10px", background: "#F8FAFC",
+          borderRadius: "10px", background: "#E8E9EC",
           boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
         }}>
           <div style={{
@@ -87,7 +87,7 @@ export default function AnalyticsPage() {
           {/* Radar Chart */}
           <div style={{
             padding: "18px", borderRadius: "10px", border: "1px solid rgba(239,68,68,0.15)",
-            background: "#F8FAFC", gridColumn: radarData.length > 0 ? "1" : "1 / -1",
+            background: "#E8E9EC", gridColumn: radarData.length > 0 ? "1" : "1 / -1",
             boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
           }}>
             <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "20px" }}>
@@ -110,7 +110,7 @@ export default function AnalyticsPage() {
           {/* Scores list */}
           <div style={{
             padding: "18px", borderRadius: "10px", border: "1px solid #2a2d3a",
-            background: "#F8FAFC",
+            background: "#E8E9EC",
             boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
           }}>
             <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "20px" }}>
@@ -197,7 +197,7 @@ export default function AnalyticsPage() {
           {analysis.keywords && analysis.keywords.length > 0 && (
             <div style={{
               padding: "18px", borderRadius: "10px", border: "1px solid #2a2d3a",
-              background: "#F8FAFC", gridColumn: "1 / -1",
+              background: "#E8E9EC", gridColumn: "1 / -1",
               boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
             }}>
               <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "16px" }}>

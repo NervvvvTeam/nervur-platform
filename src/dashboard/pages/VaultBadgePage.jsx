@@ -151,7 +151,7 @@ export default function VaultBadgePage() {
           style={{
             backgroundImage: selectedStyle === "light" ? "linear-gradient(45deg, #f8fafc 25%, #f1f5f9 25%, #f1f5f9 50%, #f8fafc 50%, #f8fafc 75%, #f1f5f9 75%, #f1f5f9 100%)" : undefined,
             backgroundSize: selectedStyle === "light" ? "20px 20px" : undefined,
-            background: selectedStyle === "light" ? undefined : "#F8FAFC",
+            background: selectedStyle === "light" ? undefined : "#E8E9EC",
           }}>
           {loading ? (
             <div className="text-[13px] text-[#6b7280]">Chargement du score...</div>

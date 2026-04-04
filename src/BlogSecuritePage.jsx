@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const BG = "#FFFFFF";
+const BG = "#F0F1F3";
 const V = "#0F172A";
 const V2 = "#334155";
 const V3 = "#64748B";
@@ -485,7 +485,7 @@ export default function BlogSecuritePage() {
             <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: V3, display: "block", marginBottom: "20px" }}>Articles connexes</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
-                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#4F46E5" },
+                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#6C5CE7" },
                 { title: "RGPD pour les TPE/PME : les 10 obligations que vous devez respecter en 2026", path: "/blog/rgpd-guide", color: "#8b5cf6" },
               ].map((a, i) => (
                 <div key={i} onClick={() => navigate(a.path)} style={{

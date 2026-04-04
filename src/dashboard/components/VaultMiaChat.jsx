@@ -210,7 +210,7 @@ export default function VaultMiaChat() {
           zIndex: 1001,
           width: 380,
           height: 500,
-          background: "#F8FAFC",
+          background: "#E8E9EC",
           borderRadius: 14,
           boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
           border: "1px solid rgba(6,182,212,0.2)",
@@ -429,7 +429,7 @@ export default function VaultMiaChat() {
             style={{
               flex: 1,
               padding: "9px 12px",
-              background: "#F8FAFC",
+              background: "#E8E9EC",
               border: "1px solid #2a2d3a",
               borderRadius: 8,
               color: "#334155",

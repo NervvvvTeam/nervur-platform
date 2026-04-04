@@ -4,7 +4,7 @@ import SubNav from "../components/SubNav";
 import { useApi } from "../hooks/useApi";
 
 /* ─── Constants ──────────────────────────────────────────────── */
-const CARD_BG = "#F8FAFC";
+const CARD_BG = "#E8E9EC";
 const CARD_BORDER = "#E2E8F0";
 
 const TYPE_CONFIG = {

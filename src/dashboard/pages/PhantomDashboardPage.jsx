@@ -31,7 +31,7 @@ const CATEGORY_COLORS = {
 const SEVERITY_COLORS = {
   critical: "#ef4444",
   warning: "#f59e0b",
-  info: "#4F46E5",
+  info: "#6C5CE7",
 };
 
 function ScoreCircle({ score, label, color, size = 80 }) {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const BG = "#FFFFFF";
+const BG = "#F0F1F3";
 const V = "#0F172A";
 const V2 = "#334155";
 const V3 = "#64748B";
@@ -383,7 +383,7 @@ export default function BlogAvisGooglePage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: "12px", margin: "40px 0" }}>
             <StatCard number="93%" label="des consommateurs lisent les avis avant d'acheter" color={ACCENT} />
             <StatCard number="4,2" label="note minimum pour inspirer confiance" color={ACCENT2} />
-            <StatCard number="+25%" label="de conversion avec une note superieure a 4,5" color="#4F46E5" />
+            <StatCard number="+25%" label="de conversion avec une note superieure a 4,5" color="#6C5CE7" />
           </div>
         </Section>
 
@@ -518,7 +518,7 @@ export default function BlogAvisGooglePage() {
             <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: V3, display: "block", marginBottom: "20px" }}>Articles connexes</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
-                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#4F46E5" },
+                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#6C5CE7" },
                 { title: "Presence digitale : comment les TPE/PME peuvent se demarquer en 2026", path: "/blog/presence-digitale", color: "#8b5cf6" },
               ].map((a, i) => (
                 <div key={i} onClick={() => navigate(a.path)} style={{

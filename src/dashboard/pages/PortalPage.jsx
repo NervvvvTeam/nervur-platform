@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import LogoNervur from "../../components/LogoNervur";
 
 const C = {
-  bg: "#FFFFFF", bgAlt: "#F8FAFC", text: "#0F172A", body: "#334155",
-  muted: "#64748B", faint: "#94A3B8", accent: "#4F46E5", accentHover: "#4338CA",
+  bg: "#F0F1F3", bgAlt: "#E8E9EC", text: "#0F172A", body: "#334155",
+  muted: "#64748B", faint: "#94A3B8", accent: "#6C5CE7", accentHover: "#5A4BD6",
   accentLight: "#EEF2FF", border: "#E2E8F0", borderHover: "#CBD5E1",
   sentinel: "#DC2626", vault: "#0891B2",
 };

@@ -16,7 +16,7 @@ const SENTINEL_NAV = [
 ];
 
 const FILTERS = [
-  { key: "all", label: "Tous", color: "#4F46E5" },
+  { key: "all", label: "Tous", color: "#6C5CE7" },
   { key: "positive", label: "Positifs", color: "#22c55e" },
   { key: "negative", label: "Négatifs", color: "#ef4444" },
   { key: "mixed", label: "Mixtes", color: "#f59e0b" },
@@ -109,7 +109,7 @@ export default function ReviewsPage() {
                 padding: "6px 14px", fontSize: "12px", fontWeight: 500,
                 background: status === f.key ? "rgba(99,102,241,0.15)" : "transparent",
                 border: `1px solid ${status === f.key ? "rgba(99,102,241,0.35)" : "#E2E8F0"}`,
-                borderRadius: "6px", color: status === f.key ? "#4F46E5" : "#64748B",
+                borderRadius: "6px", color: status === f.key ? "#6C5CE7" : "#64748B",
                 cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
                 boxShadow: status === f.key ? "0 0 8px rgba(99,102,241,0.1)" : "none"
               }}>{f.label}</button>

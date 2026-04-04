@@ -121,7 +121,7 @@ export default function ContactPage() {
   const inputBase = {
     width: "100%",
     padding: "14px 16px",
-    background: "#FFFFFF",
+    background: "#F0F1F3",
     border: "1px solid #E2E8F0",
     color: "#0F172A",
     fontSize: "15px",
@@ -144,7 +144,7 @@ export default function ContactPage() {
 
   const focusHandlers = {
     onFocus: (e) => {
-      e.target.style.borderColor = "#4F46E5";
+      e.target.style.borderColor = "#6C5CE7";
       e.target.style.boxShadow = "0 0 0 3px rgba(79,70,229,0.1)";
     },
     onBlur: (e) => {
@@ -157,7 +157,7 @@ export default function ContactPage() {
   if (sent) {
     return (
       <div style={{
-        background: "#FFFFFF", color: "#0F172A",
+        background: "#F0F1F3", color: "#0F172A",
         fontFamily: FONT,
         minHeight: "100vh", display: "flex", flexDirection: "column",
         justifyContent: "center", alignItems: "center",
@@ -165,9 +165,9 @@ export default function ContactPage() {
       }}>
         <div style={{
           width: "72px", height: "72px", borderRadius: "50%",
-          background: "#4F46E5",
+          background: "#6C5CE7",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "28px", marginBottom: "28px", color: "#FFFFFF",
+          fontSize: "28px", marginBottom: "28px", color: "#F0F1F3",
         }}>
           ✓
         </div>
@@ -185,13 +185,13 @@ export default function ContactPage() {
           onClick={() => navigate("/")}
           style={{
             marginTop: "36px", padding: "14px 36px",
-            background: "#4F46E5",
-            color: "#FFFFFF", fontSize: "14px", fontWeight: 600,
+            background: "#6C5CE7",
+            color: "#F0F1F3", fontSize: "14px", fontWeight: 600,
             border: "none", borderRadius: "8px", cursor: "pointer",
             transition: "background 0.2s", fontFamily: "inherit",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "#4338CA")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "#4F46E5")}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "#5A4BD6")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "#6C5CE7")}
         >
           Retour au site
         </button>
@@ -208,7 +208,7 @@ export default function ContactPage() {
 
   return (
     <div style={{
-      background: "#FFFFFF", color: "#0F172A",
+      background: "#F0F1F3", color: "#0F172A",
       fontFamily: FONT,
       minHeight: "100vh", position: "relative",
     }}>
@@ -274,7 +274,7 @@ export default function ContactPage() {
             letterSpacing: "-1.5px", lineHeight: 1.1, marginBottom: "16px",
             color: "#0F172A",
           }}>
-            Contactez-<span style={{ color: "#4F46E5" }}>nous</span>
+            Contactez-<span style={{ color: "#6C5CE7" }}>nous</span>
           </h1>
           <p style={{
             fontSize: "17px", color: "#64748B", lineHeight: 1.7, maxWidth: "520px", margin: "0 auto",
@@ -292,7 +292,7 @@ export default function ContactPage() {
         }}>
           {/* ──── LEFT: FORM ──── */}
           <div style={{
-            background: "#F8FAFC",
+            background: "#E8E9EC",
             border: "1px solid #E2E8F0",
             borderRadius: "12px",
             padding: isMobile ? "28px 20px" : "36px 32px",
@@ -423,7 +423,7 @@ export default function ContactPage() {
                     required
                     style={{
                       marginTop: "3px",
-                      accentColor: "#4F46E5",
+                      accentColor: "#6C5CE7",
                       width: "16px",
                       height: "16px",
                       cursor: "pointer",
@@ -441,7 +441,7 @@ export default function ContactPage() {
                       href="/politique-de-confidentialite"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "#4F46E5", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                      style={{ color: "#6C5CE7", textDecoration: "underline", textUnderlineOffset: "3px" }}
                     >
                       politique de confidentialit&eacute;
                     </a>.
@@ -454,8 +454,8 @@ export default function ContactPage() {
                   disabled={submitting || !consent}
                   style={{
                     padding: "16px 32px",
-                    background: "#4F46E5",
-                    color: "#FFFFFF",
+                    background: "#6C5CE7",
+                    color: "#F0F1F3",
                     fontSize: "15px",
                     fontWeight: 700,
                     letterSpacing: "0.5px",
@@ -470,12 +470,12 @@ export default function ContactPage() {
                   onMouseEnter={(e) => {
                     if (!submitting && consent) {
                       e.currentTarget.style.transform = "translateY(-1px)";
-                      e.currentTarget.style.background = "#4338CA";
+                      e.currentTarget.style.background = "#5A4BD6";
                     }
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.background = "#4F46E5";
+                    e.currentTarget.style.background = "#6C5CE7";
                   }}
                 >
                   {submitting ? "Envoi en cours..." : "Envoyer le message"}
@@ -491,7 +491,7 @@ export default function ContactPage() {
           }}>
             {/* Nos outils */}
             <div style={{
-              background: "#F8FAFC",
+              background: "#E8E9EC",
               border: "1px solid #E2E8F0",
               borderRadius: "12px",
               padding: "24px",
@@ -508,7 +508,7 @@ export default function ContactPage() {
                   <div key={t.name} style={{
                     display: "flex", alignItems: "center", gap: "12px",
                     padding: "12px 14px", borderRadius: "8px",
-                    background: "#FFFFFF",
+                    background: "#F0F1F3",
                     border: "1px solid #E2E8F0",
                     transition: "border-color 0.2s",
                   }}>
@@ -534,7 +534,7 @@ export default function ContactPage() {
 
             {/* Nos packs */}
             <div style={{
-              background: "#F8FAFC",
+              background: "#E8E9EC",
               border: "1px solid #E2E8F0",
               borderRadius: "12px",
               padding: "24px",
@@ -551,7 +551,7 @@ export default function ContactPage() {
                   <div key={p.name} style={{
                     display: "flex", justifyContent: "space-between", alignItems: "center",
                     padding: "12px 14px", borderRadius: "8px",
-                    background: "#FFFFFF",
+                    background: "#F0F1F3",
                     border: "1px solid #E2E8F0",
                   }}>
                     <div>
@@ -560,7 +560,7 @@ export default function ContactPage() {
                     </div>
                     <span style={{
                       fontSize: "14px", fontWeight: 700,
-                      color: "#4F46E5",
+                      color: "#6C5CE7",
                       whiteSpace: "nowrap",
                     }}>{p.price}</span>
                   </div>
@@ -570,26 +570,26 @@ export default function ContactPage() {
 
             {/* Contact info */}
             <div style={{
-              background: "#F8FAFC",
+              background: "#E8E9EC",
               border: "1px solid #E2E8F0",
               borderRadius: "12px",
               padding: "24px",
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   <a href="mailto:contact@nervur.fr" style={{
                     fontSize: "14px", color: "#334155", textDecoration: "none",
                     transition: "color 0.2s",
                   }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#4F46E5")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#6C5CE7")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "#334155")}
                   >
                     contact@nervur.fr
                   </a>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C5CE7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                   <span style={{ fontSize: "14px", color: "#64748B" }}>
                     Réponse sous 24h
                   </span>

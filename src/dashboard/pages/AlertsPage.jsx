@@ -102,7 +102,7 @@ export default function AlertsPage() {
       {/* Email */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #2a2d3a", background: "#F8FAFC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+        border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "20px"
       }}>
         <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "16px" }}>
@@ -111,7 +111,7 @@ export default function AlertsPage() {
         <input value={config.emailTo || ""} onChange={e => setConfig(prev => ({ ...prev, emailTo: e.target.value }))}
           placeholder="votre@email.com" type="email"
           style={{
-            width: "100%", padding: "14px 16px", background: "#F8FAFC",
+            width: "100%", padding: "14px 16px", background: "#E8E9EC",
             border: "1px solid #2a2d3a", borderRadius: "8px",
             color: "#0F172A", fontSize: "14px", fontFamily: "inherit", outline: "none",
             boxSizing: "border-box", transition: "border-color 0.2s"
@@ -123,7 +123,7 @@ export default function AlertsPage() {
       {/* Toggles */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #2a2d3a", background: "#F8FAFC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+        border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "20px"
       }}>
         <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "8px" }}>
@@ -149,7 +149,7 @@ export default function AlertsPage() {
       {/* Threshold */}
       <div style={{
         padding: "18px", borderRadius: "10px",
-        border: "1px solid #2a2d3a", background: "#F8FAFC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+        border: "1px solid #2a2d3a", background: "#E8E9EC", boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
         marginBottom: "20px"
       }}>
         <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#64748B", marginBottom: "16px" }}>
@@ -160,7 +160,7 @@ export default function AlertsPage() {
             <button key={n} onClick={() => setConfig(prev => ({ ...prev, thresholdRating: n }))}
               style={{
                 padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: 600,
-                background: config.thresholdRating === n ? "rgba(239,68,68,0.1)" : "#F8FAFC",
+                background: config.thresholdRating === n ? "rgba(239,68,68,0.1)" : "#E8E9EC",
                 border: `1px solid ${config.thresholdRating === n ? "rgba(239,68,68,0.3)" : "#334155"}`,
                 color: config.thresholdRating === n ? "#ef4444" : "#64748B",
                 cursor: "pointer", fontFamily: "inherit"

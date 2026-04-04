@@ -13,7 +13,7 @@ export default function PolitiqueConfidentialitePage() {
   }, []);
 
   return (
-    <main style={{ background: "#FFFFFF", color: "#0F172A", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
+    <main style={{ background: "#F0F1F3", color: "#0F172A", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: "1px solid #E2E8F0", background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
         <LogoNervur variant="light" height={28} onClick={() => navigate("/")} />
         <button onClick={() => navigate("/")} style={{ background: "transparent", border: "1px solid #E2E8F0", color: "#334155", padding: "8px 22px", fontSize: "11px", letterSpacing: "2.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit", borderRadius: "6px" }}>
@@ -23,7 +23,7 @@ export default function PolitiqueConfidentialitePage() {
 
       <div style={{ maxWidth: "800px", margin: "0 auto", padding: "60px 24px 80px" }}>
         <h1 style={{ fontSize: "28px", fontWeight: 800, letterSpacing: "-0.5px", marginBottom: "8px", color: "#0F172A" }}>Politique de Confidentialité</h1>
-        <div style={{ width: "40px", height: "2px", background: "#4F46E5", marginBottom: "40px" }} />
+        <div style={{ width: "40px", height: "2px", background: "#6C5CE7", marginBottom: "40px" }} />
 
         <section style={{ marginBottom: "32px" }}>
           <h2 style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#64748B", marginBottom: "16px" }}>1. Responsable du traitement</h2>
@@ -116,7 +116,7 @@ export default function PolitiqueConfidentialitePage() {
           </p>
         </section>
 
-        <div style={{ marginTop: "40px", padding: "16px", border: "1px solid #E2E8F0", borderRadius: "6px", fontSize: "12px", color: "#64748B", background: "#F8FAFC" }}>
+        <div style={{ marginTop: "40px", padding: "16px", border: "1px solid #E2E8F0", borderRadius: "6px", fontSize: "12px", color: "#64748B", background: "#E8E9EC" }}>
           Dernière mise à jour : mars 2026
         </div>
       </div>

@@ -100,7 +100,7 @@ function MiniChart({ data, width = 400, height = 160, dataKey = "averagePosition
       ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
       ctx.fillStyle = color;
       ctx.fill();
-      ctx.strokeStyle = "#F8FAFC";
+      ctx.strokeStyle = "#E8E9EC";
       ctx.lineWidth = 1.5;
       ctx.stroke();
     });
@@ -277,7 +277,7 @@ export default function AtlasHistoryPage() {
         <div style={{ textAlign: "center", padding: "60px 0", color: "#64748B" }}>Chargement...</div>
       ) : projects.length === 0 ? (
         <div style={{
-          background: "#F8FAFC", borderRadius: "14px", padding: "60px 32px",
+          background: "#E8E9EC", borderRadius: "14px", padding: "60px 32px",
           border: "1px solid #2a2d3a", textAlign: "center",
         }}>
           <h3 style={{ color: "#0F172A", fontSize: "16px", fontWeight: 600, margin: "0 0 8px" }}>Aucun projet</h3>
@@ -292,7 +292,7 @@ export default function AtlasHistoryPage() {
               value={selectedProject || ""}
               onChange={e => setSelectedProject(e.target.value)}
               style={{
-                padding: "10px 14px", background: "#F8FAFC",
+                padding: "10px 14px", background: "#E8E9EC",
                 border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0F172A",
                 fontSize: "13px", fontFamily: "inherit", outline: "none", minWidth: "260px",
               }}
@@ -306,7 +306,7 @@ export default function AtlasHistoryPage() {
           {/* Position Distribution */}
           {rankings.length > 0 && (
             <div style={{
-              background: "#F8FAFC", borderRadius: "14px", padding: "24px",
+              background: "#E8E9EC", borderRadius: "14px", padding: "24px",
               border: "1px solid #2a2d3a", marginBottom: "24px",
             }}>
               <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
@@ -320,7 +320,7 @@ export default function AtlasHistoryPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "20px", marginBottom: "24px" }}>
             {/* Position Chart */}
             <div style={{
-              background: "#F8FAFC", borderRadius: "14px", padding: "24px",
+              background: "#E8E9EC", borderRadius: "14px", padding: "24px",
               border: "1px solid #2a2d3a",
             }}>
               <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
@@ -336,7 +336,7 @@ export default function AtlasHistoryPage() {
 
             {/* Traffic Evolution Chart */}
             <div style={{
-              background: "#F8FAFC", borderRadius: "14px", padding: "24px",
+              background: "#E8E9EC", borderRadius: "14px", padding: "24px",
               border: "1px solid #2a2d3a",
             }}>
               <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px" }}>
@@ -363,7 +363,7 @@ export default function AtlasHistoryPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginBottom: "24px" }}>
               {/* Best Progressions */}
               <div style={{
-                background: "#F8FAFC", borderRadius: "14px", padding: "24px",
+                background: "#E8E9EC", borderRadius: "14px", padding: "24px",
                 border: "1px solid #2a2d3a",
               }}>
                 <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
@@ -375,7 +375,7 @@ export default function AtlasHistoryPage() {
 
               {/* Biggest Drops */}
               <div style={{
-                background: "#F8FAFC", borderRadius: "14px", padding: "24px",
+                background: "#E8E9EC", borderRadius: "14px", padding: "24px",
                 border: "1px solid #2a2d3a",
               }}>
                 <h3 style={{ color: "#0F172A", fontSize: "14px", fontWeight: 600, margin: "0 0 16px", display: "flex", alignItems: "center", gap: "8px" }}>
@@ -389,7 +389,7 @@ export default function AtlasHistoryPage() {
 
           {/* History Table */}
           <div style={{
-            background: "#F8FAFC", borderRadius: "14px",
+            background: "#E8E9EC", borderRadius: "14px",
             border: "1px solid #2a2d3a", overflow: "hidden",
           }}>
             <div style={{ padding: "16px 24px", borderBottom: "1px solid #2a2d3a" }}>
