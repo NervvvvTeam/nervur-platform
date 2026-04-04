@@ -232,7 +232,10 @@
       "Bash(curl -s \"https://places.googleapis.com/v1/places/ChIJUb8qPqdv5kcRazxtDcglkuA\" -H \"X-Goog-Api-Key: AIzaSyBloGD6TGzvzYPLpTSp5DUQVtp-G3S6CuM\" -H \"X-Goog-FieldMask: id,displayName,rating,userRatingCount,reviews.rating,reviews.authorAttribution,reviews.text,reviews.publishTime\")",
       "Bash(curl -s \"https://nervurapi-production.up.railway.app/api/sentinel/demo?q=Restaurant%20Le%20Bon%20Gout%20Paris\")",
       "Bash(node -e \"require\\(''./models/VaultCompany''\\); require\\(''./models/VaultDsar''\\); console.log\\(''Models OK''\\);\")",
-      "Bash(grep -E \"\\\\.\\(js|ts\\)$\")"
+      "Bash(grep -E \"\\\\.\\(js|ts\\)$\")",
+      "Bash(sed -i 's/process.env.GOOGLE_CLIENT_ID,/process.env.GOOGLE_OAUTH_CLIENT_ID || process.env.GOOGLE_CLIENT_ID,/' services/google-business.js)",
+      "Bash(sed -i 's/process.env.GOOGLE_CLIENT_SECRET,/process.env.GOOGLE_OAUTH_CLIENT_SECRET || process.env.GOOGLE_CLIENT_SECRET,/' services/google-business.js)",
+      "Bash(sed -i 's|process.env.API_URL || \"\"http://localhost:3001\"\"|process.env.API_URL || \"\"https://nervurapi-production.up.railway.app\"\"|' services/google-business.js)"
     ]
   }
 }
