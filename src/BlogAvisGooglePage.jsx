@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const BG = "#0f1117";
-const V = "#FFFFFF";
-const V2 = "#D4D4D8";
-const V3 = "#A1A1AA";
+const BG = "#FFFFFF";
+const V = "#0F172A";
+const V2 = "#334155";
+const V3 = "#64748B";
 const ACCENT = "#f59e0b";
 const ACCENT2 = "#4ADE80";
-const VG = (a) => `rgba(161,161,170,${a})`;
+const VG = (a) => `rgba(100,116,139,${a})`;
 
 /* ───── Hooks ───── */
 function useIsMobile() {
@@ -207,7 +207,7 @@ function TableOfContents({ sections, activeId, isMobile }) {
       {sections.map((s, i) => (
         <div key={i} onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
           style={{
-            fontSize: "12px", color: activeId === s.id ? ACCENT : "#52525B", cursor: "pointer",
+            fontSize: "12px", color: activeId === s.id ? ACCENT : "#64748B", cursor: "pointer",
             padding: "6px 0 6px 12px", borderLeft: `2px solid ${activeId === s.id ? ACCENT : "transparent"}`,
             transition: "all 0.3s", lineHeight: 1.5,
           }}>
@@ -315,22 +315,22 @@ export default function BlogAvisGooglePage() {
         position: "sticky", top: 0, zIndex: 50,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "12px 24px",
-        background: "rgba(15,17,23,0.95)",
+        background: "rgba(255,255,255,0.95)",
         backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid #E2E8F0",
       }}>
         <LogoNervur height={32} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#334155",
             transition: "all 0.15s",
           }}>ACCUEIL</button>
           <button onClick={() => navigate("/contact")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#e4e4e7",
+            background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#334155",
             transition: "all 0.15s",
           }}>CONTACT</button>
         </div>
@@ -342,10 +342,10 @@ export default function BlogAvisGooglePage() {
       {/* Floating TOC */}
       <TableOfContents sections={TOC_SECTIONS} activeId={activeId} isMobile={isMobile} />
 
-      <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", boxSizing: "border-box" }}>
+      <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", boxSizing: "border-box" }}>
         {/* Back button */}
         <button onClick={() => navigate(-1)} style={{
-          background: "none", border: "none", color: "#71717A", fontSize: "13px",
+          background: "none", border: "none", color: "#64748B", fontSize: "13px",
           cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: "6px",
           marginBottom: "24px", padding: 0
         }}>
@@ -383,7 +383,7 @@ export default function BlogAvisGooglePage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: "12px", margin: "40px 0" }}>
             <StatCard number="93%" label="des consommateurs lisent les avis avant d'acheter" color={ACCENT} />
             <StatCard number="4,2" label="note minimum pour inspirer confiance" color={ACCENT2} />
-            <StatCard number="+25%" label="de conversion avec une note superieure a 4,5" color="#818CF8" />
+            <StatCard number="+25%" label="de conversion avec une note superieure a 4,5" color="#4F46E5" />
           </div>
         </Section>
 
@@ -518,7 +518,7 @@ export default function BlogAvisGooglePage() {
             <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: V3, display: "block", marginBottom: "20px" }}>Articles connexes</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
-                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#818CF8" },
+                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#4F46E5" },
                 { title: "Presence digitale : comment les TPE/PME peuvent se demarquer en 2026", path: "/blog/presence-digitale", color: "#8b5cf6" },
               ].map((a, i) => (
                 <div key={i} onClick={() => navigate(a.path)} style={{

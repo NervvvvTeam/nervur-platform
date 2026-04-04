@@ -33,13 +33,15 @@ const ToolIcon = ({ type, color, size = 18 }) => {
 };
 
 const TOOLS = [
-  { name: "Sentinel", icon: "sentinel", price: "39€/mois", desc: "E-réputation", color: "#ef4444" },
-  { name: "Vault", icon: "vault", price: "79€/mois", desc: "Agent Juridique IA", color: "#06b6d4" },
+  { name: "Sentinel", icon: "sentinel", price: "39€/mois", desc: "E-réputation", color: "#DC2626" },
+  { name: "Vault", icon: "vault", price: "79€/mois", desc: "Agent Juridique IA", color: "#0891B2" },
 ];
 
 const PACKS = [
   { name: "Pack Duo", price: "99\u20AC/mois", desc: "Sentinel + Vault" },
 ];
+
+const FONT = "'Inter', system-ui, -apple-system, sans-serif";
 
 export default function ContactPage() {
   const navigate = useNavigate();
@@ -119,14 +121,14 @@ export default function ContactPage() {
   const inputBase = {
     width: "100%",
     padding: "14px 16px",
-    background: "rgba(24,24,27,0.6)",
-    border: "1px solid rgba(255,255,255,0.1)",
-    color: "#FAFAFA",
+    background: "#FFFFFF",
+    border: "1px solid #E2E8F0",
+    color: "#0F172A",
     fontSize: "15px",
     outline: "none",
     borderRadius: "8px",
-    transition: "border-color 0.2s, background 0.2s",
-    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    transition: "border-color 0.2s, box-shadow 0.2s",
+    fontFamily: FONT,
     boxSizing: "border-box",
     letterSpacing: "0.2px",
   };
@@ -135,19 +137,19 @@ export default function ContactPage() {
     fontSize: "12px",
     fontWeight: 600,
     letterSpacing: "0.5px",
-    color: "#A1A1AA",
+    color: "#64748B",
     display: "block",
     marginBottom: "8px",
   };
 
   const focusHandlers = {
     onFocus: (e) => {
-      e.target.style.borderColor = "#6366f1";
-      e.target.style.background = "rgba(24,24,27,0.8)";
+      e.target.style.borderColor = "#4F46E5";
+      e.target.style.boxShadow = "0 0 0 3px rgba(79,70,229,0.1)";
     },
     onBlur: (e) => {
-      e.target.style.borderColor = "rgba(255,255,255,0.1)";
-      e.target.style.background = "rgba(24,24,27,0.6)";
+      e.target.style.borderColor = "#E2E8F0";
+      e.target.style.boxShadow = "none";
     },
   };
 
@@ -155,41 +157,41 @@ export default function ContactPage() {
   if (sent) {
     return (
       <div style={{
-        background: "#0f1117", color: "#FAFAFA",
-        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        background: "#FFFFFF", color: "#0F172A",
+        fontFamily: FONT,
         minHeight: "100vh", display: "flex", flexDirection: "column",
         justifyContent: "center", alignItems: "center",
         padding: "48px", textAlign: "center",
       }}>
         <div style={{
           width: "72px", height: "72px", borderRadius: "50%",
-          background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+          background: "#4F46E5",
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "28px", marginBottom: "28px",
+          fontSize: "28px", marginBottom: "28px", color: "#FFFFFF",
         }}>
           ✓
         </div>
         <h2 style={{
           fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 800,
-          letterSpacing: "-1px", marginBottom: "16px",
+          letterSpacing: "-1px", marginBottom: "16px", color: "#0F172A",
         }}>
           Message envoyé !
         </h2>
-        <p style={{ fontSize: "16px", color: "#A1A1AA", lineHeight: 1.8, maxWidth: "440px" }}>
+        <p style={{ fontSize: "16px", color: "#64748B", lineHeight: 1.8, maxWidth: "440px" }}>
           Nous avons bien reçu votre message. Notre équipe vous recontacte sous{" "}
-          <strong style={{ color: "#FAFAFA" }}>24 heures</strong>.
+          <strong style={{ color: "#0F172A" }}>24 heures</strong>.
         </p>
         <button
           onClick={() => navigate("/")}
           style={{
             marginTop: "36px", padding: "14px 36px",
-            background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-            color: "#FAFAFA", fontSize: "14px", fontWeight: 600,
+            background: "#4F46E5",
+            color: "#FFFFFF", fontSize: "14px", fontWeight: 600,
             border: "none", borderRadius: "8px", cursor: "pointer",
-            transition: "opacity 0.2s", fontFamily: "inherit",
+            transition: "background 0.2s", fontFamily: "inherit",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "#4338CA")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "#4F46E5")}
         >
           Retour au site
         </button>
@@ -206,25 +208,25 @@ export default function ContactPage() {
 
   return (
     <div style={{
-      background: "#0f1117", color: "#FAFAFA",
-      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      background: "#FFFFFF", color: "#0F172A",
+      fontFamily: FONT,
       minHeight: "100vh", position: "relative",
     }}>
       <style>{`
-        input::placeholder, textarea::placeholder, select option { color: #52525B; }
-        select option { background: #18181B; color: #FAFAFA; }
+        input::placeholder, textarea::placeholder { color: #94A3B8; }
+        select option { background: #FFFFFF; color: #0F172A; }
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .contact-nav-btn {
           cursor: pointer; background: transparent;
-          border: 1px solid rgba(255,255,255,0.12); color: #A1A1AA;
+          border: 1px solid #E2E8F0; color: #64748B;
           font-weight: 600; font-size: 12px; letter-spacing: 1.5px;
           text-transform: uppercase; padding: 8px 20px;
           font-family: inherit; transition: all 0.2s; border-radius: 6px;
         }
-        .contact-nav-btn:hover { color: #FAFAFA; border-color: rgba(255,255,255,0.3); }
+        .contact-nav-btn:hover { color: #0F172A; border-color: #CBD5E1; }
       `}</style>
 
       {/* NAV */}
@@ -232,10 +234,10 @@ export default function ContactPage() {
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "12px 20px" : "20px 48px",
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "rgba(255,255,255,0.95)",
+        borderBottom: "1px solid #E2E8F0",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={28} variant="light" onClick={() => navigate("/")} />
         <button className="contact-nav-btn" onClick={() => navigate("/")}>
           Accueil
         </button>
@@ -244,12 +246,12 @@ export default function ContactPage() {
       {/* RETOUR */}
       <div style={{ padding: isMobile ? "100px 20px 0 20px" : "140px 48px 0 48px", maxWidth: "1100px", margin: "0 auto" }}>
         <button onClick={() => navigate("/")} style={{
-          background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
-          color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+          background: "none", border: "1px solid #E2E8F0", borderRadius: "8px",
+          color: "#64748B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
           fontFamily: "inherit", transition: "all 0.3s",
         }}
-          onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
-          onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          onMouseEnter={e => { e.target.style.color = "#0F172A"; e.target.style.borderColor = "#CBD5E1"; }}
+          onMouseLeave={e => { e.target.style.color = "#64748B"; e.target.style.borderColor = "#E2E8F0"; }}>
           ← Retour
         </button>
       </div>
@@ -270,14 +272,12 @@ export default function ContactPage() {
           <h1 style={{
             fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 800,
             letterSpacing: "-1.5px", lineHeight: 1.1, marginBottom: "16px",
+            color: "#0F172A",
           }}>
-            Contactez-<span style={{
-              background: "linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-            }}>nous</span>
+            Contactez-<span style={{ color: "#4F46E5" }}>nous</span>
           </h1>
           <p style={{
-            fontSize: "17px", color: "#71717A", lineHeight: 1.7, maxWidth: "520px", margin: "0 auto",
+            fontSize: "17px", color: "#64748B", lineHeight: 1.7, maxWidth: "520px", margin: "0 auto",
           }}>
             Une question sur nos outils ? Un projet web ? Parlons-en.
           </p>
@@ -292,8 +292,8 @@ export default function ContactPage() {
         }}>
           {/* ──── LEFT: FORM ──── */}
           <div style={{
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.06)",
+            background: "#F8FAFC",
+            border: "1px solid #E2E8F0",
             borderRadius: "12px",
             padding: isMobile ? "28px 20px" : "36px 32px",
             animation: "fadeInUp 0.5s ease 0.1s both",
@@ -307,7 +307,7 @@ export default function ContactPage() {
               }}>
                 {errors.map((err, i) => (
                   <p key={i} style={{
-                    fontSize: "13px", color: "#EF4444",
+                    fontSize: "13px", color: "#DC2626",
                     margin: i > 0 ? "6px 0 0" : 0,
                   }}>{err}</p>
                 ))}
@@ -326,7 +326,7 @@ export default function ContactPage() {
                 {/* Nom */}
                 <div>
                   <label htmlFor="contact-nom" style={labelStyle}>
-                    Nom complet <span style={{ color: "#ef4444" }}>*</span>
+                    Nom complet <span style={{ color: "#DC2626" }}>*</span>
                   </label>
                   <input
                     id="contact-nom" name="nom" type="text"
@@ -340,7 +340,7 @@ export default function ContactPage() {
                 {/* Email */}
                 <div>
                   <label htmlFor="contact-email" style={labelStyle}>
-                    Email <span style={{ color: "#ef4444" }}>*</span>
+                    Email <span style={{ color: "#DC2626" }}>*</span>
                   </label>
                   <input
                     id="contact-email" name="email" type="email"
@@ -354,7 +354,7 @@ export default function ContactPage() {
                 {/* Téléphone */}
                 <div>
                   <label htmlFor="contact-tel" style={labelStyle}>
-                    Téléphone <span style={{ color: "#52525B", fontWeight: 400 }}>(facultatif)</span>
+                    Téléphone <span style={{ color: "#94A3B8", fontWeight: 400 }}>(facultatif)</span>
                   </label>
                   <input
                     id="contact-tel" name="tel" type="tel"
@@ -368,7 +368,7 @@ export default function ContactPage() {
                 {/* Sujet */}
                 <div>
                   <label htmlFor="contact-sujet" style={labelStyle}>
-                    Sujet <span style={{ color: "#ef4444" }}>*</span>
+                    Sujet <span style={{ color: "#DC2626" }}>*</span>
                   </label>
                   <select
                     id="contact-sujet" name="sujet"
@@ -378,7 +378,7 @@ export default function ContactPage() {
                       ...inputBase,
                       appearance: "none",
                       WebkitAppearance: "none",
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23A1A1AA' d='M2 4l4 4 4-4'/%3E%3C/svg%3E")`,
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M2 4l4 4 4-4'/%3E%3C/svg%3E")`,
                       backgroundRepeat: "no-repeat",
                       backgroundPosition: "right 16px center",
                       paddingRight: "40px",
@@ -396,7 +396,7 @@ export default function ContactPage() {
                 {/* Message */}
                 <div>
                   <label htmlFor="contact-message" style={labelStyle}>
-                    Message <span style={{ color: "#ef4444" }}>*</span>
+                    Message <span style={{ color: "#DC2626" }}>*</span>
                   </label>
                   <textarea
                     id="contact-message" name="message"
@@ -423,7 +423,7 @@ export default function ContactPage() {
                     required
                     style={{
                       marginTop: "3px",
-                      accentColor: "#6366f1",
+                      accentColor: "#4F46E5",
                       width: "16px",
                       height: "16px",
                       cursor: "pointer",
@@ -432,7 +432,7 @@ export default function ContactPage() {
                   />
                   <label htmlFor="contact-consent" style={{
                     fontSize: "13px",
-                    color: "#A1A1AA",
+                    color: "#64748B",
                     lineHeight: 1.6,
                     cursor: "pointer",
                   }}>
@@ -441,7 +441,7 @@ export default function ContactPage() {
                       href="/politique-de-confidentialite"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "#818CF8", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                      style={{ color: "#4F46E5", textDecoration: "underline", textUnderlineOffset: "3px" }}
                     >
                       politique de confidentialit&eacute;
                     </a>.
@@ -454,15 +454,15 @@ export default function ContactPage() {
                   disabled={submitting || !consent}
                   style={{
                     padding: "16px 32px",
-                    background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                    color: "#FAFAFA",
+                    background: "#4F46E5",
+                    color: "#FFFFFF",
                     fontSize: "15px",
                     fontWeight: 700,
                     letterSpacing: "0.5px",
                     border: "none",
                     borderRadius: "8px",
                     cursor: (submitting || !consent) ? "not-allowed" : "pointer",
-                    transition: "opacity 0.2s, transform 0.2s",
+                    transition: "background 0.2s, transform 0.2s",
                     fontFamily: "inherit",
                     width: "100%",
                     opacity: (submitting || !consent) ? 0.6 : 1,
@@ -470,12 +470,12 @@ export default function ContactPage() {
                   onMouseEnter={(e) => {
                     if (!submitting && consent) {
                       e.currentTarget.style.transform = "translateY(-1px)";
-                      e.currentTarget.style.opacity = "0.9";
+                      e.currentTarget.style.background = "#4338CA";
                     }
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.opacity = (submitting || !consent) ? "0.6" : "1";
+                    e.currentTarget.style.background = "#4F46E5";
                   }}
                 >
                   {submitting ? "Envoi en cours..." : "Envoyer le message"}
@@ -491,14 +491,14 @@ export default function ContactPage() {
           }}>
             {/* Nos outils */}
             <div style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "#F8FAFC",
+              border: "1px solid #E2E8F0",
               borderRadius: "12px",
               padding: "24px",
             }}>
               <h3 style={{
                 fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px",
-                textTransform: "uppercase", color: "#A1A1AA",
+                textTransform: "uppercase", color: "#64748B",
                 marginBottom: "16px",
               }}>
                 Nos outils
@@ -508,8 +508,8 @@ export default function ContactPage() {
                   <div key={t.name} style={{
                     display: "flex", alignItems: "center", gap: "12px",
                     padding: "12px 14px", borderRadius: "8px",
-                    background: "rgba(255,255,255,0.02)",
-                    border: `1px solid ${t.color}20`,
+                    background: "#FFFFFF",
+                    border: "1px solid #E2E8F0",
                     transition: "border-color 0.2s",
                   }}>
                     <div style={{ width: "34px", height: "34px", borderRadius: "8px", background: `${t.color}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -521,11 +521,11 @@ export default function ContactPage() {
                           fontSize: "14px", fontWeight: 700, color: t.color,
                         }}>{t.name}</span>
                         <span style={{
-                          fontSize: "12px", fontWeight: 600, color: "#D4D4D8",
+                          fontSize: "12px", fontWeight: 600, color: "#334155",
                           marginLeft: "auto", whiteSpace: "nowrap",
                         }}>{t.price}</span>
                       </div>
-                      <span style={{ fontSize: "12px", color: "#71717A" }}>{t.desc}</span>
+                      <span style={{ fontSize: "12px", color: "#64748B" }}>{t.desc}</span>
                     </div>
                   </div>
                 ))}
@@ -534,14 +534,14 @@ export default function ContactPage() {
 
             {/* Nos packs */}
             <div style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "#F8FAFC",
+              border: "1px solid #E2E8F0",
               borderRadius: "12px",
               padding: "24px",
             }}>
               <h3 style={{
                 fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px",
-                textTransform: "uppercase", color: "#A1A1AA",
+                textTransform: "uppercase", color: "#64748B",
                 marginBottom: "16px",
               }}>
                 Nos packs
@@ -551,17 +551,16 @@ export default function ContactPage() {
                   <div key={p.name} style={{
                     display: "flex", justifyContent: "space-between", alignItems: "center",
                     padding: "12px 14px", borderRadius: "8px",
-                    background: "rgba(255,255,255,0.02)",
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    background: "#FFFFFF",
+                    border: "1px solid #E2E8F0",
                   }}>
                     <div>
-                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#FAFAFA" }}>{p.name}</div>
-                      <div style={{ fontSize: "12px", color: "#71717A" }}>{p.desc}</div>
+                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#0F172A" }}>{p.name}</div>
+                      <div style={{ fontSize: "12px", color: "#64748B" }}>{p.desc}</div>
                     </div>
                     <span style={{
                       fontSize: "14px", fontWeight: 700,
-                      background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                      WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+                      color: "#4F46E5",
                       whiteSpace: "nowrap",
                     }}>{p.price}</span>
                   </div>
@@ -571,27 +570,27 @@ export default function ContactPage() {
 
             {/* Contact info */}
             <div style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "#F8FAFC",
+              border: "1px solid #E2E8F0",
               borderRadius: "12px",
               padding: "24px",
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   <a href="mailto:contact@nervur.fr" style={{
-                    fontSize: "14px", color: "#D4D4D8", textDecoration: "none",
+                    fontSize: "14px", color: "#334155", textDecoration: "none",
                     transition: "color 0.2s",
                   }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#FAFAFA")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#D4D4D8")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#4F46E5")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#334155")}
                   >
                     contact@nervur.fr
                   </a>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <span style={{ fontSize: "14px", color: "#71717A" }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span style={{ fontSize: "14px", color: "#64748B" }}>
                     Réponse sous 24h
                   </span>
                 </div>
@@ -605,9 +604,9 @@ export default function ContactPage() {
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
                 padding: "12px 20px",
                 background: "transparent",
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid #E2E8F0",
                 borderRadius: "8px",
-                color: "#A1A1AA",
+                color: "#64748B",
                 fontSize: "13px",
                 fontWeight: 600,
                 cursor: "pointer",
@@ -615,12 +614,12 @@ export default function ContactPage() {
                 fontFamily: "inherit",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
-                e.currentTarget.style.color = "#FAFAFA";
+                e.currentTarget.style.borderColor = "#CBD5E1";
+                e.currentTarget.style.color = "#0F172A";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                e.currentTarget.style.color = "#A1A1AA";
+                e.currentTarget.style.borderColor = "#E2E8F0";
+                e.currentTarget.style.color = "#64748B";
               }}
             >
               Espace client →
@@ -632,15 +631,15 @@ export default function ContactPage() {
       {/* FOOTER */}
       <footer style={{
         padding: isMobile ? "24px 20px" : "32px 48px",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        borderTop: "1px solid #E2E8F0",
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
         justifyContent: "space-between",
         alignItems: "center",
         gap: isMobile ? "12px" : "0",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
-        <span style={{ fontSize: "11px", color: "#3F3F46" }}>
+        <LogoNervur height={28} variant="light" onClick={() => navigate("/")} />
+        <span style={{ fontSize: "11px", color: "#94A3B8" }}>
           © 2026 NERVÜR — Tous droits réservés
         </span>
       </footer>
