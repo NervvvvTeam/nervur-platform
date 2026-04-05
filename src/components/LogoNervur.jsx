@@ -12,7 +12,7 @@ export default function LogoNervur({ height = 40, onClick, style = {} }) {
       }}
     >
       <img
-        src="/LOGO.png"
+        src="/LOGO-Photoroom.png"
         alt="NERVÜR"
         style={{
           height: `${height}px`,
