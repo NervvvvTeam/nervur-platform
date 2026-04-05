@@ -1626,26 +1626,7 @@ export default function NervurAurora() {
                 Demander un devis
               </MagneticButton>
             </div>
-            <div style={{ marginTop: "24px", display: "flex", gap: "32px", flexWrap: "wrap", justifyContent: "center" }}>
-              <span onClick={() => navigate('/simulateur')} style={{
-                fontSize: "12px", letterSpacing: "2px", textTransform: "uppercase",
-                color: V3, cursor: "pointer", borderBottom: `1px solid ${VG(0.2)}`,
-                paddingBottom: "4px", transition: "all 0.3s",
-              }}
-                onMouseEnter={e => { e.target.style.color = V; e.target.style.borderColor = V; }}
-                onMouseLeave={e => { e.target.style.color = V3; e.target.style.borderColor = VG(0.2); }}>
-                Calculez votre ROI digital gratuitement →
-              </span>
-              <span onClick={() => navigate('/diagnostic')} style={{
-                fontSize: "12px", letterSpacing: "2px", textTransform: "uppercase",
-                color: V3, cursor: "pointer", borderBottom: `1px solid ${VG(0.2)}`,
-                paddingBottom: "4px", transition: "all 0.3s",
-              }}
-                onMouseEnter={e => { e.target.style.color = V; e.target.style.borderColor = V; }}
-                onMouseLeave={e => { e.target.style.color = V3; e.target.style.borderColor = VG(0.2); }}>
-                Évaluez votre maturité digitale →
-              </span>
-            </div>
+            {/* ROI/diagnostic links removed */}
           </div>
         </RevealSection>
       </section>
@@ -1692,27 +1673,29 @@ export default function NervurAurora() {
       </button>
 
       {/* ═══ FOOTER ═══ */}
-      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.2), transparent)" }} />
-      <footer style={{ background: "rgba(15,17,23,0.5)" }}>
+      <footer style={{ background: "#0A2540", position: "relative", overflow: "hidden" }}>
+        {/* Light effect */}
+        <div style={{ position: "absolute", top: "-100px", left: "50%", transform: "translateX(-50%)", width: "600px", height: "200px", borderRadius: "50%", background: "radial-gradient(ellipse, rgba(99,91,255,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: "-80px", left: "30%", width: "300px", height: "150px", borderRadius: "50%", background: "radial-gradient(ellipse, rgba(6,182,212,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
-            <LogoNervur height={28} onClick={() => navigate("/")} />
-            <p style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 1.8 }}>Agence Digital NERVUR</p>
-            <p style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
-            <p style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>
+            <LogoNervur height={32} onClick={() => navigate("/")} />
+            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, marginTop: "12px" }}>Agence Digitale NERVÜR</p>
+            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
+            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>
           </div>
 
           {/* Col 2 — Outils */}
           <div>
-            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#6B7C93", marginBottom: "16px" }}>Outils</p>
+            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "16px" }}>Outils</p>
             {[
               { name: "Sentinel — E-réputation", path: "/sentinel" },
               { name: "Vault — Agent Juridique IA", path: "/contact" },
             ].map((t, i) => (
-              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
-                onMouseEnter={e => e.target.style.color = A1}
-                onMouseLeave={e => e.target.style.color = "#6B7C93"}>
+              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = "#FFFFFF"}
+                onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.5)"}>
                 {t.name}
               </p>
             ))}
@@ -1720,17 +1703,16 @@ export default function NervurAurora() {
 
           {/* Col 3 — Navigation */}
           <div>
-            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#6B7C93", marginBottom: "16px" }}>Navigation</p>
+            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "16px" }}>Navigation</p>
             {[
               { name: "Accueil", path: "/" },
               { name: "Technologies", path: "/technologies" },
               { name: "Contact", path: "/contact" },
-              { name: "Simulateur", path: "/simulateur" },
-              { name: "Diagnostic", path: "/diagnostic" },
+              { name: "Qui sommes-nous", path: "/qui-sommes-nous" },
             ].map((t, i) => (
-              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
-                onMouseEnter={e => e.target.style.color = A1}
-                onMouseLeave={e => e.target.style.color = "#6B7C93"}>
+              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = "#FFFFFF"}
+                onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.5)"}>
                 {t.name}
               </p>
             ))}
@@ -1738,7 +1720,7 @@ export default function NervurAurora() {
 
           {/* Col 4 — Blog */}
           <div>
-            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#6B7C93", marginBottom: "16px" }}>Blog</p>
+            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "16px" }}>Blog</p>
             {[
               { name: "E-réputation PME", path: "/blog/e-reputation" },
               { name: "Guide RGPD", path: "/blog/rgpd-guide" },
@@ -1747,9 +1729,9 @@ export default function NervurAurora() {
               { name: "Droits des personnes", path: "/blog/droits-personnes-rgpd" },
               { name: "Avis Google", path: "/blog/avis-google" },
             ].map((t, i) => (
-              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
-                onMouseEnter={e => e.target.style.color = A1}
-                onMouseLeave={e => e.target.style.color = "#6B7C93"}>
+              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = "#FFFFFF"}
+                onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.5)"}>
                 {t.name}
               </p>
             ))}
@@ -1757,34 +1739,34 @@ export default function NervurAurora() {
 
           {/* Col 5 — Legal + Contact */}
           <div>
-            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#6B7C93", marginBottom: "16px" }}>Legal</p>
+            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF", marginBottom: "16px" }}>Legal</p>
             {[
               { name: "Mentions legales", path: "/mentions-legales" },
               { name: "Politique de confidentialite", path: "/politique-de-confidentialite" },
               { name: "CGV", path: "/cgv" },
               { name: "Qui sommes-nous", path: "/qui-sommes-nous" },
             ].map((t, i) => (
-              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
-                onMouseEnter={e => e.target.style.color = A1}
-                onMouseLeave={e => e.target.style.color = "#6B7C93"}>
+              <p key={i} onClick={() => navigate(t.path)} style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 2.2, cursor: "pointer", transition: "color 0.3s" }}
+                onMouseEnter={e => e.target.style.color = "#FFFFFF"}
+                onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.5)"}>
                 {t.name}
               </p>
             ))}
-            <p style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 2.2, marginTop: "8px" }}>contact@nervurpro.com</p>
+            <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 2.2, marginTop: "8px" }}>contact@nervurpro.com</p>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div style={{ padding: isMobile ? "16px 20px" : "16px 48px", borderTop: `1px solid ${VG(0.06)}`, display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: "center", gap: "12px" }}>
-          <span style={{ fontSize: "11px", color: "#3F3F46", letterSpacing: "0.5px" }}>
+          <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", letterSpacing: "0.5px" }}>
             NERVUR 2026. Tous droits reserves.
           </span>
           <div style={{ display: "flex", gap: "20px" }}>
             {["LI", "IG", "BH", "DB"].map((s, i) => (
               <span key={i} style={{
-                fontSize: "11px", letterSpacing: "2px", color: "#3F3F46", cursor: "pointer",
+                fontSize: "11px", letterSpacing: "2px", color: "rgba(255,255,255,0.3)", cursor: "pointer",
                 width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid ${VG(0.1)}`, transition: "all 0.3s" }}
-              onMouseEnter={e => { e.target.style.borderColor = "rgba(99,91,255,0.4)"; e.target.style.color = A1; }}
+              onMouseEnter={e => { e.target.style.borderColor = "rgba(99,91,255,0.4)"; e.target.style.color = "#FFFFFF"; }}
               onMouseLeave={e => { e.target.style.borderColor = VG(0.1); e.target.style.color = "#3F3F46"; }}>
                 {s}
               </span>
