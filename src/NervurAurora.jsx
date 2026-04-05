@@ -389,6 +389,22 @@ export default function NervurAurora() {
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
+  const shootingStarsRef = useRef([]);
+
+  // Trigger a shooting star from a specific position
+  const triggerShootingStar = (direction = "down") => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const w = canvas.width, h = canvas.height;
+    const star = {
+      x: Math.random() * w * 0.6 + w * 0.2,
+      y: direction === "down" ? h * 0.1 : h * 0.5,
+      vx: direction === "down" ? (Math.random() - 0.3) * 6 : (Math.random() * 5 + 3),
+      vy: direction === "down" ? (Math.random() * 5 + 4) : -(Math.random() * 3 + 2),
+      life: 1, decay: 0.012, bright: true,
+    };
+    shootingStarsRef.current.push(star);
+  };
 
   // Galaxy canvas for hero — stars, nebula, planet, interactive
   useEffect(() => {
@@ -408,8 +424,8 @@ export default function NervurAurora() {
       color: Math.random() > 0.85 ? [100, 150, 255] : Math.random() > 0.7 ? [255, 200, 150] : [255, 255, 255],
     }));
 
-    // Shooting stars
-    const shootingStars = [];
+    // Shooting stars — use shared ref so buttons can trigger them
+    const shootingStars = shootingStarsRef.current;
 
     // Planet drawn via CSS image now, canvas only does stars/nebula
 
@@ -494,8 +510,10 @@ export default function NervurAurora() {
         ctx.beginPath();
         ctx.moveTo(ss.x, ss.y);
         ctx.lineTo(ss.x - ss.vx * 8, ss.y - ss.vy * 8);
-        ctx.strokeStyle = `rgba(255,255,255,${ss.life * 0.6})`;
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = ss.bright
+          ? `rgba(99,91,255,${ss.life * 0.9})`
+          : `rgba(255,255,255,${ss.life * 0.6})`;
+        ctx.lineWidth = ss.bright ? 2.5 : 1.5;
         ctx.stroke();
       }
 
@@ -934,7 +952,10 @@ export default function NervurAurora() {
             <div style={{
               display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row",
               animation: loaded ? "fadeInUp 0.8s ease 0.8s both" : "none" }}>
-              <MagneticButton className="cta-btn"                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: "smooth", block: "start" })} style={{
+              <MagneticButton className="cta-btn"
+                onMouseEnter={() => triggerShootingStar("down")}
+                onClick={() => { triggerShootingStar("down"); triggerShootingStar("down"); document.getElementById('services')?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
+                style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
                 padding: isMobile ? "14px 24px" : "16px 36px", border: "none",
                 background: `linear-gradient(135deg, ${A1}, ${A3})`,
@@ -942,7 +963,10 @@ export default function NervurAurora() {
                 textTransform: "uppercase", cursor: "pointer" }}>
                 Nos services
               </MagneticButton>
-              <MagneticButton className="cta-btn"                onClick={() => navigate('/contact')} style={{
+              <MagneticButton className="cta-btn"
+                onMouseEnter={() => triggerShootingStar("up")}
+                onClick={() => { triggerShootingStar("up"); triggerShootingStar("up"); navigate('/contact'); }}
+                style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
                 padding: isMobile ? "14px 24px" : "16px 36px", border: `1px solid rgba(99,91,255,0.4)`,
                 color: "#FFFFFF", fontSize: "13px", fontWeight: 600, letterSpacing: "1.5px",
