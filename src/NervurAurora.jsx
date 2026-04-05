@@ -441,27 +441,10 @@ export default function NervurAurora() {
       ctx.clearRect(0, 0, w, h);
       const mx = mouseRef.current.x, my = mouseRef.current.y;
 
-      // Nebula clouds — subtle colored fog
-      const nebulae = [
-        { x: w * 0.2, y: h * 0.3, r: 300, c: "rgba(99,91,255,0.03)" },
-        { x: w * 0.7, y: h * 0.5, r: 350, c: "rgba(244,114,182,0.02)" },
-        { x: w * 0.5, y: h * 0.7, r: 250, c: "rgba(0,180,216,0.02)" },
-      ];
-      for (const n of nebulae) {
-        const g = ctx.createRadialGradient(
-          n.x + Math.sin(time * 0.3) * 20, n.y + Math.cos(time * 0.2) * 15,
-          0, n.x, n.y, n.r
-        );
-        g.addColorStop(0, n.c); g.addColorStop(1, "transparent");
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, w, h);
-      }
-
-      // Mouse nebula glow
+      // Mouse glow — subtle white
       if (mx > 0) {
-        const g = ctx.createRadialGradient(mx, my, 0, mx, my, 200);
-        g.addColorStop(0, "rgba(99,91,255,0.06)");
-        g.addColorStop(0.5, "rgba(0,180,216,0.02)");
+        const g = ctx.createRadialGradient(mx, my, 0, mx, my, 150);
+        g.addColorStop(0, "rgba(255,255,255,0.03)");
         g.addColorStop(1, "transparent");
         ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
       }
@@ -900,7 +883,7 @@ export default function NervurAurora() {
         {!isMobile && <div style={{
           position: "absolute", left: "-8%", bottom: "-15%", width: "45%", maxWidth: "550px",
           aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
-          boxShadow: "0 0 80px rgba(99,91,255,0.15), 0 0 200px rgba(0,100,255,0.08)",
+          boxShadow: "none",
           animation: "floatUp 20s ease-in-out infinite", pointerEvents: "none", zIndex: 0,
         }}>
           <img src="/planet.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
@@ -910,7 +893,7 @@ export default function NervurAurora() {
         {!isMobile && <div style={{
           position: "absolute", right: "-3%", top: "5%", width: "12%", maxWidth: "150px",
           aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
-          boxShadow: "0 0 40px rgba(255,255,255,0.08)",
+          boxShadow: "none",
           animation: "floatUp 25s ease-in-out 3s infinite", pointerEvents: "none", zIndex: 0,
         }}>
           <img src="/moon.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.5 }} />
