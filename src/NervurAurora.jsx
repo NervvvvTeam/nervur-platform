@@ -993,36 +993,11 @@ export default function NervurAurora() {
             </div>
           </div>
 
-          {/* Right — Animated code terminal */}
+          {/* Right — Logo N floating subtly */}
           {!isMobile && (
-            <div style={{ animation: loaded ? "fadeInUp 1s ease 0.6s both" : "none" }}>
-              <div style={{
-                background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "16px", overflow: "hidden",
-                boxShadow: "0 30px 80px rgba(0,0,0,0.4)",
-                animation: "floatUp 8s ease-in-out infinite",
-                backdropFilter: "blur(8px)",
-              }}>
-                {/* Terminal header */}
-                <div style={{ padding: "12px 16px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#FF5F57" }} />
-                  <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#FEBC2E" }} />
-                  <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#28C840" }} />
-                  <span style={{ marginLeft: "12px", fontSize: "11px", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>nervur — build</span>
-                </div>
-                {/* Terminal content — animated typing */}
-                <div style={{ padding: "20px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", fontSize: "13px", lineHeight: 2, minHeight: "280px" }}>
-                  <TerminalLine delay={800} color="rgba(255,255,255,0.3)">$ nervur init my-project</TerminalLine>
-                  <TerminalLine delay={1600} color="#4ADE80">✓ Project initialized</TerminalLine>
-                  <TerminalLine delay={2400} color="rgba(255,255,255,0.3)">$ nervur deploy --prod</TerminalLine>
-                  <TerminalLine delay={3200} color="#635BFF">⟳ Building assets...</TerminalLine>
-                  <TerminalLine delay={4000} color="#635BFF">⟳ Optimizing images...</TerminalLine>
-                  <TerminalLine delay={4800} color="#635BFF">⟳ Running lighthouse audit...</TerminalLine>
-                  <TerminalLine delay={5600} color="#4ADE80">✓ Performance: 98/100</TerminalLine>
-                  <TerminalLine delay={6400} color="#4ADE80">✓ SEO: 100/100</TerminalLine>
-                  <TerminalLine delay={7200} color="#4ADE80">✓ Deployed to nervur.fr</TerminalLine>
-                  <TerminalLine delay={8000} color="#FEBC2E">★ Build time: 2.4s</TerminalLine>
-                </div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", animation: loaded ? "fadeInUp 1s ease 0.8s both" : "none" }}>
+              <div style={{ animation: "floatUp 10s ease-in-out infinite", opacity: 0.6 }}>
+                <img src="/LOGO-Photoroom.png" alt="" style={{ width: "240px", height: "auto" }} />
               </div>
             </div>
           )}
