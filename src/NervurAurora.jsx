@@ -874,7 +874,7 @@ export default function NervurAurora() {
         background: "#000000",
       }}>
         {/* Interactive particle canvas */}
-        {!isMobile && <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", cursor: "crosshair" }}
+        {!isMobile && <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", cursor: "default" }}
           onMouseMove={e => { const r = e.currentTarget.getBoundingClientRect(); mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top }; }}
           onMouseLeave={() => { mouseRef.current = { x: -1000, y: -1000 }; }}
         />}
@@ -971,117 +971,14 @@ export default function NervurAurora() {
             </div>
           </div>
 
-          {/* Right — Visual showcase (inspired by Clay, Digital Silk, Active Theory) */}
-          <div style={{ position: "relative", height: "560px", paddingTop: "20px", animation: loaded ? "fadeInUp 1s ease 0.6s both" : "none", display: isMobile ? "none" : "block" }}>
-
-            {/* Ambient glow behind mockup */}
-            <div style={{
-              position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-              width: "400px", height: "400px", borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(99,91,255,0.06) 0%, rgba(244,114,182,0.02) 40%, transparent 70%)",
-              filter: "blur(60px)" }} />
-
-            {/* Main browser mockup — tilted in perspective */}
-            <div style={{
-              position: "absolute", top: "50px", left: "20px", right: "20px",
-              transform: "perspective(1200px) rotateY(-8deg) rotateX(2deg)",
-              border: `1px solid ${VG(0.12)}`, borderRadius: "8px",
-              background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)",
-              overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
-              animation: loaded ? "floatUp 8s ease-in-out infinite" : "none" }}>
-              {/* Browser bar */}
-              <div style={{ padding: "10px 16px", borderBottom: `1px solid ${VG(0.08)}`, display: "flex", alignItems: "center", gap: "6px" }}>
-                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF5F57" }} />
-                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FEBC2E" }} />
-                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#28C840" }} />
-                <div style={{ flex: 1, marginLeft: "12px", height: "22px", borderRadius: "4px", background: VG(0.06), display: "flex", alignItems: "center", paddingLeft: "10px" }}>
-                  <span style={{ fontSize: "9px", color: "#6B7C93" }}>nervur.com/client-project</span>
-                </div>
-              </div>
-              {/* Fake website content */}
-              <div style={{ padding: "24px", minHeight: "220px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-                  <div style={{ width: "80px", height: "10px", borderRadius: "3px", background: VG(0.15) }} />
-                  <div style={{ display: "flex", gap: "12px" }}>
-                    {[50, 40, 60].map((w, i) => <div key={i} style={{ width: `${w}px`, height: "8px", borderRadius: "3px", background: VG(0.08) }} />)}
-                  </div>
-                </div>
-                <div style={{ marginBottom: "16px" }}>
-                  <div style={{ width: "70%", height: "18px", borderRadius: "3px", background: VG(0.12), marginBottom: "8px" }} />
-                  <div style={{ width: "45%", height: "18px", borderRadius: "3px", background: VG(0.08) }} />
-                </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px", marginTop: "20px" }}>
-                  {[1,2,3].map(i => (
-                    <div key={i} style={{ height: "80px", borderRadius: "6px", background: `linear-gradient(135deg, ${VG(0.06)}, ${VG(0.12)})`, border: `1px solid ${VG(0.06)}` }} />
-                  ))}
-                </div>
+          {/* Right — Logo N floating */}
+          {!isMobile && (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", animation: loaded ? "fadeInUp 1s ease 0.6s both" : "none" }}>
+              <div style={{ animation: "floatUp 8s ease-in-out infinite" }}>
+                <img src="/LOGO-Photoroom.png" alt="NERVÜR" style={{ width: "280px", height: "auto", filter: "drop-shadow(0 0 40px rgba(99,91,255,0.2))" }} />
               </div>
             </div>
-
-            {/* Floating card 1 — Performance Score */}
-            <div style={{
-              position: "absolute", bottom: "80px", left: "-20px", zIndex: 10,
-              padding: "20px 24px", borderRadius: "10px",
-              border: `1px solid ${VG(0.15)}`,
-              background: "rgba(255,255,255,0.9)", backdropFilter: "blur(24px)",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
-              animation: loaded ? "floatUp 6s ease-in-out 0.3s infinite" : "none" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div style={{ width: "44px", height: "44px", borderRadius: "50%", border: `2px solid ${VG(0.2)}`, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                  <svg width="44" height="44" aria-hidden="true" style={{ position: "absolute", transform: "rotate(-90deg)" }}>
-                    <circle cx="22" cy="22" r="18" fill="none" stroke={VG(0.1)} strokeWidth="2.5" />
-                    <circle cx="22" cy="22" r="18" fill="none" stroke="#4ADE80" strokeWidth="2.5"
-                      strokeDasharray={`${2 * Math.PI * 18 * (perfScore / 100)} ${2 * Math.PI * 18}`} strokeLinecap="round"
-                      style={{ transition: "stroke-dasharray 0.8s ease" }} />
-                  </svg>
-                  <span style={{ fontSize: "12px", fontWeight: 800, color: V, transition: "all 0.5s" }}>{Math.round(perfScore)}</span>
-                </div>
-                <div>
-                  <div style={{ fontSize: "13px", fontWeight: 700, color: V }}>Performance</div>
-                  <div style={{ fontSize: "10px", color: "#4ADE80" }}>Core Web Vitals ✓</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating card 2 — Growth metric */}
-            <div style={{
-              position: "absolute", top: "60px", right: "-10px", zIndex: 10,
-              padding: "16px 20px", borderRadius: "10px",
-              border: `1px solid ${VG(0.15)}`,
-              background: "rgba(255,255,255,0.9)", backdropFilter: "blur(24px)",
-              boxShadow: "0 16px 40px rgba(0,0,0,0.1)",
-              animation: loaded ? "floatUp 7s ease-in-out 0.8s infinite" : "none" }}>
-              <span style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: V3, display: "block", marginBottom: "6px" }}>Trafic organique</span>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
-                <span style={{ fontSize: "24px", fontWeight: 800, color: A3, transition: "all 0.6s" }}>+{Math.round(trafficGrowth)}%</span>
-                <span style={{ fontSize: "10px", color: "#4ADE80" }}>↑</span>
-              </div>
-              <div style={{ display: "flex", alignItems: "end", gap: "2px", height: "28px", marginTop: "8px" }}>
-                {[25, 40, 35, 50, 45, 65, 60, 80, 70, 95].map((h, i) => (
-                  <div key={i} style={{ flex: 1, height: `${h}%`, background: i > 6 ? "rgba(244,114,182,0.5)" : VG(0.2), borderRadius: "1px 1px 0 0" }} />
-                ))}
-              </div>
-            </div>
-
-            {/* Floating card 3 — Conversions */}
-            <div style={{
-              position: "absolute", bottom: "20px", right: "10px", zIndex: 10,
-              padding: "16px 20px", borderRadius: "10px",
-              border: `1px solid ${VG(0.15)}`,
-              background: "rgba(255,255,255,0.9)", backdropFilter: "blur(24px)",
-              boxShadow: "0 16px 40px rgba(0,0,0,0.1)",
-              animation: loaded ? "floatUp 5s ease-in-out 1.2s infinite" : "none" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-                <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: A1 }} />
-                <span style={{ fontSize: "9px", letterSpacing: "1.5px", textTransform: "uppercase", color: V3 }}>Conversion</span>
-              </div>
-              <span style={{ fontSize: "22px", fontWeight: 800, color: A1, transition: "all 0.6s" }}>{convRate.toFixed(1)}%</span>
-              <div style={{ marginTop: "6px", height: "3px", background: VG(0.1), borderRadius: "2px", width: "100px", overflow: "hidden" }}>
-                <div style={{ width: `${Math.min(100, convRate * 15)}%`, height: "100%", background: `linear-gradient(90deg, rgba(99,91,255,0.4), ${A1})`, borderRadius: "2px", transition: "width 0.8s ease" }} />
-              </div>
-            </div>
-
-          </div>
+          )}
 
         </div>
 
