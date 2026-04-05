@@ -682,6 +682,10 @@ export default function NervurAurora() {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        @keyframes earthScroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
         @keyframes blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
@@ -894,14 +898,27 @@ export default function NervurAurora() {
         />}
         {/* Scan line removed */}
 
-        {/* Earth — left side, partially visible */}
+        {/* Earth — left side, 3D horizontal rotation effect */}
         {!isMobile && <div style={{
           position: "absolute", left: "-8%", bottom: "-15%", width: "45%", maxWidth: "550px",
           aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
           boxShadow: "0 0 80px rgba(99,91,255,0.15), 0 0 200px rgba(0,100,255,0.08)",
-          animation: "floatUp 20s ease-in-out infinite, spinSlow 120s linear infinite", pointerEvents: "none", zIndex: 0,
+          animation: "floatUp 20s ease-in-out infinite", pointerEvents: "none", zIndex: 0,
         }}>
-          <img src="/planet.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
+          {/* Scrolling texture to simulate horizontal rotation */}
+          <div style={{
+            width: "200%", height: "100%", display: "flex",
+            animation: "earthScroll 60s linear infinite",
+          }}>
+            <img src="/planet.jpg" alt="" style={{ width: "50%", height: "100%", objectFit: "cover", opacity: 0.7, flexShrink: 0 }} />
+            <img src="/planet.jpg" alt="" style={{ width: "50%", height: "100%", objectFit: "cover", opacity: 0.7, flexShrink: 0 }} />
+          </div>
+          {/* 3D sphere shadow overlay */}
+          <div style={{
+            position: "absolute", inset: 0, borderRadius: "50%",
+            background: "radial-gradient(circle at 35% 35%, transparent 40%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.8) 100%)",
+            pointerEvents: "none",
+          }} />
         </div>}
 
         {/* Moon — top right, smaller */}
