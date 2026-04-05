@@ -971,14 +971,96 @@ export default function NervurAurora() {
             </div>
           </div>
 
-          {/* Right — Logo N floating */}
-          {!isMobile && (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", animation: loaded ? "fadeInUp 1s ease 0.6s both" : "none" }}>
-              <div style={{ animation: "floatUp 8s ease-in-out infinite" }}>
-                <img src="/LOGO-Photoroom.png" alt="NERVÜR" style={{ width: "280px", height: "auto", filter: "drop-shadow(0 0 40px rgba(99,91,255,0.2))" }} />
+          {/* Right — Dark glass mockup + floating cards */}
+          <div style={{ position: "relative", height: "560px", paddingTop: "20px", animation: loaded ? "fadeInUp 1s ease 0.6s both" : "none", display: isMobile ? "none" : "block" }}>
+
+            {/* Main browser mockup — dark glass */}
+            <div style={{
+              position: "absolute", top: "50px", left: "20px", right: "20px",
+              transform: "perspective(1200px) rotateY(-8deg) rotateX(2deg)",
+              border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px",
+              background: "rgba(255,255,255,0.04)", backdropFilter: "blur(12px)",
+              overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
+              animation: loaded ? "floatUp 8s ease-in-out infinite" : "none" }}>
+              {/* Browser bar */}
+              <div style={{ padding: "10px 16px", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF5F57" }} />
+                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FEBC2E" }} />
+                <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#28C840" }} />
+                <div style={{ flex: 1, marginLeft: "12px", height: "22px", borderRadius: "6px", background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", paddingLeft: "10px" }}>
+                  <span style={{ fontSize: "9px", color: "rgba(255,255,255,0.3)" }}>nervur.fr/dashboard</span>
+                </div>
+              </div>
+              {/* Dashboard content — dark */}
+              <div style={{ padding: "24px", minHeight: "220px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                  <div style={{ width: "80px", height: "10px", borderRadius: "3px", background: "rgba(255,255,255,0.1)" }} />
+                  <div style={{ display: "flex", gap: "12px" }}>
+                    {[50, 40, 60].map((w, i) => <div key={i} style={{ width: `${w}px`, height: "8px", borderRadius: "3px", background: "rgba(255,255,255,0.05)" }} />)}
+                  </div>
+                </div>
+                <div style={{ marginBottom: "16px" }}>
+                  <div style={{ width: "70%", height: "18px", borderRadius: "3px", background: "rgba(255,255,255,0.08)", marginBottom: "8px" }} />
+                  <div style={{ width: "45%", height: "18px", borderRadius: "3px", background: "rgba(255,255,255,0.05)" }} />
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "10px", marginTop: "20px" }}>
+                  {[1,2,3].map(i => (
+                    <div key={i} style={{ height: "80px", borderRadius: "8px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }} />
+                  ))}
+                </div>
               </div>
             </div>
-          )}
+
+            {/* Floating card 1 — Performance — dark glass */}
+            <div style={{
+              position: "absolute", bottom: "80px", left: "-20px", zIndex: 10,
+              padding: "18px 22px", borderRadius: "12px",
+              border: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(255,255,255,0.06)", backdropFilter: "blur(16px)",
+              boxShadow: "0 20px 50px rgba(0,0,0,0.3)",
+              animation: loaded ? "floatUp 6s ease-in-out 0.3s infinite" : "none" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div style={{ width: "44px", height: "44px", borderRadius: "50%", border: "2px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+                  <svg width="44" height="44" aria-hidden="true" style={{ position: "absolute", transform: "rotate(-90deg)" }}>
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="2.5" />
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="#4ADE80" strokeWidth="2.5"
+                      strokeDasharray={`${2 * Math.PI * 18 * (perfScore / 100)} ${2 * Math.PI * 18}`} strokeLinecap="round"
+                      style={{ transition: "stroke-dasharray 0.8s ease" }} />
+                  </svg>
+                  <span style={{ fontSize: "12px", fontWeight: 800, color: "#FFFFFF", transition: "all 0.5s" }}>{Math.round(perfScore)}</span>
+                </div>
+                <div>
+                  <div style={{ fontSize: "13px", fontWeight: 700, color: "#FFFFFF" }}>Performance</div>
+                  <div style={{ fontSize: "10px", color: "#4ADE80" }}>Core Web Vitals</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating card 2 — Growth — dark glass */}
+            <div style={{
+              position: "absolute", top: "60px", right: "-10px", zIndex: 10,
+              padding: "14px 18px", borderRadius: "12px",
+              border: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(255,255,255,0.06)", backdropFilter: "blur(16px)",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.3)",
+              animation: loaded ? "floatUp 7s ease-in-out 0.8s infinite" : "none" }}>
+              <span style={{ fontSize: "9px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", display: "block", marginBottom: "6px" }}>Trafic organique</span>
+              <span style={{ fontSize: "24px", fontWeight: 800, color: "#4ADE80", transition: "all 0.6s" }}>+{Math.round(trafficGrowth)}%</span>
+            </div>
+
+            {/* Floating card 3 — Conversion — dark glass */}
+            <div style={{
+              position: "absolute", bottom: "20px", right: "10px", zIndex: 10,
+              padding: "14px 18px", borderRadius: "12px",
+              border: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(255,255,255,0.06)", backdropFilter: "blur(16px)",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.3)",
+              animation: loaded ? "floatUp 5s ease-in-out 1.2s infinite" : "none" }}>
+              <span style={{ fontSize: "9px", letterSpacing: "1.5px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", display: "block", marginBottom: "6px" }}>Conversion</span>
+              <span style={{ fontSize: "22px", fontWeight: 800, color: A1, transition: "all 0.6s" }}>{convRate.toFixed(1)}%</span>
+            </div>
+
+          </div>
 
         </div>
 
