@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import LogoNervur from "../../components/LogoNervur";
 
 const TOOLS = [
   { name: "Sentinel", color: "#ef4444" },
@@ -92,7 +91,7 @@ export default function LoginPage() {
           pointerEvents: "none",
         }} />
 
-        <LogoNervur height={isWide ? 64 : 44} onClick={() => navigate("/")} style={{ marginBottom: isWide ? 24 : 10, position: "relative" }} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
 
         <h1 style={{
           fontSize: isWide ? 32 : 20,

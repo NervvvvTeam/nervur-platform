@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import LogoNervur from "./components/LogoNervur";
 
 const V = "#1D1D1F";
-const VG = (a) => `rgba(250,250,250,${a})`;
+const VG = (a) => `rgba(0,0,0,${a})`;
 
 const ARTICLES = [
   {
@@ -103,7 +102,7 @@ export default function BlogPage() {
         padding: isMobile ? "16px 20px" : "20px 48px",
         borderBottom: `1px solid ${VG(0.1)}`,
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
         <a href="/app/login" style={{
           padding: "8px 20px", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase",
           fontWeight: 700, color: "#F5F5F7", background: "#1D1D1F", border: "none", borderRadius: "6px",

@@ -1,7 +1,6 @@
 import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useMemo, useState, useEffect } from "react";
-import LogoNervur from "../../components/LogoNervur";
 import VaultMiaChat from "./VaultMiaChat";
 
 function useBreakpoint() {
@@ -197,7 +196,7 @@ export default function Layout() {
               <div className="font-bold text-[#1D1D1F] tracking-wider text-xs">N</div>
             ) : (
               <>
-                <LogoNervur height={32} onClick={() => navigate("/app/portal")} />
+                <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
                 <div className="text-[11px] text-[#818CF8] font-normal mt-0.5">Espace client</div>
               </>
             )}
@@ -232,7 +231,7 @@ export default function Layout() {
       {isMobile && (
         <>
           <header className="fixed top-0 left-0 right-0 z-50 bg-[#F5F5F7]/95 backdrop-blur-md border-b border-[#E5E5EA] px-4 py-2.5 flex justify-between items-center">
-            <LogoNervur height={28} onClick={() => navigate("/app/portal")} />
+            <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="bg-transparent border-none text-[#86868B] text-xl cursor-pointer p-1.5 rounded-lg hover:bg-[#F0F0F2] transition-colors duration-150">
               {mobileMenuOpen ? "✕" : "☰"}

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
-import LogoNervur from "./components/LogoNervur";
 
 const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
 const VG = (a) => `rgba(255,255,255,${a})`;
@@ -294,7 +293,7 @@ export default function SentinelPage() {
 
       {/* NAV */}
       <nav aria-label="Navigation principale" className="flex justify-between items-center fixed top-0 left-0 right-0 z-[100] bg-[rgba(9,9,11,0.92)] backdrop-blur-[24px]" style={{ padding: isMobile ? "12px 20px" : "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
         <div className="flex items-center gap-4">
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -305,8 +304,8 @@ export default function SentinelPage() {
         {/* RETOUR */}
         <div className="mb-5">
           <button onClick={() => navigate("/")} className="bg-transparent border border-white/15 rounded-lg text-[#86868B] text-[13px] px-5 py-2 cursor-pointer font-[inherit] transition-all duration-300"
-            onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
-            onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+            onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
             ← Retour
           </button>
         </div>
@@ -814,7 +813,7 @@ export default function SentinelPage() {
           <p className="text-[15px] text-[#86868B] max-w-[560px] mx-auto mb-8 leading-[1.7]">
             Sentinel combine e-réputation et veille marché dans un seul outil propulsé par l'IA. Chaque avis, chaque mouvement concurrent — détecté et traité automatiquement.
           </p>
-          <button onClick={() => navigate('/contact?outil=sentinel')} className="bg-white text-[#0f1117] border-none font-extrabold text-[13px] tracking-[1.5px] uppercase cursor-pointer transition-all duration-300 font-[inherit]" style={{ padding: "16px 40px" }}
+          <button onClick={() => navigate('/contact?outil=sentinel')} className="bg-white text-[#F5F5F7] border-none font-extrabold text-[13px] tracking-[1.5px] uppercase cursor-pointer transition-all duration-300 font-[inherit]" style={{ padding: "16px 40px" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             Nous contacter →

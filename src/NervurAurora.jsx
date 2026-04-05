@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import useJsonLd from "./useJsonLd";
 import useFadeOnScroll from "./useFadeOnScroll";
-import LogoNervur from "./components/LogoNervur";
 
 // ─── NERVÜR AURORA ───
 // Dark theme + 3-accent palette (Indigo, Green, Pink)
@@ -599,7 +598,7 @@ export default function NervurAurora() {
         background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <LogoNervur height={isMobile ? 32 : 40} onClick={() => navigate("/")} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
         {/* Desktop nav */}
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
@@ -1685,7 +1684,7 @@ export default function NervurAurora() {
         <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
-            <LogoNervur height={28} onClick={() => navigate("/")} style={{ marginBottom: "16px" }} />
+            <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
             <p style={{ fontSize: "12px", color: "#86868B", lineHeight: 1.8 }}>Agence Digital NERVUR</p>
             <p style={{ fontSize: "12px", color: "#86868B", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
             <p style={{ fontSize: "12px", color: "#86868B", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { sanitizeInput, validateContactForm } from "./security";
 import useSEO from "./useSEO";
-import LogoNervur from "./components/LogoNervur";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== "undefined" ? window.innerWidth <= bp : false);
@@ -235,7 +234,7 @@ export default function ContactPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
         <button className="contact-nav-btn" onClick={() => navigate("/")}>
           Accueil
         </button>
@@ -244,12 +243,12 @@ export default function ContactPage() {
       {/* RETOUR */}
       <div style={{ padding: isMobile ? "100px 20px 0 20px" : "140px 48px 0 48px", maxWidth: "1100px", margin: "0 auto" }}>
         <button onClick={() => navigate("/")} style={{
-          background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
+          background: "none", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "8px",
           color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
           fontFamily: "inherit", transition: "all 0.3s",
         }}
-          onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
-          onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
+          onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
           ← Retour
         </button>
       </div>
@@ -639,7 +638,7 @@ export default function ContactPage() {
         alignItems: "center",
         gap: isMobile ? "12px" : "0",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
         <span style={{ fontSize: "11px", color: "#3F3F46" }}>
           © 2026 NERVÜR — Tous droits réservés
         </span>

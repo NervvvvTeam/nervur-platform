@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
-import LogoNervur from "./components/LogoNervur";
 
 // ─── NERVÜR DIAGNOSTIC E-RÉPUTATION & CONFORMITÉ ───
 const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
@@ -381,7 +380,7 @@ export default function DiagnosticPage() {
 
   return (
     <main style={{
-      background: "linear-gradient(180deg, #0f1117 0%, #131620 50%, #0f1117 100%)",
+      background: "linear-gradient(180deg, #F5F5F7 0%, #131620 50%, #F5F5F7 100%)",
       color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       minHeight: "100vh", position: "relative" }}>
 
@@ -405,7 +404,7 @@ export default function DiagnosticPage() {
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(255,255,255,0.92)", backdropFilter: "blur(24px)",
         borderBottom: `1px solid ${VG(0.08)}` }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" onClick={() => navigate("/")}>
             ← Accueil
@@ -419,12 +418,12 @@ export default function DiagnosticPage() {
       {/* RETOUR */}
       <div style={{ padding: isMobile ? "90px 20px 0 20px" : "140px 48px 0 48px", maxWidth: "800px", margin: "0 auto" }}>
         <button onClick={() => navigate("/")} style={{
-          background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
+          background: "none", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "8px",
           color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
           fontFamily: "inherit", transition: "all 0.3s",
         }}
-          onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
-          onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
+          onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
           ← Retour
         </button>
       </div>
@@ -715,7 +714,7 @@ export default function DiagnosticPage() {
         padding: isMobile ? "24px 20px" : "32px 48px", borderTop: `1px solid ${VG(0.06)}`,
         display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: "center", gap: isMobile ? "12px" : "0",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
         <span style={{ fontSize: "11px", color: "#4B5563" }}>© 2026 NERVÜR — Tous droits réservés</span>
       </footer>
 
