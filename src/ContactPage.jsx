@@ -235,7 +235,7 @@ export default function ContactPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         <button className="contact-nav-btn" onClick={() => navigate("/")}>
           Accueil
         </button>
@@ -639,7 +639,7 @@ export default function ContactPage() {
         alignItems: "center",
         gap: isMobile ? "12px" : "0",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         <span style={{ fontSize: "11px", color: "#3F3F46" }}>
           © 2026 NERVÜR — Tous droits réservés
         </span>

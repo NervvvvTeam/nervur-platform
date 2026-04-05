@@ -197,7 +197,7 @@ export default function Layout() {
               <div className="font-bold text-[#0A2540] tracking-wider text-xs">N</div>
             ) : (
               <>
-                <LogoNervur height={28} onClick={() => navigate("/")} />
+                <LogoNervur height={44} onClick={() => navigate("/")} />
                 <div className="text-[11px] text-[#635BFF] font-normal mt-0.5">Espace client</div>
               </>
             )}
@@ -232,7 +232,7 @@ export default function Layout() {
       {isMobile && (
         <>
           <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#E3E8EE] px-4 py-2.5 flex justify-between items-center">
-            <LogoNervur height={28} onClick={() => navigate("/")} />
+            <LogoNervur height={44} onClick={() => navigate("/")} />
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="bg-transparent border-none text-[#6B7C93] text-xl cursor-pointer p-1.5 rounded-lg hover:bg-[#F0F0F2] transition-colors duration-150">
               {mobileMenuOpen ? "✕" : "☰"}

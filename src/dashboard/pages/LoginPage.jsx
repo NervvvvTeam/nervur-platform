@@ -92,7 +92,7 @@ export default function LoginPage() {
           pointerEvents: "none",
         }} />
 
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
 
         <h1 style={{
           fontSize: isWide ? 32 : 20,

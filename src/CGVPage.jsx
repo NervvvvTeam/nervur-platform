@@ -17,7 +17,7 @@ export default function CGVPage() {
   return (
     <main style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         <button onClick={() => navigate("/")} style={{ background: "transparent", border: "1px solid rgba(129,140,248,0.25)", color: "#a1a1aa", padding: "8px 22px", fontSize: "11px", letterSpacing: "2.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>
           Accueil
         </button>

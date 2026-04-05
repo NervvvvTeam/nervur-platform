@@ -118,7 +118,7 @@ export default function TechnologiesPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(0,0,0,0.08)"
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour à l'accueil" onClick={() => navigate("/")}>Accueil</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>

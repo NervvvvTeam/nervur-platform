@@ -90,7 +90,7 @@ export default function ForgePage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#FFFFFF", borderBottom: `1px solid ${VG(0.1)}` }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate('/technologies')}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate('/contact')}>Contact</button>

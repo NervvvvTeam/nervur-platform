@@ -296,7 +296,7 @@ export default function BlogDroitsPage() {
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
@@ -628,7 +628,7 @@ export default function BlogDroitsPage() {
           <div style={{ fontSize: "13px", color: V3 }}>
             <span style={{ fontWeight: 600, color: V2 }}>L'equipe NERVUR</span> &middot; 31 mars 2026 &middot; 15 min de lecture
           </div>
-          <LogoNervur height={28} onClick={() => navigate("/")} />
+          <LogoNervur height={44} onClick={() => navigate("/")} />
         </div>
       </div>
     </div>

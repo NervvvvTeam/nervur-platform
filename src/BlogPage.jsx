@@ -103,7 +103,7 @@ export default function BlogPage() {
         padding: isMobile ? "16px 20px" : "20px 48px",
         borderBottom: `1px solid ${VG(0.1)}`,
       }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         <a href="/app/login" style={{
           padding: "8px 20px", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase",
           fontWeight: 700, color: "#FFFFFF", background: "#0A2540", border: "none", borderRadius: "6px",

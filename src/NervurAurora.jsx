@@ -599,7 +599,7 @@ export default function NervurAurora() {
         background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <LogoNervur height={28} onClick={() => navigate("/")} />
+        <LogoNervur height={44} onClick={() => navigate("/")} />
         {/* Desktop nav */}
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
@@ -1680,7 +1680,7 @@ export default function NervurAurora() {
         <div style={{ padding: isMobile ? "40px 20px 24px" : "48px 48px 24px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr 1fr 1fr", gap: isMobile ? "32px" : "40px" }}>
           {/* Col 1 — Logo + infos */}
           <div>
-            <LogoNervur height={32} onClick={() => navigate("/")} />
+            <LogoNervur height={44} onClick={() => navigate("/")} />
             <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, marginTop: "12px" }}>Agence Digitale NERVÜR</p>
             <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>SIRET : 102 415 916 00018</p>
             <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.4)", lineHeight: 1.8 }}>Saint-Paul-les-Dax, France</p>
