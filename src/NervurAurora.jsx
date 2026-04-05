@@ -978,12 +978,15 @@ export default function NervurAurora() {
                 {/* Carte 1 — Applications & Outils Métiers */}
                 <div style={{
                   padding: isMobile ? "32px 24px" : "48px 40px",
-                  border: `1px solid ${VG(0.15)}`, background: "rgba(255,255,255,0.7)",
+                  border: "none", borderRadius: "16px",
+                  background: "linear-gradient(145deg, #1E1E2E 0%, #2A1F4E 50%, #1E1E2E 100%)",
+                  color: "#FFFFFF",
                   position: "relative", overflow: "hidden",
                   display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? "24px" : "32px", alignItems: "flex-start",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
                   transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.35); e.currentTarget.style.background = "rgba(255,255,255,0.8)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.15); e.currentTarget.style.background = "rgba(255,255,255,0.7)"; setHoveredProduct(null); }}>
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.18)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)"; setHoveredProduct(null); }}>
                   <div style={{
                     position: "absolute", top: "-1px", left: "40px", right: "40px", height: "2px",
                     background: `linear-gradient(90deg, transparent, ${A1}, transparent)` }} />
@@ -994,8 +997,8 @@ export default function NervurAurora() {
                       <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: V3, fontWeight: 700 }}>
                         Sur-mesure
                       </span>
-                      <h3 style={{ fontSize: "24px", fontWeight: 800, marginTop: "8px", marginBottom: "12px" }}>Applications & Outils Métiers</h3>
-                      <p style={{ fontSize: "14px", lineHeight: 1.8, color: "#86868B" }}>
+                      <h3 style={{ fontSize: "24px", fontWeight: 800, marginTop: "8px", marginBottom: "12px", color: "#FFFFFF" }}>Applications & Outils Métiers</h3>
+                      <p style={{ fontSize: "14px", lineHeight: 1.8, color: "rgba(255,255,255,0.6)" }}>
                         On conçoit les outils digitaux dont votre entreprise a besoin. Dashboards, CRM internes, configurateurs, plateformes — chaque outil est pensé pour simplifier votre quotidien.
                       </p>
                       <div style={{ marginTop: "24px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -1028,21 +1031,24 @@ export default function NervurAurora() {
                 {/* Carte 2 — Site Vitrine */}
                 <div style={{
                   padding: isMobile ? "32px 24px" : "48px 40px",
-                  border: `1px solid ${VG(0.15)}`, background: "rgba(255,255,255,0.7)",
+                  border: "none", borderRadius: "16px",
+                  background: "linear-gradient(145deg, #0A2540 0%, #0D3B66 50%, #0A2540 100%)",
+                  color: "#FFFFFF",
                   position: "relative", overflow: "hidden", display: "flex", flexDirection: "column",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
                   transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.35); e.currentTarget.style.background = "rgba(255,255,255,0.8)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.15); e.currentTarget.style.background = "rgba(255,255,255,0.7)"; }}>
+                  onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.18)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)"; }}>
                   <div style={{
                     position: "absolute", top: "-1px", left: "40px", right: "40px", height: "2px",
-                    background: `linear-gradient(90deg, transparent, ${A1}, transparent)` }} />
+                    background: `linear-gradient(90deg, transparent, #06b6d4, transparent)` }} />
                   <ChromeIcon type="browser" size={isMobile ? 32 : 40} />
                   <div style={{ marginTop: "20px" }}>
-                    <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: V3, fontWeight: 700 }}>
+                    <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", fontWeight: 700 }}>
                       Design & Performance
                     </span>
-                    <h3 style={{ fontSize: "24px", fontWeight: 800, marginTop: "8px", marginBottom: "12px" }}>Site Vitrine</h3>
-                    <p style={{ fontSize: "14px", lineHeight: 1.8, color: "#86868B" }}>
+                    <h3 style={{ fontSize: "24px", fontWeight: 800, marginTop: "8px", marginBottom: "12px", color: "#FFFFFF" }}>Site Vitrine</h3>
+                    <p style={{ fontSize: "14px", lineHeight: 1.8, color: "rgba(255,255,255,0.6)" }}>
                       Des sites rapides, élégants et pensés pour convertir. Chaque pixel est optimisé pour refléter votre marque et capter l'attention de vos visiteurs.
                     </p>
                     <div style={{ marginTop: "24px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
@@ -1060,16 +1066,19 @@ export default function NervurAurora() {
               {/* Row 2 — Optimisation pleine largeur */}
               <div style={{
                 padding: isMobile ? "32px 24px" : "40px 48px",
-                border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.6)",
+                border: "none", borderRadius: "16px",
+                background: "linear-gradient(135deg, #1A1A2E 0%, #16213E 100%)",
+                color: "#FFFFFF",
                 position: "relative", overflow: "hidden",
                 display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", gap: isMobile ? "20px" : "40px",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
                 transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.3); e.currentTarget.style.background = "rgba(255,255,255,0.8)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.1); e.currentTarget.style.background = "rgba(255,255,255,0.6)"; }}>
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 16px 48px rgba(0,0,0,0.18)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.12)"; }}>
                 <ChromeIcon type="gauge" size={isMobile ? 32 : 40} />
                 <div style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: "20px", fontWeight: 800, marginBottom: "6px" }}>Optimisation & Performance</h3>
-                  <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#86868B", margin: 0 }}>
+                  <h3 style={{ fontSize: "20px", fontWeight: 800, marginBottom: "6px", color: "#FFFFFF" }}>Optimisation & Performance</h3>
+                  <p style={{ fontSize: "14px", lineHeight: 1.7, color: "rgba(255,255,255,0.6)", margin: 0 }}>
                     Audit technique, optimisation Core Web Vitals, refactoring. On transforme un site lent en machine de guerre.
                   </p>
                 </div>
@@ -1093,18 +1102,21 @@ export default function NervurAurora() {
                 { title: "Webdesign (UX/UI)", tag: "DESIGN", icon: null, desc: "Navigation simplifiée et optimisation du taux de conversion. Chaque interaction est pensée pour guider l'utilisateur.", points: ["Wireframes & maquettes", "Tests utilisateurs", "Optimisation CRO", "Design system"] },
               ].map((c, i) => (
                 <div key={i} style={{
-                  padding: "40px 36px", border: `1px solid ${VG(0.1)}`, background: "rgba(0,0,0,0.25)",
+                  padding: "40px 36px", border: "none", borderRadius: "16px",
+                  background: "linear-gradient(145deg, #1E1E2E 0%, #252540 100%)",
+                  color: "#FFFFFF",
                   position: "relative", overflow: "hidden",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
                   transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
                   onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = VG(0.3);
-                    e.currentTarget.style.background = "rgba(255,255,255,0.75)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.15)";
                     e.currentTarget.querySelector('.tab-line').style.transform = "scaleY(1)";
                     e.currentTarget.querySelector('.tab-line').style.opacity = "1";
                   }}
                   onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = VG(0.1);
-                    e.currentTarget.style.background = "rgba(0,0,0,0.25)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.1)";
                     e.currentTarget.querySelector('.tab-line').style.transform = "scaleY(0)";
                     e.currentTarget.querySelector('.tab-line').style.opacity = "0";
                   }}>
