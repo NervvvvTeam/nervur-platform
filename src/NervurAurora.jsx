@@ -595,13 +595,13 @@ export default function NervurAurora() {
       {/* ═══ NAV ═══ */}
       <nav aria-label="Navigation principale" style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        padding: isMobile ? "14px 20px" : "24px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)",
         borderBottom: "1px solid rgba(99,91,255,0.08)",
         boxShadow: "0 1px 20px rgba(99,91,255,0.06)",
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
-        <LogoNervur height={44} onClick={() => navigate("/")} />
+        <LogoNervur height={52} onClick={() => navigate("/")} />
         {/* Desktop nav */}
         {!isMobile && (
           <div style={{ display: "flex", gap: "36px", alignItems: "center" }}>
@@ -611,7 +611,7 @@ export default function NervurAurora() {
               { label: "Projets", id: "projets" },
               { label: "Approche", id: "approche" },
             ].map((item, i) => (
-              <span key={i} className="nav-link" style={{ fontSize: "12px", letterSpacing: "2.5px", textTransform: "uppercase", color: "#6B7C93", cursor: "pointer", transition: "color 0.3s" }}
+              <span key={i} className="nav-link" style={{ fontSize: "14px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#6B7C93", cursor: "pointer", transition: "color 0.3s" }}
                 onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
                 onMouseEnter={e => { e.target.style.color = "#0A2540"; }}
                 onMouseLeave={e => { e.target.style.color = "#6B7C93"; }}>
@@ -619,7 +619,7 @@ export default function NervurAurora() {
               </span>
             ))}
             {/* Blog nav link */}
-            <span className="nav-link" style={{ fontSize: "12px", letterSpacing: "2.5px", textTransform: "uppercase", color: "#6B7C93", cursor: "pointer", transition: "color 0.3s" }}
+            <span className="nav-link" style={{ fontSize: "14px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#6B7C93", cursor: "pointer", transition: "color 0.3s" }}
               onClick={() => navigate('/blog')}
               onMouseEnter={e => { e.target.style.color = "#0A2540"; }}
               onMouseLeave={e => { e.target.style.color = "#6B7C93"; }}>
@@ -628,7 +628,7 @@ export default function NervurAurora() {
             {/* Apps dropdown removed */}
             {/* Bouton Espace Client */}
             <a href="/app/login" style={{
-              padding: "8px 20px", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase",
+              padding: "12px 28px", fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
               fontWeight: 700, color: "#FFFFFF", background: "#0A2540", border: "none", borderRadius: "6px",
               cursor: "pointer", textDecoration: "none", transition: "all 0.3s",
               fontFamily: "inherit", marginLeft: "12px"
