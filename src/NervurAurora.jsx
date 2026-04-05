@@ -443,10 +443,9 @@ export default function NervurAurora() {
 
       // Nebula clouds — subtle colored fog
       const nebulae = [
-        { x: w * 0.2, y: h * 0.3, r: 300, c: "rgba(99,91,255,0.07)" },
-        { x: w * 0.7, y: h * 0.5, r: 350, c: "rgba(244,114,182,0.05)" },
-        { x: w * 0.5, y: h * 0.7, r: 250, c: "rgba(0,180,216,0.05)" },
-        { x: w * 0.9, y: h * 0.2, r: 200, c: "rgba(74,222,128,0.03)" },
+        { x: w * 0.2, y: h * 0.3, r: 300, c: "rgba(99,91,255,0.03)" },
+        { x: w * 0.7, y: h * 0.5, r: 350, c: "rgba(244,114,182,0.02)" },
+        { x: w * 0.5, y: h * 0.7, r: 250, c: "rgba(0,180,216,0.02)" },
       ];
       for (const n of nebulae) {
         const g = ctx.createRadialGradient(
@@ -889,7 +888,6 @@ export default function NervurAurora() {
         minHeight: "100vh", display: "flex", alignItems: "center",
         padding: isMobile ? "100px 20px 60px" : "0 48px", position: "relative", overflow: "hidden",
         background: "#000000",
-        backgroundSize: "300% 300%", animation: "gradientShift 12s ease infinite",
       }}>
         {/* Interactive particle canvas */}
         {!isMobile && <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", cursor: "crosshair" }}
