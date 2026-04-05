@@ -387,6 +387,56 @@ export default function NervurAurora() {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [appsOpen, setAppsOpen] = useState(false);
   const [mobileAppsOpen, setMobileAppsOpen] = useState(false);
+  const canvasRef = useRef(null);
+  const mouseRef = useRef({ x: -1000, y: -1000 });
+
+  // Particle canvas for hero
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width = canvas.offsetWidth;
+    const h = canvas.height = canvas.offsetHeight;
+    const COLORS = [[99,91,255],[0,180,216],[244,114,182],[74,222,128],[255,190,11]];
+    const particles = Array.from({ length: 60 }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 2.5 + 1, c: COLORS[Math.floor(Math.random() * COLORS.length)],
+      a: Math.random() * 0.5 + 0.2,
+    }));
+    let raf;
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      const mx = mouseRef.current.x, my = mouseRef.current.y;
+      // Mouse glow
+      if (mx > 0) {
+        const g = ctx.createRadialGradient(mx, my, 0, mx, my, 180);
+        g.addColorStop(0, "rgba(99,91,255,0.08)"); g.addColorStop(1, "transparent");
+        ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+      }
+      for (const p of particles) {
+        const dx = mx - p.x, dy = my - p.y, dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < 250 && mx > 0) { p.vx += dx * 0.00006; p.vy += dy * 0.00006; }
+        p.x += p.vx; p.y += p.vy; p.vx *= 0.995; p.vy *= 0.995;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.a})`; ctx.fill();
+        const pg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+        pg.addColorStop(0, `rgba(${p.c[0]},${p.c[1]},${p.c[2]},0.1)`); pg.addColorStop(1, "transparent");
+        ctx.fillStyle = pg; ctx.fillRect(p.x - p.r*5, p.y - p.r*5, p.r*10, p.r*10);
+      }
+      // Connections
+      for (let i = 0; i < particles.length; i++) for (let j = i+1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j], d = Math.sqrt((a.x-b.x)**2+(a.y-b.y)**2);
+        if (d < 130) { ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle = `rgba(99,91,255,${0.06*(1-d/130)})`; ctx.lineWidth = 0.5; ctx.stroke(); }
+      }
+      raf = requestAnimationFrame(draw);
+    }
+    draw();
+    return () => cancelAnimationFrame(raf);
+  }, []);
   const glowRef = useRef(null);
   const pageRef = useRef(null);
   useFadeOnScroll(pageRef);
@@ -514,6 +564,19 @@ export default function NervurAurora() {
         @keyframes floatUp {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-12px); }
+        }
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes scanLine {
+          0% { top: 0; }
+          100% { top: 100%; }
+        }
+        @keyframes spin3d {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(360deg); }
         }
         @keyframes blink {
           0%, 100% { opacity: 1; }
@@ -712,28 +775,37 @@ export default function NervurAurora() {
       )}
 
       <main>
-      {/* ═══ HERO ═══ */}
+      {/* ═══ HERO — Dark immersive with canvas + 3D ═══ */}
       <section aria-label="Accueil" style={{
         minHeight: "100vh", display: "flex", alignItems: "center",
-        padding: isMobile ? "0 20px" : "0 48px", position: "relative",
-        background: "radial-gradient(ellipse at 20% 50%, rgba(99,91,255,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(244,114,182,0.06) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(6,182,212,0.05) 0%, transparent 50%)",
+        padding: isMobile ? "100px 20px 60px" : "0 48px", position: "relative", overflow: "hidden",
+        background: "linear-gradient(135deg, #0A2540 0%, #0D1B3E 30%, #1A0A3E 60%, #0A2540 100%)",
+        backgroundSize: "300% 300%", animation: "gradientShift 12s ease infinite",
       }}>
+        {/* Interactive particle canvas */}
+        {!isMobile && <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", cursor: "crosshair" }}
+          onMouseMove={e => { const r = e.currentTarget.getBoundingClientRect(); mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top }; }}
+          onMouseLeave={() => { mouseRef.current = { x: -1000, y: -1000 }; }}
+        />}
+        {/* Scan line */}
+        <div style={{ position: "absolute", left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,91,255,0.3), transparent)", animation: "scanLine 4s linear infinite", pointerEvents: "none", zIndex: 1 }} />
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "0" : "60px", alignItems: "center", width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
 
           {/* Left — Text */}
           <div style={{ position: "relative", zIndex: 5 }}>
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "10px",
-              padding: "6px 16px",
+              padding: "8px 18px", background: "rgba(255,255,255,0.06)", borderRadius: "9999px",
+              border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(8px)",
               marginBottom: "32px", animation: loaded ? "fadeInUp 0.6s ease 0.2s both" : "none" }}>
-              <span style={{ width: "6px", height: "6px", background: V, borderRadius: "50%" }} />
-              <span style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: V }}>
-                NERVÜR — Éditeur de Technologies de Croissance
+              <span style={{ width: "6px", height: "6px", background: "#635BFF", borderRadius: "50%" }} />
+              <span style={{ fontSize: "12px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>
+                NERVÜR — Agence Digitale
               </span>
             </div>
             <div style={{ marginBottom: "28px", animation: loaded ? "fadeInUp 0.8s ease 0.4s both" : "none" }}>
               <TextReveal>
-                <h1 style={{ fontSize: "clamp(38px, 5.5vw, 74px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-2.5px" }}>
+                <h1 style={{ fontSize: "clamp(38px, 5.5vw, 74px)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-2.5px", color: "#FFFFFF" }}>
                   <GlitchText active={loaded}>On bâtit des</GlitchText>
                 </h1>
               </TextReveal>
@@ -744,7 +816,7 @@ export default function NervurAurora() {
               </TextReveal>
             </div>
             <p style={{
-              fontSize: "17px", lineHeight: 1.8, color: "#6B7C93", maxWidth: "520px",
+              fontSize: "17px", lineHeight: 1.8, color: "rgba(255,255,255,0.6)", maxWidth: "520px",
               marginBottom: "44px",
               animation: loaded ? "fadeInUp 0.8s ease 0.6s both" : "none" }}>
               NERVÜR conçoit les stratégies digitales qui rendent votre entreprise pérenne grâce à internet. Une vision. Zéro compromis.
@@ -763,7 +835,7 @@ export default function NervurAurora() {
               <MagneticButton className="cta-btn"                onClick={() => navigate('/contact')} style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
                 padding: isMobile ? "14px 24px" : "16px 36px", border: `1px solid rgba(99,91,255,0.4)`,
-                color: V, fontSize: "13px", fontWeight: 600, letterSpacing: "1.5px",
+                color: "#FFFFFF", fontSize: "13px", fontWeight: 600, letterSpacing: "1.5px",
                 textTransform: "uppercase", cursor: "pointer", background: "transparent" }}>
                 Nous contacter
               </MagneticButton>
