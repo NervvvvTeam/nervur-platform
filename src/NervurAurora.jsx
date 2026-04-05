@@ -411,8 +411,7 @@ export default function NervurAurora() {
     // Shooting stars
     const shootingStars = [];
 
-    // Planet position (bottom right)
-    const planet = { x: w * 0.78, y: h * 0.6, r: Math.min(w, h) * 0.12 };
+    // Planet drawn via CSS image now, canvas only does stars/nebula
 
     let time = 0;
     let raf;
@@ -499,32 +498,7 @@ export default function NervurAurora() {
         ctx.stroke();
       }
 
-      // Planet with atmosphere glow
-      // Atmosphere
-      const atmoG = ctx.createRadialGradient(planet.x, planet.y, planet.r * 0.8, planet.x, planet.y, planet.r * 1.5);
-      atmoG.addColorStop(0, "transparent");
-      atmoG.addColorStop(0.6, "rgba(99,91,255,0.05)");
-      atmoG.addColorStop(0.8, "rgba(0,100,255,0.03)");
-      atmoG.addColorStop(1, "transparent");
-      ctx.fillStyle = atmoG;
-      ctx.fillRect(planet.x - planet.r * 2, planet.y - planet.r * 2, planet.r * 4, planet.r * 4);
-
-      // Planet body
-      const pG = ctx.createRadialGradient(planet.x - planet.r * 0.3, planet.y - planet.r * 0.3, 0, planet.x, planet.y, planet.r);
-      pG.addColorStop(0, "rgba(30,40,80,0.9)");
-      pG.addColorStop(0.5, "rgba(15,20,50,0.85)");
-      pG.addColorStop(1, "rgba(5,5,20,0.8)");
-      ctx.beginPath();
-      ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
-      ctx.fillStyle = pG;
-      ctx.fill();
-
-      // Planet ring/highlight
-      ctx.beginPath();
-      ctx.arc(planet.x, planet.y, planet.r, -0.8, 0.5);
-      ctx.strokeStyle = "rgba(99,91,255,0.15)";
-      ctx.lineWidth = 2;
-      ctx.stroke();
+      // Planet is now a real image via CSS, no canvas drawing needed
 
       raf = requestAnimationFrame(draw);
     }
@@ -671,6 +645,10 @@ export default function NervurAurora() {
         @keyframes spin3d {
           0% { transform: rotateY(0deg); }
           100% { transform: rotateY(360deg); }
+        }
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(8px); }
         }
         @keyframes blink {
           0%, 100% { opacity: 1; }
@@ -883,6 +861,28 @@ export default function NervurAurora() {
         />}
         {/* Scan line */}
         <div style={{ position: "absolute", left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,91,255,0.3), transparent)", animation: "scanLine 4s linear infinite", pointerEvents: "none", zIndex: 1 }} />
+
+        {/* Planet image — left side, partially visible */}
+        {!isMobile && <div style={{
+          position: "absolute", left: "-8%", bottom: "-15%", width: "45%", maxWidth: "550px",
+          aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
+          boxShadow: "0 0 80px rgba(99,91,255,0.15), 0 0 200px rgba(0,100,255,0.08)",
+          animation: "floatUp 20s ease-in-out infinite", pointerEvents: "none", zIndex: 0,
+        }}>
+          <img src="/planet.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
+        </div>}
+
+        {/* Scroll indicator — bouncing arrow */}
+        <div style={{
+          position: "absolute", bottom: "30px", left: "50%", transform: "translateX(-50%)",
+          display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", zIndex: 10,
+          animation: "fadeInUp 1s ease 1.5s both",
+        }}>
+          <span style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Scroll</span>
+          <div style={{ animation: "scrollBounce 2s ease-in-out infinite" }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "0" : "60px", alignItems: "center", width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
 
           {/* Left — Text */}

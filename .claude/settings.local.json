@@ -241,7 +241,8 @@
       "WebFetch(domain:antigravity.google)",
       "Bash(grep -rn \"LogoNervur\" src/Blog*.jsx src/Contact*.jsx src/Mentions*.jsx src/Politique*.jsx src/CGV*.jsx src/Technologies*.jsx src/QuiSommes*.jsx src/Sentinel*.jsx)",
       "WebFetch(domain:stripe.com)",
-      "WebFetch(domain:www.igloo.inc)"
+      "WebFetch(domain:www.igloo.inc)",
+      "Bash(curl -L -o \"C:\\\\Escriba\\\\AGencer\\\\public\\\\planet.jpg\" \"https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=800&q=80\")"
     ]
   }
 }
