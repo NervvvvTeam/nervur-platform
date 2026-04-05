@@ -399,7 +399,7 @@ export default function NervurAurora() {
     const h = canvas.height = canvas.offsetHeight;
 
     // Stars — different sizes and brightnesses
-    const stars = Array.from({ length: 350 }, () => ({
+    const stars = Array.from({ length: 120 }, () => ({
       x: Math.random() * w, y: Math.random() * h,
       r: Math.random() * 2.2 + 0.4,
       baseA: Math.random() * 0.7 + 0.3,
