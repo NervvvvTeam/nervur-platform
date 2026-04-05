@@ -931,7 +931,7 @@ export default function NervurAurora() {
       {/* ═══ SERVICES & OFFRES — TABBED ═══ */}
       {/* Accent divider — indigo */}
       <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent)" }} />
-      <section id="services" aria-label="Nos services" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", background: "rgba(99,102,241,0.02)" }}>
+      <section id="services" aria-label="Nos services" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", background: "linear-gradient(180deg, #EEEEF2 0%, #E6E6EC 50%, #EEEEF2 100%)" }}>
         <RevealSection>
           <div style={{ textAlign: "center", marginBottom: "24px" }}>
             <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: V2, display: "block", marginBottom: "16px" }}>
@@ -1134,7 +1134,7 @@ export default function NervurAurora() {
       {/* ═══ OUTILS SaaS ═══ */}
       {/* Accent divider — red/cyan */}
       <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(239,68,68,0.25), rgba(6,182,212,0.25), transparent)" }} />
-      <section id="outils" aria-label="Nos outils" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", background: "rgba(239,68,68,0.015)" }}>
+      <section id="outils" aria-label="Nos outils" className="fade-section" style={{ padding: isMobile ? "60px 20px" : "120px 48px", background: "linear-gradient(135deg, rgba(239,68,68,0.03) 0%, #F5F5F7 30%, rgba(6,182,212,0.03) 100%)" }}>
         <RevealSection>
           <div style={{ textAlign: "center", marginBottom: isMobile ? "30px" : "60px" }}>
             <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: V2, display: "block", marginBottom: "16px" }}>
@@ -1479,7 +1479,7 @@ export default function NervurAurora() {
       {/* ═══ VALUE STRIP ═══ */}
       {/* Accent divider — purple */}
       <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(196,181,253,0.25), transparent)" }} />
-      <section aria-label="Pourquoi NERVÜR" style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: "rgba(99,102,241,0.02)", position: "relative", overflow: "hidden" }}>
+      <section aria-label="Pourquoi NERVÜR" style={{ padding: isMobile ? "60px 20px" : "100px 48px", background: "linear-gradient(180deg, #EEEEF2 0%, #E8E8EE 50%, #EEEEF2 100%)", position: "relative", overflow: "hidden" }}>
         {/* Background subtle gradient */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(129,140,248,0.03) 0%, transparent 70%)", pointerEvents: "none" }} />
 
