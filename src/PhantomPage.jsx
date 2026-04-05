@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
+const V = "#FFFFFF", V2 = "#425466", V3 = "#6B7C93";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#635BFF", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -145,7 +146,7 @@ export default function PhantomPage() {
   };
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} aria-hidden="true" style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -157,7 +158,7 @@ export default function PhantomPage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -169,11 +170,11 @@ export default function PhantomPage() {
         <div style={{ marginBottom: "20px" }}>
           <button onClick={() => navigate("/")} style={{
             background: "none", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "8px",
-            color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+            color: "#6B7C93", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
             fontFamily: "inherit", transition: "all 0.3s",
           }}
-            onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
-            onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
+            onMouseEnter={e => { e.target.style.color = "#0A2540"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#6B7C93"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
             ← Retour
           </button>
         </div>
@@ -188,7 +189,7 @@ export default function PhantomPage() {
             <h1 style={{ fontSize: isMobile ? "28px" : "42px", fontWeight: 800, letterSpacing: "-2px" }}>PHANTOM</h1>
             <span style={{ fontSize: "9px", letterSpacing: "1.5px", color: "#ec4899", border: "1px solid rgba(236,72,153,0.3)", padding: "3px 10px", textTransform: "uppercase" }}>Audit UX Auto</span>
           </div>
-          <p style={{ fontSize: "15px", color: "#86868B", maxWidth: "600px", lineHeight: 1.8 }}>
+          <p style={{ fontSize: "15px", color: "#6B7C93", maxWidth: "600px", lineHeight: 1.8 }}>
             L'agent invisible qui crawle votre site et trouve les tueurs de conversion. Performance, SEO, accessibilité — tout est scanné.
           </p>
         </div>
@@ -201,7 +202,7 @@ export default function PhantomPage() {
               style={{ flex: 1, padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "15px", fontFamily: "inherit", outline: "none" }}
               onKeyDown={e => e.key === "Enter" && startAudit()} />
             <button onClick={startAudit} disabled={scanning || !url}
-              style={{ padding: "14px 28px", background: !url ? VG(0.06) : "linear-gradient(135deg, #ec4899, #be185d)", border: "none", color: !url ? "#86868B" : V, fontWeight: 700, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: !url ? "not-allowed" : "pointer", fontFamily: "inherit", whiteSpace: "nowrap" }}>
+              style={{ padding: "14px 28px", background: !url ? VG(0.06) : "linear-gradient(135deg, #ec4899, #be185d)", border: "none", color: !url ? "#6B7C93" : V, fontWeight: 700, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: !url ? "not-allowed" : "pointer", fontFamily: "inherit", whiteSpace: "nowrap" }}>
               {scanning ? "Scan en cours..." : "Lancer l'audit"}
             </button>
           </div>
@@ -212,12 +213,12 @@ export default function PhantomPage() {
                 <div style={{ width: `${scanProgress}%`, height: "100%", background: "linear-gradient(90deg, #ec4899, #818CF8)", transition: "width 0.4s ease", borderRadius: "2px" }} />
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "16px" }}>
-                <span style={{ fontSize: "10px", color: "#86868B" }}>Analyse en cours...</span>
+                <span style={{ fontSize: "10px", color: "#6B7C93" }}>Analyse en cours...</span>
                 <span style={{ fontSize: "10px", color: "#ec4899", fontWeight: 700 }}>{Math.round(scanProgress)}%</span>
               </div>
               <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
                 {["Connexion", "Lighthouse", "Performance", "Accessibilité", "SEO", "Analyse IA"].map((p, i) => (
-                  <span key={i} style={{ fontSize: "10px", letterSpacing: "0.5px", color: scanPhase > i ? "#ec4899" : scanPhase === i ? V3 : "#86868B", transition: "color 0.3s", fontWeight: scanPhase === i ? 700 : 400 }}>
+                  <span key={i} style={{ fontSize: "10px", letterSpacing: "0.5px", color: scanPhase > i ? "#ec4899" : scanPhase === i ? V3 : "#6B7C93", transition: "color 0.3s", fontWeight: scanPhase === i ? 700 : 400 }}>
                     {scanPhase > i ? "✓" : scanPhase === i ? "◉" : "○"} {p}
                   </span>
                 ))}
@@ -232,7 +233,7 @@ export default function PhantomPage() {
             <div style={{ display: "inline-block", padding: "20px 32px", border: "1px solid rgba(239,68,68,0.3)", background: "rgba(239,68,68,0.05)", borderRadius: "8px" }}>
               <div style={{ fontSize: "28px", marginBottom: "12px", color: "#ef4444" }}>X</div>
               <p style={{ fontSize: "14px", color: "#fca5a5", marginBottom: "8px", fontWeight: 600 }}>Audit impossible</p>
-              <p style={{ fontSize: "12px", color: "#86868B", lineHeight: 1.6, maxWidth: "400px" }}>{error}</p>
+              <p style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 1.6, maxWidth: "400px" }}>{error}</p>
               <button onClick={() => { setError(null); setUrl(""); }} style={{ marginTop: "16px", padding: "8px 20px", background: "transparent", border: "1px solid rgba(0,0,0,0.1)", color: "#a1a1aa", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>Réessayer</button>
             </div>
           </div>
@@ -261,14 +262,14 @@ export default function PhantomPage() {
                     <span style={{ fontSize: "22px", fontWeight: 800, color: getScoreColor(globalScore) }}>{globalScore}</span>
                   </div>
                 </div>
-                <div style={{ fontSize: "8px", letterSpacing: "1.5px", color: "#86868B" }}>SCORE GLOBAL</div>
+                <div style={{ fontSize: "8px", letterSpacing: "1.5px", color: "#6B7C93" }}>SCORE GLOBAL</div>
               </div>
               {/* Category Scores */}
               {AUDIT_CATEGORIES.map(cat => (
                 <div key={cat.name} style={{ padding: "16px", border: `1px solid ${VG(0.08)}`, background: "rgba(255,255,255,0.75)", textAlign: "center" }}>
-                  <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", marginBottom: "4px", color: "#86868B" }}>{cat.icon}</div>
+                  <div style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", marginBottom: "4px", color: "#6B7C93" }}>{cat.icon}</div>
                   <div style={{ fontSize: "24px", fontWeight: 800, color: getScoreColor(scores[cat.name] || 0), marginBottom: "4px" }}>{scores[cat.name] || 0}</div>
-                  <div style={{ fontSize: "8px", letterSpacing: "1px", color: "#86868B" }}>{cat.name.toUpperCase()}</div>
+                  <div style={{ fontSize: "8px", letterSpacing: "1px", color: "#6B7C93" }}>{cat.name.toUpperCase()}</div>
                 </div>
               ))}
             </div>
@@ -293,7 +294,7 @@ export default function PhantomPage() {
                     const statusColor = status === "good" ? "#4ADE80" : status === "needs-work" ? "#fbbf24" : "#ef4444";
                     return (
                       <div key={metric.key} style={{ padding: "12px", border: `1px solid ${statusColor}20`, background: `${statusColor}08`, textAlign: "center" }}>
-                        <div style={{ fontSize: "8px", letterSpacing: "1.5px", color: "#86868B", marginBottom: "6px" }}>{metric.label}</div>
+                        <div style={{ fontSize: "8px", letterSpacing: "1.5px", color: "#6B7C93", marginBottom: "6px" }}>{metric.label}</div>
                         <div style={{ fontSize: "20px", fontWeight: 800, color: statusColor }}>{val}{metric.unit}</div>
                         <div style={{ fontSize: "8px", letterSpacing: "1px", color: statusColor, marginTop: "2px" }}>
                           {status === "good" ? "BON" : status === "needs-work" ? "À AMÉLIORER" : "MAUVAIS"}
@@ -327,9 +328,9 @@ export default function PhantomPage() {
 
             {/* CATEGORY FILTER */}
             <div style={{ display: "flex", gap: "8px", marginBottom: "16px", flexWrap: "wrap" }}>
-              <button onClick={() => setActiveCategory("all")} style={{ padding: "6px 16px", fontSize: "11px", cursor: "pointer", fontFamily: "inherit", background: activeCategory === "all" ? "rgba(236,72,153,0.15)" : "transparent", border: `1px solid ${activeCategory === "all" ? "rgba(236,72,153,0.4)" : VG(0.1)}`, color: activeCategory === "all" ? "#f9a8d4" : "#86868B", transition: "all 0.3s" }}>Tout</button>
+              <button onClick={() => setActiveCategory("all")} style={{ padding: "6px 16px", fontSize: "11px", cursor: "pointer", fontFamily: "inherit", background: activeCategory === "all" ? "rgba(236,72,153,0.15)" : "transparent", border: `1px solid ${activeCategory === "all" ? "rgba(236,72,153,0.4)" : VG(0.1)}`, color: activeCategory === "all" ? "#f9a8d4" : "#6B7C93", transition: "all 0.3s" }}>Tout</button>
               {AUDIT_CATEGORIES.map(c => (
-                <button key={c.name} onClick={() => setActiveCategory(c.name)} style={{ padding: "6px 16px", fontSize: "11px", cursor: "pointer", fontFamily: "inherit", background: activeCategory === c.name ? "rgba(236,72,153,0.15)" : "transparent", border: `1px solid ${activeCategory === c.name ? "rgba(236,72,153,0.4)" : VG(0.1)}`, color: activeCategory === c.name ? "#f9a8d4" : "#86868B", transition: "all 0.3s" }}>{c.icon} {c.name}</button>
+                <button key={c.name} onClick={() => setActiveCategory(c.name)} style={{ padding: "6px 16px", fontSize: "11px", cursor: "pointer", fontFamily: "inherit", background: activeCategory === c.name ? "rgba(236,72,153,0.15)" : "transparent", border: `1px solid ${activeCategory === c.name ? "rgba(236,72,153,0.4)" : VG(0.1)}`, color: activeCategory === c.name ? "#f9a8d4" : "#6B7C93", transition: "all 0.3s" }}>{c.icon} {c.name}</button>
               ))}
             </div>
 
@@ -343,7 +344,7 @@ export default function PhantomPage() {
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px" }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: "13px", fontWeight: 700, marginBottom: "2px" }}>{issue.title}</div>
-                        <span style={{ fontSize: "9px", color: "#86868B" }}>{issue.category}</span>
+                        <span style={{ fontSize: "9px", color: "#6B7C93" }}>{issue.category}</span>
                       </div>
                       <span style={{ fontSize: "9px", fontWeight: 700, padding: "3px 8px", background: sev.bg, border: `1px solid ${sev.color}30`, color: sev.color }}>{sev.label}</span>
                     </div>
@@ -352,11 +353,11 @@ export default function PhantomPage() {
                         <p style={{ fontSize: "12px", color: V3, lineHeight: 1.8, marginBottom: "12px" }}>{issue.description}</p>
                         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
                           <div style={{ padding: "8px 14px", background: "rgba(74,222,128,0.06)", border: `1px solid rgba(74,222,128,0.15)` }}>
-                            <div style={{ fontSize: "8px", color: "#86868B", letterSpacing: "1px", marginBottom: "4px" }}>CORRECTION</div>
+                            <div style={{ fontSize: "8px", color: "#6B7C93", letterSpacing: "1px", marginBottom: "4px" }}>CORRECTION</div>
                             <div style={{ fontSize: "12px", color: "#4ADE80" }}>{issue.fix}</div>
                           </div>
                           <div style={{ padding: "8px 14px", background: "rgba(96,165,250,0.06)", border: `1px solid rgba(96,165,250,0.15)` }}>
-                            <div style={{ fontSize: "8px", color: "#86868B", letterSpacing: "1px", marginBottom: "4px" }}>IMPACT ESTIMÉ</div>
+                            <div style={{ fontSize: "8px", color: "#6B7C93", letterSpacing: "1px", marginBottom: "4px" }}>IMPACT ESTIMÉ</div>
                             <div style={{ fontSize: "12px", color: "#60a5fa", fontWeight: 700 }}>{issue.impact}</div>
                           </div>
                         </div>
@@ -376,14 +377,14 @@ export default function PhantomPage() {
             <div className="text-[10px] tracking-[3px] uppercase text-[#8b5cf6] font-bold mb-6">ABONNEMENT UNIQUE</div>
             <div className="flex items-baseline justify-center gap-1 mb-2">
               <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>19€</span>
-              <span className="text-base text-[#86868B] font-semibold">/mois</span>
+              <span className="text-base text-[#6B7C93] font-semibold">/mois</span>
             </div>
-            <p className="text-[13px] text-[#86868B] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
+            <p className="text-[13px] text-[#6B7C93] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
             <div className="text-left mb-8">
               {["Audit Lighthouse complet", "Scores Performance + SEO + Accessibilité", "Core Web Vitals détaillés", "Recommandations IA en français", "Historique des audits + évolution", "Comparaison avant/après", "Export PDF des rapports", "Scan illimité de pages"].map((f, i) => (
                 <div key={i} className="flex items-center gap-2.5 py-2" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
                   <span className="text-[#4ADE80] text-sm min-w-[18px]">✓</span>
-                  <span className="text-[13px] text-[#424245]">{f}</span>
+                  <span className="text-[13px] text-[#425466]">{f}</span>
                 </div>
               ))}
             </div>
@@ -396,8 +397,8 @@ export default function PhantomPage() {
         {/* CTA */}
         <section aria-label="Appel à l'action" style={{ marginTop: results ? "20px" : "60px", textAlign: "center", padding: isMobile ? "32px 20px" : "48px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.6)", animation: "fadeInUp 0.6s ease 0.4s both" }}>
           <h2 style={{ fontSize: isMobile ? "20px" : "28px", fontWeight: 800, marginBottom: "12px", letterSpacing: "-1px" }}>Votre site perd des clients chaque jour.</h2>
-          <p style={{ fontSize: "14px", color: "#86868B", marginBottom: "28px", maxWidth: "450px", margin: "0 auto 28px", lineHeight: 1.7 }}>Phantom identifie les fuites. On les colmate. Résultats en 30 jours.</p>
-          <button onClick={() => navigate('/contact?outil=phantom')} style={{ padding: "14px 36px", background: V, color: "#F5F5F7", border: "none", fontWeight: 800, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", transition: "all 0.3s", fontFamily: "inherit" }}
+          <p style={{ fontSize: "14px", color: "#6B7C93", marginBottom: "28px", maxWidth: "450px", margin: "0 auto 28px", lineHeight: 1.7 }}>Phantom identifie les fuites. On les colmate. Résultats en 30 jours.</p>
+          <button onClick={() => navigate('/contact?outil=phantom')} style={{ padding: "14px 36px", background: V, color: "#FFFFFF", border: "none", fontWeight: 800, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", transition: "all 0.3s", fontFamily: "inherit" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             Auditer mon site →

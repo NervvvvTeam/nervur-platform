@@ -25,14 +25,14 @@ function ScoreBadge({ score }) {
 function MiniBar({ value, max = 100, color }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "8px", width: "100%" }}>
-      <div style={{ flex: 1, height: "4px", background: "#E5E5EA", borderRadius: "2px", overflow: "hidden" }}>
+      <div style={{ flex: 1, height: "4px", background: "#E3E8EE", borderRadius: "2px", overflow: "hidden" }}>
         <div style={{
           height: "100%", borderRadius: "2px",
           width: (value / max * 100) + "%",
           background: color || (value >= 90 ? "#10b981" : value >= 50 ? "#f59e0b" : "#ef4444"),
         }} />
       </div>
-      <span style={{ fontSize: "12px", color: "#86868B", minWidth: "28px", textAlign: "right" }}>{value}</span>
+      <span style={{ fontSize: "12px", color: "#6B7C93", minWidth: "28px", textAlign: "right" }}>{value}</span>
     </div>
   );
 }
@@ -40,7 +40,7 @@ function MiniBar({ value, max = 100, color }) {
 function TrendArrow({ current, previous }) {
   if (previous === undefined || previous === null) return null;
   const diff = current - previous;
-  if (diff === 0) return <span style={{ color: "#86868B", fontSize: "11px", marginLeft: "4px" }}>=</span>;
+  if (diff === 0) return <span style={{ color: "#6B7C93", fontSize: "11px", marginLeft: "4px" }}>=</span>;
   const isUp = diff > 0;
   return (
     <span style={{ color: isUp ? "#10b981" : "#ef4444", fontSize: "11px", fontWeight: 600, marginLeft: "4px" }}>
@@ -156,10 +156,10 @@ export default function PhantomHistoryPage() {
           background: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540", marginBottom: "6px" }}>
           Historique des audits
         </h1>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>
           Suivez l'évolution de vos scores au fil du temps.
         </p>
       </div>
@@ -175,16 +175,16 @@ export default function PhantomHistoryPage() {
                   style={{
                     padding: "6px 14px", borderRadius: "6px", border: "none",
                     fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                    background: !selectedDomain ? "#8b5cf6" : "#E5E5EA",
-                    color: !selectedDomain ? "#fff" : "#86868B",
+                    background: !selectedDomain ? "#8b5cf6" : "#E3E8EE",
+                    color: !selectedDomain ? "#fff" : "#6B7C93",
                   }}>Tous</button>
                 {domains.map(d => (
                   <button key={d} onClick={() => setSelectedDomain(d)}
                     style={{
                       padding: "6px 14px", borderRadius: "6px", border: "none",
                       fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-                      background: selectedDomain === d ? "#8b5cf6" : "#E5E5EA",
-                      color: selectedDomain === d ? "#fff" : "#86868B",
+                      background: selectedDomain === d ? "#8b5cf6" : "#E3E8EE",
+                      color: selectedDomain === d ? "#fff" : "#6B7C93",
                     }}>{d}</button>
                 ))}
               </>
@@ -196,22 +196,22 @@ export default function PhantomHistoryPage() {
               style={{
                 padding: "6px 12px", borderRadius: "6px", border: "none",
                 fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
-                background: viewMode === "grouped" ? "#8b5cf6" : "#E5E5EA",
-                color: viewMode === "grouped" ? "#fff" : "#86868B",
+                background: viewMode === "grouped" ? "#8b5cf6" : "#E3E8EE",
+                color: viewMode === "grouped" ? "#fff" : "#6B7C93",
               }}>Par domaine</button>
             <button onClick={() => setViewMode("list")}
               style={{
                 padding: "6px 12px", borderRadius: "6px", border: "none",
                 fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
-                background: viewMode === "list" ? "#8b5cf6" : "#E5E5EA",
-                color: viewMode === "list" ? "#fff" : "#86868B",
+                background: viewMode === "list" ? "#8b5cf6" : "#E3E8EE",
+                color: viewMode === "list" ? "#fff" : "#6B7C93",
               }}>Liste</button>
           </div>
         </div>
       )}
 
       {loading && (
-        <div style={{ padding: "60px 0", textAlign: "center", color: "#86868B", fontSize: "14px" }}>
+        <div style={{ padding: "60px 0", textAlign: "center", color: "#6B7C93", fontSize: "14px" }}>
           Chargement...
         </div>
       )}
@@ -222,10 +222,10 @@ export default function PhantomHistoryPage() {
           background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.06)"
         }}>
-          <div style={{ fontSize: "16px", color: "#86868B", marginBottom: "12px" }}>
+          <div style={{ fontSize: "16px", color: "#6B7C93", marginBottom: "12px" }}>
             Aucun audit enregistré
           </div>
-          <p style={{ fontSize: "14px", color: "#424245", marginBottom: "20px" }}>
+          <p style={{ fontSize: "14px", color: "#425466", marginBottom: "20px" }}>
             Lancez votre premier audit depuis la page Audit.
           </p>
           <button onClick={() => navigate("/app/phantom")}
@@ -261,8 +261,8 @@ export default function PhantomHistoryPage() {
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <div>
-                      <div style={{ fontSize: "15px", fontWeight: 500, color: "#424245" }}>{domain}</div>
-                      <div style={{ fontSize: "12px", color: "#86868B" }}>
+                      <div style={{ fontSize: "15px", fontWeight: 500, color: "#425466" }}>{domain}</div>
+                      <div style={{ fontSize: "12px", color: "#6B7C93" }}>
                         {domainAudits.length} audit{domainAudits.length > 1 ? "s" : ""} — Dernier : {formatDate(latestAudit?.createdAt)}
                       </div>
                     </div>
@@ -280,7 +280,7 @@ export default function PhantomHistoryPage() {
                       disabled={isUpdating}
                       style={{
                         padding: "8px 16px",
-                        background: isUpdating ? "#E5E5EA" : "linear-gradient(135deg, #8b5cf6, #a78bfa)",
+                        background: isUpdating ? "#E3E8EE" : "linear-gradient(135deg, #8b5cf6, #a78bfa)",
                         color: "#fff", border: "none", borderRadius: "6px",
                         fontSize: "13px", fontWeight: 500, cursor: isUpdating ? "wait" : "pointer",
                         fontFamily: "inherit", opacity: isUpdating ? 0.6 : 1,
@@ -328,7 +328,7 @@ export default function PhantomHistoryPage() {
                     { key: "bestPractices", label: "Bonnes pratiques", color: "#f59e0b" },
                   ].map(({ key, label, color }) => (
                     <div key={key}>
-                      <div style={{ fontSize: "11px", color: "#86868B", marginBottom: "4px" }}>{label}</div>
+                      <div style={{ fontSize: "11px", color: "#6B7C93", marginBottom: "4px" }}>{label}</div>
                       <ScoreWithTrend
                         value={latestAudit?.scores?.[key] || 0}
                         prevValue={previousAudit?.scores?.[key]}
@@ -351,10 +351,10 @@ export default function PhantomHistoryPage() {
                           background: idx === 0 ? "rgba(139,92,246,0.04)" : "transparent",
                         }}>
                           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                            <span style={{ fontSize: "12px", color: "#86868B", minWidth: "160px" }}>
+                            <span style={{ fontSize: "12px", color: "#6B7C93", minWidth: "160px" }}>
                               {formatDate(audit.createdAt)}
                             </span>
-                            <span style={{ fontSize: "13px", color: "#1D1D1F", fontWeight: 500 }}>
+                            <span style={{ fontSize: "13px", color: "#0A2540", fontWeight: 500 }}>
                               {audit.scores?.global || 0}
                             </span>
                             {prevAudit && (
@@ -365,7 +365,7 @@ export default function PhantomHistoryPage() {
                             )}
                           </div>
                           <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                            <span style={{ fontSize: "11px", color: "#86868B" }}>
+                            <span style={{ fontSize: "11px", color: "#6B7C93" }}>
                               P:{audit.scores?.performance || 0} A:{audit.scores?.accessibility || 0} S:{audit.scores?.seo || 0} BP:{audit.scores?.bestPractices || 0}
                             </span>
                             {prevAudit && (
@@ -373,7 +373,7 @@ export default function PhantomHistoryPage() {
                                 onClick={() => handleCompare(audit._id, prevAudit._id)}
                                 disabled={comparingId === audit._id}
                                 style={{
-                                  padding: "4px 10px", background: "#E5E5EA",
+                                  padding: "4px 10px", background: "#E3E8EE",
                                   border: "1px solid #3a3d4a", borderRadius: "4px",
                                   color: "#a78bfa", fontSize: "11px", cursor: "pointer", fontFamily: "inherit",
                                   opacity: comparingId === audit._id ? 0.5 : 1,
@@ -384,7 +384,7 @@ export default function PhantomHistoryPage() {
                             <button
                               onClick={() => navigate(`/app/phantom?auditId=${audit._id}`)}
                               style={{
-                                padding: "4px 10px", background: "#E5E5EA",
+                                padding: "4px 10px", background: "#E3E8EE",
                                 border: "1px solid #3a3d4a", borderRadius: "4px",
                                 color: "#8b5cf6", fontSize: "11px", cursor: "pointer", fontFamily: "inherit",
                               }}>
@@ -420,12 +420,12 @@ export default function PhantomHistoryPage() {
               }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: 500, color: "#424245" }}>{audit.domain}</div>
-                    <div style={{ fontSize: "12px", color: "#86868B" }}>{formatDate(audit.createdAt)}</div>
+                    <div style={{ fontSize: "14px", fontWeight: 500, color: "#425466" }}>{audit.domain}</div>
+                    <div style={{ fontSize: "12px", color: "#6B7C93" }}>{formatDate(audit.createdAt)}</div>
                   </div>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                  <div style={{ display: "flex", gap: "8px", fontSize: "11px", color: "#86868B" }}>
+                  <div style={{ display: "flex", gap: "8px", fontSize: "11px", color: "#6B7C93" }}>
                     <span>P:{audit.scores?.performance || 0}{prevAudit && <TrendArrow current={audit.scores?.performance || 0} previous={prevAudit.scores?.performance || 0} />}</span>
                     <span>A:{audit.scores?.accessibility || 0}{prevAudit && <TrendArrow current={audit.scores?.accessibility || 0} previous={prevAudit.scores?.accessibility || 0} />}</span>
                     <span>S:{audit.scores?.seo || 0}{prevAudit && <TrendArrow current={audit.scores?.seo || 0} previous={prevAudit.scores?.seo || 0} />}</span>
@@ -440,7 +440,7 @@ export default function PhantomHistoryPage() {
                       onClick={() => handleCompare(audit._id, prevAudit._id)}
                       disabled={comparingId === audit._id}
                       style={{
-                        padding: "5px 12px", background: "#E5E5EA",
+                        padding: "5px 12px", background: "#E3E8EE",
                         border: "1px solid #3a3d4a", borderRadius: "6px",
                         color: "#a78bfa", fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
                         opacity: comparingId === audit._id ? 0.5 : 1,
@@ -470,11 +470,11 @@ export default function PhantomHistoryPage() {
           }} onClick={e => e.stopPropagation()}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
               <div>
-                <div style={{ fontSize: "16px", fontWeight: 600, color: "#1D1D1F" }}>Comparaison</div>
-                <div style={{ fontSize: "12px", color: "#86868B" }}>{compareResult.domain}</div>
+                <div style={{ fontSize: "16px", fontWeight: 600, color: "#0A2540" }}>Comparaison</div>
+                <div style={{ fontSize: "12px", color: "#6B7C93" }}>{compareResult.domain}</div>
               </div>
               <button onClick={() => setCompareResult(null)} style={{
-                background: "none", border: "none", color: "#86868B", cursor: "pointer", fontSize: "18px"
+                background: "none", border: "none", color: "#6B7C93", cursor: "pointer", fontSize: "18px"
               }}>{"\×"}</button>
             </div>
 
@@ -488,13 +488,13 @@ export default function PhantomHistoryPage() {
                     padding: "12px 8px", background: "#161820", border: "1px solid #2a2d3a",
                     borderRadius: "8px", textAlign: "center"
                   }}>
-                    <div style={{ fontSize: "10px", color: "#86868B", marginBottom: "6px" }}>{labels[key]}</div>
-                    <div style={{ fontSize: "12px", color: "#86868B" }}>{comp.previous}</div>
-                    <div style={{ fontSize: "11px", color: "#86868B", margin: "2px 0" }}>{"\↓"}</div>
-                    <div style={{ fontSize: "15px", fontWeight: 600, color: "#1D1D1F" }}>{comp.current}</div>
+                    <div style={{ fontSize: "10px", color: "#6B7C93", marginBottom: "6px" }}>{labels[key]}</div>
+                    <div style={{ fontSize: "12px", color: "#6B7C93" }}>{comp.previous}</div>
+                    <div style={{ fontSize: "11px", color: "#6B7C93", margin: "2px 0" }}>{"\↓"}</div>
+                    <div style={{ fontSize: "15px", fontWeight: 600, color: "#0A2540" }}>{comp.current}</div>
                     <div style={{ marginTop: "4px" }}>
                       {comp.diff === 0
-                        ? <span style={{ color: "#86868B", fontSize: "11px" }}>=</span>
+                        ? <span style={{ color: "#6B7C93", fontSize: "11px" }}>=</span>
                         : <span style={{ color: comp.diff > 0 ? "#10b981" : "#ef4444", fontSize: "12px", fontWeight: 600 }}>
                             {comp.diff > 0 ? "\↑+" : "\↓"}{comp.diff}
                           </span>
@@ -511,14 +511,14 @@ export default function PhantomHistoryPage() {
                 border: "1px solid rgba(16,185,129,0.15)", borderRadius: "8px", textAlign: "center"
               }}>
                 <div style={{ fontSize: "20px", fontWeight: 600, color: "#10b981" }}>{compareResult.resolvedIssues || 0}</div>
-                <div style={{ fontSize: "11px", color: "#86868B" }}>Résolus</div>
+                <div style={{ fontSize: "11px", color: "#6B7C93" }}>Résolus</div>
               </div>
               <div style={{
                 flex: 1, padding: "12px", background: "rgba(239,68,68,0.06)",
                 border: "1px solid rgba(239,68,68,0.15)", borderRadius: "8px", textAlign: "center"
               }}>
                 <div style={{ fontSize: "20px", fontWeight: 600, color: "#ef4444" }}>{compareResult.newIssues || 0}</div>
-                <div style={{ fontSize: "11px", color: "#86868B" }}>Nouveaux</div>
+                <div style={{ fontSize: "11px", color: "#6B7C93" }}>Nouveaux</div>
               </div>
             </div>
           </div>
@@ -532,7 +532,7 @@ export default function PhantomHistoryPage() {
           borderRadius: "10px", marginBottom: "16px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.06)"
         }}>
-          <div style={{ fontSize: "13px", color: "#86868B", marginBottom: "16px" }}>
+          <div style={{ fontSize: "13px", color: "#6B7C93", marginBottom: "16px" }}>
             Évolution du score global
           </div>
           <div style={{ position: "relative", height: chartHeight + 30, overflow: "hidden" }}>
@@ -540,8 +540,8 @@ export default function PhantomHistoryPage() {
               {[0, 25, 50, 75, 100].map(v => (
                 <g key={v}>
                   <line x1="0" y1={chartHeight - (v / maxScore) * chartHeight} x2={chartWidth} y2={chartHeight - (v / maxScore) * chartHeight}
-                    stroke="#E5E5EA" strokeWidth="1" />
-                  <text x="0" y={chartHeight - (v / maxScore) * chartHeight - 4} fill="#86868B" fontSize="13" fontWeight="500">{v}</text>
+                    stroke="#E3E8EE" strokeWidth="1" />
+                  <text x="0" y={chartHeight - (v / maxScore) * chartHeight - 4} fill="#6B7C93" fontSize="13" fontWeight="500">{v}</text>
                 </g>
               ))}
               <polyline

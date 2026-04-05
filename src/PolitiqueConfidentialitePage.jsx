@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 export default function PolitiqueConfidentialitePage() {
   const navigate = useNavigate();
@@ -14,9 +15,9 @@ export default function PolitiqueConfidentialitePage() {
   const VG = (a) => `rgba(255,255,255,${a})`;
 
   return (
-    <main style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
+    <main style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <button onClick={() => navigate("/")} style={{ background: "transparent", border: "1px solid rgba(129,140,248,0.25)", color: "#a1a1aa", padding: "8px 22px", fontSize: "11px", letterSpacing: "2.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>
           Accueil
         </button>
@@ -24,7 +25,7 @@ export default function PolitiqueConfidentialitePage() {
 
       <div style={{ maxWidth: "800px", margin: "0 auto", padding: "60px 24px 80px" }}>
         <h1 style={{ fontSize: "28px", fontWeight: 800, letterSpacing: "-0.5px", marginBottom: "8px" }}>Politique de Confidentialité</h1>
-        <div style={{ width: "40px", height: "2px", background: "#818CF8", marginBottom: "40px" }} />
+        <div style={{ width: "40px", height: "2px", background: "#635BFF", marginBottom: "40px" }} />
 
         <section style={{ marginBottom: "32px" }}>
           <h2 style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "1px", textTransform: "uppercase", color: "#a1a1aa", marginBottom: "16px" }}>1. Responsable du traitement</h2>
@@ -117,7 +118,7 @@ export default function PolitiqueConfidentialitePage() {
           </p>
         </section>
 
-        <div style={{ marginTop: "40px", padding: "16px", border: `1px solid ${VG(0.08)}`, fontSize: "12px", color: "#86868B" }}>
+        <div style={{ marginTop: "40px", padding: "16px", border: `1px solid ${VG(0.08)}`, fontSize: "12px", color: "#6B7C93" }}>
           Dernière mise à jour : mars 2026
         </div>
       </div>

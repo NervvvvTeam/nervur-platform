@@ -54,8 +54,8 @@ export default function ReportsPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Aucune entreprise configurée</div>;
 
   const now = new Date();
   const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
@@ -69,8 +69,8 @@ export default function ReportsPage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>Rapports</h1>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540", marginBottom: "6px" }}>Rapports</h1>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>
           Générez un rapport PDF complet de votre e-réputation.
         </p>
       </div>
@@ -83,10 +83,10 @@ export default function ReportsPage() {
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "8px", color: "#1D1D1F" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 600, marginBottom: "8px", color: "#0A2540" }}>
               Rapport {months[now.getMonth()]} {now.getFullYear()}
             </h3>
-            <p style={{ fontSize: "14px", color: "#86868B", lineHeight: 1.6 }}>
+            <p style={{ fontSize: "14px", color: "#6B7C93", lineHeight: 1.6 }}>
               Vue d'ensemble, analyse sémantique, sentiments, points forts et axes d'amélioration.
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function ReportsPage() {
         border: "1px solid #2a2d3a", background: "#FFFFFF",
         boxShadow: "0 2px 8px rgba(0,0,0,0.06)"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#86868B", marginBottom: "20px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#6B7C93", marginBottom: "20px" }}>
           Contenu du rapport
         </h3>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -129,8 +129,8 @@ export default function ReportsPage() {
                 color: "#ef4444", flexShrink: 0
               }}>{item.icon}</span>
               <div>
-                <div style={{ fontSize: "14px", fontWeight: 600, color: "#424245", marginBottom: "2px" }}>{item.title}</div>
-                <div style={{ fontSize: "13px", color: "#86868B" }}>{item.desc}</div>
+                <div style={{ fontSize: "14px", fontWeight: 600, color: "#425466", marginBottom: "2px" }}>{item.title}</div>
+                <div style={{ fontSize: "13px", color: "#6B7C93" }}>{item.desc}</div>
               </div>
             </div>
           ))}

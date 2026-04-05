@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
+const V = "#FFFFFF", V2 = "#425466", V3 = "#6B7C93";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#635BFF", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -78,7 +79,7 @@ export default function VitrinePage() {
   }, []);
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -106,7 +107,7 @@ export default function VitrinePage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" onClick={() => navigate("/technologies")} aria-label="Retour aux outils">← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -118,24 +119,24 @@ export default function VitrinePage() {
         <div style={{ marginBottom: "20px" }}>
           <button onClick={() => navigate("/")} style={{
             background: "none", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "8px",
-            color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+            color: "#6B7C93", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
             fontFamily: "inherit", transition: "all 0.3s",
           }}
-            onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
-            onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
+            onMouseEnter={e => { e.target.style.color = "#0A2540"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#6B7C93"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
             ← Retour
           </button>
         </div>
         {/* HERO */}
         <section aria-label="Présentation Sites Vitrines" style={{ animation: "fadeInUp 0.6s ease both", marginBottom: isMobile ? "40px" : "64px" }}>
-          <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#86868B", fontFamily: "monospace", display: "block", marginBottom: "16px" }}>
+          <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#6B7C93", fontFamily: "monospace", display: "block", marginBottom: "16px" }}>
             // Réalisations
           </span>
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", gap: "20px" }}>
             <h1 style={{ fontSize: isMobile ? "32px" : "clamp(36px, 4.5vw, 56px)", fontWeight: 800, letterSpacing: "-2px", lineHeight: 1.1 }}>
               Sites Vitrines<br /><span style={{ color: V3 }}>qui convertissent.</span>
             </h1>
-            <p style={{ fontSize: "15px", color: "#86868B", maxWidth: "400px", lineHeight: 1.8 }}>
+            <p style={{ fontSize: "15px", color: "#6B7C93", maxWidth: "400px", lineHeight: 1.8 }}>
               Chaque projet est conçu sur-mesure. Design, performance et conversion au centre de chaque pixel.
             </p>
           </div>
@@ -180,7 +181,7 @@ export default function VitrinePage() {
                   <h2 style={{ fontSize: isMobile ? "24px" : "30px", fontWeight: 800, letterSpacing: "-1px", marginBottom: "12px" }}>
                     {project.name}
                   </h2>
-                  <p style={{ fontSize: "14px", color: "#86868B", lineHeight: 1.8, marginBottom: "20px" }}>
+                  <p style={{ fontSize: "14px", color: "#6B7C93", lineHeight: 1.8, marginBottom: "20px" }}>
                     {project.description}
                   </p>
 
@@ -204,7 +205,7 @@ export default function VitrinePage() {
           <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, marginBottom: "16px", letterSpacing: "-1px" }}>
             Votre projet mérite un site à la hauteur.
           </h2>
-          <p style={{ fontSize: "15px", color: "#86868B", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
+          <p style={{ fontSize: "15px", color: "#6B7C93", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
             On conçoit des sites vitrines sur-mesure qui reflètent votre identité et convertissent vos visiteurs en clients.
           </p>
           <button className="chrome-btn-v" onClick={() => navigate('/contact?outil=vitrine')}>
@@ -214,8 +215,8 @@ export default function VitrinePage() {
       </main>
 
       <footer style={{ padding: isMobile ? "30px 20px" : "40px 48px", borderTop: `1px solid ${VG(0.08)}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: isMobile ? "column" : "row", gap: "12px" }}>
-        <span style={{ fontSize: "11px", color: "#86868B", letterSpacing: "1px" }}>NERVÜR © 2026</span>
-        <span style={{ fontSize: "11px", color: "#86868B" }}>Éditeur de Technologies de Croissance</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93", letterSpacing: "1px" }}>NERVÜR © 2026</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93" }}>Éditeur de Technologies de Croissance</span>
       </footer>
     </div>
   );

@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V3 = "#86868B";
+const V = "#FFFFFF", V3 = "#6B7C93";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#635BFF", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -112,7 +113,7 @@ export default function LeadXPage() {
 
   return (
     <div onMouseMove={handleMouseMove} style={{
-      background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+      background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       minHeight: "100vh", position: "relative" }}>
 
       <div ref={glowRef} style={{
@@ -135,7 +136,7 @@ export default function LeadXPage() {
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -154,7 +155,7 @@ export default function LeadXPage() {
             <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "#3b82f6", fontWeight: 700, padding: "4px 12px", border: "1px solid rgba(59,130,246,0.3)", borderRadius: "2px" }}>QUALIFICATION</span>
           </div>
           <h1 style={{ fontSize: isMobile ? "36px" : "clamp(42px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-2px", lineHeight: 1.1, marginBottom: "20px" }}>LEAD-X</h1>
-          <p style={{ fontSize: "18px", color: "#86868B", lineHeight: 1.8, maxWidth: "600px" }}>
+          <p style={{ fontSize: "18px", color: "#6B7C93", lineHeight: 1.8, maxWidth: "600px" }}>
             Remplacez votre formulaire mort par un agent qui trie vos prospects chauds et rejette les curieux.
           </p>
         </div>
@@ -162,7 +163,7 @@ export default function LeadXPage() {
         {/* Score gauge */}
         <section aria-label="Score de qualification" style={{ marginBottom: "24px", padding: "16px 20px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", borderRadius: "8px", animation: "fadeInUp 0.8s ease 0.2s both" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
-            <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#86868B" }}>Score de qualification</span>
+            <span style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7C93" }}>Score de qualification</span>
             <span style={{ fontSize: "14px", fontWeight: 800, color: scorePercent > 60 ? "#4ADE80" : scorePercent > 30 ? "#fbbf24" : "#ef4444" }}>{Math.round(scorePercent)}%</span>
           </div>
           <div style={{ height: "6px", borderRadius: "3px", background: VG(0.06), overflow: "hidden" }}>
@@ -233,13 +234,13 @@ export default function LeadXPage() {
             <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, marginBottom: "16px", letterSpacing: "-1px", color: qualified ? "#4ADE80" : V }}>
               {qualified ? "Prospect Qualifié" : "Nurturing recommandé"}
             </h2>
-            <p style={{ fontSize: "15px", color: "#86868B", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
+            <p style={{ fontSize: "15px", color: "#6B7C93", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
               {qualified
                 ? "Ce profil correspond à nos critères. Imaginez filtrer automatiquement vos vrais prospects."
                 : "Ce profil nécessite un accompagnement. Lead-X le détecte instantanément pour vous."}
             </p>
             <button onClick={() => navigate('/contact?outil=leadx')} style={{
-              padding: "16px 40px", background: V, color: "#F5F5F7", border: "none",
+              padding: "16px 40px", background: V, color: "#FFFFFF", border: "none",
               fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
               cursor: "pointer", transition: "all 0.3s ease" }}
               onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)"; }}
@@ -254,8 +255,8 @@ export default function LeadXPage() {
         padding: isMobile ? "30px 20px" : "40px 48px", borderTop: `1px solid ${VG(0.08)}`,
         display: "flex", justifyContent: "space-between", alignItems: "center",
         flexDirection: isMobile ? "column" : "row", gap: "12px" }}>
-        <span style={{ fontSize: "11px", color: "#86868B", letterSpacing: "1px" }}>NERVÜR © 2026</span>
-        <span style={{ fontSize: "11px", color: "#86868B" }}>LEAD-X — Qualificateur de Prospects</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93", letterSpacing: "1px" }}>NERVÜR © 2026</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93" }}>LEAD-X — Qualificateur de Prospects</span>
       </footer>
     </div>
   );

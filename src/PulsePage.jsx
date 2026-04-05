@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
+const V = "#FFFFFF", V2 = "#425466", V3 = "#6B7C93";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#635BFF", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -101,7 +102,7 @@ export default function PulsePage() {
   const revenueAtRisk = CLIENTS.filter(c => c.risk >= 70).reduce((a, c) => a + parseInt(c.revenue), 0);
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} aria-hidden="true" style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -114,7 +115,7 @@ export default function PulsePage() {
       `}</style>
 
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Technologies</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -126,11 +127,11 @@ export default function PulsePage() {
         <div style={{ marginBottom: "20px" }}>
           <button onClick={() => navigate("/")} style={{
             background: "none", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "8px",
-            color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+            color: "#6B7C93", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
             fontFamily: "inherit", transition: "all 0.3s",
           }}
-            onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
-            onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
+            onMouseEnter={e => { e.target.style.color = "#0A2540"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#6B7C93"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
             ← Retour
           </button>
         </div>
@@ -144,7 +145,7 @@ export default function PulsePage() {
             <h1 style={{ fontSize: isMobile ? "28px" : "42px", fontWeight: 800, letterSpacing: "-2px" }}>PULSE</h1>
             <span style={{ fontSize: "9px", letterSpacing: "1.5px", color: "#d946ef", border: "1px solid rgba(217,70,239,0.3)", padding: "3px 10px", textTransform: "uppercase" }}>Prédicteur de Churn</span>
           </div>
-          <p style={{ fontSize: "15px", color: "#86868B", maxWidth: "600px", lineHeight: 1.8 }}>
+          <p style={{ fontSize: "15px", color: "#6B7C93", maxWidth: "600px", lineHeight: 1.8 }}>
             Identifiez les clients sur le point de partir avant qu'ils ne le fassent. L'IA analyse les signaux faibles et déclenche des actions préventives.
           </p>
         </div>
@@ -157,9 +158,9 @@ export default function PulsePage() {
             { label: "REVENU MENACÉ", value: `${revenueAtRisk}K€`, color: "#fbbf24", suffix: "/mois" }
           ].map((s, i) => (
             <div key={i} style={{ padding: "20px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.75)" }}>
-              <div style={{ fontSize: "9px", color: "#86868B", letterSpacing: "2px", marginBottom: "8px" }}>{s.label}</div>
+              <div style={{ fontSize: "9px", color: "#6B7C93", letterSpacing: "2px", marginBottom: "8px" }}>{s.label}</div>
               <span style={{ fontSize: "28px", fontWeight: 800, color: s.color }}>{s.value}</span>
-              {s.suffix && <span style={{ fontSize: "14px", color: "#86868B", marginLeft: "4px" }}>{s.suffix}</span>}
+              {s.suffix && <span style={{ fontSize: "14px", color: "#6B7C93", marginLeft: "4px" }}>{s.suffix}</span>}
             </div>
           ))}
         </section>
@@ -178,7 +179,7 @@ export default function PulsePage() {
               <div style={{ marginTop: "20px" }}>
                 <div style={{ display: "flex", justifyContent: "center", gap: "24px", fontSize: "10px", letterSpacing: "1px" }}>
                   {["Collecte données", "Analyse comportement", "Calcul prédictif", "Génération alertes"].map((step, i) => (
-                    <span key={i} style={{ color: analysisStep > i ? "#d946ef" : "#86868B", transition: "color 0.3s", animation: analysisStep === i + 1 ? "scanPulse 0.8s ease infinite" : "none" }}>
+                    <span key={i} style={{ color: analysisStep > i ? "#d946ef" : "#6B7C93", transition: "color 0.3s", animation: analysisStep === i + 1 ? "scanPulse 0.8s ease infinite" : "none" }}>
                       {analysisStep > i ? "✓ " : analysisStep === i + 1 ? "◉ " : "○ "}{step}
                     </span>
                   ))}
@@ -198,7 +199,7 @@ export default function PulsePage() {
               {/* Header */}
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 80px" : "2fr 1fr 1fr 1fr 120px", padding: "12px 20px", borderBottom: `1px solid ${VG(0.08)}`, background: "rgba(255,255,255,0.8)" }}>
                 {(isMobile ? ["Client", "Risque"] : ["Client", "Revenu", "Utilisation", "Satisfaction", "Risque Churn"]).map((h, i) => (
-                  <span key={i} style={{ fontSize: "9px", letterSpacing: "2px", color: "#86868B", textTransform: "uppercase", textAlign: i > 0 ? "center" : "left" }}>{h}</span>
+                  <span key={i} style={{ fontSize: "9px", letterSpacing: "2px", color: "#6B7C93", textTransform: "uppercase", textAlign: i > 0 ? "center" : "left" }}>{h}</span>
                 ))}
               </div>
               {/* Rows */}
@@ -210,7 +211,7 @@ export default function PulsePage() {
                     borderLeft: selectedClient === i ? "2px solid #d946ef" : "2px solid transparent" }}>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: "14px", marginBottom: "2px" }}>{c.name}</div>
-                    <div style={{ fontSize: "10px", color: "#86868B" }}>{c.sector}</div>
+                    <div style={{ fontSize: "10px", color: "#6B7C93" }}>{c.sector}</div>
                   </div>
                   {!isMobile && <div style={{ textAlign: "center", fontSize: "13px", color: V3, alignSelf: "center" }}>{c.revenue}</div>}
                   {!isMobile && (
@@ -218,7 +219,7 @@ export default function PulsePage() {
                       <div role="progressbar" aria-valuenow={c.usage} aria-valuemin={0} aria-valuemax={100} aria-label={`Utilisation : ${c.usage}%`} style={{ height: "4px", background: VG(0.06), borderRadius: "2px", overflow: "hidden", width: "60px", margin: "0 auto" }}>
                         <div style={{ width: `${c.usage}%`, height: "100%", background: c.usage > 70 ? "#4ADE80" : c.usage > 40 ? "#fbbf24" : "#ef4444", borderRadius: "2px" }} />
                       </div>
-                      <span aria-hidden="true" style={{ fontSize: "9px", color: "#86868B", marginTop: "2px", display: "block" }}>{c.usage}%</span>
+                      <span aria-hidden="true" style={{ fontSize: "9px", color: "#6B7C93", marginTop: "2px", display: "block" }}>{c.usage}%</span>
                     </div>
                   )}
                   {!isMobile && <div style={{ textAlign: "center", fontSize: "13px", color: c.satisfaction >= 4 ? "#4ADE80" : c.satisfaction >= 3 ? "#fbbf24" : "#ef4444", alignSelf: "center" }}>{"★".repeat(Math.round(c.satisfaction))} {c.satisfaction}</div>}
@@ -264,14 +265,14 @@ export default function PulsePage() {
             <div className="text-[10px] tracking-[3px] uppercase text-[#ec4899] font-bold mb-6">ABONNEMENT UNIQUE</div>
             <div className="flex items-baseline justify-center gap-1 mb-2">
               <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>19€</span>
-              <span className="text-base text-[#86868B] font-semibold">/mois</span>
+              <span className="text-base text-[#6B7C93] font-semibold">/mois</span>
             </div>
-            <p className="text-[13px] text-[#86868B] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
+            <p className="text-[13px] text-[#6B7C93] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
             <div className="text-left mb-8">
               {["Surveillance uptime 24/7", "Certificat SSL & expiration domaine", "Analyse DNS & DMARC", "Headers de sécurité", "Vérification HTTP/2", "Alertes email en temps réel", "Page de statut publique", "Historique de disponibilité"].map((f, i) => (
                 <div key={i} className="flex items-center gap-2.5 py-2" style={{ borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
                   <span className="text-[#4ADE80] text-sm min-w-[18px]">✓</span>
-                  <span className="text-[13px] text-[#424245]">{f}</span>
+                  <span className="text-[13px] text-[#425466]">{f}</span>
                 </div>
               ))}
             </div>
@@ -284,8 +285,8 @@ export default function PulsePage() {
         {/* CTA */}
         <section aria-label="Appel à l'action" style={{ marginTop: "60px", textAlign: "center", padding: isMobile ? "32px 20px" : "48px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.6)", animation: "fadeInUp 0.6s ease 0.4s both" }}>
           <h2 style={{ fontSize: isMobile ? "20px" : "28px", fontWeight: 800, marginBottom: "12px", letterSpacing: "-1px" }}>Arrêtez de perdre des clients dans l'ombre.</h2>
-          <p style={{ fontSize: "14px", color: "#86868B", marginBottom: "28px", maxWidth: "450px", margin: "0 auto 28px", lineHeight: 1.7 }}>PULSE s'intègre à votre CRM et commence à prédire dès le premier jour.</p>
-          <button onClick={() => navigate('/contact?outil=pulse')} style={{ padding: "14px 36px", background: V, color: "#F5F5F7", border: "none", fontWeight: 800, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", transition: "all 0.3s", fontFamily: "inherit" }}
+          <p style={{ fontSize: "14px", color: "#6B7C93", marginBottom: "28px", maxWidth: "450px", margin: "0 auto 28px", lineHeight: 1.7 }}>PULSE s'intègre à votre CRM et commence à prédire dès le premier jour.</p>
+          <button onClick={() => navigate('/contact?outil=pulse')} style={{ padding: "14px 36px", background: V, color: "#FFFFFF", border: "none", fontWeight: 800, fontSize: "12px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", transition: "all 0.3s", fontFamily: "inherit" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             Intégrer Pulse →

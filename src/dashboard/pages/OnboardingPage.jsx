@@ -53,7 +53,7 @@ export default function OnboardingPage() {
         {[0, 1, 2].map(i => (
           <div key={i} style={{
             flex: 1, height: "3px", borderRadius: "2px",
-            background: i <= step ? "linear-gradient(135deg, #6366f1, #818cf8)" : "#E5E5EA",
+            background: i <= step ? "linear-gradient(135deg, #6366f1, #818cf8)" : "#E3E8EE",
             transition: "background 0.5s"
           }} />
         ))}
@@ -62,18 +62,18 @@ export default function OnboardingPage() {
       {/* Step 0: Business name */}
       {step === 0 && (
         <div>
-          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#1D1D1F" }}>Comment s'appelle votre entreprise ?</h2>
-          <p style={{ color: "#86868B", marginBottom: "32px", fontSize: "14px" }}>Ce nom apparaîtra dans les réponses IA aux avis clients.</p>
+          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#0A2540" }}>Comment s'appelle votre entreprise ?</h2>
+          <p style={{ color: "#6B7C93", marginBottom: "32px", fontSize: "14px" }}>Ce nom apparaîtra dans les réponses IA aux avis clients.</p>
           <input value={businessName} onChange={e => setBusinessName(e.target.value)}
             placeholder="Ex: Restaurant Le Bon Gout"
             autoFocus
             style={{
               width: "100%", padding: "16px", background: "#FFFFFF", border: "1px solid #2a2d3a",
-              borderRadius: "8px", color: "#1D1D1F", fontSize: "16px", fontFamily: "inherit",
+              borderRadius: "8px", color: "#0A2540", fontSize: "16px", fontFamily: "inherit",
               outline: "none", boxSizing: "border-box", marginBottom: "24px"
             }}
-            onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-            onBlur={e => { e.target.style.borderColor = "#E5E5EA"; }}
+            onFocus={e => { e.target.style.borderColor = "#635BFF"; }}
+            onBlur={e => { e.target.style.borderColor = "#E3E8EE"; }}
             onKeyDown={e => { if (e.key === "Enter" && businessName.trim()) setStep(1); }} />
           <button onClick={() => setStep(1)} disabled={!businessName.trim()}
             style={nextBtnStyle(!businessName.trim())}>
@@ -85,21 +85,21 @@ export default function OnboardingPage() {
       {/* Step 1: Sector */}
       {step === 1 && (
         <div>
-          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#1D1D1F" }}>Quel est votre secteur d'activité ?</h2>
-          <p style={{ color: "#86868B", marginBottom: "32px", fontSize: "14px" }}>L'IA adaptera le vocabulaire des réponses à votre métier.</p>
+          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#0A2540" }}>Quel est votre secteur d'activité ?</h2>
+          <p style={{ color: "#6B7C93", marginBottom: "32px", fontSize: "14px" }}>L'IA adaptera le vocabulaire des réponses à votre métier.</p>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "10px", marginBottom: "24px" }}>
             {SECTORS.map(s => (
               <button key={s.value} onClick={() => { setSector(s.value); setStep(2); }}
                 style={{
                   padding: "16px", borderRadius: "8px", cursor: "pointer", fontFamily: "inherit",
                   background: sector === s.value ? "rgba(99,102,241,0.1)" : "transparent",
-                  border: `1px solid ${sector === s.value ? "rgba(99,102,241,0.25)" : "#E5E5EA"}`,
+                  border: `1px solid ${sector === s.value ? "rgba(99,102,241,0.25)" : "#E3E8EE"}`,
                   textAlign: "left", transition: "all 0.2s"
                 }}
-                onMouseEnter={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#E5E5EA"; }}
-                onMouseLeave={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#E5E5EA"; }}>
-                <div style={{ fontSize: "14px", fontWeight: 600, marginBottom: "2px", color: "#1D1D1F" }}>{s.label}</div>
-                <div style={{ fontSize: "12px", color: "#424245" }}>{s.desc}</div>
+                onMouseEnter={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#E3E8EE"; }}
+                onMouseLeave={e => { if (sector !== s.value) e.currentTarget.style.borderColor = "#E3E8EE"; }}>
+                <div style={{ fontSize: "14px", fontWeight: 600, marginBottom: "2px", color: "#0A2540" }}>{s.label}</div>
+                <div style={{ fontSize: "12px", color: "#425466" }}>{s.desc}</div>
               </button>
             ))}
           </div>
@@ -109,8 +109,8 @@ export default function OnboardingPage() {
       {/* Step 2: Google URL */}
       {step === 2 && (
         <div>
-          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#1D1D1F" }}>Connectez votre fiche Google</h2>
-          <p style={{ color: "#86868B", marginBottom: "32px", fontSize: "14px", lineHeight: 1.6 }}>
+          <h2 style={{ fontSize: "22px", fontWeight: 600, marginBottom: "8px", color: "#0A2540" }}>Connectez votre fiche Google</h2>
+          <p style={{ color: "#6B7C93", marginBottom: "32px", fontSize: "14px", lineHeight: 1.6 }}>
             Sentinel scannera automatiquement vos avis Google pour analyser votre e-réputation.
           </p>
 
@@ -124,25 +124,25 @@ export default function OnboardingPage() {
                 width: "32px", height: "32px", borderRadius: "8px",
                 background: "rgba(99,102,241,0.1)", display: "flex", alignItems: "center", justifyContent: "center"
               }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#635BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
                   <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
                 </svg>
               </div>
               <div>
-                <div style={{ fontSize: "14px", fontWeight: 600, color: "#1D1D1F" }}>Coller le lien Google Maps</div>
-                <div style={{ fontSize: "12px", color: "#86868B" }}>Recherchez votre entreprise sur Google Maps et copiez le lien</div>
+                <div style={{ fontSize: "14px", fontWeight: 600, color: "#0A2540" }}>Coller le lien Google Maps</div>
+                <div style={{ fontSize: "12px", color: "#6B7C93" }}>Recherchez votre entreprise sur Google Maps et copiez le lien</div>
               </div>
             </div>
             <input value={googleUrl} onChange={e => setGoogleUrl(e.target.value)}
               placeholder="https://www.google.com/maps/place/..."
               style={{
                 width: "100%", padding: "14px 16px", background: "#FFFFFF", border: "1px solid #2a2d3a",
-                borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit",
+                borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit",
                 outline: "none", boxSizing: "border-box"
               }}
-              onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-              onBlur={e => { e.target.style.borderColor = "#E5E5EA"; }} />
+              onFocus={e => { e.target.style.borderColor = "#635BFF"; }}
+              onBlur={e => { e.target.style.borderColor = "#E3E8EE"; }} />
           </div>
 
           {/* Option 2: Google OAuth */}
@@ -165,8 +165,8 @@ export default function OnboardingPage() {
                 </svg>
               </div>
               <div>
-                <div style={{ fontSize: "14px", fontWeight: 600, color: "#1D1D1F" }}>Se connecter avec Google</div>
-                <div style={{ fontSize: "12px", color: "#86868B" }}>Accès direct à tous vos avis Google</div>
+                <div style={{ fontSize: "14px", fontWeight: 600, color: "#0A2540" }}>Se connecter avec Google</div>
+                <div style={{ fontSize: "12px", color: "#6B7C93" }}>Accès direct à tous vos avis Google</div>
               </div>
               <span style={{
                 marginLeft: "auto", fontSize: "10px", fontWeight: 600,
@@ -176,7 +176,7 @@ export default function OnboardingPage() {
             </div>
           </div>
 
-          <p style={{ fontSize: "12px", color: "#86868B", marginBottom: "24px", textAlign: "center" }}>
+          <p style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "24px", textAlign: "center" }}>
             Vous pourrez ajouter ou modifier le lien plus tard dans les Paramètres.
           </p>
 
@@ -193,7 +193,7 @@ export default function OnboardingPage() {
       {step > 0 && (
         <button onClick={() => setStep(s => s - 1)}
           style={{
-            marginTop: "24px", background: "none", border: "none", color: "#424245",
+            marginTop: "24px", background: "none", border: "none", color: "#425466",
             fontSize: "13px", cursor: "pointer", fontFamily: "inherit", padding: 0
           }}>
           ← Retour
@@ -204,7 +204,7 @@ export default function OnboardingPage() {
 }
 
 const nextBtnStyle = (disabled) => ({
-  padding: "14px 28px", background: disabled ? "#E5E5EA" : "#6366f1", color: "#ffffff",
+  padding: "14px 28px", background: disabled ? "#E3E8EE" : "#635BFF", color: "#ffffff",
   border: "none", borderRadius: "8px", fontWeight: 600, fontSize: "13px",
   cursor: disabled ? "not-allowed" : "pointer", fontFamily: "inherit",
   transition: "all 0.2s", opacity: disabled ? 0.5 : 1

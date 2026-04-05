@@ -81,14 +81,14 @@ function ScrollToTop() {
 }
 
 const Loader = () => (
-  <div style={{ background: "#F5F5F7", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+  <div style={{ background: "#FFFFFF", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
     <div style={{ width: "32px", height: "32px", border: "2px solid rgba(129,140,248,0.2)", borderTop: "2px solid #818CF8", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
     <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
   </div>
 )
 
 const DashboardLoader = () => (
-  <div style={{ background: "#F5F5F7", minHeight: "100vh", padding: "32px" }}>
+  <div style={{ background: "#FFFFFF", minHeight: "100vh", padding: "32px" }}>
     <SkeletonText width="200px" height="24px" />
     <div style={{ marginTop: "24px" }}><SkeletonGrid count={4} height="140px" /></div>
     <div style={{ marginTop: "24px" }}><SkeletonGrid count={2} height="240px" /></div>

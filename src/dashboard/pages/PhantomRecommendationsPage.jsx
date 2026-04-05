@@ -108,7 +108,7 @@ export default function PhantomRecommendationsPage() {
     return (
       <div key={`${rec.domain}-${i}`} style={{
         padding: "18px 22px", background: "#FFFFFF", border: "1px solid #2a2d3a",
-        borderRadius: "10px", borderLeft: `3px solid ${SEVERITY_COLORS[rec.severity] || "#86868B"}`
+        borderRadius: "10px", borderLeft: `3px solid ${SEVERITY_COLORS[rec.severity] || "#6B7C93"}`
       }}>
         {/* Meta row */}
         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px", flexWrap: "wrap" }}>
@@ -123,14 +123,14 @@ export default function PhantomRecommendationsPage() {
           {/* Category badge */}
           <span style={{
             fontSize: "11px", padding: "2px 8px", borderRadius: "4px",
-            background: (CATEGORY_COLORS[rec.category] || "#86868B") + "14",
-            color: CATEGORY_COLORS[rec.category] || "#86868B",
+            background: (CATEGORY_COLORS[rec.category] || "#6B7C93") + "14",
+            color: CATEGORY_COLORS[rec.category] || "#6B7C93",
           }}>
             {CATEGORY_LABELS[rec.category] || rec.category}
           </span>
 
           {/* Domain */}
-          <span style={{ fontSize: "11px", color: "#424245" }}>{rec.domain}</span>
+          <span style={{ fontSize: "11px", color: "#425466" }}>{rec.domain}</span>
 
           {/* Impact badge */}
           <span style={{
@@ -149,13 +149,13 @@ export default function PhantomRecommendationsPage() {
         </div>
 
         {/* Title */}
-        <div style={{ fontSize: "15px", fontWeight: 500, color: "#424245", marginBottom: "6px" }}>
+        <div style={{ fontSize: "15px", fontWeight: 500, color: "#425466", marginBottom: "6px" }}>
           {rec.title}
         </div>
 
         {/* Description */}
         {rec.description && (
-          <div style={{ fontSize: "13px", color: "#86868B", lineHeight: 1.6, marginBottom: rec.fix ? "8px" : 0 }}>
+          <div style={{ fontSize: "13px", color: "#6B7C93", lineHeight: 1.6, marginBottom: rec.fix ? "8px" : 0 }}>
             {rec.description}
           </div>
         )}
@@ -163,7 +163,7 @@ export default function PhantomRecommendationsPage() {
         {/* Fix */}
         {rec.fix && (
           <div style={{
-            fontSize: "13px", color: "#424245", lineHeight: 1.6,
+            fontSize: "13px", color: "#425466", lineHeight: 1.6,
             padding: "10px 14px", background: "#161820",
             borderRadius: "6px", border: "1px solid #2a2d3a", marginTop: "8px"
           }}>
@@ -185,10 +185,10 @@ export default function PhantomRecommendationsPage() {
           background: "linear-gradient(135deg, #8b5cf6, #a78bfa)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540", marginBottom: "6px" }}>
           Recommandations
         </h1>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>
           Actions priorisées par impact pour améliorer vos sites.
         </p>
       </div>
@@ -205,8 +205,8 @@ export default function PhantomRecommendationsPage() {
             borderLeft: `3px solid ${s.color}`
           }}>
             <div style={{ fontSize: "24px", fontWeight: 600, color: s.color, marginBottom: "4px" }}>{s.count}</div>
-            <div style={{ fontSize: "13px", color: "#424245", fontWeight: 500 }}>{s.label}</div>
-            <div style={{ fontSize: "11px", color: "#86868B" }}>{s.sublabel}</div>
+            <div style={{ fontSize: "13px", color: "#425466", fontWeight: 500 }}>{s.label}</div>
+            <div style={{ fontSize: "11px", color: "#6B7C93" }}>{s.sublabel}</div>
           </div>
         ))}
       </div>
@@ -222,22 +222,22 @@ export default function PhantomRecommendationsPage() {
               style={{
                 padding: "5px 14px", borderRadius: "6px", border: "none",
                 fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
-                background: filterSeverity === f ? (f === "all" ? "#E5E5EA" : SEVERITY_COLORS[f] + "20") : "transparent",
-                color: filterSeverity === f ? (f === "all" ? "#1D1D1F" : SEVERITY_COLORS[f]) : "#86868B",
+                background: filterSeverity === f ? (f === "all" ? "#E3E8EE" : SEVERITY_COLORS[f] + "20") : "transparent",
+                color: filterSeverity === f ? (f === "all" ? "#0A2540" : SEVERITY_COLORS[f]) : "#6B7C93",
               }}>
               {f === "all" ? "Tous" : f === "critical" ? "Critique" : f === "warning" ? "Important" : "Optionnel"}
             </button>
           ))}
 
-          <div style={{ width: "1px", background: "#E5E5EA", margin: "0 4px" }} />
+          <div style={{ width: "1px", background: "#E3E8EE", margin: "0 4px" }} />
 
           {categories.length > 1 && categories.map(c => (
             <button key={c} onClick={() => setFilterCategory(filterCategory === c ? "all" : c)}
               style={{
                 padding: "5px 14px", borderRadius: "6px", border: "none",
                 fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
-                background: filterCategory === c ? (CATEGORY_COLORS[c] || "#424245") + "20" : "transparent",
-                color: filterCategory === c ? (CATEGORY_COLORS[c] || "#1D1D1F") : "#86868B",
+                background: filterCategory === c ? (CATEGORY_COLORS[c] || "#425466") + "20" : "transparent",
+                color: filterCategory === c ? (CATEGORY_COLORS[c] || "#0A2540") : "#6B7C93",
               }}>
               {CATEGORY_LABELS[c] || c}
             </button>
@@ -249,21 +249,21 @@ export default function PhantomRecommendationsPage() {
             style={{
               padding: "5px 12px", borderRadius: "6px", border: "none",
               fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
-              background: viewMode === "category" ? "#8b5cf6" : "#E5E5EA",
-              color: viewMode === "category" ? "#fff" : "#86868B",
+              background: viewMode === "category" ? "#8b5cf6" : "#E3E8EE",
+              color: viewMode === "category" ? "#fff" : "#6B7C93",
             }}>Par catégorie</button>
           <button onClick={() => setViewMode("list")}
             style={{
               padding: "5px 12px", borderRadius: "6px", border: "none",
               fontSize: "12px", cursor: "pointer", fontFamily: "inherit",
-              background: viewMode === "list" ? "#8b5cf6" : "#E5E5EA",
-              color: viewMode === "list" ? "#fff" : "#86868B",
+              background: viewMode === "list" ? "#8b5cf6" : "#E3E8EE",
+              color: viewMode === "list" ? "#fff" : "#6B7C93",
             }}>Liste</button>
         </div>
       </div>
 
       {loading && (
-        <div style={{ padding: "60px 0", textAlign: "center", color: "#86868B", fontSize: "14px" }}>
+        <div style={{ padding: "60px 0", textAlign: "center", color: "#6B7C93", fontSize: "14px" }}>
           Chargement...
         </div>
       )}
@@ -273,10 +273,10 @@ export default function PhantomRecommendationsPage() {
           padding: "60px 24px", textAlign: "center",
           background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px"
         }}>
-          <div style={{ fontSize: "16px", color: "#86868B", marginBottom: "8px" }}>
+          <div style={{ fontSize: "16px", color: "#6B7C93", marginBottom: "8px" }}>
             Aucune recommandation
           </div>
-          <p style={{ fontSize: "14px", color: "#424245" }}>
+          <p style={{ fontSize: "14px", color: "#425466" }}>
             Lancez un audit depuis le dashboard Phantom pour obtenir des recommandations.
           </p>
         </div>
@@ -295,20 +295,20 @@ export default function PhantomRecommendationsPage() {
                 <div style={{
                   display: "flex", alignItems: "center", gap: "10px",
                   marginBottom: "12px", padding: "10px 16px",
-                  background: (CATEGORY_COLORS[cat] || "#86868B") + "08",
-                  border: `1px solid ${(CATEGORY_COLORS[cat] || "#86868B")}20`,
+                  background: (CATEGORY_COLORS[cat] || "#6B7C93") + "08",
+                  border: `1px solid ${(CATEGORY_COLORS[cat] || "#6B7C93")}20`,
                   borderRadius: "8px",
                 }}>
                   <span style={{ fontSize: "16px" }}>{CATEGORY_ICONS[cat] || ""}</span>
                   <span style={{
                     fontSize: "14px", fontWeight: 600,
-                    color: CATEGORY_COLORS[cat] || "#1D1D1F",
+                    color: CATEGORY_COLORS[cat] || "#0A2540",
                   }}>
                     {CATEGORY_LABELS[cat] || cat}
                   </span>
                   <span style={{
-                    fontSize: "12px", color: "#86868B",
-                    padding: "2px 8px", background: "#E5E5EA", borderRadius: "10px",
+                    fontSize: "12px", color: "#6B7C93",
+                    padding: "2px 8px", background: "#E3E8EE", borderRadius: "10px",
                   }}>
                     {items.length}
                   </span>

@@ -6,7 +6,7 @@ import { VAULT_NAV } from "./vaultNav";
 const DEMO_TIMELINE = [];
 
 const ACCENT = "#06b6d4";
-const BG = "#F5F5F7";
+const BG = "#FFFFFF";
 const CARD_BG = "#FFFFFF";
 const CARD_BORDER = "rgba(0,0,0,0.06)";
 

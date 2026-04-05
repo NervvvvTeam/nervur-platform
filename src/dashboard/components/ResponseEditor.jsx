@@ -18,7 +18,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
       background: "#FFFFFF"
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-        <div style={{ fontSize: "12px", fontWeight: 500, color: "#86868B" }}>
+        <div style={{ fontSize: "12px", fontWeight: 500, color: "#6B7C93" }}>
           Réponse IA
         </div>
         {response?.status && (
@@ -26,7 +26,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
             fontSize: "11px", fontWeight: 500, padding: "3px 10px",
             borderRadius: "6px",
             background: isPublished ? "rgba(34,197,94,0.1)" : "rgba(99,102,241,0.1)",
-            color: isPublished ? "#22c55e" : "#6366f1"
+            color: isPublished ? "#22c55e" : "#635BFF"
           }}>
             {isPublished ? "Publiée" : response?.status === "approved" ? "Approuvée" : "Brouillon"}
           </span>
@@ -34,7 +34,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
       </div>
 
       {isPublished ? (
-        <p style={{ fontSize: "14px", color: "#86868B", lineHeight: 1.8 }}>
+        <p style={{ fontSize: "14px", color: "#6B7C93", lineHeight: 1.8 }}>
           {response?.finalText || response?.generatedText}
         </p>
       ) : (
@@ -42,33 +42,33 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
           <textarea value={text} onChange={e => setText(e.target.value)}
             style={{
               width: "100%", minHeight: "160px", padding: "16px", background: "#FFFFFF",
-              border: "1px solid #2a2d3a", borderRadius: "8px", color: "#424245",
+              border: "1px solid #2a2d3a", borderRadius: "8px", color: "#425466",
               fontSize: "14px", lineHeight: 1.8, fontFamily: "inherit", resize: "vertical",
               outline: "none", boxSizing: "border-box"
             }}
-            onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-            onBlur={e => { e.target.style.borderColor = "#E5E5EA"; }} />
+            onFocus={e => { e.target.style.borderColor = "#635BFF"; }}
+            onBlur={e => { e.target.style.borderColor = "#E3E8EE"; }} />
 
           <div style={{ display: "flex", gap: "10px", marginTop: "16px", flexWrap: "wrap" }}>
             {onRegenerate && (
-              <button onClick={onRegenerate} style={btnStyle("#86868B")}>
+              <button onClick={onRegenerate} style={btnStyle("#6B7C93")}>
                 Régénérer
               </button>
             )}
             {isEdited && onSave && (
-              <button onClick={handleSave} disabled={saving} style={btnStyle("#6366f1")}>
+              <button onClick={handleSave} disabled={saving} style={btnStyle("#635BFF")}>
                 {saving ? "..." : "Sauvegarder"}
               </button>
             )}
             {onApprove && response?.status === "generated" && (
-              <button onClick={onApprove} style={btnStyle("#6366f1")}>
+              <button onClick={onApprove} style={btnStyle("#635BFF")}>
                 Approuver
               </button>
             )}
             {onPublish && (
               <button onClick={() => onPublish(text)} style={{
-                ...btnStyle("#6366f1"),
-                background: "#6366f1", color: "#ffffff", borderColor: "#6366f1"
+                ...btnStyle("#635BFF"),
+                background: "#635BFF", color: "#ffffff", borderColor: "#635BFF"
               }}>
                 Publier →
               </button>
@@ -78,7 +78,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
       )}
 
       {response?.publishedAt && (
-        <div style={{ marginTop: "12px", fontSize: "11px", color: "#86868B" }}>
+        <div style={{ marginTop: "12px", fontSize: "11px", color: "#6B7C93" }}>
           Publiée le {new Date(response.publishedAt).toLocaleString("fr-FR")}
         </div>
       )}

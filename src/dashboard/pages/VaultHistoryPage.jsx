@@ -32,7 +32,7 @@ const ClockIcon = ({ size = 18, color = ACCENT }) => (
   </svg>
 );
 
-const TrashIcon = ({ size = 15, color = "#86868B" }) => (
+const TrashIcon = ({ size = 15, color = "#6B7C93" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
   </svg>
@@ -88,7 +88,7 @@ export default function VaultHistoryPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
-        <h1 className="text-[22px] font-semibold text-[#1D1D1F] mb-1.5">
+        <h1 className="text-[22px] font-semibold text-[#0A2540] mb-1.5">
           Historique des analyses
         </h1>
         <p className="text-sm text-[#9ca3af]">
@@ -115,7 +115,7 @@ export default function VaultHistoryPage() {
       {/* Empty state */}
       {!loading && !error && scans.length === 0 && (
         <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] text-center px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
-          <ShieldIcon size={48} color="#AEAEB2" />
+          <ShieldIcon size={48} color="#8898AA" />
           <div className="text-base font-semibold text-[#9ca3af] mt-4 mb-2">
             Aucune analyse effectuée
           </div>
@@ -163,7 +163,7 @@ export default function VaultHistoryPage() {
                 {/* Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2.5 mb-1 flex-wrap">
-                    <span className="text-sm font-semibold text-[#1D1D1F]">
+                    <span className="text-sm font-semibold text-[#0A2540]">
                       {scan.domain}
                     </span>
                     <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{

@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
+const V = "#FFFFFF", V2 = "#425466", V3 = "#6B7C93";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#635BFF", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -184,11 +185,11 @@ export default function OraclePage() {
     return false;
   };
 
-  const impactColor = (i) => i === "fort" ? "#4ADE80" : i === "moyen" ? "#fbbf24" : "#86868B";
+  const impactColor = (i) => i === "fort" ? "#4ADE80" : i === "moyen" ? "#fbbf24" : "#6B7C93";
   const effortColor = (e) => e === "faible" ? "#4ADE80" : e === "moyen" ? "#fbbf24" : "#ef4444";
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -197,8 +198,8 @@ export default function OraclePage() {
         .nav-btn:hover { color: #fafafa; border-color: #818CF8; box-shadow: 0 0 16px rgba(129,140,248,0.2); }
       `}</style>
 
-      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#F5F5F7", borderBottom: `1px solid ${VG(0.1)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#FFFFFF", borderBottom: `1px solid ${VG(0.1)}` }}>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button className="nav-btn" onClick={() => navigate('/technologies')} aria-label="Retour aux outils">← Outils</button>
           <button className="nav-btn" onClick={() => navigate('/contact')}>Contact</button>
@@ -236,7 +237,7 @@ export default function OraclePage() {
               textTransform: "uppercase", fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
               background: activeTab === tab.key ? `${tab.color}20` : "transparent",
               border: `1px solid ${activeTab === tab.key ? `${tab.color}60` : VG(0.1)}`,
-              color: activeTab === tab.key ? tab.color : "#86868B",
+              color: activeTab === tab.key ? tab.color : "#6B7C93",
               transition: "all 0.3s", borderRadius: "8px",
             }}>{tab.label}</button>
           ))}
@@ -359,7 +360,7 @@ export default function OraclePage() {
         <section aria-label="Appel à l'action" style={{ marginTop: "60px", textAlign: "center", padding: "48px", border: `1px solid ${VG(0.1)}`, borderRadius: "16px", animation: "fadeInUp 0.8s ease 0.6s both" }}>
           <h2 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "12px" }}>Passez à l'action avec Oracle</h2>
           <p style={{ color: V3, marginBottom: "24px" }}>Notre équipe met en place votre plan stratégique personnalisé.</p>
-          <button className="nav-btn" onClick={() => navigate('/contact?outil=oracle')} style={{ padding: "14px 36px", background: V, color: "#F5F5F7", fontWeight: 700, border: "none" }}>RÉSERVER UN APPEL →</button>
+          <button className="nav-btn" onClick={() => navigate('/contact?outil=oracle')} style={{ padding: "14px 36px", background: V, color: "#FFFFFF", fontWeight: 700, border: "none" }}>RÉSERVER UN APPEL →</button>
         </section>
         </>)}
 
@@ -369,7 +370,7 @@ export default function OraclePage() {
             {["Entreprise", "Secteur", "Budget", "Besoin"].map((s, i) => (
               <div key={i} style={{ flex: 1 }}>
                 <div style={{ height: "3px", background: i <= vStep ? "linear-gradient(90deg, #f59e0b, #fde68a)" : VG(0.08), transition: "background 0.5s", marginBottom: "6px", borderRadius: "2px" }} />
-                <span style={{ fontSize: "9px", letterSpacing: "1px", color: i <= vStep ? "#f59e0b" : "#86868B" }}>{s}</span>
+                <span style={{ fontSize: "9px", letterSpacing: "1px", color: i <= vStep ? "#f59e0b" : "#6B7C93" }}>{s}</span>
               </div>
             ))}
           </div>
@@ -379,14 +380,14 @@ export default function OraclePage() {
             <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", borderRadius: "16px", padding: isMobile ? "24px" : "40px", animation: "fadeInUp 0.5s ease both" }}>
               {vStep === 0 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>NOM DE L'ENTREPRISE</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#6B7C93", display: "block", marginBottom: "12px" }}>NOM DE L'ENTREPRISE</label>
                   <input value={vCompanyName} onChange={e => setVCompanyName(e.target.value)} placeholder="Ex: Acme Corp"
                     style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, borderRadius: "8px", color: V, fontSize: "16px", fontFamily: "inherit", outline: "none", boxSizing: "border-box" }} />
                 </div>
               )}
               {vStep === 1 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>SECTEUR D'ACTIVITÉ</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#6B7C93", display: "block", marginBottom: "12px" }}>SECTEUR D'ACTIVITÉ</label>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                     {SECTORS.map(s => (
                       <button key={s} onClick={() => setVSector(s)} style={{
@@ -400,7 +401,7 @@ export default function OraclePage() {
               )}
               {vStep === 2 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>BUDGET ESTIMÉ</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#6B7C93", display: "block", marginBottom: "12px" }}>BUDGET ESTIMÉ</label>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                     {BUDGETS.map(b => (
                       <button key={b} onClick={() => setVBudget(b)} style={{
@@ -414,7 +415,7 @@ export default function OraclePage() {
               )}
               {vStep === 3 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>TYPE DE PROJET</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#6B7C93", display: "block", marginBottom: "12px" }}>TYPE DE PROJET</label>
                   <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                     {NEEDS.map(n => (
                       <button key={n} onClick={() => setVNeed(n)} style={{
@@ -429,7 +430,7 @@ export default function OraclePage() {
               <div style={{ marginTop: "24px", display: "flex", justifyContent: "space-between" }}>
                 {vStep > 0 && <button onClick={() => setVStep(vStep - 1)} aria-label="Étape précédente" style={{ padding: "10px 24px", background: "transparent", border: `1px solid ${VG(0.15)}`, borderRadius: "8px", color: V3, fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>← Retour</button>}
                 <button onClick={() => vStep < 3 ? setVStep(vStep + 1) : generateProposal()} disabled={!canProceed()}
-                  style={{ padding: "10px 24px", background: canProceed() ? "linear-gradient(135deg, #f59e0b, #d97706)" : VG(0.06), border: "none", borderRadius: "8px", color: canProceed() ? "#F5F5F7" : "#86868B", fontSize: "12px", fontWeight: 700, cursor: canProceed() ? "pointer" : "not-allowed", fontFamily: "inherit", marginLeft: "auto", letterSpacing: "1px", textTransform: "uppercase" }}>
+                  style={{ padding: "10px 24px", background: canProceed() ? "linear-gradient(135deg, #f59e0b, #d97706)" : VG(0.06), border: "none", borderRadius: "8px", color: canProceed() ? "#FFFFFF" : "#6B7C93", fontSize: "12px", fontWeight: 700, cursor: canProceed() ? "pointer" : "not-allowed", fontFamily: "inherit", marginLeft: "auto", letterSpacing: "1px", textTransform: "uppercase" }}>
                   {vStep < 3 ? "Suivant →" : "Générer la proposition →"}
                 </button>
               </div>
@@ -451,7 +452,7 @@ export default function OraclePage() {
             <div style={{ animation: "fadeInUp 0.5s ease both" }}>
               <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", overflow: "hidden", borderRadius: "16px" }}>
                 <div style={{ padding: "24px 32px", borderBottom: `1px solid ${VG(0.08)}`, background: "rgba(245,158,11,0.05)" }}>
-                  <div style={{ fontSize: "9px", letterSpacing: "2px", color: "#86868B", marginBottom: "8px" }}>NERVÜR — PROPOSITION COMMERCIALE</div>
+                  <div style={{ fontSize: "9px", letterSpacing: "2px", color: "#6B7C93", marginBottom: "8px" }}>NERVÜR — PROPOSITION COMMERCIALE</div>
                   <h2 style={{ fontSize: isMobile ? "20px" : "26px", fontWeight: 800, letterSpacing: "-1px" }}>{vProposal.title}</h2>
                   <div style={{ marginTop: "12px", display: "flex", gap: "20px", flexWrap: "wrap" }}>
                     <span style={{ fontSize: "11px", color: V3 }}>Client : <strong style={{ color: V }}>{vCompanyName}</strong></span>
@@ -476,7 +477,7 @@ export default function OraclePage() {
                   Nouvelle proposition
                 </button>
                 <button onClick={() => navigate('/contact?outil=oracle')}
-                  style={{ padding: "12px 28px", background: V, color: "#F5F5F7", border: "none", borderRadius: "8px", fontWeight: 700, fontSize: "12px", cursor: "pointer", fontFamily: "inherit", letterSpacing: "1px", textTransform: "uppercase" }}>
+                  style={{ padding: "12px 28px", background: V, color: "#FFFFFF", border: "none", borderRadius: "8px", fontWeight: 700, fontSize: "12px", cursor: "pointer", fontFamily: "inherit", letterSpacing: "1px", textTransform: "uppercase" }}>
                   Nous contacter →
                 </button>
               </div>

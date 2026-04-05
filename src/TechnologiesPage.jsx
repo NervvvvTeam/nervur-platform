@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -65,7 +66,7 @@ export default function TechnologiesPage() {
 
   return (
     <div style={{
-      background: "#F5F5F7", color: "#1D1D1F",
+      background: "#FFFFFF", color: "#0A2540",
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       minHeight: "100vh", position: "relative"
     }}>
@@ -117,7 +118,7 @@ export default function TechnologiesPage() {
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
         borderBottom: "1px solid rgba(0,0,0,0.08)"
       }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour à l'accueil" onClick={() => navigate("/")}>Accueil</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -129,24 +130,24 @@ export default function TechnologiesPage() {
         <div style={{ marginBottom: "20px" }}>
           <button onClick={() => navigate("/")} style={{
             background: "none", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "8px",
-            color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+            color: "#6B7C93", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
             fontFamily: "inherit", transition: "all 0.3s",
           }}
-            onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
-            onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
+            onMouseEnter={e => { e.target.style.color = "#0A2540"; e.target.style.borderColor = "rgba(0,0,0,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#6B7C93"; e.target.style.borderColor = "rgba(0,0,0,0.15)"; }}>
             ← Retour
           </button>
         </div>
 
         {/* HERO */}
         <section aria-label="Presentation des technologies" style={{ animation: "fadeInUp 0.8s ease both", marginBottom: isMobile ? "40px" : "64px", textAlign: "center" }}>
-          <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#86868B", fontFamily: "monospace", display: "block", marginBottom: "16px" }}>
+          <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#6B7C93", fontFamily: "monospace", display: "block", marginBottom: "16px" }}>
             // Nos Technologies
           </span>
           <h1 style={{ fontSize: isMobile ? "32px" : "clamp(36px, 4.5vw, 52px)", fontWeight: 800, letterSpacing: "-2px", lineHeight: 1.1, marginBottom: "16px" }}>
             Des outils puissants pour votre business
           </h1>
-          <p style={{ fontSize: "16px", color: "#86868B", maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}>
+          <p style={{ fontSize: "16px", color: "#6B7C93", maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}>
             Deux solutions professionnelles pour surveiller et protéger votre présence en ligne.
           </p>
         </section>
@@ -195,14 +196,14 @@ export default function TechnologiesPage() {
               </div>
 
               {/* Description */}
-              <p style={{ fontSize: "14px", color: "#86868B", lineHeight: 1.7, marginBottom: "20px" }}>
+              <p style={{ fontSize: "14px", color: "#6B7C93", lineHeight: 1.7, marginBottom: "20px" }}>
                 {tool.description}
               </p>
 
               {/* Features */}
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
                 {tool.features.map((f, i) => (
-                  <li key={i} style={{ fontSize: "12px", color: "#86868B", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <li key={i} style={{ fontSize: "12px", color: "#6B7C93", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={tool.color} strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
@@ -213,11 +214,11 @@ export default function TechnologiesPage() {
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
                   <span style={{ fontSize: "32px", fontWeight: 800 }}>{tool.price}&#8364;</span>
-                  <span style={{ fontSize: "14px", color: "#86868B" }}>/mois</span>
+                  <span style={{ fontSize: "14px", color: "#6B7C93" }}>/mois</span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
                   <button className="cta-link" onClick={() => navigate("/contact")} style={{
-                    color: "#F5F5F7", background: tool.color, padding: "8px 18px", borderRadius: "8px",
+                    color: "#FFFFFF", background: tool.color, padding: "8px 18px", borderRadius: "8px",
                     fontSize: "13px", fontWeight: 700, border: "none", cursor: "pointer", transition: "all 0.3s",
                   }}
                     onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 20px ${tool.color}50`; }}
@@ -241,7 +242,7 @@ export default function TechnologiesPage() {
             <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, letterSpacing: "-1px", marginBottom: "12px" }}>
               Packs multi-outils
             </h2>
-            <p style={{ fontSize: "15px", color: "#86868B", maxWidth: "500px", margin: "0 auto", lineHeight: 1.7 }}>
+            <p style={{ fontSize: "15px", color: "#6B7C93", maxWidth: "500px", margin: "0 auto", lineHeight: 1.7 }}>
               Combinez vos outils et économisez. Sans engagement, annulez quand vous voulez.
             </p>
           </div>
@@ -252,9 +253,9 @@ export default function TechnologiesPage() {
               <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#ef4444", fontWeight: 700, marginBottom: "12px" }}>Sentinel seul</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>39&#8364;</span>
-                <span style={{ fontSize: "14px", color: "#86868B" }}>/mois</span>
+                <span style={{ fontSize: "14px", color: "#6B7C93" }}>/mois</span>
               </div>
-              <p style={{ fontSize: "13px", color: "#86868B", marginBottom: "20px", lineHeight: 1.6 }}>E-reputation & gestion des avis</p>
+              <p style={{ fontSize: "13px", color: "#6B7C93", marginBottom: "20px", lineHeight: 1.6 }}>E-reputation & gestion des avis</p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "12px 32px", background: "transparent", border: "1px solid rgba(239,68,68,0.3)",
                 color: "#ef4444", fontWeight: 600, fontSize: "13px", cursor: "pointer",
@@ -268,23 +269,23 @@ export default function TechnologiesPage() {
 
             {/* Pack Duo — recommended */}
             <div className="pack-card" style={{ border: "2px solid rgba(129,140,248,0.5)", background: "rgba(99,102,241,0.08)", position: "relative", transform: isMobile ? "none" : "scale(1.04)" }}>
-              <div style={{ position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)", background: "#818CF8", color: "#F5F5F7", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", padding: "4px 16px", borderRadius: "20px" }}>
+              <div style={{ position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)", background: "#635BFF", color: "#FFFFFF", fontSize: "11px", fontWeight: 800, letterSpacing: "1.5px", textTransform: "uppercase", padding: "4px 16px", borderRadius: "20px" }}>
                 Recommand&eacute;
               </div>
-              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#818CF8", fontWeight: 700, marginBottom: "12px", marginTop: "8px" }}>Pack Duo</div>
+              <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#635BFF", fontWeight: 700, marginBottom: "12px", marginTop: "8px" }}>Pack Duo</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "4px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>99&#8364;</span>
-                <span style={{ fontSize: "14px", color: "#86868B" }}>/mois</span>
+                <span style={{ fontSize: "14px", color: "#6B7C93" }}>/mois</span>
               </div>
-              <p style={{ fontSize: "13px", color: "#86868B", marginBottom: "4px", lineHeight: 1.6 }}>Sentinel + Vault</p>
+              <p style={{ fontSize: "13px", color: "#6B7C93", marginBottom: "4px", lineHeight: 1.6 }}>Sentinel + Vault</p>
               <p style={{ fontSize: "12px", color: "#ef4444", fontWeight: 600, marginBottom: "20px" }}>au lieu de 118&#8364; &mdash; &eacute;conomisez 19&#8364;/mois</p>
               <button onClick={() => navigate("/contact")} style={{
-                padding: "12px 32px", background: "#818CF8", border: "none",
-                color: "#F5F5F7", fontWeight: 700, fontSize: "13px", cursor: "pointer",
+                padding: "12px 32px", background: "#635BFF", border: "none",
+                color: "#FFFFFF", fontWeight: 700, fontSize: "13px", cursor: "pointer",
                 fontFamily: "inherit", transition: "all 0.3s", borderRadius: "8px",
               }}
-                onMouseEnter={e => { e.target.style.background = "#a5b4fc"; e.target.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={e => { e.target.style.background = "#818CF8"; e.target.style.transform = "translateY(0)"; }}>
+                onMouseEnter={e => { e.target.style.background = "#7A73FF"; e.target.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.target.style.background = "#635BFF"; e.target.style.transform = "translateY(0)"; }}>
                 Contactez-nous
               </button>
             </div>
@@ -294,9 +295,9 @@ export default function TechnologiesPage() {
               <div style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#06b6d4", fontWeight: 700, marginBottom: "12px" }}>Vault seul</div>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "4px", marginBottom: "8px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 800 }}>79&#8364;</span>
-                <span style={{ fontSize: "14px", color: "#86868B" }}>/mois</span>
+                <span style={{ fontSize: "14px", color: "#6B7C93" }}>/mois</span>
               </div>
-              <p style={{ fontSize: "13px", color: "#86868B", marginBottom: "20px", lineHeight: 1.6 }}>Agent Juridique IA & RGPD</p>
+              <p style={{ fontSize: "13px", color: "#6B7C93", marginBottom: "20px", lineHeight: 1.6 }}>Agent Juridique IA & RGPD</p>
               <button onClick={() => navigate("/contact")} style={{
                 padding: "12px 32px", background: "transparent", border: "1px solid rgba(6,182,212,0.3)",
                 color: "#06b6d4", fontWeight: 600, fontSize: "13px", cursor: "pointer",
@@ -319,11 +320,11 @@ export default function TechnologiesPage() {
           <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, marginBottom: "16px", letterSpacing: "-1px" }}>
             Un besoin spécifique ?
           </h2>
-          <p style={{ fontSize: "15px", color: "#86868B", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
+          <p style={{ fontSize: "15px", color: "#6B7C93", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
             On conçoit des outils sur-mesure pour votre entreprise. Parlons de votre projet.
           </p>
           <button onClick={() => navigate('/contact')} style={{
-            padding: "16px 40px", background: "#1D1D1F", color: "#F5F5F7", border: "none",
+            padding: "16px 40px", background: "#0A2540", color: "#FFFFFF", border: "none",
             fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
             cursor: "pointer", transition: "all 0.3s ease",
           }}
@@ -340,8 +341,8 @@ export default function TechnologiesPage() {
         display: "flex", justifyContent: "space-between", alignItems: "center",
         flexDirection: isMobile ? "column" : "row", gap: "12px",
       }}>
-        <span style={{ fontSize: "11px", color: "#86868B", letterSpacing: "1px" }}>NERVUR &copy; 2026</span>
-        <span style={{ fontSize: "11px", color: "#86868B" }}>Éditeur de Technologies de Croissance</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93", letterSpacing: "1px" }}>NERVUR &copy; 2026</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93" }}>Éditeur de Technologies de Croissance</span>
       </footer>
     </div>
   );

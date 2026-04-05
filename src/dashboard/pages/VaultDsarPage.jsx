@@ -5,7 +5,7 @@ import { useApi } from "../hooks/useApi";
 
 /* ─── Constants ──────────────────────────────────────────────── */
 const CARD_BG = "#FFFFFF";
-const CARD_BORDER = "#E5E5EA";
+const CARD_BORDER = "#E3E8EE";
 
 const TYPE_CONFIG = {
   acces:         { label: "Droit d'accès", color: "#3b82f6", bg: "rgba(59,130,246,0.08)", border: "rgba(59,130,246,0.25)" },
@@ -13,7 +13,7 @@ const TYPE_CONFIG = {
   suppression:   { label: "Suppression",    color: "#ef4444", bg: "rgba(239,68,68,0.08)",  border: "rgba(239,68,68,0.25)"  },
   portabilite:   { label: "Portabilité",    color: "#8b5cf6", bg: "rgba(139,92,246,0.08)", border: "rgba(139,92,246,0.25)" },
   opposition:    { label: "Opposition",     color: "#f97316", bg: "rgba(249,115,22,0.08)", border: "rgba(249,115,22,0.25)" },
-  limitation:    { label: "Limitation",     color: "#86868B", bg: "rgba(107,114,128,0.08)",border: "rgba(107,114,128,0.25)"},
+  limitation:    { label: "Limitation",     color: "#6B7C93", bg: "rgba(107,114,128,0.08)",border: "rgba(107,114,128,0.25)"},
 };
 
 const STATUS_CONFIG = {
@@ -619,7 +619,7 @@ function NewRequestModal({ onClose, onSubmit }) {
           disabled={!valid || submitting}
           style={{
             width: "100%", fontSize: 13, fontWeight: 700, color: "#fff",
-            background: valid ? `linear-gradient(135deg, ${ACCENT}, #0891b2)` : "#E5E5EA",
+            background: valid ? `linear-gradient(135deg, ${ACCENT}, #0891b2)` : "#E3E8EE",
             border: "none", borderRadius: 10, padding: "11px 0",
             cursor: valid ? "pointer" : "not-allowed", opacity: submitting ? 0.6 : 1,
             transition: "all 0.15s ease",

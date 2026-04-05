@@ -65,7 +65,7 @@ export default function SubNav({ items, color }) {
 
   const tabStyle = (isActive, isHovered) => ({
     padding: "10px 14px", fontSize: "13px", fontWeight: isActive ? 500 : 400,
-    color: isActive ? color : isHovered ? "#86868B" : "#86868B",
+    color: isActive ? color : isHovered ? "#6B7C93" : "#6B7C93",
     borderBottom: isActive ? `2px solid ${color}` : "2px solid transparent",
     textDecoration: "none", transition: "all 0.2s",
     marginBottom: "-1px", whiteSpace: "nowrap",
@@ -89,7 +89,7 @@ export default function SubNav({ items, color }) {
             style={({ isActive }) => tabStyle(isActive, isHovered)}>
             {({ isActive }) => (
               <>
-                {iconFn && iconFn(isActive ? color : isHovered ? "#86868B" : "#86868B")}
+                {iconFn && iconFn(isActive ? color : isHovered ? "#6B7C93" : "#6B7C93")}
                 <span>{item.label}</span>
               </>
             )}
@@ -105,12 +105,12 @@ export default function SubNav({ items, color }) {
               ...tabStyle(isOverflowActive, hoveredPath === "__more"),
               cursor: "pointer", border: "none", fontFamily: "inherit",
               borderBottom: isOverflowActive ? `2px solid ${color}` : moreOpen ? `2px solid ${color}40` : "2px solid transparent",
-              color: isOverflowActive ? color : moreOpen ? "#86868B" : "#86868B",
+              color: isOverflowActive ? color : moreOpen ? "#6B7C93" : "#6B7C93",
             }}
             onMouseEnter={() => setHoveredPath("__more")}
             onMouseLeave={() => setHoveredPath(null)}
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={isOverflowActive ? color : "#86868B"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={isOverflowActive ? color : "#6B7C93"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
             </svg>
             <span>Plus</span>
@@ -138,11 +138,11 @@ export default function SubNav({ items, color }) {
                       display: "flex", alignItems: "center", gap: "8px",
                       padding: "10px 12px", borderRadius: "6px",
                       fontSize: "13px", fontWeight: isActive ? 500 : 400,
-                      color: isActive ? color : isHovered ? "#424245" : "#86868B",
+                      color: isActive ? color : isHovered ? "#425466" : "#6B7C93",
                       background: isActive ? `${color}15` : isHovered ? "rgba(255,255,255,0.05)" : "transparent",
                       textDecoration: "none", transition: "all 0.15s",
                     }}>
-                    {iconFn && iconFn(isActive ? color : isHovered ? "#424245" : "#86868B")}
+                    {iconFn && iconFn(isActive ? color : isHovered ? "#425466" : "#6B7C93")}
                     <span>{item.label}</span>
                   </NavLink>
                 );

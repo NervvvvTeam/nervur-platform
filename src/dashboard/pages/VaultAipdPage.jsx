@@ -446,7 +446,7 @@ const StepProgress = ({ current, total = 6 }) => {
               </span>
             </div>
             {i < total - 1 && (
-              <div style={{ width: 32, height: 2, background: done ? ACCENT : "#E5E5EA", margin: "0 2px", marginBottom: 16 }} />
+              <div style={{ width: 32, height: 2, background: done ? ACCENT : "#E3E8EE", margin: "0 2px", marginBottom: 16 }} />
             )}
           </div>
         );
@@ -966,7 +966,7 @@ ${(analysis.actions || []).map(a => {
           {suggestions.map((s) => (
             <button key={s} onClick={() => updateWiz("treatmentName", s)} style={{
               background: wiz.treatmentName === s ? "rgba(6,182,212,0.12)" : "transparent",
-              border: `1px solid ${wiz.treatmentName === s ? ACCENT : "#E5E5EA"}`,
+              border: `1px solid ${wiz.treatmentName === s ? ACCENT : "#E3E8EE"}`,
               borderRadius: 20, padding: "4px 12px", color: wiz.treatmentName === s ? ACCENT : "#64748b",
               fontSize: 12, cursor: "pointer",
             }}>
@@ -989,7 +989,7 @@ ${(analysis.actions || []).map(a => {
           {DATA_CATEGORIES.map((dt) => (
             <button key={dt} onClick={() => toggleDataType(dt)} style={{
               background: wiz.dataTypes.includes(dt) ? "rgba(6,182,212,0.12)" : "#161820",
-              border: `1px solid ${wiz.dataTypes.includes(dt) ? ACCENT : "#E5E5EA"}`,
+              border: `1px solid ${wiz.dataTypes.includes(dt) ? ACCENT : "#E3E8EE"}`,
               borderRadius: 8, padding: "6px 14px", color: wiz.dataTypes.includes(dt) ? ACCENT : "#94a3b8",
               fontSize: 12, fontWeight: 500, cursor: "pointer", transition: "all .15s",
             }}>
@@ -1035,7 +1035,7 @@ ${(analysis.actions || []).map(a => {
           {DURATIONS.map((d) => (
             <button key={d} onClick={() => updateWiz("duration", d)} style={{
               background: wiz.duration === d ? "rgba(6,182,212,0.12)" : "#161820",
-              border: `1px solid ${wiz.duration === d ? ACCENT : "#E5E5EA"}`,
+              border: `1px solid ${wiz.duration === d ? ACCENT : "#E3E8EE"}`,
               borderRadius: 8, padding: "6px 14px", color: wiz.duration === d ? ACCENT : "#94a3b8",
               fontSize: 12, cursor: "pointer",
             }}>
@@ -1075,7 +1075,7 @@ ${(analysis.actions || []).map(a => {
             <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
               <button onClick={() => setNecessity(i, true)} style={{
                 background: wiz.necessity[i] === true ? "#22c55e22" : "#161820",
-                border: `1px solid ${wiz.necessity[i] === true ? "#22c55e" : "#E5E5EA"}`,
+                border: `1px solid ${wiz.necessity[i] === true ? "#22c55e" : "#E3E8EE"}`,
                 borderRadius: 8, padding: "6px 16px", color: wiz.necessity[i] === true ? "#22c55e" : "#64748b",
                 fontSize: 13, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4,
               }}>
@@ -1083,7 +1083,7 @@ ${(analysis.actions || []).map(a => {
               </button>
               <button onClick={() => setNecessity(i, false)} style={{
                 background: wiz.necessity[i] === false ? "#ef444422" : "#161820",
-                border: `1px solid ${wiz.necessity[i] === false ? "#ef4444" : "#E5E5EA"}`,
+                border: `1px solid ${wiz.necessity[i] === false ? "#ef4444" : "#E3E8EE"}`,
                 borderRadius: 8, padding: "6px 16px", color: wiz.necessity[i] === false ? "#ef4444" : "#64748b",
                 fontSize: 13, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 4,
               }}>
@@ -1131,7 +1131,7 @@ ${(analysis.actions || []).map(a => {
                     {[1, 2, 3, 4].map((v) => (
                       <button key={v} onClick={() => setRisk(i, "gravity", v)} style={{
                         background: wiz.risks[i].gravity === v ? `${heatCellColor(v * wiz.risks[i].likelihood)}22` : "#161820",
-                        border: `1px solid ${wiz.risks[i].gravity === v ? heatCellColor(v * wiz.risks[i].likelihood) : "#E5E5EA"}`,
+                        border: `1px solid ${wiz.risks[i].gravity === v ? heatCellColor(v * wiz.risks[i].likelihood) : "#E3E8EE"}`,
                         borderRadius: 6, padding: "5px 10px", color: wiz.risks[i].gravity === v ? heatCellColor(v * wiz.risks[i].likelihood) : "#64748b",
                         fontSize: 11, fontWeight: 600, cursor: "pointer", minWidth: 32,
                       }}>
@@ -1149,7 +1149,7 @@ ${(analysis.actions || []).map(a => {
                     {[1, 2, 3, 4].map((v) => (
                       <button key={v} onClick={() => setRisk(i, "likelihood", v)} style={{
                         background: wiz.risks[i].likelihood === v ? `${heatCellColor(wiz.risks[i].gravity * v)}22` : "#161820",
-                        border: `1px solid ${wiz.risks[i].likelihood === v ? heatCellColor(wiz.risks[i].gravity * v) : "#E5E5EA"}`,
+                        border: `1px solid ${wiz.risks[i].likelihood === v ? heatCellColor(wiz.risks[i].gravity * v) : "#E3E8EE"}`,
                         borderRadius: 6, padding: "5px 10px", color: wiz.risks[i].likelihood === v ? heatCellColor(wiz.risks[i].gravity * v) : "#64748b",
                         fontSize: 11, fontWeight: 600, cursor: "pointer", minWidth: 32,
                       }}>
@@ -1248,7 +1248,7 @@ ${(analysis.actions || []).map(a => {
                       {[1, 2, 3, 4].map(v => (
                         <button key={v} onClick={() => setResidualRisk(i, "gravity", v)} style={{
                           background: wiz.residualRisks[i].gravity === v ? `${heatCellColor(v * wiz.residualRisks[i].likelihood)}22` : "#161820",
-                          border: `1px solid ${wiz.residualRisks[i].gravity === v ? heatCellColor(v * wiz.residualRisks[i].likelihood) : "#E5E5EA"}`,
+                          border: `1px solid ${wiz.residualRisks[i].gravity === v ? heatCellColor(v * wiz.residualRisks[i].likelihood) : "#E3E8EE"}`,
                           borderRadius: 4, padding: "3px 6px", fontSize: 10, fontWeight: 600, cursor: "pointer",
                           color: wiz.residualRisks[i].gravity === v ? heatCellColor(v * wiz.residualRisks[i].likelihood) : "#475569",
                           minWidth: 24,
@@ -1262,7 +1262,7 @@ ${(analysis.actions || []).map(a => {
                       {[1, 2, 3, 4].map(v => (
                         <button key={v} onClick={() => setResidualRisk(i, "likelihood", v)} style={{
                           background: wiz.residualRisks[i].likelihood === v ? `${heatCellColor(wiz.residualRisks[i].gravity * v)}22` : "#161820",
-                          border: `1px solid ${wiz.residualRisks[i].likelihood === v ? heatCellColor(wiz.residualRisks[i].gravity * v) : "#E5E5EA"}`,
+                          border: `1px solid ${wiz.residualRisks[i].likelihood === v ? heatCellColor(wiz.residualRisks[i].gravity * v) : "#E3E8EE"}`,
                           borderRadius: 4, padding: "3px 6px", fontSize: 10, fontWeight: 600, cursor: "pointer",
                           color: wiz.residualRisks[i].likelihood === v ? heatCellColor(wiz.residualRisks[i].gravity * v) : "#475569",
                           minWidth: 24,
@@ -1400,7 +1400,7 @@ ${(analysis.actions || []).map(a => {
           {/* Prior confirmation checkbox */}
           <label style={{
             display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer",
-            padding: "12px 16px", borderRadius: 8, border: `1px solid ${wiz.priorConfirmation ? ACCENT + "44" : "#E5E5EA"}`,
+            padding: "12px 16px", borderRadius: 8, border: `1px solid ${wiz.priorConfirmation ? ACCENT + "44" : "#E3E8EE"}`,
             background: wiz.priorConfirmation ? "rgba(6,182,212,0.06)" : "transparent",
           }} onClick={() => updateWiz("priorConfirmation", !wiz.priorConfirmation)}>
             <div style={{
@@ -1646,7 +1646,7 @@ ${(analysis.actions || []).map(a => {
               display: "flex", alignItems: "center", gap: 16,
             }}
               onMouseEnter={(e) => e.currentTarget.style.borderColor = ACCENT + "66"}
-              onMouseLeave={(e) => e.currentTarget.style.borderColor = "#E5E5EA"}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = "#E3E8EE"}
             >
               <div style={{ display: "flex", alignItems: "center" }}><SectorIcon type={a.sector} size={28} /></div>
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -1690,7 +1690,7 @@ ${(analysis.actions || []).map(a => {
                     transition: "color .15s, border-color .15s",
                   }}
                   onMouseEnter={(e) => { e.currentTarget.style.color = ACCENT; e.currentTarget.style.borderColor = ACCENT + "66"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.borderColor = "#E5E5EA"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.borderColor = "#E3E8EE"; }}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 </button>
@@ -1703,7 +1703,7 @@ ${(analysis.actions || []).map(a => {
                     transition: "color .15s, border-color .15s",
                   }}
                   onMouseEnter={(e) => { e.currentTarget.style.color = "#ef4444"; e.currentTarget.style.borderColor = "#ef444466"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.borderColor = "#E5E5EA"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "#64748b"; e.currentTarget.style.borderColor = "#E3E8EE"; }}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
                 </button>

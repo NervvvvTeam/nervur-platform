@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const BG = "#F5F5F7";
+const BG = "#FFFFFF";
 const V = "#FFFFFF";
-const V2 = "#424245";
-const V3 = "#86868B";
+const V2 = "#425466";
+const V3 = "#6B7C93";
 const ACCENT = "#f59e0b";
 const ACCENT2 = "#4ADE80";
 const VG = (a) => `rgba(161,161,170,${a})`;
@@ -206,7 +207,7 @@ function TableOfContents({ sections, activeId, isMobile }) {
       {sections.map((s, i) => (
         <div key={i} onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
           style={{
-            fontSize: "12px", color: activeId === s.id ? ACCENT : "#86868B", cursor: "pointer",
+            fontSize: "12px", color: activeId === s.id ? ACCENT : "#6B7C93", cursor: "pointer",
             padding: "6px 0 6px 12px", borderLeft: `2px solid ${activeId === s.id ? ACCENT : "transparent"}`,
             transition: "all 0.3s", lineHeight: 1.5,
           }}>
@@ -318,18 +319,18 @@ export default function BlogAvisGooglePage() {
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#424245",
+            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#425466",
             transition: "all 0.15s",
           }}>ACCUEIL</button>
           <button onClick={() => navigate("/contact")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#424245",
+            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#425466",
             transition: "all 0.15s",
           }}>CONTACT</button>
         </div>
@@ -344,7 +345,7 @@ export default function BlogAvisGooglePage() {
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", boxSizing: "border-box" }}>
         {/* Back button */}
         <button onClick={() => navigate(-1)} style={{
-          background: "none", border: "none", color: "#86868B", fontSize: "13px",
+          background: "none", border: "none", color: "#6B7C93", fontSize: "13px",
           cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: "6px",
           marginBottom: "24px", padding: 0
         }}>
@@ -382,7 +383,7 @@ export default function BlogAvisGooglePage() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: "12px", margin: "40px 0" }}>
             <StatCard number="93%" label="des consommateurs lisent les avis avant d'acheter" color={ACCENT} />
             <StatCard number="4,2" label="note minimum pour inspirer confiance" color={ACCENT2} />
-            <StatCard number="+25%" label="de conversion avec une note superieure a 4,5" color="#818CF8" />
+            <StatCard number="+25%" label="de conversion avec une note superieure a 4,5" color="#635BFF" />
           </div>
         </Section>
 
@@ -494,7 +495,7 @@ export default function BlogAvisGooglePage() {
               A partir de <span style={{ color: ACCENT, fontWeight: 700 }}>39&#8364;/mois</span> &middot; Sans engagement
             </P>
             <button onClick={() => navigate("/contact")} style={{
-              background: `linear-gradient(135deg, ${ACCENT}, #d97706)`, border: "none", color: "#F5F5F7",
+              background: `linear-gradient(135deg, ${ACCENT}, #d97706)`, border: "none", color: "#FFFFFF",
               padding: "14px 40px", fontSize: "14px", fontWeight: 700, letterSpacing: "1.5px",
               textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit", borderRadius: "6px",
               boxShadow: "0 4px 24px rgba(245,158,11,0.3)", transition: "transform 0.2s, box-shadow 0.2s",
@@ -517,7 +518,7 @@ export default function BlogAvisGooglePage() {
             <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: V3, display: "block", marginBottom: "20px" }}>Articles connexes</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
-                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#818CF8" },
+                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#635BFF" },
                 { title: "Presence digitale : comment les TPE/PME peuvent se demarquer en 2026", path: "/blog/presence-digitale", color: "#8b5cf6" },
               ].map((a, i) => (
                 <div key={i} onClick={() => navigate(a.path)} style={{
@@ -554,7 +555,7 @@ export default function BlogAvisGooglePage() {
           <div style={{ fontSize: "13px", color: V3 }}>
             <span style={{ fontWeight: 600, color: V2 }}>L'equipe NERVUR</span> &middot; 25 mars 2026 &middot; 10 min de lecture
           </div>
-          <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+          <LogoNervur height={28} onClick={() => navigate("/")} />
         </div>
       </div>
     </div>

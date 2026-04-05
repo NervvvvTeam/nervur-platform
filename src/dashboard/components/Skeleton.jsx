@@ -17,7 +17,7 @@ export function SkeletonCard({ height = "120px" }) {
 export function SkeletonText({ width = "60%", height = "14px" }) {
   return (
     <div style={{
-      background: "#E5E5EA", borderRadius: "4px",
+      background: "#E3E8EE", borderRadius: "4px",
       width, height, position: "relative", overflow: "hidden"
     }}>
       <div style={{

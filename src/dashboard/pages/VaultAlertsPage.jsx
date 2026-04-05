@@ -21,7 +21,7 @@ const FILTER_TABS = [
 ];
 
 const CARD_BG = "#FFFFFF";
-const CARD_BORDER = "#E5E5EA";
+const CARD_BORDER = "#E3E8EE";
 const LS_KEY = "vault_alerts";
 const LS_RESOLVED = "vault_alerts_resolved_count";
 

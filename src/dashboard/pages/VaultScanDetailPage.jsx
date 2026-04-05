@@ -21,7 +21,7 @@ const ShieldIcon = ({ size = 28, color = ACCENT }) => (
   </svg>
 );
 
-const ArrowLeftIcon = ({ size = 16, color = "#86868B" }) => (
+const ArrowLeftIcon = ({ size = 16, color = "#6B7C93" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
   </svg>
@@ -72,11 +72,11 @@ function RadarChart({ scores }) {
       {gridLevels.map(level => {
         const points = labels.map((_, i) => getPoint(i, level));
         const path = points.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ") + " Z";
-        return <path key={level} d={path} fill="none" stroke="#E5E5EA" strokeWidth="1" />;
+        return <path key={level} d={path} fill="none" stroke="#E3E8EE" strokeWidth="1" />;
       })}
       {labels.map((_, i) => {
         const p = getPoint(i, 100);
-        return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#E5E5EA" strokeWidth="1" />;
+        return <line key={i} x1={cx} y1={cy} x2={p.x} y2={p.y} stroke="#E3E8EE" strokeWidth="1" />;
       })}
       <path d={dataPath} fill="rgba(6,182,212,0.15)" stroke={ACCENT} strokeWidth="2" />
       {dataPoints.map((p, i) => (
@@ -87,7 +87,7 @@ function RadarChart({ scores }) {
         const anchor = p.x < cx - 10 ? "end" : p.x > cx + 10 ? "start" : "middle";
         return (
           <text key={i} x={p.x} y={p.y} textAnchor={anchor} dominantBaseline="middle"
-            fill="#424245" fontSize="11" fontWeight="500" fontFamily="inherit">
+            fill="#425466" fontSize="11" fontWeight="500" fontFamily="inherit">
             {l.label}
           </text>
         );
@@ -228,7 +228,7 @@ export default function VaultScanDetailPage() {
             disabled={downloadingPdf}
             className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md border-none text-white text-xs font-medium font-[inherit] transition-all duration-150"
             style={{
-              background: downloadingPdf ? "#E5E5EA" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+              background: downloadingPdf ? "#E3E8EE" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
               cursor: downloadingPdf ? "not-allowed" : "pointer",
               opacity: downloadingPdf ? 0.7 : 1,
             }}
@@ -251,7 +251,7 @@ export default function VaultScanDetailPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="w-10 h-[3px] rounded-sm bg-gradient-to-br from-[#06b6d4] to-[#22d3ee] mb-4" />
-        <h1 className="text-[22px] font-semibold text-[#1D1D1F] mb-1.5">
+        <h1 className="text-[22px] font-semibold text-[#0A2540] mb-1.5">
           {scan ? scan.domain : "Détails de l'analyse"}
         </h1>
         <p className="text-sm text-[#9ca3af]">
@@ -280,7 +280,7 @@ export default function VaultScanDetailPage() {
         <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-7">
           <div className="flex items-center gap-2 mb-5">
             <ShieldIcon size={20} color={ACCENT} />
-            <h2 className="text-base font-semibold text-[#1D1D1F] m-0">
+            <h2 className="text-base font-semibold text-[#0A2540] m-0">
               Score de sécurité global
             </h2>
           </div>
@@ -329,7 +329,7 @@ export default function VaultScanDetailPage() {
             <div className="mt-6 border-t border-[rgba(6,182,212,0.2)] pt-5">
               <div className="flex items-center gap-2 mb-3.5">
                 <AlertTriangleIcon size={16} color={ACCENT} />
-                <h3 className="text-sm font-semibold text-[#1D1D1F] m-0">
+                <h3 className="text-sm font-semibold text-[#0A2540] m-0">
                   Actions recommandées
                 </h3>
               </div>
@@ -349,7 +349,7 @@ export default function VaultScanDetailPage() {
                         {conf.label}
                       </span>
                       <div>
-                        <div className="text-[13px] font-semibold text-[#1D1D1F] mb-0.5">
+                        <div className="text-[13px] font-semibold text-[#0A2540] mb-0.5">
                           {action.label}
                         </div>
                         <div className="text-xs text-[#9ca3af] leading-normal">

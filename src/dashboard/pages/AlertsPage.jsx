@@ -57,8 +57,8 @@ export default function AlertsPage() {
     setConfig(prev => ({ ...prev, [key]: !prev[key] }));
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Chargement...</div>;
-  if (!business || !config) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Chargement...</div>;
+  if (!business || !config) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Aucune entreprise configurée</div>;
 
   const Toggle = ({ value, onToggle, label, desc }) => (
     <div style={{
@@ -66,8 +66,8 @@ export default function AlertsPage() {
       padding: "16px 0", borderBottom: "1px solid #2a2d3a"
     }}>
       <div>
-        <div style={{ fontSize: "14px", fontWeight: 500, color: "#424245", marginBottom: "4px" }}>{label}</div>
-        {desc && <div style={{ fontSize: "12px", color: "#424245" }}>{desc}</div>}
+        <div style={{ fontSize: "14px", fontWeight: 500, color: "#425466", marginBottom: "4px" }}>{label}</div>
+        {desc && <div style={{ fontSize: "12px", color: "#425466" }}>{desc}</div>}
       </div>
       <div onClick={onToggle} style={{
         width: "44px", height: "24px", borderRadius: "12px", cursor: "pointer",
@@ -75,7 +75,7 @@ export default function AlertsPage() {
         position: "relative", transition: "background 0.2s"
       }}>
         <div style={{
-          width: "18px", height: "18px", borderRadius: "50%", background: "#1D1D1F",
+          width: "18px", height: "18px", borderRadius: "50%", background: "#0A2540",
           position: "absolute", top: "3px",
           left: value ? "23px" : "3px", transition: "left 0.2s",
           boxShadow: "0 1px 3px rgba(0,0,0,0.08)"
@@ -93,8 +93,8 @@ export default function AlertsPage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>Alertes</h1>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540", marginBottom: "6px" }}>Alertes</h1>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>
           Recevez des notifications par email quand un nouvel avis est publie.
         </p>
       </div>
@@ -105,7 +105,7 @@ export default function AlertsPage() {
         border: "1px solid #2a2d3a", background: "#FFFFFF", boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
         marginBottom: "20px"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#86868B", marginBottom: "16px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#6B7C93", marginBottom: "16px" }}>
           Adresse email
         </h3>
         <input value={config.emailTo || ""} onChange={e => setConfig(prev => ({ ...prev, emailTo: e.target.value }))}
@@ -113,11 +113,11 @@ export default function AlertsPage() {
           style={{
             width: "100%", padding: "14px 16px", background: "#FFFFFF",
             border: "1px solid #2a2d3a", borderRadius: "8px",
-            color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none",
+            color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none",
             boxSizing: "border-box", transition: "border-color 0.2s"
           }}
           onFocus={e => e.target.style.borderColor = "#ef4444"}
-          onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+          onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
       </div>
 
       {/* Toggles */}
@@ -126,7 +126,7 @@ export default function AlertsPage() {
         border: "1px solid #2a2d3a", background: "#FFFFFF", boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
         marginBottom: "20px"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#86868B", marginBottom: "8px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#6B7C93", marginBottom: "8px" }}>
           Notifications
         </h3>
 
@@ -152,7 +152,7 @@ export default function AlertsPage() {
         border: "1px solid #2a2d3a", background: "#FFFFFF", boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
         marginBottom: "20px"
       }}>
-        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#86868B", marginBottom: "16px" }}>
+        <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#6B7C93", marginBottom: "16px" }}>
           Seuil d'alerte négatif
         </h3>
         <div style={{ display: "flex", gap: "8px" }}>
@@ -161,8 +161,8 @@ export default function AlertsPage() {
               style={{
                 padding: "10px 20px", borderRadius: "8px", fontSize: "14px", fontWeight: 600,
                 background: config.thresholdRating === n ? "rgba(239,68,68,0.1)" : "#FFFFFF",
-                border: `1px solid ${config.thresholdRating === n ? "rgba(239,68,68,0.3)" : "#424245"}`,
-                color: config.thresholdRating === n ? "#ef4444" : "#86868B",
+                border: `1px solid ${config.thresholdRating === n ? "rgba(239,68,68,0.3)" : "#425466"}`,
+                color: config.thresholdRating === n ? "#ef4444" : "#6B7C93",
                 cursor: "pointer", fontFamily: "inherit"
               }}>
               {"★".repeat(n) + "☆".repeat(5 - n)} et moins

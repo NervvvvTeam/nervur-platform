@@ -57,7 +57,7 @@ function ScoreGauge({ score }) {
   return (
     <div className="flex flex-col items-center gap-2">
       <svg height={radius * 2} width={radius * 2} className="-rotate-90">
-        <circle stroke="#E5E5EA" fill="transparent" strokeWidth={stroke} r={normalizedRadius} cx={radius} cy={radius} />
+        <circle stroke="#E3E8EE" fill="transparent" strokeWidth={stroke} r={normalizedRadius} cx={radius} cy={radius} />
         <circle
           stroke={color} fill="transparent" strokeWidth={stroke} strokeLinecap="round"
           strokeDasharray={circumference + " " + circumference}
@@ -196,7 +196,7 @@ export default function VaultDashboardPage() {
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
+          <h1 className="text-[22px] font-semibold text-[#0A2540] m-0">
             Conformité juridique
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -229,7 +229,7 @@ export default function VaultDashboardPage() {
       <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-7">
         <div className="flex items-center gap-2 mb-4">
           <GlobeIcon size={18} color={ACCENT} />
-          <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
+          <h2 className="text-[15px] font-semibold text-[#0A2540] m-0">
             Scanner mon site
           </h2>
         </div>
@@ -241,7 +241,7 @@ export default function VaultDashboardPage() {
               value={url}
               onChange={e => setUrl(e.target.value)}
               placeholder="https://monsite.fr"
-              className="w-full px-3.5 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
+              className="w-full px-3.5 py-2.5 bg-white border border-[#E3E8EE] rounded-lg text-[#425466] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
               onKeyDown={e => { if (e.key === "Enter") handleScan(); }}
             />
             <div className="text-[11px] text-[#6b7280] mt-1">
@@ -253,8 +253,8 @@ export default function VaultDashboardPage() {
             disabled={loading}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border-none text-sm font-semibold font-[inherit] transition-all duration-150 whitespace-nowrap shrink-0"
             style={{
-              background: loading ? "#E5E5EA" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
-              color: loading ? "#86868B" : "#0f0f11",
+              background: loading ? "#E3E8EE" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
+              color: loading ? "#6B7C93" : "#0f0f11",
               cursor: loading ? "not-allowed" : "pointer",
               boxShadow: loading ? "none" : "0 4px 16px rgba(6,182,212,0.25)",
             }}
@@ -286,7 +286,7 @@ export default function VaultDashboardPage() {
           <div className="mb-5">
             <div className="w-16 h-16 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite]" />
           </div>
-          <div className="text-base font-semibold text-[#1D1D1F] mb-2">
+          <div className="text-base font-semibold text-[#0A2540] mb-2">
             Analyse de conformité en cours...
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed">
@@ -301,7 +301,7 @@ export default function VaultDashboardPage() {
       {!loading && !hasResults && !loadingLast && (
         <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center mb-7">
           <ShieldIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#1D1D1F] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#0A2540] mt-4 mb-2">
             Commencez par scanner votre site
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed max-w-[440px] mx-auto">
@@ -350,12 +350,12 @@ export default function VaultDashboardPage() {
                     ) : (
                       <XCircle size={20} />
                     )}
-                    <span className="text-sm font-semibold text-[#1D1D1F]">{area.label}</span>
+                    <span className="text-sm font-semibold text-[#0A2540]">{area.label}</span>
                   </div>
                   <div className="text-[11px] text-[#6b7280]">{area.description}</div>
                   <div className="mt-2">
                     <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{
-                      color: isUnknown ? "#86868B" : isPass ? "#22c55e" : "#ef4444",
+                      color: isUnknown ? "#6B7C93" : isPass ? "#22c55e" : "#ef4444",
                       background: isUnknown ? "rgba(107,114,128,0.15)" : isPass ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)",
                     }}>
                       {isUnknown ? "Non analysé" : isPass ? "Conforme" : "Non conforme"}
@@ -371,7 +371,7 @@ export default function VaultDashboardPage() {
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-3.5">
                 <ShieldIcon size={18} color={ACCENT} />
-                <h3 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
+                <h3 className="text-[15px] font-semibold text-[#0A2540] m-0">
                   Recommandations prioritaires
                 </h3>
               </div>
@@ -393,10 +393,10 @@ export default function VaultDashboardPage() {
                 <GlobeIcon size={18} color={ACCENT} />
               </div>
               <div className="flex-1">
-                <div className="text-sm font-semibold text-[#1D1D1F]">Scan RGPD détaillé</div>
+                <div className="text-sm font-semibold text-[#0A2540]">Scan RGPD détaillé</div>
                 <div className="text-[11px] text-[#6b7280] mt-0.5">8 critères analysés en profondeur</div>
               </div>
-              <ArrowRight size={16} color="#86868B" />
+              <ArrowRight size={16} color="#6B7C93" />
             </button>
 
             <button
@@ -407,10 +407,10 @@ export default function VaultDashboardPage() {
                 <FileIcon size={18} color={ACCENT} />
               </div>
               <div className="flex-1">
-                <div className="text-sm font-semibold text-[#1D1D1F]">Générer vos documents</div>
+                <div className="text-sm font-semibold text-[#0A2540]">Générer vos documents</div>
                 <div className="text-[11px] text-[#6b7280] mt-0.5">Mentions légales, CGV, politique cookies...</div>
               </div>
-              <ArrowRight size={16} color="#86868B" />
+              <ArrowRight size={16} color="#6B7C93" />
             </button>
           </div>
 
@@ -418,7 +418,7 @@ export default function VaultDashboardPage() {
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-3.5">
               <ShieldIcon size={18} color={ACCENT} />
-              <h3 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
+              <h3 className="text-[15px] font-semibold text-[#0A2540] m-0">
                 Vos modules de conformité
               </h3>
             </div>
@@ -440,7 +440,7 @@ export default function VaultDashboardPage() {
                     <ModuleIcon icon={mod.icon} color={mod.color} size={16} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-[13px] font-semibold text-[#1D1D1F] truncate">{mod.label}</div>
+                    <div className="text-[13px] font-semibold text-[#0A2540] truncate">{mod.label}</div>
                     <div className="text-[11px] text-[#6b7280] mt-0.5">{mod.stat}</div>
                   </div>
                 </button>

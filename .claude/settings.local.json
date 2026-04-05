@@ -239,7 +239,9 @@
       "WebFetch(domain:www.olyn-group.com)",
       "Bash(node -e \"require\\(''gsap''\\); console.log\\(''GSAP OK''\\)\")",
       "WebFetch(domain:antigravity.google)",
-      "Bash(grep -rn \"LogoNervur\" src/Blog*.jsx src/Contact*.jsx src/Mentions*.jsx src/Politique*.jsx src/CGV*.jsx src/Technologies*.jsx src/QuiSommes*.jsx src/Sentinel*.jsx)"
+      "Bash(grep -rn \"LogoNervur\" src/Blog*.jsx src/Contact*.jsx src/Mentions*.jsx src/Politique*.jsx src/CGV*.jsx src/Technologies*.jsx src/QuiSommes*.jsx src/Sentinel*.jsx)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:www.igloo.inc)"
     ]
   }
 }

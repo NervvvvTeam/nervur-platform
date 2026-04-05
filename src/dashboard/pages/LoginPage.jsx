@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import LogoNervur from "../../components/LogoNervur";
 
 const TOOLS = [
   { name: "Sentinel", color: "#ef4444" },
@@ -55,7 +56,7 @@ export default function LoginPage() {
           background: "rgba(0,0,0,0.06)",
           border: "1px solid rgba(0,0,0,0.08)",
           borderRadius: 8,
-          color: "#86868B",
+          color: "#6B7C93",
           fontSize: 13,
           padding: "8px 16px",
           cursor: "pointer",
@@ -63,13 +64,13 @@ export default function LoginPage() {
           transition: "all 0.2s",
         }}
         onMouseEnter={e => { e.target.style.background = "rgba(0,0,0,0.1)"; e.target.style.color = "#fff"; }}
-        onMouseLeave={e => { e.target.style.background = "rgba(0,0,0,0.06)"; e.target.style.color = "#86868B"; }}
+        onMouseLeave={e => { e.target.style.background = "rgba(0,0,0,0.06)"; e.target.style.color = "#6B7C93"; }}
       >
         ← Retour au site
       </button>
       {/* Branding Panel */}
       <div style={{
-        background: "#F5F5F7",
+        background: "#FFFFFF",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -91,12 +92,12 @@ export default function LoginPage() {
           pointerEvents: "none",
         }} />
 
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
 
         <h1 style={{
           fontSize: isWide ? 32 : 20,
           fontWeight: 700,
-          color: "#1D1D1F",
+          color: "#0A2540",
           textAlign: "center",
           marginBottom: 8,
           position: "relative",
@@ -105,7 +106,7 @@ export default function LoginPage() {
         </h1>
         <p style={{
           fontSize: isWide ? 15 : 13,
-          color: "#86868B",
+          color: "#6B7C93",
           textAlign: "center",
           maxWidth: 360,
           lineHeight: 1.6,
@@ -141,7 +142,7 @@ export default function LoginPage() {
 
         {isWide && (
           <div style={{ position: "absolute", bottom: 28, textAlign: "center" }}>
-            <p style={{ fontSize: 12, color: "#AEAEB2", margin: 0 }}>
+            <p style={{ fontSize: 12, color: "#8898AA", margin: 0 }}>
               © 2026 NERVÜR — Éditeur de Technologies de Croissance
             </p>
           </div>
@@ -151,7 +152,7 @@ export default function LoginPage() {
       {/* Login Form */}
       <div style={{
         ...(isWide ? { width: 480 } : { flex: 1 }),
-        background: "#F5F5F7",
+        background: "#FFFFFF",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -160,10 +161,10 @@ export default function LoginPage() {
         borderLeft: isWide ? "1px solid #1e1e2a" : "none",
       }}>
         <div style={{ maxWidth: 340, width: "100%", margin: "0 auto" }}>
-          <h2 style={{ fontSize: 22, fontWeight: 600, color: "#1D1D1F", marginBottom: 6 }}>
+          <h2 style={{ fontSize: 22, fontWeight: 600, color: "#0A2540", marginBottom: 6 }}>
             Connexion
           </h2>
-          <p style={{ fontSize: 14, color: "#86868B", marginBottom: 28 }}>
+          <p style={{ fontSize: 14, color: "#6B7C93", marginBottom: 28 }}>
             Accédez à votre espace client
           </p>
 
@@ -184,7 +185,7 @@ export default function LoginPage() {
             )}
 
             <div style={{ marginBottom: 18 }}>
-              <label style={{ display: "block", fontSize: 13, color: "#86868B", marginBottom: 6, fontWeight: 500 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#6B7C93", marginBottom: 6, fontWeight: 500 }}>
                 Adresse email
               </label>
               <input
@@ -199,20 +200,20 @@ export default function LoginPage() {
                   background: "#FFFFFF",
                   border: "1px solid #2a2d3a",
                   borderRadius: 10,
-                  color: "#1D1D1F",
+                  color: "#0A2540",
                   fontSize: 14,
                   fontFamily: "inherit",
                   outline: "none",
                   boxSizing: "border-box",
                   transition: "border-color 0.2s, box-shadow 0.2s",
                 }}
-                onFocus={(e) => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
-                onBlur={(e) => { e.target.style.borderColor = "#E5E5EA"; e.target.style.boxShadow = "none"; }}
+                onFocus={(e) => { e.target.style.borderColor = "#635BFF"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
+                onBlur={(e) => { e.target.style.borderColor = "#E3E8EE"; e.target.style.boxShadow = "none"; }}
               />
             </div>
 
             <div style={{ marginBottom: 24 }}>
-              <label style={{ display: "block", fontSize: 13, color: "#86868B", marginBottom: 6, fontWeight: 500 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#6B7C93", marginBottom: 6, fontWeight: 500 }}>
                 Mot de passe
               </label>
               <input
@@ -227,15 +228,15 @@ export default function LoginPage() {
                   background: "#FFFFFF",
                   border: "1px solid #2a2d3a",
                   borderRadius: 10,
-                  color: "#1D1D1F",
+                  color: "#0A2540",
                   fontSize: 14,
                   fontFamily: "inherit",
                   outline: "none",
                   boxSizing: "border-box",
                   transition: "border-color 0.2s, box-shadow 0.2s",
                 }}
-                onFocus={(e) => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
-                onBlur={(e) => { e.target.style.borderColor = "#E5E5EA"; e.target.style.boxShadow = "none"; }}
+                onFocus={(e) => { e.target.style.borderColor = "#635BFF"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
+                onBlur={(e) => { e.target.style.borderColor = "#E3E8EE"; e.target.style.boxShadow = "none"; }}
               />
             </div>
 
@@ -245,7 +246,7 @@ export default function LoginPage() {
               style={{
                 width: "100%",
                 padding: "13px 0",
-                background: "#6366f1",
+                background: "#635BFF",
                 color: "#fff",
                 border: "none",
                 borderRadius: 10,
@@ -256,23 +257,23 @@ export default function LoginPage() {
                 transition: "background 0.2s, opacity 0.2s",
                 opacity: loading ? 0.6 : 1,
               }}
-              onMouseEnter={(e) => !loading && (e.target.style.background = "#818CF8")}
-              onMouseLeave={(e) => !loading && (e.target.style.background = "#6366f1")}
+              onMouseEnter={(e) => !loading && (e.target.style.background = "#635BFF")}
+              onMouseLeave={(e) => !loading && (e.target.style.background = "#635BFF")}
             >
               {loading ? "Connexion..." : "Se connecter"}
             </button>
           </form>
 
           <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid #2a2d3a" }}>
-            <p style={{ fontSize: 12, color: "#86868B", lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: 12, color: "#6B7C93", lineHeight: 1.6, margin: 0 }}>
               Votre compte est créé par l'équipe NERVÜR lors de votre souscription.
             </p>
-            <a href="/contact" style={{ fontSize: 13, color: "#6366f1", textDecoration: "none", fontWeight: 500, display: "inline-block", marginTop: 8 }}>
+            <a href="/contact" style={{ fontSize: 13, color: "#635BFF", textDecoration: "none", fontWeight: 500, display: "inline-block", marginTop: 8 }}>
               Pas encore client ? Contactez-nous →
             </a>
-            <p style={{ fontSize: 11, color: "#86868B", lineHeight: 1.6, marginTop: 12 }}>
+            <p style={{ fontSize: 11, color: "#6B7C93", lineHeight: 1.6, marginTop: 12 }}>
               En vous connectant, vos données sont traitées conformément à notre{" "}
-              <a href="/politique-de-confidentialite" style={{ color: "#6366f1", textDecoration: "underline", textUnderlineOffset: "3px" }}>
+              <a href="/politique-de-confidentialite" style={{ color: "#635BFF", textDecoration: "underline", textUnderlineOffset: "3px" }}>
                 politique de confidentialité
               </a>.
             </p>

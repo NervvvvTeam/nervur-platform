@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
 export default function QuiSommesNousPage() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function QuiSommesNousPage() {
   }, []);
 
   const VG = (a) => `rgba(255,255,255,${a})`;
-  const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
+  const A1 = "#635BFF", A2 = "#4ADE80", A3 = "#F472B6";
 
   const ValueIcon = ({ type }) => {
     const s = { width: 28, height: 28, stroke: "#3b82f6", strokeWidth: 1.5, fill: "none" };
@@ -54,9 +55,9 @@ export default function QuiSommesNousPage() {
   ];
 
   return (
-    <main style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
+    <main style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <button onClick={() => navigate("/")} style={{ background: "transparent", border: `1px solid ${VG(0.15)}`, color: "#a1a1aa", padding: "8px 22px", fontSize: "11px", letterSpacing: "2.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>
           Accueil
         </button>

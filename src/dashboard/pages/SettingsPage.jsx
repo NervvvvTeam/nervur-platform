@@ -87,8 +87,8 @@ export default function SettingsPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Aucune entreprise configurée. <a href="/app/onboarding" style={{ color: "#6366f1" }}>Configurer →</a></div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Aucune entreprise configurée. <a href="/app/onboarding" style={{ color: "#635BFF" }}>Configurer →</a></div>;
 
   return (
     <div style={{ maxWidth: "600px" }}>
@@ -99,8 +99,8 @@ export default function SettingsPage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>Paramètres</h1>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>Configurez votre entreprise et vos préférences.</p>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540", marginBottom: "6px" }}>Paramètres</h1>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>Configurez votre entreprise et vos préférences.</p>
       </div>
 
       <Section title="Informations entreprise">
@@ -118,7 +118,7 @@ export default function SettingsPage() {
           placeholder="https://www.google.com/maps/place/..." />
         <button onClick={handleSave} disabled={saving}
           style={{
-            padding: "10px 24px", background: "#6366f1", color: "#ffffff",
+            padding: "10px 24px", background: "#635BFF", color: "#ffffff",
             border: "none", borderRadius: "8px", fontWeight: 600, fontSize: "13px",
             cursor: saving ? "wait" : "pointer", fontFamily: "inherit",
             transition: "all 0.3s"
@@ -132,7 +132,7 @@ export default function SettingsPage() {
           <ModeButton active={business.mode === "manual"} label="Manuel" desc="L'IA genere, vous decidez" onClick={() => business.mode !== "manual" && toggleMode()} />
           <ModeButton active={business.mode === "auto"} label="Automatique" desc="L'IA repond 24/7" onClick={() => business.mode !== "auto" && toggleMode()} />
         </div>
-        <p style={{ fontSize: "12px", color: "#424245", lineHeight: 1.6 }}>
+        <p style={{ fontSize: "12px", color: "#425466", lineHeight: 1.6 }}>
           {business.mode === "auto"
             ? "Les réponses sont générées et publiées automatiquement sur Google. Vous pouvez toujours les modifier après."
             : "Les réponses IA sont générées automatiquement. Vous les validez et publiez manuellement depuis le dashboard."
@@ -143,19 +143,19 @@ export default function SettingsPage() {
       <Section title="Scan automatique">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <div style={{ fontSize: "14px", fontWeight: 500, marginBottom: "4px", color: "#424245" }}>Scanner les avis toutes les heures</div>
-            <div style={{ fontSize: "12px", color: "#424245" }}>
+            <div style={{ fontSize: "14px", fontWeight: 500, marginBottom: "4px", color: "#425466" }}>Scanner les avis toutes les heures</div>
+            <div style={{ fontSize: "12px", color: "#425466" }}>
               {business.lastScanAt ? `Dernier scan : ${new Date(business.lastScanAt).toLocaleString("fr-FR")}` : "Jamais scanné"}
             </div>
           </div>
           <button onClick={toggleScan}
             style={{
               width: "48px", height: "28px", borderRadius: "14px", border: "none", cursor: "pointer",
-              background: business.scanEnabled ? "#6366f1" : "#3a3d4a",
+              background: business.scanEnabled ? "#635BFF" : "#3a3d4a",
               position: "relative", transition: "background 0.3s"
             }}>
             <div style={{
-              width: "22px", height: "22px", borderRadius: "11px", background: "#1D1D1F",
+              width: "22px", height: "22px", borderRadius: "11px", background: "#0A2540",
               position: "absolute", top: "3px",
               left: business.scanEnabled ? "23px" : "3px",
               transition: "left 0.3s"
@@ -172,13 +172,13 @@ export default function SettingsPage() {
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
             <div style={{
               width: "8px", height: "8px", borderRadius: "4px",
-              background: business.googleAccessToken ? "#6366f1" : "#ef4444"
+              background: business.googleAccessToken ? "#635BFF" : "#ef4444"
             }} />
-            <span style={{ fontSize: "13px", fontWeight: 600, color: "#424245" }}>
+            <span style={{ fontSize: "13px", fontWeight: 600, color: "#425466" }}>
               {business.googleAccessToken ? "Connecté" : "Non connecté"}
             </span>
           </div>
-          <p style={{ fontSize: "12px", color: "#424245", marginBottom: "16px", lineHeight: 1.6 }}>
+          <p style={{ fontSize: "12px", color: "#425466", marginBottom: "16px", lineHeight: 1.6 }}>
             Connectez votre compte Google Business pour scanner automatiquement les avis et publier les réponses.
           </p>
           <button onClick={async () => {
@@ -188,7 +188,7 @@ export default function SettingsPage() {
             } catch (err) { console.error(err); }
           }}
             style={{
-              padding: "10px 20px", background: business.googleAccessToken ? "transparent" : "#6366f1",
+              padding: "10px 20px", background: business.googleAccessToken ? "transparent" : "#635BFF",
               border: business.googleAccessToken ? "1px solid #2a2d3a" : "none",
               borderRadius: "8px", color: "#ffffff", fontSize: "13px", fontWeight: 600,
               cursor: "pointer", fontFamily: "inherit"
@@ -199,7 +199,7 @@ export default function SettingsPage() {
       </Section>
 
       <Section title="Réinitialiser les données">
-        <p style={{ fontSize: "12px", color: "#86868B", marginBottom: "16px", lineHeight: 1.6 }}>
+        <p style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "16px", lineHeight: 1.6 }}>
           Supprimer tous les avis, réponses et historiques de votre compte. Cette action est irréversible.
         </p>
         <button onClick={async () => {
@@ -233,7 +233,7 @@ function Section({ title, children }) {
       background: "#FFFFFF", marginBottom: "20px",
       boxShadow: "0 2px 8px rgba(0,0,0,0.06)"
     }}>
-      <div style={{ fontSize: "12px", fontWeight: 500, color: "#86868B", marginBottom: "20px" }}>{title}</div>
+      <div style={{ fontSize: "12px", fontWeight: 500, color: "#6B7C93", marginBottom: "20px" }}>{title}</div>
       {children}
     </div>
   );
@@ -245,8 +245,8 @@ function Field({ label, value, onChange, placeholder }) {
       <label style={labelStyle}>{label}</label>
       <input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={inputStyle}
-        onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-        onBlur={e => { e.target.style.borderColor = "#E5E5EA"; }} />
+        onFocus={e => { e.target.style.borderColor = "#635BFF"; }}
+        onBlur={e => { e.target.style.borderColor = "#E3E8EE"; }} />
     </div>
   );
 }
@@ -256,18 +256,18 @@ function ModeButton({ active, label, desc, onClick }) {
     <button onClick={onClick} style={{
       flex: 1, padding: "16px", borderRadius: "8px", cursor: "pointer", fontFamily: "inherit",
       background: active ? "rgba(99,102,241,0.1)" : "transparent",
-      border: `1px solid ${active ? "rgba(99,102,241,0.25)" : "#E5E5EA"}`,
+      border: `1px solid ${active ? "rgba(99,102,241,0.25)" : "#E3E8EE"}`,
       textAlign: "left", transition: "all 0.3s"
     }}>
-      <div style={{ fontSize: "13px", fontWeight: 600, color: active ? "#6366f1" : "#86868B", marginBottom: "4px" }}>{label}</div>
-      <div style={{ fontSize: "12px", color: "#424245" }}>{desc}</div>
+      <div style={{ fontSize: "13px", fontWeight: 600, color: active ? "#635BFF" : "#6B7C93", marginBottom: "4px" }}>{label}</div>
+      <div style={{ fontSize: "12px", color: "#425466" }}>{desc}</div>
     </button>
   );
 }
 
-const labelStyle = { display: "block", fontSize: "12px", fontWeight: 500, color: "#86868B", marginBottom: "8px" };
+const labelStyle = { display: "block", fontSize: "12px", fontWeight: 500, color: "#6B7C93", marginBottom: "8px" };
 const inputStyle = {
   width: "100%", padding: "12px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a",
-  borderRadius: "8px", color: "#424245", fontSize: "14px", fontFamily: "inherit",
+  borderRadius: "8px", color: "#425466", fontSize: "14px", fontFamily: "inherit",
   outline: "none", boxSizing: "border-box", transition: "border-color 0.2s"
 };

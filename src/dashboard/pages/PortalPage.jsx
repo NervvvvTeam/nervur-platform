@@ -82,13 +82,13 @@ function TypingText({ text, speed = 60, delay = 500 }) {
     }, delay);
     return () => clearTimeout(timeout);
   }, [text, speed, delay]);
-  return <span>{displayed}{showCursor && <span className="[animation:blink_1s_infinite] text-[#818CF8]">|</span>}</span>;
+  return <span>{displayed}{showCursor && <span className="[animation:blink_1s_infinite] text-[#635BFF]">|</span>}</span>;
 }
 
 // ═══════════════════════════════════════════
 // ANIMATED COUNTER
 // ═══════════════════════════════════════════
-function AnimatedCounter({ value, duration = 1500, suffix = "", color = "#1D1D1F" }) {
+function AnimatedCounter({ value, duration = 1500, suffix = "", color = "#0A2540" }) {
   const [count, setCount] = useState(0);
   const numVal = parseFloat(value) || 0;
   useEffect(() => {
@@ -178,7 +178,7 @@ function LiveClock() {
   const clock = time.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
   return (
     <div className="absolute top-7 right-8 text-right opacity-0 [animation:fadeInUp_0.6s_ease-out_1.5s_forwards]">
-      <div className="text-[22px] font-semibold text-[#1D1D1F] tabular-nums tracking-wide">{clock}</div>
+      <div className="text-[22px] font-semibold text-[#0A2540] tabular-nums tracking-wide">{clock}</div>
       <div className="text-xs text-gray-500 capitalize mt-0.5">{fmt}</div>
     </div>
   );
@@ -308,7 +308,7 @@ function AuroraCanvas({ width = 300, height = 340 }) {
   }, [width, height]);
 
   return (
-    <div className="rounded-[14px] relative bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden"
+    <div className="rounded-[14px] relative bg-white border border-[#E3E8EE] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden"
       style={{ height: height + "px" }}>
       <div className="absolute top-3.5 left-4 z-[2] text-[10px] font-semibold text-gray-500 tracking-wide uppercase">
         Aurora NERVÜR
@@ -326,7 +326,7 @@ function AuroraCanvas({ width = 300, height = 340 }) {
 }
 
 // Keep ParticleNetwork for reference but use Aurora
-const PARTICLE_COLORS = ["#ef4444", "#8b5cf6", "#10b981", "#06b6d4", "#f59e0b", "#6366f1"];
+const PARTICLE_COLORS = ["#ef4444", "#8b5cf6", "#10b981", "#06b6d4", "#f59e0b", "#635BFF"];
 
 function ParticleNetwork({ width = 300, height = 600 }) {
   const canvasRef = useRef(null);
@@ -498,7 +498,7 @@ function LiveTicker() {
   }, []);
 
   return (
-    <div className="px-5 py-4 rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden relative min-h-[70px]">
+    <div className="px-5 py-4 rounded-xl bg-white border border-[#E3E8EE] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden relative min-h-[70px]">
       <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3 uppercase flex items-center gap-1.5">
         <span className="w-1.5 h-1.5 rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />
         Activité en direct
@@ -598,7 +598,7 @@ const holoStyles = `
 
 function NervurHologram() {
   return (
-    <div className="holo-container h-[280px] rounded-[14px] relative bg-[linear-gradient(180deg,#1a1b25_0%,#1e2029_50%,#1a1b25_100%)] border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden flex items-center justify-center cursor-pointer [perspective:600px]">
+    <div className="holo-container h-[280px] rounded-[14px] relative bg-[linear-gradient(180deg,#1a1b25_0%,#1e2029_50%,#1a1b25_100%)] border border-[#E3E8EE] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden flex items-center justify-center cursor-pointer [perspective:600px]">
       <style>{holoStyles}</style>
 
       {/* Scan line effect */}
@@ -849,7 +849,7 @@ function GravityPlayground({ width = 300, height = 300 }) {
   }, [width, height]);
 
   return (
-    <div className="rounded-[14px] relative overflow-hidden border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
+    <div className="rounded-[14px] relative overflow-hidden border border-[#E3E8EE] shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
       style={{ height: height + "px" }}>
       <div className="absolute top-3 left-3.5 z-[2]">
         <div className="text-[10px] font-semibold text-white/40 tracking-wide uppercase">NERVÜR Universe</div>
@@ -923,7 +923,7 @@ function RightPanel({ hasAccess }) {
     activities.push({ icon: "🔒", text: "Conformité juridique surveillée", tool: "Vault", color: "#06b6d4" });
   }
   if (activities.length === 0) {
-    activities.push({ icon: "👋", text: "Souscrivez à un outil pour commencer", tool: "NERVÜR", color: "#6366f1" });
+    activities.push({ icon: "👋", text: "Souscrivez à un outil pour commencer", tool: "NERVÜR", color: "#635BFF" });
   }
 
   // Ticker rotation
@@ -947,7 +947,7 @@ function RightPanel({ hasAccess }) {
     <div className="w-full lg:w-[300px] shrink-0 flex flex-col gap-4 opacity-0 [animation:slideInRight_0.6s_ease-out_0.3s_forwards]">
       {/* Quick overview card */}
       <div className="p-5 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.15)] relative overflow-hidden">
-        <div className="text-[10px] font-semibold text-[#818CF8] tracking-[1.5px] uppercase mb-3">NERVUR</div>
+        <div className="text-[10px] font-semibold text-[#635BFF] tracking-[1.5px] uppercase mb-3">NERVUR</div>
         <div className="text-[13px] text-[#9ca3af] leading-[1.7]">
           Votre espace de gestion centralise. Accedez a vos outils, suivez vos statistiques et gerez votre presence en ligne.
         </div>
@@ -965,7 +965,7 @@ function RightPanel({ hasAccess }) {
       </div>
 
       {/* Live Activity — dynamic */}
-      <div className="px-5 py-4 rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] min-h-[70px] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.5s_forwards]">
+      <div className="px-5 py-4 rounded-xl bg-white border border-[#E3E8EE] shadow-[0_2px_8px_rgba(0,0,0,0.06)] min-h-[70px] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.5s_forwards]">
         <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3 uppercase flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />
           Vos outils
@@ -982,7 +982,7 @@ function RightPanel({ hasAccess }) {
       </div>
 
       {/* Quick Stats — real data */}
-      <div className="px-5 py-4 rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.6s_forwards]">
+      <div className="px-5 py-4 rounded-xl bg-white border border-[#E3E8EE] shadow-[0_2px_8px_rgba(0,0,0,0.06)] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.6s_forwards]">
         <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3.5 uppercase">
           Résumé rapide
         </div>
@@ -997,7 +997,7 @@ function RightPanel({ hasAccess }) {
             { label: "Traitements registre", value: stats?.registreCount ?? "—", color: "#06b6d4" },
           ] : []),
         ].map((stat, i) => (
-          <div key={i} className={`flex justify-between items-center py-2 ${i < 3 ? "border-b border-[#E5E5EA]" : ""}`}>
+          <div key={i} className={`flex justify-between items-center py-2 ${i < 3 ? "border-b border-[#E3E8EE]" : ""}`}>
             <span className="text-xs text-[#9ca3af]">{stat.label}</span>
             <span className="text-[13px] font-semibold" style={{ color: stat.color }}>{stat.value}</span>
           </div>
@@ -1010,12 +1010,12 @@ function RightPanel({ hasAccess }) {
           className="flex items-center gap-2.5 px-5 py-3.5 rounded-xl w-full bg-[linear-gradient(135deg,rgba(99,102,241,0.1),rgba(129,140,248,0.05))] border border-[rgba(99,102,241,0.15)] cursor-pointer font-[inherit] text-left transition-all duration-300 opacity-0 [animation:fadeInUp_0.5s_ease-out_0.7s_forwards]">
           <span className="text-xl">💬</span>
           <div>
-            <div className="text-[13px] text-[#818CF8] font-medium">Besoin d'aide ?</div>
+            <div className="text-[13px] text-[#635BFF] font-medium">Besoin d'aide ?</div>
             <div className="text-[11px] text-gray-500">Envoyez-nous un message</div>
           </div>
         </button>
       ) : (
-        <div className="px-5 py-[18px] rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] [animation:fadeInScale_0.3s_ease-out]">
+        <div className="px-5 py-[18px] rounded-xl bg-white border border-[#E3E8EE] shadow-[0_2px_8px_rgba(0,0,0,0.06)] [animation:fadeInScale_0.3s_ease-out]">
           {contactSent ? (
             <div className="text-center py-5">
               <div className="text-[28px] mb-2">✅</div>
@@ -1025,17 +1025,17 @@ function RightPanel({ hasAccess }) {
           ) : (
             <>
               <div className="flex justify-between items-center mb-3.5">
-                <span className="text-[13px] font-semibold text-[#1D1D1F]">Contactez-nous</span>
+                <span className="text-[13px] font-semibold text-[#0A2540]">Contactez-nous</span>
                 <button onClick={() => setContactOpen(false)} className="bg-transparent border-none text-gray-500 cursor-pointer text-base font-[inherit]">✕</button>
               </div>
               <input value={contactForm.subject} onChange={e => setContactForm(f => ({ ...f, subject: e.target.value }))}
                 placeholder="Sujet"
-                className="w-full px-3 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-[13px] font-[inherit] outline-none box-border mb-2.5 focus:border-indigo-500"
+                className="w-full px-3 py-2.5 bg-white border border-[#E3E8EE] rounded-lg text-[#425466] text-[13px] font-[inherit] outline-none box-border mb-2.5 focus:border-indigo-500"
               />
               <textarea value={contactForm.message} onChange={e => setContactForm(f => ({ ...f, message: e.target.value }))}
                 placeholder="Votre message..."
                 rows={4}
-                className="w-full px-3 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-[13px] font-[inherit] outline-none box-border mb-3 resize-y focus:border-indigo-500"
+                className="w-full px-3 py-2.5 bg-white border border-[#E3E8EE] rounded-lg text-[#425466] text-[13px] font-[inherit] outline-none box-border mb-3 resize-y focus:border-indigo-500"
               />
               <button onClick={handleContact}
                 className="w-full py-2.5 bg-[linear-gradient(135deg,#6366f1,#818CF8)] text-white border-none rounded-lg text-[13px] font-medium cursor-pointer font-[inherit]">
@@ -1071,7 +1071,7 @@ export default function PortalPage() {
           {/* Header */}
           <div className={`mb-5 sm:mb-8 px-4 sm:px-8 py-5 sm:py-7 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.12)] relative overflow-hidden ${fadeInUpClass}`}>
             <div className="absolute -top-5 right-10 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.15)_0%,transparent_70%)] [animation:orbFloat_6s_ease-in-out_infinite] pointer-events-none" />
-            <h1 className="text-xl sm:text-[28px] font-semibold text-[#1D1D1F] mb-1.5 relative">
+            <h1 className="text-xl sm:text-[28px] font-semibold text-[#0A2540] mb-1.5 relative">
               <TypingText text={`Bonjour, ${user?.name?.split(" ")[0] || "Client"}`} speed={50} delay={300} />
             </h1>
             <p className="text-sm text-[#9ca3af] relative opacity-0 [animation:fadeInUp_0.6s_ease-out_1.2s_forwards]">
@@ -1095,13 +1095,13 @@ export default function PortalPage() {
                   className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-5 sm:p-6 rounded-[14px] bg-white cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden min-w-0"
                   style={{
                     animationDelay: `${index * 0.1}s`,
-                    border: `1px solid ${isHovered && active ? `${color}50` : "#E5E5EA"}`,
+                    border: `1px solid ${isHovered && active ? `${color}50` : "#E3E8EE"}`,
                     opacity: active ? undefined : 0.45,
                     transform: isHovered && active ? "translateY(-4px)" : "translateY(0)",
                     boxShadow: isHovered && active ? `0 12px 40px ${color}20, 0 4px 16px rgba(0,0,0,0.08)` : "0 2px 12px rgba(0,0,0,0.08)",
                   }}>
                   {/* Top accent */}
-                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[14px]" style={{ background: active ? gradient : "#E5E5EA" }} />
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[14px]" style={{ background: active ? gradient : "#E3E8EE" }} />
                   {isHovered && active && <div className="absolute inset-0 rounded-[14px] pointer-events-none [background-size:200%_100%] [animation:shimmer_2s_linear_infinite]" style={{ background: `linear-gradient(90deg, transparent, ${color}10, transparent)` }} />}
 
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300"
@@ -1114,9 +1114,9 @@ export default function PortalPage() {
                   </div>
 
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                    <h3 className="text-base font-semibold m-0" style={{ color: active ? "#1D1D1F" : "#86868B" }}>{tool.name}</h3>
+                    <h3 className="text-base font-semibold m-0" style={{ color: active ? "#0A2540" : "#6B7C93" }}>{tool.name}</h3>
                     <span className="text-[10px] font-medium px-[7px] py-0.5 rounded"
-                      style={{ color: active ? color : "#86868B", background: active ? `${color}15` : "#E5E5EA" }}>{tool.subtitle}</span>
+                      style={{ color: active ? color : "#6B7C93", background: active ? `${color}15` : "#E3E8EE" }}>{tool.subtitle}</span>
                     {active && <span className="inline-flex items-center gap-[3px] text-[10px] text-green-500 font-medium">
                       <span className="w-[5px] h-[5px] rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />Actif
                     </span>}
@@ -1124,7 +1124,7 @@ export default function PortalPage() {
 
                   <p className="text-[13px] text-[#9ca3af] m-0 mb-3.5 leading-relaxed">{tool.desc}</p>
 
-                  {active && <div className="text-[11px] text-gray-500 mb-4 px-2.5 py-1.5 rounded-md bg-white border border-[#E5E5EA]">{tool.stats}</div>}
+                  {active && <div className="text-[11px] text-gray-500 mb-4 px-2.5 py-1.5 rounded-md bg-white border border-[#E3E8EE]">{tool.stats}</div>}
 
                   <div className="mt-auto">
                     {active ? (
@@ -1149,7 +1149,7 @@ export default function PortalPage() {
 
           {/* Tips */}
           <div className={`mt-6 px-5 py-4 rounded-xl bg-[rgba(99,102,241,0.06)] border border-[rgba(99,102,241,0.12)] ${fadeInUpClass}`} style={{ animationDelay: "0.5s" }}>
-            <div className="text-[10px] font-semibold text-[#818CF8] tracking-[0.5px] uppercase mb-1.5">Conseil du jour</div>
+            <div className="text-[10px] font-semibold text-[#635BFF] tracking-[0.5px] uppercase mb-1.5">Conseil du jour</div>
             <p className="text-[13px] text-[#9ca3af] m-0 leading-relaxed">{TIPS[tipIndex]}</p>
           </div>
         </div>

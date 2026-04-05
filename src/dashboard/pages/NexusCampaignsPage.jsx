@@ -119,8 +119,8 @@ export default function NexusCampaignsPage() {
           background: "linear-gradient(135deg, #10b981, #34d399)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>Campagnes email</h1>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>Créez et envoyez des campagnes email avec l'IA.</p>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540", marginBottom: "6px" }}>Campagnes email</h1>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>Créez et envoyez des campagnes email avec l'IA.</p>
       </div>
 
       <button onClick={() => setShowCreate(!showCreate)}
@@ -131,41 +131,41 @@ export default function NexusCampaignsPage() {
       {/* Create campaign */}
       {showCreate && (
         <div style={{ padding: "24px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.06)", marginBottom: "24px" }}>
-          <div style={{ fontSize: "15px", fontWeight: 500, color: "#1D1D1F", marginBottom: "18px" }}>Créer une campagne</div>
+          <div style={{ fontSize: "15px", fontWeight: 500, color: "#0A2540", marginBottom: "18px" }}>Créer une campagne</div>
 
           {!generated ? (
             <>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px", marginBottom: "14px" }}>
                 <div>
-                  <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>Objectif de l'email</div>
+                  <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>Objectif de l'email</div>
                   <input type="text" value={objective} onChange={e => setObjective(e.target.value)}
                     placeholder="Présenter nos services, promotion, invitation..."
-                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
                     onFocus={e => e.target.style.borderColor = "#10b981"}
-                    onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+                    onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
                 </div>
                 <div>
-                  <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>Entreprise</div>
+                  <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>Entreprise</div>
                   <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)}
                     placeholder="NERVÜR"
-                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
                     onFocus={e => e.target.style.borderColor = "#10b981"}
-                    onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+                    onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
                 </div>
                 <div>
-                  <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>Audience</div>
+                  <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>Audience</div>
                   <input type="text" value={audience} onChange={e => setAudience(e.target.value)}
                     placeholder="Restaurateurs, e-commerçants..."
-                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
                     onFocus={e => e.target.style.borderColor = "#10b981"}
-                    onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+                    onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
                 </div>
                 <div>
-                  <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>Liste de contacts</div>
+                  <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>Liste de contacts</div>
                   <select value={selectedList} onChange={e => setSelectedList(e.target.value)}
-                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                    style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
                     onFocus={e => e.target.style.borderColor = "#10b981"}
-                    onBlur={e => e.target.style.borderColor = "#E5E5EA"}>
+                    onBlur={e => e.target.style.borderColor = "#E3E8EE"}>
                     <option value="Tous les contacts">Tous les contacts</option>
                     {lists.map(l => <option key={l.name} value={l.name}>{l.name} ({l.active} actifs)</option>)}
                   </select>
@@ -180,16 +180,16 @@ export default function NexusCampaignsPage() {
             <>
               {/* Edit generated email */}
               <div style={{ marginBottom: "14px" }}>
-                <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>Objet</div>
+                <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>Objet</div>
                 <input type="text" value={editSubject} onChange={e => setEditSubject(e.target.value)}
-                  style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                  style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
                     onFocus={e => e.target.style.borderColor = "#10b981"}
-                    onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+                    onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
               </div>
 
               {/* Preview */}
               <div style={{ marginBottom: "14px" }}>
-                <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>Aperçu</div>
+                <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>Aperçu</div>
                 <div style={{
                   background: "#fff", borderRadius: "8px", padding: "20px",
                   maxHeight: "400px", overflowY: "auto",
@@ -198,11 +198,11 @@ export default function NexusCampaignsPage() {
 
               {/* HTML editor */}
               <div style={{ marginBottom: "14px" }}>
-                <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>Code HTML (modifiable)</div>
+                <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>Code HTML (modifiable)</div>
                 <textarea value={editHtml} onChange={e => setEditHtml(e.target.value)} rows={8}
-                  style={{ width: "100%", padding: "12px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#86868B", fontSize: "12px", fontFamily: "monospace", outline: "none", boxSizing: "border-box", resize: "vertical", transition: "border-color 0.2s" }}
+                  style={{ width: "100%", padding: "12px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#6B7C93", fontSize: "12px", fontFamily: "monospace", outline: "none", boxSizing: "border-box", resize: "vertical", transition: "border-color 0.2s" }}
                   onFocus={e => e.target.style.borderColor = "#10b981"}
-                  onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+                  onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
               </div>
 
               <div style={{ display: "flex", gap: "10px" }}>
@@ -211,11 +211,11 @@ export default function NexusCampaignsPage() {
                   Sauvegarder le brouillon
                 </button>
                 <button onClick={generateEmail} disabled={generating}
-                  style={{ padding: "10px 22px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#86868B", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
+                  style={{ padding: "10px 22px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#6B7C93", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
                   Régénérer
                 </button>
                 <button onClick={() => { setGenerated(null); setShowCreate(false); }}
-                  style={{ padding: "10px 22px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#86868B", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
+                  style={{ padding: "10px 22px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#6B7C93", fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
                   Annuler
                 </button>
               </div>
@@ -226,11 +226,11 @@ export default function NexusCampaignsPage() {
 
       {/* Campaign list */}
       {loading ? (
-        <div style={{ padding: "60px 0", textAlign: "center", color: "#86868B" }}>Chargement...</div>
+        <div style={{ padding: "60px 0", textAlign: "center", color: "#6B7C93" }}>Chargement...</div>
       ) : campaigns.length === 0 && !showCreate ? (
         <div style={{ padding: "60px 24px", textAlign: "center", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-          <div style={{ fontSize: "16px", color: "#86868B", marginBottom: "8px" }}>Aucune campagne</div>
-          <p style={{ fontSize: "14px", color: "#424245" }}>Créez votre première campagne email avec l'IA.</p>
+          <div style={{ fontSize: "16px", color: "#6B7C93", marginBottom: "8px" }}>Aucune campagne</div>
+          <p style={{ fontSize: "14px", color: "#425466" }}>Créez votre première campagne email avec l'IA.</p>
         </div>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -241,8 +241,8 @@ export default function NexusCampaignsPage() {
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                 <div>
-                  <div style={{ fontSize: "15px", fontWeight: 500, color: "#424245", marginBottom: "2px" }}>{c.subject}</div>
-                  <div style={{ fontSize: "12px", color: "#424245" }}>
+                  <div style={{ fontSize: "15px", fontWeight: 500, color: "#425466", marginBottom: "2px" }}>{c.subject}</div>
+                  <div style={{ fontSize: "12px", color: "#425466" }}>
                     {c.listName} — {formatDate(c.createdAt)}
                   </div>
                 </div>
@@ -259,14 +259,14 @@ export default function NexusCampaignsPage() {
               {c.status === "sent" && (
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "12px" }}>
                   {[
-                    { label: "Envoyés", value: c.stats?.sent || 0, color: "#1D1D1F" },
+                    { label: "Envoyés", value: c.stats?.sent || 0, color: "#0A2540" },
                     { label: "Délivrés", value: c.stats?.delivered || 0, color: "#10b981" },
                     { label: "Ouverts", value: c.stats?.opened || 0, color: "#3b82f6" },
                     { label: "Cliqués", value: c.stats?.clicked || 0, color: "#8b5cf6" },
                   ].map(s => (
                     <div key={s.label} style={{ padding: "10px 14px", background: "#FFFFFF", borderRadius: "6px", border: "1px solid #2a2d3a" }}>
                       <div style={{ fontSize: "18px", fontWeight: 600, color: s.color }}>{s.value}</div>
-                      <div style={{ fontSize: "11px", color: "#86868B" }}>{s.label}</div>
+                      <div style={{ fontSize: "11px", color: "#6B7C93" }}>{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -281,7 +281,7 @@ export default function NexusCampaignsPage() {
                   </button>
                 )}
                 <button onClick={() => deleteCampaign(c._id)}
-                  style={{ padding: "7px 16px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#86868B", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>
+                  style={{ padding: "7px 16px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#6B7C93", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>
                   Supprimer
                 </button>
               </div>

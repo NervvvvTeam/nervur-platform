@@ -7,7 +7,7 @@ export default function ProtectedRoute() {
   if (isLoading) {
     return (
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", background: "#0f0f11" }}>
-        <div style={{ fontSize: "13px", letterSpacing: "3px", color: "#86868B", textTransform: "uppercase" }}>Chargement...</div>
+        <div style={{ fontSize: "13px", letterSpacing: "3px", color: "#6B7C93", textTransform: "uppercase" }}>Chargement...</div>
       </div>
     );
   }

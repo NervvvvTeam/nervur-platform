@@ -60,8 +60,8 @@ function ScoreChart({ history, width = 820, height = 180 }) {
       </defs>
       {[0, 25, 50, 75, 100].map(v => (
         <g key={v}>
-          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#E5E5EA" strokeWidth="1" />
-          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#86868B" fontSize="9">{v}</text>
+          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#E3E8EE" strokeWidth="1" />
+          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#6B7C93" fontSize="9">{v}</text>
         </g>
       ))}
       <path d={areaD} fill="url(#pulseGrad)" />
@@ -108,8 +108,8 @@ function ResponseTimeChart({ history, width = 820, height = 160 }) {
       </defs>
       {gridValues.map(v => (
         <g key={v}>
-          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#E5E5EA" strokeWidth="1" />
-          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#86868B" fontSize="9">{v}ms</text>
+          <line x1={padding.left} y1={getY(v)} x2={width - padding.right} y2={getY(v)} stroke="#E3E8EE" strokeWidth="1" />
+          <text x={width - padding.right + 2} y={getY(v) + 3} fill="#6B7C93" fontSize="9">{v}ms</text>
         </g>
       ))}
       <path d={areaD} fill="url(#rtGradHist)" />
@@ -251,11 +251,11 @@ function HistoryTable({ history }) {
       <table className="w-full border-collapse text-[13px]">
         <thead>
           <tr>
-            <th className="text-left px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E5E5EA] text-xs">Date</th>
-            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E5E5EA] text-xs">Statut</th>
-            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E5E5EA] text-xs">Score</th>
-            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E5E5EA] text-xs">Temps de reponse</th>
-            <th className="text-right px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E5E5EA] text-xs">Tendance</th>
+            <th className="text-left px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E3E8EE] text-xs">Date</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E3E8EE] text-xs">Statut</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E3E8EE] text-xs">Score</th>
+            <th className="text-center px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E3E8EE] text-xs">Temps de reponse</th>
+            <th className="text-right px-3.5 py-2.5 text-[#9ca3af] font-medium border-b border-[#E3E8EE] text-xs">Tendance</th>
           </tr>
         </thead>
         <tbody>
@@ -264,9 +264,9 @@ function HistoryTable({ history }) {
             const diff = prev ? entry.score - prev.score : 0;
             const scoreColor = entry.score >= 80 ? "#10b981" : entry.score >= 50 ? "#f59e0b" : "#ef4444";
             const isDown = entry.uptimeStatus === false;
-            const rtColor = entry.responseTime == null ? "#86868B" : entry.responseTime < 500 ? "#10b981" : entry.responseTime < 1500 ? "#f59e0b" : "#ef4444";
+            const rtColor = entry.responseTime == null ? "#6B7C93" : entry.responseTime < 500 ? "#10b981" : entry.responseTime < 1500 ? "#f59e0b" : "#ef4444";
             return (
-              <tr key={i} className="border-b border-[#E5E5EA]/[0.12]" style={{ background: isDown ? "rgba(239,68,68,0.04)" : "transparent" }}>
+              <tr key={i} className="border-b border-[#E3E8EE]/[0.12]" style={{ background: isDown ? "rgba(239,68,68,0.04)" : "transparent" }}>
                 <td className="px-3.5 py-2.5 text-[#d1d5db]">
                   {new Date(entry.checkedAt).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                 </td>
@@ -292,7 +292,7 @@ function HistoryTable({ history }) {
                 <td className="px-3.5 py-2.5 text-center text-xs font-medium" style={{ color: rtColor }}>
                   {entry.responseTime != null ? `${entry.responseTime}ms` : "\u2014"}
                 </td>
-                <td className="px-3.5 py-2.5 text-right text-xs font-medium" style={{ color: diff > 0 ? "#10b981" : diff < 0 ? "#ef4444" : "#86868B" }}>
+                <td className="px-3.5 py-2.5 text-right text-xs font-medium" style={{ color: diff > 0 ? "#10b981" : diff < 0 ? "#ef4444" : "#6B7C93" }}>
                   {diff > 0 ? `+${diff}` : diff < 0 ? `${diff}` : "="}
                 </td>
               </tr>
@@ -339,7 +339,7 @@ export default function PulseHistoryPage() {
           <HeartPulseIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">Evolution</h1>
+          <h1 className="text-[22px] font-semibold text-[#0A2540] m-0">Evolution</h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
             Suivez l'evolution du score de sante de vos sites
           </p>
@@ -362,7 +362,7 @@ export default function PulseHistoryPage() {
       {!loading && sites.length === 0 && (
         <div className="bg-[rgba(236,72,153,0.06)] border border-[rgba(236,72,153,0.18)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center py-12">
           <HeartPulseIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#1D1D1F] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#0A2540] mt-4 mb-2">
             Aucun site surveille
           </div>
           <div className="text-[13px] text-[#9ca3af]">
@@ -383,8 +383,8 @@ export default function PulseHistoryPage() {
                   className="px-4 py-2 rounded-md text-[13px] font-medium cursor-pointer font-[inherit]"
                   style={{
                     background: selectedSite === site._id ? `${ACCENT}20` : "#FFFFFF",
-                    color: selectedSite === site._id ? ACCENT : "#86868B",
-                    border: `1px solid ${selectedSite === site._id ? BORDER_TINT : "#E5E5EA"}`,
+                    color: selectedSite === site._id ? ACCENT : "#6B7C93",
+                    border: `1px solid ${selectedSite === site._id ? BORDER_TINT : "#E3E8EE"}`,
                   }}
                 >
                   {site.domain}

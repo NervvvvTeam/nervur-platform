@@ -22,7 +22,7 @@ const RefreshIcon = ({ size = 14, color = ACCENT }) => (
 );
 
 const CATEGORIES = [
-  { key: "all", label: "Toutes", color: "#86868B" },
+  { key: "all", label: "Toutes", color: "#6B7C93" },
   { key: "RGPD", label: "RGPD", color: "#06b6d4" },
   { key: "Droit commercial", label: "Droit commercial", color: "#8b5cf6" },
   { key: "E-commerce", label: "E-commerce", color: "#f59e0b" },
@@ -107,7 +107,7 @@ export default function VaultVeillePage() {
           )}
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
+          <h1 className="text-[22px] font-semibold text-[#0A2540] m-0">
             Veille juridique
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -145,8 +145,8 @@ export default function VaultVeillePage() {
             className="px-3.5 py-1.5 rounded-lg text-[13px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border"
             style={{
               background: activeCategory === cat.key ? `${cat.color}20` : "transparent",
-              borderColor: activeCategory === cat.key ? cat.color : "#E5E5EA",
-              color: activeCategory === cat.key ? cat.color : "#86868B",
+              borderColor: activeCategory === cat.key ? cat.color : "#E3E8EE",
+              color: activeCategory === cat.key ? cat.color : "#6B7C93",
             }}
           >
             {cat.label}
@@ -176,7 +176,7 @@ export default function VaultVeillePage() {
           <button
             onClick={fetchVeille}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border border-[#E5E5EA] bg-transparent text-[#6b7280] hover:border-[#06b6d4] hover:text-[#06b6d4]"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border border-[#E3E8EE] bg-transparent text-[#6b7280] hover:border-[#06b6d4] hover:text-[#06b6d4]"
           >
             <RefreshIcon size={12} color="currentColor" />
             Actualiser
@@ -196,7 +196,7 @@ export default function VaultVeillePage() {
       {!loading && sortedAlerts.length === 0 ? (
         <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center">
           <BellIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#1D1D1F] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#0A2540] mt-4 mb-2">
             Aucune alerte dans cette catégorie
           </div>
         </div>
@@ -251,7 +251,7 @@ export default function VaultVeillePage() {
                     </div>
 
                     {/* Title */}
-                    <div className={`text-[14px] font-semibold mb-2 ${read ? "text-[#9ca3af]" : "text-[#1D1D1F]"}`}>
+                    <div className={`text-[14px] font-semibold mb-2 ${read ? "text-[#9ca3af]" : "text-[#0A2540]"}`}>
                       {alert.title}
                     </div>
 

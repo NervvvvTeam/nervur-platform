@@ -250,7 +250,7 @@ export default function VaultMiaChat() {
               <SparkleIcon size={18} />
             </div>
             <div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: "#1D1D1F" }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: "#0A2540" }}>
                 NOÉ
               </div>
               <div style={{ fontSize: 11, color: "#06b6d4" }}>
@@ -263,14 +263,14 @@ export default function VaultMiaChat() {
             style={{
               background: "none",
               border: "none",
-              color: "#86868B",
+              color: "#6B7C93",
               cursor: "pointer",
               padding: 4,
               display: "flex",
               borderRadius: 6,
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = "#1D1D1F"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = "#86868B"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "#0A2540"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "#6B7C93"; }}
           >
             <CloseIcon />
           </button>
@@ -289,7 +289,7 @@ export default function VaultMiaChat() {
         >
           {messages.length === 0 && !typing && (
             <div style={{ textAlign: "center", padding: "20px 0" }}>
-              <div style={{ fontSize: 13, color: "#86868B", marginBottom: 16, lineHeight: 1.6 }}>
+              <div style={{ fontSize: 13, color: "#6B7C93", marginBottom: 16, lineHeight: 1.6 }}>
                 Bonjour ! Je suis <strong style={{ color: "#06b6d4" }}>NOÉ</strong>, votre assistant juridique.
                 <br />Posez-moi une question ou choisissez un sujet :
               </div>
@@ -303,7 +303,7 @@ export default function VaultMiaChat() {
                       border: "1px solid rgba(6,182,212,0.2)",
                       borderRadius: 8,
                       padding: "8px 12px",
-                      color: "#424245",
+                      color: "#425466",
                       fontSize: 12,
                       cursor: "pointer",
                       textAlign: "left",
@@ -342,7 +342,7 @@ export default function VaultMiaChat() {
                   background: msg.role === "user" ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.04)",
                   borderLeft: msg.role === "bot" ? "3px solid #06b6d4" : "none",
                   fontSize: 13,
-                  color: "#424245",
+                  color: "#425466",
                   lineHeight: 1.6,
                 }}
                 dangerouslySetInnerHTML={
@@ -389,7 +389,7 @@ export default function VaultMiaChat() {
                     border: "1px solid rgba(6,182,212,0.15)",
                     borderRadius: 6,
                     padding: "5px 10px",
-                    color: "#86868B",
+                    color: "#6B7C93",
                     fontSize: 11,
                     cursor: "pointer",
                     fontFamily: "inherit",
@@ -432,14 +432,14 @@ export default function VaultMiaChat() {
               background: "#FFFFFF",
               border: "1px solid #2a2d3a",
               borderRadius: 8,
-              color: "#424245",
+              color: "#425466",
               fontSize: 13,
               fontFamily: "inherit",
               outline: "none",
               transition: "border-color 0.15s",
             }}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#06b6d4"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = "#E5E5EA"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = "#E3E8EE"; }}
           />
           <button
             onClick={() => handleSend()}
@@ -449,8 +449,8 @@ export default function VaultMiaChat() {
               height: 36,
               borderRadius: 8,
               border: "none",
-              background: input.trim() && !typing ? "linear-gradient(135deg, #06b6d4, #22d3ee)" : "#E5E5EA",
-              color: input.trim() && !typing ? "#0f0f11" : "#86868B",
+              background: input.trim() && !typing ? "linear-gradient(135deg, #06b6d4, #22d3ee)" : "#E3E8EE",
+              color: input.trim() && !typing ? "#0f0f11" : "#6B7C93",
               cursor: input.trim() && !typing ? "pointer" : "not-allowed",
               display: "flex",
               alignItems: "center",

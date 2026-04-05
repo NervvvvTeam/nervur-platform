@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import LogoNervur from "./components/LogoNervur";
 
-const V = "#1D1D1F";
+const V = "#0A2540";
 const VG = (a) => `rgba(0,0,0,${a})`;
 
 const ARTICLES = [
@@ -9,7 +10,7 @@ const ARTICLES = [
     slug: "e-reputation",
     title: "E-réputation : pourquoi 90% des PME perdent des clients sans le savoir",
     desc: "Découvrez les stratégies essentielles pour surveiller, gérer et améliorer votre réputation numérique. Guide complet avec statistiques et solutions concrètes.",
-    color: "#818CF8",
+    color: "#635BFF",
     tag: "E-RÉPUTATION",
     date: "20 mars 2026",
     readTime: "12 min",
@@ -102,10 +103,10 @@ export default function BlogPage() {
         padding: isMobile ? "16px 20px" : "20px 48px",
         borderBottom: `1px solid ${VG(0.1)}`,
       }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <a href="/app/login" style={{
           padding: "8px 20px", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase",
-          fontWeight: 700, color: "#F5F5F7", background: "#1D1D1F", border: "none", borderRadius: "6px",
+          fontWeight: 700, color: "#FFFFFF", background: "#0A2540", border: "none", borderRadius: "6px",
           cursor: "pointer", textDecoration: "none",
         }}>Espace Client</a>
       </header>
@@ -114,20 +115,20 @@ export default function BlogPage() {
       <section style={{ padding: isMobile ? "60px 20px" : "100px 48px", textAlign: "center" }}>
         <button onClick={() => navigate("/")} style={{
           background: "none", border: `1px solid ${VG(0.15)}`, borderRadius: "8px",
-          color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+          color: "#6B7C93", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
           marginBottom: "32px", transition: "all 0.3s", fontFamily: "inherit",
         }}
           onMouseEnter={e => { e.target.style.color = V; e.target.style.borderColor = VG(0.3); }}
-          onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = VG(0.15); }}>
+          onMouseLeave={e => { e.target.style.color = "#6B7C93"; e.target.style.borderColor = VG(0.15); }}>
           ← Retour à l'accueil
         </button>
-        <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#86868B", display: "block", marginBottom: "16px" }}>
+        <span style={{ fontSize: "11px", letterSpacing: "4px", textTransform: "uppercase", color: "#6B7C93", display: "block", marginBottom: "16px" }}>
           // Le blog NERVÜR
         </span>
         <h1 style={{ fontSize: isMobile ? "32px" : "clamp(36px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-1.5px", marginBottom: "16px" }}>
           Ressources & articles
         </h1>
-        <p style={{ fontSize: "16px", color: "#86868B", maxWidth: "560px", margin: "0 auto", lineHeight: 1.7 }}>
+        <p style={{ fontSize: "16px", color: "#6B7C93", maxWidth: "560px", margin: "0 auto", lineHeight: 1.7 }}>
           Conseils, analyses et bonnes pratiques pour les PME qui veulent grandir en ligne.
         </p>
       </section>
@@ -153,19 +154,19 @@ export default function BlogPage() {
                   color: article.color, padding: "4px 10px", borderRadius: "20px",
                   border: `1px solid ${article.color}30`, background: `${article.color}10`,
                 }}>{article.tag}</span>
-                <span style={{ fontSize: "11px", color: "#86868B" }}>{article.readTime}</span>
+                <span style={{ fontSize: "11px", color: "#6B7C93" }}>{article.readTime}</span>
               </div>
               {/* Title */}
               <h2 style={{ fontSize: "18px", fontWeight: 700, lineHeight: 1.4, letterSpacing: "-0.3px" }}>
                 {article.title}
               </h2>
               {/* Desc */}
-              <p style={{ fontSize: "13px", color: "#86868B", lineHeight: 1.7, flex: 1 }}>
+              <p style={{ fontSize: "13px", color: "#6B7C93", lineHeight: 1.7, flex: 1 }}>
                 {article.desc}
               </p>
               {/* Footer */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "12px", borderTop: `1px solid ${VG(0.06)}` }}>
-                <span style={{ fontSize: "11px", color: "#86868B" }}>{article.date}</span>
+                <span style={{ fontSize: "11px", color: "#6B7C93" }}>{article.date}</span>
                 <span style={{ fontSize: "12px", color: article.color, fontWeight: 600 }}>Lire →</span>
               </div>
             </div>
@@ -175,7 +176,7 @@ export default function BlogPage() {
 
       {/* Footer simple */}
       <footer style={{ borderTop: `1px solid ${VG(0.1)}`, padding: "32px 48px", textAlign: "center" }}>
-        <p style={{ fontSize: "12px", color: "#AEAEB2" }}>
+        <p style={{ fontSize: "12px", color: "#8898AA" }}>
           © 2026 NERVÜR — Éditeur de Technologies de Croissance
         </p>
       </footer>

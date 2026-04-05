@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
+const V = "#FFFFFF", V2 = "#425466", V3 = "#6B7C93";
 const VG = (a) => `rgba(255,255,255,${a})`;
-const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
+const A1 = "#635BFF", A2 = "#4ADE80", A3 = "#F472B6";
 
 const useIsMobile = (bp = 768) => {
   const [m, setM] = useState(typeof window !== 'undefined' ? window.innerWidth <= bp : false);
@@ -31,7 +32,7 @@ function ScoreGauge({ label, score, delay }) {
           style={{ transition: "stroke-dashoffset 1s ease" }} />
         <text x="40" y="44" textAnchor="middle" fill={V} fontSize="18" fontWeight="800">{score}</text>
       </svg>
-      <div style={{ fontSize: "10px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#86868B", marginTop: "6px" }}>{label}</div>
+      <div style={{ fontSize: "10px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#6B7C93", marginTop: "6px" }}>{label}</div>
     </div>
   );
 }
@@ -150,7 +151,7 @@ export default function AtlasPage() {
   };
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#FFFFFF", color: "#0A2540", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
 
@@ -163,7 +164,7 @@ export default function AtlasPage() {
 
       {/* NAV */}
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)", borderBottom: `1px solid ${VG(0.08)}` }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate("/technologies")}>← Outils</button>
           <button className="nav-btn" onClick={() => navigate("/contact")}>Contact</button>
@@ -185,7 +186,7 @@ export default function AtlasPage() {
             <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "#3b82f6", fontWeight: 700, padding: "4px 12px", border: "1px solid rgba(59,130,246,0.3)", borderRadius: "2px" }}>ANALYSE SEO</span>
           </div>
           <h1 style={{ fontSize: isMobile ? "36px" : "clamp(42px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-2px", lineHeight: 1.1, marginBottom: "20px" }}>ATLAS</h1>
-          <p style={{ fontSize: "18px", color: "#86868B", lineHeight: 1.8, maxWidth: "600px" }}>
+          <p style={{ fontSize: "18px", color: "#6B7C93", lineHeight: 1.8, maxWidth: "600px" }}>
             L'IA qui décortique votre référencement. Audit SEO complet en 30 secondes.
           </p>
         </div>
@@ -199,7 +200,7 @@ export default function AtlasPage() {
           ].map((s, i) => (
             <div key={i} style={{ padding: "20px 24px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", textAlign: "center" }}>
               <div style={{ fontSize: "28px", fontWeight: 800, color: V, marginBottom: "4px" }}>{s.value}</div>
-              <div style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#86868B" }}>{s.label}</div>
+              <div style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#6B7C93" }}>{s.label}</div>
             </div>
           ))}
         </section>
@@ -213,7 +214,7 @@ export default function AtlasPage() {
                 <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
                 <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FEBC2E" }} />
                 <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
-                <span style={{ fontSize: "11px", color: "#86868B", marginLeft: "12px", letterSpacing: "1px" }}>atlas-seo.nervur.com</span>
+                <span style={{ fontSize: "11px", color: "#6B7C93", marginLeft: "12px", letterSpacing: "1px" }}>atlas-seo.nervur.com</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#60a5fa", animation: "pulseBlue 2s ease infinite" }} />
@@ -249,7 +250,7 @@ export default function AtlasPage() {
                     style={{
                       padding: "14px 28px", whiteSpace: "nowrap",
                       background: url.trim() ? "linear-gradient(135deg, #3b82f6, #60a5fa)" : VG(0.06),
-                      border: "none", color: url.trim() ? V : "#86868B", fontWeight: 700, fontSize: "12px",
+                      border: "none", color: url.trim() ? V : "#6B7C93", fontWeight: 700, fontSize: "12px",
                       letterSpacing: "1.5px", textTransform: "uppercase", fontFamily: "inherit",
                       cursor: url.trim() && !isAnalyzing ? "pointer" : "not-allowed",
                       transition: "all 0.3s ease", opacity: !url.trim() ? 0.4 : 1, borderRadius: "6px",
@@ -264,7 +265,7 @@ export default function AtlasPage() {
                 <div style={{ textAlign: "center", padding: "40px 0", animation: "fadeInUp 0.4s ease both" }}>
                   <div style={{ width: "40px", height: "40px", border: "3px solid rgba(59,130,246,0.2)", borderTop: "3px solid #3b82f6", borderRadius: "50%", margin: "0 auto 16px", animation: "spin 1s linear infinite" }} />
                   <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-                  <p style={{ fontSize: "13px", color: "#86868B", letterSpacing: "1px" }}>Analyse de {url} en cours...</p>
+                  <p style={{ fontSize: "13px", color: "#6B7C93", letterSpacing: "1px" }}>Analyse de {url} en cours...</p>
                 </div>
               )}
 
@@ -274,7 +275,7 @@ export default function AtlasPage() {
                   <div style={{ display: "inline-block", padding: "20px 32px", border: "1px solid rgba(239,68,68,0.3)", background: "rgba(239,68,68,0.05)", borderRadius: "8px" }}>
                     <div style={{ fontSize: "28px", marginBottom: "12px", color: "#ef4444" }}>X</div>
                     <p style={{ fontSize: "14px", color: "#fca5a5", marginBottom: "8px", fontWeight: 600 }}>Analyse impossible</p>
-                    <p style={{ fontSize: "12px", color: "#86868B", lineHeight: 1.6, maxWidth: "400px" }}>{error}</p>
+                    <p style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 1.6, maxWidth: "400px" }}>{error}</p>
                     <button onClick={() => { setError(null); setUrl(""); }} style={{ marginTop: "16px", padding: "8px 20px", background: "transparent", border: "1px solid rgba(0,0,0,0.1)", color: "#a1a1aa", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>Réessayer</button>
                   </div>
                 </div>
@@ -288,7 +289,7 @@ export default function AtlasPage() {
                     <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
                       <span style={{ fontSize: "9px", letterSpacing: "1.5px", fontWeight: 700, color: "#3b82f6", padding: "3px 8px", border: "1px solid rgba(59,130,246,0.3)" }}>ATLAS</span>
                       {result.realData && <span style={{ fontSize: "8px", letterSpacing: "1px", fontWeight: 700, color: "#4ADE80", padding: "3px 8px", background: "rgba(74,222,128,0.1)", border: "1px solid rgba(74,222,128,0.3)" }}>GOOGLE PAGESPEED</span>}
-                      <span style={{ fontSize: "10px", color: "#86868B" }}>Rapport généré</span>
+                      <span style={{ fontSize: "10px", color: "#6B7C93" }}>Rapport généré</span>
                     </div>
                     <p style={{ fontSize: "14px", color: "#E4E4E7", lineHeight: 1.8 }}>
                       {typingText}
@@ -356,11 +357,11 @@ export default function AtlasPage() {
           <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, marginBottom: "16px", letterSpacing: "-1px" }}>
             Boostez votre référencement avec Atlas
           </h2>
-          <p style={{ fontSize: "15px", color: "#86868B", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
+          <p style={{ fontSize: "15px", color: "#6B7C93", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
             Obtenez un audit SEO complet et des recommandations personnalisées pour dominer les résultats de recherche.
           </p>
           <button onClick={() => navigate('/contact?outil=atlas')} style={{
-            padding: "16px 40px", background: V, color: "#F5F5F7", border: "none",
+            padding: "16px 40px", background: V, color: "#FFFFFF", border: "none",
             fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
             cursor: "pointer", transition: "all 0.3s ease" }}
             onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)"; }}
@@ -372,8 +373,8 @@ export default function AtlasPage() {
 
       {/* Footer */}
       <footer style={{ padding: isMobile ? "30px 20px" : "40px 48px", borderTop: `1px solid ${VG(0.08)}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: isMobile ? "column" : "row", gap: "12px" }}>
-        <span style={{ fontSize: "11px", color: "#86868B", letterSpacing: "1px" }}>La structure derrière l'impact. © 2026</span>
-        <span style={{ fontSize: "11px", color: "#86868B" }}>ATLAS — Analyse SEO IA</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93", letterSpacing: "1px" }}>La structure derrière l'impact. © 2026</span>
+        <span style={{ fontSize: "11px", color: "#6B7C93" }}>ATLAS — Analyse SEO IA</span>
       </footer>
     </div>
   );

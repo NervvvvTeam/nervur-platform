@@ -118,10 +118,10 @@ export default function NexusDashboardPage() {
           background: "linear-gradient(135deg, #10b981, #34d399)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540", marginBottom: "6px" }}>
           Générateur de contenu
         </h1>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>
           Créez des posts, emails et descriptions produit avec l'IA.
         </p>
       </div>
@@ -138,7 +138,7 @@ export default function NexusDashboardPage() {
               padding: "8px 18px", borderRadius: "6px 6px 0 0", border: "none",
               fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
               background: tab === t.key ? "#FFFFFF" : "transparent",
-              color: tab === t.key ? "#10b981" : "#86868B",
+              color: tab === t.key ? "#10b981" : "#6B7C93",
               borderBottom: tab === t.key ? "2px solid #10b981" : "2px solid transparent",
             }}>{t.label}</button>
         ))}
@@ -149,14 +149,14 @@ export default function NexusDashboardPage() {
         <>
           <div style={{ padding: "24px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.06)", marginBottom: "20px" }}>
             <div style={{ marginBottom: "18px" }}>
-              <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "8px", fontWeight: 500 }}>Type de contenu</div>
+              <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "8px", fontWeight: 500 }}>Type de contenu</div>
               <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
                 {TYPES.map(t => (
                   <button key={t.value} onClick={() => setType(t.value)}
                     style={{
                       padding: "7px 16px", borderRadius: "6px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
                       background: type === t.value ? "#10b98120" : "#FFFFFF",
-                      color: type === t.value ? "#10b981" : "#86868B",
+                      color: type === t.value ? "#10b981" : "#6B7C93",
                       border: type === t.value ? "1px solid #10b98130" : "1px solid #2a2d3a",
                     }}>{t.label}</button>
                 ))}
@@ -164,14 +164,14 @@ export default function NexusDashboardPage() {
             </div>
 
             <div style={{ marginBottom: "18px" }}>
-              <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "8px", fontWeight: 500 }}>Ton</div>
+              <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "8px", fontWeight: 500 }}>Ton</div>
               <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
                 {TONES.map(t => (
                   <button key={t.value} onClick={() => setTone(t.value)}
                     style={{
                       padding: "7px 16px", borderRadius: "6px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
                       background: tone === t.value ? "#10b98120" : "#FFFFFF",
-                      color: tone === t.value ? "#10b981" : "#86868B",
+                      color: tone === t.value ? "#10b981" : "#6B7C93",
                       border: tone === t.value ? "1px solid #10b98130" : "1px solid #2a2d3a",
                     }}>{t.label}</button>
                 ))}
@@ -179,22 +179,22 @@ export default function NexusDashboardPage() {
             </div>
 
             <div style={{ marginBottom: "18px" }}>
-              <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "8px", fontWeight: 500 }}>
-                Nom de l'entreprise <span style={{ color: "#424245" }}>(optionnel)</span>
+              <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "8px", fontWeight: 500 }}>
+                Nom de l'entreprise <span style={{ color: "#425466" }}>(optionnel)</span>
               </div>
               <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Ex: NERVÜR"
-                style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
+                style={{ width: "100%", padding: "10px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", transition: "border-color 0.2s" }}
                 onFocus={e => e.target.style.borderColor = "#10b981"}
-                onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+                onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
             </div>
 
             <div style={{ marginBottom: "20px" }}>
-              <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "8px", fontWeight: 500 }}>Sujet / Briefing</div>
+              <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "8px", fontWeight: 500 }}>Sujet / Briefing</div>
               <textarea value={topic} onChange={e => setTopic(e.target.value)}
                 placeholder={"Décrivez le sujet de votre contenu...\nEx: Lancement de notre nouvelle offre d'audit SEO pour les restaurants"} rows={3}
-                style={{ width: "100%", padding: "12px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#1D1D1F", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", resize: "vertical", lineHeight: 1.6, transition: "border-color 0.2s" }}
+                style={{ width: "100%", padding: "12px 14px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "8px", color: "#0A2540", fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", resize: "vertical", lineHeight: 1.6, transition: "border-color 0.2s" }}
                 onFocus={e => e.target.style.borderColor = "#10b981"}
-                onBlur={e => e.target.style.borderColor = "#E5E5EA"} />
+                onBlur={e => e.target.style.borderColor = "#E3E8EE"} />
             </div>
 
             <button onClick={generate} disabled={loading || !topic.trim()}
@@ -211,18 +211,18 @@ export default function NexusDashboardPage() {
             <div style={{ padding: "24px", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <div style={{ fontSize: "13px", color: "#86868B" }}>Résultat</div>
+                  <div style={{ fontSize: "13px", color: "#6B7C93" }}>Résultat</div>
                   <span style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", background: "#10b98114", color: "#10b981" }}>{type}</span>
                 </div>
                 <button onClick={() => copyToClipboard()}
-                  style={{ padding: "6px 14px", background: copied ? "#10b98120" : "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "6px", color: copied ? "#10b981" : "#86868B", fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>
+                  style={{ padding: "6px 14px", background: copied ? "#10b98120" : "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "6px", color: copied ? "#10b981" : "#6B7C93", fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>
                   {copied ? "Copié !" : "Copier"}
                 </button>
               </div>
-              <div style={{ fontSize: "14px", color: "#424245", lineHeight: 1.8, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>{result}</div>
+              <div style={{ fontSize: "14px", color: "#425466", lineHeight: 1.8, whiteSpace: "pre-wrap", wordBreak: "break-word" }}>{result}</div>
               <div style={{ marginTop: "16px", display: "flex", gap: "10px" }}>
-                <button onClick={generate} style={{ padding: "8px 18px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#86868B", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Régénérer</button>
-                <button onClick={() => { setResult(""); setTopic(""); }} style={{ padding: "8px 18px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#86868B", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Nouveau</button>
+                <button onClick={generate} style={{ padding: "8px 18px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#6B7C93", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Régénérer</button>
+                <button onClick={() => { setResult(""); setTopic(""); }} style={{ padding: "8px 18px", background: "transparent", border: "1px solid #2a2d3a", borderRadius: "6px", color: "#6B7C93", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}>Nouveau</button>
               </div>
             </div>
           )}
@@ -239,13 +239,13 @@ export default function NexusDashboardPage() {
                 borderRadius: "10px", cursor: "pointer", transition: "border-color 0.15s",
               }}
               onMouseEnter={e => e.currentTarget.style.borderColor = "#10b98130"}
-              onMouseLeave={e => e.currentTarget.style.borderColor = "#E5E5EA"}>
+              onMouseLeave={e => e.currentTarget.style.borderColor = "#E3E8EE"}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
                 <span style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", background: "#10b98114", color: "#10b981" }}>{t.category}</span>
-                <span style={{ fontSize: "11px", color: "#424245" }}>{t.type}</span>
+                <span style={{ fontSize: "11px", color: "#425466" }}>{t.type}</span>
               </div>
-              <div style={{ fontSize: "14px", fontWeight: 500, color: "#424245", marginBottom: "6px" }}>{t.name}</div>
-              <div style={{ fontSize: "12px", color: "#86868B", lineHeight: 1.5 }}>{t.topic.substring(0, 80)}...</div>
+              <div style={{ fontSize: "14px", fontWeight: 500, color: "#425466", marginBottom: "6px" }}>{t.name}</div>
+              <div style={{ fontSize: "12px", color: "#6B7C93", lineHeight: 1.5 }}>{t.topic.substring(0, 80)}...</div>
             </div>
           ))}
         </div>
@@ -255,11 +255,11 @@ export default function NexusDashboardPage() {
       {tab === "history" && (
         <>
           {historyLoading ? (
-            <div style={{ padding: "60px 0", textAlign: "center", color: "#86868B" }}>Chargement...</div>
+            <div style={{ padding: "60px 0", textAlign: "center", color: "#6B7C93" }}>Chargement...</div>
           ) : history.length === 0 ? (
             <div style={{ padding: "60px 24px", textAlign: "center", background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-              <div style={{ fontSize: "16px", color: "#86868B", marginBottom: "8px" }}>Aucun contenu généré</div>
-              <p style={{ fontSize: "14px", color: "#424245" }}>Vos contenus générés apparaîtront ici.</p>
+              <div style={{ fontSize: "16px", color: "#6B7C93", marginBottom: "8px" }}>Aucun contenu généré</div>
+              <p style={{ fontSize: "14px", color: "#425466" }}>Vos contenus générés apparaîtront ici.</p>
             </div>
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -270,25 +270,25 @@ export default function NexusDashboardPage() {
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                       <span style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", background: "#10b98114", color: "#10b981" }}>{c.type}</span>
-                      <span style={{ fontSize: "11px", color: "#424245" }}>{formatDate(c.createdAt)}</span>
+                      <span style={{ fontSize: "11px", color: "#425466" }}>{formatDate(c.createdAt)}</span>
                     </div>
                     <div style={{ display: "flex", gap: "6px" }}>
                       <button onClick={() => toggleFavorite(c._id)}
-                        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "14px", color: c.favorite ? "#f59e0b" : "#424245" }}>
+                        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "14px", color: c.favorite ? "#f59e0b" : "#425466" }}>
                         {c.favorite ? "★" : "☆"}
                       </button>
                       <button onClick={() => copyToClipboard(c.content)}
-                        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "11px", color: "#86868B", fontFamily: "inherit" }}>
+                        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "11px", color: "#6B7C93", fontFamily: "inherit" }}>
                         Copier
                       </button>
                       <button onClick={() => deleteContent(c._id)}
-                        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "12px", color: "#424245" }}
+                        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "12px", color: "#425466" }}
                         onMouseEnter={e => e.target.style.color = "#ef4444"}
-                        onMouseLeave={e => e.target.style.color = "#424245"}>✕</button>
+                        onMouseLeave={e => e.target.style.color = "#425466"}>✕</button>
                     </div>
                   </div>
-                  <div style={{ fontSize: "12px", color: "#86868B", marginBottom: "6px" }}>{c.topic}</div>
-                  <div style={{ fontSize: "13px", color: "#86868B", lineHeight: 1.6, whiteSpace: "pre-wrap", maxHeight: "120px", overflow: "hidden" }}>
+                  <div style={{ fontSize: "12px", color: "#6B7C93", marginBottom: "6px" }}>{c.topic}</div>
+                  <div style={{ fontSize: "13px", color: "#6B7C93", lineHeight: 1.6, whiteSpace: "pre-wrap", maxHeight: "120px", overflow: "hidden" }}>
                     {c.content}
                   </div>
                 </div>

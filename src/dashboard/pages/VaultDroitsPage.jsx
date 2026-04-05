@@ -11,7 +11,7 @@ const DROIT_TYPES = {
 };
 
 const STATUS_CONFIG = {
-  recue: { label: "Re\u00e7ue", color: "#86868B" },
+  recue: { label: "Re\u00e7ue", color: "#6B7C93" },
   en_cours: { label: "En cours", color: "#06b6d4" },
   traitee: { label: "Trait\u00e9e", color: "#22c55e" },
   refusee: { label: "Refus\u00e9e", color: "#ef4444" },

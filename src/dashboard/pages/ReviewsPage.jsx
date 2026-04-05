@@ -16,7 +16,7 @@ const SENTINEL_NAV = [
 ];
 
 const FILTERS = [
-  { key: "all", label: "Tous", color: "#6366f1" },
+  { key: "all", label: "Tous", color: "#635BFF" },
   { key: "positive", label: "Positifs", color: "#22c55e" },
   { key: "negative", label: "Négatifs", color: "#ef4444" },
   { key: "mixed", label: "Mixtes", color: "#f59e0b" },
@@ -69,8 +69,8 @@ export default function ReviewsPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#425466" }}>Aucune entreprise configurée</div>;
 
   return (
     <div style={{ maxWidth: "1100px" }}>
@@ -81,10 +81,10 @@ export default function ReviewsPage() {
           <span style={{ fontSize: "12px", color: "#ef4444", fontWeight: 500 }}>Sentinel</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F" }}>Avis clients</h1>
-          <span style={{ fontSize: "12px", color: "#424245" }}>{pagination?.total || 0} avis au total</span>
+          <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#0A2540" }}>Avis clients</h1>
+          <span style={{ fontSize: "12px", color: "#425466" }}>{pagination?.total || 0} avis au total</span>
         </div>
-        <p style={{ fontSize: "14px", color: "#86868B" }}>Consultez et gérez les avis de vos clients.</p>
+        <p style={{ fontSize: "14px", color: "#6B7C93" }}>Consultez et gérez les avis de vos clients.</p>
       </div>
 
       {/* Filters */}
@@ -95,8 +95,8 @@ export default function ReviewsPage() {
               style={{
                 padding: "6px 14px", fontSize: "12px", fontWeight: 500,
                 background: sentiment === f.key ? `${f.color}22` : "transparent",
-                border: `1px solid ${sentiment === f.key ? `${f.color}45` : "#E5E5EA"}`,
-                borderRadius: "6px", color: sentiment === f.key ? f.color : "#86868B",
+                border: `1px solid ${sentiment === f.key ? `${f.color}45` : "#E3E8EE"}`,
+                borderRadius: "6px", color: sentiment === f.key ? f.color : "#6B7C93",
                 cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
                 boxShadow: sentiment === f.key ? `0 0 8px ${f.color}15` : "none"
               }}>{f.label}</button>
@@ -108,8 +108,8 @@ export default function ReviewsPage() {
               style={{
                 padding: "6px 14px", fontSize: "12px", fontWeight: 500,
                 background: status === f.key ? "rgba(99,102,241,0.15)" : "transparent",
-                border: `1px solid ${status === f.key ? "rgba(99,102,241,0.35)" : "#E5E5EA"}`,
-                borderRadius: "6px", color: status === f.key ? "#818CF8" : "#86868B",
+                border: `1px solid ${status === f.key ? "rgba(99,102,241,0.35)" : "#E3E8EE"}`,
+                borderRadius: "6px", color: status === f.key ? "#635BFF" : "#6B7C93",
                 cursor: "pointer", fontFamily: "inherit", transition: "all 0.2s",
                 boxShadow: status === f.key ? "0 0 8px rgba(99,102,241,0.1)" : "none"
               }}>{f.label}</button>
@@ -122,7 +122,7 @@ export default function ReviewsPage() {
         {reviews.length > 0 ? reviews.map(r => (
           <ReviewCard key={r._id} review={r} businessId={business._id} />
         )) : (
-          <div style={{ padding: "60px", textAlign: "center", color: "#424245", border: "1px dashed #e5e7eb", borderRadius: "10px" }}>
+          <div style={{ padding: "60px", textAlign: "center", color: "#425466", border: "1px dashed #e5e7eb", borderRadius: "10px" }}>
             Aucun avis avec ces filtres
           </div>
         )}
@@ -134,9 +134,9 @@ export default function ReviewsPage() {
           {Array.from({ length: pagination.pages }, (_, i) => (
             <button key={i} onClick={() => setPage(i + 1)}
               style={{
-                width: "36px", height: "36px", borderRadius: "8px", border: `1px solid ${page === i + 1 ? "#6366f150" : "#E5E5EA"}`,
+                width: "36px", height: "36px", borderRadius: "8px", border: `1px solid ${page === i + 1 ? "#6366f150" : "#E3E8EE"}`,
                 background: page === i + 1 ? "linear-gradient(135deg, #6366f1, #818CF8)" : "transparent",
-                color: page === i + 1 ? "#ffffff" : "#86868B",
+                color: page === i + 1 ? "#ffffff" : "#6B7C93",
                 cursor: "pointer", fontFamily: "inherit", fontSize: "13px", fontWeight: 500,
                 transition: "all 0.2s"
               }}>{i + 1}</button>

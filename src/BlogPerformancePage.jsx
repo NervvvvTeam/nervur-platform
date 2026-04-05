@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
+import LogoNervur from "./components/LogoNervur";
 
-const BG = "#F5F5F7";
+const BG = "#FFFFFF";
 const V = "#FFFFFF";
-const V2 = "#424245";
-const V3 = "#86868B";
+const V2 = "#425466";
+const V3 = "#6B7C93";
 const ACCENT = "#8b5cf6";
 const ACCENT2 = "#4ADE80";
 const VG = (a) => `rgba(161,161,170,${a})`;
@@ -196,7 +197,7 @@ function TableOfContents({ sections, activeId, isMobile }) {
       {sections.map((s, i) => (
         <div key={i} onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
           style={{
-            fontSize: "12px", color: activeId === s.id ? ACCENT : "#86868B", cursor: "pointer",
+            fontSize: "12px", color: activeId === s.id ? ACCENT : "#6B7C93", cursor: "pointer",
             padding: "6px 0 6px 12px", borderLeft: `2px solid ${activeId === s.id ? ACCENT : "transparent"}`,
             transition: "all 0.3s", lineHeight: 1.5,
           }}>
@@ -308,18 +309,18 @@ export default function BlogPerformancePage() {
         backdropFilter: "blur(12px)",
         borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}>
-        <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+        <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button onClick={() => navigate("/")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#424245",
+            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#425466",
             transition: "all 0.15s",
           }}>ACCUEIL</button>
           <button onClick={() => navigate("/contact")} style={{
             padding: "8px 20px", borderRadius: "8px", fontSize: "12px", fontWeight: 600,
             letterSpacing: "1px", cursor: "pointer", fontFamily: "inherit",
-            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#424245",
+            background: "transparent", border: "1px solid rgba(0,0,0,0.08)", color: "#425466",
             transition: "all 0.15s",
           }}>CONTACT</button>
         </div>
@@ -334,7 +335,7 @@ export default function BlogPerformancePage() {
       <div style={{ maxWidth: "720px", margin: "0 auto", padding: isMobile ? "100px 20px 60px" : "120px 24px 60px", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", boxSizing: "border-box" }}>
         {/* Back button */}
         <button onClick={() => navigate(-1)} style={{
-          background: "none", border: "none", color: "#86868B", fontSize: "13px",
+          background: "none", border: "none", color: "#6B7C93", fontSize: "13px",
           cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: "6px",
           marginBottom: "24px", padding: 0
         }}>
@@ -404,7 +405,7 @@ export default function BlogPerformancePage() {
           </P>
           {[
             { num: "01", title: "Visibilite locale : etre trouve par les bons clients", desc: "Votre fiche Google Business Profile est votre actif digital le plus precieux. Elle doit etre complete, a jour et enrichie regulierement : photos, horaires, description, categories, produits et services. Les entreprises avec une fiche completement remplie reçoivent 7 fois plus de clics que les fiches incompletes. Ajoutez-y des publications regulieres et des reponses systematiques aux avis pour booster votre classement local.", color: ACCENT },
-            { num: "02", title: "E-reputation : transformer les avis en levier de croissance", desc: "Les avis ne sont pas une fatalite — ils sont un outil de vente. Une strategie d'e-reputation proactive comprend : la collecte systematique d'avis aupres des clients satisfaits, la reponse rapide et professionnelle a chaque avis (positif ou negatif), la surveillance multiplateforme et l'analyse des tendances. Un outil comme Sentinel automatise ces taches et transforme la gestion des avis en un avantage concurrentiel.", color: "#818CF8" },
+            { num: "02", title: "E-reputation : transformer les avis en levier de croissance", desc: "Les avis ne sont pas une fatalite — ils sont un outil de vente. Une strategie d'e-reputation proactive comprend : la collecte systematique d'avis aupres des clients satisfaits, la reponse rapide et professionnelle a chaque avis (positif ou negatif), la surveillance multiplateforme et l'analyse des tendances. Un outil comme Sentinel automatise ces taches et transforme la gestion des avis en un avantage concurrentiel.", color: "#635BFF" },
             { num: "03", title: "Conformite juridique : proteger son entreprise et rassurer ses clients", desc: "La conformite RGPD n'est pas seulement une obligation legale — c'est un signal de confiance. Les entreprises qui affichent clairement leur conformite convertissent 12% de plus que les autres. Les fondamentaux : politique de confidentialite a jour, bandeau cookies conforme, registre des traitements, procedures de gestion des droits. Un outil comme Vault simplifie et automatise l'ensemble du processus.", color: "#06b6d4" },
           ].map((m, i) => (
             <div key={i} style={{ display: "flex", gap: "20px", margin: "24px 0", padding: "24px", background: "rgba(255,255,255,0.015)", borderRadius: "8px", border: `1px solid ${VG(0.06)}` }}>
@@ -500,7 +501,7 @@ export default function BlogPerformancePage() {
             <span style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: V3, display: "block", marginBottom: "20px" }}>Articles connexes</span>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
-                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#818CF8" },
+                { title: "E-reputation : pourquoi 90% des PME perdent des clients sans le savoir", path: "/blog/e-reputation", color: "#635BFF" },
                 { title: "Conformite RGPD : guide complet pour les TPE/PME en 2026", path: "/blog/conformite-juridique", color: "#06b6d4" },
               ].map((a, i) => (
                 <div key={i} onClick={() => navigate(a.path)} style={{
@@ -537,7 +538,7 @@ export default function BlogPerformancePage() {
           <div style={{ fontSize: "13px", color: V3 }}>
             <span style={{ fontWeight: 600, color: V2 }}>L'equipe NERVUR</span> &middot; 15 mars 2026 &middot; 11 min de lecture
           </div>
-          <span onClick={() => navigate("/")} style={{ fontSize: "18px", fontWeight: 800, cursor: "pointer", fontFamily: "'Inter', system-ui, sans-serif", letterSpacing: "1px" }}>NERV<span style={{ color: "#818CF8" }}>{String.fromCharCode(220)}</span>R</span>
+          <LogoNervur height={28} onClick={() => navigate("/")} />
         </div>
       </div>
     </div>
