@@ -119,14 +119,14 @@ export default function ContactPage() {
   const inputBase = {
     width: "100%",
     padding: "14px 16px",
-    background: "rgba(24,24,27,0.6)",
-    border: "1px solid rgba(255,255,255,0.1)",
-    color: "#FAFAFA",
+    background: "rgba(255,255,255,0.8)",
+    border: "1px solid rgba(0,0,0,0.08)",
+    color: "#1D1D1F",
     fontSize: "15px",
     outline: "none",
     borderRadius: "8px",
     transition: "border-color 0.2s, background 0.2s",
-    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
     boxSizing: "border-box",
     letterSpacing: "0.2px",
   };
@@ -135,7 +135,7 @@ export default function ContactPage() {
     fontSize: "12px",
     fontWeight: 600,
     letterSpacing: "0.5px",
-    color: "#A1A1AA",
+    color: "#86868B",
     display: "block",
     marginBottom: "8px",
   };
@@ -146,8 +146,8 @@ export default function ContactPage() {
       e.target.style.background = "rgba(24,24,27,0.8)";
     },
     onBlur: (e) => {
-      e.target.style.borderColor = "rgba(255,255,255,0.1)";
-      e.target.style.background = "rgba(24,24,27,0.6)";
+      e.target.style.borderColor = "rgba(0,0,0,0.08)";
+      e.target.style.background = "rgba(255,255,255,0.8)";
     },
   };
 
@@ -155,8 +155,8 @@ export default function ContactPage() {
   if (sent) {
     return (
       <div style={{
-        background: "#0f1117", color: "#FAFAFA",
-        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        background: "#F5F5F7", color: "#1D1D1F",
+        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
         minHeight: "100vh", display: "flex", flexDirection: "column",
         justifyContent: "center", alignItems: "center",
         padding: "48px", textAlign: "center",
@@ -175,16 +175,16 @@ export default function ContactPage() {
         }}>
           Message envoyé !
         </h2>
-        <p style={{ fontSize: "16px", color: "#A1A1AA", lineHeight: 1.8, maxWidth: "440px" }}>
+        <p style={{ fontSize: "16px", color: "#86868B", lineHeight: 1.8, maxWidth: "440px" }}>
           Nous avons bien reçu votre message. Notre équipe vous recontacte sous{" "}
-          <strong style={{ color: "#FAFAFA" }}>24 heures</strong>.
+          <strong style={{ color: "#1D1D1F" }}>24 heures</strong>.
         </p>
         <button
           onClick={() => navigate("/")}
           style={{
             marginTop: "36px", padding: "14px 36px",
             background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-            color: "#FAFAFA", fontSize: "14px", fontWeight: 600,
+            color: "#1D1D1F", fontSize: "14px", fontWeight: 600,
             border: "none", borderRadius: "8px", cursor: "pointer",
             transition: "opacity 0.2s", fontFamily: "inherit",
           }}
@@ -206,8 +206,8 @@ export default function ContactPage() {
 
   return (
     <div style={{
-      background: "#0f1117", color: "#FAFAFA",
-      fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      background: "#F5F5F7", color: "#1D1D1F",
+      fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       minHeight: "100vh", position: "relative",
     }}>
       <style>{`
@@ -219,12 +219,12 @@ export default function ContactPage() {
         }
         .contact-nav-btn {
           cursor: pointer; background: transparent;
-          border: 1px solid rgba(255,255,255,0.12); color: #A1A1AA;
+          border: 1px solid rgba(0,0,0,0.1); color: #A1A1AA;
           font-weight: 600; font-size: 12px; letter-spacing: 1.5px;
           text-transform: uppercase; padding: 8px 20px;
           font-family: inherit; transition: all 0.2s; border-radius: 6px;
         }
-        .contact-nav-btn:hover { color: #FAFAFA; border-color: rgba(255,255,255,0.3); }
+        .contact-nav-btn:hover { color: #FAFAFA; border-color: rgba(0,0,0,0.15); }
       `}</style>
 
       {/* NAV */}
@@ -233,7 +233,7 @@ export default function ContactPage() {
         padding: isMobile ? "12px 20px" : "20px 48px",
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         background: "rgba(9,9,11,0.92)", backdropFilter: "blur(24px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(0,0,0,0.06)",
       }}>
         <LogoNervur height={28} onClick={() => navigate("/")} />
         <button className="contact-nav-btn" onClick={() => navigate("/")}>
@@ -245,11 +245,11 @@ export default function ContactPage() {
       <div style={{ padding: isMobile ? "100px 20px 0 20px" : "140px 48px 0 48px", maxWidth: "1100px", margin: "0 auto" }}>
         <button onClick={() => navigate("/")} style={{
           background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
-          color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+          color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
           fontFamily: "inherit", transition: "all 0.3s",
         }}
-          onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
-          onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
+          onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
           ← Retour
         </button>
       </div>
@@ -277,7 +277,7 @@ export default function ContactPage() {
             }}>nous</span>
           </h1>
           <p style={{
-            fontSize: "17px", color: "#71717A", lineHeight: 1.7, maxWidth: "520px", margin: "0 auto",
+            fontSize: "17px", color: "#86868B", lineHeight: 1.7, maxWidth: "520px", margin: "0 auto",
           }}>
             Une question sur nos outils ? Un projet web ? Parlons-en.
           </p>
@@ -293,7 +293,7 @@ export default function ContactPage() {
           {/* ──── LEFT: FORM ──── */}
           <div style={{
             background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.06)",
+            border: "1px solid rgba(0,0,0,0.06)",
             borderRadius: "12px",
             padding: isMobile ? "28px 20px" : "36px 32px",
             animation: "fadeInUp 0.5s ease 0.1s both",
@@ -354,7 +354,7 @@ export default function ContactPage() {
                 {/* Téléphone */}
                 <div>
                   <label htmlFor="contact-tel" style={labelStyle}>
-                    Téléphone <span style={{ color: "#52525B", fontWeight: 400 }}>(facultatif)</span>
+                    Téléphone <span style={{ color: "#86868B", fontWeight: 400 }}>(facultatif)</span>
                   </label>
                   <input
                     id="contact-tel" name="tel" type="tel"
@@ -432,7 +432,7 @@ export default function ContactPage() {
                   />
                   <label htmlFor="contact-consent" style={{
                     fontSize: "13px",
-                    color: "#A1A1AA",
+                    color: "#86868B",
                     lineHeight: 1.6,
                     cursor: "pointer",
                   }}>
@@ -455,7 +455,7 @@ export default function ContactPage() {
                   style={{
                     padding: "16px 32px",
                     background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                    color: "#FAFAFA",
+                    color: "#1D1D1F",
                     fontSize: "15px",
                     fontWeight: 700,
                     letterSpacing: "0.5px",
@@ -492,13 +492,13 @@ export default function ContactPage() {
             {/* Nos outils */}
             <div style={{
               background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              border: "1px solid rgba(0,0,0,0.06)",
               borderRadius: "12px",
               padding: "24px",
             }}>
               <h3 style={{
                 fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px",
-                textTransform: "uppercase", color: "#A1A1AA",
+                textTransform: "uppercase", color: "#86868B",
                 marginBottom: "16px",
               }}>
                 Nos outils
@@ -521,11 +521,11 @@ export default function ContactPage() {
                           fontSize: "14px", fontWeight: 700, color: t.color,
                         }}>{t.name}</span>
                         <span style={{
-                          fontSize: "12px", fontWeight: 600, color: "#D4D4D8",
+                          fontSize: "12px", fontWeight: 600, color: "#424245",
                           marginLeft: "auto", whiteSpace: "nowrap",
                         }}>{t.price}</span>
                       </div>
-                      <span style={{ fontSize: "12px", color: "#71717A" }}>{t.desc}</span>
+                      <span style={{ fontSize: "12px", color: "#86868B" }}>{t.desc}</span>
                     </div>
                   </div>
                 ))}
@@ -535,13 +535,13 @@ export default function ContactPage() {
             {/* Nos packs */}
             <div style={{
               background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              border: "1px solid rgba(0,0,0,0.06)",
               borderRadius: "12px",
               padding: "24px",
             }}>
               <h3 style={{
                 fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px",
-                textTransform: "uppercase", color: "#A1A1AA",
+                textTransform: "uppercase", color: "#86868B",
                 marginBottom: "16px",
               }}>
                 Nos packs
@@ -552,11 +552,11 @@ export default function ContactPage() {
                     display: "flex", justifyContent: "space-between", alignItems: "center",
                     padding: "12px 14px", borderRadius: "8px",
                     background: "rgba(255,255,255,0.02)",
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(0,0,0,0.06)",
                   }}>
                     <div>
-                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#FAFAFA" }}>{p.name}</div>
-                      <div style={{ fontSize: "12px", color: "#71717A" }}>{p.desc}</div>
+                      <div style={{ fontSize: "14px", fontWeight: 700, color: "#1D1D1F" }}>{p.name}</div>
+                      <div style={{ fontSize: "12px", color: "#86868B" }}>{p.desc}</div>
                     </div>
                     <span style={{
                       fontSize: "14px", fontWeight: 700,
@@ -572,7 +572,7 @@ export default function ContactPage() {
             {/* Contact info */}
             <div style={{
               background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
+              border: "1px solid rgba(0,0,0,0.06)",
               borderRadius: "12px",
               padding: "24px",
             }}>
@@ -580,18 +580,18 @@ export default function ContactPage() {
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                   <a href="mailto:contact@nervur.fr" style={{
-                    fontSize: "14px", color: "#D4D4D8", textDecoration: "none",
+                    fontSize: "14px", color: "#424245", textDecoration: "none",
                     transition: "color 0.2s",
                   }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#FAFAFA")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#D4D4D8")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "#1D1D1F")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "#424245")}
                   >
                     contact@nervur.fr
                   </a>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <span style={{ fontSize: "14px", color: "#71717A" }}>
+                  <span style={{ fontSize: "14px", color: "#86868B" }}>
                     Réponse sous 24h
                   </span>
                 </div>
@@ -605,9 +605,9 @@ export default function ContactPage() {
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
                 padding: "12px 20px",
                 background: "transparent",
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid rgba(0,0,0,0.08)",
                 borderRadius: "8px",
-                color: "#A1A1AA",
+                color: "#86868B",
                 fontSize: "13px",
                 fontWeight: 600,
                 cursor: "pointer",
@@ -615,12 +615,12 @@ export default function ContactPage() {
                 fontFamily: "inherit",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
-                e.currentTarget.style.color = "#FAFAFA";
+                e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)";
+                e.currentTarget.style.color = "#1D1D1F";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-                e.currentTarget.style.color = "#A1A1AA";
+                e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)";
+                e.currentTarget.style.color = "#86868B";
               }}
             >
               Espace client →
@@ -632,7 +632,7 @@ export default function ContactPage() {
       {/* FOOTER */}
       <footer style={{
         padding: isMobile ? "24px 20px" : "32px 48px",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        borderTop: "1px solid rgba(0,0,0,0.06)",
         display: "flex",
         flexDirection: isMobile ? "column" : "row",
         justifyContent: "space-between",

@@ -15,7 +15,7 @@ export default function PolitiqueConfidentialitePage() {
   const VG = (a) => `rgba(255,255,255,${a})`;
 
   return (
-    <main style={{ background: "#0f1117", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh" }}>
+    <main style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 48px", borderBottom: `1px solid ${VG(0.08)}` }}>
         <LogoNervur height={28} onClick={() => navigate("/")} />
         <button onClick={() => navigate("/")} style={{ background: "transparent", border: "1px solid rgba(129,140,248,0.25)", color: "#a1a1aa", padding: "8px 22px", fontSize: "11px", letterSpacing: "2.5px", textTransform: "uppercase", cursor: "pointer", fontFamily: "inherit" }}>
@@ -118,7 +118,7 @@ export default function PolitiqueConfidentialitePage() {
           </p>
         </section>
 
-        <div style={{ marginTop: "40px", padding: "16px", border: `1px solid ${VG(0.08)}`, fontSize: "12px", color: "#52525B" }}>
+        <div style={{ marginTop: "40px", padding: "16px", border: `1px solid ${VG(0.08)}`, fontSize: "12px", color: "#86868B" }}>
           Dernière mise à jour : mars 2026
         </div>
       </div>

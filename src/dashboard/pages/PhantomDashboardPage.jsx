@@ -44,13 +44,13 @@ function ScoreCircle({ score, label, color, size = 80 }) {
     <div className="text-center">
       <div className="relative mx-auto" style={{ width: size, height: size }}>
         <svg width={size} height={size} className="-rotate-90">
-          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#2a2d3a" strokeWidth="5" />
+          <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke="#E5E5EA" strokeWidth="5" />
           <circle cx={size/2} cy={size/2} r={radius} fill="none" stroke={color || scoreColor}
             strokeWidth="5" strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={offset}
             className="transition-[stroke-dashoffset] duration-1000 ease-out" />
         </svg>
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-          <span className="font-semibold text-[#f0f0f3]" style={{ fontSize: size > 70 ? "22px" : "18px" }}>{score}</span>
+          <span className="font-semibold text-[#1D1D1F]" style={{ fontSize: size > 70 ? "22px" : "18px" }}>{score}</span>
         </div>
       </div>
       <div className="text-xs text-[#9ca3af] mt-2">{label}</div>
@@ -62,14 +62,14 @@ function CWVItem({ label, data }) {
   if (!data) return null;
   const colors = { good: "#10b981", "needs-improvement": "#f59e0b", poor: "#ef4444" };
   return (
-    <div className="px-[18px] py-[14px] bg-[#1e2029] border border-[#2a2d3a] rounded-lg flex justify-between items-center shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+    <div className="px-[18px] py-[14px] bg-white border border-[#E5E5EA] rounded-lg flex justify-between items-center shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
       <div>
         <div className="text-[11px] text-[#9ca3af] mb-1">{label}</div>
-        <div className="text-[17px] font-semibold text-[#f0f0f3]">
+        <div className="text-[17px] font-semibold text-[#1D1D1F]">
           {data.display || `${data.value}${data.unit}`}
         </div>
       </div>
-      <div className="w-2.5 h-2.5 rounded-full" style={{ background: colors[data.status] || "#9ca3af" }} />
+      <div className="w-2.5 h-2.5 rounded-full" style={{ background: colors[data.status] || "#86868B" }} />
     </div>
   );
 }
@@ -258,7 +258,7 @@ export default function PhantomDashboardPage() {
           <div className="w-2 h-2 rounded-full bg-[#8b5cf6]" />
           <span className="text-xs text-[#8b5cf6] font-medium">Phantom</span>
         </div>
-        <h1 className="text-[22px] font-semibold text-[#f0f0f3] mb-1.5">
+        <h1 className="text-[22px] font-semibold text-[#1D1D1F] mb-1.5">
           Audit de performance
         </h1>
         <p className="text-sm text-[#9ca3af]">
@@ -267,12 +267,12 @@ export default function PhantomDashboardPage() {
       </div>
 
       {/* URL Input */}
-      <div className="flex gap-2.5 mb-8 p-5 bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+      <div className="flex gap-2.5 mb-8 p-5 bg-white border border-[#E5E5EA] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
         <input
           type="text" value={url} onChange={e => setUrl(e.target.value)}
           placeholder="https://exemple.com"
           onKeyDown={e => e.key === "Enter" && !loading && runAudit()}
-          className="flex-1 px-4 py-3 bg-[#1e2029] border border-[#2a2d3a] rounded-lg text-[#f0f0f3] text-sm font-[inherit] outline-none box-border transition-[border-color,box-shadow] duration-200 focus:border-[#8b5cf6] focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
+          className="flex-1 px-4 py-3 bg-white border border-[#E5E5EA] rounded-lg text-[#1D1D1F] text-sm font-[inherit] outline-none box-border transition-[border-color,box-shadow] duration-200 focus:border-[#8b5cf6] focus:shadow-[0_0_0_3px_rgba(139,92,246,0.15)]"
         />
         <button onClick={runAudit} disabled={loading || !url.trim()}
           className="px-7 py-3 bg-gradient-to-br from-[#8b5cf6] to-[#a78bfa] text-white border-none rounded-lg text-sm font-medium font-[inherit] whitespace-nowrap shadow-[0_4px_16px_rgba(139,92,246,0.25)] disabled:opacity-50"
@@ -283,7 +283,7 @@ export default function PhantomDashboardPage() {
 
       {/* Progress */}
       {loading && (
-        <div className="p-6 bg-[#1e2029] border border-[#8b5cf630] border-l-[3px] border-l-[#8b5cf6] rounded-[10px] mb-6">
+        <div className="p-6 bg-white border border-[#8b5cf630] border-l-[3px] border-l-[#8b5cf6] rounded-[10px] mb-6">
           <div className="flex justify-between mb-3">
             <span className="text-sm text-[#6b7280]">{phase}</span>
             <span className="text-sm text-[#8b5cf6] font-medium">{progress}%</span>
@@ -323,7 +323,7 @@ export default function PhantomDashboardPage() {
                 <select
                   value={selectedCompareId}
                   onChange={e => handleCompare(e.target.value)}
-                  className="px-3 py-2 bg-[#1e2029] border border-[#2a2d3a] rounded-lg text-[#f0f0f3] text-[13px] font-[inherit] cursor-pointer outline-none min-w-[220px]"
+                  className="px-3 py-2 bg-white border border-[#E5E5EA] rounded-lg text-[#1D1D1F] text-[13px] font-[inherit] cursor-pointer outline-none min-w-[220px]"
                 >
                   <option value="">Comparer avec un audit précédent</option>
                   {previousAudits.map(a => (
@@ -338,13 +338,13 @@ export default function PhantomDashboardPage() {
 
           {/* Comparison results */}
           {comparingLoading && (
-            <div className="p-5 bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] mb-4 text-center text-[#9ca3af] text-sm">
+            <div className="p-5 bg-white border border-[#E5E5EA] rounded-[10px] mb-4 text-center text-[#9ca3af] text-sm">
               Comparaison en cours...
             </div>
           )}
 
           {comparison && !comparingLoading && (
-            <div className="p-6 bg-[#1e2029] border border-[#2a2d3a] border-l-[3px] border-l-[#a78bfa] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+            <div className="p-6 bg-white border border-[#E5E5EA] border-l-[3px] border-l-[#a78bfa] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
               <div className="text-[13px] text-[#9ca3af] mb-[18px] flex items-center gap-1.5">
                 <span className="w-[5px] h-[5px] rounded-full bg-[#a78bfa] inline-block" />
                 Comparaison avec l'audit du {formatDate(comparison.previous?.date)}
@@ -357,12 +357,12 @@ export default function PhantomDashboardPage() {
                   if (!comp) return null;
                   const labels = { global: "Global", performance: "Perf.", accessibility: "A11y", seo: "SEO", bestPractices: "BP" };
                   return (
-                    <div key={key} className="px-2.5 py-[14px] bg-[#161820] border border-[#2a2d3a] rounded-lg text-center">
+                    <div key={key} className="px-2.5 py-[14px] bg-[#161820] border border-[#E5E5EA] rounded-lg text-center">
                       <div className="text-[11px] text-[#9ca3af] mb-2">{labels[key]}</div>
                       <div className="flex justify-center items-center gap-2">
                         <span className="text-xs text-[#6b7280]">{comp.previous}</span>
                         <span className="text-sm text-[#9ca3af]">{"→"}</span>
-                        <span className="text-[15px] font-semibold text-[#f0f0f3]">{comp.current}</span>
+                        <span className="text-[15px] font-semibold text-[#1D1D1F]">{comp.current}</span>
                       </div>
                       <div className="mt-1.5">
                         <ComparisonArrow diff={comp.diff} />
@@ -387,7 +387,7 @@ export default function PhantomDashboardPage() {
           )}
 
           {/* Scores */}
-          <div className="p-7 bg-[#1e2029] border border-[#2a2d3a] border-l-[3px] border-l-[#8b5cf6] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+          <div className="p-7 bg-white border border-[#E5E5EA] border-l-[3px] border-l-[#8b5cf6] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
             <div className="text-[13px] text-[#9ca3af] mb-6 flex items-center gap-1.5"><span className="w-[5px] h-[5px] rounded-full bg-[#8b5cf6] inline-block" />Scores Lighthouse</div>
             <div className="grid grid-cols-5 gap-4 justify-items-center">
               <ScoreCircle score={result.scores.global || Math.round((result.scores.performance + result.scores.accessibility + result.scores.seo + (result.scores.bestPractices || 0)) / 4)} label="Global" size={90} color="#8b5cf6" />
@@ -400,7 +400,7 @@ export default function PhantomDashboardPage() {
 
           {/* Core Web Vitals */}
           {result.coreWebVitals && (
-            <div className="p-6 bg-[#1e2029] border border-[#2a2d3a] border-l-[3px] border-l-[#3b82f6] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+            <div className="p-6 bg-white border border-[#E5E5EA] border-l-[3px] border-l-[#3b82f6] rounded-[10px] mb-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
               <div className="text-[13px] text-[#9ca3af] mb-4 flex items-center gap-1.5"><span className="w-[5px] h-[5px] rounded-full bg-[#3b82f6] inline-block" />Core Web Vitals</div>
               <div className="grid grid-cols-3 gap-2.5">
                 <CWVItem label="LCP" data={result.coreWebVitals.lcp} />
@@ -422,7 +422,7 @@ export default function PhantomDashboardPage() {
           )}
 
           {/* Issues */}
-          <div className="p-6 bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+          <div className="p-6 bg-white border border-[#E5E5EA] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
             <div className="flex justify-between items-center mb-[18px]">
               <div className="text-[13px] text-[#9ca3af] flex items-center gap-1.5">
                 <span className="w-[5px] h-[5px] rounded-full bg-[#ef4444] inline-block" />Problèmes détectés ({result.issues?.length || 0})
@@ -432,8 +432,8 @@ export default function PhantomDashboardPage() {
                   <button key={f} onClick={() => setFilter(f)}
                     className="px-3 py-1 rounded border-none text-xs cursor-pointer font-[inherit]"
                     style={{
-                      background: filter === f ? (f === "all" ? "#2a2d3a" : SEVERITY_COLORS[f] + "20") : "transparent",
-                      color: filter === f ? (f === "all" ? "#f0f0f3" : SEVERITY_COLORS[f]) : "#9ca3af",
+                      background: filter === f ? (f === "all" ? "#E5E5EA" : SEVERITY_COLORS[f] + "20") : "transparent",
+                      color: filter === f ? (f === "all" ? "#1D1D1F" : SEVERITY_COLORS[f]) : "#86868B",
                     }}>
                     {f === "all" ? "Tous" : f === "critical" ? "Critique" : f === "warning" ? "Attention" : "Info"}
                   </button>
@@ -443,17 +443,17 @@ export default function PhantomDashboardPage() {
 
             <div className="flex flex-col gap-2">
               {filteredIssues.map((issue, i) => (
-                <div key={i} className="px-5 py-4 bg-[#1e2029] border border-[#2a2d3a] rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.2)]"
-                  style={{ borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#9ca3af"}` }}>
+                <div key={i} className="px-5 py-4 bg-white border border-[#E5E5EA] rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
+                  style={{ borderLeft: `3px solid ${SEVERITY_COLORS[issue.severity] || "#86868B"}` }}>
                   <div className="flex items-center gap-2.5 mb-1.5">
                     <span className="text-[11px] font-medium px-2 py-0.5 rounded"
                       style={{
-                        background: (SEVERITY_COLORS[issue.severity] || "#9ca3af") + "18",
-                        color: SEVERITY_COLORS[issue.severity] || "#9ca3af",
+                        background: (SEVERITY_COLORS[issue.severity] || "#86868B") + "18",
+                        color: SEVERITY_COLORS[issue.severity] || "#86868B",
                       }}>
                       {issue.severity === "critical" ? "Critique" : issue.severity === "warning" ? "Attention" : "Info"}
                     </span>
-                    <span className="text-[11px]" style={{ color: CATEGORY_COLORS[issue.category] || "#9ca3af" }}>
+                    <span className="text-[11px]" style={{ color: CATEGORY_COLORS[issue.category] || "#86868B" }}>
                       {CATEGORY_LABELS[issue.category] || issue.category}
                     </span>
                     {issue.impact && (
@@ -485,7 +485,7 @@ export default function PhantomDashboardPage() {
           {/* New audit */}
           <div className="mt-6 text-center">
             <button onClick={() => { setResult(null); setUrl(""); setError(""); setProgress(0); setComparison(null); setSelectedCompareId(""); setPreviousAudits([]); }}
-              className="px-6 py-2.5 bg-transparent border border-[#2a2d3a] rounded-lg text-[#6b7280] text-[13px] cursor-pointer font-[inherit]">
+              className="px-6 py-2.5 bg-transparent border border-[#E5E5EA] rounded-lg text-[#6b7280] text-[13px] cursor-pointer font-[inherit]">
               Nouvel audit
             </button>
           </div>

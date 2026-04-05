@@ -30,7 +30,7 @@ const GlobeIcon = ({ size = 20, color = ACCENT }) => (
   </svg>
 );
 
-const ClockIcon = ({ size = 14, color = "#9ca3af" }) => (
+const ClockIcon = ({ size = 14, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
   </svg>
@@ -64,7 +64,7 @@ function ScoreGauge({ score }) {
     <div className="flex flex-col items-center gap-2">
       <svg height={radius * 2} width={radius * 2} className="-rotate-90">
         <circle
-          stroke="#2a2d3a"
+          stroke="#E5E5EA"
           fill="transparent"
           strokeWidth={stroke}
           r={normalizedRadius}
@@ -108,7 +108,7 @@ function ComplianceCard({ keyName, result }) {
   const bgColor = isPass ? "rgba(34,197,94,0.04)" : "rgba(239,68,68,0.04)";
 
   return (
-    <div className="rounded-[10px] px-5 py-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.2)]" style={{
+    <div className="rounded-[10px] px-5 py-[18px] shadow-[0_2px_8px_rgba(0,0,0,0.06)]" style={{
       border: `1px solid ${borderColor}`,
       background: bgColor,
     }}>
@@ -118,7 +118,7 @@ function ComplianceCard({ keyName, result }) {
         </div>
         <div className="flex-1">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-sm font-semibold text-[#f0f0f3]">
+            <span className="text-sm font-semibold text-[#1D1D1F]">
               {info.label}
             </span>
             <span className="text-[11px] font-semibold px-2 py-0.5 rounded" style={{
@@ -343,7 +343,7 @@ export default function VaultRgpdPage() {
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
             Scan RGPD
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -361,7 +361,7 @@ export default function VaultRgpdPage() {
           <GlobeIcon size={20} color={ACCENT} />
         </div>
         <div className="text-[13px] text-[#d1d5db] leading-[1.7]">
-          <strong className="text-[#f0f0f3]">Vault — Scan RGPD</strong>
+          <strong className="text-[#1D1D1F]">Vault — Scan RGPD</strong>
           <br />
           Entrez l'adresse de votre site web pour vérifier sa conformité juridique. L'outil vérifie 8 points
           essentiels : mentions légales, politique de confidentialité, cookies, CGV, contacts, HTTPS, trackers et consentement.
@@ -373,10 +373,10 @@ export default function VaultRgpdPage() {
       </div>
 
       {/* Scan form */}
-      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+      <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-7">
         <div className="flex items-center gap-2 mb-5">
           <GlobeIcon size={18} color={ACCENT} />
-          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
             Analyser un site
           </h2>
         </div>
@@ -388,7 +388,7 @@ export default function VaultRgpdPage() {
               value={url}
               onChange={e => setUrl(e.target.value)}
               placeholder="https://monsite.fr"
-              className="w-full px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
+              className="w-full px-3.5 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]"
               onKeyDown={e => { if (e.key === "Enter") handleScan(); }}
             />
             <div className="text-[11px] text-[#6b7280] mt-1">
@@ -400,8 +400,8 @@ export default function VaultRgpdPage() {
             disabled={loading}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg border-none text-sm font-semibold font-[inherit] transition-all duration-150 whitespace-nowrap shrink-0"
             style={{
-              background: loading ? "#2a2d3a" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
-              color: loading ? "#6b7280" : "#0f0f11",
+              background: loading ? "#E5E5EA" : `linear-gradient(135deg, ${ACCENT}, #22d3ee)`,
+              color: loading ? "#86868B" : "#0f0f11",
               cursor: loading ? "not-allowed" : "pointer",
               boxShadow: loading ? "none" : "0 4px 16px rgba(6,182,212,0.25)",
             }}
@@ -429,11 +429,11 @@ export default function VaultRgpdPage() {
 
       {/* Loading */}
       {loading && !scan && (
-        <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+        <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center">
           <div className="mb-5">
             <div className="w-16 h-16 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[rgpd-spin_1s_linear_infinite]" />
           </div>
-          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
+          <div className="text-base font-semibold text-[#1D1D1F] mb-2">
             Analyse RGPD en cours...
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed">
@@ -450,7 +450,7 @@ export default function VaultRgpdPage() {
           <div className="flex items-center justify-between mb-5">
             <div className="flex items-center gap-2">
               <ShieldIcon size={18} color={ACCENT} />
-              <h2 className="text-base font-semibold text-[#f0f0f3] m-0">
+              <h2 className="text-base font-semibold text-[#1D1D1F] m-0">
                 Résultats \u2014 {scan.domain}
               </h2>
             </div>
@@ -460,14 +460,14 @@ export default function VaultRgpdPage() {
                 disabled={downloadingPdf}
                 className="inline-flex items-center gap-1.5 px-3.5 py-[7px] rounded-md border-none text-white text-xs font-medium font-[inherit] transition-all duration-150"
                 style={{
-                  background: downloadingPdf ? "#2a2d3a" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
+                  background: downloadingPdf ? "#E5E5EA" : "linear-gradient(135deg, #06b6d4, #22d3ee)",
                   cursor: downloadingPdf ? "not-allowed" : "pointer",
                   opacity: downloadingPdf ? 0.7 : 1,
                 }}
               >
                 {downloadingPdf ? (
                   <>
-                    <div className="w-[13px] h-[13px] border-2 border-[rgba(255,255,255,0.3)] border-t-white rounded-full animate-[rgpd-spin_0.8s_linear_infinite]" />
+                    <div className="w-[13px] h-[13px] border-2 border-[rgba(0,0,0,0.15)] border-t-white rounded-full animate-[rgpd-spin_0.8s_linear_infinite]" />
                     Génération...
                   </>
                 ) : (
@@ -487,7 +487,7 @@ export default function VaultRgpdPage() {
           </div>
 
           {/* Score gauge */}
-          <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
+          <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center mb-6">
             <ScoreGauge score={scan.score || 0} />
             <div className="text-[13px] text-[#9ca3af] mt-3">
               Score de conformité RGPD
@@ -506,11 +506,11 @@ export default function VaultRgpdPage() {
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-3.5">
                 <ShieldIcon size={18} color={ACCENT} />
-                <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
+                <h3 className="text-base font-semibold text-[#1D1D1F] m-0">
                   Recommandations IA
                 </h3>
               </div>
-              <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+              <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
                 <div className="text-[13px] text-[#d1d5db] leading-[1.8] whitespace-pre-wrap">
                   {scan.aiRecommendations}
                 </div>
@@ -523,7 +523,7 @@ export default function VaultRgpdPage() {
             <div className="mb-6">
               <div className="flex items-center gap-2 mb-3.5">
                 <WrenchIcon size={18} color={ACCENT} />
-                <h3 className="text-base font-semibold text-[#f0f0f3] m-0">
+                <h3 className="text-base font-semibold text-[#1D1D1F] m-0">
                   Plan d'action
                 </h3>
                 <span className="text-[11px] font-semibold text-[#06b6d4] bg-[rgba(6,182,212,0.15)] px-2 py-0.5 rounded">
@@ -531,7 +531,7 @@ export default function VaultRgpdPage() {
                 </span>
               </div>
 
-              <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.2)] p-0">
+              <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.06)] p-0">
                 {actionPlanItems.map((item, i) => (
                   <div key={item.key} className="px-6 py-5" style={{
                     borderBottom: i < actionPlanItems.length - 1 ? `1px solid ${BORDER_TINT}` : "none",
@@ -543,7 +543,7 @@ export default function VaultRgpdPage() {
                       </div>
                       <div className="flex-1">
                         {/* Issue title */}
-                        <div className="text-sm font-semibold text-[#f0f0f3] mb-2">
+                        <div className="text-sm font-semibold text-[#1D1D1F] mb-2">
                           {item.issue}
                         </div>
 
@@ -559,7 +559,7 @@ export default function VaultRgpdPage() {
 
                         {/* Estimated time */}
                         <div className="inline-flex items-center gap-1.5 text-[11px] text-[#9ca3af]">
-                          <ClockIcon size={12} color="#9ca3af" />
+                          <ClockIcon size={12} color="#86868B" />
                           Temps estimé : {item.time}
                         </div>
                       </div>
@@ -572,7 +572,7 @@ export default function VaultRgpdPage() {
 
           {/* All compliant message */}
           {actionPlanItems.length === 0 && scan.score >= 80 && (
-            <div className="bg-[rgba(34,197,94,0.06)] border border-[rgba(34,197,94,0.25)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-6">
+            <div className="bg-[rgba(34,197,94,0.06)] border border-[rgba(34,197,94,0.25)] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center mb-6">
               <CheckCircle size={40} color="#22c55e" />
               <div className="text-base font-semibold text-[#22c55e] mt-3 mb-1.5">
                 Félicitations !
@@ -589,8 +589,8 @@ export default function VaultRgpdPage() {
       {/* History section */}
       <div className="mt-4">
         <div className="flex items-center gap-2 mb-3.5">
-          <ClockIcon size={16} color="#9ca3af" />
-          <h3 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          <ClockIcon size={16} color="#86868B" />
+          <h3 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
             Historique des analyses
           </h3>
         </div>
@@ -602,7 +602,7 @@ export default function VaultRgpdPage() {
         )}
 
         {!loadingHistory && history.length === 0 && (
-          <div className="bg-[#1e2029] border border-[#2a2d3a] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center text-[#6b7280] text-[13px]">
+          <div className="bg-white border border-[#E5E5EA] rounded-[10px] px-6 py-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center text-[#6b7280] text-[13px]">
             Aucune analyse RGPD effectuée. Lancez votre première analyse ci-dessus.
           </div>
         )}
@@ -613,16 +613,16 @@ export default function VaultRgpdPage() {
               <div
                 key={h._id}
                 onClick={() => loadScanDetail(h._id)}
-                className="bg-[#1e2029] rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] cursor-pointer transition-all duration-150 flex items-center justify-between"
+                className="bg-white rounded-[10px] px-[18px] py-3.5 shadow-[0_2px_8px_rgba(0,0,0,0.06)] cursor-pointer transition-all duration-150 flex items-center justify-between"
                 style={{
                   border: selectedHistoryId === h._id ? `1px solid ${ACCENT}` : "1px solid #2a2d3a",
-                  background: selectedHistoryId === h._id ? BG_TINT : "#1e2029",
+                  background: selectedHistoryId === h._id ? BG_TINT : "#FFFFFF",
                 }}
               >
                 <div className="flex items-center gap-3">
-                  <GlobeIcon size={16} color="#6b7280" />
+                  <GlobeIcon size={16} color="#86868B" />
                   <div>
-                    <div className="text-[13px] font-semibold text-[#f0f0f3]">
+                    <div className="text-[13px] font-semibold text-[#1D1D1F]">
                       {h.domain || h.url}
                     </div>
                     <div className="text-[11px] text-[#6b7280] mt-0.5">

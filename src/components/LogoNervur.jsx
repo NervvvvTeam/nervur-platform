@@ -30,7 +30,7 @@ export default function LogoNervur({ height = 40, onClick, style = {} }) {
         borderRadius: `${Math.round(iconSize * 0.28)}px`,
         background: hovered
           ? "linear-gradient(135deg, #6366f1, #818CF8, #6366f1)"
-          : "linear-gradient(135deg, #111118, #1a1a2e)",
+          : "linear-gradient(135deg, #E5E5EA, #D1D1D6)",
         border: `1.5px solid ${hovered ? "rgba(129,140,248,0.5)" : "rgba(129,140,248,0.2)"}`,
         display: "flex",
         alignItems: "center",
@@ -40,14 +40,14 @@ export default function LogoNervur({ height = 40, onClick, style = {} }) {
         transition: "all 0.4s ease",
         boxShadow: hovered
           ? "0 0 20px rgba(99,102,241,0.4), 0 0 40px rgba(99,102,241,0.15)"
-          : "0 2px 8px rgba(0,0,0,0.3)",
+          : "0 2px 8px rgba(0,0,0,0.08)",
       }}>
         {/* Shine sweep effect */}
         <div style={{
           position: "absolute",
           top: 0, left: hovered ? "120%" : "-120%",
           width: "60%", height: "100%",
-          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)",
+          background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent)",
           transition: "left 0.6s ease",
           transform: "skewX(-20deg)",
         }} />
@@ -78,7 +78,7 @@ export default function LogoNervur({ height = 40, onClick, style = {} }) {
         fontWeight: 800,
         fontStyle: "italic",
         letterSpacing: `${Math.round(scale * 2)}px`,
-        color: "#FAFAFA",
+        color: "#1D1D1F",
         lineHeight: 1,
         position: "relative",
         transition: "all 0.3s ease",

@@ -120,7 +120,7 @@ export default function VaultChecklistPage() {
           <ChecklistIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
             Checklist de conformité
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -133,7 +133,7 @@ export default function VaultChecklistPage() {
       <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-6 mt-4" />
 
       {/* Score card */}
-      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+      <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-7">
         <div className="flex flex-col sm:flex-row items-center gap-6">
           {/* Progress bar */}
           <div className="flex-1 w-full">
@@ -143,7 +143,7 @@ export default function VaultChecklistPage() {
                 {completedCount}/{TOTAL_ITEMS} ({percentage}%)
               </span>
             </div>
-            <div className="w-full h-3 bg-[#141520] rounded-full overflow-hidden border border-[#2a2d3a]">
+            <div className="w-full h-3 bg-white rounded-full overflow-hidden border border-[#E5E5EA]">
               <div
                 className="h-full rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${percentage}%`, background: `linear-gradient(90deg, ${scoreColor}, ${scoreColor}cc)` }}
@@ -167,7 +167,7 @@ export default function VaultChecklistPage() {
           <div className="flex flex-col items-center shrink-0">
             <div className="relative w-20 h-20">
               <svg className="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="34" fill="none" stroke="#2a2d3a" strokeWidth="6" />
+                <circle cx="40" cy="40" r="34" fill="none" stroke="#E5E5EA" strokeWidth="6" />
                 <circle cx="40" cy="40" r="34" fill="none" stroke={scoreColor} strokeWidth="6"
                   strokeLinecap="round"
                   strokeDasharray={`${2 * Math.PI * 34}`}
@@ -190,7 +190,7 @@ export default function VaultChecklistPage() {
           <div key={cat.category} className="mb-6">
             <div className="flex items-center gap-2.5 mb-3">
               <div className="w-2.5 h-2.5 rounded-full" style={{ background: cat.color }} />
-              <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">{cat.category}</h2>
+              <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0">{cat.category}</h2>
               <span className="text-[12px] text-[#6b7280] ml-auto">{catCompleted}/{cat.items.length}</span>
             </div>
 
@@ -200,17 +200,17 @@ export default function VaultChecklistPage() {
                 return (
                   <div
                     key={item.id}
-                    className="bg-[#1e2029] border rounded-lg px-4 py-3 shadow-[0_1px_4px_rgba(0,0,0,0.15)] flex items-start gap-3 transition-all duration-150"
+                    className="bg-white border rounded-lg px-4 py-3 shadow-[0_1px_4px_rgba(0,0,0,0.15)] flex items-start gap-3 transition-all duration-150"
                     style={{
                       borderColor: checked ? `${cat.color}40` : "rgba(42,45,58,0.8)",
-                      background: checked ? `${cat.color}08` : "#1e2029",
+                      background: checked ? `${cat.color}08` : "#FFFFFF",
                     }}
                   >
                     <button
                       onClick={() => toggleItem(item.id)}
                       className="mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center cursor-pointer shrink-0 transition-all duration-150"
                       style={{
-                        borderColor: checked ? cat.color : "#3f3f46",
+                        borderColor: checked ? cat.color : "#AEAEB2",
                         background: checked ? cat.color : "transparent",
                       }}
                     >
@@ -223,7 +223,7 @@ export default function VaultChecklistPage() {
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className={`text-[13px] font-medium transition-all duration-150 ${checked ? "text-[#9ca3af] line-through" : "text-[#f0f0f3]"}`}>
+                        <span className={`text-[13px] font-medium transition-all duration-150 ${checked ? "text-[#9ca3af] line-through" : "text-[#1D1D1F]"}`}>
                           {item.label}
                         </span>
                         <div className="relative">
@@ -234,7 +234,7 @@ export default function VaultChecklistPage() {
                             ?
                           </button>
                           {tooltipId === item.id && (
-                            <div className="absolute left-6 top-0 z-50 w-[280px] p-3 bg-[#1a1b26] border border-[#2a2d3a] rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] text-[12px] text-[#d1d5db] leading-relaxed">
+                            <div className="absolute left-6 top-0 z-50 w-[280px] p-3 bg-[#1a1b26] border border-[#E5E5EA] rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.5)] text-[12px] text-[#d1d5db] leading-relaxed">
                               {item.tooltip}
                             </div>
                           )}

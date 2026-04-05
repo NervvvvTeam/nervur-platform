@@ -53,24 +53,24 @@ export default function LoginPage() {
           top: isWide ? 24 : 16,
           left: isWide ? 24 : 16,
           zIndex: 10,
-          background: "rgba(255,255,255,0.06)",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "rgba(0,0,0,0.06)",
+          border: "1px solid rgba(0,0,0,0.08)",
           borderRadius: 8,
-          color: "#71717A",
+          color: "#86868B",
           fontSize: 13,
           padding: "8px 16px",
           cursor: "pointer",
           fontFamily: "inherit",
           transition: "all 0.2s",
         }}
-        onMouseEnter={e => { e.target.style.background = "rgba(255,255,255,0.12)"; e.target.style.color = "#fff"; }}
-        onMouseLeave={e => { e.target.style.background = "rgba(255,255,255,0.06)"; e.target.style.color = "#71717A"; }}
+        onMouseEnter={e => { e.target.style.background = "rgba(0,0,0,0.1)"; e.target.style.color = "#fff"; }}
+        onMouseLeave={e => { e.target.style.background = "rgba(0,0,0,0.06)"; e.target.style.color = "#86868B"; }}
       >
         ← Retour au site
       </button>
       {/* Branding Panel */}
       <div style={{
-        background: "#09090B",
+        background: "#F5F5F7",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -97,7 +97,7 @@ export default function LoginPage() {
         <h1 style={{
           fontSize: isWide ? 32 : 20,
           fontWeight: 700,
-          color: "#FAFAFA",
+          color: "#1D1D1F",
           textAlign: "center",
           marginBottom: 8,
           position: "relative",
@@ -106,7 +106,7 @@ export default function LoginPage() {
         </h1>
         <p style={{
           fontSize: isWide ? 15 : 13,
-          color: "#71717A",
+          color: "#86868B",
           textAlign: "center",
           maxWidth: 360,
           lineHeight: 1.6,
@@ -142,7 +142,7 @@ export default function LoginPage() {
 
         {isWide && (
           <div style={{ position: "absolute", bottom: 28, textAlign: "center" }}>
-            <p style={{ fontSize: 12, color: "#3f3f46", margin: 0 }}>
+            <p style={{ fontSize: 12, color: "#AEAEB2", margin: 0 }}>
               © 2026 NERVÜR — Éditeur de Technologies de Croissance
             </p>
           </div>
@@ -152,7 +152,7 @@ export default function LoginPage() {
       {/* Login Form */}
       <div style={{
         ...(isWide ? { width: 480 } : { flex: 1 }),
-        background: "#111318",
+        background: "#F5F5F7",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -161,10 +161,10 @@ export default function LoginPage() {
         borderLeft: isWide ? "1px solid #1e1e2a" : "none",
       }}>
         <div style={{ maxWidth: 340, width: "100%", margin: "0 auto" }}>
-          <h2 style={{ fontSize: 22, fontWeight: 600, color: "#f0f0f3", marginBottom: 6 }}>
+          <h2 style={{ fontSize: 22, fontWeight: 600, color: "#1D1D1F", marginBottom: 6 }}>
             Connexion
           </h2>
-          <p style={{ fontSize: 14, color: "#6b7280", marginBottom: 28 }}>
+          <p style={{ fontSize: 14, color: "#86868B", marginBottom: 28 }}>
             Accédez à votre espace client
           </p>
 
@@ -185,7 +185,7 @@ export default function LoginPage() {
             )}
 
             <div style={{ marginBottom: 18 }}>
-              <label style={{ display: "block", fontSize: 13, color: "#9ca3af", marginBottom: 6, fontWeight: 500 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#86868B", marginBottom: 6, fontWeight: 500 }}>
                 Adresse email
               </label>
               <input
@@ -197,10 +197,10 @@ export default function LoginPage() {
                 style={{
                   width: "100%",
                   padding: "12px 14px",
-                  background: "#1e2029",
+                  background: "#FFFFFF",
                   border: "1px solid #2a2d3a",
                   borderRadius: 10,
-                  color: "#f0f0f3",
+                  color: "#1D1D1F",
                   fontSize: 14,
                   fontFamily: "inherit",
                   outline: "none",
@@ -208,12 +208,12 @@ export default function LoginPage() {
                   transition: "border-color 0.2s, box-shadow 0.2s",
                 }}
                 onFocus={(e) => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
-                onBlur={(e) => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }}
+                onBlur={(e) => { e.target.style.borderColor = "#E5E5EA"; e.target.style.boxShadow = "none"; }}
               />
             </div>
 
             <div style={{ marginBottom: 24 }}>
-              <label style={{ display: "block", fontSize: 13, color: "#9ca3af", marginBottom: 6, fontWeight: 500 }}>
+              <label style={{ display: "block", fontSize: 13, color: "#86868B", marginBottom: 6, fontWeight: 500 }}>
                 Mot de passe
               </label>
               <input
@@ -225,10 +225,10 @@ export default function LoginPage() {
                 style={{
                   width: "100%",
                   padding: "12px 14px",
-                  background: "#1e2029",
+                  background: "#FFFFFF",
                   border: "1px solid #2a2d3a",
                   borderRadius: 10,
-                  color: "#f0f0f3",
+                  color: "#1D1D1F",
                   fontSize: 14,
                   fontFamily: "inherit",
                   outline: "none",
@@ -236,7 +236,7 @@ export default function LoginPage() {
                   transition: "border-color 0.2s, box-shadow 0.2s",
                 }}
                 onFocus={(e) => { e.target.style.borderColor = "#6366f1"; e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.12)"; }}
-                onBlur={(e) => { e.target.style.borderColor = "#2a2d3a"; e.target.style.boxShadow = "none"; }}
+                onBlur={(e) => { e.target.style.borderColor = "#E5E5EA"; e.target.style.boxShadow = "none"; }}
               />
             </div>
 
@@ -265,13 +265,13 @@ export default function LoginPage() {
           </form>
 
           <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid #2a2d3a" }}>
-            <p style={{ fontSize: 12, color: "#4b5563", lineHeight: 1.6, margin: 0 }}>
+            <p style={{ fontSize: 12, color: "#86868B", lineHeight: 1.6, margin: 0 }}>
               Votre compte est créé par l'équipe NERVÜR lors de votre souscription.
             </p>
             <a href="/contact" style={{ fontSize: 13, color: "#6366f1", textDecoration: "none", fontWeight: 500, display: "inline-block", marginTop: 8 }}>
               Pas encore client ? Contactez-nous →
             </a>
-            <p style={{ fontSize: 11, color: "#4b5563", lineHeight: 1.6, marginTop: 12 }}>
+            <p style={{ fontSize: 11, color: "#86868B", lineHeight: 1.6, marginTop: 12 }}>
               En vous connectant, vos données sont traitées conformément à notre{" "}
               <a href="/politique-de-confidentialite" style={{ color: "#6366f1", textDecoration: "underline", textUnderlineOffset: "3px" }}>
                 politique de confidentialité

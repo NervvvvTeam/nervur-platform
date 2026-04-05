@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#D4D4D8", V3 = "#A1A1AA";
+const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
 const VG = (a) => `rgba(255,255,255,${a})`;
 const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
 
@@ -80,7 +80,7 @@ export default function ForgePage() {
   };
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#09090B", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -89,7 +89,7 @@ export default function ForgePage() {
         .nav-btn:hover { color: #fafafa; border-color: #818CF8; box-shadow: 0 0 16px rgba(129,140,248,0.2); }
       `}</style>
 
-      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#09090B", borderBottom: `1px solid ${VG(0.1)}` }}>
+      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#F5F5F7", borderBottom: `1px solid ${VG(0.1)}` }}>
         <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button className="nav-btn" aria-label="Retour aux outils" onClick={() => navigate('/technologies')}>← Outils</button>
@@ -110,7 +110,7 @@ export default function ForgePage() {
         {/* Stats */}
         <section aria-label="Statistiques clés" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "16px", margin: "40px 0", animation: "fadeInUp 0.8s ease 0.2s both" }}>
           {[{ val: "12s", label: "TEMPS DE GÉNÉRATION" }, { val: "98%", label: "PRÉCISION TARIFAIRE" }, { val: "x8", label: "GAIN DE PRODUCTIVITÉ" }].map((s, i) => (
-            <div key={i} style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "20px", textAlign: "center" }}>
+            <div key={i} style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "20px", textAlign: "center" }}>
               <div style={{ fontSize: "28px", fontWeight: 800, color: V }}>{s.val}</div>
               <div style={{ fontSize: "10px", letterSpacing: "2px", color: V3, marginTop: "4px" }}>{s.label}</div>
             </div>
@@ -118,7 +118,7 @@ export default function ForgePage() {
         </section>
 
         {/* Form */}
-        <section aria-label="Formulaire de génération de devis" style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "16px", padding: isMobile ? "24px" : "32px", animation: "fadeInUp 0.8s ease 0.4s both" }}>
+        <section aria-label="Formulaire de génération de devis" style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "16px", padding: isMobile ? "24px" : "32px", animation: "fadeInUp 0.8s ease 0.4s both" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "24px" }}>
             <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#f59e0b" }} />
             <span style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "1px" }}>Générez votre devis</span>
@@ -143,14 +143,14 @@ export default function ForgePage() {
             <textarea value={notes} onChange={e => setNotes(e.target.value)} placeholder="Précisions, fonctionnalités souhaitées..." rows={3} style={{ width: "100%", padding: "12px 16px", background: "rgba(255,255,255,0.05)", border: `1px solid ${VG(0.12)}`, borderRadius: "8px", color: V, fontSize: "14px", outline: "none", fontFamily: "inherit", resize: "vertical", boxSizing: "border-box" }} />
           </div>
 
-          <button onClick={generateQuote} disabled={generating || !clientName || !projectType} style={{ padding: "14px 32px", background: generating ? "#52525b" : "linear-gradient(135deg, #f59e0b, #d97706)", border: "none", borderRadius: "8px", color: "#09090B", fontSize: "12px", fontWeight: 800, letterSpacing: "2px", textTransform: "uppercase", cursor: generating ? "wait" : "pointer", fontFamily: "inherit", opacity: (!clientName || !projectType) ? 0.4 : 1, transition: "all 0.3s" }}>
+          <button onClick={generateQuote} disabled={generating || !clientName || !projectType} style={{ padding: "14px 32px", background: generating ? "#52525b" : "linear-gradient(135deg, #f59e0b, #d97706)", border: "none", borderRadius: "8px", color: "#F5F5F7", fontSize: "12px", fontWeight: 800, letterSpacing: "2px", textTransform: "uppercase", cursor: generating ? "wait" : "pointer", fontFamily: "inherit", opacity: (!clientName || !projectType) ? 0.4 : 1, transition: "all 0.3s" }}>
             {generating ? "GÉNÉRATION EN COURS..." : "GÉNÉRER LE DEVIS →"}
           </button>
         </section>
 
         {/* Quote Result */}
         {quote && (
-          <div style={{ marginTop: "32px", background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "16px", overflow: "hidden", animation: "fadeInUp 0.6s ease" }}>
+          <div style={{ marginTop: "32px", background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "16px", overflow: "hidden", animation: "fadeInUp 0.6s ease" }}>
             {/* Header */}
             <div style={{ padding: "24px 32px", borderBottom: `1px solid ${VG(0.08)}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
@@ -215,7 +215,7 @@ export default function ForgePage() {
         <section aria-label="Appel à l'action" style={{ marginTop: "60px", textAlign: "center", padding: "48px", border: `1px solid ${VG(0.1)}`, borderRadius: "16px", animation: "fadeInUp 0.8s ease 0.6s both" }}>
           <h2 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "12px" }}>Automatisez votre facturation</h2>
           <p style={{ color: V3, marginBottom: "24px" }}>Forge génère devis, factures et relances adaptés à chaque client.</p>
-          <button className="nav-btn" onClick={() => navigate('/contact?outil=forge')} style={{ padding: "14px 36px", background: V, color: "#09090B", fontWeight: 700, border: "none" }}>RÉSERVER UN APPEL →</button>
+          <button className="nav-btn" onClick={() => navigate('/contact?outil=forge')} style={{ padding: "14px 36px", background: V, color: "#F5F5F7", fontWeight: 700, border: "none" }}>RÉSERVER UN APPEL →</button>
         </section>
       </main>
 

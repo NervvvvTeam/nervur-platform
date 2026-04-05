@@ -4,7 +4,7 @@ import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
 // ─── NERVÜR DIAGNOSTIC E-RÉPUTATION & CONFORMITÉ ───
-const V = "#FFFFFF", V2 = "#D4D4D8", V3 = "#A1A1AA";
+const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
 const VG = (a) => `rgba(255,255,255,${a})`;
 const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
 
@@ -246,7 +246,7 @@ const RadarChart = ({ scores, size = 280 }) => {
         fill={VG(0.08)} stroke={V} strokeWidth="2" style={{ transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)" }} />
       {/* Data points */}
       {dataPoints.map((p, i) => (
-        <circle key={i} cx={p.x} cy={p.y} r="4" fill={CATEGORIES[categories[i]].color} stroke="#0f1117" strokeWidth="2"
+        <circle key={i} cx={p.x} cy={p.y} r="4" fill={CATEGORIES[categories[i]].color} stroke="#F5F5F7" strokeWidth="2"
           style={{ transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)" }} />
       ))}
       {/* Labels */}
@@ -382,7 +382,7 @@ export default function DiagnosticPage() {
   return (
     <main style={{
       background: "linear-gradient(180deg, #0f1117 0%, #131620 50%, #0f1117 100%)",
-      color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       minHeight: "100vh", position: "relative" }}>
 
       <style>{`
@@ -403,7 +403,7 @@ export default function DiagnosticPage() {
       <nav style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "rgba(15,17,23,0.92)", backdropFilter: "blur(24px)",
+        background: "rgba(255,255,255,0.92)", backdropFilter: "blur(24px)",
         borderBottom: `1px solid ${VG(0.08)}` }}>
         <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
@@ -420,11 +420,11 @@ export default function DiagnosticPage() {
       <div style={{ padding: isMobile ? "90px 20px 0 20px" : "140px 48px 0 48px", maxWidth: "800px", margin: "0 auto" }}>
         <button onClick={() => navigate("/")} style={{
           background: "none", border: "1px solid rgba(250,250,250,0.15)", borderRadius: "8px",
-          color: "#71717A", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
+          color: "#86868B", fontSize: "13px", padding: "8px 20px", cursor: "pointer",
           fontFamily: "inherit", transition: "all 0.3s",
         }}
-          onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
-          onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
+          onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
           ← Retour
         </button>
       </div>
@@ -488,7 +488,7 @@ export default function DiagnosticPage() {
                     onMouseLeave={e => { if (!isSelected) { e.currentTarget.style.borderColor = VG(0.08); e.currentTarget.style.color = V3; e.currentTarget.style.transform = "translateX(0)"; }}}>
                     {/* Letter */}
                     <span style={{
-                      fontSize: "11px", fontWeight: 700, color: isSelected ? "#0f1117" : "#6B7280",
+                      fontSize: "11px", fontWeight: 700, color: isSelected ? "#F5F5F7" : "#6B7280",
                       background: isSelected ? optColor : VG(0.06), width: "28px", height: "28px", borderRadius: "6px",
                       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                       transition: "all 0.3s",
@@ -617,7 +617,7 @@ export default function DiagnosticPage() {
                         onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.15); e.currentTarget.style.background = "rgba(255,255,255,0.03)"; }}
                         onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.08); e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}>
                         <span style={{
-                          fontSize: "16px", fontWeight: 900, color: "#0f1117", width: "28px", height: "28px",
+                          fontSize: "16px", fontWeight: 900, color: "#F5F5F7", width: "28px", height: "28px",
                           display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "6px",
                           background: CATEGORIES[rec.cat].color,
                         }}>{i + 1}</span>
@@ -657,7 +657,7 @@ export default function DiagnosticPage() {
                   </p>
                   <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
                     <button onClick={() => navigate("/contact")} style={{
-                      padding: "18px 48px", background: `linear-gradient(135deg, ${A1}, ${A3})`, color: "#0f1117",
+                      padding: "18px 48px", background: `linear-gradient(135deg, ${A1}, ${A3})`, color: "#F5F5F7",
                       fontSize: "14px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase",
                       border: "none", cursor: "pointer", transition: "all 0.3s ease", fontFamily: "inherit", borderRadius: "8px",
                     }}
@@ -699,7 +699,7 @@ export default function DiagnosticPage() {
       {!showResults && (
         <aside style={{ position: "fixed", bottom: "32px", right: "32px", zIndex: 50 }}>
           <div style={{
-            padding: "14px 20px", background: "rgba(15,17,23,0.95)", backdropFilter: "blur(16px)",
+            padding: "14px 20px", background: "rgba(255,255,255,0.95)", backdropFilter: "blur(16px)",
             border: `1px solid ${VG(0.08)}`, display: "flex", alignItems: "center", gap: "10px", borderRadius: "10px",
           }}>
             <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4ADE80", flexShrink: 0 }} />

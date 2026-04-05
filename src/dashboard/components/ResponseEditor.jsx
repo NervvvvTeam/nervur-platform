@@ -15,10 +15,10 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
   return (
     <div style={{
       border: "1px solid #2a2d3a", borderRadius: "10px", padding: "18px",
-      background: "#1e2029"
+      background: "#FFFFFF"
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-        <div style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af" }}>
+        <div style={{ fontSize: "12px", fontWeight: 500, color: "#86868B" }}>
           Réponse IA
         </div>
         {response?.status && (
@@ -34,24 +34,24 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
       </div>
 
       {isPublished ? (
-        <p style={{ fontSize: "14px", color: "#9ca3af", lineHeight: 1.8 }}>
+        <p style={{ fontSize: "14px", color: "#86868B", lineHeight: 1.8 }}>
           {response?.finalText || response?.generatedText}
         </p>
       ) : (
         <>
           <textarea value={text} onChange={e => setText(e.target.value)}
             style={{
-              width: "100%", minHeight: "160px", padding: "16px", background: "#141520",
-              border: "1px solid #2a2d3a", borderRadius: "8px", color: "#e4e4e7",
+              width: "100%", minHeight: "160px", padding: "16px", background: "#FFFFFF",
+              border: "1px solid #2a2d3a", borderRadius: "8px", color: "#424245",
               fontSize: "14px", lineHeight: 1.8, fontFamily: "inherit", resize: "vertical",
               outline: "none", boxSizing: "border-box"
             }}
             onFocus={e => { e.target.style.borderColor = "#6366f1"; }}
-            onBlur={e => { e.target.style.borderColor = "#2a2d3a"; }} />
+            onBlur={e => { e.target.style.borderColor = "#E5E5EA"; }} />
 
           <div style={{ display: "flex", gap: "10px", marginTop: "16px", flexWrap: "wrap" }}>
             {onRegenerate && (
-              <button onClick={onRegenerate} style={btnStyle("#9ca3af")}>
+              <button onClick={onRegenerate} style={btnStyle("#86868B")}>
                 Régénérer
               </button>
             )}
@@ -78,7 +78,7 @@ export default function ResponseEditor({ response, onSave, onRegenerate, onPubli
       )}
 
       {response?.publishedAt && (
-        <div style={{ marginTop: "12px", fontSize: "11px", color: "#4b5563" }}>
+        <div style={{ marginTop: "12px", fontSize: "11px", color: "#86868B" }}>
           Publiée le {new Date(response.publishedAt).toLocaleString("fr-FR")}
         </div>
       )}

@@ -227,7 +227,7 @@ export default function VaultGenerateurPage() {
     }
   };
 
-  const inputStyle = "w-full px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]";
+  const inputStyle = "w-full px-3.5 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-sm font-[inherit] outline-none transition-colors duration-150 box-border focus:border-[#06b6d4]";
   const labelStyle = "block text-[13px] font-medium text-[#d1d5db] mb-1.5";
 
   return (
@@ -240,7 +240,7 @@ export default function VaultGenerateurPage() {
           <FileIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
             Générateur de documents
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -253,11 +253,11 @@ export default function VaultGenerateurPage() {
       <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-6 mt-4" />
 
       {/* Company info form */}
-      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
+      <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-7">
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
             <FileIcon size={18} color={ACCENT} />
-            <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+            <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
               Informations de votre entreprise
             </h2>
           </div>
@@ -344,7 +344,7 @@ export default function VaultGenerateurPage() {
       <div className="mb-7">
         <div className="flex items-center gap-2 mb-4">
           <FileIcon size={18} color={ACCENT} />
-          <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+          <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
             Choisissez un document à générer
           </h2>
         </div>
@@ -355,7 +355,7 @@ export default function VaultGenerateurPage() {
               key={doc.key}
               onClick={() => handleGenerate(doc.key)}
               disabled={loading}
-              className="bg-[#1e2029] rounded-[10px] px-5 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-left cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.04)]"
+              className="bg-white rounded-[10px] px-5 py-4 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-left cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.04)]"
               style={{
                 border: selectedDoc === doc.key ? `1px solid ${doc.color}` : "1px solid rgba(6,182,212,0.15)",
                 opacity: loading && selectedDoc !== doc.key ? 0.5 : 1,
@@ -363,7 +363,7 @@ export default function VaultGenerateurPage() {
             >
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-2 h-2 rounded-full" style={{ background: doc.color }} />
-                <span className="text-sm font-semibold text-[#f0f0f3]">{doc.label}</span>
+                <span className="text-sm font-semibold text-[#1D1D1F]">{doc.label}</span>
               </div>
               <div className="text-[11px] text-[#6b7280] leading-relaxed">
                 {doc.description}
@@ -381,11 +381,11 @@ export default function VaultGenerateurPage() {
 
       {/* Loading */}
       {loading && (
-        <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center mb-7">
+        <div className="bg-[rgba(6,182,212,0.08)] border border-[rgba(6,182,212,0.2)] rounded-[10px] px-6 py-12 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center mb-7">
           <div className="mb-5">
             <div className="w-16 h-16 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[gen-spin_1s_linear_infinite]" />
           </div>
-          <div className="text-base font-semibold text-[#f0f0f3] mb-2">
+          <div className="text-base font-semibold text-[#1D1D1F] mb-2">
             Génération en cours...
           </div>
           <div className="text-[13px] text-[#9ca3af] leading-relaxed">
@@ -401,7 +401,7 @@ export default function VaultGenerateurPage() {
           <div className="flex items-center justify-between mb-3.5">
             <div className="flex items-center gap-2">
               <FileIcon size={18} color={ACCENT} />
-              <h3 className="text-[15px] font-semibold text-[#f0f0f3] m-0">
+              <h3 className="text-[15px] font-semibold text-[#1D1D1F] m-0">
                 {DOC_TYPES.find(d => d.key === selectedDoc)?.label || "Document"}
               </h3>
             </div>
@@ -424,7 +424,7 @@ export default function VaultGenerateurPage() {
             </div>
           </div>
 
-          <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+          <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
             <div className="text-[13px] text-[#d1d5db] leading-[1.9] whitespace-pre-wrap font-mono">
               {generatedDoc.content}
             </div>

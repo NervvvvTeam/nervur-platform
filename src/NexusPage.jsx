@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#D4D4D8", V3 = "#A1A1AA";
+const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
 const VG = (a) => `rgba(255,255,255,${a})`;
 const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
 
@@ -318,7 +318,7 @@ export default function NexusPage() {
   const accentDark = mode === "contenu" ? "#22c55e" : mode === "sequence" ? "#f43f5e" : "#06b6d4";
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#09090B", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -348,7 +348,7 @@ export default function NexusPage() {
             <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "#4ADE80", fontWeight: 700, padding: "4px 12px", border: "1px solid rgba(74,222,128,0.3)", borderRadius: "2px" }}>STUDIO DE CONTENU</span>
           </div>
           <h1 style={{ fontSize: isMobile ? "36px" : "clamp(42px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-2px", lineHeight: 1.1, marginBottom: "20px" }}>NEXUS</h1>
-          <p style={{ fontSize: "18px", color: "#71717A", lineHeight: 1.8, maxWidth: "600px" }}>
+          <p style={{ fontSize: "18px", color: "#86868B", lineHeight: 1.8, maxWidth: "600px" }}>
             L'IA qui génère du contenu marketing qui convertit. Posts, emails, séquences et calendrier social — en quelques secondes.
           </p>
         </div>
@@ -368,9 +368,9 @@ export default function NexusPage() {
             { label: "Engagement", value: "x4.1" },
             { label: "Gain de temps", value: "87%" },
           ]).map((s, i) => (
-            <div key={i} style={{ padding: "20px 24px", border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.4)", textAlign: "center" }}>
+            <div key={i} style={{ padding: "20px 24px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", textAlign: "center" }}>
               <div style={{ fontSize: "28px", fontWeight: 800, color: V, marginBottom: "4px" }}>{s.value}</div>
-              <div style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#52525B" }}>{s.label}</div>
+              <div style={{ fontSize: "10px", letterSpacing: "2px", textTransform: "uppercase", color: "#86868B" }}>{s.label}</div>
             </div>
           ))}
         </section>
@@ -390,7 +390,7 @@ export default function NexusPage() {
                 fontFamily: "inherit",
                 background: active ? `${tab.color}20` : "transparent",
                 border: `1px solid ${active ? `${tab.color}60` : VG(0.1)}`,
-                color: active ? tab.color : "#52525B",
+                color: active ? tab.color : "#86868B",
                 transition: "all 0.3s",
               }}>{tab.label}</button>
             );
@@ -399,14 +399,14 @@ export default function NexusPage() {
 
         {/* DEMO */}
         <section aria-label="Générateur de contenu" style={{ animation: "fadeInUp 0.8s ease 0.4s both" }}>
-          <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.5)", borderRadius: "12px", overflow: "hidden", backdropFilter: "blur(12px)" }}>
+          <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.75)", borderRadius: "12px", overflow: "hidden", backdropFilter: "blur(12px)" }}>
             {/* Dashboard header */}
             <div style={{ padding: "14px 20px", borderBottom: `1px solid ${VG(0.08)}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
                 <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FF5F57" }} />
                 <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#FEBC2E" }} />
                 <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28C840" }} />
-                <span style={{ fontSize: "11px", color: "#52525B", marginLeft: "12px", letterSpacing: "1px" }}>nexus-studio.nervur.com</span>
+                <span style={{ fontSize: "11px", color: "#86868B", marginLeft: "12px", letterSpacing: "1px" }}>nexus-studio.nervur.com</span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: accentColor }} />
@@ -421,7 +421,7 @@ export default function NexusPage() {
                 <>
                   {/* Content type selector */}
                   <div style={{ marginBottom: "24px" }}>
-                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "10px" }}>TYPE DE CONTENU</label>
+                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "10px" }}>TYPE DE CONTENU</label>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {CONTENT_TYPES.map(t => (
                         <button key={t} onClick={() => setContentType(t)} style={{
@@ -437,13 +437,13 @@ export default function NexusPage() {
                   {/* Inputs */}
                   <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px", marginBottom: "24px" }}>
                     <div>
-                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "8px" }}>NOM DE L'ENTREPRISE</label>
+                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "8px" }}>NOM DE L'ENTREPRISE</label>
                       <input value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Ex: Acme Corp"
                         style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", borderRadius: "6px", transition: "border-color 0.3s" }}
                         onFocus={e => e.target.style.borderColor = VG(0.25)} onBlur={e => e.target.style.borderColor = VG(0.1)} />
                     </div>
                     <div>
-                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "8px" }}>SUJET / PRODUIT</label>
+                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "8px" }}>SUJET / PRODUIT</label>
                       <input value={topic} onChange={e => setTopic(e.target.value)} placeholder="Ex: automatisation marketing"
                         style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", borderRadius: "6px", transition: "border-color 0.3s" }}
                         onFocus={e => e.target.style.borderColor = VG(0.25)} onBlur={e => e.target.style.borderColor = VG(0.1)} />
@@ -452,7 +452,7 @@ export default function NexusPage() {
 
                   {/* Tone selector */}
                   <div style={{ marginBottom: "24px" }}>
-                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "10px" }}>TON</label>
+                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "10px" }}>TON</label>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {TONES.map(t => (
                         <button key={t} onClick={() => setTone(t)} style={{
@@ -469,7 +469,7 @@ export default function NexusPage() {
                   <button onClick={generateContent} disabled={isGenerating || !canGenerateContent}
                     style={{
                       padding: "14px 32px", background: canGenerateContent ? "linear-gradient(135deg, #4ADE80, #22c55e)" : VG(0.06),
-                      border: "none", color: canGenerateContent ? "#09090B" : "#52525B", fontWeight: 700, fontSize: "12px",
+                      border: "none", color: canGenerateContent ? "#F5F5F7" : "#86868B", fontWeight: 700, fontSize: "12px",
                       letterSpacing: "1.5px", textTransform: "uppercase", cursor: canGenerateContent && !isGenerating ? "pointer" : "not-allowed",
                       transition: "all 0.3s ease", fontFamily: "inherit", opacity: !canGenerateContent ? 0.4 : 1,
                     }}>
@@ -481,7 +481,7 @@ export default function NexusPage() {
                     <div style={{ marginTop: "24px", padding: isMobile ? "20px" : "28px", border: "1px solid rgba(74,222,128,0.2)", background: "rgba(74,222,128,0.03)", borderRadius: "10px", animation: "fadeInUp 0.4s ease both" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
                         <span style={{ fontSize: "9px", letterSpacing: "1.5px", fontWeight: 700, color: "#4ADE80", padding: "3px 8px", border: "1px solid rgba(74,222,128,0.3)" }}>IA NEXUS</span>
-                        <span style={{ fontSize: "10px", color: "#52525B" }}>{contentType} — {tone}</span>
+                        <span style={{ fontSize: "10px", color: "#86868B" }}>{contentType} — {tone}</span>
                       </div>
                       <p style={{ fontSize: "14px", color: "#E4E4E7", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>
                         {displayedText}
@@ -498,13 +498,13 @@ export default function NexusPage() {
                   {/* Inputs */}
                   <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px", marginBottom: "24px" }}>
                     <div>
-                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "8px" }}>NOM DE L'ENTREPRISE</label>
+                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "8px" }}>NOM DE L'ENTREPRISE</label>
                       <input value={eCompanyName} onChange={e => setECompanyName(e.target.value)} placeholder="Ex: Acme Corp"
                         style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", borderRadius: "6px", transition: "border-color 0.3s" }}
                         onFocus={e => e.target.style.borderColor = VG(0.25)} onBlur={e => e.target.style.borderColor = VG(0.1)} />
                     </div>
                     <div>
-                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "8px" }}>CIBLE / AUDIENCE</label>
+                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "8px" }}>CIBLE / AUDIENCE</label>
                       <input value={audience} onChange={e => setAudience(e.target.value)} placeholder="Ex: Directeurs marketing B2B"
                         style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", borderRadius: "6px", transition: "border-color 0.3s" }}
                         onFocus={e => e.target.style.borderColor = VG(0.25)} onBlur={e => e.target.style.borderColor = VG(0.1)} />
@@ -513,7 +513,7 @@ export default function NexusPage() {
 
                   {/* Objective selector */}
                   <div style={{ marginBottom: "24px" }}>
-                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "10px" }}>OBJECTIF</label>
+                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "10px" }}>OBJECTIF</label>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {OBJECTIVES.map(o => (
                         <button key={o} onClick={() => setObjective(o)} style={{
@@ -528,7 +528,7 @@ export default function NexusPage() {
 
                   {/* Email count selector */}
                   <div style={{ marginBottom: "24px" }}>
-                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "10px" }}>NOMBRE D'EMAILS</label>
+                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "10px" }}>NOMBRE D'EMAILS</label>
                     <div style={{ display: "flex", gap: "8px" }}>
                       {EMAIL_COUNTS.map(n => (
                         <button key={n} onClick={() => setEmailCount(n)} style={{
@@ -545,7 +545,7 @@ export default function NexusPage() {
                   <button onClick={generateSequence} disabled={eIsGenerating || !canGenerateSequence}
                     style={{
                       padding: "14px 32px", background: canGenerateSequence ? "linear-gradient(135deg, #f43f5e, #fb7185)" : VG(0.06),
-                      border: "none", color: canGenerateSequence ? V : "#52525B", fontWeight: 700, fontSize: "12px",
+                      border: "none", color: canGenerateSequence ? V : "#86868B", fontWeight: 700, fontSize: "12px",
                       letterSpacing: "1.5px", textTransform: "uppercase", cursor: canGenerateSequence && !eIsGenerating ? "pointer" : "not-allowed",
                       transition: "all 0.3s ease", fontFamily: "inherit", opacity: !canGenerateSequence ? 0.4 : 1,
                     }}>
@@ -565,17 +565,17 @@ export default function NexusPage() {
                           transition: "opacity 0.4s ease, transform 0.4s ease",
                         }}>
                           {/* Timeline dot */}
-                          <div style={{ position: "absolute", left: isMobile ? "-20px" : "-32px", top: "18px", width: "12px", height: "12px", borderRadius: "50%", background: "#09090B", border: "2px solid #f43f5e", zIndex: 2 }} />
+                          <div style={{ position: "absolute", left: isMobile ? "-20px" : "-32px", top: "18px", width: "12px", height: "12px", borderRadius: "50%", background: "#F5F5F7", border: "2px solid #f43f5e", zIndex: 2 }} />
 
                           {/* Email card */}
                           <div style={{ padding: isMobile ? "16px" : "20px 24px", border: "1px solid rgba(244,63,94,0.2)", background: "rgba(244,63,94,0.03)", borderRadius: "10px" }}>
                             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", flexWrap: "wrap" }}>
                               <span style={{ fontSize: "11px", fontWeight: 800, color: "#fb7185", minWidth: "24px" }}>#{email.number}</span>
                               <span style={{ fontSize: "9px", letterSpacing: "1.5px", fontWeight: 700, color: "#f43f5e", padding: "3px 8px", border: "1px solid rgba(244,63,94,0.3)", borderRadius: "2px" }}>{email.type}</span>
-                              <span style={{ fontSize: "10px", color: "#52525B", letterSpacing: "1px" }}>{email.delay}</span>
+                              <span style={{ fontSize: "10px", color: "#86868B", letterSpacing: "1px" }}>{email.delay}</span>
                             </div>
                             <div style={{ fontSize: "14px", fontWeight: 700, color: V2, marginBottom: "8px" }}>{email.subject}</div>
-                            <p style={{ fontSize: "13px", color: "#71717A", lineHeight: 1.7, margin: 0 }}>{email.preview}</p>
+                            <p style={{ fontSize: "13px", color: "#86868B", lineHeight: 1.7, margin: 0 }}>{email.preview}</p>
                           </div>
                         </div>
                       ))}
@@ -590,13 +590,13 @@ export default function NexusPage() {
                   {/* Inputs */}
                   <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "16px", marginBottom: "24px" }}>
                     <div>
-                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "8px" }}>NOM DE L'ENTREPRISE</label>
+                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "8px" }}>NOM DE L'ENTREPRISE</label>
                       <input value={fCompanyName} onChange={e => setFCompanyName(e.target.value)} placeholder="Ex: Acme Corp"
                         style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", borderRadius: "6px", transition: "border-color 0.3s" }}
                         onFocus={e => e.target.style.borderColor = VG(0.25)} onBlur={e => e.target.style.borderColor = VG(0.1)} />
                     </div>
                     <div>
-                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "8px" }}>SECTEUR D'ACTIVITÉ</label>
+                      <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "8px" }}>SECTEUR D'ACTIVITÉ</label>
                       <input value={sector} onChange={e => setSector(e.target.value)} placeholder="Ex: Tech SaaS, Immobilier, Mode"
                         style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, color: V, fontSize: "14px", fontFamily: "inherit", outline: "none", boxSizing: "border-box", borderRadius: "6px", transition: "border-color 0.3s" }}
                         onFocus={e => e.target.style.borderColor = VG(0.25)} onBlur={e => e.target.style.borderColor = VG(0.1)} />
@@ -605,7 +605,7 @@ export default function NexusPage() {
 
                   {/* Platform selector */}
                   <div style={{ marginBottom: "24px" }}>
-                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "10px" }}>PLATEFORMES</label>
+                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "10px" }}>PLATEFORMES</label>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {PLATFORMS.map(p => (
                         <button key={p} onClick={() => togglePlatform(p)} style={{
@@ -620,7 +620,7 @@ export default function NexusPage() {
 
                   {/* Tone selector */}
                   <div style={{ marginBottom: "24px" }}>
-                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "10px" }}>TON</label>
+                    <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "10px" }}>TON</label>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                       {FLUX_TONES.map(t => (
                         <button key={t} onClick={() => setFTone(t)} style={{
@@ -637,7 +637,7 @@ export default function NexusPage() {
                   <button onClick={generateCalendar} disabled={fIsGenerating || !canGenerateCalendar}
                     style={{
                       padding: "14px 32px", background: canGenerateCalendar ? "linear-gradient(135deg, #06b6d4, #22d3ee)" : VG(0.06),
-                      border: "none", color: canGenerateCalendar ? "#09090B" : "#52525B", fontWeight: 700, fontSize: "12px",
+                      border: "none", color: canGenerateCalendar ? "#F5F5F7" : "#86868B", fontWeight: 700, fontSize: "12px",
                       letterSpacing: "1.5px", textTransform: "uppercase", cursor: canGenerateCalendar && !fIsGenerating ? "pointer" : "not-allowed",
                       transition: "all 0.3s ease", fontFamily: "inherit", opacity: !canGenerateCalendar ? 0.4 : 1,
                     }}>
@@ -655,14 +655,14 @@ export default function NexusPage() {
                         }}>
                           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
                             <span style={{ fontSize: "13px", fontWeight: 700, color: "#22d3ee" }}>{entry.day}</span>
-                            <span style={{ fontSize: "11px", color: "#52525B" }}>{entry.time}</span>
+                            <span style={{ fontSize: "11px", color: "#86868B" }}>{entry.time}</span>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
                             <span style={{ fontSize: "14px" }}>{PLATFORM_ICONS[entry.platform] || ""}</span>
                             <span style={{ fontSize: "10px", letterSpacing: "1.5px", fontWeight: 600, color: "#06b6d4", padding: "2px 8px", border: "1px solid rgba(6,182,212,0.3)", borderRadius: "2px" }}>{entry.platform}</span>
-                            <span style={{ fontSize: "10px", letterSpacing: "1px", color: "#52525B" }}>{entry.type}</span>
+                            <span style={{ fontSize: "10px", letterSpacing: "1px", color: "#86868B" }}>{entry.type}</span>
                           </div>
-                          <p style={{ fontSize: "13px", color: "#A1A1AA", lineHeight: 1.6, margin: 0 }}>{entry.content}</p>
+                          <p style={{ fontSize: "13px", color: "#86868B", lineHeight: 1.6, margin: 0 }}>{entry.content}</p>
                         </div>
                       ))}
                     </div>
@@ -675,18 +675,18 @@ export default function NexusPage() {
         </section>
 
         {/* CTA */}
-        <section aria-label="Appel à l'action" style={{ marginTop: "80px", textAlign: "center", padding: isMobile ? "40px 20px" : "60px 48px", border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.3)", borderRadius: "12px", animation: "fadeInUp 0.8s ease 0.6s both" }}>
+        <section aria-label="Appel à l'action" style={{ marginTop: "80px", textAlign: "center", padding: isMobile ? "40px 20px" : "60px 48px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.6)", borderRadius: "12px", animation: "fadeInUp 0.8s ease 0.6s both" }}>
           <h2 style={{ fontSize: isMobile ? "24px" : "32px", fontWeight: 800, marginBottom: "16px", letterSpacing: "-1px" }}>
             Intégrez Nexus à votre stratégie de contenu
           </h2>
-          <p style={{ fontSize: "15px", color: "#71717A", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
+          <p style={{ fontSize: "15px", color: "#86868B", marginBottom: "32px", maxWidth: "500px", margin: "0 auto 32px", lineHeight: 1.7 }}>
             Générez du contenu marketing performant en quelques secondes. Posts, emails, séquences et calendrier social — sur-mesure pour votre marque.
           </p>
           <button onClick={() => navigate('/contact?outil=nexus')} style={{
-            padding: "16px 40px", background: V, color: "#09090B", border: "none",
+            padding: "16px 40px", background: V, color: "#F5F5F7", border: "none",
             fontWeight: 800, fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
             cursor: "pointer", transition: "all 0.3s ease" }}
-            onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(255,255,255,0.2)"; }}
+            onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             Réserver un appel →
           </button>
@@ -695,8 +695,8 @@ export default function NexusPage() {
 
       {/* Footer */}
       <footer style={{ padding: isMobile ? "30px 20px" : "40px 48px", borderTop: `1px solid ${VG(0.08)}`, display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: isMobile ? "column" : "row", gap: "12px" }}>
-        <span style={{ fontSize: "11px", color: "#52525B", letterSpacing: "1px" }}>NERVÜR © 2026</span>
-        <span style={{ fontSize: "11px", color: "#52525B" }}>NEXUS — Studio de Contenu IA</span>
+        <span style={{ fontSize: "11px", color: "#86868B", letterSpacing: "1px" }}>NERVÜR © 2026</span>
+        <span style={{ fontSize: "11px", color: "#86868B" }}>NEXUS — Studio de Contenu IA</span>
       </footer>
     </div>
   );

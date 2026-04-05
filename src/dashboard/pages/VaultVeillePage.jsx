@@ -22,7 +22,7 @@ const RefreshIcon = ({ size = 14, color = ACCENT }) => (
 );
 
 const CATEGORIES = [
-  { key: "all", label: "Toutes", color: "#6b7280" },
+  { key: "all", label: "Toutes", color: "#86868B" },
   { key: "RGPD", label: "RGPD", color: "#06b6d4" },
   { key: "Droit commercial", label: "Droit commercial", color: "#8b5cf6" },
   { key: "E-commerce", label: "E-commerce", color: "#f59e0b" },
@@ -107,7 +107,7 @@ export default function VaultVeillePage() {
           )}
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
             Veille juridique
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -145,8 +145,8 @@ export default function VaultVeillePage() {
             className="px-3.5 py-1.5 rounded-lg text-[13px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border"
             style={{
               background: activeCategory === cat.key ? `${cat.color}20` : "transparent",
-              borderColor: activeCategory === cat.key ? cat.color : "#2a2d3a",
-              color: activeCategory === cat.key ? cat.color : "#6b7280",
+              borderColor: activeCategory === cat.key ? cat.color : "#E5E5EA",
+              color: activeCategory === cat.key ? cat.color : "#86868B",
             }}
           >
             {cat.label}
@@ -176,7 +176,7 @@ export default function VaultVeillePage() {
           <button
             onClick={fetchVeille}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border border-[#2a2d3a] bg-transparent text-[#6b7280] hover:border-[#06b6d4] hover:text-[#06b6d4]"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border border-[#E5E5EA] bg-transparent text-[#6b7280] hover:border-[#06b6d4] hover:text-[#06b6d4]"
           >
             <RefreshIcon size={12} color="currentColor" />
             Actualiser
@@ -186,7 +186,7 @@ export default function VaultVeillePage() {
 
       {/* Loading state */}
       {loading && alerts.length === 0 && (
-        <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+        <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center">
           <div className="w-10 h-10 mx-auto border-[3px] border-[rgba(6,182,212,0.2)] border-t-[#06b6d4] rounded-full animate-[vault-spin_1s_linear_infinite] mb-4" />
           <div className="text-[14px] text-[#9ca3af]">Chargement de la veille juridique...</div>
         </div>
@@ -194,9 +194,9 @@ export default function VaultVeillePage() {
 
       {/* Alerts list */}
       {!loading && sortedAlerts.length === 0 ? (
-        <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.2)] text-center">
+        <div className="bg-[rgba(6,182,212,0.06)] border border-[rgba(6,182,212,0.15)] rounded-[10px] px-6 py-10 shadow-[0_2px_8px_rgba(0,0,0,0.06)] text-center">
           <BellIcon size={48} color={ACCENT} />
-          <div className="text-base font-semibold text-[#f0f0f3] mt-4 mb-2">
+          <div className="text-base font-semibold text-[#1D1D1F] mt-4 mb-2">
             Aucune alerte dans cette catégorie
           </div>
         </div>
@@ -210,7 +210,7 @@ export default function VaultVeillePage() {
             return (
               <div
                 key={alert.id}
-                className="bg-[#1e2029] border rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.2)] transition-all duration-150"
+                className="bg-white border rounded-[10px] p-5 shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-150"
                 style={{
                   borderColor: read ? "rgba(42,45,58,0.8)" : `${impactInfo.color}30`,
                   opacity: read ? 0.7 : 1,
@@ -251,7 +251,7 @@ export default function VaultVeillePage() {
                     </div>
 
                     {/* Title */}
-                    <div className={`text-[14px] font-semibold mb-2 ${read ? "text-[#9ca3af]" : "text-[#f0f0f3]"}`}>
+                    <div className={`text-[14px] font-semibold mb-2 ${read ? "text-[#9ca3af]" : "text-[#1D1D1F]"}`}>
                       {alert.title}
                     </div>
 

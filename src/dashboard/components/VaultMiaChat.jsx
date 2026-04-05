@@ -210,7 +210,7 @@ export default function VaultMiaChat() {
           zIndex: 1001,
           width: 380,
           height: 500,
-          background: "#1e2029",
+          background: "#FFFFFF",
           borderRadius: 14,
           boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
           border: "1px solid rgba(6,182,212,0.2)",
@@ -250,7 +250,7 @@ export default function VaultMiaChat() {
               <SparkleIcon size={18} />
             </div>
             <div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: "#f0f0f3" }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: "#1D1D1F" }}>
                 NOÉ
               </div>
               <div style={{ fontSize: 11, color: "#06b6d4" }}>
@@ -263,14 +263,14 @@ export default function VaultMiaChat() {
             style={{
               background: "none",
               border: "none",
-              color: "#6b7280",
+              color: "#86868B",
               cursor: "pointer",
               padding: 4,
               display: "flex",
               borderRadius: 6,
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = "#f0f0f3"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = "#6b7280"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "#1D1D1F"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "#86868B"; }}
           >
             <CloseIcon />
           </button>
@@ -289,7 +289,7 @@ export default function VaultMiaChat() {
         >
           {messages.length === 0 && !typing && (
             <div style={{ textAlign: "center", padding: "20px 0" }}>
-              <div style={{ fontSize: 13, color: "#9ca3af", marginBottom: 16, lineHeight: 1.6 }}>
+              <div style={{ fontSize: 13, color: "#86868B", marginBottom: 16, lineHeight: 1.6 }}>
                 Bonjour ! Je suis <strong style={{ color: "#06b6d4" }}>NOÉ</strong>, votre assistant juridique.
                 <br />Posez-moi une question ou choisissez un sujet :
               </div>
@@ -303,7 +303,7 @@ export default function VaultMiaChat() {
                       border: "1px solid rgba(6,182,212,0.2)",
                       borderRadius: 8,
                       padding: "8px 12px",
-                      color: "#d1d5db",
+                      color: "#424245",
                       fontSize: 12,
                       cursor: "pointer",
                       textAlign: "left",
@@ -342,7 +342,7 @@ export default function VaultMiaChat() {
                   background: msg.role === "user" ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.04)",
                   borderLeft: msg.role === "bot" ? "3px solid #06b6d4" : "none",
                   fontSize: 13,
-                  color: "#e4e4e7",
+                  color: "#424245",
                   lineHeight: 1.6,
                 }}
                 dangerouslySetInnerHTML={
@@ -389,7 +389,7 @@ export default function VaultMiaChat() {
                     border: "1px solid rgba(6,182,212,0.15)",
                     borderRadius: 6,
                     padding: "5px 10px",
-                    color: "#9ca3af",
+                    color: "#86868B",
                     fontSize: 11,
                     cursor: "pointer",
                     fontFamily: "inherit",
@@ -429,17 +429,17 @@ export default function VaultMiaChat() {
             style={{
               flex: 1,
               padding: "9px 12px",
-              background: "#141520",
+              background: "#FFFFFF",
               border: "1px solid #2a2d3a",
               borderRadius: 8,
-              color: "#e4e4e7",
+              color: "#424245",
               fontSize: 13,
               fontFamily: "inherit",
               outline: "none",
               transition: "border-color 0.15s",
             }}
             onFocus={(e) => { e.currentTarget.style.borderColor = "#06b6d4"; }}
-            onBlur={(e) => { e.currentTarget.style.borderColor = "#2a2d3a"; }}
+            onBlur={(e) => { e.currentTarget.style.borderColor = "#E5E5EA"; }}
           />
           <button
             onClick={() => handleSend()}
@@ -449,8 +449,8 @@ export default function VaultMiaChat() {
               height: 36,
               borderRadius: 8,
               border: "none",
-              background: input.trim() && !typing ? "linear-gradient(135deg, #06b6d4, #22d3ee)" : "#2a2d3a",
-              color: input.trim() && !typing ? "#0f0f11" : "#6b7280",
+              background: input.trim() && !typing ? "linear-gradient(135deg, #06b6d4, #22d3ee)" : "#E5E5EA",
+              color: input.trim() && !typing ? "#0f0f11" : "#86868B",
               cursor: input.trim() && !typing ? "pointer" : "not-allowed",
               display: "flex",
               alignItems: "center",

@@ -28,7 +28,7 @@ const PRIORITY_COLORS = {
   critique: "#ef4444",
   haute: "#f97316",
   moyenne: "#f59e0b",
-  basse: "#6b7280",
+  basse: "#86868B",
 };
 
 const PRIORITY_LABELS = {
@@ -43,11 +43,11 @@ const CATEGORY_COLORS = {
   "Sécurité": { bg: "rgba(168,85,247,0.12)", text: "#a855f7" },
   Juridique: { bg: "rgba(249,115,22,0.12)", text: "#f97316" },
   Technique: { bg: "rgba(34,197,94,0.12)", text: "#22c55e" },
-  Autre: { bg: "rgba(107,114,128,0.12)", text: "#6b7280" },
+  Autre: { bg: "rgba(107,114,128,0.12)", text: "#86868B" },
 };
 
 const SEVERITY_MAP = {
-  1: { label: "Négligeable", color: "#6b7280", bg: "rgba(107,114,128,0.15)" },
+  1: { label: "Négligeable", color: "#86868B", bg: "rgba(107,114,128,0.15)" },
   2: { label: "Limité", color: "#f59e0b", bg: "rgba(245,158,11,0.15)" },
   3: { label: "Important", color: "#f97316", bg: "rgba(249,115,22,0.15)" },
   4: { label: "Maximal", color: "#ef4444", bg: "rgba(239,68,68,0.15)" },
@@ -124,7 +124,7 @@ const ShieldIcon = ({ size = 24, color = ACCENT }) => (
   </svg>
 );
 
-const GripIcon = ({ size = 14, color = "#4b5563" }) => (
+const GripIcon = ({ size = 14, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round">
     <circle cx="9" cy="6" r="1" /><circle cx="15" cy="6" r="1" />
     <circle cx="9" cy="12" r="1" /><circle cx="15" cy="12" r="1" />
@@ -139,38 +139,38 @@ const AlertTriangleIcon = ({ size = 14, color = "#ef4444" }) => (
   </svg>
 );
 
-const ClockIcon = ({ size = 12, color = "#9ca3af" }) => (
+const ClockIcon = ({ size = 12, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
   </svg>
 );
 
-const PencilIcon = ({ size = 13, color = "#9ca3af" }) => (
+const PencilIcon = ({ size = 13, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
   </svg>
 );
 
-const PlusIcon = ({ size = 14, color = "#9ca3af" }) => (
+const PlusIcon = ({ size = 14, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round">
     <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
   </svg>
 );
 
-const XIcon = ({ size = 13, color = "#9ca3af" }) => (
+const XIcon = ({ size = 13, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round">
     <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
   </svg>
 );
 
-const ArrowLeftIcon = ({ size = 12, color = "#9ca3af" }) => (
+const ArrowLeftIcon = ({ size = 12, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" />
   </svg>
 );
 
-const ArrowRightIcon = ({ size = 12, color = "#9ca3af" }) => (
+const ArrowRightIcon = ({ size = 12, color = "#86868B" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
   </svg>
@@ -178,7 +178,7 @@ const ArrowRightIcon = ({ size = 12, color = "#9ca3af" }) => (
 
 /* ── Shared styles ── */
 const cardStyle = {
-  background: "#1e2029",
+  background: "#FFFFFF",
   border: "1px solid #2a2d3a",
   borderRadius: 12,
   padding: "14px 16px",
@@ -210,7 +210,7 @@ const selectStyle = {
 const labelStyle = {
   fontSize: 12,
   fontWeight: 600,
-  color: "#9ca3af",
+  color: "#86868B",
   marginBottom: 4,
   display: "block",
 };
@@ -229,7 +229,7 @@ const btnPrimary = {
 
 const btnSecondary = {
   background: "transparent",
-  color: "#6b7280",
+  color: "#86868B",
   border: "1px solid #2a2d3a",
   borderRadius: 8,
   padding: "8px 20px",
@@ -289,7 +289,7 @@ function Modal({ open, onClose, title, children }) {
           overflowY: "auto",
         }}
       >
-        <h3 style={{ margin: "0 0 18px 0", fontSize: 16, fontWeight: 600, color: "#f0f0f3" }}>
+        <h3 style={{ margin: "0 0 18px 0", fontSize: 16, fontWeight: 600, color: "#1D1D1F" }}>
           {title}
         </h3>
         {children}
@@ -422,7 +422,7 @@ function IncidentForm({ incident, setIncident, onSave, onCancel }) {
 /* ── Action Card ── */
 function ActionCard({ action, columns, onMove, onEdit, onDelete }) {
   const pColor = PRIORITY_COLORS[action.priority];
-  const catStyle = CATEGORY_COLORS[action.category] || { bg: "rgba(107,114,128,0.12)", text: "#6b7280" };
+  const catStyle = CATEGORY_COLORS[action.category] || { bg: "rgba(107,114,128,0.12)", text: "#86868B" };
   const colIdx = columns.findIndex((c) => c.id === action.status);
   const canLeft = colIdx > 0;
   const canRight = colIdx < columns.length - 1;
@@ -430,7 +430,7 @@ function ActionCard({ action, columns, onMove, onEdit, onDelete }) {
   return (
     <div
       style={{
-        background: "#1e2029",
+        background: "#FFFFFF",
         borderRadius: 10,
         border: "1px solid #2a2d3a",
         borderLeft: `3px solid ${pColor}`,
@@ -488,7 +488,7 @@ function ActionCard({ action, columns, onMove, onEdit, onDelete }) {
         <p style={{
           margin: "6px 0 0 22px",
           fontSize: 11,
-          color: "#6b7280",
+          color: "#86868B",
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
@@ -506,7 +506,7 @@ function ActionCard({ action, columns, onMove, onEdit, onDelete }) {
           onClick={() => canLeft && onMove(action.id, columns[colIdx - 1].id)}
           title="Déplacer à gauche"
         >
-          <ArrowLeftIcon size={12} color={canLeft ? ACCENT : "#4b5563"} />
+          <ArrowLeftIcon size={12} color={canLeft ? ACCENT : "#86868B"} />
         </button>
         <button
           style={{ ...iconBtn, opacity: canRight ? 1 : 0.25 }}
@@ -514,16 +514,16 @@ function ActionCard({ action, columns, onMove, onEdit, onDelete }) {
           onClick={() => canRight && onMove(action.id, columns[colIdx + 1].id)}
           title="Déplacer à droite"
         >
-          <ArrowRightIcon size={12} color={canRight ? ACCENT : "#4b5563"} />
+          <ArrowRightIcon size={12} color={canRight ? ACCENT : "#86868B"} />
         </button>
         <div style={{ flex: 1 }} />
         <button
           style={iconBtn}
           onClick={() => onEdit(action)}
           title="Modifier"
-          className="hover:bg-[rgba(255,255,255,0.06)]"
+          className="hover:bg-[rgba(0,0,0,0.06)]"
         >
-          <PencilIcon size={13} color="#6b7280" />
+          <PencilIcon size={13} color="#86868B" />
         </button>
         <button
           style={iconBtn}
@@ -531,7 +531,7 @@ function ActionCard({ action, columns, onMove, onEdit, onDelete }) {
           title="Supprimer"
           className="hover:bg-[rgba(239,68,68,0.12)]"
         >
-          <XIcon size={13} color="#6b7280" />
+          <XIcon size={13} color="#86868B" />
         </button>
       </div>
     </div>
@@ -560,8 +560,8 @@ function KanbanColumn({ column, actions, columns, onAddClick, onMove, onEdit, on
         <span className="text-[13px] font-semibold text-[#c8cad0]">{column.label}</span>
         <span
           style={{
-            background: "rgba(255,255,255,0.06)",
-            color: "#6b7280",
+            background: "rgba(0,0,0,0.06)",
+            color: "#86868B",
             fontSize: 11,
             fontWeight: 600,
             borderRadius: 10,
@@ -578,7 +578,7 @@ function KanbanColumn({ column, actions, columns, onAddClick, onMove, onEdit, on
             title="Supprimer cette colonne"
             className="hover:bg-[rgba(239,68,68,0.12)]"
           >
-            <XIcon size={11} color="#4b5563" />
+            <XIcon size={11} color="#86868B" />
           </button>
         )}
         <button
@@ -760,7 +760,7 @@ export default function VaultActionsPage() {
           <ShieldIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
             Plan d'action &amp; Incidents
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -776,7 +776,7 @@ export default function VaultActionsPage() {
       <div className="grid grid-cols-4 gap-3 mb-4" style={{ fontSize: 13 }}>
         <div style={cardStyle}>
           <p className="text-[11px] text-[#6b7280] m-0 mb-1 uppercase tracking-wider font-medium">Total actions</p>
-          <p className="text-[22px] font-bold text-[#f0f0f3] m-0">{totalActions}</p>
+          <p className="text-[22px] font-bold text-[#1D1D1F] m-0">{totalActions}</p>
         </div>
         <div style={cardStyle}>
           <p className="text-[11px] text-[#6b7280] m-0 mb-1 uppercase tracking-wider font-medium">Actions critiques</p>
@@ -791,7 +791,7 @@ export default function VaultActionsPage() {
           <div className="flex items-center gap-2">
             <p className="text-[22px] font-bold m-0" style={{ color: "#22c55e" }}>{completionRate}%</p>
           </div>
-          <div style={{ height: 4, borderRadius: 4, background: "rgba(255,255,255,0.06)", marginTop: 8, overflow: "hidden" }}>
+          <div style={{ height: 4, borderRadius: 4, background: "rgba(0,0,0,0.06)", marginTop: 8, overflow: "hidden" }}>
             <div style={{ height: "100%", width: `${completionRate}%`, borderRadius: 4, background: "linear-gradient(90deg, #06b6d4, #22c55e)", transition: "width 0.5s ease" }} />
           </div>
         </div>
@@ -820,7 +820,7 @@ export default function VaultActionsPage() {
             style={{
               fontSize: 11,
               fontWeight: 500,
-              color: "#9ca3af",
+              color: "#86868B",
               background: "rgba(255,255,255,0.04)",
               padding: "3px 10px",
               borderRadius: 6,
@@ -844,7 +844,7 @@ export default function VaultActionsPage() {
             style={{
               background: activeTab === t.key ? "rgba(6,182,212,0.12)" : "transparent",
               color: activeTab === t.key ? ACCENT : "#64748b",
-              borderColor: activeTab === t.key ? "rgba(6,182,212,0.3)" : "rgba(255,255,255,0.06)",
+              borderColor: activeTab === t.key ? "rgba(6,182,212,0.3)" : "rgba(0,0,0,0.06)",
             }}
           >
             {t.label}
@@ -868,7 +868,7 @@ export default function VaultActionsPage() {
               }}
               onClick={addColumn}
             >
-              <PlusIcon size={12} color="#6b7280" />
+              <PlusIcon size={12} color="#86868B" />
               Ajouter une colonne
             </button>
           </div>
@@ -925,7 +925,7 @@ export default function VaultActionsPage() {
 
           <div
             style={{
-              background: "#1e2029",
+              background: "#FFFFFF",
               border: "1px solid #2a2d3a",
               borderRadius: 12,
               overflow: "hidden",
@@ -960,7 +960,7 @@ export default function VaultActionsPage() {
                           textAlign: "left",
                           fontSize: 11,
                           fontWeight: 600,
-                          color: "#6b7280",
+                          color: "#86868B",
                           textTransform: "uppercase",
                           letterSpacing: 0.5,
                           whiteSpace: "nowrap",
@@ -974,13 +974,13 @@ export default function VaultActionsPage() {
                 <tbody>
                   {incidents.map((inc) => {
                     const sev = SEVERITY_MAP[inc.severity];
-                    const statusStyle = INCIDENT_STATUS_COLORS[inc.status] || { bg: "rgba(107,114,128,0.12)", text: "#6b7280" };
+                    const statusStyle = INCIDENT_STATUS_COLORS[inc.status] || { bg: "rgba(107,114,128,0.12)", text: "#86868B" };
                     const cnilStatus = inc.status !== "resolved" ? get72hRemaining(inc.date) : null;
                     const canAdvance = INCIDENT_STATUSES.indexOf(inc.status) < INCIDENT_STATUSES.length - 1;
 
                     return (
                       <tr key={inc.id} style={{ borderBottom: "1px solid #2a2d3a" }} className="hover:bg-[rgba(255,255,255,0.02)] transition-colors">
-                        <td style={{ padding: "12px 10px", fontSize: 13, color: "#9ca3af", whiteSpace: "nowrap" }}>
+                        <td style={{ padding: "12px 10px", fontSize: 13, color: "#86868B", whiteSpace: "nowrap" }}>
                           {formatDateTimeFr(inc.date)}
                         </td>
                         <td style={{ padding: "12px 10px", fontSize: 13, color: "#e2e4ea", maxWidth: 200 }}>
@@ -993,7 +993,7 @@ export default function VaultActionsPage() {
                             {inc.severity} — {sev.label}
                           </span>
                         </td>
-                        <td style={{ padding: "12px 10px", fontSize: 12, color: "#9ca3af", maxWidth: 140 }}>
+                        <td style={{ padding: "12px 10px", fontSize: 12, color: "#86868B", maxWidth: 140 }}>
                           <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                             {inc.dataTypes}
                           </div>
@@ -1061,7 +1061,7 @@ export default function VaultActionsPage() {
                               title="Supprimer"
                               className="hover:bg-[rgba(239,68,68,0.12)]"
                             >
-                              <XIcon size={12} color="#6b7280" />
+                              <XIcon size={12} color="#86868B" />
                             </button>
                           </div>
                         </td>
@@ -1070,7 +1070,7 @@ export default function VaultActionsPage() {
                   })}
                   {incidents.length === 0 && (
                     <tr>
-                      <td colSpan={8} style={{ padding: "30px 10px", textAlign: "center", fontSize: 13, color: "#4b5563" }}>
+                      <td colSpan={8} style={{ padding: "30px 10px", textAlign: "center", fontSize: 13, color: "#86868B" }}>
                         Aucun incident déclaré
                       </td>
                     </tr>
@@ -1096,7 +1096,7 @@ export default function VaultActionsPage() {
                     style={{
                       fontSize: 11,
                       fontWeight: 500,
-                      color: i === arr.length - 1 ? "#22c55e" : "#9ca3af",
+                      color: i === arr.length - 1 ? "#22c55e" : "#86868B",
                       background: i === arr.length - 1 ? "rgba(34,197,94,0.1)" : "rgba(255,255,255,0.04)",
                       padding: "2px 8px",
                       borderRadius: 5,

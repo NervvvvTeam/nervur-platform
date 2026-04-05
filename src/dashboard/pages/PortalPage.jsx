@@ -88,7 +88,7 @@ function TypingText({ text, speed = 60, delay = 500 }) {
 // ═══════════════════════════════════════════
 // ANIMATED COUNTER
 // ═══════════════════════════════════════════
-function AnimatedCounter({ value, duration = 1500, suffix = "", color = "#f0f0f3" }) {
+function AnimatedCounter({ value, duration = 1500, suffix = "", color = "#1D1D1F" }) {
   const [count, setCount] = useState(0);
   const numVal = parseFloat(value) || 0;
   useEffect(() => {
@@ -178,7 +178,7 @@ function LiveClock() {
   const clock = time.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
   return (
     <div className="absolute top-7 right-8 text-right opacity-0 [animation:fadeInUp_0.6s_ease-out_1.5s_forwards]">
-      <div className="text-[22px] font-semibold text-[#f0f0f3] tabular-nums tracking-wide">{clock}</div>
+      <div className="text-[22px] font-semibold text-[#1D1D1F] tabular-nums tracking-wide">{clock}</div>
       <div className="text-xs text-gray-500 capitalize mt-0.5">{fmt}</div>
     </div>
   );
@@ -308,7 +308,7 @@ function AuroraCanvas({ width = 300, height = 340 }) {
   }, [width, height]);
 
   return (
-    <div className="rounded-[14px] relative bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] overflow-hidden"
+    <div className="rounded-[14px] relative bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden"
       style={{ height: height + "px" }}>
       <div className="absolute top-3.5 left-4 z-[2] text-[10px] font-semibold text-gray-500 tracking-wide uppercase">
         Aurora NERVÜR
@@ -498,7 +498,7 @@ function LiveTicker() {
   }, []);
 
   return (
-    <div className="px-5 py-4 rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] overflow-hidden relative min-h-[70px]">
+    <div className="px-5 py-4 rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden relative min-h-[70px]">
       <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3 uppercase flex items-center gap-1.5">
         <span className="w-1.5 h-1.5 rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />
         Activité en direct
@@ -507,7 +507,7 @@ function LiveTicker() {
         <div key={i} className={`${i === visibleIdx ? "flex" : "hidden"} items-center gap-3 [animation:fadeInUp_0.4s_ease-out]`}>
           <span className="text-xl">{item.icon}</span>
           <div className="flex-1">
-            <div className="text-[13px] text-gray-300 font-medium">{item.text}</div>
+            <div className="text-[13px] text-gray-700 font-medium">{item.text}</div>
             <div className="text-[11px] text-gray-500 mt-0.5 flex gap-2">
               <span className="font-medium" style={{ color: item.color }}>{item.tool}</span>
               <span>{item.time}</span>
@@ -598,7 +598,7 @@ const holoStyles = `
 
 function NervurHologram() {
   return (
-    <div className="holo-container h-[280px] rounded-[14px] relative bg-[linear-gradient(180deg,#1a1b25_0%,#1e2029_50%,#1a1b25_100%)] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] overflow-hidden flex items-center justify-center cursor-pointer [perspective:600px]">
+    <div className="holo-container h-[280px] rounded-[14px] relative bg-[linear-gradient(180deg,#1a1b25_0%,#1e2029_50%,#1a1b25_100%)] border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] overflow-hidden flex items-center justify-center cursor-pointer [perspective:600px]">
       <style>{holoStyles}</style>
 
       {/* Scan line effect */}
@@ -795,7 +795,7 @@ function GravityPlayground({ width = 300, height = 300 }) {
         // Shine highlight
         ctx.beginPath();
         ctx.arc(orb.x - orb.r * 0.25, orb.y - orb.r * 0.25, orb.r * 0.35, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.25)";
+        ctx.fillStyle = "rgba(0,0,0,0.15)";
         ctx.fill();
 
         // Label
@@ -841,7 +841,7 @@ function GravityPlayground({ width = 300, height = 300 }) {
     }
 
     // Initial clear
-    ctx.fillStyle = "#1e2029";
+    ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, 0, width, height);
     draw();
 
@@ -849,7 +849,7 @@ function GravityPlayground({ width = 300, height = 300 }) {
   }, [width, height]);
 
   return (
-    <div className="rounded-[14px] relative overflow-hidden border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)]"
+    <div className="rounded-[14px] relative overflow-hidden border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
       style={{ height: height + "px" }}>
       <div className="absolute top-3 left-3.5 z-[2]">
         <div className="text-[10px] font-semibold text-white/40 tracking-wide uppercase">NERVÜR Universe</div>
@@ -965,7 +965,7 @@ function RightPanel({ hasAccess }) {
       </div>
 
       {/* Live Activity — dynamic */}
-      <div className="px-5 py-4 rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] min-h-[70px] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.5s_forwards]">
+      <div className="px-5 py-4 rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] min-h-[70px] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.5s_forwards]">
         <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3 uppercase flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />
           Vos outils
@@ -974,7 +974,7 @@ function RightPanel({ hasAccess }) {
           <div key={i} className={`${i === visibleIdx % activities.length ? "flex" : "hidden"} items-center gap-3 [animation:fadeInUp_0.4s_ease-out]`}>
             <span className="text-xl">{item.icon}</span>
             <div className="flex-1">
-              <div className="text-[13px] text-gray-300 font-medium">{item.text}</div>
+              <div className="text-[13px] text-gray-700 font-medium">{item.text}</div>
               <span className="text-[11px] font-medium" style={{ color: item.color }}>{item.tool}</span>
             </div>
           </div>
@@ -982,7 +982,7 @@ function RightPanel({ hasAccess }) {
       </div>
 
       {/* Quick Stats — real data */}
-      <div className="px-5 py-4 rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.6s_forwards]">
+      <div className="px-5 py-4 rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] opacity-0 [animation:fadeInUp_0.5s_ease-out_0.6s_forwards]">
         <div className="text-[10px] font-semibold text-gray-500 tracking-wide mb-3.5 uppercase">
           Résumé rapide
         </div>
@@ -997,7 +997,7 @@ function RightPanel({ hasAccess }) {
             { label: "Traitements registre", value: stats?.registreCount ?? "—", color: "#06b6d4" },
           ] : []),
         ].map((stat, i) => (
-          <div key={i} className={`flex justify-between items-center py-2 ${i < 3 ? "border-b border-[#2a2d3a]" : ""}`}>
+          <div key={i} className={`flex justify-between items-center py-2 ${i < 3 ? "border-b border-[#E5E5EA]" : ""}`}>
             <span className="text-xs text-[#9ca3af]">{stat.label}</span>
             <span className="text-[13px] font-semibold" style={{ color: stat.color }}>{stat.value}</span>
           </div>
@@ -1015,7 +1015,7 @@ function RightPanel({ hasAccess }) {
           </div>
         </button>
       ) : (
-        <div className="px-5 py-[18px] rounded-xl bg-[#1e2029] border border-[#2a2d3a] shadow-[0_2px_8px_rgba(0,0,0,0.2)] [animation:fadeInScale_0.3s_ease-out]">
+        <div className="px-5 py-[18px] rounded-xl bg-white border border-[#E5E5EA] shadow-[0_2px_8px_rgba(0,0,0,0.06)] [animation:fadeInScale_0.3s_ease-out]">
           {contactSent ? (
             <div className="text-center py-5">
               <div className="text-[28px] mb-2">✅</div>
@@ -1025,17 +1025,17 @@ function RightPanel({ hasAccess }) {
           ) : (
             <>
               <div className="flex justify-between items-center mb-3.5">
-                <span className="text-[13px] font-semibold text-[#f0f0f3]">Contactez-nous</span>
+                <span className="text-[13px] font-semibold text-[#1D1D1F]">Contactez-nous</span>
                 <button onClick={() => setContactOpen(false)} className="bg-transparent border-none text-gray-500 cursor-pointer text-base font-[inherit]">✕</button>
               </div>
               <input value={contactForm.subject} onChange={e => setContactForm(f => ({ ...f, subject: e.target.value }))}
                 placeholder="Sujet"
-                className="w-full px-3 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-[13px] font-[inherit] outline-none box-border mb-2.5 focus:border-indigo-500"
+                className="w-full px-3 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-[13px] font-[inherit] outline-none box-border mb-2.5 focus:border-indigo-500"
               />
               <textarea value={contactForm.message} onChange={e => setContactForm(f => ({ ...f, message: e.target.value }))}
                 placeholder="Votre message..."
                 rows={4}
-                className="w-full px-3 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-[13px] font-[inherit] outline-none box-border mb-3 resize-y focus:border-indigo-500"
+                className="w-full px-3 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-[13px] font-[inherit] outline-none box-border mb-3 resize-y focus:border-indigo-500"
               />
               <button onClick={handleContact}
                 className="w-full py-2.5 bg-[linear-gradient(135deg,#6366f1,#818CF8)] text-white border-none rounded-lg text-[13px] font-medium cursor-pointer font-[inherit]">
@@ -1071,7 +1071,7 @@ export default function PortalPage() {
           {/* Header */}
           <div className={`mb-5 sm:mb-8 px-4 sm:px-8 py-5 sm:py-7 rounded-[14px] bg-[linear-gradient(135deg,rgba(99,102,241,0.08)_0%,rgba(129,140,248,0.04)_100%)] border border-[rgba(99,102,241,0.12)] relative overflow-hidden ${fadeInUpClass}`}>
             <div className="absolute -top-5 right-10 w-[120px] h-[120px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.15)_0%,transparent_70%)] [animation:orbFloat_6s_ease-in-out_infinite] pointer-events-none" />
-            <h1 className="text-xl sm:text-[28px] font-semibold text-[#f0f0f3] mb-1.5 relative">
+            <h1 className="text-xl sm:text-[28px] font-semibold text-[#1D1D1F] mb-1.5 relative">
               <TypingText text={`Bonjour, ${user?.name?.split(" ")[0] || "Client"}`} speed={50} delay={300} />
             </h1>
             <p className="text-sm text-[#9ca3af] relative opacity-0 [animation:fadeInUp_0.6s_ease-out_1.2s_forwards]">
@@ -1092,16 +1092,16 @@ export default function PortalPage() {
                   onClick={() => active ? navigate(tool.path) : window.open("https://nervur.fr/contact", "_blank")}
                   onMouseEnter={() => setHoveredCard(tool.id)}
                   onMouseLeave={() => setHoveredCard(null)}
-                  className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-5 sm:p-6 rounded-[14px] bg-[#1f2130] cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden min-w-0"
+                  className="opacity-0 [animation:fadeInUp_0.5s_ease-out_forwards] pt-[27px] p-5 sm:p-6 rounded-[14px] bg-white cursor-pointer flex flex-col transition-all duration-300 relative overflow-hidden min-w-0"
                   style={{
                     animationDelay: `${index * 0.1}s`,
-                    border: `1px solid ${isHovered && active ? `${color}50` : "#33364a"}`,
+                    border: `1px solid ${isHovered && active ? `${color}50` : "#E5E5EA"}`,
                     opacity: active ? undefined : 0.45,
                     transform: isHovered && active ? "translateY(-4px)" : "translateY(0)",
-                    boxShadow: isHovered && active ? `0 12px 40px ${color}20, 0 4px 16px rgba(0,0,0,0.3)` : "0 2px 12px rgba(0,0,0,0.3)",
+                    boxShadow: isHovered && active ? `0 12px 40px ${color}20, 0 4px 16px rgba(0,0,0,0.08)` : "0 2px 12px rgba(0,0,0,0.08)",
                   }}>
                   {/* Top accent */}
-                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[14px]" style={{ background: active ? gradient : "#2a2d3a" }} />
+                  <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-[14px]" style={{ background: active ? gradient : "#E5E5EA" }} />
                   {isHovered && active && <div className="absolute inset-0 rounded-[14px] pointer-events-none [background-size:200%_100%] [animation:shimmer_2s_linear_infinite]" style={{ background: `linear-gradient(90deg, transparent, ${color}10, transparent)` }} />}
 
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300"
@@ -1114,9 +1114,9 @@ export default function PortalPage() {
                   </div>
 
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                    <h3 className="text-base font-semibold m-0" style={{ color: active ? "#f0f0f3" : "#4b5563" }}>{tool.name}</h3>
+                    <h3 className="text-base font-semibold m-0" style={{ color: active ? "#1D1D1F" : "#86868B" }}>{tool.name}</h3>
                     <span className="text-[10px] font-medium px-[7px] py-0.5 rounded"
-                      style={{ color: active ? color : "#6b7280", background: active ? `${color}15` : "#2a2d3a" }}>{tool.subtitle}</span>
+                      style={{ color: active ? color : "#86868B", background: active ? `${color}15` : "#E5E5EA" }}>{tool.subtitle}</span>
                     {active && <span className="inline-flex items-center gap-[3px] text-[10px] text-green-500 font-medium">
                       <span className="w-[5px] h-[5px] rounded-full bg-green-500 [animation:statusPulse_2s_infinite] inline-block" />Actif
                     </span>}
@@ -1124,7 +1124,7 @@ export default function PortalPage() {
 
                   <p className="text-[13px] text-[#9ca3af] m-0 mb-3.5 leading-relaxed">{tool.desc}</p>
 
-                  {active && <div className="text-[11px] text-gray-500 mb-4 px-2.5 py-1.5 rounded-md bg-[#17181f] border border-[#2a2d3a]">{tool.stats}</div>}
+                  {active && <div className="text-[11px] text-gray-500 mb-4 px-2.5 py-1.5 rounded-md bg-white border border-[#E5E5EA]">{tool.stats}</div>}
 
                   <div className="mt-auto">
                     {active ? (

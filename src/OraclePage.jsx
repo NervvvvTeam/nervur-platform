@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#D4D4D8", V3 = "#A1A1AA";
+const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
 const VG = (a) => `rgba(255,255,255,${a})`;
 const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
 
@@ -185,11 +185,11 @@ export default function OraclePage() {
     return false;
   };
 
-  const impactColor = (i) => i === "fort" ? "#4ADE80" : i === "moyen" ? "#fbbf24" : "#71717A";
+  const impactColor = (i) => i === "fort" ? "#4ADE80" : i === "moyen" ? "#fbbf24" : "#86868B";
   const effortColor = (e) => e === "faible" ? "#4ADE80" : e === "moyen" ? "#fbbf24" : "#ef4444";
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ background: "#09090B", color: "#FAFAFA", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", minHeight: "100vh", position: "relative" }}>
+    <div onMouseMove={handleMouseMove} style={{ background: "#F5F5F7", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif", minHeight: "100vh", position: "relative" }}>
       <div ref={glowRef} style={{ position: "fixed", left: -100, top: -100, width: "150px", height: "150px", borderRadius: "50%", pointerEvents: "none", zIndex: 9999, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transform: "translate(-50%, -50%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0, mixBlendMode: "screen" }} />
 
       <style>{`
@@ -198,7 +198,7 @@ export default function OraclePage() {
         .nav-btn:hover { color: #fafafa; border-color: #818CF8; box-shadow: 0 0 16px rgba(129,140,248,0.2); }
       `}</style>
 
-      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#09090B", borderBottom: `1px solid ${VG(0.1)}` }}>
+      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "#F5F5F7", borderBottom: `1px solid ${VG(0.1)}` }}>
         <LogoNervur height={28} onClick={() => navigate("/")} />
         <div style={{ display: "flex", gap: "12px" }}>
           <button className="nav-btn" onClick={() => navigate('/technologies')} aria-label="Retour aux outils">← Outils</button>
@@ -219,7 +219,7 @@ export default function OraclePage() {
         {/* Stats */}
         <section aria-label="Statistiques Oracle" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "16px", margin: "40px 0", animation: "fadeInUp 0.8s ease 0.2s both" }}>
           {[{ val: "500+", label: "ANALYSES GÉNÉRÉES" }, { val: "94%", label: "TAUX DE SATISFACTION" }, { val: "x2.7", label: "CROISSANCE MOYENNE" }].map((s, i) => (
-            <div key={i} style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "20px", textAlign: "center" }}>
+            <div key={i} style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "20px", textAlign: "center" }}>
               <div style={{ fontSize: "28px", fontWeight: 800, color: V }}>{s.val}</div>
               <div style={{ fontSize: "10px", letterSpacing: "2px", color: V3, marginTop: "4px" }}>{s.label}</div>
             </div>
@@ -237,7 +237,7 @@ export default function OraclePage() {
               textTransform: "uppercase", fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
               background: activeTab === tab.key ? `${tab.color}20` : "transparent",
               border: `1px solid ${activeTab === tab.key ? `${tab.color}60` : VG(0.1)}`,
-              color: activeTab === tab.key ? tab.color : "#52525B",
+              color: activeTab === tab.key ? tab.color : "#86868B",
               transition: "all 0.3s", borderRadius: "8px",
             }}>{tab.label}</button>
           ))}
@@ -245,7 +245,7 @@ export default function OraclePage() {
 
         {activeTab === "strategie" && (<>
         {/* Form */}
-        <section aria-label="Formulaire d'analyse stratégique" style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "16px", padding: isMobile ? "24px" : "32px", animation: "fadeInUp 0.8s ease 0.4s both" }}>
+        <section aria-label="Formulaire d'analyse stratégique" style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "16px", padding: isMobile ? "24px" : "32px", animation: "fadeInUp 0.8s ease 0.4s both" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "24px" }}>
             <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#a78bfa" }} />
             <span style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "1px" }}>Décrivez votre entreprise</span>
@@ -290,7 +290,7 @@ export default function OraclePage() {
           <section aria-label="Résultats de l'analyse" style={{ marginTop: "32px", display: "flex", flexDirection: "column", gap: "20px" }}>
             {/* Diagnostic */}
             {visibleSections >= 1 && (
-              <div style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "24px", animation: "fadeInUp 0.5s ease" }}>
+              <div style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "24px", animation: "fadeInUp 0.5s ease" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
                   <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", color: "#a78bfa", background: "rgba(167,139,250,0.15)", padding: "3px 10px", borderRadius: "12px" }}>DIAGNOSTIC</span>
                 </div>
@@ -300,7 +300,7 @@ export default function OraclePage() {
 
             {/* Opportunities */}
             {visibleSections >= 2 && (
-              <div style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "24px", animation: "fadeInUp 0.5s ease" }}>
+              <div style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "24px", animation: "fadeInUp 0.5s ease" }}>
                 <h3 style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "1px", marginBottom: "16px" }}>Opportunités identifiées</h3>
                 {analysis.opportunities?.map((o, i) => (
                   <div key={i} style={{ padding: "14px 0", borderBottom: i < analysis.opportunities.length - 1 ? `1px solid ${VG(0.06)}` : "none" }}>
@@ -317,7 +317,7 @@ export default function OraclePage() {
 
             {/* Actions */}
             {visibleSections >= 3 && (
-              <div style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "24px", animation: "fadeInUp 0.5s ease" }}>
+              <div style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "24px", animation: "fadeInUp 0.5s ease" }}>
                 <h3 style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "1px", marginBottom: "16px" }}>Plan d'action prioritaire</h3>
                 {analysis.actions?.map((a, i) => (
                   <div key={i} style={{ display: "flex", gap: "16px", padding: "12px 0", borderBottom: i < analysis.actions.length - 1 ? `1px solid ${VG(0.06)}` : "none" }}>
@@ -338,7 +338,7 @@ export default function OraclePage() {
             {visibleSections >= 4 && (
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: "16px", animation: "fadeInUp 0.5s ease" }}>
                 {analysis.kpis?.map((k, i) => (
-                  <div key={i} style={{ background: `rgba(24,24,27,0.4)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "20px", textAlign: "center" }}>
+                  <div key={i} style={{ background: `rgba(255,255,255,0.7)`, border: `1px solid ${VG(0.1)}`, borderRadius: "12px", padding: "20px", textAlign: "center" }}>
                     <div style={{ fontSize: "10px", letterSpacing: "1.5px", color: V3, marginBottom: "8px", textTransform: "uppercase" }}>{k.name}</div>
                     <div style={{ fontSize: "24px", fontWeight: 900, color: "#a78bfa" }}>{k.target}</div>
                     <div style={{ fontSize: "11px", color: V3, marginTop: "4px" }}>Objectif : {k.timeline}</div>
@@ -360,7 +360,7 @@ export default function OraclePage() {
         <section aria-label="Appel à l'action" style={{ marginTop: "60px", textAlign: "center", padding: "48px", border: `1px solid ${VG(0.1)}`, borderRadius: "16px", animation: "fadeInUp 0.8s ease 0.6s both" }}>
           <h2 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "12px" }}>Passez à l'action avec Oracle</h2>
           <p style={{ color: V3, marginBottom: "24px" }}>Notre équipe met en place votre plan stratégique personnalisé.</p>
-          <button className="nav-btn" onClick={() => navigate('/contact?outil=oracle')} style={{ padding: "14px 36px", background: V, color: "#09090B", fontWeight: 700, border: "none" }}>RÉSERVER UN APPEL →</button>
+          <button className="nav-btn" onClick={() => navigate('/contact?outil=oracle')} style={{ padding: "14px 36px", background: V, color: "#F5F5F7", fontWeight: 700, border: "none" }}>RÉSERVER UN APPEL →</button>
         </section>
         </>)}
 
@@ -370,24 +370,24 @@ export default function OraclePage() {
             {["Entreprise", "Secteur", "Budget", "Besoin"].map((s, i) => (
               <div key={i} style={{ flex: 1 }}>
                 <div style={{ height: "3px", background: i <= vStep ? "linear-gradient(90deg, #f59e0b, #fde68a)" : VG(0.08), transition: "background 0.5s", marginBottom: "6px", borderRadius: "2px" }} />
-                <span style={{ fontSize: "9px", letterSpacing: "1px", color: i <= vStep ? "#f59e0b" : "#52525B" }}>{s}</span>
+                <span style={{ fontSize: "9px", letterSpacing: "1px", color: i <= vStep ? "#f59e0b" : "#86868B" }}>{s}</span>
               </div>
             ))}
           </div>
 
           {/* VERTEX FORM STEPS */}
           {!vProposal && !vGenerating && (
-            <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.4)", borderRadius: "16px", padding: isMobile ? "24px" : "40px", animation: "fadeInUp 0.5s ease both" }}>
+            <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", borderRadius: "16px", padding: isMobile ? "24px" : "40px", animation: "fadeInUp 0.5s ease both" }}>
               {vStep === 0 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "12px" }}>NOM DE L'ENTREPRISE</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>NOM DE L'ENTREPRISE</label>
                   <input value={vCompanyName} onChange={e => setVCompanyName(e.target.value)} placeholder="Ex: Acme Corp"
                     style={{ width: "100%", padding: "14px 16px", background: VG(0.04), border: `1px solid ${VG(0.1)}`, borderRadius: "8px", color: V, fontSize: "16px", fontFamily: "inherit", outline: "none", boxSizing: "border-box" }} />
                 </div>
               )}
               {vStep === 1 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "12px" }}>SECTEUR D'ACTIVITÉ</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>SECTEUR D'ACTIVITÉ</label>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                     {SECTORS.map(s => (
                       <button key={s} onClick={() => setVSector(s)} style={{
@@ -401,7 +401,7 @@ export default function OraclePage() {
               )}
               {vStep === 2 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "12px" }}>BUDGET ESTIMÉ</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>BUDGET ESTIMÉ</label>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                     {BUDGETS.map(b => (
                       <button key={b} onClick={() => setVBudget(b)} style={{
@@ -415,7 +415,7 @@ export default function OraclePage() {
               )}
               {vStep === 3 && (
                 <div>
-                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#52525B", display: "block", marginBottom: "12px" }}>TYPE DE PROJET</label>
+                  <label style={{ fontSize: "11px", letterSpacing: "2px", color: "#86868B", display: "block", marginBottom: "12px" }}>TYPE DE PROJET</label>
                   <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                     {NEEDS.map(n => (
                       <button key={n} onClick={() => setVNeed(n)} style={{
@@ -430,7 +430,7 @@ export default function OraclePage() {
               <div style={{ marginTop: "24px", display: "flex", justifyContent: "space-between" }}>
                 {vStep > 0 && <button onClick={() => setVStep(vStep - 1)} aria-label="Étape précédente" style={{ padding: "10px 24px", background: "transparent", border: `1px solid ${VG(0.15)}`, borderRadius: "8px", color: V3, fontSize: "12px", cursor: "pointer", fontFamily: "inherit" }}>← Retour</button>}
                 <button onClick={() => vStep < 3 ? setVStep(vStep + 1) : generateProposal()} disabled={!canProceed()}
-                  style={{ padding: "10px 24px", background: canProceed() ? "linear-gradient(135deg, #f59e0b, #d97706)" : VG(0.06), border: "none", borderRadius: "8px", color: canProceed() ? "#09090B" : "#52525B", fontSize: "12px", fontWeight: 700, cursor: canProceed() ? "pointer" : "not-allowed", fontFamily: "inherit", marginLeft: "auto", letterSpacing: "1px", textTransform: "uppercase" }}>
+                  style={{ padding: "10px 24px", background: canProceed() ? "linear-gradient(135deg, #f59e0b, #d97706)" : VG(0.06), border: "none", borderRadius: "8px", color: canProceed() ? "#F5F5F7" : "#86868B", fontSize: "12px", fontWeight: 700, cursor: canProceed() ? "pointer" : "not-allowed", fontFamily: "inherit", marginLeft: "auto", letterSpacing: "1px", textTransform: "uppercase" }}>
                   {vStep < 3 ? "Suivant →" : "Générer la proposition →"}
                 </button>
               </div>
@@ -439,7 +439,7 @@ export default function OraclePage() {
 
           {/* GENERATING */}
           {vGenerating && (
-            <div style={{ textAlign: "center", padding: "60px 20px", border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.4)", borderRadius: "16px", animation: "fadeInUp 0.5s ease both" }}>
+            <div style={{ textAlign: "center", padding: "60px 20px", border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", borderRadius: "16px", animation: "fadeInUp 0.5s ease both" }}>
               <div style={{ fontSize: "14px", color: "#f59e0b", marginBottom: "16px" }}>Génération de la proposition pour {vCompanyName}...</div>
               <div style={{ height: "3px", background: VG(0.06), maxWidth: "300px", margin: "0 auto", overflow: "hidden", borderRadius: "2px" }}>
                 <div style={{ width: "100%", height: "100%", background: "linear-gradient(90deg, #f59e0b, #fde68a)", animation: "fadeInUp 2.5s ease both" }} />
@@ -450,9 +450,9 @@ export default function OraclePage() {
           {/* PROPOSAL */}
           {vProposal && (
             <div style={{ animation: "fadeInUp 0.5s ease both" }}>
-              <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.4)", overflow: "hidden", borderRadius: "16px" }}>
+              <div style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.7)", overflow: "hidden", borderRadius: "16px" }}>
                 <div style={{ padding: "24px 32px", borderBottom: `1px solid ${VG(0.08)}`, background: "rgba(245,158,11,0.05)" }}>
-                  <div style={{ fontSize: "9px", letterSpacing: "2px", color: "#52525B", marginBottom: "8px" }}>NERVÜR — PROPOSITION COMMERCIALE</div>
+                  <div style={{ fontSize: "9px", letterSpacing: "2px", color: "#86868B", marginBottom: "8px" }}>NERVÜR — PROPOSITION COMMERCIALE</div>
                   <h2 style={{ fontSize: isMobile ? "20px" : "26px", fontWeight: 800, letterSpacing: "-1px" }}>{vProposal.title}</h2>
                   <div style={{ marginTop: "12px", display: "flex", gap: "20px", flexWrap: "wrap" }}>
                     <span style={{ fontSize: "11px", color: V3 }}>Client : <strong style={{ color: V }}>{vCompanyName}</strong></span>
@@ -477,7 +477,7 @@ export default function OraclePage() {
                   Nouvelle proposition
                 </button>
                 <button onClick={() => navigate('/contact?outil=oracle')}
-                  style={{ padding: "12px 28px", background: V, color: "#09090B", border: "none", borderRadius: "8px", fontWeight: 700, fontSize: "12px", cursor: "pointer", fontFamily: "inherit", letterSpacing: "1px", textTransform: "uppercase" }}>
+                  style={{ padding: "12px 28px", background: V, color: "#F5F5F7", border: "none", borderRadius: "8px", fontWeight: 700, fontSize: "12px", cursor: "pointer", fontFamily: "inherit", letterSpacing: "1px", textTransform: "uppercase" }}>
                   Nous contacter →
                 </button>
               </div>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useSEO from "./useSEO";
 import LogoNervur from "./components/LogoNervur";
 
-const V = "#FFFFFF", V2 = "#D4D4D8", V3 = "#A1A1AA";
+const V = "#FFFFFF", V2 = "#424245", V3 = "#86868B";
 const VG = (a) => `rgba(255,255,255,${a})`;
 const A1 = "#818CF8", A2 = "#4ADE80", A3 = "#F472B6";
 
@@ -276,7 +276,7 @@ export default function SentinelPage() {
   ];
 
   return (
-    <div onMouseMove={handleMouseMove} className="bg-[#0f1117] text-[#FAFAFA] font-[Helvetica_Neue,Helvetica,Arial,sans-serif] min-h-screen relative" role="document">
+    <div onMouseMove={handleMouseMove} className="bg-[#F5F5F7] text-[#1D1D1F] font-[Helvetica_Neue,Helvetica,Arial,sans-serif] min-h-screen relative" role="document">
 
       <div ref={glowRef} aria-hidden="true" className="fixed w-[150px] h-[150px] rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-screen" style={{ left: -100, top: -100, background: "radial-gradient(circle, rgba(129,140,248,0.08) 0%, rgba(129,140,248,0.02) 40%, transparent 70%)", transition: "left 0.15s ease-out, top 0.15s ease-out, opacity 0.4s", opacity: 0 }} />
 
@@ -304,9 +304,9 @@ export default function SentinelPage() {
       <main className="mx-auto max-w-[1100px]" style={{ padding: isMobile ? "100px 20px 60px" : "160px 48px 80px" }}>
         {/* RETOUR */}
         <div className="mb-5">
-          <button onClick={() => navigate("/")} className="bg-transparent border border-white/15 rounded-lg text-[#71717A] text-[13px] px-5 py-2 cursor-pointer font-[inherit] transition-all duration-300"
-            onMouseEnter={e => { e.target.style.color = "#FAFAFA"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
-            onMouseLeave={e => { e.target.style.color = "#71717A"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
+          <button onClick={() => navigate("/")} className="bg-transparent border border-white/15 rounded-lg text-[#86868B] text-[13px] px-5 py-2 cursor-pointer font-[inherit] transition-all duration-300"
+            onMouseEnter={e => { e.target.style.color = "#1D1D1F"; e.target.style.borderColor = "rgba(250,250,250,0.3)"; }}
+            onMouseLeave={e => { e.target.style.color = "#86868B"; e.target.style.borderColor = "rgba(250,250,250,0.15)"; }}>
             ← Retour
           </button>
         </div>
@@ -326,7 +326,7 @@ export default function SentinelPage() {
             </span>
           </div>
           <h1 className="font-extrabold tracking-[-2px] leading-[1.1] mb-5" style={{ fontSize: isMobile ? "36px" : "clamp(42px, 5vw, 64px)" }}>SENTINEL</h1>
-          <p className="text-lg text-[#71717A] leading-[1.8] max-w-[680px]">
+          <p className="text-lg text-[#86868B] leading-[1.8] max-w-[680px]">
             Votre bouclier complet. Sentinel surveille votre e-réputation, scanne vos concurrents et détecte les opportunités de votre marché — le tout propulsé par l'IA.
           </p>
         </div>
@@ -341,9 +341,9 @@ export default function SentinelPage() {
             { label: "Sources actives", value: "156", color: "#60a5fa" },
             { label: "Avis interceptés", value: "94%", color: "#fbbf24" },
           ].map((s, i) => (
-            <div key={i} className="py-4 px-3 bg-[rgba(24,24,27,0.4)] text-center" style={{ border: `1px solid ${VG(0.1)}` }}>
+            <div key={i} className="py-4 px-3 bg-[rgba(255,255,255,0.7)] text-center" style={{ border: `1px solid ${VG(0.1)}` }}>
               <div className="text-xl font-extrabold mb-1" style={{ color: s.color }}>{s.value}</div>
-              <div className="text-[8px] tracking-[1.5px] uppercase text-[#52525B]">{s.label}</div>
+              <div className="text-[8px] tracking-[1.5px] uppercase text-[#86868B]">{s.label}</div>
             </div>
           ))}
         </section>
@@ -355,7 +355,7 @@ export default function SentinelPage() {
               padding: "10px 24px",
               background: activeTab === tab.key ? `${tab.color}20` : "transparent",
               border: `1px solid ${activeTab === tab.key ? `${tab.color}60` : VG(0.1)}`,
-              color: activeTab === tab.key ? tab.color : "#52525B",
+              color: activeTab === tab.key ? tab.color : "#86868B",
             }}>{tab.label}</button>
           ))}
         </div>
@@ -363,7 +363,7 @@ export default function SentinelPage() {
         {/* ═══════════════ TAB: RÉPUTATION ═══════════════ */}
         {activeTab === "reputation" && (
           <section aria-label="Démonstration e-réputation" className="mb-20" style={{ animation: "fadeInUp 0.6s ease both" }}>
-            <div className="rounded-xl overflow-hidden backdrop-blur-[12px]" style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.5)" }}>
+            <div className="rounded-xl overflow-hidden backdrop-blur-[12px]" style={{ border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.75)" }}>
 
               {/* Dashboard header */}
               <div className="flex items-center justify-between" style={{ padding: "14px 20px", borderBottom: `1px solid ${VG(0.08)}` }}>
@@ -371,7 +371,7 @@ export default function SentinelPage() {
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                  <span className="text-[11px] text-[#52525B] ml-3 tracking-[1px]">sentinel-dashboard.nervur.com</span>
+                  <span className="text-[11px] text-[#86868B] ml-3 tracking-[1px]">sentinel-dashboard.nervur.com</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" style={{ animation: "pulseGlow 2s ease infinite" }} />
@@ -385,21 +385,21 @@ export default function SentinelPage() {
                 <div className="grid gap-4 mb-7" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr" }}>
                   <div className="p-4 rounded-lg text-center" style={{ border: `1px solid ${VG(0.08)}`, background: VG(0.02) }}>
                     <div className="text-[32px] font-extrabold text-[#4ADE80]">4.7</div>
-                    <div className="text-[9px] text-[#52525B] tracking-[1.5px] uppercase">Score global</div>
+                    <div className="text-[9px] text-[#86868B] tracking-[1.5px] uppercase">Score global</div>
                     <div className="mt-1.5 flex justify-center gap-0.5">
                       {[1,2,3,4,5].map(s => <span key={s} className="text-sm" style={{ color: s <= 4 ? "#fbbf24" : VG(0.2) }}>★</span>)}
                     </div>
                   </div>
                   <div className="p-4 rounded-lg text-center" style={{ border: `1px solid ${VG(0.08)}`, background: VG(0.02) }}>
                     <div className="text-[32px] font-extrabold text-[#ef4444]">3</div>
-                    <div className="text-[9px] text-[#52525B] tracking-[1.5px] uppercase">Alertes cette semaine</div>
+                    <div className="text-[9px] text-[#86868B] tracking-[1.5px] uppercase">Alertes cette semaine</div>
                     <div className="mt-2 flex justify-center gap-1">
                       {["negative","negative","mixed"].map((s,i) => <span key={i} className="w-2 h-2 rounded-full" style={{ background: sentimentColor(s), animation: "pulseDot 2s ease infinite", animationDelay: `${i*0.3}s` }} />)}
                     </div>
                   </div>
                   <div className="p-4 rounded-lg text-center" style={{ border: `1px solid ${VG(0.08)}`, background: VG(0.02) }}>
                     <div className="text-[32px] font-extrabold text-white">+12%</div>
-                    <div className="text-[9px] text-[#52525B] tracking-[1.5px] uppercase">Évolution ce mois</div>
+                    <div className="text-[9px] text-[#86868B] tracking-[1.5px] uppercase">Évolution ce mois</div>
                     <div className="mt-2 h-4 flex items-end justify-center gap-[3px]">
                       {[30,45,35,55,60,50,70,65,80,75,85,90].map((h,i) => <div key={i} className="w-1 rounded-[1px]" style={{ height: `${h*0.16}px`, background: `rgba(74,222,128,${0.3+i*0.05})` }} />)}
                     </div>
@@ -409,8 +409,8 @@ export default function SentinelPage() {
                 {/* Reviews feed */}
                 <div className="mb-7">
                   <div className="flex items-center justify-between mb-3.5">
-                    <h3 className="text-xs font-bold text-[#A1A1AA] tracking-[1.5px] uppercase">Flux d'avis en temps réel</h3>
-                    <span className="text-[9px] text-[#52525B] tracking-[1px]">{FAKE_REVIEWS.length} NOUVEAUX</span>
+                    <h3 className="text-xs font-bold text-[#86868B] tracking-[1.5px] uppercase">Flux d'avis en temps réel</h3>
+                    <span className="text-[9px] text-[#86868B] tracking-[1px]">{FAKE_REVIEWS.length} NOUVEAUX</span>
                   </div>
                   <div className="flex flex-col gap-2.5">
                     {FAKE_REVIEWS.map((review, i) => (
@@ -432,11 +432,11 @@ export default function SentinelPage() {
                             <span className="text-[8px] tracking-[1px] font-bold rounded-[2px]" style={{ color: sentimentColor(review.sentiment), padding: "2px 6px", border: `1px solid ${sentimentColor(review.sentiment)}40` }}>{sentimentLabel(review.sentiment)}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-[9px] text-[#52525B] tracking-[0.5px]">{review.source}</span>
+                            <span className="text-[9px] text-[#86868B] tracking-[0.5px]">{review.source}</span>
                             <span className="text-[9px] text-[#3f3f46]">{review.date}</span>
                           </div>
                         </div>
-                        <p className="text-[13px] text-[#71717A] leading-[1.6] m-0">{review.text}</p>
+                        <p className="text-[13px] text-[#86868B] leading-[1.6] m-0">{review.text}</p>
                       </div>
                     ))}
                   </div>
@@ -466,7 +466,7 @@ export default function SentinelPage() {
                     className="mt-3 font-bold text-xs tracking-[1.5px] uppercase font-[inherit] transition-all duration-300" style={{
                       padding: "12px 28px",
                       background: userReview.trim() ? "linear-gradient(135deg, #ef4444, #dc2626)" : VG(0.06),
-                      border: "none", color: userReview.trim() ? V : "#52525B",
+                      border: "none", color: userReview.trim() ? V : "#86868B",
                       cursor: isGenerating || !userReview.trim() ? "not-allowed" : "pointer",
                       opacity: !userReview.trim() ? 0.4 : 1,
                     }}>
@@ -479,7 +479,7 @@ export default function SentinelPage() {
                   <div className="mt-5 border border-[rgba(239,68,68,0.2)] bg-[rgba(239,68,68,0.03)] rounded-[10px]" style={{ padding: isMobile ? "20px" : "24px", animation: "fadeInUp 0.4s ease both" }}>
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-[9px] tracking-[1.5px] font-bold text-[#ef4444] border border-[rgba(239,68,68,0.3)]" style={{ padding: "3px 8px" }}>IA SENTINEL</span>
-                      <span className="text-[10px] text-[#52525B]">Réponse suggérée — prête à publier</span>
+                      <span className="text-[10px] text-[#86868B]">Réponse suggérée — prête à publier</span>
                     </div>
                     <p className="text-sm text-[#E4E4E7] leading-[1.8] whitespace-pre-wrap m-0">
                       {displayedText}
@@ -503,7 +503,7 @@ export default function SentinelPage() {
                   padding: "6px 16px",
                   background: signalFilter === f ? "rgba(16,185,129,0.15)" : "transparent",
                   border: `1px solid ${signalFilter === f ? "rgba(16,185,129,0.4)" : VG(0.1)}`,
-                  color: signalFilter === f ? "#6ee7b7" : "#52525B",
+                  color: signalFilter === f ? "#6ee7b7" : "#86868B",
                 }}>{f}</button>
               ))}
             </div>
@@ -515,7 +515,7 @@ export default function SentinelPage() {
                 const isVisible = i < visibleSignals;
                 return (
                   <div key={s.id} onClick={() => setExpandedSignal(expandedSignal === s.id ? null : s.id)}
-                    className="bg-[rgba(24,24,27,0.4)] cursor-pointer transition-all duration-[400ms]" style={{
+                    className="bg-[rgba(255,255,255,0.7)] cursor-pointer transition-all duration-[400ms]" style={{
                       border: `1px solid ${expandedSignal === s.id ? `${cfg.color}40` : VG(0.08)}`,
                       padding: "16px 20px",
                       opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(12px)",
@@ -526,7 +526,7 @@ export default function SentinelPage() {
                         <span className="text-base" style={{ color: cfg.color }}>{cfg.icon}</span>
                         <div className="min-w-0">
                           <div className="text-sm font-bold mb-0.5 whitespace-nowrap overflow-hidden text-ellipsis">{s.title}</div>
-                          <div className="text-[10px] text-[#52525B] flex gap-2 items-center flex-wrap">
+                          <div className="text-[10px] text-[#86868B] flex gap-2 items-center flex-wrap">
                             <span style={{ color: cfg.color }} className="font-semibold">{cfg.label}</span>
                             <span>·</span>
                             <span>{s.source}</span>
@@ -537,14 +537,14 @@ export default function SentinelPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         {!isMobile && s.tags.map(t => (
-                          <span key={t} className="text-[8px] text-[#52525B] tracking-[0.5px]" style={{ padding: "2px 8px", border: `1px solid ${VG(0.1)}` }}>{t}</span>
+                          <span key={t} className="text-[8px] text-[#86868B] tracking-[0.5px]" style={{ padding: "2px 8px", border: `1px solid ${VG(0.1)}` }}>{t}</span>
                         ))}
-                        <span className="text-[13px] font-extrabold min-w-[36px] text-right" style={{ color: s.score >= 80 ? "#4ADE80" : s.score >= 60 ? "#fbbf24" : "#71717A" }}>{s.score}</span>
+                        <span className="text-[13px] font-extrabold min-w-[36px] text-right" style={{ color: s.score >= 80 ? "#4ADE80" : s.score >= 60 ? "#fbbf24" : "#86868B" }}>{s.score}</span>
                       </div>
                     </div>
                     {expandedSignal === s.id && (
                       <div className="mt-3 pt-3" style={{ borderTop: `1px solid ${VG(0.06)}` }}>
-                        <p className="text-[13px] text-[#A1A1AA] leading-[1.8]">{s.detail}</p>
+                        <p className="text-[13px] text-[#86868B] leading-[1.8]">{s.detail}</p>
                       </div>
                     )}
                   </div>
@@ -553,7 +553,7 @@ export default function SentinelPage() {
             </div>
 
             {/* Monitor tool */}
-            <div className="bg-[rgba(24,24,27,0.4)]" style={{ border: `1px solid ${VG(0.1)}`, padding: isMobile ? "24px" : "32px" }}>
+            <div className="bg-[rgba(255,255,255,0.7)]" style={{ border: `1px solid ${VG(0.1)}`, padding: isMobile ? "24px" : "32px" }}>
               <div className="text-[9px] tracking-[2px] text-[#10b981] mb-4">SCANNER UN CONCURRENT</div>
               <div className="flex gap-2.5" style={{ flexDirection: isMobile ? "column" : "row" }}>
                 <input value={monitorUrl} onChange={e => setMonitorUrl(e.target.value)} placeholder="Entrez un nom de domaine (ex: concurrent.com)" aria-label="URL du concurrent"
@@ -562,7 +562,7 @@ export default function SentinelPage() {
                   className="font-bold text-[11px] tracking-[1.5px] uppercase font-[inherit] whitespace-nowrap" style={{
                     padding: "12px 24px",
                     background: !monitorUrl ? VG(0.06) : "linear-gradient(135deg, #10b981, #059669)",
-                    border: "none", color: !monitorUrl ? "#52525B" : V,
+                    border: "none", color: !monitorUrl ? "#86868B" : V,
                     cursor: !monitorUrl ? "not-allowed" : "pointer",
                   }}>
                   {monitoring ? "Scan..." : "Analyser"}
@@ -577,7 +577,7 @@ export default function SentinelPage() {
                 <div className="mt-5 text-center p-5" style={{ animation: "fadeInUp 0.4s ease both" }}>
                   <div className="inline-block border border-[rgba(239,68,68,0.3)] bg-[rgba(239,68,68,0.05)] rounded-lg" style={{ padding: "20px 32px" }}>
                     <p className="text-sm text-[#fca5a5] mb-2 font-semibold">Analyse impossible</p>
-                    <p className="text-xs text-[#71717A] leading-[1.6] max-w-[400px]">{monitorError}</p>
+                    <p className="text-xs text-[#86868B] leading-[1.6] max-w-[400px]">{monitorError}</p>
                     <button onClick={() => { setMonitorError(null); setMonitorUrl(""); }} className="mt-4 bg-transparent border border-white/15 text-[#a1a1aa] text-[11px] tracking-[1.5px] uppercase cursor-pointer font-[inherit]" style={{ padding: "8px 20px" }}>Réessayer</button>
                   </div>
                 </div>
@@ -593,27 +593,27 @@ export default function SentinelPage() {
                     <div className="grid gap-2 mb-4" style={{ gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr" }}>
                       <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
                         <div className="text-base font-extrabold" style={{ color: monitorResults.rawData.loadTime < 2000 ? "#4ADE80" : monitorResults.rawData.loadTime < 4000 ? "#fbbf24" : "#ef4444" }}>{monitorResults.rawData.loadTime}ms</div>
-                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">CHARGEMENT</div>
+                        <div className="text-[8px] text-[#86868B] tracking-[1px] mt-0.5">CHARGEMENT</div>
                       </div>
                       <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
                         <div className="text-base font-extrabold" style={{ color: monitorResults.rawData.hasSSL ? "#4ADE80" : "#ef4444" }}>{monitorResults.rawData.hasSSL ? "HTTPS" : "HTTP"}</div>
-                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">SÉCURITÉ</div>
+                        <div className="text-[8px] text-[#86868B] tracking-[1px] mt-0.5">SÉCURITÉ</div>
                       </div>
                       <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
                         <div className="text-base font-extrabold text-white">{monitorResults.rawData.links?.internal || 0}</div>
-                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">LIENS INT.</div>
+                        <div className="text-[8px] text-[#86868B] tracking-[1px] mt-0.5">LIENS INT.</div>
                       </div>
                       <div className="p-2.5 text-center" style={{ background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
                         <div className="text-base font-extrabold text-white">{(monitorResults.rawData.socialLinks || []).length}</div>
-                        <div className="text-[8px] text-[#52525B] tracking-[1px] mt-0.5">RÉSEAUX</div>
+                        <div className="text-[8px] text-[#86868B] tracking-[1px] mt-0.5">RÉSEAUX</div>
                       </div>
                     </div>
                   )}
 
                   {monitorResults.techStack && (
                     <div className="mb-4" style={{ padding: "10px 14px", background: VG(0.03), border: `1px solid ${VG(0.06)}` }}>
-                      <div className="text-[9px] text-[#52525B] tracking-[1px] mb-1.5">STACK TECHNIQUE DÉTECTÉE</div>
-                      <div className="text-xs text-[#D4D4D8] leading-[1.6]">{monitorResults.techStack}</div>
+                      <div className="text-[9px] text-[#86868B] tracking-[1px] mb-1.5">STACK TECHNIQUE DÉTECTÉE</div>
+                      <div className="text-xs text-[#424245] leading-[1.6]">{monitorResults.techStack}</div>
                     </div>
                   )}
 
@@ -622,33 +622,33 @@ export default function SentinelPage() {
                       {monitorResults.strengths?.length > 0 && (
                         <div className="p-3 bg-[rgba(74,222,128,0.05)] border border-[rgba(74,222,128,0.15)]">
                           <div className="text-[9px] text-[#4ADE80] tracking-[1px] mb-2">POINTS FORTS</div>
-                          {monitorResults.strengths.map((s, i) => <div key={i} className="text-[11px] text-[#A1A1AA] mb-1 leading-[1.5]">+ {s}</div>)}
+                          {monitorResults.strengths.map((s, i) => <div key={i} className="text-[11px] text-[#86868B] mb-1 leading-[1.5]">+ {s}</div>)}
                         </div>
                       )}
                       {monitorResults.weaknesses?.length > 0 && (
                         <div className="p-3 bg-[rgba(239,68,68,0.05)] border border-[rgba(239,68,68,0.15)]">
                           <div className="text-[9px] text-[#ef4444] tracking-[1px] mb-2">FAIBLESSES</div>
-                          {monitorResults.weaknesses.map((w, i) => <div key={i} className="text-[11px] text-[#A1A1AA] mb-1 leading-[1.5]">- {w}</div>)}
+                          {monitorResults.weaknesses.map((w, i) => <div key={i} className="text-[11px] text-[#86868B] mb-1 leading-[1.5]">- {w}</div>)}
                         </div>
                       )}
                     </div>
                   )}
 
-                  <div className="text-[9px] text-[#52525B] tracking-[1px] mb-2">SIGNAUX DÉTECTÉS</div>
+                  <div className="text-[9px] text-[#86868B] tracking-[1px] mb-2">SIGNAUX DÉTECTÉS</div>
                   {monitorResults.signals.map((s, i) => (
                     <div key={i} className="flex justify-between items-start gap-3" style={{ padding: "10px 0", borderBottom: `1px solid ${VG(0.05)}` }}>
                       <div className="flex-1">
-                        <span className="text-xs text-[#D4D4D8] leading-[1.5]">{s.text}</span>
+                        <span className="text-xs text-[#424245] leading-[1.5]">{s.text}</span>
                         {s.recommendation && <div className="text-[10px] text-[#10b981] mt-1">{s.recommendation}</div>}
                       </div>
-                      <span className="text-[9px] whitespace-nowrap shrink-0" style={{ padding: "2px 8px", border: `1px solid ${s.importance === "haute" ? "rgba(239,68,68,0.3)" : s.importance === "moyenne" ? "rgba(251,191,36,0.3)" : VG(0.1)}`, color: s.importance === "haute" ? "#ef4444" : s.importance === "moyenne" ? "#fbbf24" : "#52525B" }}>{(s.importance || "").toUpperCase()}</span>
+                      <span className="text-[9px] whitespace-nowrap shrink-0" style={{ padding: "2px 8px", border: `1px solid ${s.importance === "haute" ? "rgba(239,68,68,0.3)" : s.importance === "moyenne" ? "rgba(251,191,36,0.3)" : VG(0.1)}`, color: s.importance === "haute" ? "#ef4444" : s.importance === "moyenne" ? "#fbbf24" : "#86868B" }}>{(s.importance || "").toUpperCase()}</span>
                     </div>
                   ))}
 
                   {monitorResults.summary && (
                     <div className="mt-4 p-3 bg-[rgba(16,185,129,0.05)] border border-[rgba(16,185,129,0.15)]">
                       <div className="text-[9px] text-[#10b981] tracking-[1px] mb-1.5">SYNTHÈSE</div>
-                      <div className="text-xs text-[#D4D4D8] leading-[1.6]">{monitorResults.summary}</div>
+                      <div className="text-xs text-[#424245] leading-[1.6]">{monitorResults.summary}</div>
                     </div>
                   )}
                 </div>
@@ -661,14 +661,14 @@ export default function SentinelPage() {
         {activeTab === "prix" && (
           <section aria-label="Tableau de bord prix et marché" className="mb-20" style={{ animation: "fadeInUp 0.6s ease both" }}>
             <div className="overflow-hidden backdrop-blur-[12px]" style={{
-              border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.5)" }}>
+              border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.75)" }}>
 
               <div className="flex justify-between items-center" style={{ padding: "14px 20px", borderBottom: `1px solid ${VG(0.08)}` }}>
                 <div className="flex gap-1.5 items-center">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]" />
                   <span className="w-2.5 h-2.5 rounded-full bg-[#28C840]" />
-                  <span className="text-[11px] text-[#52525B] ml-3">sentinel-prix.nervur.com</span>
+                  <span className="text-[11px] text-[#86868B] ml-3">sentinel-prix.nervur.com</span>
                 </div>
                 <span className="text-[9px] text-[#8b5cf6] tracking-[1px]">30 JOURS</span>
               </div>
@@ -678,7 +678,7 @@ export default function SentinelPage() {
                   {COMPETITORS.map((c, i) => (
                     <div key={i} className="flex items-center gap-1.5">
                       <span className="w-3 h-[3px] rounded-[2px]" style={{ background: c.color }} />
-                      <span className="text-[10px] text-[#A1A1AA] tracking-[0.5px]">{c.name}</span>
+                      <span className="text-[10px] text-[#86868B] tracking-[0.5px]">{c.name}</span>
                     </div>
                   ))}
                 </div>
@@ -688,7 +688,7 @@ export default function SentinelPage() {
                     {[90, 110, 130, 150].map(p => (
                       <g key={p}>
                         <line x1="0" y1={getY(p)} x2={chartW} y2={getY(p)} stroke={VG(0.05)} strokeWidth="1" />
-                        <text x={chartW + 5} y={getY(p) + 4} fill="#52525B" fontSize="9">€{p}</text>
+                        <text x={chartW + 5} y={getY(p) + 4} fill="#86868B" fontSize="9">€{p}</text>
                       </g>
                     ))}
                     {COMPETITORS.map((comp, ci) => (
@@ -712,7 +712,7 @@ export default function SentinelPage() {
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="text-xs font-bold text-[#A1A1AA] tracking-[2px] uppercase mb-3">Alertes récentes</h3>
+                  <h3 className="text-xs font-bold text-[#86868B] tracking-[2px] uppercase mb-3">Alertes récentes</h3>
                   <div className="flex flex-col gap-2">
                     {PRICE_ALERTS.map((a, i) => (
                       <div key={i} className="flex items-center gap-3" style={{
@@ -723,8 +723,8 @@ export default function SentinelPage() {
                         <span className="w-2 h-2 rounded-full" style={{
                           background: a.type === "danger" ? "#ef4444" : a.type === "warning" ? "#fbbf24" : "#3b82f6",
                         }} />
-                        <span className="text-xs flex-1" style={{ color: a.type === "danger" ? "#fca5a5" : "#A1A1AA" }}>{a.text}</span>
-                        <span className="text-[10px] text-[#52525B]">Jour {a.day}</span>
+                        <span className="text-xs flex-1" style={{ color: a.type === "danger" ? "#fca5a5" : "#86868B" }}>{a.text}</span>
+                        <span className="text-[10px] text-[#86868B]">Jour {a.day}</span>
                       </div>
                     ))}
                   </div>
@@ -738,7 +738,7 @@ export default function SentinelPage() {
         <section aria-label="Fonctionnalités incluses" className="mb-20">
           <div className="text-center mb-12">
             <h2 className="font-extrabold tracking-[-1px] mb-3" style={{ fontSize: isMobile ? "28px" : "36px" }}>Tout ce qui est inclus</h2>
-            <p className="text-[15px] text-[#71717A] max-w-[560px] mx-auto leading-[1.7]">Un seul abonnement, zéro surprise. Réputation + veille concurrentielle + alertes marché.</p>
+            <p className="text-[15px] text-[#86868B] max-w-[560px] mx-auto leading-[1.7]">Un seul abonnement, zéro surprise. Réputation + veille concurrentielle + alertes marché.</p>
           </div>
           <div className="grid gap-4" style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr" }}>
             {FEATURES.map((f, i) => (
@@ -753,7 +753,7 @@ export default function SentinelPage() {
                   </div>
                   <div>
                     <h3 className="text-[15px] font-bold mb-1.5 text-white">{f.title}</h3>
-                    <p className="text-[13px] text-[#71717A] leading-[1.7] m-0">{f.desc}</p>
+                    <p className="text-[13px] text-[#86868B] leading-[1.7] m-0">{f.desc}</p>
                   </div>
                 </div>
               </div>
@@ -770,9 +770,9 @@ export default function SentinelPage() {
 
             <div className="flex items-baseline justify-center gap-1 mb-2">
               <span className="font-extrabold text-white leading-none" style={{ fontSize: isMobile ? "48px" : "64px" }}>39€</span>
-              <span className="text-base text-[#52525B] font-semibold">/mois</span>
+              <span className="text-base text-[#86868B] font-semibold">/mois</span>
             </div>
-            <p className="text-[13px] text-[#71717A] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
+            <p className="text-[13px] text-[#86868B] mb-7">Sans engagement · Setup offert · Résultats dès le 1er jour</p>
 
             <div className="text-left mb-8">
               {[
@@ -789,7 +789,7 @@ export default function SentinelPage() {
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2.5 py-2" style={{ borderBottom: i < 9 ? `1px solid ${VG(0.06)}` : "none" }}>
                   <span className="text-[#4ADE80] text-sm min-w-[18px]">✓</span>
-                  <span className="text-[13px] text-[#D4D4D8]">{item}</span>
+                  <span className="text-[13px] text-[#424245]">{item}</span>
                 </div>
               ))}
             </div>
@@ -800,22 +800,22 @@ export default function SentinelPage() {
               Activer Sentinel →
             </button>
 
-            <p className="text-[11px] text-[#52525B] mt-4">Paiement sécurisé · Annulation à tout moment</p>
+            <p className="text-[11px] text-[#86868B] mt-4">Paiement sécurisé · Annulation à tout moment</p>
           </div>
         </section>
 
         {/* ═══════════════ CTA FINAL ═══════════════ */}
         <section aria-label="Appel à l'action" className="text-center rounded-xl" style={{
           padding: isMobile ? "40px 20px" : "60px 48px",
-          border: `1px solid ${VG(0.1)}`, background: "rgba(24,24,27,0.3)" }}>
+          border: `1px solid ${VG(0.1)}`, background: "rgba(255,255,255,0.6)" }}>
           <h2 className="font-extrabold mb-4 tracking-[-1px]" style={{ fontSize: isMobile ? "24px" : "32px" }}>
             Protégez votre réputation. Devancez vos concurrents.
           </h2>
-          <p className="text-[15px] text-[#71717A] max-w-[560px] mx-auto mb-8 leading-[1.7]">
+          <p className="text-[15px] text-[#86868B] max-w-[560px] mx-auto mb-8 leading-[1.7]">
             Sentinel combine e-réputation et veille marché dans un seul outil propulsé par l'IA. Chaque avis, chaque mouvement concurrent — détecté et traité automatiquement.
           </p>
           <button onClick={() => navigate('/contact?outil=sentinel')} className="bg-white text-[#0f1117] border-none font-extrabold text-[13px] tracking-[1.5px] uppercase cursor-pointer transition-all duration-300 font-[inherit]" style={{ padding: "16px 40px" }}
-            onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(255,255,255,0.2)"; }}
+            onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 30px rgba(0,0,0,0.12)"; }}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             Nous contacter →
           </button>
@@ -824,8 +824,8 @@ export default function SentinelPage() {
 
       {/* Footer */}
       <footer className="flex justify-between items-center" style={{ padding: isMobile ? "30px 20px" : "40px 48px", borderTop: `1px solid ${VG(0.08)}`, flexDirection: isMobile ? "column" : "row", gap: "12px" }}>
-        <span className="text-[11px] text-[#52525B] tracking-[1px]">NERVÜR © 2026</span>
-        <span className="text-[11px] text-[#52525B]">SENTINEL — Bouclier E-Réputation & Veille IA</span>
+        <span className="text-[11px] text-[#86868B] tracking-[1px]">NERVÜR © 2026</span>
+        <span className="text-[11px] text-[#86868B]">SENTINEL — Bouclier E-Réputation & Veille IA</span>
       </footer>
     </div>
   );

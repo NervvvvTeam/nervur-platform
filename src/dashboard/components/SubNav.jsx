@@ -65,7 +65,7 @@ export default function SubNav({ items, color }) {
 
   const tabStyle = (isActive, isHovered) => ({
     padding: "10px 14px", fontSize: "13px", fontWeight: isActive ? 500 : 400,
-    color: isActive ? color : isHovered ? "#9ca3af" : "#6b7280",
+    color: isActive ? color : isHovered ? "#86868B" : "#86868B",
     borderBottom: isActive ? `2px solid ${color}` : "2px solid transparent",
     textDecoration: "none", transition: "all 0.2s",
     marginBottom: "-1px", whiteSpace: "nowrap",
@@ -77,7 +77,7 @@ export default function SubNav({ items, color }) {
     <nav style={{
       display: "flex", alignItems: "center", gap: "2px", marginBottom: "28px",
       borderBottom: "1px solid #2a2d3a", position: "relative",
-      boxShadow: "0 1px 2px rgba(0,0,0,0.2)"
+      boxShadow: "0 1px 2px rgba(0,0,0,0.06)"
     }}>
       {visibleItems.map(item => {
         const iconFn = ICONS[item.label];
@@ -89,7 +89,7 @@ export default function SubNav({ items, color }) {
             style={({ isActive }) => tabStyle(isActive, isHovered)}>
             {({ isActive }) => (
               <>
-                {iconFn && iconFn(isActive ? color : isHovered ? "#9ca3af" : "#6b7280")}
+                {iconFn && iconFn(isActive ? color : isHovered ? "#86868B" : "#86868B")}
                 <span>{item.label}</span>
               </>
             )}
@@ -105,12 +105,12 @@ export default function SubNav({ items, color }) {
               ...tabStyle(isOverflowActive, hoveredPath === "__more"),
               cursor: "pointer", border: "none", fontFamily: "inherit",
               borderBottom: isOverflowActive ? `2px solid ${color}` : moreOpen ? `2px solid ${color}40` : "2px solid transparent",
-              color: isOverflowActive ? color : moreOpen ? "#6b7280" : "#9ca3af",
+              color: isOverflowActive ? color : moreOpen ? "#86868B" : "#86868B",
             }}
             onMouseEnter={() => setHoveredPath("__more")}
             onMouseLeave={() => setHoveredPath(null)}
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={isOverflowActive ? color : "#9ca3af"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={isOverflowActive ? color : "#86868B"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
             </svg>
             <span>Plus</span>
@@ -122,7 +122,7 @@ export default function SubNav({ items, color }) {
           {moreOpen && (
             <div style={{
               position: "absolute", top: "100%", right: 0, marginTop: "4px",
-              background: "#1e2029", border: "1px solid #2a2d3a", borderRadius: "10px",
+              background: "#FFFFFF", border: "1px solid #2a2d3a", borderRadius: "10px",
               padding: "6px", minWidth: "180px", zIndex: 100,
               boxShadow: "0 8px 32px rgba(0,0,0,0.5)"
             }}>
@@ -138,11 +138,11 @@ export default function SubNav({ items, color }) {
                       display: "flex", alignItems: "center", gap: "8px",
                       padding: "10px 12px", borderRadius: "6px",
                       fontSize: "13px", fontWeight: isActive ? 500 : 400,
-                      color: isActive ? color : isHovered ? "#d1d5db" : "#6b7280",
+                      color: isActive ? color : isHovered ? "#424245" : "#86868B",
                       background: isActive ? `${color}15` : isHovered ? "rgba(255,255,255,0.05)" : "transparent",
                       textDecoration: "none", transition: "all 0.15s",
                     }}>
-                    {iconFn && iconFn(isActive ? color : isHovered ? "#d1d5db" : "#9ca3af")}
+                    {iconFn && iconFn(isActive ? color : isHovered ? "#424245" : "#86868B")}
                     <span>{item.label}</span>
                   </NavLink>
                 );

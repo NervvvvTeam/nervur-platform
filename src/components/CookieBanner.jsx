@@ -93,8 +93,8 @@ export default function CookieBanner() {
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         borderTop: "1px solid rgba(99,102,241,0.2)",
-        boxShadow: "0 -4px 32px rgba(0,0,0,0.4)",
-        fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+        boxShadow: "0 -4px 32px rgba(0,0,0,0.1)",
+        fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
         animation: "cookieSlideUp 0.4s ease",
       }}
     >
@@ -120,7 +120,7 @@ export default function CookieBanner() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#D4D4D8",
+                color: "#424245",
                 lineHeight: 1.7,
                 margin: 0,
               }}
@@ -152,9 +152,9 @@ export default function CookieBanner() {
               style={{
                 padding: "10px 20px",
                 background: "transparent",
-                border: "1px solid rgba(255,255,255,0.15)",
+                border: "1px solid rgba(0,0,0,0.1)",
                 borderRadius: "8px",
-                color: "#A1A1AA",
+                color: "#86868B",
                 fontSize: "13px",
                 fontWeight: 600,
                 cursor: "pointer",
@@ -163,12 +163,12 @@ export default function CookieBanner() {
                 flex: isMobile ? 1 : "none",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
-                e.currentTarget.style.color = "#FAFAFA";
+                e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)";
+                e.currentTarget.style.color = "#1D1D1F";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
-                e.currentTarget.style.color = "#A1A1AA";
+                e.currentTarget.style.borderColor = "rgba(0,0,0,0.1)";
+                e.currentTarget.style.color = "#86868B";
               }}
             >
               Refuser
@@ -206,7 +206,7 @@ export default function CookieBanner() {
                 background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
                 border: "none",
                 borderRadius: "8px",
-                color: "#FAFAFA",
+                color: "#1D1D1F",
                 fontSize: "13px",
                 fontWeight: 700,
                 cursor: "pointer",
@@ -227,7 +227,7 @@ export default function CookieBanner() {
             style={{
               fontSize: "16px",
               fontWeight: 700,
-              color: "#FAFAFA",
+              color: "#1D1D1F",
               marginBottom: "20px",
               margin: "0 0 20px 0",
             }}
@@ -242,14 +242,14 @@ export default function CookieBanner() {
               justifyContent: "space-between",
               alignItems: "center",
               padding: "14px 0",
-              borderBottom: "1px solid rgba(255,255,255,0.06)",
+              borderBottom: "1px solid rgba(0,0,0,0.06)",
             }}
           >
             <div>
-              <p style={{ fontSize: "14px", fontWeight: 600, color: "#D4D4D8", margin: 0 }}>
+              <p style={{ fontSize: "14px", fontWeight: 600, color: "#424245", margin: 0 }}>
                 Cookies essentiels
               </p>
-              <p style={{ fontSize: "12px", color: "#71717A", margin: "4px 0 0" }}>
+              <p style={{ fontSize: "12px", color: "#86868B", margin: "4px 0 0" }}>
                 N&eacute;cessaires au fonctionnement du site. Toujours actifs.
               </p>
             </div>
@@ -273,7 +273,7 @@ export default function CookieBanner() {
                   width: "20px",
                   height: "20px",
                   borderRadius: "50%",
-                  background: "#FAFAFA",
+                  background: "#1D1D1F",
                   transition: "all 0.2s",
                 }}
               />
@@ -287,14 +287,14 @@ export default function CookieBanner() {
               justifyContent: "space-between",
               alignItems: "center",
               padding: "14px 0",
-              borderBottom: "1px solid rgba(255,255,255,0.06)",
+              borderBottom: "1px solid rgba(0,0,0,0.06)",
             }}
           >
             <div>
-              <p style={{ fontSize: "14px", fontWeight: 600, color: "#D4D4D8", margin: 0 }}>
+              <p style={{ fontSize: "14px", fontWeight: 600, color: "#424245", margin: 0 }}>
                 Cookies analytiques
               </p>
-              <p style={{ fontSize: "12px", color: "#71717A", margin: "4px 0 0" }}>
+              <p style={{ fontSize: "12px", color: "#86868B", margin: "4px 0 0" }}>
                 Google Tag Manager — mesure d'audience et am&eacute;lioration du site.
               </p>
             </div>
@@ -321,7 +321,7 @@ export default function CookieBanner() {
                   width: "20px",
                   height: "20px",
                   borderRadius: "50%",
-                  background: "#FAFAFA",
+                  background: "#1D1D1F",
                   transition: "left 0.2s",
                 }}
               />
@@ -342,9 +342,9 @@ export default function CookieBanner() {
               style={{
                 padding: "10px 20px",
                 background: "transparent",
-                border: "1px solid rgba(255,255,255,0.15)",
+                border: "1px solid rgba(0,0,0,0.1)",
                 borderRadius: "8px",
-                color: "#A1A1AA",
+                color: "#86868B",
                 fontSize: "13px",
                 fontWeight: 600,
                 cursor: "pointer",
@@ -352,12 +352,12 @@ export default function CookieBanner() {
                 transition: "all 0.2s",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
-                e.currentTarget.style.color = "#FAFAFA";
+                e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)";
+                e.currentTarget.style.color = "#1D1D1F";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
-                e.currentTarget.style.color = "#A1A1AA";
+                e.currentTarget.style.borderColor = "rgba(0,0,0,0.1)";
+                e.currentTarget.style.color = "#86868B";
               }}
             >
               Retour
@@ -369,7 +369,7 @@ export default function CookieBanner() {
                 background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
                 border: "none",
                 borderRadius: "8px",
-                color: "#FAFAFA",
+                color: "#1D1D1F",
                 fontSize: "13px",
                 fontWeight: 700,
                 cursor: "pointer",

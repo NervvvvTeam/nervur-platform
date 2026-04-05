@@ -28,7 +28,7 @@ const BADGE_STYLES = [
     key: "light",
     label: "Clair",
     bg: "#ffffff",
-    text: "#1a1a2e",
+    text: "#F5F5F7",
     border: "#e2e8f0",
     accent: "#06b6d4",
     shieldFill: "#06b6d4",
@@ -38,8 +38,8 @@ const BADGE_STYLES = [
     key: "dark",
     label: "Sombre",
     bg: "#1a1b26",
-    text: "#f0f0f3",
-    border: "#2a2d3a",
+    text: "#1D1D1F",
+    border: "#E5E5EA",
     accent: "#22d3ee",
     shieldFill: "#06b6d4",
     shieldStroke: "#22d3ee",
@@ -48,8 +48,8 @@ const BADGE_STYLES = [
     key: "minimal",
     label: "Minimal",
     bg: "transparent",
-    text: "#6b7280",
-    border: "#d1d5db",
+    text: "#86868B",
+    border: "#424245",
     accent: "#06b6d4",
     shieldFill: "none",
     shieldStroke: "#06b6d4",
@@ -131,7 +131,7 @@ export default function VaultBadgePage() {
           <ShieldBadgeIcon size={24} color={ACCENT} />
         </div>
         <div>
-          <h1 className="text-[22px] font-semibold text-[#f0f0f3] m-0">
+          <h1 className="text-[22px] font-semibold text-[#1D1D1F] m-0">
             Badge de conformité
           </h1>
           <p className="text-[13px] text-[#9ca3af] m-0 mt-0.5">
@@ -144,14 +144,14 @@ export default function VaultBadgePage() {
       <div className="h-[3px] bg-gradient-to-r from-[#06b6d4] via-[#22d3ee] to-transparent rounded-sm mb-6 mt-4" />
 
       {/* Badge preview */}
-      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
-        <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0 mb-4">Aperçu du badge</h2>
+      <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-7">
+        <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0 mb-4">Aperçu du badge</h2>
 
-        <div className="flex items-center justify-center py-8 px-4 bg-[#141520] rounded-lg border border-[#2a2d3a] mb-5"
+        <div className="flex items-center justify-center py-8 px-4 bg-white rounded-lg border border-[#E5E5EA] mb-5"
           style={{
             backgroundImage: selectedStyle === "light" ? "linear-gradient(45deg, #f8fafc 25%, #f1f5f9 25%, #f1f5f9 50%, #f8fafc 50%, #f8fafc 75%, #f1f5f9 75%, #f1f5f9 100%)" : undefined,
             backgroundSize: selectedStyle === "light" ? "20px 20px" : undefined,
-            background: selectedStyle === "light" ? undefined : "#141520",
+            background: selectedStyle === "light" ? undefined : "#FFFFFF",
           }}>
           {loading ? (
             <div className="text-[13px] text-[#6b7280]">Chargement du score...</div>
@@ -171,8 +171,8 @@ export default function VaultBadgePage() {
                 className="px-4 py-2 rounded-lg text-[13px] font-medium cursor-pointer font-[inherit] transition-all duration-150 border"
                 style={{
                   background: selectedStyle === style.key ? "rgba(6,182,212,0.15)" : "transparent",
-                  borderColor: selectedStyle === style.key ? "#06b6d4" : "#2a2d3a",
-                  color: selectedStyle === style.key ? "#22d3ee" : "#9ca3af",
+                  borderColor: selectedStyle === style.key ? "#06b6d4" : "#E5E5EA",
+                  color: selectedStyle === style.key ? "#22d3ee" : "#86868B",
                 }}
               >
                 {style.label}
@@ -193,18 +193,18 @@ export default function VaultBadgePage() {
       </div>
 
       {/* Embed code */}
-      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)] mb-7">
-        <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0 mb-4">Code d'intégration</h2>
+      <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)] mb-7">
+        <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0 mb-4">Code d'intégration</h2>
 
         <div className="mb-4">
           <label className="block text-[13px] font-medium text-[#d1d5db] mb-2">Code HTML à copier</label>
           <div className="relative">
-            <pre className="p-4 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[12px] text-[#d1d5db] font-mono overflow-x-auto whitespace-pre-wrap break-all leading-relaxed m-0">
+            <pre className="p-4 bg-white border border-[#E5E5EA] rounded-lg text-[12px] text-[#d1d5db] font-mono overflow-x-auto whitespace-pre-wrap break-all leading-relaxed m-0">
               {EMBED_CODE}
             </pre>
             <button
               onClick={() => handleCopy(EMBED_CODE, "embed")}
-              className="absolute top-2 right-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[rgba(6,182,212,0.2)] bg-[#1e2029] text-[#06b6d4] text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.08)]"
+              className="absolute top-2 right-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[rgba(6,182,212,0.2)] bg-white text-[#06b6d4] text-[11px] font-medium cursor-pointer font-[inherit] transition-all duration-150 hover:bg-[rgba(6,182,212,0.08)]"
             >
               {copied === "embed" ? <CheckIcon size={12} color="#22c55e" /> : <CopyIcon size={12} color="#06b6d4" />}
               {copied === "embed" ? "Copié !" : "Copier"}
@@ -219,7 +219,7 @@ export default function VaultBadgePage() {
               type="text"
               value={BADGE_URL}
               readOnly
-              className="flex-1 px-3.5 py-2.5 bg-[#141520] border border-[#2a2d3a] rounded-lg text-[#e4e4e7] text-sm font-mono outline-none"
+              className="flex-1 px-3.5 py-2.5 bg-white border border-[#E5E5EA] rounded-lg text-[#424245] text-sm font-mono outline-none"
             />
             <button
               onClick={() => handleCopy(BADGE_URL, "url")}
@@ -233,14 +233,14 @@ export default function VaultBadgePage() {
       </div>
 
       {/* Instructions */}
-      <div className="bg-[#1e2029] border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
-        <h2 className="text-[15px] font-semibold text-[#f0f0f3] m-0 mb-4">Comment ajouter le badge à votre site</h2>
+      <div className="bg-white border border-[rgba(6,182,212,0.2)] rounded-[10px] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+        <h2 className="text-[15px] font-semibold text-[#1D1D1F] m-0 mb-4">Comment ajouter le badge à votre site</h2>
 
         <div className="flex flex-col gap-4">
           <div className="flex gap-3">
             <div className="w-7 h-7 rounded-full bg-[rgba(6,182,212,0.15)] border border-[rgba(6,182,212,0.3)] flex items-center justify-center shrink-0 text-[13px] font-semibold text-[#22d3ee]">1</div>
             <div>
-              <div className="text-[13px] font-medium text-[#f0f0f3]">Copiez le code d'intégration</div>
+              <div className="text-[13px] font-medium text-[#1D1D1F]">Copiez le code d'intégration</div>
               <div className="text-[12px] text-[#6b7280] mt-0.5">Cliquez sur le bouton "Copier" ci-dessus pour copier le code HTML.</div>
             </div>
           </div>
@@ -248,7 +248,7 @@ export default function VaultBadgePage() {
           <div className="flex gap-3">
             <div className="w-7 h-7 rounded-full bg-[rgba(6,182,212,0.15)] border border-[rgba(6,182,212,0.3)] flex items-center justify-center shrink-0 text-[13px] font-semibold text-[#22d3ee]">2</div>
             <div>
-              <div className="text-[13px] font-medium text-[#f0f0f3]">Collez dans votre site</div>
+              <div className="text-[13px] font-medium text-[#1D1D1F]">Collez dans votre site</div>
               <div className="text-[12px] text-[#6b7280] mt-0.5">
                 Ajoutez le code dans le pied de page de votre site web (footer), dans votre page de mentions légales, ou à tout autre endroit visible.
               </div>
@@ -258,7 +258,7 @@ export default function VaultBadgePage() {
           <div className="flex gap-3">
             <div className="w-7 h-7 rounded-full bg-[rgba(6,182,212,0.15)] border border-[rgba(6,182,212,0.3)] flex items-center justify-center shrink-0 text-[13px] font-semibold text-[#22d3ee]">3</div>
             <div>
-              <div className="text-[13px] font-medium text-[#f0f0f3]">Maintenez votre conformité</div>
+              <div className="text-[13px] font-medium text-[#1D1D1F]">Maintenez votre conformité</div>
               <div className="text-[12px] text-[#6b7280] mt-0.5">
                 Le badge reflète votre dernier score de conformité. Lancez des scans réguliers pour maintenir un score élevé et rassurer vos visiteurs.
               </div>

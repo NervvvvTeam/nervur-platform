@@ -27,7 +27,7 @@ const cardStyle = {
 const labelStyle = {
   fontSize: "13px",
   fontWeight: 500,
-  color: "#A1A1AA",
+  color: "#86868B",
   marginBottom: "6px",
   display: "block",
 };
@@ -38,7 +38,7 @@ const inputStyle = {
   background: "#0f0f11",
   border: "1px solid #27272A",
   borderRadius: "8px",
-  color: "#FAFAFA",
+  color: "#1D1D1F",
   fontSize: "14px",
   fontFamily: "inherit",
   outline: "none",
@@ -71,7 +71,7 @@ function OptionButtons({ options, value, onChange }) {
               borderRadius: "8px",
               border: `1px solid ${active ? ACCENT : "#1e1e22"}`,
               background: active ? `${ACCENT}18` : "#0f0f11",
-              color: active ? ACCENT : "#A1A1AA",
+              color: active ? ACCENT : "#86868B",
               fontSize: "13px",
               fontWeight: active ? 500 : 400,
               cursor: "pointer",
@@ -192,10 +192,10 @@ export default function ForgeDashboardPage() {
           background: "linear-gradient(135deg, #f59e0b, #fbbf24)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#FAFAFA", margin: 0, marginBottom: "6px" }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", margin: 0, marginBottom: "6px" }}>
           Générateur de landing pages
         </h1>
-        <p style={{ fontSize: "14px", color: "#71717A", margin: 0 }}>
+        <p style={{ fontSize: "14px", color: "#86868B", margin: 0 }}>
           Générez des landing pages professionnelles en quelques secondes avec l'IA.
         </p>
       </div>
@@ -219,10 +219,10 @@ export default function ForgeDashboardPage() {
             flexWrap: "wrap", gap: "12px", marginBottom: "20px",
           }}>
             <div>
-              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#FAFAFA", margin: 0 }}>
+              <h2 style={{ fontSize: "16px", fontWeight: 600, color: "#1D1D1F", margin: 0 }}>
                 {result.businessName || "Landing Page"}
               </h2>
-              <p style={{ fontSize: "13px", color: "#71717A", margin: "4px 0 0" }}>
+              <p style={{ fontSize: "13px", color: "#86868B", margin: "4px 0 0" }}>
                 {result.objective || "Page générée"}
               </p>
             </div>
@@ -244,7 +244,7 @@ export default function ForgeDashboardPage() {
                 onClick={handleCopy}
                 style={{
                   padding: "9px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 500,
-                  background: "transparent", color: copied ? "#10b981" : "#A1A1AA",
+                  background: "transparent", color: copied ? "#10b981" : "#86868B",
                   border: `1px solid ${copied ? "#10b981" : "#1e1e22"}`,
                   cursor: "pointer", fontFamily: "inherit", transition: "all 0.15s",
                 }}
@@ -255,12 +255,12 @@ export default function ForgeDashboardPage() {
                 onClick={handleReset}
                 style={{
                   padding: "9px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 500,
-                  background: "transparent", color: "#71717A",
+                  background: "transparent", color: "#86868B",
                   border: "1px solid #1e1e22",
                   cursor: "pointer", fontFamily: "inherit", transition: "all 0.15s",
                 }}
-                onMouseEnter={(e) => { e.target.style.borderColor = "#3f3f46"; e.target.style.color = "#A1A1AA"; }}
-                onMouseLeave={(e) => { e.target.style.borderColor = "#1e1e22"; e.target.style.color = "#71717A"; }}
+                onMouseEnter={(e) => { e.target.style.borderColor = "#AEAEB2"; e.target.style.color = "#86868B"; }}
+                onMouseLeave={(e) => { e.target.style.borderColor = "#1e1e22"; e.target.style.color = "#86868B"; }}
               >
                 Nouvelle page
               </button>
@@ -283,7 +283,7 @@ export default function ForgeDashboardPage() {
               <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
               <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
               <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#10b981" }} />
-              <span style={{ fontSize: "12px", color: "#52525B", marginLeft: "8px" }}>
+              <span style={{ fontSize: "12px", color: "#86868B", marginLeft: "8px" }}>
                 Aperçu — {result.businessName || "landing-page"}.html
               </span>
             </div>
@@ -315,7 +315,7 @@ export default function ForgeDashboardPage() {
                 onChange={updateField("businessName")}
                 style={inputStyle}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E5E5EA")}
               />
             </div>
 
@@ -329,7 +329,7 @@ export default function ForgeDashboardPage() {
                 onChange={updateField("sector")}
                 style={inputStyle}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E5E5EA")}
               />
             </div>
 
@@ -343,7 +343,7 @@ export default function ForgeDashboardPage() {
                 onChange={updateField("objective")}
                 style={inputStyle}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E5E5EA")}
               />
             </div>
 
@@ -361,7 +361,7 @@ export default function ForgeDashboardPage() {
                   minHeight: "80px",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = ACCENT)}
-                onBlur={(e) => (e.target.style.borderColor = "#27272A")}
+                onBlur={(e) => (e.target.style.borderColor = "#E5E5EA")}
               />
             </div>
 
@@ -390,7 +390,7 @@ export default function ForgeDashboardPage() {
           {loading && (
             <div style={{ marginTop: "24px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-                <span style={{ fontSize: "13px", color: "#A1A1AA" }}>
+                <span style={{ fontSize: "13px", color: "#86868B" }}>
                   Génération en cours...
                 </span>
                 <span style={{ fontSize: "13px", color: ACCENT, fontWeight: 500 }}>
@@ -422,8 +422,8 @@ export default function ForgeDashboardPage() {
                 borderRadius: "8px",
                 fontSize: "14px",
                 fontWeight: 600,
-                background: loading ? "#52525B" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
-                color: loading ? "#A1A1AA" : "#000",
+                background: loading ? "#86868B" : "linear-gradient(135deg, #f59e0b, #fbbf24)",
+                color: loading ? "#86868B" : "#000",
                 border: "none",
                 boxShadow: loading ? "none" : "0 4px 16px rgba(245,158,11,0.4)",
                 cursor: loading ? "not-allowed" : "pointer",

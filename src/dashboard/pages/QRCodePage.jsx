@@ -55,8 +55,8 @@ export default function QRCodePage() {
     URL.revokeObjectURL(url);
   }
 
-  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Chargement...</div>;
-  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#d1d5db" }}>Aucune entreprise configurée</div>;
+  if (loading) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Chargement...</div>;
+  if (!business) return <div style={{ padding: "60px", textAlign: "center", color: "#424245" }}>Aucune entreprise configurée</div>;
 
   return (
     <div style={{ maxWidth: "700px" }}>
@@ -67,8 +67,8 @@ export default function QRCodePage() {
           background: "linear-gradient(135deg, #ef4444, #f97316)",
           marginBottom: "16px"
         }} />
-        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#f0f0f3", marginBottom: "6px" }}>QR Code Avis</h1>
-        <p style={{ fontSize: "14px", color: "#9ca3af", lineHeight: 1.6 }}>
+        <h1 style={{ fontSize: "22px", fontWeight: 600, color: "#1D1D1F", marginBottom: "6px" }}>QR Code Avis</h1>
+        <p style={{ fontSize: "14px", color: "#86868B", lineHeight: 1.6 }}>
           {"Imprimez ce QR code et placez-le en caisse, sur vos tables ou sur vos cartes de visite. Vos clients satisfaits pourront laisser un avis en un scan."}
         </p>
       </div>
@@ -77,8 +77,8 @@ export default function QRCodePage() {
         {/* QR Code display */}
         <div style={{
           padding: "18px", borderRadius: "10px", textAlign: "center",
-          border: "1px solid #2a2d3a", background: "#1e2029",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+          border: "1px solid #2a2d3a", background: "#FFFFFF",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.06)"
         }}>
           {qrData?.qrCode ? (
             <>
@@ -88,7 +88,7 @@ export default function QRCodePage() {
               }}>
                 <img src={qrData.qrCode} alt="QR Code" style={{ width: "200px", height: "200px" }} />
               </div>
-              <p style={{ fontSize: "12px", color: "#d1d5db", marginBottom: "20px", wordBreak: "break-all" }}>
+              <p style={{ fontSize: "12px", color: "#424245", marginBottom: "20px", wordBreak: "break-all" }}>
                 {qrData.reviewUrl}
               </p>
               <button onClick={downloadQR}
@@ -103,17 +103,17 @@ export default function QRCodePage() {
               </button>
             </>
           ) : (
-            <p style={{ color: "#d1d5db", padding: "40px 0" }}>Génération du QR code...</p>
+            <p style={{ color: "#424245", padding: "40px 0" }}>Génération du QR code...</p>
           )}
         </div>
 
         {/* Instructions */}
         <div style={{
           padding: "18px", borderRadius: "10px",
-          border: "1px solid #2a2d3a", background: "#1e2029",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+          border: "1px solid #2a2d3a", background: "#FFFFFF",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.06)"
         }}>
-          <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#9ca3af", marginBottom: "20px" }}>
+          <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#86868B", marginBottom: "20px" }}>
             Conseils d'utilisation
           </h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
@@ -132,8 +132,8 @@ export default function QRCodePage() {
                   color: "#ef4444", flexShrink: 0
                 }}>{item.num}</span>
                 <div>
-                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#d1d5db", marginBottom: "2px" }}>{item.title}</div>
-                  <div style={{ fontSize: "13px", color: "#9ca3af", lineHeight: 1.5 }}>{item.desc}</div>
+                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#424245", marginBottom: "2px" }}>{item.title}</div>
+                  <div style={{ fontSize: "13px", color: "#86868B", lineHeight: 1.5 }}>{item.desc}</div>
                 </div>
               </div>
             ))}
@@ -149,7 +149,7 @@ export default function QRCodePage() {
         <h3 style={{ fontSize: "12px", fontWeight: 500, color: "#ef4444", marginBottom: "10px" }}>
           Message suggéré
         </h3>
-        <p style={{ fontSize: "15px", color: "#d1d5db", lineHeight: 1.8, fontStyle: "italic" }}>
+        <p style={{ fontSize: "15px", color: "#424245", lineHeight: 1.8, fontStyle: "italic" }}>
           {`"Votre avis compte ! Scannez ce QR code pour nous laisser un commentaire sur Google. Merci de votre confiance ! — ${business.businessName}"`}
         </p>
       </div>
