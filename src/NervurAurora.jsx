@@ -390,48 +390,142 @@ export default function NervurAurora() {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
 
-  // Particle canvas for hero
+  // Galaxy canvas for hero — stars, nebula, planet, interactive
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const w = canvas.width = canvas.offsetWidth;
     const h = canvas.height = canvas.offsetHeight;
-    const COLORS = [[99,91,255],[0,180,216],[244,114,182],[74,222,128],[255,190,11]];
-    const particles = Array.from({ length: 60 }, () => ({
+
+    // Stars — different sizes and brightnesses
+    const stars = Array.from({ length: 200 }, () => ({
       x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 2.5 + 1, c: COLORS[Math.floor(Math.random() * COLORS.length)],
-      a: Math.random() * 0.5 + 0.2,
+      r: Math.random() * 1.8 + 0.3,
+      baseA: Math.random() * 0.6 + 0.2,
+      twinkleSpeed: Math.random() * 0.02 + 0.005,
+      twinkleOffset: Math.random() * Math.PI * 2,
+      color: Math.random() > 0.85 ? [100, 150, 255] : Math.random() > 0.7 ? [255, 200, 150] : [255, 255, 255],
     }));
+
+    // Shooting stars
+    const shootingStars = [];
+
+    // Planet position (bottom right)
+    const planet = { x: w * 0.78, y: h * 0.6, r: Math.min(w, h) * 0.12 };
+
+    let time = 0;
     let raf;
+
     function draw() {
+      time += 0.016;
       ctx.clearRect(0, 0, w, h);
       const mx = mouseRef.current.x, my = mouseRef.current.y;
-      // Mouse glow
+
+      // Nebula clouds — subtle colored fog
+      const nebulae = [
+        { x: w * 0.2, y: h * 0.3, r: 250, c: "rgba(99,91,255,0.04)" },
+        { x: w * 0.7, y: h * 0.5, r: 300, c: "rgba(244,114,182,0.03)" },
+        { x: w * 0.5, y: h * 0.7, r: 200, c: "rgba(0,180,216,0.03)" },
+      ];
+      for (const n of nebulae) {
+        const g = ctx.createRadialGradient(
+          n.x + Math.sin(time * 0.3) * 20, n.y + Math.cos(time * 0.2) * 15,
+          0, n.x, n.y, n.r
+        );
+        g.addColorStop(0, n.c); g.addColorStop(1, "transparent");
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+      }
+
+      // Mouse nebula glow
       if (mx > 0) {
-        const g = ctx.createRadialGradient(mx, my, 0, mx, my, 180);
-        g.addColorStop(0, "rgba(99,91,255,0.08)"); g.addColorStop(1, "transparent");
+        const g = ctx.createRadialGradient(mx, my, 0, mx, my, 200);
+        g.addColorStop(0, "rgba(99,91,255,0.06)");
+        g.addColorStop(0.5, "rgba(0,180,216,0.02)");
+        g.addColorStop(1, "transparent");
         ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
       }
-      for (const p of particles) {
-        const dx = mx - p.x, dy = my - p.y, dist = Math.sqrt(dx*dx+dy*dy);
-        if (dist < 250 && mx > 0) { p.vx += dx * 0.00006; p.vy += dy * 0.00006; }
-        p.x += p.vx; p.y += p.vy; p.vx *= 0.995; p.vy *= 0.995;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.a})`; ctx.fill();
-        const pg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
-        pg.addColorStop(0, `rgba(${p.c[0]},${p.c[1]},${p.c[2]},0.1)`); pg.addColorStop(1, "transparent");
-        ctx.fillStyle = pg; ctx.fillRect(p.x - p.r*5, p.y - p.r*5, p.r*10, p.r*10);
+
+      // Draw stars with twinkling
+      for (const s of stars) {
+        const twinkle = Math.sin(time * s.twinkleSpeed * 60 + s.twinkleOffset) * 0.3 + 0.7;
+        const alpha = s.baseA * twinkle;
+
+        // Mouse repulsion — stars move away gently
+        if (mx > 0) {
+          const dx = s.x - mx, dy = s.y - my;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            const force = (150 - dist) / 150 * 0.3;
+            s.x += (dx / dist) * force;
+            s.y += (dy / dist) * force;
+          }
+        }
+
+        // Draw star
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${s.color[0]},${s.color[1]},${s.color[2]},${alpha})`;
+        ctx.fill();
+
+        // Star glow for bigger stars
+        if (s.r > 1.2) {
+          const sg = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 4);
+          sg.addColorStop(0, `rgba(${s.color[0]},${s.color[1]},${s.color[2]},${alpha * 0.15})`);
+          sg.addColorStop(1, "transparent");
+          ctx.fillStyle = sg;
+          ctx.fillRect(s.x - s.r * 4, s.y - s.r * 4, s.r * 8, s.r * 8);
+        }
       }
-      // Connections
-      for (let i = 0; i < particles.length; i++) for (let j = i+1; j < particles.length; j++) {
-        const a = particles[i], b = particles[j], d = Math.sqrt((a.x-b.x)**2+(a.y-b.y)**2);
-        if (d < 130) { ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
-          ctx.strokeStyle = `rgba(99,91,255,${0.06*(1-d/130)})`; ctx.lineWidth = 0.5; ctx.stroke(); }
+
+      // Random shooting stars
+      if (Math.random() < 0.005) {
+        shootingStars.push({
+          x: Math.random() * w, y: Math.random() * h * 0.5,
+          vx: 4 + Math.random() * 4, vy: 2 + Math.random() * 2,
+          life: 1, decay: 0.02 + Math.random() * 0.02,
+        });
       }
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const ss = shootingStars[i];
+        ss.x += ss.vx; ss.y += ss.vy; ss.life -= ss.decay;
+        if (ss.life <= 0) { shootingStars.splice(i, 1); continue; }
+        ctx.beginPath();
+        ctx.moveTo(ss.x, ss.y);
+        ctx.lineTo(ss.x - ss.vx * 8, ss.y - ss.vy * 8);
+        ctx.strokeStyle = `rgba(255,255,255,${ss.life * 0.6})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // Planet with atmosphere glow
+      // Atmosphere
+      const atmoG = ctx.createRadialGradient(planet.x, planet.y, planet.r * 0.8, planet.x, planet.y, planet.r * 1.5);
+      atmoG.addColorStop(0, "transparent");
+      atmoG.addColorStop(0.6, "rgba(99,91,255,0.05)");
+      atmoG.addColorStop(0.8, "rgba(0,100,255,0.03)");
+      atmoG.addColorStop(1, "transparent");
+      ctx.fillStyle = atmoG;
+      ctx.fillRect(planet.x - planet.r * 2, planet.y - planet.r * 2, planet.r * 4, planet.r * 4);
+
+      // Planet body
+      const pG = ctx.createRadialGradient(planet.x - planet.r * 0.3, planet.y - planet.r * 0.3, 0, planet.x, planet.y, planet.r);
+      pG.addColorStop(0, "rgba(30,40,80,0.9)");
+      pG.addColorStop(0.5, "rgba(15,20,50,0.85)");
+      pG.addColorStop(1, "rgba(5,5,20,0.8)");
+      ctx.beginPath();
+      ctx.arc(planet.x, planet.y, planet.r, 0, Math.PI * 2);
+      ctx.fillStyle = pG;
+      ctx.fill();
+
+      // Planet ring/highlight
+      ctx.beginPath();
+      ctx.arc(planet.x, planet.y, planet.r, -0.8, 0.5);
+      ctx.strokeStyle = "rgba(99,91,255,0.15)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
       raf = requestAnimationFrame(draw);
     }
     draw();
