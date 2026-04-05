@@ -750,10 +750,10 @@ export default function NervurAurora() {
       <nav aria-label="Navigation principale" style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "14px 20px" : "24px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "rgba(255,255,255,0.95)",
-        backdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(0,0,0,0.06)",
-        boxShadow: "0 1px 20px rgba(0,0,0,0.05)",
+        background: "rgba(255,255,255,0.75)",
+        backdropFilter: "blur(16px)",
+        borderBottom: "1px solid rgba(0,0,0,0.04)",
+        boxShadow: "none",
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <LogoNervur height={52} onClick={() => navigate("/")} />
