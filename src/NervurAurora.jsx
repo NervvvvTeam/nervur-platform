@@ -898,14 +898,14 @@ export default function NervurAurora() {
         />}
         {/* Scan line removed */}
 
-        {/* Earth — real rotating GIF */}
+        {/* Earth — static photo with float */}
         {!isMobile && <div style={{
           position: "absolute", left: "-8%", bottom: "-15%", width: "45%", maxWidth: "550px",
           aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
           boxShadow: "0 0 80px rgba(99,91,255,0.15), 0 0 200px rgba(0,100,255,0.08)",
           animation: "floatUp 20s ease-in-out infinite", pointerEvents: "none", zIndex: 0,
         }}>
-          <img src="/earth.gif" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.8 }} />
+          <img src="/planet.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
         </div>}
 
         {/* Moon — top right, smaller */}
