@@ -952,9 +952,9 @@ export default function NervurAurora() {
                 onClick={(e) => { triggerShootingStar(e, "down"); navigate('/contact'); }}
                 style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
-                padding: isMobile ? "16px 28px" : "18px 44px", border: "none",
-                background: "#FFFFFF",
-                color: "#000000", fontSize: "14px", fontWeight: 700, letterSpacing: "1px",
+                padding: isMobile ? "16px 28px" : "18px 44px", border: "1px solid rgba(255,255,255,0.3)",
+                background: "rgba(255,255,255,0.1)", backdropFilter: "blur(8px)",
+                color: "#FFFFFF", fontSize: "14px", fontWeight: 700, letterSpacing: "1px",
                 textTransform: "uppercase", cursor: "pointer", borderRadius: "8px" }}>
                 Nous contacter
               </MagneticButton>
