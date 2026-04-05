@@ -933,9 +933,9 @@ export default function NervurAurora() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", width: "100%", maxWidth: "800px", margin: "0 auto", position: "relative", zIndex: 5 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "40px" : "60px", alignItems: "center", width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
 
-          {/* Center — Text */}
+          {/* Left — Text */}
           <div style={{ position: "relative", zIndex: 5 }}>
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "8px",
@@ -967,7 +967,7 @@ export default function NervurAurora() {
               NERVÜR conçoit les stratégies digitales qui rendent votre entreprise pérenne grâce à internet. Une vision. Zéro compromis.
             </p>
             <div style={{
-              display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row", justifyContent: "center",
+              display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row",
               animation: loaded ? "fadeInUp 0.8s ease 0.8s both" : "none" }}>
               <MagneticButton className="cta-btn"
                 onMouseEnter={(e) => triggerShootingStar(e, "down")}
@@ -993,7 +993,49 @@ export default function NervurAurora() {
             </div>
           </div>
 
-          {/* No right side — centered layout */}
+          {/* Right — Nos expertises avec logos */}
+          {!isMobile && (
+            <div style={{ animation: loaded ? "fadeInUp 1s ease 0.8s both" : "none", position: "relative", zIndex: 5 }}>
+              <span style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", display: "block", marginBottom: "24px" }}>Nos expertises</span>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                {[
+                  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+                  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+                  { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+                  { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+                  { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+                  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+                ].map((t, i) => (
+                  <div key={i} style={{
+                    display: "flex", alignItems: "center", gap: "12px",
+                    padding: "14px 18px", borderRadius: "12px",
+                    background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)",
+                    transition: "all 0.3s ease",
+                    animation: loaded ? `fadeInUp 0.5s ease ${0.9 + i * 0.1}s both` : "none",
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; e.currentTarget.style.transform = "translateY(0)"; }}
+                  >
+                    <img src={t.icon} alt={t.name} style={{ width: "28px", height: "28px" }} />
+                    <span style={{ fontSize: "14px", color: "rgba(255,255,255,0.7)", fontWeight: 500 }}>{t.name}</span>
+                  </div>
+                ))}
+              </div>
+              {/* Stats en dessous */}
+              <div style={{ display: "flex", gap: "24px", marginTop: "28px", paddingTop: "20px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                {[
+                  { n: "50+", l: "Projets" },
+                  { n: "98/100", l: "Performance" },
+                  { n: "24/7", l: "Support" },
+                ].map((s, i) => (
+                  <div key={i} style={{ animation: loaded ? `fadeInUp 0.5s ease ${1.5 + i * 0.1}s both` : "none" }}>
+                    <div style={{ fontSize: "22px", fontWeight: 800, color: "#FFFFFF" }}>{s.n}</div>
+                    <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", marginTop: "2px" }}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
         </div>
 
