@@ -399,10 +399,10 @@ export default function NervurAurora() {
     const h = canvas.height = canvas.offsetHeight;
 
     // Stars — different sizes and brightnesses
-    const stars = Array.from({ length: 200 }, () => ({
+    const stars = Array.from({ length: 350 }, () => ({
       x: Math.random() * w, y: Math.random() * h,
-      r: Math.random() * 1.8 + 0.3,
-      baseA: Math.random() * 0.6 + 0.2,
+      r: Math.random() * 2.2 + 0.4,
+      baseA: Math.random() * 0.7 + 0.3,
       twinkleSpeed: Math.random() * 0.02 + 0.005,
       twinkleOffset: Math.random() * Math.PI * 2,
       color: Math.random() > 0.85 ? [100, 150, 255] : Math.random() > 0.7 ? [255, 200, 150] : [255, 255, 255],
@@ -423,9 +423,10 @@ export default function NervurAurora() {
 
       // Nebula clouds — subtle colored fog
       const nebulae = [
-        { x: w * 0.2, y: h * 0.3, r: 250, c: "rgba(99,91,255,0.04)" },
-        { x: w * 0.7, y: h * 0.5, r: 300, c: "rgba(244,114,182,0.03)" },
-        { x: w * 0.5, y: h * 0.7, r: 200, c: "rgba(0,180,216,0.03)" },
+        { x: w * 0.2, y: h * 0.3, r: 300, c: "rgba(99,91,255,0.07)" },
+        { x: w * 0.7, y: h * 0.5, r: 350, c: "rgba(244,114,182,0.05)" },
+        { x: w * 0.5, y: h * 0.7, r: 250, c: "rgba(0,180,216,0.05)" },
+        { x: w * 0.9, y: h * 0.2, r: 200, c: "rgba(74,222,128,0.03)" },
       ];
       for (const n of nebulae) {
         const g = ctx.createRadialGradient(
@@ -592,9 +593,14 @@ export default function NervurAurora() {
     setTimeout(() => setLoaded(true), 200);
   }, []);
 
-  // Back to top visibility
+  const [navScrolled, setNavScrolled] = useState(false);
+
+  // Back to top + nav scroll state
   useEffect(() => {
-    const onScroll = () => setShowBackToTop(window.scrollY > 600);
+    const onScroll = () => {
+      setShowBackToTop(window.scrollY > 600);
+      setNavScrolled(window.scrollY > 100);
+    };
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -731,9 +737,10 @@ export default function NervurAurora() {
       <nav aria-label="Navigation principale" style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "14px 20px" : "24px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(99,91,255,0.08)",
-        boxShadow: "0 1px 20px rgba(99,91,255,0.06)",
+        background: navScrolled ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.3)",
+        backdropFilter: "blur(20px)",
+        borderBottom: navScrolled ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.06)",
+        boxShadow: navScrolled ? "0 1px 20px rgba(0,0,0,0.05)" : "none",
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <LogoNervur height={52} onClick={() => navigate("/")} />
@@ -746,7 +753,7 @@ export default function NervurAurora() {
               { label: "Projets", id: "projets" },
               { label: "Approche", id: "approche" },
             ].map((item, i) => (
-              <span key={i} className="nav-link" style={{ fontSize: "14px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#6B7C93", cursor: "pointer", transition: "color 0.3s" }}
+              <span key={i} className="nav-link" style={{ fontSize: "14px", letterSpacing: "1.5px", textTransform: "uppercase", color: navScrolled ? "#6B7C93" : "rgba(255,255,255,0.7)", cursor: "pointer", transition: "color 0.3s" }}
                 onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
                 onMouseEnter={e => { e.target.style.color = "#0A2540"; }}
                 onMouseLeave={e => { e.target.style.color = "#6B7C93"; }}>
@@ -1050,13 +1057,7 @@ export default function NervurAurora() {
 
         </div>
 
-        <div style={{
-          position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)",
-          display: "flex", flexDirection: "column", alignItems: "center", gap: "8px",
-          animation: loaded ? "fadeInUp 1s ease 1.2s both" : "none" }}>
-          <span style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "#6B7C93" }}>Scroll</span>
-          <div style={{ width: "1px", height: "40px", background: `linear-gradient(180deg, ${V2}, transparent)` }} />
-        </div>
+        {/* Old scroll indicator removed — using new bouncing arrow */}
       </section>
 
       {/* ═══ SERVICES & OFFRES — TABBED ═══ */}
