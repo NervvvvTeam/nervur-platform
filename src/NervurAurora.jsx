@@ -779,7 +779,7 @@ export default function NervurAurora() {
       <section aria-label="Accueil" style={{
         minHeight: "100vh", display: "flex", alignItems: "center",
         padding: isMobile ? "100px 20px 60px" : "0 48px", position: "relative", overflow: "hidden",
-        background: "linear-gradient(135deg, #0A2540 0%, #0D1B3E 30%, #1A0A3E 60%, #0A2540 100%)",
+        background: "linear-gradient(135deg, #000000 0%, #0A0A1A 30%, #0A0020 60%, #000000 100%)",
         backgroundSize: "300% 300%", animation: "gradientShift 12s ease infinite",
       }}>
         {/* Interactive particle canvas */}
