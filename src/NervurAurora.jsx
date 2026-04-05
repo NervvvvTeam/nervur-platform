@@ -858,7 +858,7 @@ export default function NervurAurora() {
       <section aria-label="Accueil" style={{
         minHeight: "100vh", display: "flex", alignItems: "center",
         padding: isMobile ? "100px 20px 60px" : "0 48px", position: "relative", overflow: "hidden",
-        background: "linear-gradient(135deg, #000000 0%, #0A0A1A 30%, #0A0020 60%, #000000 100%)",
+        background: "#000000",
         backgroundSize: "300% 300%", animation: "gradientShift 12s ease infinite",
       }}>
         {/* Interactive particle canvas */}
@@ -866,10 +866,9 @@ export default function NervurAurora() {
           onMouseMove={e => { const r = e.currentTarget.getBoundingClientRect(); mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top }; }}
           onMouseLeave={() => { mouseRef.current = { x: -1000, y: -1000 }; }}
         />}
-        {/* Scan line */}
-        <div style={{ position: "absolute", left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent, rgba(99,91,255,0.3), transparent)", animation: "scanLine 4s linear infinite", pointerEvents: "none", zIndex: 1 }} />
+        {/* Scan line removed */}
 
-        {/* Planet image — left side, partially visible */}
+        {/* Earth — left side, partially visible */}
         {!isMobile && <div style={{
           position: "absolute", left: "-8%", bottom: "-15%", width: "45%", maxWidth: "550px",
           aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
@@ -877,6 +876,16 @@ export default function NervurAurora() {
           animation: "floatUp 20s ease-in-out infinite", pointerEvents: "none", zIndex: 0,
         }}>
           <img src="/planet.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
+        </div>}
+
+        {/* Moon — top right, smaller */}
+        {!isMobile && <div style={{
+          position: "absolute", right: "-3%", top: "5%", width: "12%", maxWidth: "150px",
+          aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
+          boxShadow: "0 0 40px rgba(255,255,255,0.08)",
+          animation: "floatUp 25s ease-in-out 3s infinite", pointerEvents: "none", zIndex: 0,
+        }}>
+          <img src="/moon.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.5 }} />
         </div>}
 
         {/* Scroll indicator — bouncing arrow */}
