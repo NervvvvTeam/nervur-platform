@@ -911,9 +911,9 @@ export default function NervurAurora() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", width: "100%", maxWidth: "800px", margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "0" : "60px", alignItems: "center", width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
 
-          {/* Center — Text */}
+          {/* Left — Text */}
           <div style={{ position: "relative", zIndex: 5 }}>
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "8px",
@@ -945,7 +945,7 @@ export default function NervurAurora() {
               NERVÜR conçoit les stratégies digitales qui rendent votre entreprise pérenne grâce à internet. Une vision. Zéro compromis.
             </p>
             <div style={{
-              display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row", justifyContent: "center",
+              display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row",
               animation: loaded ? "fadeInUp 0.8s ease 0.8s both" : "none" }}>
               <MagneticButton className="cta-btn"
                 onMouseEnter={(e) => triggerShootingStar(e, "down")}
@@ -971,7 +971,14 @@ export default function NervurAurora() {
             </div>
           </div>
 
-          {/* No right side — centered layout */}
+          {/* Right — Logo N floating */}
+          {!isMobile && (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", animation: loaded ? "fadeInUp 1s ease 0.6s both" : "none" }}>
+              <div style={{ animation: "floatUp 8s ease-in-out infinite" }}>
+                <img src="/LOGO-Photoroom.png" alt="NERVÜR" style={{ width: "300px", height: "auto", filter: "drop-shadow(0 0 60px rgba(99,91,255,0.15))" }} />
+              </div>
+            </div>
+          )}
 
         </div>
 
