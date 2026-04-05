@@ -1021,19 +1021,7 @@ export default function NervurAurora() {
                   </div>
                 ))}
               </div>
-              {/* Stats en dessous */}
-              <div style={{ display: "flex", gap: "24px", marginTop: "28px", paddingTop: "20px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                {[
-                  { n: "50+", l: "Projets" },
-                  { n: "98/100", l: "Performance" },
-                  { n: "24/7", l: "Support" },
-                ].map((s, i) => (
-                  <div key={i} style={{ animation: loaded ? `fadeInUp 0.5s ease ${1.5 + i * 0.1}s both` : "none" }}>
-                    <div style={{ fontSize: "22px", fontWeight: 800, color: "#FFFFFF" }}>{s.n}</div>
-                    <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.35)", marginTop: "2px" }}>{s.l}</div>
-                  </div>
-                ))}
-              </div>
+              {/* Stats removed */}
             </div>
           )}
 
