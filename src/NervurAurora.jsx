@@ -400,12 +400,12 @@ export default function NervurAurora() {
     // Get button center relative to canvas
     const x = btnRect.left + btnRect.width / 2 - canvasRect.left;
     const y = btnRect.top + btnRect.height / 2 - canvasRect.top;
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
       shootingStarsRef.current.push({
-        x, y,
-        vx: direction === "down" ? (Math.random() - 0.5) * 4 : (Math.random() * 6 + 2),
-        vy: direction === "down" ? (Math.random() * 6 + 3) : -(Math.random() * 5 + 3),
-        life: 1, decay: 0.01 + Math.random() * 0.008, bright: true,
+        x: x + (Math.random() - 0.5) * 30, y,
+        vx: direction === "down" ? (Math.random() - 0.3) * 2 : (Math.random() * 3 + 1),
+        vy: direction === "down" ? (Math.random() * 3 + 1.5) : -(Math.random() * 2.5 + 1.5),
+        life: 1, decay: 0.006 + Math.random() * 0.004, bright: true,
       });
     }
   };
@@ -495,11 +495,12 @@ export default function NervurAurora() {
         if (ss.life <= 0) { shootingStars.splice(i, 1); continue; }
         ctx.beginPath();
         ctx.moveTo(ss.x, ss.y);
-        ctx.lineTo(ss.x - ss.vx * 8, ss.y - ss.vy * 8);
+        const tailLen = ss.bright ? 20 : 8;
+        ctx.lineTo(ss.x - ss.vx * tailLen, ss.y - ss.vy * tailLen);
         ctx.strokeStyle = ss.bright
-          ? `rgba(99,91,255,${ss.life * 0.9})`
-          : `rgba(255,255,255,${ss.life * 0.6})`;
-        ctx.lineWidth = ss.bright ? 2.5 : 1.5;
+          ? `rgba(255,255,255,${ss.life * 0.8})`
+          : `rgba(255,255,255,${ss.life * 0.5})`;
+        ctx.lineWidth = ss.bright ? 2 : 1;
         ctx.stroke();
       }
 
@@ -749,10 +750,10 @@ export default function NervurAurora() {
       <nav aria-label="Navigation principale" style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "14px 20px" : "24px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: navScrolled ? "rgba(255,255,255,0.95)" : "rgba(0,0,0,0.3)",
+        background: "rgba(255,255,255,0.95)",
         backdropFilter: "blur(20px)",
-        borderBottom: navScrolled ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.06)",
-        boxShadow: navScrolled ? "0 1px 20px rgba(0,0,0,0.05)" : "none",
+        borderBottom: "1px solid rgba(0,0,0,0.06)",
+        boxShadow: "0 1px 20px rgba(0,0,0,0.05)",
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <LogoNervur height={52} onClick={() => navigate("/")} />
@@ -765,7 +766,7 @@ export default function NervurAurora() {
               { label: "Projets", id: "projets" },
               { label: "Approche", id: "approche" },
             ].map((item, i) => (
-              <span key={i} className="nav-link" style={{ fontSize: "14px", letterSpacing: "1.5px", textTransform: "uppercase", color: navScrolled ? "#6B7C93" : "rgba(255,255,255,0.7)", cursor: "pointer", transition: "color 0.3s" }}
+              <span key={i} className="nav-link" style={{ fontSize: "14px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#6B7C93", cursor: "pointer", transition: "color 0.3s" }}
                 onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" })}
                 onMouseEnter={e => { e.target.style.color = "#0A2540"; }}
                 onMouseLeave={e => { e.target.style.color = "#6B7C93"; }}>
@@ -891,12 +892,12 @@ export default function NervurAurora() {
 
         {/* Moon — top right, smaller */}
         {!isMobile && <div style={{
-          position: "absolute", right: "-3%", top: "5%", width: "12%", maxWidth: "150px",
+          position: "absolute", right: "2%", top: "8%", width: "18%", maxWidth: "220px",
           aspectRatio: "1", borderRadius: "50%", overflow: "hidden",
           boxShadow: "none",
           animation: "floatUp 25s ease-in-out 3s infinite", pointerEvents: "none", zIndex: 0,
         }}>
-          <img src="/moon.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.5 }} />
+          <img src="/moon.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }} />
         </div>}
 
         {/* Scroll indicator — bouncing arrow */}
@@ -915,13 +916,14 @@ export default function NervurAurora() {
           {/* Left — Text */}
           <div style={{ position: "relative", zIndex: 5 }}>
             <div style={{
-              display: "inline-flex", alignItems: "center", gap: "10px",
-              padding: "8px 18px", background: "rgba(255,255,255,0.06)", borderRadius: "9999px",
-              border: "1px solid rgba(255,255,255,0.1)", backdropFilter: "blur(8px)",
+              display: "inline-flex", alignItems: "center", gap: "8px",
               marginBottom: "32px", animation: loaded ? "fadeInUp 0.6s ease 0.2s both" : "none" }}>
-              <span style={{ width: "6px", height: "6px", background: "#635BFF", borderRadius: "50%" }} />
-              <span style={{ fontSize: "12px", letterSpacing: "2px", textTransform: "uppercase", color: "rgba(255,255,255,0.7)" }}>
-                NERVÜR — Agence Digitale
+              <span style={{ fontSize: "13px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", fontWeight: 500 }}>
+                NERVÜR
+              </span>
+              <span style={{ width: "4px", height: "4px", background: "#635BFF", borderRadius: "50%" }} />
+              <span style={{ fontSize: "13px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", fontWeight: 500 }}>
+                Agence Digitale
               </span>
             </div>
             <div style={{ marginBottom: "28px", animation: loaded ? "fadeInUp 0.8s ease 0.4s both" : "none" }}>
@@ -947,24 +949,24 @@ export default function NervurAurora() {
               animation: loaded ? "fadeInUp 0.8s ease 0.8s both" : "none" }}>
               <MagneticButton className="cta-btn"
                 onMouseEnter={(e) => triggerShootingStar(e, "down")}
-                onClick={(e) => { triggerShootingStar(e, "down"); document.getElementById('services')?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
+                onClick={(e) => { triggerShootingStar(e, "down"); navigate('/contact'); }}
                 style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
-                padding: isMobile ? "14px 24px" : "16px 36px", border: "none",
-                background: `linear-gradient(135deg, ${A1}, ${A3})`,
-                color: "#FFFFFF", fontSize: "13px", fontWeight: 700, letterSpacing: "1.5px",
-                textTransform: "uppercase", cursor: "pointer" }}>
-                Nos services
+                padding: isMobile ? "16px 28px" : "18px 44px", border: "none",
+                background: "#FFFFFF",
+                color: "#000000", fontSize: "14px", fontWeight: 700, letterSpacing: "1px",
+                textTransform: "uppercase", cursor: "pointer", borderRadius: "8px" }}>
+                Nous contacter
               </MagneticButton>
               <MagneticButton className="cta-btn"
                 onMouseEnter={(e) => triggerShootingStar(e, "up")}
-                onClick={(e) => { triggerShootingStar(e, "up"); navigate('/contact'); }}
+                onClick={(e) => { triggerShootingStar(e, "up"); document.getElementById('services')?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
                 style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
-                padding: isMobile ? "14px 24px" : "16px 36px", border: `1px solid rgba(99,91,255,0.4)`,
-                color: "#FFFFFF", fontSize: "13px", fontWeight: 600, letterSpacing: "1.5px",
-                textTransform: "uppercase", cursor: "pointer", background: "transparent" }}>
-                Nous contacter
+                padding: isMobile ? "16px 28px" : "18px 44px", border: "1px solid rgba(255,255,255,0.25)",
+                color: "#FFFFFF", fontSize: "14px", fontWeight: 600, letterSpacing: "1px",
+                textTransform: "uppercase", cursor: "pointer", background: "transparent", borderRadius: "8px" }}>
+                Nos services
               </MagneticButton>
             </div>
           </div>
