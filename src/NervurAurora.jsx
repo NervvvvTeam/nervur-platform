@@ -391,19 +391,23 @@ export default function NervurAurora() {
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const shootingStarsRef = useRef([]);
 
-  // Trigger a shooting star from a specific position
-  const triggerShootingStar = (direction = "down") => {
+  // Trigger a shooting star from a button's position
+  const triggerShootingStar = (e, direction = "down") => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-    const w = canvas.width, h = canvas.height;
-    const star = {
-      x: Math.random() * w * 0.6 + w * 0.2,
-      y: direction === "down" ? h * 0.1 : h * 0.5,
-      vx: direction === "down" ? (Math.random() - 0.3) * 6 : (Math.random() * 5 + 3),
-      vy: direction === "down" ? (Math.random() * 5 + 4) : -(Math.random() * 3 + 2),
-      life: 1, decay: 0.012, bright: true,
-    };
-    shootingStarsRef.current.push(star);
+    if (!canvas || !e?.currentTarget) return;
+    const canvasRect = canvas.getBoundingClientRect();
+    const btnRect = e.currentTarget.getBoundingClientRect();
+    // Get button center relative to canvas
+    const x = btnRect.left + btnRect.width / 2 - canvasRect.left;
+    const y = btnRect.top + btnRect.height / 2 - canvasRect.top;
+    for (let i = 0; i < 3; i++) {
+      shootingStarsRef.current.push({
+        x, y,
+        vx: direction === "down" ? (Math.random() - 0.5) * 4 : (Math.random() * 6 + 2),
+        vy: direction === "down" ? (Math.random() * 6 + 3) : -(Math.random() * 5 + 3),
+        life: 1, decay: 0.01 + Math.random() * 0.008, bright: true,
+      });
+    }
   };
 
   // Galaxy canvas for hero — stars, nebula, planet, interactive
@@ -953,8 +957,8 @@ export default function NervurAurora() {
               display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row",
               animation: loaded ? "fadeInUp 0.8s ease 0.8s both" : "none" }}>
               <MagneticButton className="cta-btn"
-                onMouseEnter={() => triggerShootingStar("down")}
-                onClick={() => { triggerShootingStar("down"); triggerShootingStar("down"); document.getElementById('services')?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
+                onMouseEnter={(e) => triggerShootingStar(e, "down")}
+                onClick={(e) => { triggerShootingStar(e, "down"); document.getElementById('services')?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
                 style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
                 padding: isMobile ? "14px 24px" : "16px 36px", border: "none",
@@ -964,8 +968,8 @@ export default function NervurAurora() {
                 Nos services
               </MagneticButton>
               <MagneticButton className="cta-btn"
-                onMouseEnter={() => triggerShootingStar("up")}
-                onClick={() => { triggerShootingStar("up"); triggerShootingStar("up"); navigate('/contact'); }}
+                onMouseEnter={(e) => triggerShootingStar(e, "up")}
+                onClick={(e) => { triggerShootingStar(e, "up"); navigate('/contact'); }}
                 style={{
                 display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "10px",
                 padding: isMobile ? "14px 24px" : "16px 36px", border: `1px solid rgba(99,91,255,0.4)`,
