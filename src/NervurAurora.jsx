@@ -596,7 +596,9 @@ export default function NervurAurora() {
       <nav aria-label="Navigation principale" style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: isMobile ? "12px 20px" : "20px 48px", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)", borderBottom: `1px solid ${VG(0.1)}`,
+        background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)",
+        borderBottom: "1px solid rgba(99,91,255,0.08)",
+        boxShadow: "0 1px 20px rgba(99,91,255,0.06)",
         transition: "all 0.6s ease",
         opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)" }}>
         <LogoNervur height={44} onClick={() => navigate("/")} />
@@ -623,46 +625,7 @@ export default function NervurAurora() {
               onMouseLeave={e => { e.target.style.color = "#6B7C93"; }}>
               Blog
             </span>
-            {/* Dropdown Apps — hover */}
-            <div style={{ position: "relative" }}
-              onMouseEnter={() => setAppsOpen(true)}
-              onMouseLeave={() => setAppsOpen(false)}>
-              <span aria-haspopup="true" aria-expanded={appsOpen} style={{ fontSize: "12px", letterSpacing: "2.5px", textTransform: "uppercase", color: appsOpen ? "#0A2540" : "#6B7C93", cursor: "pointer", transition: "color 0.3s", display: "flex", alignItems: "center", gap: "5px" }}>
-                Apps
-                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true" style={{ transition: "transform 0.3s", transform: appsOpen ? "rotate(180deg)" : "rotate(0)" }}>
-                  <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
-              {/* Invisible bridge — fills the gap so mouse never leaves the hover zone */}
-              <div style={{ position: "absolute", top: "100%", left: "-20px", right: "-20px", height: "16px" }} />
-              <div style={{
-                position: "absolute", top: "calc(100% + 16px)", left: "50%", transform: "translateX(-50%)",
-                background: "rgba(255,255,255,0.95)", backdropFilter: "blur(20px)", border: `1px solid ${VG(0.12)}`,
-                borderRadius: "12px", padding: "8px", minWidth: "260px",
-                opacity: appsOpen ? 1 : 0, pointerEvents: appsOpen ? "auto" : "none",
-                transition: "opacity 0.25s ease, transform 0.25s ease",
-                boxShadow: "0 20px 40px rgba(0,0,0,0.5)"
-              }}>
-                {[
-                  { label: "Calculer votre ROI digital", desc: "Estimez le retour sur investissement de votre stratégie digitale", path: "/simulateur" },
-                  { label: "Évaluer votre maturité digitale", desc: "Diagnostic complet de votre présence en ligne", path: "/diagnostic" },
-                ].map((app, i) => (
-                  <div key={i} onClick={() => { navigate(app.path); setAppsOpen(false); }}
-                    style={{
-                      padding: "12px 16px", borderRadius: "8px", cursor: "pointer",
-                      transition: "background 0.2s",
-                      display: "flex", alignItems: "center", gap: "12px"
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = VG(0.08); }}
-                    onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}>
-                    <div>
-                      <div style={{ fontSize: "13px", fontWeight: 600, color: V, letterSpacing: "0.5px" }}>{app.label}</div>
-                      <div style={{ fontSize: "11px", color: V3, marginTop: "2px" }}>{app.desc}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Apps dropdown removed */}
             {/* Bouton Espace Client */}
             <a href="/app/login" style={{
               padding: "8px 20px", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase",
@@ -765,7 +728,7 @@ export default function NervurAurora() {
               marginBottom: "32px", animation: loaded ? "fadeInUp 0.6s ease 0.2s both" : "none" }}>
               <span style={{ width: "6px", height: "6px", background: V, borderRadius: "50%" }} />
               <span style={{ fontSize: "11px", letterSpacing: "3px", textTransform: "uppercase", color: V }}>
-                Éditeur de Technologies de Croissance
+                NERVÜR — Éditeur de Technologies de Croissance
               </span>
             </div>
             <div style={{ marginBottom: "28px", animation: loaded ? "fadeInUp 0.8s ease 0.4s both" : "none" }}>
