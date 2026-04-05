@@ -752,7 +752,9 @@ export default function NervurAurora() {
       {/* ═══ HERO ═══ */}
       <section aria-label="Accueil" style={{
         minHeight: "100vh", display: "flex", alignItems: "center",
-        padding: isMobile ? "0 20px" : "0 48px", position: "relative" }}>
+        padding: isMobile ? "0 20px" : "0 48px", position: "relative",
+        background: "radial-gradient(ellipse at 20% 50%, rgba(129,140,248,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(244,114,182,0.06) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(6,182,212,0.05) 0%, transparent 50%)",
+      }}>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? "0" : "60px", alignItems: "center", width: "100%", maxWidth: "1200px", margin: "0 auto" }}>
 
           {/* Left — Text */}
@@ -1154,20 +1156,21 @@ export default function NervurAurora() {
           {/* Sentinel */}
           <RevealSection delay={0}>
             <div style={{
-              border: isMobile ? "1px solid rgba(239,68,68,0.45)" : "1px solid rgba(239,68,68,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
+              border: "none", borderRadius: "20px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
-              background: isMobile ? "rgba(239,68,68,0.08)" : "rgba(239,68,68,0.04)", backdropFilter: "blur(8px)",
-              boxShadow: isMobile ? "0 4px 20px rgba(239,68,68,0.15)" : "none",
+              background: "linear-gradient(145deg, #1a1a2e 0%, #2d1b4e 40%, #1a1a2e 100%)",
+              color: "#FFFFFF",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(239,68,68,0.12)"; e.currentTarget.style.background = "rgba(239,68,68,0.07)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(239,68,68,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(239,68,68,0.04)"; }}>
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(239,68,68,0.2)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.15)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #ef4444, #f97316)" }} />
               <div style={{ width: isMobile ? "36px" : "44px", height: isMobile ? "36px" : "44px", borderRadius: "12px", background: "rgba(239,68,68,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: isMobile ? "12px" : "20px" }}>
                 <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Sentinel</h3>
+              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px", color: "#FFFFFF" }}>Sentinel</h3>
               <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#ef4444", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>E-réputation & gestion des avis</p>
-              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#86868B", marginBottom: "20px" }}>
+              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "rgba(255,255,255,0.6)", marginBottom: "20px" }}>
                 Surveillez vos avis Google en temps réel, répondez automatiquement par IA et analysez les tendances de votre e-réputation.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "sentinel" ? null : "sentinel"); }} style={{ background: "rgba(239,68,68,0.15)", border: "1px solid rgba(239,68,68,0.4)", color: "#ef4444", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
@@ -1175,7 +1178,7 @@ export default function NervurAurora() {
               </button>}
               {(expandedTool === "sentinel" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
                 {["Surveillance avis Google", "Réponses IA automatiques", "Analyse sémantique", "Veille concurrentielle", "QR Code + Widget + Alertes"].map((f, i) => (
-                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#86868B", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "rgba(255,255,255,0.7)", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
@@ -1183,7 +1186,7 @@ export default function NervurAurora() {
               </ul>}
               <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
-                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>39€</span>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800, color: "#FFFFFF" }}>39€</span>
                   <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#86868B" }}>/mois</span>
                 </div>
                 <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #ef4444, #dc2626)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s", marginBottom: "8px" }}
@@ -1198,20 +1201,21 @@ export default function NervurAurora() {
           {/* Vault */}
           <RevealSection delay={240}>
             <div style={{
-              border: isMobile ? "1px solid rgba(6,182,212,0.45)" : "1px solid rgba(6,182,212,0.25)", borderRadius: "16px", padding: isMobile ? "16px 14px" : "36px 32px",
+              border: "none", borderRadius: "20px", padding: isMobile ? "16px 14px" : "36px 32px",
               position: "relative", overflow: "hidden", height: "100%",
-              background: isMobile ? "rgba(6,182,212,0.08)" : "rgba(6,182,212,0.04)", backdropFilter: "blur(8px)",
-              boxShadow: isMobile ? "0 4px 20px rgba(6,182,212,0.15)" : "none",
+              background: "linear-gradient(145deg, #0a2540 0%, #0d3b66 40%, #0a2540 100%)",
+              color: "#FFFFFF",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
               transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.5)"; e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(6,182,212,0.12)"; e.currentTarget.style.background = "rgba(6,182,212,0.07)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(6,182,212,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(6,182,212,0.04)"; }}>
+              onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.boxShadow = "0 20px 60px rgba(6,182,212,0.2)"; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.15)"; }}>
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, #06b6d4, #22d3ee)" }} />
               <div style={{ width: isMobile ? "36px" : "44px", height: isMobile ? "36px" : "44px", borderRadius: "12px", background: "rgba(6,182,212,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: isMobile ? "12px" : "20px" }}>
                 <svg width={isMobile ? "18" : "22"} height={isMobile ? "18" : "22"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               </div>
-              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px" }}>Vault</h3>
+              <h3 style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 800, marginBottom: "4px", color: "#FFFFFF" }}>Vault</h3>
               <p style={{ fontSize: isMobile ? "11px" : "13px", color: "#06b6d4", fontWeight: 600, marginBottom: isMobile ? "8px" : "12px", letterSpacing: "0.5px" }}>Agent Juridique IA — Conformité & Protection juridique</p>
-              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "#86868B", marginBottom: "20px" }}>
+              {!isMobile && <p style={{ fontSize: "13px", lineHeight: 1.7, color: "rgba(255,255,255,0.6)", marginBottom: "20px" }}>
                 Votre DPO virtuel : assistant IA RGPD, registre des traitements, audit d'impact CNIL, gestion des droits, générateur de documents légaux pré-remplis et veille juridique automatisée.
               </p>}
               {isMobile && <button onClick={(e) => { e.stopPropagation(); setExpandedTool(expandedTool === "vault" ? null : "vault"); }} style={{ background: "rgba(6,182,212,0.15)", border: "1px solid rgba(6,182,212,0.4)", color: "#06b6d4", fontSize: "12px", fontWeight: 700, cursor: "pointer", padding: "6px 12px", marginBottom: "8px", borderRadius: "8px", display: "flex", alignItems: "center", gap: "5px", width: "100%", justifyContent: "center" }}>
@@ -1219,7 +1223,7 @@ export default function NervurAurora() {
               </button>}
               {(expandedTool === "vault" || !isMobile) && <ul style={{ listStyle: "none", padding: 0, margin: "0 0 16px", display: "flex", flexDirection: "column", gap: isMobile ? "6px" : "10px", ...(isMobile ? { animation: "fadeInUp 0.3s ease-out" } : {}) }}>
                 {["Assistant IA RGPD (NOÉ) — réponses instantanées", "Générateur de documents légaux pré-remplis", "Registre des traitements automatisé", "Audit d'impact (AIPD) conforme CNIL", "Gestion des droits des personnes (DSAR)", "Veille juridique automatisée"].map((f, i) => (
-                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "#86868B", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <li key={i} style={{ fontSize: isMobile ? "11px" : "13px", color: "rgba(255,255,255,0.7)", display: "flex", alignItems: "center", gap: "6px" }}>
                     <svg width={isMobile ? "12" : "14"} height={isMobile ? "12" : "14"} viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
@@ -1227,8 +1231,8 @@ export default function NervurAurora() {
               </ul>}
               <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: isMobile ? "12px" : "20px" }}>
-                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800 }}>79€</span>
-                  <span style={{ fontSize: isMobile ? "12px" : "14px", color: "#86868B" }}>/mois</span>
+                  <span style={{ fontSize: isMobile ? "28px" : "36px", fontWeight: 800, color: "#FFFFFF" }}>79€</span>
+                  <span style={{ fontSize: isMobile ? "12px" : "14px", color: "rgba(255,255,255,0.5)" }}>/mois</span>
                 </div>
                 <button onClick={() => navigate("/contact")} style={{ width: "100%", padding: isMobile ? "10px" : "12px", background: "linear-gradient(135deg, #06b6d4, #22d3ee)", border: "none", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, cursor: "pointer", transition: "all 0.3s", marginBottom: "8px" }}
                   onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(6,182,212,0.3)"; }}
