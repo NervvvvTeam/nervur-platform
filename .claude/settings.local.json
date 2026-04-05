@@ -244,7 +244,10 @@
       "WebFetch(domain:www.igloo.inc)",
       "Bash(curl -L -o \"C:\\\\Escriba\\\\AGencer\\\\public\\\\planet.jpg\" \"https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=800&q=80\")",
       "Bash(curl -L -o \"C:\\\\Escriba\\\\AGencer\\\\public\\\\moon.jpg\" \"https://images.unsplash.com/photo-1522030299830-16b8d3d049fe?w=400&q=80\")",
-      "Bash(curl -L -o \"C:\\\\Escriba\\\\AGencer\\\\public\\\\space-bg.jpg\" \"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=75\")"
+      "Bash(curl -L -o \"C:\\\\Escriba\\\\AGencer\\\\public\\\\space-bg.jpg\" \"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=75\")",
+      "WebFetch(domain:www.webflow.com)",
+      "WebFetch(domain:www.linear.app)",
+      "WebFetch(domain:vercel.com)"
     ]
   }
 }
