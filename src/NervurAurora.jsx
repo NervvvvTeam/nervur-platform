@@ -889,8 +889,12 @@ export default function NervurAurora() {
         minHeight: "100vh", display: "flex", alignItems: "center",
         padding: isMobile ? "100px 20px 60px" : "0 48px", position: "relative", overflow: "hidden",
         background: "#000000",
+        backgroundImage: "url('/space-bg.jpg')", backgroundSize: "cover", backgroundPosition: "center",
         backgroundSize: "300% 300%", animation: "gradientShift 12s ease infinite",
       }}>
+        {/* Dark overlay on space background for readability */}
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", pointerEvents: "none", zIndex: 0 }} />
+
         {/* Interactive particle canvas */}
         {!isMobile && <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", cursor: "crosshair" }}
           onMouseMove={e => { const r = e.currentTarget.getBoundingClientRect(); mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top }; }}
