@@ -9,10 +9,10 @@ import LogoNervur from "./components/LogoNervur";
 // Dark theme + 3-accent palette (Indigo, Green, Pink)
 // Clean typography + Ghost text hovers + Bento grid + Codenames
 
-const V = "#FFFFFF";   // Primary white
+const V = "#1D1D1F";   // Primary text (dark)
 const V2 = "#424245";  // Mid grey
 const V3 = "#86868B";  // Soft grey
-const VG = (a) => `rgba(255,255,255,${a})`;
+const VG = (a) => `rgba(0,0,0,${a})`;
 
 // ─── ACCENT PALETTE ───
 const A1 = "#818CF8";  // Indigo — primary accent
@@ -495,7 +495,7 @@ export default function NervurAurora() {
 
   return (
     <div ref={pageRef} style={{
-      background: "linear-gradient(180deg, #0f1117 0%, #161b2e 30%, #1a1f33 50%, #161b2e 70%, #0f1117 100%)", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
+      background: "linear-gradient(180deg, #F5F5F7 0%, #EDEDF0 30%, #E8E8EC 50%, #EDEDF0 70%, #F5F5F7 100%)", color: "#1D1D1F", fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       minHeight: "100vh", position: "relative", overflowX: "hidden" }}>
 
       {/* Mouse glow removed */}
@@ -637,7 +637,7 @@ export default function NervurAurora() {
               <div style={{ position: "absolute", top: "100%", left: "-20px", right: "-20px", height: "16px" }} />
               <div style={{
                 position: "absolute", top: "calc(100% + 16px)", left: "50%", transform: "translateX(-50%)",
-                background: "rgba(24,24,27,0.95)", backdropFilter: "blur(20px)", border: `1px solid ${VG(0.12)}`,
+                background: "rgba(255,255,255,0.95)", backdropFilter: "blur(20px)", border: `1px solid ${VG(0.12)}`,
                 borderRadius: "12px", padding: "8px", minWidth: "260px",
                 opacity: appsOpen ? 1 : 0, pointerEvents: appsOpen ? "auto" : "none",
                 transition: "opacity 0.25s ease, transform 0.25s ease",
@@ -820,7 +820,7 @@ export default function NervurAurora() {
               position: "absolute", top: "50px", left: "20px", right: "20px",
               transform: "perspective(1200px) rotateY(-8deg) rotateX(2deg)",
               border: `1px solid ${VG(0.12)}`, borderRadius: "8px",
-              background: "rgba(24,24,27,0.8)", backdropFilter: "blur(20px)",
+              background: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)",
               overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,0.5)",
               animation: loaded ? "floatUp 8s ease-in-out infinite" : "none" }}>
               {/* Browser bar */}
@@ -1063,7 +1063,7 @@ export default function NervurAurora() {
                 position: "relative", overflow: "hidden",
                 display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center", gap: isMobile ? "20px" : "40px",
                 transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)" }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.3); e.currentTarget.style.background = "rgba(24,24,27,0.55)"; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = VG(0.3); e.currentTarget.style.background = "rgba(255,255,255,0.8)"; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = VG(0.1); e.currentTarget.style.background = "rgba(255,255,255,0.6)"; }}>
                 <ChromeIcon type="gauge" size={isMobile ? 32 : 40} />
                 <div style={{ flex: 1 }}>
